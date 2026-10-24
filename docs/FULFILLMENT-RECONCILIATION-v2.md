@@ -1,6 +1,6 @@
 # Atomic fulfillment reconciliation, review version 2
 
-This extends the local mitigation in draft PR1. It is not deployed and no remote database migration, order, live tick, provider request, email or production setting was changed. The no-spend guard remains disabled by default. Version1 review and original defect reproduction remain preserved.
+This extends the local mitigation in draft PR1. It is not deployed and no remote database migration, order, live tick, provider request, email or production setting was changed. Paid work remains disabled by default, with the no-spend guard active. Version1 review and original defect reproduction remain preserved.
 
 ## Corrected defect
 
@@ -24,6 +24,6 @@ Commands: npm run test:offline --prefix ops; npm run test:sql --prefix ops; npm 
 
 ## Still blocked before paid execution
 
-Order/daily budget checks still lack atomic reservations. The two$7under$10cap overrun is not corrected by this migration. Provider acceptance followed by a ledger failure can still strand submitShot without a recoverable saved request ID; reconciliation changes do not remove that gap. Lost responses/process termination and stale-submitting recovery require further work. Keep the no-spend policy disabled and do not enable paid work based on these results.
+Order/daily budget checks still lack atomic reservations. The two$7under$10cap overrun is not corrected by this migration. Provider acceptance followed by a ledger failure can still strand submitShot without a recoverable saved request ID; reconciliation changes do not remove that gap. Lost responses/process termination and stale-submitting recovery require further work. Keep paid work disabled with the no-spend policy active. Do not enable paid work based on these results.
 
 DraftPR: https://github.com/ryancortenbach/ugc-campaign-studio/pull/1. Source and migration require review and explicit production-release authorization before deployment. The existing live service was not paused by this work.
