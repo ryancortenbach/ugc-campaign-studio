@@ -17,9 +17,10 @@ begin
   select * into s from public.shots where id = p_shot_id for update;
   if not found then raise exception 'Shot not found'; end if;
   if s.status = 'queued' and s.request_id = p_request_id then return to_jsonb(s); end if;
-  if s.status <> 'attention' or s.resume_status is distinct from 'unknown' then
-    raise exception 'Only an unknown submission can be reconciled';
+  if not (s.status = 'submitting' or (s.status = 'attention' and s.resume_status is not distinct from 'unknown')) then
+    raise exception 'Only a submitted or unknown render can be recorded';
   end if;
+  if s.request_id is not null and s.request_id <> p_request_id then raise exception 'Saved provider request ID differs'; end if;
   if s.estimate_usd is null or s.estimate_usd <= 0
      or s.estimate_usd::text in ('NaN', 'Infinity', '-Infinity') then
     raise exception 'A finite positive render estimate is required';
@@ -31,7 +32,7 @@ begin
     on conflict (shot_id) where provider = 'higgsfield' and shot_id is not null do nothing;
   select * into charged from public.spend where provider = 'higgsfield' and shot_id = s.id;
   if charged.usd is distinct from s.estimate_usd or charged.order_id is distinct from v.order_id or charged.video_id is distinct from v.id then raise exception 'Recorded render estimate or ownership differs'; end if;
-  update public.shots set status = 'queued', request_id = p_request_id,
+  update public.shots set status = 'queued', attempts = 0, request_id = p_request_id,
     resume_status = null, error = null, lock_until = null, updated_at = now()
     where id = s.id returning * into s;
   return to_jsonb(s);

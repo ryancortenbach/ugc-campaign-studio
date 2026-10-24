@@ -9,7 +9,7 @@
     "migrate": "node scripts/migrate.mjs",
     "dev": "node --env-file-if-exists=.env.local scripts/dev.mjs",
     "test:sql": "node test/sql/reconciliation.mjs",
-    "test:offline": "node --test test/pipeline.test.mjs test/whop.test.mjs test/spending-policy.test.mjs test/reconciliation.test.mjs"
+    "test:offline": "node --test test/pipeline.test.mjs test/whop.test.mjs test/spending-policy.test.mjs test/reconciliation.test.mjs test/submission-recovery.test.mjs"
   },
   "engines": {
     "node": ">=22.13"

@@ -1,6 +1,6 @@
 import {createHmac, createHash, timingSafeEqual} from 'node:crypto';
 import {verifyWhop, paymentSummary, PACKAGES} from './whop.mjs';
-import {loadSettings, saveSettings, createOrder, submitBrief, tick, digest, reviewVideo, retryRow, approveSpend, reconcileShot, briefUrl, deliveryUrl, event} from './pipeline.mjs';
+import {staleSubmission, loadSettings, saveSettings, createOrder, submitBrief, tick, digest, reviewVideo, retryRow, approveSpend, reconcileShot, briefUrl, deliveryUrl, event} from './pipeline.mjs';
 
 const json = (data, status = 200, headers = {}) => new Response(JSON.stringify(data), {status, headers: {'content-type': 'application/json', 'cache-control': 'no-store', ...headers}});
 const fail = (status, message) => Object.assign(Error(message), {status});
@@ -111,8 +111,8 @@ export function createRouter(deps) {
           spent: await db.sumUsd({order_id: o.id}), progress: videos.filter(v => v.order_id === o.id).reduce((acc, v) => ({...acc, [v.status]: (acc[v.status] || 0) + 1}), {})}))),
         review: videos.filter(v => v.status === 'review').map(v => ({id: v.id, order_id: v.order_id, idx: v.idx, title: v.angle?.title, plan: v.plan, checks: v.checks})),
         attention: [...videos.filter(v => v.status === 'attention').map(v => ({table: 'videos', id: v.id, order_id: v.order_id, video: v.idx, error: v.error, resume: v.resume_status})),
-          ...shots.filter(x => x.status === 'attention').map(x => ({table: 'shots', id: x.id, video_id: x.video_id, shot: x.idx, error: x.error, resume: x.resume_status, estimate: x.estimate_usd}))],
-        rendering: shots.filter(x => x.status !== 'attention').length,
+          ...shots.filter(x => x.status === 'attention' || staleSubmission(x)).map(x => ({table:'shots',id:x.id,video_id:x.video_id,shot:x.idx,error:staleSubmission(x)?'Submission interrupted or lease expired. Verify Higgsfield; do not retry automatically.':x.error,resume:staleSubmission(x)?'unknown':x.resume_status,estimate:x.estimate_usd,requestId:x.request_id || null}))],
+        rendering: shots.filter(x => x.status !== 'attention' && !staleSubmission(x)).length,
         outbox, events,
       });
     }, true],

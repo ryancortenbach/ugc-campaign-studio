@@ -1,0 +1,17 @@
+# Recover interrupted render submissions, review version 3
+
+This extends draft PR1 without merging, deployment, remote migration or paid calls. The current live service is unchanged. Paid work remains disabled by default in the review source.
+
+Previously, a provider could accept a render and a subsequent ledger failure could leave the shot permanently submitting, without a recovery route. Submission now commits its accepted request ID, charge and queued state through the existing transactional RPC. If that transaction fails and the database still accepts a recovery write, the shot becomes unknown with the accepted ID saved. If the database is completely unavailable or the process terminates, the durable submission intent remains available for manual reconciliation after a fifteen-minute lease.
+
+Expiry does not prove that the provider failed or did not charge. Stale submissions are never automatically resubmitted. The operator must check Higgsfield and supply its actual request ID, or explicitly confirm that nothing started. A saved request ID cannot be cleared through the nothing-started action or replaced by a different ID. The stable submission key is preserved, but the provider's actual idempotency guarantee remains unverified. Database outage before saving the returned ID still requires manual lookup at the provider; this change does not claim to recover an ID from nowhere.
+
+The operator state response lists stale submitting rows as needing unknown-outcome reconciliation and excludes them from the rendering count. It includes a saved ID where available. The existing console retains its manual request-ID entry; no frontend file was changed. Generic retry remains blocked for unknown outcomes.
+
+The accepted-render RPC now permits a submitting intent or an unknown attention row, rejects null/other resume states, and prevents replacing an already saved ID. Successful submission resets earlier retry attempts before polling. The independent reviewer found that the first revision omitted this reset, causing a single polling timeout to exhaust an earlier attempt count. SQL and memory implementations were corrected and a regression test added.
+
+Validation:34offline policy/pipeline/webhook/reconciliation/recovery tests pass. Nine actual local PostgreSQL checks pass. Tests cover commit failure after acceptance, total recovery-write failure, stale intent recovery, lost commit acknowledgement, no automatic resubmission, saved-ID protection, invalid quotes, null SQL resume-state rejection and reset of earlier attempts. Independent re-review found no outstanding defect within this submission-recovery change and reran both suites. Source syntax checks pass.
+
+Parallel PostgreSQL connections, live Supabase/RLS, provider idempotency, stitch/media and physical devices remain unverified. Migration002is still local and unapplied; its original reconciliation and new acceptance paths require a reviewed migration before deploying the adapter. Existing historical duplicate charges make the index fail safely and require operator audit.
+
+Atomic order/daily budget reservations remain unresolved. The separate fake reproduction still demonstrates two$7submissions under$10caps. Recovery and reconciliation fixes do not authorize enabling paid work. Keep the no-spend guard active. No order, email, live tick, provider request, remote database write or production setting was changed by this review.

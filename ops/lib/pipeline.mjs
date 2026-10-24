@@ -253,25 +253,37 @@ async function submitShots(ctx) {
   });
 }
 
-// The only place money is spent on Higgsfield. The key is fixed per shot, so a retry after an unknown outcome reuses it.
+// Expiry means operator reconciliation is needed, never that the provider did not charge.
+export const SUBMISSION_LEASE_MS = 15 * 60 * 1000;
+export function staleSubmission(shot, now = Date.now()) {
+  if (shot.status !== 'submitting') return false;
+  const expiry = shot.lock_until ? Date.parse(shot.lock_until) : Date.parse(shot.updated_at || shot.created_at) + SUBMISSION_LEASE_MS;
+  return Number.isFinite(expiry) && expiry <= now;
+}
+
+// The fixed key survives an uncertain outcome. Provider acceptance and ledger state commit together.
 export async function submitShot(db, tools, shot, {order, video, report}) {
   requirePaidWork(tools);
+  if (!Number.isFinite(Number(shot.estimate_usd)) || Number(shot.estimate_usd) <= 0) throw Object.assign(Error('A finite positive render estimate is required.'), {status:400});
+  if (!['priced','attention'].includes(shot.status) || (shot.status === 'attention' && shot.resume_status !== 'priced')) throw Object.assign(Error('This shot is not awaiting submission.'), {status:409});
   const key = shot.submission_key || `mint-shot-${shot.id}`;
-  const claimed = await db.update('shots', shot.id, {status: 'submitting', submission_key: key}, {status: shot.status});
-  if (!claimed) throw Object.assign(Error('This shot changed. Reload and try again.'), {status: 409});
+  const claimed = await db.update('shots', shot.id, {status:'submitting', submission_key:key, lock_until:new Date(Date.now() + SUBMISSION_LEASE_MS).toISOString()}, {status:shot.status, ...(shot.status === 'attention' ? {resume_status:'priced'} : {})});
+  if (!claimed) throw Object.assign(Error('This shot changed. Reload and try again.'), {status:409});
   let requestId;
   try {
     const res = await tools.submit(shot.endpoint, shot.input, key);
-    requestId = res.request_id || res.id;
-    if (typeof requestId !== 'string' || !requestId.trim()) throw Error('Higgsfield did not return a request ID');
+    const candidate = res.request_id || res.id;
+    if (typeof candidate !== 'string' || !/^[a-zA-Z0-9_.:-]{1,200}$/.test(candidate)) throw Error('Higgsfield did not return a usable request ID');
+    requestId = candidate;
+    const queued = await db.reconcileRenderSubmission(shot.id, requestId);
+    if (report) report.submitted++;
+    return queued;
   } catch (error) {
-    await db.update('shots', shot.id, {status: 'attention', resume_status: 'unknown', error: clip(`Submission outcome unknown: ${error.message}. Check Higgsfield before retrying.`, 500), lock_until: null}, {status: 'submitting'});
-    await event(db, {level: 'attention', order_id: order.id, video_id: video.id, shot_id: shot.id, title: `Needs you: shot ${shot.idx} of video ${video.idx}, order ${order.id}. Higgsfield submission outcome unknown.`});
+    // If this write also fails, the durable submitting row still becomes manually reconcilable after its lease.
+    const moved = await db.update('shots', shot.id, {status:'attention', resume_status:'unknown', ...(requestId ? {request_id:requestId} : {}), error:clip(`Submission needs reconciliation: ${error.message}. Check Higgsfield before retrying.`,500), lock_until:null}, {status:'submitting'});
+    if (moved) await event(db, {level:'attention',order_id:order.id,video_id:video.id,shot_id:shot.id,title:`Needs you: shot ${shot.idx} of video ${video.idx}, order ${order.id}. Reconcile the provider request before retrying.`});
     return null;
   }
-  await db.insert('spend', {provider: 'higgsfield', usd: Number(shot.estimate_usd) || 0, order_id: order.id, video_id: video.id, shot_id: shot.id, note: 'render estimate'});
-  if (report) report.submitted++;
-  return db.update('shots', shot.id, {status: 'queued', request_id: requestId, attempts: 0, error: null, lock_until: null}, {status: 'submitting'});
 }
 
 async function pollShots(ctx) {
@@ -400,8 +412,10 @@ export async function approveSpend(db, tools, id) {
 // After checking Higgsfield by hand: attach the request ID it shows, or confirm nothing started so the same key is reused.
 export async function reconcileShot(db, tools, id, {requestId = null} = {}) {
   const shot = await db.get('shots', id);
-  if (!shot || shot.status !== 'attention' || shot.resume_status !== 'unknown') throw Object.assign(Error('Only shots with an unknown submission need reconciling.'), {status: 409});
-  if (!requestId) return db.update('shots', id, {status: 'priced', resume_status: null, error: null, lock_until: null}, {status: 'attention'});
+  const unknown = shot?.status === 'attention' && shot.resume_status === 'unknown';
+  if (!shot || (!unknown && !staleSubmission(shot))) throw Object.assign(Error('Only unknown or stale submissions can be reconciled.'), {status:409});
+  if (!requestId && shot.request_id) throw Object.assign(Error('This shot has a saved provider request ID. Verify that request instead of resetting it.'), {status:409});
+  if (!requestId) return db.update('shots', id, {status:'priced', resume_status:null, error:null, lock_until:null}, {status:shot.status, ...(unknown ? {resume_status:'unknown'} : {lock_until:shot.lock_until ?? null})});
   if (!/^[\w.:-]{1,200}$/.test(requestId)) throw Object.assign(Error('That does not look like a Higgsfield request ID.'), {status: 400});
   const s = await tools.status(requestId);
   if (typeof s?.status !== 'string') throw Object.assign(Error('Higgsfield did not confirm that request ID.'), {status: 400});
