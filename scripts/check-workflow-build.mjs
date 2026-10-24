@@ -1,7 +1,8 @@
 import{readFile,readdir,realpath}from'node:fs/promises';import{resolve}from'node:path';import assert from'node:assert/strict';
 const root=resolve('experiments/durable-dashboard-v3'),build=resolve(root,'.nitro-build'),output=resolve(root,'.vercel/output/functions/__server.func');
 assert.equal(await realpath(build),build,'Workflow build directory must belong to this experiment, outside shared dependency symlinks');
-const generated=await readFile(resolve(build,'workflow/steps.mjs'),'utf8');assert.ok(generated.includes('async function check('),'Expected generated readiness step');
+const config=await readFile(resolve(root,'nitro.config.ts'),'utf8');assert.ok(config.includes("workflow:{dirs:['src']}"),'Only source files may be scanned, never generated workflows');
+const generated=await readFile(resolve(build,'workflow/steps.mjs'),'utf8');assert.ok(generated.includes('workflow//./src/readiness//readinessWorkflowV3'),'Workflow identity must remain stable for recovery');assert.ok(generated.includes('async function check('),'Expected generated readiness step');
 const files=[resolve(output,'index.mjs'),...(await readdir(resolve(output,'_chunks'))).filter(x=>x.endsWith('.mjs')).map(x=>resolve(output,'_chunks',x))];const sources=await Promise.all(files.map(x=>readFile(x,'utf8')));const combined=sources.join('\n');
 assert.ok(combined.includes('No finite positive cost estimate.'),'Compiled workflow must include current readiness validation');
 assert.ok(!combined.includes('durable-workflow-v1/lib/review.js'),'Compiled workflow must not resolve the preserved V1 validator');
