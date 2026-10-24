@@ -290,6 +290,14 @@
     "parallel_postgres_connections_tested": false,
     "deployed": false,
     "remote_database_writes": 0,
-    "whole_goal_complete": false
+    "whole_goal_complete": false,
+    "source_ci": {
+      "commit": "92e9ddb",
+      "runs": [
+        40129809176,
+        40129804887
+      ],
+      "conclusion": "success"
+    }
   }
 }
