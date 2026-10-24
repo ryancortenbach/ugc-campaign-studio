@@ -63,7 +63,9 @@ export function parseSquarespace(json,base){
   const variant=(sc.variants||i.variants||[]).map(v=>v?.salePriceMoney?.value&&Number(v.salePriceMoney.value)>0?v.salePriceMoney:v?.priceMoney).find(m=>money(m?.value));
   const direct=[sc.priceMoney,i.priceMoney].find(m=>money(m?.value));
   const money_=variant||direct||null;
-  const image=i.assetUrl||i.items?.[0]?.assetUrl||null;
+  // The item's own assetUrl is often a bare folder that redirects to a placeholder; its first gallery image holds the real file.
+  const real=u=>u&&/\.(jpe?g|png|webp|gif)$/i.test(new URL(u,base).pathname)?u:null;
+  const image=real(i.items?.[0]?.assetUrl)||real(i.assetUrl)||i.items?.[0]?.assetUrl||i.assetUrl||null;
   return {title:String(i.title).trim(),productType:'',tags:[...(i.tags||[]),...(i.categories||[])].map(String),url:i.fullUrl?absolute(i.fullUrl,base):null,
    imageUrl:image?sizedImage(absolute(image,base)):null,price:money(money_?.value),currency:money_?.currency||null};
  });

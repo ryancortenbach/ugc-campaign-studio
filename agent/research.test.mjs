@@ -212,7 +212,8 @@ test('a concept with a hero product builds a two-step plan whose still input car
  assert.equal(made.plan.video.endpoint,hf.endpoints['image-to-video']);
  assert.equal(made.plan.video.input.image_url,undefined,'the still does not exist yet, so the video has no image_url until it completes');
  assert.equal(made.plan.video.input.duration,5);assert.equal(made.plan.video.input.resolution,'720p');
- assert.match(made.plan.video.input.prompt,/Handheld phone/);
+ // Framing and camera come from the garment kind in code, never from the writer, so they cannot contradict the product shot.
+ assert.match(made.plan.video.input.prompt,/Camera: waist-up selfie at arm length/);assert.match(made.plan.video.input.prompt,/No zoom, no push-in/);assert.doesNotMatch(made.plan.video.input.prompt,/Handheld phone/);
  assert.equal(made.input,made.plan.video.input);
  const brief=JSON.parse(sent.prompt);
  assert.equal(brief.heroProduct.title,'Heavy Tee');assert.deepEqual(brief.audience,['18-24','NYC skate kids']);
