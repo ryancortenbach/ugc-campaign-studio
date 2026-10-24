@@ -1,3 +1,4 @@
+import {protectPaidTools} from './spending-policy.mjs';
 import {z} from 'zod';
 import * as boards from '../../agent/storyboard.mjs';
 import * as hf from '../../agent/tools/higgsfield.mjs';
@@ -43,8 +44,8 @@ export function supabaseStorage(client, bucket = 'fulfillment') {
   };
 }
 
-export function realTools({storage}) {
-  return {
+export function realTools({storage, env = process.env}) {
+  return protectPaidTools({
     ready: () => ({llm: llmEnabled(), higgsfield: hf.higgsfieldEnabled()}),
     angles: planAngles,
     draftStoryboard: brief => boards.draftStoryboard(brief),
@@ -59,5 +60,5 @@ export function realTools({storage}) {
     fetchFile,
     stitch,
     storage,
-  };
+  }, {enabled: env.OPS_PAID_WORK_ENABLED === 'true'});
 }

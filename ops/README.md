@@ -42,3 +42,9 @@ npm run migrate                       # schema, storage bucket, and the pg_cron 
 ```
 
 Deploy from the repository root (the project is linked there): `vercel build --prod`, then `vercel deploy --prebuilt --prod`.
+
+## Local review: paid work disabled by default
+
+The reviewed source now defaults real provider tools to paused. OPS_PAID_WORK_ENABLED must equal the exact string true in server configuration to opt in. This is not an authorization: keep it absent or false under Ryan's current no-spend instruction. There is no HTTP settings switch to enable it. Paused ticks return without running pipeline steps; direct and manual render submissions reject423before claiming rows. The existing auto-approve UI does not bypass this policy.
+
+This patch has not been deployed to the existing fulfillment service. It does not establish that a live service or separately running process is paused. Do not call a live tick or approve-spend endpoint as a test. Known unresolved issues include non-atomic order/daily budget reservations, post-acceptance request persistence failure, and duplicate reconciliation ledger inserts. See docs/FULFILLMENT-REVIEW-v1.md in the repository root. No production release or remote database changes are authorized by this review.

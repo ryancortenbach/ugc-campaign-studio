@@ -12,7 +12,7 @@ function router() {
   const key = env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_SECRET_KEY;
   if (!env.SUPABASE_URL || !key) throw Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are not set');
   const client = createClient(env.SUPABASE_URL, key, {auth: {persistSession: false, autoRefreshToken: false}});
-  handle = createRouter({db: supabaseDb(client), tools: realTools({storage: supabaseStorage(client)}), env, notify: alertSender(env.ALERT_WEBHOOK_URL), waitUntil});
+  handle = createRouter({db: supabaseDb(client), tools: realTools({storage: supabaseStorage(client), env}), env, notify: alertSender(env.ALERT_WEBHOOK_URL), waitUntil});
   return handle;
 }
 

@@ -58,7 +58,7 @@ export function harness(over = {}) {
     let last = '', same = 0;
     for (let i = 0; i < max; i++) {
       await tick({db, tools, baseUrl: env.PUBLIC_BASE_URL, notify: async t => { alerts.push(t); }});
-      const fp = JSON.stringify(await Promise.all(['orders', 'videos', 'shots'].map(async t => (await db.find(t)).map(r => [r.status, r.updated_at]))));
+      const fp = JSON.stringify(await Promise.all(['orders', 'videos', 'shots'].map(async t => (await db.find(t)).map(r => [r.status, r.updated_at, r.revisions, r.attempts, r.error, r.resume_status]))));
       if (fp === last) { if (++same >= 2) return i + 1; } else { same = 0; last = fp; }
     }
     throw Error('pipeline did not settle');

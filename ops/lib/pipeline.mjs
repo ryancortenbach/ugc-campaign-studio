@@ -1,3 +1,4 @@
+import {requirePaidWork} from './spending-policy.mjs';
 import {randomBytes} from 'node:crypto';
 import {PACKAGES} from './whop.mjs';
 
@@ -70,6 +71,11 @@ export async function tick({db, tools, baseUrl, now = () => Date.now(), budgetMs
   const ready = tools.ready();
   const report = {angles: 0, drafted: 0, checked: 0, revised: 0, shotsMade: 0, priced: 0, submitted: 0, polled: 0, stitched: 0, delivered: 0, cleaned: 0, attention: 0, waiting: []};
   const ctx = {db, tools, s, baseUrl, now, left, report, notify, ready, orders: new Map()};
+  if (ready.spendingPaused === true) {
+    report.spendingPaused = true;
+    report.waiting.push('Paid fulfillment work is paused by server configuration. No pipeline steps ran.');
+    return report;
+  }
   if (!ready.llm) report.waiting.push('ANTHROPIC_API_KEY is not set, so storyboards and checks are paused.');
   if (!ready.higgsfield) report.waiting.push('HF_CREDENTIALS is not set, so shots are not priced or rendered.');
   // Closest to done first: money already spent becomes finished videos before new work starts.
@@ -249,6 +255,7 @@ async function submitShots(ctx) {
 
 // The only place money is spent on Higgsfield. The key is fixed per shot, so a retry after an unknown outcome reuses it.
 export async function submitShot(db, tools, shot, {order, video, report}) {
+  requirePaidWork(tools);
   const key = shot.submission_key || `mint-shot-${shot.id}`;
   const claimed = await db.update('shots', shot.id, {status: 'submitting', submission_key: key}, {status: shot.status});
   if (!claimed) throw Object.assign(Error('This shot changed. Reload and try again.'), {status: 409});
@@ -383,6 +390,7 @@ export async function retryRow(db, table, id) {
 
 // The operator's spending decision for one shot, whatever the caps say. Only for priced shots that stopped at the budget gate.
 export async function approveSpend(db, tools, id) {
+  requirePaidWork(tools);
   const shot = await db.get('shots', id);
   if (!shot || shot.status !== 'attention' || shot.resume_status !== 'priced') throw Object.assign(Error('Only shots waiting for a spending OK can be approved.'), {status: 409});
   const video = await db.get('videos', shot.video_id), order = await db.get('orders', video.order_id);
