@@ -1,11 +1,11 @@
 UGC HACKATHON CONTINUATION
-Updated 2026-10-24 18:05 ET. Current audit: docs/COMPLETION-AUDIT-v29.json.
+Updated 2026-10-24 18:36 ET. Current audit: docs/COMPLETION-AUDIT-v30.json.
 Root: /Users/ryancortenbach/Development/ugc-campaign-studio
 Repo: https://github.com/ryancortenbach/ugc-campaign-studio
 Research: /Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1
 
 CURRENT ARCHITECTURE AND BRANCH
-The team moved fulfillment into the Mac app in main12330d6 and retired/deleted ops and root Vercel config. Do not resurrect the retired service. Current Mini branch: review/mac-delivery-audit-v1, functional sourceb82469a, based on main1ce767a. DraftPR2: https://github.com/ryancortenbach/ugc-campaign-studio/pull/2. No merge or deployment by this task.
+The team moved fulfillment into the Mac app in main12330d6 and retired/deleted ops and root Vercel config. Do not resurrect the retired service. Current Mini branch: review/mac-delivery-audit-v1, functional source76694cd, based on main1ce767a. DraftPR2: https://github.com/ryancortenbach/ugc-campaign-studio/pull/2. No merge or deployment by this task.
 Old ops draftPR1was closed without merge or branch deletion after reading the retirement decision. Its code, migrations, tests and reviews remain on review/fulfillment-spending-pause-v1. Do not continue its migrations or treat its old source tests as current Mac app validation. Full earlier handoffs are preserved on that branch. This branch preserves main's handoff in CONTINUATION-history-v24.txt and the retired review's final v28 handoff in history-v25.txt.
 Read CLAUDE.md and linked current app/UI handoffs before editing agent code. Current team note says Ryan lifted the Air spending pause for his own click-approved renders at about17:45. This is a reported handoff, not this worker's live setting verification. Do not toggle his setting, watchers or autopilot. This scheduled worker still has no authorization for paid generation or sending.
 
@@ -14,7 +14,7 @@ Only the original UGC morning checklist: three website mocks, chat/task dashboar
 One existing timer: /Users/ryancortenbach/scripts/ugc-campaign-loop-20261024/state.json, LaunchAgent com.ryan.ugc-campaign-loop-20261024, thread01a1622e-07cb-7af3-be0c-9eea96d17781, interval1800. No UGC10AM cutoff. Goal incomplete, noDONE. Create DONE/unload only when the whole goal is achieved. Stop task workers/timer if Ryan stops work. Never duplicate the timer or live scraping/download/transcription/app builds.
 
 WORKERS AND OWNERSHIP
-Air read-only check this batch: HEAD1ce767a, agentPID25669, dirty campaign-demo/client-demo media and scripts. No delivery.mjs edit observed then. Air is actively making a streetwear demo; do not overwrite or duplicate its work. No Air writes/restarts/pulls/render calls or app spending-setting changes by this worker.
+Air read-only check this batch: HEAD2e70dd8. No dirty lines or matching process lines returned by the targeted query; this does not establish that the app is stopped. Main advanced to dab1b7b. No overlapping changes in the four reviewed runtime modules were found. No Air writes/restarts/pulls/render calls or app spending-setting changes by this worker. Do not duplicate the Air demo work.
 Mini has no app server/build started by this batch. Focused tests use temporary files, memory SQLite and fake providers/storage/Gmail. Local agent dependencies installed with lifecycle scripts disabled; no app build or dependency ffmpeg download. Check actual PID/command/cwd before touching any process. Historical PIDs and older copy receipts do not establish current state.
 
 MAC DELIVERY REVIEW THIS BATCH
@@ -28,7 +28,7 @@ Independent re-review cleared these targeted fixes and reran14delivery tests. Lo
 Details: docs/MAC-DELIVERY-REVIEW-v1.md; work/mac-delivery-fixed-v2.log, mac-delivery-root-tests-v1.log, mac-delivery-ci-v1.log. No live Gmail/storage/provider/order action. The .app on Air was not modified or opened by this worker. No release/distribution/production deployment.
 
 CURRENT DELIVERY LIMITS
-Initial createDraft acceptance followed by a lost response, or a local save failure after acceptance, still lacks durable intent/reconciliation. Do not call delivery retries safe as a whole. The per-order lock is per delivery instance, not cross-process. Version checks cannot retract a draft request if another process changes source during the external request. Gmail is never sent by the delivery module; the operator reviews/sends drafts.
+First-create recovery now records a SQLite intent before Gmail creation and remembers a returned draft ID before final metadata. Lost responses/save failures reconcile by deterministic Message-ID and verified sender, complete single recipient, subject and identity headers. Unknown, absent or ambiguous matches block automatic replacement. Conditional token claims prevent the reviewed delayed cross-instance create race. Backend POST /api/whop/orders/:id/delivery-draft-reconcile requires the current intent token; a manual absence reset also requires strict boolean confirmation, empty lookup and at least15minuteselapsed. No frontend recovery controls exist yet. Real Gmail Message-ID preservation and indexing remain unverified, and an incorrect manual absence assertion can still duplicate a draft. This is not an exactly-once claim. The per-instance action lock is not a global lock. Gmail is never sent by delivery code. See docs/MAC-DRAFT-RECOVERY-v2.md. Independent review found and cleared two defects and passed24targeted tests; final combined HTTP/policy suite27passed. Both source76694cd CI runs40138894848and40138892101passed:90root and404agent tests,0failures,0skips. All new recovery tests use fake transports, memory SQLite and temporary files. No live account/database operations or deployment.
 Whop watcher is polling rather than webhook. The order workflow still makes one storyboard per order; other videos in a5or12pack remain manual. Do not create the team's pre-webhook buyer records or run delivery/Whop/Gmail calls without a new instruction. Supabase mint-labs is the team's current project; old ops tables/fulfillment bucket are unused leftovers. Do not delete them.
 The human panel's DEFAULT_PUBLIC_URL still refers to an old Vercel rating page. Do not assign a human study or report panel execution without a current reachable approach, account and explicitly approved study budget.
 
@@ -43,4 +43,4 @@ Saved mission review:6leads,3Gmail draft records,7failed-shot reports. Proposed 
 Lovable skipped per team handoff. Terac requires account/scope/budget before assignment. No repeat secret/config question or request for credentials in chat.
 
 NEXT
-Inspect current workers/main before changes. Continue durable first-time Gmail draft intent/reconciliation on the Mac delivery review branch with fake transports; do not duplicate active Air demo work. Keep live-account/physical-device/full-pack/approved branded sample and sponsor dependencies explicit. No paid generation, sending, production deployment or DONE under current incomplete evidence.
+Inspect current workers/main before changes. Next useful work is frontend recovery controls or remaining full-pack fulfillment on the Mac delivery review branch with fake transports; do not duplicate active Air demo work. Keep live-account/physical-device/full-pack/approved branded sample and sponsor dependencies explicit. No paid generation, sending, production deployment or DONE under current incomplete evidence.

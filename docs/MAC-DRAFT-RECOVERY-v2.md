@@ -12,7 +12,7 @@ POST /api/whop/orders/:id/delivery-draft-reconcile provides backend recovery. Re
 
 Tests use memory SQLite, temporary files and fake transports. They cover accepted-create response loss across service reconstruction, no-match blocking before more uploads, failure saving delivery metadata, failure saving the known intent ID, stale tokens, early/string confirmations, cross-instance delayed claims, extra recipients and duplicate headers. A real loopback HTTP test verifies recovery while the persisted no-spend guard is active, with no new create or send. Existing local synthetic ffmpeg tests remain separate.
 
-Independent review found and corrected the conditional-claim and recipient-verification defects. Re-review passed24targeted tests; subsequent HTTP/policy coverage brings the focused combined set to27tests. Ninety root tests and syntax checks pass. Consult actual CI before reporting the full agent count.
+Independent review found and corrected the conditional-claim and recipient-verification defects. Re-review passed24targeted tests; subsequent HTTP/policy coverage brings the focused combined set to27tests. Ninety root tests and syntax checks pass. Both source76694cd CI runs40138894848and40138892101passed:90root tests and404agent tests, with0failures and0skips. Evidence: work/mac-draft-recovery-ci-v1.log.
 
 The Gmail adapter follows the documented drafts.list query and drafts.get endpoints:
 https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.drafts/list
