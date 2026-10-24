@@ -1,7 +1,0 @@
-import {paintDelivery} from './delivery.js';
-const el=document.querySelector('#delivery'),select=document.querySelector('#scenario'),status=document.querySelector('#status');
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let state,mode,generation=0;
-function reset(){mode=select.value;generation++;state={order:{buyerEmail:'buyer@example.test'},shots:[{renderId:1}],ready:true,final:{url:'',at:new Date().toISOString(),bytes:1000000,captions:false,stale:false},delivery:null,draftRecovery:{intentToken:'fictional-token',recipient:'buyer@example.test',subject:'Your fictional brand video from Mint Labs',startedAt:new Date(Date.now()-(mode==='young'?1:16)*60000).toISOString()},setup:{gmail:mode!=='offline',storage:true,ffmpeg:true}};status.textContent='Fixture restarted. No external requests.';paint();}
-async function paint(){const own=generation;await paintDelivery({el,esc,paymentId:'fictional-order',isCurrent:()=>own===generation,toast:(a,b,c)=>status.textContent=[a,c].filter(Boolean).join('. '),api:async(path,body)=>{if(body){if(path.endsWith('delivery-draft-reconcile')){if(mode==='found'||body.confirmNotCreated===true)state.draftRecovery=null;else throw Error('Fixture: no matching draft found. Automatic creation stays blocked.');}else throw Error('Fixture only: upload and video creation are disabled.');}return structuredClone(state);}});}
-select.onchange=reset;document.querySelector('#reload').onclick=reset;reset();
