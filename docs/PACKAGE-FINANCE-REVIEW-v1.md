@@ -1,0 +1,11 @@
+# One-time UGC package financial planner
+
+The Economics view now models Starter (5 videos / $500) and Campaign (12 videos / $1,000) as one-time offers. Changing a scenario never changes a checkout. Prices were observed in public Whop checkout; counts and creative scope come from docs/WHOP-UGC-OFFERS-v1.md. No purchase was made.
+
+The new model preserves the earlier three-offer model and uses separate browser storage. Every input is editable: package price/count, 15 to 30 seconds per video, generation price, usable yield, extra revision generation, voice/check/other cost, setup/edit/review labor, payment fees, refunds, acquisition and allocated overhead. Presets are hypothetical. Defaults for acquisition and overhead are zero, so enter actual allocated costs before relying on contribution. No observed private Khan sales or capacity are implied.
+
+Generated seconds = delivered seconds * (1 + revision fraction) / usable yield. The same yield applies to initial and revision footage. Labor includes setup plus editing/review per delivered video, including the consolidated revision round. Costs apply even to refunded work; fees are modeled on the full purchase and assumed nonrefundable. Break-even solves for the package price at zero contribution after refunds and percentage fees. A nonpositive retained fraction has no finite floor. Taxes, disputes, working capital and unallocated expenses are excluded.
+
+The initial independent source review found an export narrative that retained default fees after editing, and a numerical cutoff that labeled a very large finite break-even as nonexistent. Both were corrected and independently re-reviewed. Final verdict: no remaining blocking findings within this package planner. Eight focused tests and 90 full studio tests pass. This is not a full application signoff.
+
+Real local Chrome checks covered an invalid blank yield (results cleared, export disabled), scenario switching, campaign/reload persistence, a downloaded JSON file, edited 10% fees with matching export disclosure, and 390px document width. The download event waiter timed out despite the file downloading; the resulting file was read and validated. Physical devices and checkout fulfillment remain untested. Hosted verification is recorded separately in work/package-finance-final-verification-v1.json and work/package-finance-browser-v1.json.

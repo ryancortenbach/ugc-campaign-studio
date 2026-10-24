@@ -16,3 +16,5 @@
 #plan-origin{overflow-wrap:anywhere}
 
 .alert-row{border-top:1px solid #30342c;padding:16px 0;overflow-wrap:anywhere}.alert-row p{margin:8px 0}.alert-row button{margin:6px 8px 0 0}.alert-row.acknowledged{opacity:.7}
+
+.package-toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:14px}.package-toolbar label{display:grid;gap:7px;font-size:12px}.package-toolbar select{font-size:12px}.package-divider{border:0;border-top:1px solid var(--line);margin:40px 0}#package-error{color:#f3a58a}#package-finance .input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#package-finance .input-grid label{min-width:0}#package-finance input{min-width:0}#package-finance .document{white-space:normal;max-height:none}#package-finance .ops-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}@media(max-width:1100px){#package-finance .ops-grid{grid-template-columns:minmax(0,1fr)}}@media(max-width:600px){#package-finance .input-grid{grid-template-columns:minmax(0,1fr)}#package-finance .result-row{gap:10px}#package-finance .result-row b{white-space:normal}}
