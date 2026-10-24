@@ -7,10 +7,30 @@ function activityHTML(workspace,esc){
  const events=workspace.events||[],calls=events.filter(e=>e.type==='tool_call').slice(-12).reverse();
  return calls.length?calls.map(e=>toolLogRow(e,{events,esc})).join(''):'<p class="faint">Research tool calls will appear here as the brand is qualified.</p>';
 }
+function paintActivity(context,workspace){
+ const container=context.view.querySelector('#task-board-activity'),html=activityHTML(workspace,context.esc);
+ if(context.activityHTML===html)return;
+ const focused=container.contains(document.activeElement)?document.activeElement:null;
+ const focusRow=focused?.closest('[data-ap-log]'),focusDetails=focused?.closest('details');
+ const focusLabel=focusDetails?.classList.contains('ap-log-payload')?focusDetails.querySelector('summary')?.textContent:null;
+ const states=new Map([...container.querySelectorAll('[data-ap-log]')].map(row=>[row.dataset.apLog,{open:row.open,payloads:new Map([...row.querySelectorAll('.ap-log-payload')].map(detail=>[detail.querySelector('summary')?.textContent,detail.open]))}]));
+ container.innerHTML=html;context.activityHTML=html;
+ for(const row of container.querySelectorAll('[data-ap-log]')){
+  const state=states.get(row.dataset.apLog);if(!state)continue;
+  row.open=state.open;
+  for(const detail of row.querySelectorAll('.ap-log-payload')){
+   const label=detail.querySelector('summary')?.textContent;if(state.payloads.has(label))detail.open=state.payloads.get(label);
+  }
+  if(focusRow?.dataset.apLog===row.dataset.apLog){
+   const target=focusLabel?[...row.querySelectorAll('.ap-log-payload')].find(detail=>detail.querySelector('summary')?.textContent===focusLabel)?.querySelector('summary'):row.querySelector('summary');
+   target?.focus({preventScroll:true});
+  }
+ }
+}
 function paintProgress(context,workspace){
  if(active!==context||!context.isCurrent()||!context.view.isConnected||!context.view.querySelector('#task-ideas-report'))return;
  context.view.querySelector('#task-ideas-status').innerHTML=statusChip(workspace.reportStatus||workspace.task.status);
- context.view.querySelector('#task-board-activity').innerHTML=activityHTML(workspace,context.esc);
+ paintActivity(context,workspace);
  const report=context.view.querySelector('#task-ideas-report'),key=`${workspace.revision}:${workspace.task.status}`;
  if(report.dataset.version!==key){report.dataset.version=key;report.data=`${context.reportUrl||`/api/tasks/${context.taskId}/ideas.pdf`}?v=${encodeURIComponent(key)}`;}
 }
