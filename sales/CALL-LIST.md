@@ -1,161 +1,122 @@
-# Call list: D2C e-commerce brands, October 24
+# Call list: D2C e-commerce brands
 
-94 D2C brands worth calling for the Mint Labs video ad packs: 24 call first, 29 call next, 41 if there's time. Each one sells its own products through its own online store. Most already run ads or use marketing tools such as Klaviyo, review apps and subscriptions.
+94 D2C brands with phone and email, ready to call. Each one sells its own products through its own online store.
 
-**Track every call here:** https://claude.ai/artifact/SbNrLBK1rMd4saE5NnzW3b
-Mark each call there so nobody dials the same brand twice. Tensae has to add you in the page's Share menu as Contributor or Editor before you can mark calls. Each card has copy buttons for the number, the email, the yes text and the follow-up email.
+**Offer:** 12 videos for $1,000 or 5 for $500. Whop link to send on a yes: https://whop.com/mint-labs/ai-ugc-videos-bb/
 
-The full list with every field is in [call-list-d2c-2026-10-24.csv](call-list-d2c-2026-10-24.csv).
+**Track calls:** https://claude.ai/artifact/SbNrLBK1rMd4saE5NnzW3b (Tensae adds you in the page's Share menu as Contributor or Editor). The spreadsheet version is [call-list-d2c-2026-10-24.csv](call-list-d2c-2026-10-24.csv).
 
-## How to work the list
+**How to work it:** Brand offices are mostly closed on Saturday. Call the **Call today** brands first. For everyone else, call once, leave the voicemail, send the follow-up email right after, then call back Monday from 10am ET.
 
-Brand offices are mostly closed on Saturday. Only 7 brands look reachable today.
+## Call today (7)
 
-1. **Today:** call the **Today** brands first. For everyone else, call once, leave the voicemail below, then send the follow-up email right away, from the card or the template below. 92 of the 94 brands publish an email, shown in the tables below with the best one for a pitch first. The other addresses each brand lists are in the CSV and on the tracker page. Johnny Slicks and Raww Gear only have a contact form.
-2. **Monday:** call everyone back from 10am ET. Call West Coast brands after 1pm ET.
-3. **Support lines** (marked "support line") reach customer service. Ask who handles marketing or paid social and how to reach them.
-4. On a yes, text or email the Whop link while you're still on the call: https://whop.com/mint-labs/ai-ugc-videos-bb/
-5. Mark the outcome on the tracker page right away.
+These may pick up on a Saturday.
 
-The offer: **Campaign, $1,000 for 12 videos**, for brands already running paid ads, or **Starter, $500 for 5**. Each video is 15 to 30 seconds, vertical, with hooks, editing and captions, ready to run on Meta and TikTok. Videos are made with AI and labeled as AI, as product demos and explainers, never fake customer reviews. One round of changes is included.
+- **Sugar Wood** - risqué DIY waffle and cookie decorating kits for bachelorette parties and birthdays<br>(917) 409-7360 | heysugar@sugarwood.co
+- **Dapper Yankee** - handmade natural men's soaps, deodorant, shampoo bars, beard care and colognes<br>(937) 761-2312 | support@dapperyankee.com
+- **Fruitstand** - Long Island City streetwear: heavyweight tees, hoodies and polos with in-house graphics<br>(347) 306-8055 | info@fruitstandny.com
+- **The Chocolate Room** - Brooklyn chocolate shop: bonbons, truffles, baked goods and gift boxes, in store and online<br>(718) 246-2600 | info@thechocolateroombrooklyn.com
+- **Lord Jameson** - USDA organic dog treats, toppers and pill hiders, made in the USA<br>(985) 805-6735 | hello@lordjameson.com
+- **Theory Coffee** - small-batch roaster in Redding, CA: whole beans, subscriptions, brew gear and merch<br>(530) 395-0104 | wholesale@theorycoffee.com
+- **Ele Keats** - fine jewelry, engagement rings, wedding bands and crystals, made in LA<br>(310) 804-4611 | shop@elekeats.com
 
-## Call first (24)
+## Call first (23)
 
-| # | Brand | Phone | When | Ask for | Email |
-|---|---|---|---|---|---|
-| 1 | Sugar Wood (Food & drink, New York) | (917) 409-7360 | Today | the founder or whoever runs social and marketing | heysugar@sugarwood.co |
-| 2 | Red Land Cotton (Home goods, US) | (205) 564-9332 | Monday morning ET | Molly, or whoever runs paid social and marketing | molly@redlandcotton.com |
-| 3 | Tracie Martyn (Beauty & skincare, New York) | (212) 206-9333 | Monday morning ET | whoever runs paid social or marketing, or the founder's office | purevision@traciemartyn.com |
-| 4 | Cuddle Sprouts (Baby & kids, US) | (404) 655-4382 | Monday morning ET | the founder or whoever runs paid social | hello@cuddlesprouts.com |
-| 5 | Dr. Idriss (Beauty & skincare, US) | (212) 612-1520 | Monday morning ET | whoever runs paid social or performance marketing | hello@dridriss.com |
-| 6 | Amanda Pearl (Jewelry & accessories, New York) | (646) 666-0653 | Monday morning ET | the founder or whoever runs paid social and marketing | aponline@amandapearl.com |
-| 7 | Lalo (Baby & kids, US) | (646) 863-5225 | Monday morning ET | whoever runs paid social or performance marketing | lalofam@meetlalo.com |
-| 8 | AMYO Jewelry (Jewelry & accessories, New York) | (646) 480-6755 | Monday morning ET | the founder or whoever runs paid social | hello@amyojewelry.com |
-| 9 | Miraco (Jewelry & accessories, US) | (347) 952-7453 | Monday morning ET | the founder or whoever runs paid social | concierge@shopmiraco.com |
-| 10 | Diggs (Pet, US) | (260) 560-2505 | Monday morning ET | whoever runs paid social or the marketing lead | hello@diggs.pet |
-| 11 | Ace High Co (Personal care, US) | (248) 238-8027 | Monday morning ET | the founder or whoever runs paid social and marketing | info@acehighco.com |
-| 12 | Heatonist (Food & drink, New York) | (718) 599-0838 | Monday morning ET | whoever runs paid social or marketing | affiliate@heatonist.com |
-| 13 | Mike's Hot Honey (Food & drink, New York) | (212) 655-0574 | Monday morning ET | whoever runs paid social or marketing | marketing@mikeshothoney.com |
-| 14 | Plaine Products (Personal care, US) | (513) 248-2017 | Monday morning ET | the founder or whoever runs marketing and paid social | lindsey@plaineproducts.com |
-| 15 | Hyperwear (Fitness gear, US) | (240) 466-9074 | Monday morning ET | the founder or whoever runs paid social and marketing | sales@hyperwear.com |
-| 16 | PRx Performance (Fitness gear, US) | (701) 566-0452 | Monday morning ET | whoever runs paid social or marketing | sales@prxperformance.com |
-| 17 | American Cotton (Home goods, US) | (212) 641-0998 | Monday morning ET | whoever runs paid social or marketing, or the founder | socials@americancotton.com |
-| 18 | Beddy's (Home goods, US) | (801) 753-9050 | Monday afternoon ET | whoever runs paid social or the marketing lead | hello@beddys.com |
-| 19 | Evan Alexander Grooming (Personal care, US) | (424) 272-1580 | Monday afternoon ET | the founder or whoever runs paid social | support@evanalexandergrooming.com (support inbox) |
-| 20 | Tradition Coffee (Food & drink, US) | (808) 207-7022 | Monday afternoon ET | the owner or whoever runs paid social and marketing | info@traditioncoffeeroasters.com |
-| 21 | QuickZip (Home goods, US) | (720) 929-1099 | Monday afternoon ET | whoever runs paid social or marketing, or the founder | info@quickzip.com |
-| 22 | Pour Moi Skincare (Beauty & skincare, US) | (909) 243-1456 | Monday afternoon ET | the founder or whoever runs paid social and marketing | pr@pourmoiskincare.com |
-| 23 | FINEX (Home goods, US) | (503) 946-1136 | Monday afternoon ET | the founder or whoever runs paid social and marketing | cookwithus@finexusa.com |
-| 24 | TOWL (Home goods, US) | (323) 596-1811 | Monday afternoon ET | the founder or whoever runs paid social | info@wisetowl.com |
+Offices are closed today, so call, leave the voicemail, email right after, then call back Monday 10am ET.
 
-### Openers and products to mention
+- **Red Land Cotton** - American-made cotton bedding and towels: sheets, quilts and shams<br>(205) 564-9332 | molly@redlandcotton.com
+- **Tracie Martyn** - NYC clean skincare plus spa treatments, known for its Firming Serum<br>(212) 206-9333 | purevision@traciemartyn.com
+- **Cuddle Sprouts** - organic cotton baby and toddler clothing and nursery bedding<br>(404) 655-4382 | hello@cuddlesprouts.com
+- **Dr. Idriss** - dermatologist-formulated skincare: cleansers, serums, moisturizers and sunscreen<br>(212) 612-1520 | hello@dridriss.com
+- **Amanda Pearl** - woman-owned, NYC-made fine jewelry: charm locks, necklaces and rings<br>(646) 666-0653 | aponline@amandapearl.com
+- **Lalo** - baby and toddler gear: high chairs, play gyms, rockers and potty chairs<br>(646) 863-5225 | lalofam@meetlalo.com
+- **AMYO Jewelry** - minimalist everyday fine jewelry in 14K gold, vermeil and silver, ships from NYC<br>(646) 480-6755 | hello@amyojewelry.com
+- **Miraco** - gold and diamond fine jewelry designed in New York<br>(347) 952-7453 | concierge@shopmiraco.com
+- **Diggs** - dog crates, beds and accessories designed to fit in at home, like the Evolv crate<br>(260) 560-2505 | hello@diggs.pet
+- **Ace High Co** - small-batch natural hair styling products made in the USA<br>(248) 238-8027 | info@acehighco.com
+- **Heatonist** - NYC hot sauce shop selling the official Hot Ones sauces plus its own collabs<br>(718) 599-0838 | affiliate@heatonist.com
+- **Mike's Hot Honey** - chili-infused hot honey from New York<br>(212) 655-0574 | marketing@mikeshothoney.com
+- **Plaine Products** - refillable haircare and skincare in returnable bottles, vegan, made in the USA<br>(513) 248-2017 | lindsey@plaineproducts.com
+- **Hyperwear** - weighted vests, sandbags, battle ropes and rucking gear<br>(240) 466-9074 | sales@hyperwear.com
+- **PRx Performance** - folding squat racks, functional trainers and storage for home gyms<br>(701) 566-0452 | sales@prxperformance.com
+- **American Cotton** - American-made bedding and bath towels<br>(212) 641-0998 | socials@americancotton.com
+- **Beddy's** - zipper bedding sets, comforters and blankets for kids, adults, bunk beds and RVs (call after 12pm ET)<br>(801) 753-9050 | hello@beddys.com
+- **Evan Alexander Grooming** - men's beard, hair and skin care, grooming kits and tools (call after 1pm ET)<br>(424) 272-1580 | support@evanalexandergrooming.com
+- **Tradition Coffee** - fresh-roasted Hawaiian coffee from a family-owned Kailua roaster, by subscription (call after 4pm ET)<br>(808) 207-7022 | info@traditioncoffeeroasters.com
+- **QuickZip** - zip-on bedding and fitted sheets for RVs, dorms and adjustable beds (call after 12pm ET)<br>(720) 929-1099 | info@quickzip.com
+- **Pour Moi Skincare** - climate-matched face creams, masks and drops, made in France (call after 1pm ET)<br>(909) 243-1456 | pr@pourmoiskincare.com
+- **FINEX** - American-made cast iron skillets, grill pans, griddles and Dutch ovens (call after 1pm ET)<br>(503) 946-1136 | cookwithus@finexusa.com
+- **TOWL** - organic cotton and bamboo bath and baby towels (call after 1pm ET)<br>(323) 596-1811 | info@wisetowl.com
 
-- **Sugar Wood**, (917) 409-7360. Mention: WOODY Waffle Decorating Kit. Say: "I saw your WOODY Waffle Decorating Kit and the bachelorette party boxes, and we make short AI video ads for products like that."
-- **Red Land Cotton**, (205) 564-9332. Mention: Hemstitch Essentials sheet set. Say: "I saw your Hemstitch Essentials sheets and the video on your site, and we make short vertical AI video ads for brands like yours."
-- **Tracie Martyn**, (212) 206-9333. Mention: Firming Serum. Say: "I noticed your Firming Serum and Face Resculpting Cream; we make short AI-labeled vertical product videos for brands like yours."
-- **Cuddle Sprouts**, (404) 655-4382. Mention: TENCEL Baby Clothes. Say: "I noticed your TENCEL baby clothes and the new Spring Summer rompers, and wanted to ask about your short video ads on Meta and TikTok."
-- **Dr. Idriss**, (212) 612-1520. Mention: Major Fade. Say: "I saw your Major Fade line for dark spots and wanted to ask who handles your short video ads for TikTok and Instagram."
-- **Amanda Pearl**, (646) 666-0653. Mention: Charm Locks. Say: "I noticed your Charm Locks and Slim Gemstone Necklaces, and we make short AI-labeled vertical video ads for jewelry brands like yours."
-- **Lalo**, (646) 863-5225. Mention: The Chair II. Say: "I saw The Chair II just launched, and we make short AI-labeled vertical video ads for baby product brands like yours."
-- **AMYO Jewelry**, (646) 480-6755. Mention: 14K Tiny Studs. Say: "I noticed your 14K Tiny Studs and the waterproof jewelry collection, and wanted to ask who handles your short video ads."
-- **Miraco**, (347) 952-7453. Mention: Infinity Rumi Diamond Gold Hoop Earrings. Say: "I was looking at your Infinity Rumi Diamond Gold Hoop Earrings and wanted to ask who handles your short-form video ads."
-- **Diggs**, (260) 560-2505. Mention: Evolv dog crate. Say: "I saw the new Evolv Matte Black crate pre-order and wanted to ask who handles your short video ads."
-- **Ace High Co**, (248) 238-8027. Say: "I saw your small-batch, made-in-USA hair styling products and your TikTok, and wanted to ask who handles your short video ads."
-- **Heatonist**, (718) 599-0838. Mention: Hot Ones Challenge. Say: "I saw the Hot Ones Challenge pack on your site and wanted to ask who handles your short video ads."
-- **Mike's Hot Honey**, (212) 655-0574. Mention: Mike's Hot Honey. Say: "I saw your honey infused with chilies and the recipes page, and we make short AI product-demo videos for drizzling ideas."
-- **Plaine Products**, (513) 248-2017. Mention: Refillable haircare. Say: "I saw Plaine's refillable haircare and the bottle-return program, and we make short vertical AI video ads for brands like yours."
-- **Hyperwear**, (240) 466-9074. Mention: Hyper Vest Pro. Say: "I saw the Hyper Vest Pro and the Hyrox sandbag system on your site, and we make short vertical video ads for brands like yours."
-- **PRx Performance**, (701) 566-0452. Mention: Profile PRO Ark Functional Trainer. Say: "I saw the Profile PRO Ark Functional Trainer featured on your homepage and wanted to ask about short vertical video ads for it."
-- **American Cotton**, (212) 641-0998. Mention: Solid Color Sheet Sets. Say: "I saw your Cool Flow Cotton solid color sheet sets and wanted to ask about short video ads for them."
-- **Beddy's**, (801) 753-9050. Mention: Beddy's zipper bedding. Say: "I saw Beddy's zipper bedding sets on your site, and I make short AI-labeled demo videos showing how the zip-up bed works."
-- **Evan Alexander Grooming**, (424) 272-1580. Mention: MY Hair Repair System. Say: "I saw the MY Hair Repair System and the beard kits on your site, and we make short AI video ads for brands like yours."
-- **Tradition Coffee**, (808) 207-7022. Mention: Coffee Club. Say: "I saw your Coffee Club subscription with free monthly shipping and wanted to ask about short vertical video ads for it."
-- **QuickZip**, (720) 929-1099. Mention: Add-on Zip Sheets. Say: "I noticed your Add-on Zip Sheets and the demo video on your site, and we make short AI product-demo ads for brands like yours."
-- **Pour Moi Skincare**, (909) 243-1456. Mention: Marine Day Cream. Say: "I saw your Marine Day Cream for cool, humid weather, and I wanted to ask about short vertical video ads for it."
-- **FINEX**, (503) 946-1136. Mention: FINEX Cast Iron Skillet. Say: "I saw the FINEX Cast Iron Skillet and the octagonal design, which would suit short vertical demo videos for Instagram and TikTok."
-- **TOWL**, (323) 596-1811. Mention: Baby Towels. Say: "I saw your organic cotton and bamboo baby towels and the right-after-bath-time angle, and wanted to ask about short video ads."
+## Call next (26)
 
-## Call next (29)
+- **Dosso Beauty** - Black-owned US maker of non-toxic, hypoallergenic braiding hair for sensitive scalps<br>(267) 354-5304 | info@dossobeauty.com
+- **Smithey** - cast iron and carbon steel cookware, from skillets to woks, made in Charleston, SC<br>(843) 619-0082 | support@smithey.com
+- **Johnny Slicks** - veteran-owned, US-made all-natural men's beard, hair, skin and deodorant products<br>(910) 803-2159 | no public email, use their contact form: https://johnnyslicks.com/pages/contact
+- **Mountaineer Brand** - beard, bald head, shaving and body care products for men, made in West Virginia, USA<br>(304) 551-0250 | customerservice@mountaineerbrand.com
+- **Silked** - silk and satin pillow sleeves for standard, queen and king pillows, plus kimonos and loungewear<br>(917) 721-8468 | phoenix@silked.co
+- **Bios Apothecary** - skincare and apothecary goods inspired by ancient healing traditions, based in New York<br>(212) 390-0442 | info@biosapothecary.com
+- **Stephanie Gottlieb** - custom and lab-grown diamond jewelry: necklaces, bracelets, earrings, rings, made in New York<br>(212) 655-1230 | info@stephaniegottlieb.com
+- **Marei New York** - fine gold and platinum jewelry in New York, including engagement rings and custom pieces<br>(347) 460-1072 | info@mareinewyork.com
+- **Modkat** - modern cat litter boxes, starter kits, liners and refills for US cat owners<br>(718) 965-2300 | support@modkat.com
+- **Lowcountry Littles** - nontoxic reusable smoothie pouches, snack cups and straw cups for babies and toddlers, US-based<br>(843) 619-7952 | support@lowcountrylittles.com
+- **The Bearded Savant** - handcrafted small-batch beard oil, balm, mustache wax and solid cologne made in Austin, Texas<br>(512) 730-1815 | support@thebeardedsavant.com
+- **Passenger Coffee** - lancaster, PA coffee roaster and tea seller with subscriptions, equipment and gifts<br>(717) 455-3633 | contact@drinkpassenger.com
+- **Driftaway Coffee** - New York coffee roaster selling bags, subscriptions, and box sets for home and office<br>(347) 762-8576 | wholesale@driftaway.coffee
+- **Naked & Thriving** - plant-based skincare: serums, oils, creams, eye care and cleansers for all skin types, US<br>(855) 943-0521 (support line, ask for marketing) | hello@nakedandthriving.com
+- **Mezcla** - crispy plant-based protein bars, gluten-free and kosher, for light, crunchy snacking<br>(844) 944-3566 (support line, ask for marketing) | hello@eatmezcla.com
+- **Walkee Paws** - adjustable waterproof dog boot leggings with extended leg coverage for boots that keep falling off<br>(833) 727-1994 (support line, ask for marketing) | walkeepaws@walkeepaws.com
+- **Buffy** - eucalyptus, linen and cotton bedding and bath textiles from the US<br>(833) 757-1080 (support line, ask for marketing) | press@buffy.co
+- **Milk Bar** - New York bakery shipping cakes, cookies, pies and truffles nationwide<br>(347) 577-9504 | help@milkbarstore.com
+- **Estes Paw Company** - natural air-dried dog chews and treats, like bully sticks and beef bones, made with USA-sourced ingredients<br>(214) 789-7920 | dogs@estespaw.com
+- **Made In** - cookware, knives, plates and glasses for home cooks, shipped direct from the US<br>(512) 957-9956 | hello@madeincookware.com
+- **Brooklyn Roasting Company** - small-batch coffee roasted at the Brooklyn Navy Yard, with subscriptions and gear<br>(718) 855-1000 | info@brooklynroasting.com
+- **Piyoga** - handmade-in-Bali pants, clothing and jewelry for women, kids and men (call after 1pm ET)<br>(619) 800-1325 | wholesale@piyogapants.com
+- **Onekind** - clean skincare and fragrance oils for sensitive skin, free US shipping on $50+ (call after 1pm ET)<br>(323) 275-9380 | hello@onekind.us
+- **Tico Coffee Roasters** - coffee roaster selling coffee, tea, accessories and subscriptions, plus a wholesale program for businesses (call after 1pm ET)<br>(408) 256-1004 | info@ticoroasters.com
+- **RXSG Jump Ropes** - jump ropes, replacement parts, apparel and coaching for all levels, plus a rope-picking quiz (call after 1pm ET)<br>(619) 655-3960 | info@rxsmartgear.com
+- **Pro Kettlebell** - kettlebells, accessories and online workouts for home exercisers and trainers, including US-made Apollo bells (call after 1pm ET)<br>(206) 280-4941 | nikolai@prokettlebell.com
 
-| # | Brand | Phone | When | Ask for | Email |
-|---|---|---|---|---|---|
-| 25 | Dapper Yankee (Personal care, US) | (937) 761-2312 | Today | the founder or whoever runs paid social and marketing | support@dapperyankee.com (support inbox) |
-| 26 | Fruitstand (Apparel & shoes, New York) | (347) 306-8055 | Today | the founder or whoever runs social and marketing | info@fruitstandny.com |
-| 27 | The Chocolate Room (Food & drink, New York) | (718) 246-2600 | Today | the owner or whoever runs marketing and online orders | info@thechocolateroombrooklyn.com |
-| 28 | Dosso Beauty (Personal care, US) | (267) 354-5304 | Monday morning ET | the founder or whoever runs paid social and marketing | info@dossobeauty.com |
-| 29 | Smithey (Home goods, US) | (843) 619-0082 | Monday morning ET | whoever runs paid social or marketing | support@smithey.com (support inbox) |
-| 30 | Johnny Slicks (Personal care, US) | (910) 803-2159 | Monday morning ET | the founder or whoever runs paid social and marketing | contact form only |
-| 31 | Mountaineer Brand (Personal care, US) | (304) 551-0250 | Monday morning ET | the founder or whoever runs paid social and marketing | customerservice@mountaineerbrand.com (support inbox) |
-| 32 | Silked (Home goods, US) | (917) 721-8468 | Monday morning ET | the founder, or whoever runs paid social and marketing | phoenix@silked.co |
-| 33 | Bios Apothecary (Beauty & skincare, New York) | (212) 390-0442 | Monday morning ET | the founder, or whoever runs marketing | info@biosapothecary.com |
-| 34 | Stephanie Gottlieb (Jewelry & accessories, New York) | (212) 655-1230 | Monday morning ET | the founder or whoever runs paid social and marketing | info@stephaniegottlieb.com |
-| 35 | Marei New York (Jewelry & accessories, New York) | (347) 460-1072 | Monday morning ET | Angie Marei, the founder, or whoever runs social and marketing | info@mareinewyork.com |
-| 36 | Modkat (Pet, US) | (718) 965-2300 | Monday morning ET | the founder or whoever runs marketing | support@modkat.com (support inbox) |
-| 37 | Lowcountry Littles (Baby & kids, US) | (843) 619-7952 | Monday morning ET | the founder or whoever runs marketing | support@lowcountrylittles.com (support inbox) |
-| 38 | The Bearded Savant (Personal care, US) | (512) 730-1815 | Monday morning ET | the founder or whoever runs paid social | support@thebeardedsavant.com (support inbox) |
-| 39 | Passenger Coffee (Food & drink, US) | (717) 455-3633 | Monday morning ET | whoever runs marketing or paid social, or the owner | contact@drinkpassenger.com |
-| 40 | Driftaway Coffee (Food & drink, New York) | (347) 762-8576 | Monday morning ET | the founder or whoever runs marketing and paid social | wholesale@driftaway.coffee |
-| 41 | Naked & Thriving (Beauty & skincare, US) | (855) 943-0521 (support line) | Monday morning ET | whoever runs paid social or performance marketing, or the founder | hello@nakedandthriving.com |
-| 42 | Mezcla (Food & drink, US) | (844) 944-3566 (support line) | Monday morning ET | whoever runs paid social or the head of marketing | hello@eatmezcla.com |
-| 43 | Walkee Paws (Pet, US) | (833) 727-1994 (support line) | Monday morning ET | the founder or whoever runs paid social and creative | walkeepaws@walkeepaws.com |
-| 44 | Buffy (Home goods, US) | (833) 757-1080 (support line) | Monday morning ET | whoever runs paid social or creative for Buffy | press@buffy.co |
-| 45 | Milk Bar (Food & drink, New York) | (347) 577-9504 | Monday morning ET | whoever runs paid social or the head of marketing | help@milkbarstore.com (support inbox) |
-| 46 | Estes Paw Company (Pet, US) | (214) 789-7920 | Monday morning ET | the owner or whoever runs marketing | dogs@estespaw.com |
-| 47 | Made In (Home goods, US) | (512) 957-9956 | Monday morning ET | whoever runs paid social or creative | hello@madeincookware.com |
-| 48 | Brooklyn Roasting Company (Food & drink, New York) | (718) 855-1000 | Monday morning ET | whoever runs marketing or e-commerce, or the owner | info@brooklynroasting.com |
-| 49 | Piyoga (Apparel & shoes, US) | (619) 800-1325 | Monday afternoon ET | the founder, or whoever runs paid social | wholesale@piyogapants.com |
-| 50 | Onekind (Beauty & skincare, US) | (323) 275-9380 | Monday afternoon ET | Matt or Madison, the co-founders, or whoever runs paid social | hello@onekind.us |
-| 51 | Tico Coffee Roasters (Food & drink, US) | (408) 256-1004 | Monday afternoon ET | the founder or whoever runs paid social and marketing | info@ticoroasters.com |
-| 52 | RXSG Jump Ropes (Fitness gear, US) | (619) 655-3960 | Monday afternoon ET | the founder or whoever runs paid social and marketing | info@rxsmartgear.com |
-| 53 | Pro Kettlebell (Fitness gear, US) | (206) 280-4941 | Monday afternoon ET | the owner or whoever handles marketing | nikolai@prokettlebell.com |
+## If there's time (38)
 
-## If there's time (41)
-
-| # | Brand | Phone | When | Ask for | Email |
-|---|---|---|---|---|---|
-| 54 | Lord Jameson (Pet, New York) | (985) 805-6735 | Today | the founder or whoever runs marketing and paid social | hello@lordjameson.com |
-| 55 | Theory Coffee (Food & drink, US) | (530) 395-0104 | Today | the owner or whoever runs marketing and paid social | wholesale@theorycoffee.com |
-| 56 | Ele Keats (Jewelry & accessories, US) | (310) 804-4611 | Today | the owner or whoever handles marketing | shop@elekeats.com (support inbox) |
-| 57 | ThomasPaul (Home goods, New York) | (718) 797-8758 | Monday morning ET | the founder or whoever runs marketing and paid social | info@thomaspaul.com |
-| 58 | Kensui (Fitness gear, US) | (800) 359-7180 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | b2b@kensuifitness.com |
-| 59 | Keap Candles (Home goods, US) | (518) 278-7144 | Monday morning ET | the founder or whoever runs marketing | press@keapcandles.com |
-| 60 | The Mane Attraction (Personal care, US) | (601) 586-9935 | Monday morning ET | the founder or whoever runs paid social | support@themaneattraction.com (support inbox) |
-| 61 | Near & Native (Home goods, US) | (207) 550-1335 | Monday morning ET | Hannah, the founder | hannah@shopnearandnative.com |
-| 62 | Dear Perli (Baby & kids, US) | (786) 301-9133 | Monday morning ET | the founder or whoever runs marketing | info@dearperli.com |
-| 63 | Andrew James Hair Co. (Personal care, US) | (908) 216-5830 | Monday morning ET | Andrew, the founder | andrew@andrewjameshair.com |
-| 64 | Jeffrey Burroughs (Jewelry & accessories, New York) | (828) 220-1241 | Monday morning ET | the founder or whoever runs paid social and marketing | concierge@jeffreyburroughs.com |
-| 65 | Tini Lux (Jewelry & accessories, US) | (888) 768-1954 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | info@tinilux.com |
-| 66 | Campo Grande (Food & drink, US) | (877) 728-1455 (support line) | Monday morning ET | whoever runs paid social or marketing | hola@eatcampogrande.com |
-| 67 | Avatara (Beauty & skincare, US) | (888) 883-5507 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | pr@avataraskin.com |
-| 68 | DMoose (Fitness gear, US) | (833) 366-6733 (support line) | Monday morning ET | whoever runs paid social or creative marketing | support@dmoose.com (support inbox) |
-| 69 | Brickell Men's Products (Personal care, US) | (877) 598-0060 (support line) | Monday morning ET | whoever runs paid social or the founder | support@brickellmensproducts.com (support inbox) |
-| 70 | Toma (Food & drink, New York) | (914) 632-4900 | Monday morning ET | the founder or whoever runs marketing | info@drinktoma.com |
-| 71 | 2 Dogs Treats (Pet, US) | (617) 286-4844 | Monday morning ET | the founder or whoever handles marketing | woof@2dogstreats.com |
-| 72 | The Pillow Bar (Home goods, US) | (214) 939-3696 | Monday morning ET | the founder or whoever runs marketing | info@thepillowbar.com |
-| 73 | Flamingo (Personal care, US) | (888) 205-9655 (support line) | Monday morning ET | whoever runs paid social or creative marketing | press@shopflamingo.com |
-| 74 | Jennifer Fisher (Jewelry & accessories, New York) | (888) 660-9572 (support line) | Monday morning ET | whoever runs paid social or performance marketing | madison@jenniferfisher.com |
-| 75 | Spascriptions (Beauty & skincare, New York) | (347) 586-0380 | Monday morning ET | whoever runs paid social or marketing, or the founder | support@spascriptions.com (support inbox) |
-| 76 | Pawstruck (Pet, US) | (800) 715-4955 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | contact@pawstruck.com |
-| 77 | Material (Home goods, New York) | (888) 706-3302 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | hello@materialkitchen.com |
-| 78 | Miracle Made (Home goods, US) | (888) 683-4875 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | help@support.miraclebrand.co (support inbox) |
-| 79 | The New Savant (Home goods, New York) | (855) 749-2311 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | concierge@thenewsavant.com |
-| 80 | T'zikal (Personal care, US) | (844) 489-4525 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | contactus@tzikal.com |
-| 81 | Zoe (Baby & kids, US) | (866) 701-1720 (support line) | Monday morning ET | whoever runs paid social or performance marketing | help@zoebaby.com (support inbox) |
-| 82 | LuvMyJewelry (Jewelry & accessories, US) | (833) 565-4565 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | info@luvmyjewelry.com |
-| 83 | Bondeye Jewelry (Jewelry & accessories, New York) | (800) 555-1234 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | info@bondeyejewelry.com |
-| 84 | Bean Box (Food & drink, US) | (888) 923-8596 (support line) | Monday morning ET | whoever runs paid social or marketing | delight@beanbox.com |
-| 85 | GroundLuxe (Home goods, US) | (877) 705-6871 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | admin@groundluxe.com |
-| 86 | Smalls (Pet, US) | (503) 487-4303 | Monday afternoon ET | whoever runs paid social or creative marketing | meow@smalls.com |
-| 87 | Anchor Gym (Fitness gear, US) | (310) 902-4060 | Monday afternoon ET | Shawn, the owner, or whoever runs paid social | shawn@coreenergyfitness.com |
-| 88 | Morrow Soft Goods (Home goods, US) | (323) 973-2447 | Monday afternoon ET | the founder, or whoever runs marketing | hello@morrowsoftgoods.com |
-| 89 | Bronwen Jewelry (Jewelry & accessories, US) | (541) 647-4509 | Monday afternoon ET | the owner or whoever runs marketing | info@bronwenjewelry.com |
-| 90 | Jala (Apparel & shoes, US) | (800) 840-4042 (support line) | Monday afternoon ET | whoever runs paid social or marketing | wecare@jalaclothing.com |
-| 91 | Raww Gear (Fitness gear, US) | (424) 242-5244 | Monday afternoon ET | the founder or whoever runs marketing and social | contact form only |
-| 92 | Laura Elizabeth Jewelry (Jewelry & accessories, US) | (805) 669-8645 | Monday afternoon ET | Laura, the founder, or whoever handles marketing | info@lauraelizabethjewelry.com |
-| 93 | Blooming Baby (Baby & kids, US) | (866) 218-7143 (support line) | Monday afternoon ET | whoever runs paid social or performance marketing, or the founder | support@mybloomingbaby.com (support inbox) |
-| 94 | EACH Jewels (Jewelry & accessories, US) | (650) 380-4090 | Monday afternoon ET | Abby, the founder, or whoever runs marketing | abby@eachjewels.com |
-
-Openers and products to mention for every brand are in the CSV and on the tracker page.
+- **ThomasPaul** - handmade home textiles, melamine tableware, candles and vintage-inspired decor from New York<br>(718) 797-8758 | info@thomaspaul.com
+- **Kensui** - plate-loaded weight vests and loadable strength gear for serious lifters and athletes<br>(800) 359-7180 (support line, ask for marketing) | b2b@kensuifitness.com
+- **Keap Candles** - plant-based, biodegradable scented candles in year-round and seasonal scents, with subscriptions<br>(518) 278-7144 | press@keapcandles.com
+- **The Mane Attraction** - haircare, hair growth oils and product bundles for building a hair routine. Subscriptions ship free<br>(601) 586-9935 | support@themaneattraction.com
+- **Near & Native** - maine-made refillable coconut wax candles, diffusers and mists, plus custom and wedding candles<br>(207) 550-1335 | hannah@shopnearandnative.com
+- **Dear Perli** - bamboo pajamas and essentials for babies, kids and families, including matching styles; ships from the US<br>(786) 301-9133 | info@dearperli.com
+- **Andrew James Hair Co.** - pomades, beard and tattoo care, skincare, shampoo for classic grooming; US-based<br>(908) 216-5830 | andrew@andrewjameshair.com
+- **Jeffrey Burroughs** - handcrafted fine and demi-fine jewelry made in NYC: earrings, rings, necklaces and custom pieces<br>(828) 220-1241 | concierge@jeffreyburroughs.com
+- **Tini Lux** - titanium fashion earrings and jewelry for sensitive ears, including studs, hoops and flat backs<br>(888) 768-1954 (support line, ask for marketing) | info@tinilux.com
+- **Campo Grande** - spanish Ibérico pork, Vaca Vieja beef and gourmet meat boxes, delivered nationwide<br>(877) 728-1455 (support line, ask for marketing) | hola@eatcampogrande.com
+- **Avatara** - skincare: masks, cleansers, serums, moisturizers, plus a kids line, for fun, balanced routines<br>(888) 883-5507 (support line, ask for marketing) | pr@avataraskin.com
+- **DMoose** - lifting gear, gym accessories and supplements, like lifting straps, for weightlifters and gym-goers in the US<br>(833) 366-6733 (support line, ask for marketing) | support@dmoose.com
+- **Brickell Men's Products** - men's skin care, hair, body and shave products with natural ingredients<br>(877) 598-0060 (support line, ask for marketing) | support@brickellmensproducts.com
+- **Toma** - premium bloody mary mixers in Picante, Clasico and Suave, sold in 32oz 2-packs from New York<br>(914) 632-4900 | info@drinktoma.com
+- **2 Dogs Treats** - single-ingredient dog treats like chicken, beef, pork and fish skins, made locally in small batches<br>(617) 286-4844 | woof@2dogstreats.com
+- **The Pillow Bar** - custom sleeping pillows matched to sleep style and size, plus bedding, bath and loungewear<br>(214) 939-3696 | info@thepillowbar.com
+- **Flamingo** - women's razors, refill blades, shave gel, hair removal cream and body care with subscription refills<br>(888) 205-9655 (support line, ask for marketing) | press@shopflamingo.com
+- **Jennifer Fisher** - handcrafted fine jewelry, including hoops and personalized letter pendants, made in New York City<br>(888) 660-9572 (support line, ask for marketing) | madison@jenniferfisher.com
+- **Spascriptions** - affordable at-home spa skincare: masks, serums, scrubs and eye pads, based in New York<br>(347) 586-0380 | support@spascriptions.com
+- **Pawstruck** - natural dog chews, treats and air-dried dog food, including bully sticks, for US dog owners<br>(800) 715-4955 (support line, ask for marketing) | contact@pawstruck.com
+- **Material** - kitchenware for home cooks, including knives, cutting boards, tools, ceramics and table linens, based in New York<br>(888) 706-3302 (support line, ask for marketing) | hello@materialkitchen.com
+- **Miracle Made** - silver-infused cotton sheets, comforters and bath towels for US shoppers<br>(888) 683-4875 (support line, ask for marketing) | help@support.miraclebrand.co
+- **The New Savant** - Brooklyn home fragrance brand selling soy blend candles and seasonal collections<br>(855) 749-2311 (support line, ask for marketing) | concierge@thenewsavant.com
+- **T'zikal** - hair and skincare with Ojon (Batana) oil for curly, wavy, straight and frizzy hair; Honduran roots<br>(844) 489-4525 (support line, ask for marketing) | contactus@tzikal.com
+- **Zoe** - lightweight, compact strollers and baby gear for traveling families<br>(866) 701-1720 (support line, ask for marketing) | help@zoebaby.com
+- **LuvMyJewelry** - lab grown diamond engagement rings, wedding bands, and fine jewelry for women and men<br>(833) 565-4565 (support line, ask for marketing) | info@luvmyjewelry.com
+- **Bondeye Jewelry** - NYC jeweler selling 14k gold and gemstone rings, necklaces, bracelets and earrings for women and men<br>(800) 555-1234 (support line, ask for marketing) | info@bondeyejewelry.com
+- **Bean Box** - coffee subscription with specialty beans from independent U.S. roasters, curated to your taste<br>(888) 923-8596 (support line, ask for marketing) | delight@beanbox.com
+- **GroundLuxe** - grounding sheets, pillowcases and mats in cotton and silver fiber, US market<br>(877) 705-6871 (support line, ask for marketing) | admin@groundluxe.com
+- **Smalls** - gently cooked, human-grade fresh cat food and treats, delivered by subscription (call after 1pm ET)<br>(503) 487-4303 | meow@smalls.com
+- **Anchor Gym** - wall-mounted and door anchors, pull-up bars, resistance bands and suspension trainers for home workouts (call after 1pm ET)<br>(310) 902-4060 | shawn@coreenergyfitness.com
+- **Morrow Soft Goods** - Organic cotton and hemp sheets, bedding, towels and textiles, designed in LA (call after 1pm ET)<br>(323) 973-2447 | hello@morrowsoftgoods.com
+- **Bronwen Jewelry** - handmade necklaces, earrings, bracelets and rings for active women, made in USA (call after 1pm ET)<br>(541) 647-4509 | info@bronwenjewelry.com
+- **Jala** - yoga-inspired women's pants, leggings, tops and loungewear, hand-dyed in Phoenix (call after 1pm ET)<br>(800) 840-4042 (support line, ask for marketing) | wecare@jalaclothing.com
+- **Raww Gear** - minimalist weightlifting gloves called Barehand for CrossFit and weightlifting athletes, 45-day money-back guarantee (call after 1pm ET)<br>(424) 242-5244 | no public email, use their contact form: https://rawwgear.com/pages/contact
+- **Laura Elizabeth Jewelry** - handmade sustainable jewelry: necklaces, rings, earrings, cuffs built for swimming and showering (call after 1pm ET)<br>(805) 669-8645 | info@lauraelizabethjewelry.com
+- **Blooming Baby** - baby essentials: Zipadee-Zip swaddle transition sleepwear, pacifiers and teethers for parents of babies and young children (call after 1pm ET)<br>(866) 218-7143 (support line, ask for marketing) | support@mybloomingbaby.com
+- **EACH Jewels** - ethical, sustainable, US-made hair accessories, jewelry, headbands, barrettes, and earrings (call after 1pm ET)<br>(650) 380-4090 | abby@eachjewels.com
 
 ## Call script
 
