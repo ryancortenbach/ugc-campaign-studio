@@ -21,3 +21,7 @@ jobs:
       - run: npm test
       - run: npm ci --prefix agent
       - run: npm test --prefix agent
+      - run: npm ci --prefix ops --ignore-scripts
+      - run: npm run check --prefix ops
+      - run: npm run test:offline --prefix ops
+      - run: npm run test:sql --prefix ops

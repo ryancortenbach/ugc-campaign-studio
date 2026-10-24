@@ -63,6 +63,20 @@ export function memoryDb() {
     },
     async remove(t, where) { const keep = rows(t).filter(r => !matches(r, where)); const n = rows(t).length - keep.length; tables[t] = keep; return n; },
     async sumUsd(where = {}) { return rows('spend').filter(r => matches(r, where)).reduce((s, r) => s + Number(r.usd), 0); },
+    // No await between validation and writes: model the database transaction atomically.
+    async reconcileRenderSubmission(id, requestId) {
+      const shot = rows('shots').find(r => r.id === id);
+      if (shot?.status === 'queued' && shot.request_id === requestId) return copy(shot);
+      if (!shot || shot.status !== 'attention' || shot.resume_status !== 'unknown') throw Object.assign(Error('Only an unknown submission can be reconciled'), {status:409});
+      if (!/^[a-zA-Z0-9_.:-]{1,200}$/.test(requestId || '')) throw Error('Invalid provider request ID');
+      const estimate = Number(shot.estimate_usd), video = rows('videos').find(r => r.id === shot.video_id);
+      if (!Number.isFinite(estimate) || estimate <= 0 || !video) throw Error('A video and finite positive render estimate are required');
+      const existing = rows('spend').find(r => r.provider === 'higgsfield' && r.shot_id === id);
+      if (existing && (Number(existing.usd) !== estimate || existing.order_id !== video.order_id || existing.video_id !== video.id)) throw Error('Recorded render estimate or ownership differs');
+      if (!existing) rows('spend').push({id:(ids.spend = (ids.spend || 0) + 1), at:nowIso(), provider:'higgsfield', usd:estimate, order_id:video.order_id, video_id:video.id, shot_id:id, note:'reconciled render estimate'});
+      Object.assign(shot, {status:'queued', request_id:requestId, resume_status:null, error:null, lock_until:null, updated_at:nowIso()});
+      return copy(shot);
+    },
     async acquireLease(name, seconds) {
       const lease = rows('leases').find(r => r.name === name), now = Date.now();
       if (lease && lease.until > now) return false;
@@ -107,6 +121,7 @@ export function supabaseDb(client) {
     async upsert(t, row, key = 'key') { return must(await client.from(t).upsert(row, {onConflict: key}).select().single()); },
     async remove(t, where) { const data = must(await apply(client.from(t).delete(), where).select()); return data.length; },
     async sumUsd(where = {}) { const data = must(await apply(client.from('spend').select('usd'), where)); return data.reduce((s, r) => s + Number(r.usd), 0); },
+    async reconcileRenderSubmission(id, requestId) { return must(await client.rpc('reconcile_render_submission', {p_shot_id:id, p_request_id:requestId})); },
     async acquireLease(name, seconds) { return Boolean(must(await client.rpc('acquire_lease', {p_name: name, p_seconds: seconds}))); },
   };
 }

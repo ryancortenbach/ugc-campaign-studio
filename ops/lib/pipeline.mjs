@@ -405,7 +405,5 @@ export async function reconcileShot(db, tools, id, {requestId = null} = {}) {
   if (!/^[\w.:-]{1,200}$/.test(requestId)) throw Object.assign(Error('That does not look like a Higgsfield request ID.'), {status: 400});
   const s = await tools.status(requestId);
   if (typeof s?.status !== 'string') throw Object.assign(Error('Higgsfield did not confirm that request ID.'), {status: 400});
-  const video = await db.get('videos', shot.video_id);
-  await db.insert('spend', {provider: 'higgsfield', usd: Number(shot.estimate_usd) || 0, order_id: video.order_id, video_id: video.id, shot_id: shot.id, note: 'reconciled render estimate'});
-  return db.update('shots', id, {status: 'queued', request_id: requestId, resume_status: null, error: null, lock_until: null}, {status: 'attention'});
+  return db.reconcileRenderSubmission(id, requestId);
 }
