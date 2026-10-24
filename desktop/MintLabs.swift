@@ -39,6 +39,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         NSApp.activate(ignoringOtherApps: true)
         showMessage("Starting Mint Labs", detail: "Connecting to the agent on port \(port).")
         reachable { up in if up { self.webView.load(URLRequest(url: self.base)) } else { self.startServer() } }
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(snapshotRequested(_:)), name: Notification.Name("com.mintlabs.snapshot"), object: nil)
+    }
+
+    // QA hook for UI reviews: `desktop/snapshot.swift "#/tasks lead"` saves a PNG of this window, no screen recording needed.
+    // Only app routes and a fixed set of clicks are accepted, and files land in ~/Library/Caches/Mint Labs/snapshots.
+    @objc func snapshotRequested(_ note: Notification) {
+        let parts = ((note.object as? String) ?? "").split(separator: " ").map(String.init)
+        guard let route = parts.first, route.range(of: "^#/[a-z]+(/[0-9]+)?$", options: .regularExpression) != nil else { return }
+        let actions = ["spend": "document.querySelector('#spendbtn').click()", "integrations": "document.querySelector('#intbtn').click()",
+                       "lead": "document.querySelector('.trow[data-id]')?.click()", "bottom": "document.querySelector('#view').scrollTop=1e6"]
+        let action = parts.count > 1 ? actions[parts[1]] : nil
+        let name = (route.dropFirst(2).replacingOccurrences(of: "/", with: "-")) + (parts.count > 1 && action != nil ? "-" + parts[1] : "")
+        webView.evaluateJavaScript("location.hash='\(route)';document.querySelectorAll('.intpanel').forEach(p=>p.hidden=true);1") { _, _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                if let action { self.webView.evaluateJavaScript(action + ";1") }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.webView.takeSnapshot(with: nil) { image, _ in
+                        guard let tiff = image?.tiffRepresentation, let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) else { return }
+                        let dir = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Caches/Mint Labs/snapshots")
+                        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+                        try? png.write(to: dir.appendingPathComponent(name + ".png"))
+                    }
+                }
+            }
+        }
     }
 
     func startServer() {

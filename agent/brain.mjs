@@ -16,7 +16,7 @@ const profileFile=()=>path.join(dataDir,'profile.json');
 export function loadProfile(){try{return {...defaultProfile,...JSON.parse(readFileSync(profileFile(),'utf8'))};}catch{return {...defaultProfile};}}
 export function saveProfile(next){const merged={...loadProfile(),...Object.fromEntries(Object.entries(next).filter(([k,v])=>k in defaultProfile&&typeof v==='string'))};mkdirSync(dataDir,{recursive:true});writeFileSync(profileFile(),JSON.stringify(merged,null,1));return merged;}
 
-export const cleanCopy=text=>text.replace(/\s*[—–]\s*/g,', ').replace(/\breally\s+/gi,'').replace(/!(?=[\s\S]*!)/g,'.');
+export const cleanCopy=text=>text.replace(/\s*[\u2014\u2013]\s*/g,', ').replace(/\breally\s+/gi,'').replace(/!(?=[\s\S]*!)/g,'.');
 export const brainMode=()=>llmEnabled()?`claude (${models.main} plans and writes, ${models.grader} grades)`:'rules (no ANTHROPIC_API_KEY)';
 
 const planSchema=z.object({

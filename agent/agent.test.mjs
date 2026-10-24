@@ -83,7 +83,7 @@ test('email extraction drops noreply and picks the brand inbox',()=>{
 });
 
 test('copy cleanup removes em dashes, "really" and extra exclamation marks',()=>{
- assert.equal(cleanCopy('We really love it — truly! Call us!'),'We love it, truly. Call us!');
+ assert.equal(cleanCopy('We really love it \u2014 truly! Call us!'),'We love it, truly. Call us!');
 });
 
 test('gmail module never sends and blocks header injection',()=>{
@@ -136,7 +136,7 @@ test('storyboards are normalized, gated by checkers, and approval sends shots to
  assert.equal(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:'room tone'},{id:'shot-02',duration:5,camera:'c',action:'a',dialogue:'Hi.',audio:'x'}]}),null);
  assert.match(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:'tone.\\"}, {\\"id\\":\\"shot-02\\"'},{id:'shot-02',duration:5,camera:'c',action:'a',dialogue:'',audio:''}]}),/leaked/);
  assert.match(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:''}]}),/only 1 shot/);
- const plan=normalizePlan({title:'Drop day',identity:'i',wardrobe:'w',environment:'e',voice:'v',creativeDirection:'c',offer:'o',constraints:'',shots:[{id:'a',duration:2,camera:'Wide',action:'Walks in',dialogue:'Okay — here it is',audio:'Door'},{id:'b',duration:30,camera:'Close',action:'Holds shirt',dialogue:'',audio:''}]});
+ const plan=normalizePlan({title:'Drop day',identity:'i',wardrobe:'w',environment:'e',voice:'v',creativeDirection:'c',offer:'o',constraints:'',shots:[{id:'a',duration:2,camera:'Wide',action:'Walks in',dialogue:'Okay \u2014 here it is',audio:'Door'},{id:'b',duration:30,camera:'Close',action:'Holds shirt',dialogue:'',audio:''}]});
  assert.deepEqual(plan.shots.map(s=>[s.id,s.start,s.duration]),[['shot-01',0,4],['shot-02',4,10]]);
  assert.equal(plan.durationSeconds,14);
  assert.equal(plan.shots[0].dialogue,'Okay, here it is');
@@ -154,6 +154,41 @@ test('storyboards are normalized, gated by checkers, and approval sends shots to
   assert.ok(ok.body.renders.every(r=>r.status==='draft'&&r.group_name==='Drop day v1'));
   assert.equal((await post(`/api/storyboards/${s.id}/check`)).status,409);
  }finally{server.close();}
+});
+
+test('spend is itemized by provider with a today column',async()=>{
+ const store=openStore(':memory:');const tools=fakeTools();const runner=createRunner(store,tools);
+ await runner.wait(runner.start('find brands').id);
+ store.addSpend({provider:'higgsfield',usd:2.31,renderId:1,note:'approved render estimate'});
+ const s=store.spendSummary();
+ const by=Object.fromEntries(s.providers.map(p=>[p.provider,p.total]));
+ assert.ok(by.claude>0&&by.exa>0&&by.higgsfield===2.31);
+ assert.equal(Math.round(s.total*1e6),Math.round((by.claude+by.exa+by.higgsfield)*1e6));
+ assert.equal(Math.round(s.today*1e6),Math.round(s.total*1e6));
+ assert.equal(Math.round(store.stats().spend*1e6),Math.round(s.total*1e6));
+});
+
+test('home metrics bucket drafts, leads and spend by range',async()=>{
+ const store=openStore(':memory:');const tools=fakeTools();const runner=createRunner(store,tools);
+ await runner.wait(runner.start('find brands').id);
+ const drafts=store.listDrafts().length,leads=store.listLeads().length;
+ for(const [range,n] of [['today',24],['week',7],['month',30],['year',12]]){
+  const m=store.metrics(range);
+  assert.equal(m.series.length,n);
+  assert.equal(m.totals.drafts,drafts);assert.equal(m.totals.leads,leads);assert.equal(m.totals.missions,1);
+  assert.equal(Math.round(m.totals.spend*1e6),Math.round(store.spendSummary().total*1e6));
+  assert.equal(m.series[range==='today'?new Date().getHours():n-1].drafts,drafts);
+ }
+ const [t]=store.listTasks();assert.equal(t.drafts,drafts);assert.equal(t.working,0);
+});
+
+test('marking a draft sent by hand moves the brand to contacted',async()=>{
+ const store=openStore(':memory:');const tools=fakeTools();const runner=createRunner(store,tools);
+ await runner.wait(runner.start('find brands').id);
+ const [d]=store.listDrafts();
+ assert.equal(store.markDraftSent(d.id).status,'sent');
+ assert.equal(store.getLead(d.lead_id).status,'contacted');
+ assert.equal(store.markDraftSent(99999),null);
 });
 
 test('higgsfield price sheet becomes a total for the chosen resolution and length',()=>{

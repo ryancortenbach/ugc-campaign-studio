@@ -58,7 +58,7 @@ async function visitWithFetch(url,domain){
 
 function summarize(pages,domain,meta){
  const sources=[];
- for(const p of pages)for(const email of extractEmails(p.text,p.mailtos))if(!sources.some(s=>s.email===email))sources.push({email,sourceUrl:p.url,excerpt:excerptAround(p.text,email)||'(mailto link)'});
+ for(const p of pages)for(const email of extractEmails(p.text,p.mailtos))if(!sources.some(s=>s.email===email))sources.push({email,sourceUrl:p.url,excerpt:excerptAround(p.text,email)||null});
  const best=bestEmail(sources.map(s=>s.email),domain);
  return {...meta,domain,pages:pages.map(p=>({url:p.url,title:p.title,chars:p.text.length})),homeText:pages[0]?.text.slice(0,3000)||'',contactText:pages[1]?.text.slice(0,3000)||'',emails:sources,best:best?sources.find(s=>s.email===best):null};
 }

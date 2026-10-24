@@ -18,6 +18,7 @@ create table if not exists leads(id integer primary key,task_id integer,domain t
 create table if not exists drafts(id integer primary key,lead_id integer not null,task_id integer,to_email text,subject text not null,body text not null,gmail_draft_id text,gmail_url text,status text not null,created_at text not null);
 create table if not exists renders(id integer primary key,title text not null,endpoint text not null,input text not null,status text not null,checks text,estimate_usd text,request_id text,result_url text,local_file text,error text,approved_at text,created_at text not null,updated_at text not null);
 create table if not exists storyboards(id integer primary key,title text not null,brief text not null,plan text not null,status text not null,checks text,version integer not null default 1,parent_id integer,note text,cost_usd real not null default 0,created_at text not null,updated_at text not null);
+create table if not exists spend(id integer primary key,at text not null,provider text not null,usd real not null,task_id integer,storyboard_id integer,render_id integer,note text);
 create index if not exists events_task on events(task_id,id);
 create index if not exists events_lead on events(lead_id,id);`;
 
@@ -27,6 +28,16 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  if(file!==':memory:')db.exec('pragma journal_mode=wal');
  db.exec(schema);
  for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text','submission_key text'])try{db.exec(`alter table renders add column ${col}`);}catch{}
+ // One time: itemize spend recorded before the ledger existed. Exa prices were logged on its events; the rest was Claude.
+ if(!db.prepare('select count(*) n from spend').get().n){
+  const add=db.prepare('insert into spend(at,provider,usd,task_id,storyboard_id,note) values(?,?,?,?,?,?)');
+  for(const t of db.prepare('select id,cost_usd,updated_at from tasks where cost_usd>0').all()){
+   const exa=db.prepare("select title from events where task_id=? and type='tool_result' and tool like '%exa%'").all(t.id).reduce((sum,e)=>sum+Number((e.title.match(/\(\$([\d.]+)\)/)||[])[1]||0),0);
+   if(exa>0)add.run(t.updated_at,'exa',Math.min(exa,t.cost_usd),t.id,null,'itemized from earlier totals');
+   if(t.cost_usd-exa>0)add.run(t.updated_at,'claude',t.cost_usd-exa,t.id,null,'itemized from earlier totals');
+  }
+  for(const s of db.prepare('select id,cost_usd,updated_at from storyboards where cost_usd>0').all())add.run(s.updated_at,'claude',s.cost_usd,null,s.id,'itemized from earlier totals');
+ }
  const bus=new EventEmitter();bus.setMaxListeners(100);
  const task=row=>row&&{...row,plan:parse(row.plan)};
  const event=row=>row&&{...row,data:parse(row.data)};
@@ -36,7 +47,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  const store={db,bus,
   createTask(prompt){const at=now();const id=Number(db.prepare('insert into tasks(prompt,status,created_at,updated_at) values(?,?,?,?)').run(prompt,'queued',at,at).lastInsertRowid);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
   getTask(id){return task(db.prepare('select * from tasks where id=?').get(id));},
-  listTasks(){return db.prepare('select t.*,(select count(*) from leads l where l.task_id=t.id) leads,(select count(*) from drafts d where d.task_id=t.id) drafts from tasks t order by t.id desc limit 200').all().map(task);},
+  listTasks(){return db.prepare("select t.*,(select count(*) from leads l where l.task_id=t.id) leads,(select count(*) from drafts d where d.task_id=t.id) drafts,(select count(*) from leads l where l.task_id=t.id and l.status in ('visiting','grading','drafting')) working,(select count(*) from leads l where l.task_id=t.id and l.status in ('unreachable','error')) failed from tasks t order by t.id desc limit 200").all().map(task);},
   updateTask(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update tasks set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>c==='plan'?json(fields[c]):fields[c]),at,id);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
   addCost(id,usd){if(usd>0)db.prepare('update tasks set cost_usd=cost_usd+? where id=?').run(usd,id);},
   addEvent({taskId=null,leadId=null,type,tool=null,title,detail=null,data}){const at=now();const id=Number(db.prepare('insert into events(task_id,lead_id,at,type,tool,title,detail,data) values(?,?,?,?,?,?,?,?)').run(taskId,leadId,at,type,tool,title,detail,json(data)).lastInsertRowid);const e=event(db.prepare('select * from events where id=?').get(id));bus.emit('change',{kind:'event',event:e});return e;},
@@ -51,6 +62,8 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   listLeads({taskId}={}){const rows=taskId?db.prepare('select * from leads where task_id=? order by id desc').all(taskId):db.prepare('select * from leads order by id desc limit 1000').all();return rows.map(lead);},
   updateLead(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update leads set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['reasons','risks','emails'].includes(c)?json(fields[c]):fields[c]),at,id);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
   addDraft(fields){const id=Number(db.prepare('insert into drafts(lead_id,task_id,to_email,subject,body,gmail_draft_id,gmail_url,status,created_at) values(?,?,?,?,?,?,?,?,?)').run(fields.leadId,fields.taskId,fields.to,fields.subject,fields.body,fields.gmailDraftId||null,fields.gmailUrl||null,fields.status,now()).lastInsertRowid);return db.prepare('select * from drafts where id=?').get(id);},
+  getDraft(id){return db.prepare('select * from drafts where id=?').get(id);},
+  markDraftSent(id){const d=store.getDraft(id);if(!d)return null;db.prepare("update drafts set status='sent' where id=?").run(id);const l=store.getLead(d.lead_id);if(l&&['drafted','found'].includes(l.status))store.updateLead(l.id,{status:'contacted'});return store.getDraft(id);},
   listDrafts({leadId,taskId}={}){if(leadId)return db.prepare('select * from drafts where lead_id=? order by id desc').all(leadId);if(taskId)return db.prepare('select * from drafts where task_id=? order by id desc').all(taskId);return db.prepare('select * from drafts order by id desc limit 500').all();},
   createRender({title,endpoint,input,group=null,shotId=null}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,group_name,shot_id,created_at,updated_at) values(?,?,?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',group,shotId,at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   getRender(id){return render(db.prepare('select * from renders where id=?').get(id));},
@@ -61,7 +74,29 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   getStoryboard(id){return board(db.prepare('select * from storyboards where id=?').get(id));},
   listStoryboards(){return db.prepare('select * from storyboards order by id desc limit 200').all().map(board);},
   updateStoryboard(id,fields,addCost=0){const at=now();const cols=Object.keys(fields);db.prepare(`update storyboards set ${cols.map(c=>`${c}=?`).join(',')}${cols.length?',':''}cost_usd=cost_usd+?,updated_at=? where id=?`).run(...cols.map(c=>['brief','plan','checks'].includes(c)?json(fields[c]):fields[c]),addCost,at,id);const s=store.getStoryboard(id);bus.emit('change',{kind:'storyboard',storyboard:s});return s;},
-  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(cost_usd),0) n from tasks').get().n+db.prepare('select coalesce(sum(cost_usd),0) n from storyboards').get().n};}
+  addSpend({provider,usd,taskId=null,storyboardId=null,renderId=null,note=null}){if(!(usd>0))return;db.prepare('insert into spend(at,provider,usd,task_id,storyboard_id,render_id,note) values(?,?,?,?,?,?,?)').run(now(),provider,usd,taskId,storyboardId,renderId,note);bus.emit('change',{kind:'spend'});},
+  spendSummary(){
+   const day=new Date();day.setHours(0,0,0,0);
+   const rows=db.prepare('select provider,sum(usd) total,count(*) n,sum(case when at>=? then usd else 0 end) today from spend group by provider order by total desc').all(day.toISOString());
+   return {total:rows.reduce((s,r)=>s+r.total,0),today:rows.reduce((s,r)=>s+r.today,0),providers:rows.map(r=>({provider:r.provider,total:r.total,today:r.today,count:r.n}))};
+  },
+  // Home chart: totals plus one bucket per hour (today), day (week, month) or month (year), in local time.
+  metrics(range='week'){
+   const start=new Date();start.setHours(0,0,0,0);const buckets=[];
+   if(range==='today')for(let h=0;h<24;h++){const at=new Date(start);at.setHours(h);buckets.push({at,label:`${String(h).padStart(2,'0')}:00`});}
+   else if(range==='year'){start.setDate(1);start.setMonth(start.getMonth()-11);for(let i=0;i<12;i++){const at=new Date(start);at.setMonth(start.getMonth()+i);buckets.push({at,label:at.toLocaleDateString('en-US',{month:'short'})});}}
+   else{const days=range==='month'?30:7;start.setDate(start.getDate()-(days-1));for(let i=0;i<days;i++){const at=new Date(start);at.setDate(start.getDate()+i);buckets.push({at,label:at.toLocaleDateString('en-US',{month:'short',day:'numeric'})});}}
+   const since=buckets[0].at.toISOString(),series=buckets.map(b=>({label:b.label,drafts:0,leads:0,missions:0,spend:0}));
+   const slot=at=>{const t=new Date(at);for(let i=buckets.length-1;i>=0;i--)if(t>=buckets[i].at)return i;return -1;};
+   const tally=(rows,key,value=()=>1)=>{for(const r of rows){const i=slot(r.at);if(i>=0)series[i][key]+=value(r);}};
+   tally(db.prepare('select created_at at from drafts where created_at>=?').all(since),'drafts');
+   tally(db.prepare('select created_at at from leads where created_at>=?').all(since),'leads');
+   tally(db.prepare('select created_at at from tasks where created_at>=?').all(since),'missions');
+   tally(db.prepare('select at,usd from spend where at>=?').all(since),'spend',r=>r.usd);
+   const sum=k=>series.reduce((s,b)=>s+b[k],0);
+   return {range,totals:{drafts:sum('drafts'),leads:sum('leads'),missions:sum('missions'),spend:sum('spend')},series};
+  },
+  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(usd),0) n from spend').get().n};}
  };
  return store;
 }
