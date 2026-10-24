@@ -1,0 +1,1 @@
+Historical NYC list snapshot from commit2ad6060, preserved before the D2C retargeting in1cd0bad. These are archived source files, not the current outreach queue. Current list: ../call-list-d2c-2026-10-24.csv and ../CALL-LIST.md. No call or message is authorized by these files. No contacts were called or messaged during this archive operation.
