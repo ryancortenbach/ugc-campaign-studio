@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-24T18:15:41.314Z",
+  "scope": "Read-only review of actively edited Air agent through local GET/HEAD-only proxy",
+  "responsive": {
+    "Tasks760": {
+      "document_width": 760,
+      "view_width": 696
+    },
+    "Tasks390": {
+      "document_width": 390,
+      "view_width": 326
+    },
+    "physical_phone_tested": false
+  },
+  "transport": {
+    "reads": 79,
+    "blocked": 1,
+    "write_requests_forwarded": 0,
+    "explicit_blocked_boundary_test": 1
+  },
+  "boot_observation": {
+    "earlier_error": "SyntaxError: Unexpected token '<<'",
+    "current_node_parse_exit": 0,
+    "reload_recovered": true,
+    "cause_established": false
+  },
+  "findings": [
+    {
+      "id": "lead_title_html",
+      "state": "observed",
+      "severity": "quality",
+      "expected": "Human-readable company or hostname",
+      "observed": "Live feed renders an escaped HTML fragment as a lead label",
+      "owner_files": [
+        "agent/runner.mjs",
+        "agent/public/app.js"
+      ],
+      "recommendation": "Use a readable hostname fallback for markup-like source titles; retain raw source in evidence."
+    },
+    {
+      "id": "scarcity_example",
+      "state": "observed",
+      "severity": "claim_quality",
+      "expected": "Claim-free example unless inventory evidence is supplied",
+      "observed": "Home suggestion frames a tee as selling out",
+      "owner_files": [
+        "agent/public/app.js"
+      ],
+      "recommendation": "Use a neutral product introduction example or require verified claim evidence."
+    }
+  ],
+  "not_tested": [
+    "Paid actions",
+    "Model grading requests",
+    "External sending",
+    "Voices generation",
+    "Settings mutations",
+    "Full independent visual signoff"
+  ],
+  "app_source_modified": false,
+  "Air_workers_modified": false,
+  "observed": {
+    "Home": true,
+    "Tasks": true,
+    "Renders": true,
+    "Drafts": true,
+    "task_groups": 2,
+    "draft_activity_count": 6,
+    "below_threshold_checkers": 5,
+    "lowest_checker_score": 62,
+    "approval_controls_for_failed_render": 0,
+    "draft_labels": "In Gmail, not sent"
+  },
+  "status": "partial_read_only_ui_review_with_findings",
+  "raw_contact_or_draft_data_published": false,
+  "temporary_review_transport_stopped": true
+}

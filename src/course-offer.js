@@ -1,3 +1,4 @@
+// Historical course-offer fixture helper. The current V3 endpoint is retired and makes no provider request.
 export const whopApiVersion='2026-10-24';
 const idPattern=/^plan_[a-zA-Z0-9]{1,80}$/;
 export function checkoutLink(value){
