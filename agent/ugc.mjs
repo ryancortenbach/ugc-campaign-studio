@@ -96,11 +96,14 @@ async function estimateSteps(video,plan){
 // Write the concept and keep applying checker feedback until every checker scores PASS_SCORE or more,
 // fetch the Higgsfield price, and park the render at checks_passed. Returns the passing render and price. Provider errors and explicit stop/pause requests retain the current render.
 // `spend(usd,note,renderId)` records every Claude cost. Nothing here submits to Higgsfield.
-export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()=>{},checkpoint=async()=>{}}){
+// Claude spend allowed per concept before the loop parks it. Ryan approved concept work at roughly $0.10 per brand; this is the hard stop.
+export const CONCEPT_CEILING_USD=0.40;
+export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()=>{},checkpoint=async()=>{},ceilingUsd=CONCEPT_CEILING_USD}){
  const company=ctx.company||lead.company||lead.domain;
- const costs=[];let render=null;
- const note=(usd,what)=>{if(render)spend(usd||0,`${what} for ${company}`,render.id);else costs.push([usd||0,what]);};
- const ready=async()=>{assertRevisionWorkAllowed(store);await checkpoint();assertRevisionWorkAllowed(store);};
+ const costs=[];let render=null,spent=0,best=null;
+ const lowest=c=>Math.min(...c.results.map(r=>r.score));
+ const note=(usd,what)=>{spent+=Number(usd)||0;if(render)spend(usd||0,`${what} for ${company}`,render.id);else costs.push([usd||0,what]);};
+ const ready=async()=>{assertRevisionWorkAllowed(store);await checkpoint();assertRevisionWorkAllowed(store);if(spent>=ceilingUsd)throw Object.assign(Error(`Concept budget reached ($${spent.toFixed(2)} of $${ceilingUsd.toFixed(2)}). The best revision is kept and nothing was submitted.`),{code:'concept_cap'});};
  try{
   await ready();
   // A researched lead with a usable apparel photo gets the two-step product clip. Otherwise this stays text-to-video.
@@ -112,7 +115,7 @@ export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()
   for(const [usd,what] of costs.splice(0))spend(usd,`${what} for ${company}`,render.id);
   const reviewed=await reviseUntilPassed({candidate:made,checkpoint:ready,accept:strong,
    check:async candidate=>{store.updateRender(render.id,{status:'checking',input:candidate.plan?candidate.plan.still.input:candidate.input,plan:candidate.plan||null});const checks=await video.check({title:`${company} video`,input:checkInput(candidate),brief});note(checks.cost,'video checkers');return checks;},
-   onChecked:async(candidate,checks,revision)=>{store.updateRender(render.id,{input:candidate.plan?candidate.plan.still.input:candidate.input,plan:candidate.plan||null,status:strong(checks)?'checks_passed':'checking',checks});log('tool_result',`Video review ${revision}: ${strong(checks)?'passed':'applying feedback'}`,{tool:'higgsfield.checks',data:{renderId:render.id,revision,checks}});},
+   onChecked:async(candidate,checks,revision)=>{if(!best||lowest(checks)>=lowest(best.checks))best={candidate,checks};store.updateRender(render.id,{input:candidate.plan?candidate.plan.still.input:candidate.input,plan:candidate.plan||null,status:strong(checks)?'checks_passed':'checking',checks});log('tool_result',`Video review ${revision}: ${strong(checks)?'passed':'applying feedback'}`,{tool:'higgsfield.checks',data:{renderId:render.id,revision,checks}});},
    onRevision:async(candidate,checks,revision)=>log('tool_call',`Video concept for ${company} needs fixes, revising (${revision})`,{tool:'claude.video revise',data:{revision,notes:checks.results.flatMap(r=>r.issues.map(i=>i.fix)).slice(0,6),lowest:Math.min(...checks.results.map(r=>r.score))}}),
    revise:async(candidate,checks)=>{const next=await video.revise(ctx,candidate.fields,checks);note(next.cost,'video concept revision');store.updateRender(render.id,{input:next.plan?next.plan.still.input:next.input,plan:next.plan||null,status:'checking'});return next;}
   });
@@ -128,7 +131,15 @@ export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()
   render=store.updateRender(render.id,fields);
   log('decision',price?(plan?`Video concept ready for your approval ($${price}: reference photo $${steps.still} + video $${steps.video})`:`Video concept ready for your approval ($${price})`):`Video concept ready, but no price yet (${error}). Rerun its checks to fetch one.`,{tool:'higgsfield.estimate',data:{renderId:render.id,estimateUsd:price,steps,prompt:made.input.prompt,stillPrompt:plan?.still.input.prompt||null}});
   return {render,price};
- }catch(error){if(render)store.updateRender(render.id,{status:'checks_failed',error:error.message});throw error;}
+ }catch(error){
+  if(error.code==='concept_cap'&&render){
+   const keep=best?{input:best.candidate.plan?best.candidate.plan.still.input:best.candidate.input,plan:best.candidate.plan||null,checks:best.checks}:{};
+   render=store.updateRender(render.id,{...keep,status:'checks_failed',error:error.message});
+   log('error',`Video concept for ${company} stopped at its budget with the lowest checker at ${best?lowest(best.checks):'n/a'}. ${error.message}`,{tool:'higgsfield.checks',data:{renderId:render.id,spentUsd:spent}});
+   return {render,failed:true};
+  }
+  if(render)store.updateRender(render.id,{status:'checks_failed',error:error.message});throw error;
+ }
  finally{for(const [usd,what] of costs)spend(usd,`${what} for ${company}`,render?.id??null);}
 }
 
