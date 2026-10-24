@@ -1,0 +1,40 @@
+FINANCIAL MODEL: THREE REVENUE STREAMS
+As of 2026-10-24. All currency USD, monthly 30-day operating model.
+
+PRIMARY OBSERVATIONS
+Children of Khan: https://www.childrenofkhan.com/ and /products/chinese-time-tee
+Observed standard tee price around $59.99, long sleeves and polos around $69.99, hoodies around $90-95. Homepage advertises free worldwide shipping over $90 and buy 3, get 1 free. This supports a meme/lore content -> named apparel -> bundle/cart threshold funnel. The shop calls itself a narrative-driven apparel brand. Product-page buyer-count statements are merchant marketing claims, not a verified sales ledger.
+Elite Ball Knowledge: https://www.eliteballknowledge.ai/
+Reference course page currently advertises $197 one-time lifetime access. Ryan's course price is $97. Its audience, buyer-count, and view-count claims belong to that creator and are not proof for our product.
+Whop: https://whop.com/network/pricing/
+Published domestic card processing baseline 2.7% + $0.30. International, currency conversion, and optional services can add fees. Extra platform fee is a separate editable model input. Confirm actual account fee schedule before launching.
+
+KHAN SALES ARE NOT VERIFIED
+No first-party order export, accounting statement, or analytics access was obtained. Third-party estimates conflict dramatically: EcomScout reports a modeled $52.4k-122.3k monthly revenue range, while ConvertMate shows $400 and explicitly describes an AI parsing error with a fallback estimate. Neither is used as an actual-sales calibration. Revenue claims on storefronts do not establish profit, month, refund rate, or conversion.
+Estimate sources, excluded from actuals: https://ecomscout.com/stores/www.childrenofkhan.com and https://www.convertmate.io/revenue-tracking/childrenofkhan-com
+
+AUTHORITATIVE INPUTS
+Ryan: 10+ daily posts for each brand; $97 course; three offers.
+Model defaults: editable estimates for views, click-through, conversion, COGS, shipping, returns, retry yield, generation cost, human review, LLM, voice, editing, support, labor, CAC, churn, and fixed expenses. They are not estimates of Khan's private business. The historical Higgsfield price is not reused as a current quote; cost-per-second must be confirmed against the selected model.
+
+FORMULA FLOW
+Own-channel monthly posts = days * posts per day.
+Views = posts * average views per post. This is a scenario, not a prediction.
+Visits = views * view-to-site rate. Tee/course traffic allocation shares are non-overlapping and must total no more than 100%.
+Orders = allocated visits * stream-specific conversion.
+Tee gross = orders * (unit selling price * units/order * (1-discount) + shipping charged).
+Tee net = gross less expected refunds. COGS and shipping apply to all fulfilled orders, a conservative assumption without recovery value for returned goods.
+Payment fees apply to gross payments, with fixed fee per order. Affiliate commissions apply to net retained revenue for the affiliate share of sales.
+Course contribution = retained course revenue less payment fees, affiliate fees, and per-order support.
+Expected paid generation per approved post = seconds * cost/second * (1-reuse fraction) / first-pass acceptance yield. Independent retries/geometric success is an assumption, not a guarantee. Reuse can reduce generation needs but does not eliminate review, voice, edit, or LLM costs.
+Shared own-brand content cost is deducted once across the tee and course channels. This avoids charging the same marketing content twice.
+Each brand client incurs its own daily post production and support costs. Client revenue is reduced for refunds, processing and expected churn-replacement CAC.
+Operating profit before tax = all stream contributions - shared content cost - shared overhead, including imputed labor, course setup amortization, prospect research and sample production.
+First-month cash proxy deducts the upfront course setup instead of amortization. It is not a tax or complete accounting cashflow statement. Working-capital proxy = cash operating costs/day * payout delay days.
+Break-even outputs report units or clients at positive contribution margins. Nonpositive unit margin has no finite break-even.
+
+REQUIRED SENSITIVITIES
+Views and click-through can fail independently. Test low audience reach, poor conversion, 50% generation yield, doubled generation price, higher refunds, higher shipping, affiliate acquisition, client churn, and 10 vs 15 posts/day. Count 5-second samples as an acquisition cost even when no prospect buys.
+
+WHAT CAN BE PROMISED
+A defined production cadence, scope, review process, retry budget, reporting, and support response time can become service commitments after demonstrated capacity and platform access. Rejected and failed generations are not delivered posts. No guaranteed views, virality, follower count, conversion, sales, revenue, or profit follows from another creator's performance. A content-volume SLA needs a quality definition, exclusions, account access, and remedy for missed delivery.

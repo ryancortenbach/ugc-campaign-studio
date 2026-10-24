@@ -13,7 +13,7 @@ npm run dev
 
 Open the local address printed by the server. `npm test` validates intake and output behavior. `npm run check` checks JavaScript syntax.
 
-The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
+The dark dashboard includes guided intake, saved campaigns, task tabs with actual readiness blockers, a prompt review lab, Exa prospect discovery, and an editable financial model. Three marketing mocks live at `/shop/`, `/course/`, and `/brands/`. The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
 
 The browser saves drafts and campaigns locally and exports a production packet as JSON. This is not shared account storage. The packet leaves unknown facts and unapproved generation settings explicit.
 
@@ -29,7 +29,7 @@ The browser saves drafts and campaigns locally and exports a production packet a
 
 ## Integration boundaries
 
-Higgsfield generation, publication, sponsor research/review, checkout, and analytics adapters are not connected. The app never submits a paid video generation. The real course checkout URL is pending. Do not represent test data, views, revenue, or integration placeholders as live activity.
+The optional Exa adapter and model conversation/review adapters require credentials. Seven specialist model reviewers can run for up to three rounds, revising only the prompt between rounds and stopping on unresolved findings or connection errors. Reviews bind to a prompt/reference fingerprint. The UI never issues a fictional model pass. Browser execution, background posting, Terac, Lovable, Whop checkout, and analytics are not connected. The app never submits a paid video generation. The real course checkout URL is pending. Do not represent test data, views, revenue, or integration placeholders as live activity.
 
 ## API reference
 

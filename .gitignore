@@ -5,3 +5,4 @@ node_modules/
 private-research/
 work/
 .DS_Store
+.data/

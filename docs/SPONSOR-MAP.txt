@@ -1,0 +1,14 @@
+NYC SPONSOR INTEGRATION MAP
+Verified 2026-10-24 from https://terac.com/events/hackathon/nyc and https://luma.com/naxtga5l
+
+Terac (host): recruit human audience reviewers for concept/script comparison, then compare original and revised versions. Escalate high-impact disagreements from the prompt graders to a human. Record task ID, cost, completion, judgment, and whether it changed the output.
+Whop (sponsor/venue): $97 course checkout, course access entitlement, recurring brand-service checkout and purchase webhooks. T-shirt storefront can use Whop checkout only if physical-goods/order fulfillment is supported and configured. Do not claim physical fulfillment integration before verification.
+Lovable (sponsor): implement or generate the customer-facing storefront/course/brand onboarding surfaces using Lovable's supported builder. This local scaffold alone does not constitute using Lovable. A real builder session/export remains pending.
+Exa (sponsor): source-backed audience/brand research and DTC prospect discovery. Return URLs, evidence, public business emails if present, and personalized unsent outreach drafts. Never invent contacts or infer a private email from a naming convention.
+
+Community partners: 529 Labs and Bond AI. They are communities, not documented runtime APIs. No artificial software integration is assigned.
+
+NYC's published toolkit is Terac, Whop, Lovable and Exa. Stripe, Render, Linq, Superserve, Replay, Pioneer, Band, Dodo Payments, sandbox0 and Solari appear on the older SF event listing, not on NYC's current sponsor list. Do not add them as requirements without updated evidence.
+
+STATUS
+This is an implementation map. These integrations are not represented as live until credentials, requests, and responses are verified. Devpost rules require browser verification because the ordinary web fetch was inaccessible. Historical chat says Terac and Whop MCP are mandatory, but that rule has not yet been independently reverified in this run.

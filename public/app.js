@@ -24,3 +24,5 @@ $('#chat-form').onsubmit=async e=>{e.preventDefault();const message=$('#message'
 };
 $('#save').onclick=()=>{const id=state.id||crypto.randomUUID();state.id=id;const copy={id,brief:{...state.brief},messages:[...state.messages],updatedAt:new Date().toISOString()};state.campaigns=state.campaigns.filter(c=>c.id!==id);state.campaigns.unshift(copy);persist();render();$('#saved-status').textContent='Campaign saved on this browser.';};
 $('#export').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(productionPacket(state.brief),null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='campaign-production-packet.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+
+if(location.hash&&document.getElementById(location.hash.slice(1))?.classList.contains("view"))view(location.hash.slice(1));

@@ -3,18 +3,23 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {chat} from './api/chat.js';
-const root=fileURLToPath(new URL('./public/',import.meta.url));
+import reviewHandler from './api/review.js';
+import {findProspects} from './api/prospects.js';
+const root=path.resolve(fileURLToPath(new URL('./public/',import.meta.url)));
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'};
 http.createServer(async(req,res)=>{
   const send=(code,data)=>{res.writeHead(code,{'Content-Type':'application/json'});res.end(JSON.stringify(data));};
-  if(req.url==='/api/chat'){
+  if(req.url==='/api/review'){
+    let raw='';try{for await(const chunk of req){raw+=chunk;if(raw.length>64000)return send(413,{error:'Request too large'});}req.body=JSON.parse(raw||'{}');res.status=code=>{res.statusCode=code;return res;};res.json=data=>send(res.statusCode||200,data);return await reviewHandler(req,res);}catch{return send(400,{error:'Invalid review request'});}
+  }
+  if(req.url==='/api/chat'||req.url==='/api/prospects'){
     if(req.method!=='POST')return send(405,{error:'POST required'});
     let body='';try{for await(const chunk of req){body+=chunk;if(body.length>64000)return send(413,{error:'Request too large'});}
-    const r=await chat(JSON.parse(body),req.headers.authorization||'');return send(r.status,r.body);}catch{return send(400,{error:'Invalid request'});}
+    const r=await (req.url==='/api/chat'?chat:findProspects)(JSON.parse(body),req.headers.authorization||'');return send(r.status,r.body);}catch{return send(400,{error:'Invalid request'});}
   }
   try{
     const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-    const file=pathname==='/src/brief.js'?fileURLToPath(new URL('./src/brief.js',import.meta.url)):path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+    const file=pathname==='/src/brief.js'?fileURLToPath(new URL('./src/brief.js',import.meta.url)):path.resolve(root,'.'+(pathname.endsWith('/')?pathname+'index.html':pathname));
     if(!file.startsWith(root+path.sep) && pathname!=='/src/brief.js')return send(403,{error:'Forbidden'});
     const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','X-Content-Type-Options':'nosniff'});res.end(data);
   }catch{send(404,{error:'Not found'});}
