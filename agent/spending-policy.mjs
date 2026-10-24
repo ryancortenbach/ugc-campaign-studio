@@ -12,6 +12,7 @@ export function spendingRequestAllowed(method,pathname,body={}){
  if(method==='GET')return true;
  if(method!=='POST')return false;
  if(pathname==='/api/client-demo/tasks')return true;
+ if(/^\/api\/tasks\/\d+\/client-review$/.test(pathname))return true;
  if(['/api/chat','/api/assistant'].includes(pathname)&&clientDemoPromptBrands(body.message).length)return true;
  if(pathname==='/api/production/call'||pathname==='/api/uploads'||pathname==='/api/profile')return true;
  if(/^\/api\/tasks\/\d+\/storyboard$/.test(pathname)||/^\/api\/leads\/\d+(?:\/storyboard)?$/.test(pathname))return true;

@@ -3,6 +3,7 @@ import {voicesView} from './voices.js';
 import {connectionStatus} from './connection-status.js';
 import {ideationPanel} from './brand-ideation.js';
 import {buildGroups,pairTools} from './live-feed-model.js';
+import {paidTaskOrders,taskSection,sortTaskGroups} from './task-list-model.js';
 // tool-logs.js is untracked: load it dynamically and fall back to plain log rows if it is missing.
 const {toolLogDetails}=await import('./tool-logs.js').catch(()=>({toolLogDetails:null}));
 const $=s=>document.querySelector(s);
@@ -22,6 +23,7 @@ function toast(title,kind='info',sub=''){
  const t=document.createElement('div');t.className=`toast t-${kind}`;
  t.innerHTML=`<i>${svg(kind==='ok'?'ok':kind==='bad'?'bad':'info')}</i><div style="min-width:0"><b>${esc(title)}</b>${sub?`<span>${esc(sub)}</span>`:''}</div><button class="x" title="Dismiss">×</button>`;
  t.querySelector('.x').onclick=()=>t.remove();box.prepend(t);while(box.children.length>4)box.lastChild.remove();setTimeout(()=>t.remove(),kind==='bad'?9000:5000);
+ return t;
 }
 
 // Status palette from Cyber 4.5: orange working, yellow needs you, green done, red failed, white waiting.
@@ -46,7 +48,7 @@ function contactChip(l){
  return '';
 }
 const ls=s=>leadStatus[s]||[s,'s-idle'];const ts=s=>taskStatus[s]||[s,'s-idle'];
-const titles={analytics:'Analytics',home:'Home',tasks:'Tasks',leads:'Leads',drafts:'Drafts',storyboards:'Storyboards',renders:'Renders',voices:'Voices',settings:'Settings',production:'Production','client-demo':'Client demo'};
+const titles={analytics:'Analytics',home:'Home',tasks:'Tasks',leads:'Leads',drafts:'Drafts',storyboards:'Storyboards',renders:'Renders',voices:'Voices',settings:'Settings',production:'Production','client-demo':'Tasks'};
 const logoFor=tool=>{const t=String(tool||'').toLowerCase();return t.startsWith('claude')?'claude':t.includes('exa')?'exa':t.startsWith('solari')?'solari':t.startsWith('gmail')?'gmail':t.includes('higgsfield')?'higgsfield':t.includes('elevenlabs')?'elevenlabs':t.includes('whop')?'whop':t.includes('terac')?'terac':t.includes('instagram')?'instagram':null;};
 const MARKS={instagram:'data:image/svg+xml;utf8,'+encodeURIComponent("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><defs><linearGradient id=\"g\" x1=\"0\" y1=\"1\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#FEDA75\"/><stop offset=\".28\" stop-color=\"#FA7E1E\"/><stop offset=\".52\" stop-color=\"#D62976\"/><stop offset=\".78\" stop-color=\"#962FBF\"/><stop offset=\"1\" stop-color=\"#4F5BD5\"/></linearGradient></defs><g fill=\"url(#g)\"><path d=\"M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077\"/></g></svg>"),tiktok:'data:image/svg+xml;utf8,'+encodeURIComponent("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"5.5\" fill=\"#000\"/><g transform=\"translate(5.2 5.2) scale(.6)\"><g transform=\"translate(-.9 -.7)\" fill=\"#25F4EE\"><path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z\"/></g><g transform=\"translate(.9 .7)\" fill=\"#FE2C55\"><path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z\"/></g><g fill=\"#fff\"><path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z\"/></g></g></svg>"),youtube:'data:image/svg+xml;utf8,'+encodeURIComponent("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><g fill=\"#FF0000\"><path d=\"M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z\"/></g></svg>"),facebook:'data:image/svg+xml;utf8,'+encodeURIComponent("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><g fill=\"#1877F2\"><path d=\"M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z\"/></g></svg>")};
 // The server does not serve .svg, so the four social marks ship inline.
@@ -246,10 +248,10 @@ $('#livefeed').addEventListener('click',e=>{
 
 
 const video=r=>r.local_file?`<video src="/renders/${esc(r.local_file)}#t=0.1" controls playsinline preload="metadata"></video>`:r.result_url?`<video src="${esc(r.result_url)}#t=0.1" controls playsinline preload="metadata"></video>`:'';
-function reviewCard(r){return `<div class="review" data-review="${r.id}">${video(r)}<div class="rbody"><div class="eyebrow" style="margin-bottom:6px">Scene ready for review</div><div style="font-weight:600">${esc(r.title)}</div><div class="faint" style="font-size:11.5px;margin:2px 0 8px">${esc(r.group_name||'Single shot')} · ${r.input.duration}s · ${esc(r.input.resolution)}${r.estimate_usd?` · about $${esc(r.estimate_usd)}`:''}</div><input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button></div></div></div>`;}
+function reviewCard(r){return `<div class="review" data-review="${r.id}">${video(r)}<div class="rbody"><div style="font-weight:600">${esc(r.title)}</div><div class="faint" style="font-size:11.5px;margin:2px 0 8px">${esc(r.group_name||'Single shot')} · ${r.input.duration}s · ${esc(r.input.resolution)}${r.estimate_usd?` · about $${esc(r.estimate_usd)}`:''}</div><input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button></div></div></div>`;}
 function bindReviews(after){document.querySelectorAll('[data-decide]').forEach(b=>b.onclick=async()=>{const id=b.dataset.id;const note=document.querySelector(`[data-note="${id}"]`)?.value||'';try{await api(`/api/renders/${id}/review`,{decision:b.dataset.decide,note});b.dataset.decide==='approved'?toast('Scene approved','ok'):toast('Scene rejected','bad','Use Revise to queue a fixed version.');document.querySelector(`#pop-${id}`)?.remove();after?.();}catch(err){toast(err.message,'bad');}});}
 const popped=new Set();
-function popReview(r){if(popped.has(r.id))return;popped.add(r.id);const el=document.createElement('div');el.className='popup';el.id=`pop-${r.id}`;el.innerHTML=`<button class="x" title="Dismiss">×</button>${reviewCard(r)}`;document.body.append(el);el.querySelector('.x').onclick=()=>el.remove();bindReviews(()=>route());}
+function popReview(r){if(popped.has(r.id))return;popped.add(r.id);const notice=toast('Video ready','ok',clip(r.title,80)),link=document.createElement('a');link.href='#/renders';link.className='linkbtn';link.textContent='Review';notice.querySelector('div').append(link);}
 
 function startMission(form){form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type=submit]');if(!f.message.value.trim())return;b.disabled=true;try{const {task}=await api('/api/chat',{message:f.message.value});f.reset();toast('Mission started','ok',`Task ${task.id}`);location.hash=`#/tasks/${task.id}`;}catch(err){toast(err.message,'bad');}finally{b.disabled=false;}});form.message?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))form.requestSubmit();});}
 
@@ -261,15 +263,15 @@ const hash36=str=>{let h=5381;for(const ch of String(str))h=((h*33)^ch.charCodeA
 const skey=prompt=>'s'+hash36(normPrompt(prompt));
 function sessionGroups(){
  const map=new Map();
- for(const t of state.tasks){const k=t.plan?.kind==='brand_storyboard'?`brand-task-${t.id}`:skey(t.prompt);if(!map.has(k))map.set(k,{key:k,runs:[]});map.get(k).runs.push(t);}
+ for(const t of state.tasks){const k=t.plan?.kind==='brand_storyboard'?`brand-task-${t.id}`:t.plan?.kind==='client_demo'?`client-task-${t.id}`:skey(t.prompt);if(!map.has(k))map.set(k,{key:k,runs:[]});map.get(k).runs.push(t);}
  const out=[...map.values()];
  for(const g of out){
   g.runs.sort((a,b)=>b.id-a.id);const newest=g.runs[0],live=g.runs.filter(isLive);
-  g.title=newest.plan?.kind==='brand_storyboard'?(newest.plan.brand||newest.prompt.replace(/^Storyboard: /,'')):newest.prompt;g.live=live;g.whop=isWhopTask(newest);
+  g.title=['brand_storyboard','client_demo'].includes(newest.plan?.kind)?(newest.plan.brand||newest.prompt.replace(/^(?:Storyboard|Client demo|Streetwear demo): /,'')):newest.prompt;g.live=live;g.whop=isWhopTask(newest);
   g.status=(live.find(t=>t.status==='running')||live.find(t=>t.status==='paused')||live[0]||newest).status;
   g.drafts=g.runs.reduce((n,t)=>n+(t.drafts||0),0);g.failed=g.runs.reduce((n,t)=>n+(t.failed||0),0);g.cost=g.runs.reduce((n,t)=>n+(Number(t.cost_usd)||0),0);
  }
- return out.sort((a,b)=>b.runs[0].id-a.runs[0].id);
+ return sortTaskGroups(out);
 }
 const groupByKey=k=>sessionGroups().find(g=>g.key===k);
 function sessControls(g){
@@ -279,14 +281,14 @@ function sessControls(g){
  return (run.status==='running'?btn('pause','pause','Pause'):run.status==='paused'?btn('resume','play','Resume'):'')+btn('stop','square','Stop');
 }
 function sessHead(g,open,nav){
- const idea=g.runs[0]?.plan?.kind==='brand_storyboard',st=ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
- return `<div class="sess-h" data-sh="${g.key}" ${nav?`data-nav="#/tasks/${g.runs[0].id}" `:''}role="button" tabindex="0" aria-expanded="${open}">
+ const idea=['brand_storyboard','client_demo'].includes(g.runs[0]?.plan?.kind),st=ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
+ return `<div class="sess-h" data-sh="${g.key}" ${nav?`data-nav="#/tasks/${g.runs[0].id}" `:''}role="${nav?'link':'button'}" tabindex="0" ${nav?'':`aria-expanded="${open}"`}>
   <span class="schev">${ic(idea||g.whop?'file-text':'chevron-right')}</span>
   <div class="stitle">${g.whop?'<img class="wlogo" src="/logos/whop.png" alt="Whop" data-tip="Whop order">':''}<b>${esc(g.title)}</b></div>
   <div class="smeta">${g.runs.length>1?`<span class="schip s-idle">${g.runs.length} runs</span>`:''}${schip(st,statusIcon[st[1]])}${idea?'':`${g.drafts?cnt('s-ok','check',g.drafts):''}${g.failed?cnt('s-bad','x',g.failed):''}<span class="scost" data-tip="What it cost">${usd(g.cost)||'$0'}</span>`}<span class="sact">${sessControls(g)}</span></div>
  </div>`;
 }
-function sessionCard(g,{nav=false}={}){
+function sessionCard(g,{nav=['brand_storyboard','client_demo','client_project'].includes(g.runs[0]?.plan?.kind)||g.whop}={}){
  const open=!nav&&state.openSess.has(g.key);
  return `<div class="sess${open?' open':''}" data-sess="${g.key}">${sessHead(g,open,nav)}${nav?'':`<div class="sess-b"${open?'':' hidden'}>${open?sessBody(g):''}</div>`}</div>`;
 }
@@ -367,10 +369,10 @@ function orderRow(o){
  return `<div class="ord"><img class="wlogo" src="/logos/whop.png" alt="Whop"><a class="ord-t ord-open" href="#/orders/${id}" aria-label="Open ${esc(who||'client')} creative brief"><b>${esc(o.product||'Order')}</b><span>${[orderAmount(o),who].filter(Boolean).map(esc).join(' · ')}</span>${o.error&&['failed','checks_failed'].includes(o.state)?`<span class="s-bad" title="${esc(o.error)}">${esc(clip(o.error,70))}</span>`:''}</a>${chip}<div class="ord-side">${side}</div></div>`;
 }
 function ordersHTML(){
- const w=state.whop;if(!w||!(w.orders||[]).length)return '';
- return `<div class="orders" id="orders">${w.orders.slice(0,12).map(orderRow).join('')}</div>`;
+ const orders=paidTaskOrders(state.whop?.orders);
+ return `<div class="orders" id="orders">${orders.slice(0,12).map(orderRow).join('')}</div>`;
 }
-function paintOrders(){const el=$('#orders');const html=ordersHTML();if(el){if(html)el.outerHTML=html;else el.remove();}else if(html){const host=$('#sessions');host?.insertAdjacentHTML('beforebegin',html);}}
+function paintOrders(){const el=$('#orders');if(!el)return;const section=el.closest('[data-task-section="client"]');el.outerHTML=ordersHTML();if(section){const count=section.querySelectorAll('.ord,.sess').length;section.hidden=!count;section.querySelector('.task-section-count').textContent=count;}}
 async function refreshWhop(){state.whop=await tryGet('/api/whop');state.whopConfirm=null;if(tab()==='tasks')paintOrders();}
 async function whopAction(el){
  if(el.dataset.wconfirm){state.whopConfirm=el.dataset.wconfirm;paintOrders();return;}
@@ -676,19 +678,21 @@ async function tasks(arg,{isCurrent=()=>true}={}){
  const target=id?(state.tasks.find(t=>t.id===id)||(await api(`/api/tasks/${id}`)).task):null;
  if(!isCurrent())return;
  if(target&&!state.tasks.some(t=>t.id===target.id))state.tasks.push(target);
- if(target?.plan?.kind==='client_demo'){const {mountClientDemo}=await import('./client-demo.js');if(isCurrent())await mountClientDemo($('#view'),{brandId:target.plan.clientDemo.brandId});return;}
+ if(target?.plan?.kind==='client_demo'){const {clientTaskReviewView}=await import('./client-task-review.js');if(isCurrent())await clientTaskReviewView({view:$('#view'),api,taskId:target.id,isCurrent});return;}
  if(target?.plan?.kind==='brand_storyboard'){const {taskStoryboardView}=await import('./task-storyboards.js');if(isCurrent())await taskStoryboardView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(target&&(target.plan?.kind==='client_project'||isWhopTask(target))){const {clientProjectView}=await import('./task-storyboards.js');if(isCurrent())await clientProjectView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(id&&state.hashOpened!==id){const t=state.tasks.find(x=>x.id===id);if(t){state.openSess.add(skey(t.prompt));state.hashOpened=id;state.scrollTo=skey(t.prompt);}}
  const [ap,whop]=await Promise.all([api('/api/autopilot').catch(()=>null),tryGet('/api/whop'),loadDraftMaps()]);
  state.whop=whop;
- const groups=sessionGroups();
+ const linkedOrderTasks=new Set(paidTaskOrders(whop?.orders).map(order=>order.task_id).filter(Boolean));
+ const groups=sessionGroups().filter(group=>!group.whop||!group.runs.some(task=>linkedOrderTasks.has(task.id)));
  await Promise.all(groups.filter(g=>state.openSess.has(g.key)).map(loadSession));
  if(!isCurrent())return;
  const sw=(idn,on,tip,label,dis)=>`<label class="switch" data-tip="${esc(tip)}"><input type="checkbox" role="switch" aria-label="${label}" id="${idn}" ${on?'checked':''} ${dis?'disabled':''}><i aria-hidden="true"></i><span>${label}</span><span class="switch-state">${on?'On':'Off'}</span></label>`;
  const bar=[ap?sw('apswitch',ap.enabled,ap.enabled?`On: starts the next batch when one finishes, up to $${Number(ap.dailyBudgetUsd).toFixed(2)} a day`:'Off: Mint waits for you to start missions','Always on'):'',whop?sw('whopswitch',whop.enabled,whop.configured?(whop.enabled?'On: a Whop purchase starts work on its own':'Off: purchases wait for you'):'Add WHOP_API_KEY to turn this on','Watch new purchases',!whop.configured):''].join('');
- $('#view').innerHTML=`${bar?`<div class="pagebar"><div class="automation-controls">${bar}${ap?`<span class="automation-limit">${usd(ap.dailyBudgetUsd)} daily limit</span>`:''}</div></div>`:''}${ordersHTML()}
-  <div class="sessions" id="sessions">${groups.map(g=>sessionCard(g)).join('')||'<div class="idle">No missions yet. Start one from Home.</div>'}</div>`;
+ const sections=[['client','Client work'],['research','Brand research'],['missions','Missions']];
+ $('#view').innerHTML=`${bar?`<div class="pagebar"><div class="automation-controls">${bar}${ap?`<span class="automation-limit">${usd(ap.dailyBudgetUsd)} daily limit</span>`:''}</div></div>`:''}
+  <div class="sessions" id="sessions">${sections.map(([key,title])=>{const rows=groups.filter(group=>taskSection(group.runs[0])===key),count=rows.length+(key==='client'?paidTaskOrders(whop?.orders).length:0);if(!count&&key!=='client')return '';return `<section class="task-section" data-task-section="${key}" ${count?'':'hidden'}><div class="pagebar"><h2>${title}</h2><span class="schip s-idle task-section-count">${count}</span></div>${key==='client'?ordersHTML():''}${rows.map(group=>sessionCard(group)).join('')}</section>`;}).join('')}${!groups.length&&!paidTaskOrders(whop?.orders).length?'<div class="idle">No tasks yet. Start one from Home.</div>':''}</div>`;
  if(state.scrollTo){document.querySelector(`.sess[data-sess="${state.scrollTo}"]`)?.scrollIntoView({block:'start'});state.scrollTo=null;}
  for(const el of document.querySelectorAll('.console:not([hidden])'))el.scrollTop=el.scrollHeight;
  $('#apswitch')?.addEventListener('change',async e=>{const input=e.target;input.disabled=true;try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');tasks(id);}catch(err){input.checked=!input.checked;toast(err.message,'bad');}finally{input.disabled=false;}});
@@ -716,6 +720,7 @@ const missingLabel={email:'Needs email',clip:'Needs clip',pdf:'Needs PDF',gmail:
 const lstat=([label,cls])=>`<span class="lstat ${cls}">${ic(statusIcon[cls]||'circle-alert')}<span>${esc(label)}</span></span>`;
 // "Draft ready" only when the draft is truly ready. Otherwise show what is missing as quiet chips.
 function leadStatusCell(l){
+ if(l.simulatedJourney)return `<div class="ct-journey"><span class="schip s-ok">Outreach sent</span><span class="schip s-ok">Whop checkout successful</span><span class="schip s-idle">Simulation</span></div>`;
  const d=state.dr.get(l.id);
  if(l.status==='drafted'&&d?.readiness&&!d.readiness.ready){
   const miss=(d.readiness.missing||[]).map(m=>schip([missingLabel[m]||`Needs ${m}`,'s-idle'])).join('');
@@ -784,25 +789,27 @@ async function openLead(id){
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden){$('#drawer').hidden=true;state.selectedLead=null;}});
 
 // Leads: filter chips with counts, a sort menu, and one list. Drafts is a filter here (the old Drafts page redirects to it).
-const leadFilters=[['all','All','layers'],['drafts','Drafts','mail'],['drafted','Drafted','mail-check'],['awaiting_video','Waiting for video','video'],['rejected','Not a fit','thumbs-down'],['unreachable','Unreachable','wifi-off'],['skipped','Skipped','skip-forward']];
+const leadFilters=[['all','All'],['drafts','Drafts'],['awaiting_video','Needs video'],['rejected','Not a fit'],['issues','Other']];
 const leadSorts=[['newest','Newest'],['name','Name'],['status','Status']];
 const statusRank=['drafted','awaiting_video','contacted','replied','won','drafting','grading','visiting','found','skipped','unreachable','error','lost','rejected'];
 async function leads(arg){
- const [{leads:all},dr]=await Promise.all([api('/api/leads'),loadDraftMaps()]);
+ const [{leads:found},dr,packet]=await Promise.all([api('/api/leads'),loadDraftMaps(),tryGet('/api/client-demo')]);
+ const simulatedBrands=packet?.mode==='demo'?(packet.brands||[]).filter(brand=>['disobedient','vylin'].includes(brand.id)):[];
+ const domain=value=>{try{return new URL(value.includes('://')?value:`https://${value}`).hostname.replace(/^www\./,'').toLowerCase();}catch{return '';}};
+ const all=found.map(lead=>({...lead,simulatedJourney:simulatedBrands.some(brand=>domain(brand.website)===domain(lead.domain||lead.url||''))}));
  const haveDraft=new Set(dr.map(d=>d.lead_id));
  if(typeof arg==='string'&&leadFilters.some(f=>f[0]===arg)){pref.set('lfilter',arg);history.replaceState(null,'','#/leads');}
- let filter=pref.get('lfilter','all');if(!leadFilters.some(f=>f[0]===filter))filter='all';
+ let filter=pref.get('lfilter','all');if(filter==='drafted')filter='drafts';if(['unreachable','skipped'].includes(filter))filter='issues';if(!leadFilters.some(f=>f[0]===filter))filter='all';
  let sort=pref.get('lsort','newest');if(!leadSorts.some(s=>s[0]===sort))sort='newest';
- const match={all:l=>l.status!=='rejected',drafts:l=>haveDraft.has(l.id)&&l.status!=='rejected',drafted:l=>l.status==='drafted',awaiting_video:l=>l.status==='awaiting_video',rejected:l=>l.status==='rejected',unreachable:l=>l.status==='unreachable',skipped:l=>l.status==='skipped'};
+ const match={all:l=>l.status!=='rejected'||l.simulatedJourney,drafts:l=>haveDraft.has(l.id)&&l.status!=='rejected',awaiting_video:l=>l.status==='awaiting_video',rejected:l=>l.status==='rejected',issues:l=>['unreachable','skipped','error','lost'].includes(l.status)};
  const counts=Object.fromEntries(Object.entries(match).map(([k,f])=>[k,all.filter(f).length]));
- const shown0=all.filter(match.all);
  const cmp={newest:(a,b)=>b.id-a.id,name:(a,b)=>String(a.company||a.domain).localeCompare(String(b.company||b.domain)),status:(a,b)=>statusRank.indexOf(a.status)-statusRank.indexOf(b.status)||b.id-a.id};
- const rows=()=>all.filter(match[filter]).sort((a,b)=>(a.status==='rejected')-(b.status==='rejected')||cmp[sort](a,b));
- $('#view').innerHTML=`<div class="fchips" role="group" aria-label="Filter brands">${leadFilters.map(([k,l,i])=>`<button type="button" class="fchip${k===filter?' on':''}" data-lf="${k}" aria-pressed="${k===filter}">${ic(i)}${l}<span class="n">${counts[k]}</span></button>`).join('')}</div>
-  <div class="lbar"><div class="cchips">${counterChips(shown0)}</div><span class="grow"></span>
+ const rows=()=>all.filter(match[filter]).sort((a,b)=>Number(b.simulatedJourney)-Number(a.simulatedJourney)||(a.status==='rejected')-(b.status==='rejected')||cmp[sort](a,b));
+ $('#view').innerHTML=`<div class="ct-leads-toolbar"><div class="fchips" role="group" aria-label="Filter brands">${leadFilters.map(([k,l])=>`<button type="button" class="fchip${k===filter?' on':''}" data-lf="${k}" aria-pressed="${k===filter}">${l}<span class="n">${counts[k]}</span></button>`).join('')}</div>
+  <div class="lbar">
    <div class="cwrap sortwrap"><button type="button" class="ctl" id="sortbtn" aria-expanded="false" aria-haspopup="true">${ic('arrow-up-down')}<span>${leadSorts.find(s=>s[0]===sort)[1]}</span></button><div class="cmenu right" id="sortmenu" hidden>${leadSorts.map(([k,l])=>`<button type="button" data-ls="${k}" class="${k===sort?'on':''}"><span><b>${l}</b></span>${k===sort?ic('check'):''}</button>`).join('')}</div></div>
-   <button class="ctl" id="requalify" type="button" data-tip="Drop brands with no Instagram, TikTok or logo, and grade the rest">${ic('check')}Re-check brands</button></div>
-  <div class="trows bare" id="crm"><div class="trow th"><span>Brand</span><span>Where</span><span>Contact</span><span>Status</span><span>Actions</span></div>${rows().map(leadRow).join('')||'<div class="idle">No brands here yet. Start a mission from Home.</div>'}</div>`;
+   <button class="ctl" id="requalify" type="button" data-tip="Drop brands with no Instagram, TikTok or logo, and grade the rest">Re-check brands</button></div></div>
+  <div class="ct-leads-table"><div class="trows bare" id="crm"><div class="trow th"><span>Brand</span><span>Where</span><span>Contact</span><span>Status</span><span>Actions</span></div>${rows().map(leadRow).join('')||'<div class="idle">No brands match this filter.</div>'}</div></div>`;
  document.querySelectorAll('[data-lf]').forEach(b=>b.onclick=()=>{pref.set('lfilter',b.dataset.lf);leads();});
  const sb=$('#sortbtn'),sm=$('#sortmenu');
  sb.onclick=e=>{e.stopPropagation();const open=sm.hidden;closeMenus();sm.hidden=!open;sb.setAttribute('aria-expanded',String(open));};
@@ -925,7 +932,7 @@ async function analytics(){
  $('#view').innerHTML='<div class="stats slim" id="stats"></div>';await loadStats();
 }
 async function orders(paymentId,{isCurrent=()=>true}={}){const {clientProjectView}=await import('./task-storyboards.js');if(isCurrent())await clientProjectView({view:$('#view'),api,esc,toast,paymentId,isCurrent});}
-async function clientDemo(arg,{isCurrent=()=>true}={}){const {mountClientDemo}=await import('./client-demo.js');if(isCurrent())await mountClientDemo($('#view'));}
+async function clientDemo(arg,{isCurrent=()=>true}={}){if(isCurrent())location.hash='#/tasks';}
 const views={analytics,home,tasks,orders,leads,drafts,storyboards,renders,voices,settings,production,'client-demo':clientDemo};
 let lastView,routeVersion=0;
 async function route(){
@@ -987,7 +994,8 @@ stream.onmessage=msg=>{
  }
  if(change.kind==='task'){
   const t=change.task,prev=state.tasks.find(x=>x.id===t.id);
-  if(tab()==='tasks'&&document.querySelector('#task-ideas-report')){loadState().catch(()=>{});import('./task-storyboards.js').then(m=>m.refreshTaskStoryboardActivity()).catch(()=>{});}
+  if(tab()==='tasks'&&document.querySelector('#client-task-review')){loadState().catch(()=>{});}
+  else if(tab()==='tasks'&&document.querySelector('#task-ideas-report')){loadState().catch(()=>{});import('./task-storyboards.js').then(m=>m.refreshTaskStoryboardActivity()).catch(()=>{});}
   else if(['home','tasks'].includes(tab())){if(prev&&prev.status===t.status)refreshCards();else softRefresh(route);}else loadState().catch(()=>{});
  }
  if(change.kind==='spend'){renderSpend().catch(()=>{});}

@@ -23,7 +23,7 @@ export function createClientDemo({store,readPacket=()=>JSON.parse(readFileSync(p
   if(!brand)throw invalid('Choose a client from the research demo.');
   const saved=existing(brandId);
   if(saved)return {task:saved,reused:true};
-  const task=store.createTask(`Client demo: ${brand.name}`);
+  const task=store.createTask(brand.name);
   store.updateTask(task.id,{status:'ready',summary:'Research and original avatar concepts prepared for human review. No sample generated or message sent.',plan:{kind:'client_demo',brand:brand.name,domain:new URL(brand.website).hostname.replace(/^www\./,''),clientDemo:{brandId:brand.id,version:1,stage:'human_review',reportUrl:brand.reportUrl,offerPdfUrl:brand.offerPdfUrl,packet:brand,sourceMode:'saved_sourced_research',productionAuthorized:false,sendingAuthorized:false},brief:{product:brand.product.summary,audience:brand.icp.summary,idea:brand.script.hook},creativeBrief:{researchBrief:brand.product.summary,icp:brand.icp,character:{appearance:brand.persona.description,wardrobe:brand.persona.wardrobe||'',rationale:brand.persona.rationale},sources:brand.sources,unknowns:brand.gaps}}});
   const callId=randomUUID();
   store.addEvent({taskId:task.id,type:'tool_call',tool:'client_demo.prepare',title:`Loading the saved ${brand.name} research demo`,data:{callId,input:{brandId},status:'running'}});

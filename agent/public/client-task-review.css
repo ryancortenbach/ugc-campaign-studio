@@ -1,0 +1,29 @@
+/* Task review uses the existing Mint surfaces, type and status colors. */
+.ct-review{max-width:1100px;margin:0 auto;display:grid;gap:20px}
+.ct-heading,.ct-heading h2,.ct-actions{display:flex;align-items:center;gap:12px}
+.ct-heading>div{margin-right:auto}.ct-heading h2{margin:6px 0 0}.ct-heading h2 img{width:32px;height:32px;object-fit:contain}
+.ct-section>.head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ct-actions{gap:8px;flex-wrap:wrap}.ct-section .body>p{margin:6px 0 14px}
+.ct-label{font-size:11px;color:var(--faint);font-weight:500}.ct-summary{font-size:15px;line-height:1.5;max-width:70ch}
+.ct-evidence{color:var(--muted);font-size:12px;margin-top:16px}.ct-evidence>summary,.ct-history>summary{cursor:pointer}
+.ct-evidence p{max-width:80ch}.ct-links{display:flex;flex-wrap:wrap;gap:12px}
+.ct-creative{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:16px;align-items:start}
+.ct-image{min-width:0;margin:0;background:var(--shell);border-radius:10px;overflow:hidden}
+.ct-image img{display:block;width:100%;height:260px;object-fit:contain}.ct-image img[hidden]{display:none}
+.ct-image figcaption{padding:10px 12px;color:var(--muted);font-size:11px}.ct-image p{padding:12px}
+.ct-board img{height:340px}.ct-character img{height:340px}
+.ct-wardrobe{margin-top:22px}.ct-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:10px}
+.ct-products img{height:240px;padding:12px;box-sizing:border-box}.ct-video{display:block;max-width:100%;max-height:560px;margin:auto}
+.ct-note{display:grid;gap:10px;margin-top:16px}.ct-note textarea{min-height:80px}.ct-note button{justify-self:start}
+.ct-history{font-size:12px;color:var(--muted)}.ct-terac{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.ct-terac>img{width:22px;height:22px;object-fit:contain}.ct-terac>div{margin-right:auto}.ct-terac span{display:block;font-size:11px;margin-top:4px}
+.ct-log{margin-top:14px}.ct-error{padding:14px;border-radius:10px;color:var(--red);background:var(--panel)}
+.task-section{display:grid;gap:8px;margin-bottom:14px}.task-section>.pagebar{margin:8px 0}.task-section[hidden]{display:none}
+.ct-leads-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.ct-leads-toolbar .fchips,.ct-leads-toolbar .lbar{margin:0}.ct-leads-toolbar .fchips{flex-wrap:nowrap;overflow:auto;max-width:100%}
+.ct-leads-toolbar .fchip{flex:none}.ct-leads-table{background:var(--panel);border-radius:12px;overflow:auto}
+.ct-leads-table #crm{gap:0;min-width:860px}.ct-leads-table #crm .trow{border-radius:0;background:transparent;padding:12px 14px;grid-template-columns:minmax(200px,1.5fr) minmax(80px,.6fr) minmax(140px,1fr) minmax(200px,1.3fr) 96px}
+.ct-leads-table #crm .trow>:nth-child(2){display:block}
+.ct-leads-table #crm .trow.th{position:sticky;top:0;background:var(--panel);margin:0;padding:12px 14px}
+.ct-journey{display:flex;gap:6px;flex-wrap:wrap}.ct-journey .schip{font-size:10.5px}
+@media(max-width:650px){.ct-heading{flex-wrap:wrap}.ct-creative{grid-template-columns:minmax(0,1fr)}.ct-products{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-products img{height:190px}.ct-board img,.ct-character img{height:280px}}

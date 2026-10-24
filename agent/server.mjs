@@ -1,5 +1,6 @@
 import {assertRevisionWorkAllowed} from './revision-harness.mjs';
 import {createClientDemo} from './client-demo.mjs';
+import {createClientReview} from './client-review.mjs';
 import {createAnalytics} from './analytics.mjs';
 import {spendingPaused,spendingRequestAllowed} from './spending-policy.mjs';
 import http from 'node:http';
@@ -53,6 +54,7 @@ class Raw{constructor(type,data,headers={}){this.type=type;this.data=data;this.h
 export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=defaultCheckVoice,gmailApi=gmailTools,video,logoNet={},autopilot,assistant,requalifier,whopwatch,costs,connections,production,taskStoryboards,analytics,ideation,browserLive=defaultBrowserLive,instagram,panels,panelsWatch=false}={}){
  runner??=createRunner(store);
  const clientDemo=createClientDemo({store});
+ const clientReview=createClientReview({store,clientDemo});
  autopilot??=createAutopilot({store,runner});
  whopwatch??=createWhopWatch({store,runner});
  costs??=createCosts({store});
@@ -203,6 +205,8 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
  const routes=[
   ['GET',/^\/api\/client-demo$/,()=>clientDemo.get()],
   ['POST',/^\/api\/client-demo\/tasks$/,(m,b)=>clientDemo.prepare(b.brandId)],
+  ['GET',/^\/api\/tasks\/(\d+)\/client-review$/,m=>clientReview.get(Number(m[1]))],
+  ['POST',/^\/api\/tasks\/(\d+)\/client-review$/,(m,b)=>clientReview.review(Number(m[1]),b)],
   ...researchRoutes({store,Raw}),
   ['GET',/^\/api\/analytics$/,(m,b,url)=>analytics.get({range:url.searchParams.get('range')||'today',refresh:url.searchParams.get('refresh')==='1'})],
   ['GET',/^\/api\/storyboard-tasks$/,()=>({workspaces:taskStoryboards.list()})],
