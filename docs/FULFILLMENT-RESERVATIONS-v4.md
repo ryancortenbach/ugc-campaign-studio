@@ -1,6 +1,6 @@
 # Estimated render-cost reservations, review version 4
 
-This adds estimated render admission controls to draft PR1. It does not enable paid work, merge the PR, deploy the service or apply a migration remotely. The live service remains unchanged.
+This adds estimated render admission controls to draft PR1. It does not enable paid work, merge the PR, deploy the service or apply a production migration. The live service remains unchanged.
 
 Before a render provider call, migration003 takes a shared transaction-scoped advisory lock, locks the shot and checks its latest stored quote, order budget, automatic-approval setting, known ledger spend and held render reservations. Quotes round upward to cents. Admission and the submitting intent/key commit together before the provider is called. The provider receives the claimed database row's endpoint/input instead of a stale caller copy.
 
