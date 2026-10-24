@@ -1,0 +1,29 @@
+{
+  "brandId": "disobedient",
+  "createdAt": "2026-10-24T20:50:08.761568+00:00",
+  "status": "prepared_not_submitted",
+  "paidRetryAuthorized": false,
+  "previousRequestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+  "revisionReason": "The back artwork leaked onto the chest in later shots.",
+  "referenceRule": "Use one front image only. The actual official front is blank.",
+  "request": {
+    "prompt": "Replace only the original blue zip hoodie with the exact light heather grey pullover shown in the sole reference image. The front is blank: no logo, no lettering, no musical staff, no treble clef, no artwork, no zipper and no drawstrings. Keep this same blank-front pullover continuously in EVERY frame, every camera angle, including the late reclined arms-behind-head pose. Keep its colour, fabric, seams, kangaroo pocket and construction consistent. There is no view of the back in this source, so no back artwork should be visible at any time. Use only the provided front photograph. Preserve the original fictional male face, blond braids, facial animation, hands, body, trousers, shoes, furniture, original camera shots, timing, penthouse, London skyline, dusk lighting and PS2 rendering. Do not create transitions, extra scenes, text, brand marks, title cards or CTAs. Garment repair only.",
+    "resolution": "720p",
+    "image_urls": [
+      "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389"
+    ],
+    "video_url": "[existing six-second provider source, private binding retained locally]"
+  },
+  "estimatedUsd": 1.2,
+  "estimateStatus": "Planning estimate at previously verified 720p list rate; refresh before submission",
+  "storyboardUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
+  "staticReview": {
+    "blankFrontAcrossBothPoses": true,
+    "zipperAbsent": true,
+    "sameCharacterAndScene": true,
+    "motionContinuity": "Not verified by still images",
+    "humanApproval": false
+  },
+  "ctaRule": "Garment-only footage review first. Separate CTA still preview. Append CTA only after garment approval.",
+  "sends": 0
+}

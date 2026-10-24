@@ -16,17 +16,17 @@ The London presenter comes from the existing historical PS2 penthouse ad. ImageG
 
 ## Production boundary
 
-Actual Genjutsu execution and outbound sending are pending. A live read of the historical cleanup request returned its existing six-second provider source. This provider source is silent at 30fps; the local six-second generic master is normalized to 24fps and has the restored original audio. They are not byte-identical and are not described as such.
+The bounded Genjutsu pilot was authorized and submitted. Disobedient completed; VYLIN failed for low credit. Outbound sending remains pending. A live read of the historical cleanup request returned its existing six-second provider source. This provider source is silent at 30fps; the local six-second generic master is normalized to 24fps and has the restored original audio. They are not byte-identical and are not described as such.
 
-The provider's estimate endpoint confirmed billing based on output seconds plus input-reference seconds. At list 720p pricing, a six-second input and six-second output are estimated at $1.20 per brand, $2.40 for two. This is a planning estimate, not an itemized charge or a guaranteed discount. No retry is authorized by this preparation. The user has been asked to approve the displayed concepts and a $3 total ceiling. Do not treat elapsed time as approval or clear the app's global pause.
+The provider's estimate endpoint confirmed billing based on output seconds plus input-reference seconds. At list 720p pricing, a six-second input and six-second output are estimated at $1.20 per brand, $2.40 for two. This is a planning estimate, not an itemized charge or a guaranteed discount. No retry is authorized by this preparation. The user authorized generation after the displayed concepts and $3 total ceiling. Do not treat elapsed time as approval or clear the app's global pause.
 
-Genjutsu preserves audio and processes only the first 15 seconds of a source. The proposed pilot repairs six seconds of hoodie footage, restores the original local audio, and adds a two-second product/website CTA. Any new spoken brand-specific script would require separate voice/lip-sync work. A full 23-second ad is not covered by one Light request or by this pilot estimate.
+Genjutsu preserves audio and processes only the first 15 seconds of a source. The Disobedient pilot repairs six seconds of hoodie footage, restores the original local audio, and adds a two-second product/website CTA. Any new spoken brand-specific script would require separate voice/lip-sync work. A full 23-second ad is not covered by one Light request or by this pilot estimate.
 
 Both CTAs target the respective official hoodie product pages. No Mint checkout destination is used. Outreach uses email with the brief attached. VYLIN publishes info@wearvylin.com for collaborations; Disobedient still needs a verified recipient email. The UI only claims a sent message when a real provider ID and sent timestamp are present.
 
 ## Open and replay
 
-Use the Demo sidebar entry or prompt: `Create a streetwear demo for Disobedient and VYLIN`. Chat reuses the existing local tasks. It does not invoke a paid language model or start production. The history exposes saved queries, result counts, timing and downloadable raw records. Replay is read-only. Current streetwear records have a real pending production gate, without invented approval, render or delivery events.
+Use the Demo sidebar entry or prompt: `Create a streetwear demo for Disobedient and VYLIN`. Chat reuses the existing local tasks. It does not invoke a paid language model or start production. The history exposes saved queries, result counts, timing and downloadable raw records. Replay is read-only. Current streetwear records include the actual bounded production authorization and provider results. Email remains unsent.
 
 - Disobedient task: http://127.0.0.1:3200/#/tasks/10
 - VYLIN task: http://127.0.0.1:3200/#/tasks/11
@@ -47,3 +47,7 @@ Refresh the existing app if it still has the earlier JavaScript loaded. No deskt
 The activation check reused tasks without duplication. Tasks, CRM leads, drafts, renders, spend rows and dollar totals were unchanged during that check, and `spendingPaused=true` remained set. This is scoped activation evidence, not proof of total-session zero creative cost. ImageGen did not return an itemized charge.
 
 Fresh checks: 322 agent tests, 90 root tests and required syntax checks passed. PDF generation independently verified two pages per brief, the exact product/website links and all four rendered pages. DOM checks validate replay, task selection and receipt status; no new whole-window native visual pass is claimed.
+
+## Actual generation and chat update
+
+Disobedient render 26 completed. Its actual eight-second preview is attached to task 10 and Renders, with original audio and the official website CTA. AI visual review found back artwork on the chest near the end, so revision and human review remain necessary before outreach. VYLIN render 27 failed for insufficient credit and was not retried. Global spending remains paused. See [the Offload activity integration and monitoring handoff](OFFLOAD-CHAT-ACTIVITY-v1.md) for current UI behavior, provider IDs and verification.

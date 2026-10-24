@@ -1,0 +1,14 @@
+{
+  "authorizedBy": "user",
+  "authorizedAt": "2026-10-24T20:36:41.409316+00:00",
+  "instruction": "Okay, can you generate the sample clip that we would send to them?",
+  "scope": "One six-second Genjutsu hoodie repair for Disobedient and one for VYLIN, within the previously presented $3 total ceiling. Restore original source audio and add two-second brand/product website CTA. No sends or retry submissions.",
+  "generateAuthorized": true,
+  "maxTotalUsd": 3,
+  "estimatedTotalUsd": 2.4,
+  "retryCap": 0,
+  "inputSha256": {
+    "disobedient": "29b4d9eeb072027a9e5ab12f7d131f45281b35d9c35e75eda7c586f234bb7194",
+    "vylin": "e490753c0052ede168e6b812716dc29306d18404ed1333fe92fd3fb0f3f101bf"
+  }
+}

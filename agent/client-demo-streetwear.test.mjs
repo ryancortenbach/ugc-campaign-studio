@@ -17,6 +17,23 @@ const fixture = () => ({activeBrandIds:['disobedient','vylin'], brands:[
   {id:'vylin',name:'VYLIN',demoKind:'streetwear',taskId:'vylin-task'}
 ]});
 
+test('a rejected garment is reviewed separately from its static CTA and the correction is not claimed as a video',async()=>{
+ const data=fixture(),brand=data.brands[2];
+ brand.sampleVideo={url:'/garment-review-v2.mp4',requestId:'actual-provider-id',containsCTA:false,status:'needs_revision',ctaPreviewUrl:'/cta-still.png',visualQA:{status:'needs_revision',findings:['Back artwork appears on the chest.']},cta:{url:'https://disobedientnyc.com/products/low-lives-hoodie'}};
+ brand.revisionDraft={referenceRule:'Use only the official blank front.',ctaRule:'Approve garment before assembling the CTA.',estimatedUsd:1.2,request:{image_urls:['https://example.com/front.jpg']}};
+ await setup(async({host,calls})=>{
+  await mountClientDemo(host);
+  host.querySelector('[data-ap-cd-stage="4"]').click();
+  const video=host.querySelector('video');
+  assert.equal(video.getAttribute('src'),'/garment-review-v2.mp4');assert.equal(video.autoplay,false);
+  assert.match(host.textContent,/Garment render only/);assert.match(host.textContent,/Revision required/);
+  const cta=[...host.querySelectorAll('details')].find(el=>el.querySelector('summary')?.textContent==='CTA still preview');
+  assert.ok(cta);assert.equal(cta.open,false);assert.ok(cta.querySelector('img[src="/cta-still.png"]'));
+  assert.match(host.querySelector('.ap-cd-preparation').textContent,/Prepared \/ not submitted/);
+  assert.equal(calls.length,1);assert.equal(calls[0].url,'/api/client-demo');
+ },data);
+});
+
 async function setup(fn, data = fixture()) {
   const originalFetch = globalThis.fetch, calls = [];
   const dom = new JSDOM('<style></style><div id="host"></div>');
