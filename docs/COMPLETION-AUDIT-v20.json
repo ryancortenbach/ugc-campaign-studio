@@ -195,7 +195,7 @@
     "Lovable": "skipped per Air handoff",
     "paid_actions_authorized": false
   },
-  "agent_test_count": 16,
+  "agent_test_count": 19,
   "local_agent": {
     "source_imported_from": "56251a11a9b365b22123fefbe1504b55e8930653",
     "local_only": true,
@@ -237,5 +237,19 @@
     "fresh_visual_approval": false,
     "new_campaign_identity_approval": false,
     "receipt": "public/agent-proof/avatar-recovery-v1.json"
+  },
+  "latest_source_review": {
+    "commit": "99e089e",
+    "ci": "https://github.com/ryancortenbach/ugc-campaign-studio/actions/runs/40116672655",
+    "studio_tests": 82,
+    "agent_tests": 19,
+    "atomic_claim_retained": true,
+    "fresh_visual_review": false
+  },
+  "sales_archive": {
+    "current": "sales/call-list-d2c-2026-10-24.csv",
+    "historical": "sales/archive/nyc-call-list-2026-10-24-v1.csv",
+    "source_bytes_preserved": true,
+    "calls_placed": 0
   }
 }
