@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "status": "design_only_not_activated",
+  "sequence": [
+    {
+      "state": "brand_qualified",
+      "description": "Verify website, Instagram, target contact, product references and two actual ads. Create one task per brand with an evidence record."
+    },
+    {
+      "state": "ideation",
+      "description": "Produce a brand-specific hook and category joke, exact script and ImageGen frames. Log tools, sources, elapsed time, recorded cost or unknown."
+    },
+    {
+      "state": "ai_stills_review",
+      "description": "Check identity, anatomy, garments, composition and script-to-frame coverage. Failures return to ideation with findings."
+    },
+    {
+      "state": "human_concept_review",
+      "description": "Ryan or a named authorized creative reviewer sees frames, script and product refs. Terac respondents may provide scored feedback. A study opinion does not itself approve spend."
+    },
+    {
+      "state": "cost_review",
+      "description": "Show the current itemized estimate, model IDs, quantities and retry cap. Record explicit production budget authorization."
+    },
+    {
+      "state": "base_video_generation",
+      "description": "Generate neutral short source clips only after cost approval. Preserve source frames and original voice reference."
+    },
+    {
+      "state": "brand_personalization",
+      "description": "Apply exact apparel references through Genjutsu. Create the brand-name voice and matching lip animation separately. Assemble the final video and deterministic end link."
+    },
+    {
+      "state": "ai_video_review",
+      "description": "Inspect every decoded frame plus joins and audio timing. Keep timecoded findings and coverage counts. Any major failure returns to the affected production stage within the approved retry budget."
+    },
+    {
+      "state": "human_video_review",
+      "description": "Ryan or authorized production reviewer watches the full clip with sound and confirms product accuracy, pronunciation and suitability. Terac feedback can support this review."
+    },
+    {
+      "state": "brief_preparation",
+      "description": "Copy the approved two-page master, replace approved variables only, insert actual brand logo and ad images, and verify the final PDF and links."
+    },
+    {
+      "state": "outreach_review",
+      "description": "Attach video, PDF, logo, Instagram, ad sources and exact message in the same brand task. Approval binds to recipient, channel and attachment hashes."
+    },
+    {
+      "state": "ready_to_send",
+      "description": "Require explicit sending authorization for the intended recipient or a separately authorized bounded campaign. Concept approval is not sending approval."
+    },
+    {
+      "state": "sent",
+      "description": "Record provider message/thread IDs and timestamps only after provider acknowledgement. Reconcile ambiguous results before retrying."
+    },
+    {
+      "state": "awaiting_reply",
+      "description": "Start reply watching only when the live integration and monitoring are authorized. A send receipt does not prove the prospect opened or read it."
+    },
+    {
+      "state": "replied",
+      "description": "Dedupe on provider message ID. Save the original reply, classify it and update CRM with timestamp, confidence and next action."
+    },
+    {
+      "state": "deal_or_call",
+      "description": "Draft a relevant reply. For interest, ask about goals, products, usage, deliverables and timing. Offer a call using actual availability. Draft deal terms within approved pricing."
+    },
+    {
+      "state": "won_or_closed",
+      "description": "Record won only from confirmed acceptance/payment evidence. Negative replies suppress follow-ups. Keep booked, proposal sent, paid and delivered as distinct stages."
+    }
+  ],
+  "approvalBinding": {
+    "required": [
+      "task_id",
+      "brand_id",
+      "artifact_sha256",
+      "script_sha256",
+      "reference_sha256",
+      "reviewer_identity",
+      "reviewed_at",
+      "decision",
+      "findings"
+    ],
+    "invalidateWhen": [
+      "Script changes",
+      "Product or reference changes",
+      "Video changes",
+      "Recipient changes",
+      "Message or attachment changes"
+    ],
+    "separateScopes": [
+      "creative_concept",
+      "production_budget",
+      "final_video",
+      "outreach_send",
+      "commercial_terms"
+    ]
+  },
+  "teracReviewDraft": {
+    "status": "not_submitted",
+    "studyId": null,
+    "respondents": "Use the actual available Terac audience. Record who reviewed; do not describe general respondents as brand decision-makers.",
+    "materials": [
+      "Original reference face",
+      "Six-frame storyboard",
+      "Exact branded script",
+      "Wardrobe reference photographs when available"
+    ],
+    "questions": [
+      "Does the character look like the same person in every frame?",
+      "Can you identify what clothing is being shown?",
+      "Does the first line make the recipient and purpose clear?",
+      "Which line or pose feels awkward? Cite the panel.",
+      "Would you watch the sample and open the brief? Why?"
+    ],
+    "outputs": [
+      "Named reviewer or respondent identifier",
+      "Scores",
+      "Specific comments",
+      "Decision by authorized creative owner"
+    ],
+    "budget": "Quote before launching a paid study."
+  },
+  "crm": {
+    "uniqueKey": "brand_id + channel + provider_thread_id",
+    "replyDedupe": "provider_message_id",
+    "fields": [
+      "brand",
+      "contact",
+      "website",
+      "instagram",
+      "logo_asset",
+      "ad_source_urls",
+      "product_references",
+      "task_id",
+      "video_url",
+      "brief_url",
+      "message_id",
+      "thread_id",
+      "last_reply_text",
+      "reply_intent",
+      "intent_confidence",
+      "stage",
+      "next_action",
+      "next_action_due",
+      "owner",
+      "quoted_terms",
+      "call_time",
+      "payment_status"
+    ],
+    "replyRoutes": {
+      "interested": "Draft discovery questions and a call invitation. Do not commit unapproved scope, terms or calendar times.",
+      "pricing": "Use the approved 10-ad proposal and current authorized terms. Flag requests for discounts or different guarantees.",
+      "wrong_person": "Ask for the relevant creative contact only within the authorized reply workflow.",
+      "out_of_office": "Do not count as interest. Record the stated return date.",
+      "negative": "Stop the sequence and suppress further automated outreach.",
+      "unsubscribe": "Suppress across the campaign immediately.",
+      "unclear": "Human review before a reply."
+    },
+    "followups": "Draft first; cadence and sending require campaign authorization. Stop on any substantive reply, opt-out or bounce."
+  }
+}

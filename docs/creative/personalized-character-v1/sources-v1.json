@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-10-24",
+  "sources": [
+    {
+      "type": "current_local_asset",
+      "path": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/PS2_penthouse_FINAL_v4.mp4",
+      "role": "Existing character/world and voice reference"
+    },
+    {
+      "type": "current_local_record",
+      "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Pilot_Notes_v1.json",
+      "role": "Historical six-second clothing-lettering cleanup. Not exact branded-product proof."
+    },
+    {
+      "type": "current_local_template",
+      "path": "/Users/ryancortenbach/Outreach/templates/ai-ugc-proposal-v1/TEMPLATE.md",
+      "role": "Approved two-page copy and variable rules"
+    },
+    {
+      "type": "current_connected_read",
+      "url": "https://docs.google.com/document/d/1SmrXnm20wIJ775FUor7xN9FeMilTLLYRzroQafzSF-I/edit",
+      "role": "Andrew and Adam brief, read through personal Drive connector"
+    },
+    {
+      "type": "local_research",
+      "path": "/Users/ryancortenbach/Outreach/2026-10-24-storyboard-system-v1/research-sources-v1.json",
+      "role": "SOP shot architecture and reference-role bindings"
+    },
+    {
+      "type": "local_research",
+      "path": "/Users/ryancortenbach/Outreach/2026-10-24-storyboard-system-v1/mini-research-packet-v1.md",
+      "role": "Previously recovered mini audience/format research; not re-measured audience performance"
+    },
+    {
+      "type": "official_live_documentation",
+      "url": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/playground",
+      "role": "Clothing swaps, preserves source audio, trims to first 15 seconds. Recheck live quote before spending."
+    },
+    {
+      "type": "official_brand_site",
+      "url": "https://www.gymshark.com/",
+      "role": "Brand spelling and clothing categories"
+    },
+    {
+      "type": "official_brand_site",
+      "url": "https://www.aloyoga.com/",
+      "role": "Alo spelling and clothing categories"
+    }
+  ],
+  "conceptProvenance": "New original pitch and dialogue. Physical angle cuts, recurring game-world presenter and product visibility adapt the stored SOP research. They are not copied creator dialogue or replicated creator motion.",
+  "imageGeneration": {
+    "tool": "built-in ImageGen",
+    "calls": 2,
+    "paidVideoCalls": 0,
+    "voiceCalls": 0,
+    "teracStudies": 0,
+    "outreachSends": 0,
+    "billedImageCostUsd": null,
+    "costNote": "No itemized ImageGen charge was returned; do not represent total creative cost as confirmed zero."
+  }
+}

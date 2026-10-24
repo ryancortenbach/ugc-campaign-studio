@@ -1,0 +1,25 @@
+GYMSHARK
+Initial message, after video and PDF are ready:
+Yo Gymshark team, Ryan here. We put together a PS2-style character concept for Gymshark, with a gym-entrance joke and your kit worked into the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?
+
+Follow-up draft, cadence not activated:
+Hey Gymshark team, following up on the character concept I sent. Is this something your creative team would want to test?
+
+ALO
+Initial message, after video and PDF are ready:
+Yo Alo team, Ryan here. We put together a PS2-style character concept for Alo, turning a low-key coffee run into a character introduction with your apparel in the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?
+
+Follow-up draft, cadence not activated:
+Hey Alo team, following up on the character concept I sent. Would it be useful to talk through how this could fit your next creative test?
+
+POSITIVE REPLY
+Appreciate it. Which product or drop would you want us to build around, and are you thinking paid ads, organic posts, or both? Happy to walk through the concept on a quick call. {{VERIFIED_BOOKING_LINK_OR_AVAILABLE_TIMES}}
+
+PRICING QUESTION
+The brief has the 10-ad pilot at $500 with the terms shown there. If that scope fits, what product and launch date should we build around?
+Use only when the approved offer and time-sensitive context are still valid. Any revised scope, discount, usage rights or guarantee needs its own approved terms.
+
+WRONG PERSON
+Thanks. Who would be the best person to speak with about creative testing for {{BRAND_NAME}}?
+
+Not sent. Render links, recipient identity, final terms and review approvals remain pending.

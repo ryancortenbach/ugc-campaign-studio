@@ -1,0 +1,140 @@
+[
+  {
+    "taskId": "concept-gymshark-v1",
+    "status": "awaiting_concept_review",
+    "brand": "Gymshark",
+    "website": "https://www.gymshark.com/",
+    "instagram": {
+      "url": "https://www.instagram.com/gymshark/",
+      "status": "Candidate profile, verify ownership before sending."
+    },
+    "logoAsset": null,
+    "exactProductImages": [],
+    "actualAdImages": [],
+    "adSourceUrls": [],
+    "storyboard": "storyboard-v1.json",
+    "conceptFrames": [
+      "assets/storyboard-master-v1.png",
+      "assets/wardrobe-comparison-v1.png"
+    ],
+    "script": [
+      "Yo, Gymshark. Quick idea for your next drop.",
+      "Says he's here for a quick session.",
+      "Still waiting for his entrance music.",
+      "Your kit. Our character. A different kind of ad.",
+      "Same face. New scenes. Built around your brand.",
+      "The full idea's in the brief. Take a look."
+    ],
+    "wardrobe": "Black training tee and charcoal training trousers. Optional pants swap only after exact product references are approved.",
+    "videoUrl": null,
+    "personalizedBriefUrl": null,
+    "briefTemplate": "proposal-template/TEMPLATE.md",
+    "briefRules": {
+      "maxPages": 2,
+      "copy": "Preserve approved wording, formatting, guarantee and offer. Change approved variables only.",
+      "offer": "10 High-Converting AI UGC ads",
+      "normalPriceUsd": 1000,
+      "offerPriceUsd": 500,
+      "deadline": "Confirm the actual send date, event and deadline before applying the time-sensitive hackathon wording.",
+      "ads": "Require two actual matching-brand ad images and source URLs. No generated substitutes or unsupported 'seen your ads' claim.",
+      "sampleLink": "Keep the approved fixed sample video link unless Ryan explicitly approves replacing or adding the personalized video."
+    },
+    "initialMessage": "Yo Gymshark team, Ryan here. We put together a PS2-style character concept for Gymshark, with a gym-entrance joke and your kit worked into the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?",
+    "attachmentsReady": false,
+    "missingBeforeProduction": [
+      "Exact approved top/pants photos and SKU",
+      "Brand pronunciation in the approved voice",
+      "Current video/voice/swap quote",
+      "Creative and budget approvals"
+    ],
+    "missingBeforeSend": [
+      "Verified recipient and Instagram ownership",
+      "Official logo asset",
+      "Two real brand ad creatives and source URLs",
+      "Approved generated video",
+      "Checked personalized two-page PDF",
+      "Named send authorization"
+    ],
+    "approvals": {
+      "creative": null,
+      "budget": null,
+      "video": null,
+      "send": null
+    },
+    "crm": {
+      "threadId": null,
+      "lastReply": null,
+      "nextAction": "Review concept"
+    },
+    "externalActionsExecuted": []
+  },
+  {
+    "taskId": "concept-alo-v1",
+    "status": "awaiting_concept_review",
+    "brand": "Alo",
+    "website": "https://www.aloyoga.com/",
+    "instagram": {
+      "url": "https://www.instagram.com/aloyoga/",
+      "status": "Candidate profile, verify ownership before sending."
+    },
+    "logoAsset": null,
+    "exactProductImages": [],
+    "actualAdImages": [],
+    "adSourceUrls": [],
+    "storyboard": "storyboard-v1.json",
+    "conceptFrames": [
+      "assets/storyboard-master-v1.png",
+      "assets/wardrobe-comparison-v1.png"
+    ],
+    "script": [
+      "Yo, Alo. Quick idea for your next drop.",
+      "Says he's keeping it low-key.",
+      "Still gives the coffee run a title sequence.",
+      "Your kit. Our character. A different kind of ad.",
+      "Same face. New scenes. Built around your brand.",
+      "The full idea's in the brief. Take a look."
+    ],
+    "wardrobe": "Off-white relaxed crewneck and light stone-gray sweatpants. Optional matching set after exact product references are approved.",
+    "videoUrl": null,
+    "personalizedBriefUrl": null,
+    "briefTemplate": "proposal-template/TEMPLATE.md",
+    "briefRules": {
+      "maxPages": 2,
+      "copy": "Preserve approved wording, formatting, guarantee and offer. Change approved variables only.",
+      "offer": "10 High-Converting AI UGC ads",
+      "normalPriceUsd": 1000,
+      "offerPriceUsd": 500,
+      "deadline": "Confirm the actual send date, event and deadline before applying the time-sensitive hackathon wording.",
+      "ads": "Require two actual matching-brand ad images and source URLs. No generated substitutes or unsupported 'seen your ads' claim.",
+      "sampleLink": "Keep the approved fixed sample video link unless Ryan explicitly approves replacing or adding the personalized video."
+    },
+    "initialMessage": "Yo Alo team, Ryan here. We put together a PS2-style character concept for Alo, turning a low-key coffee run into a character introduction with your apparel in the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?",
+    "attachmentsReady": false,
+    "missingBeforeProduction": [
+      "Exact approved top/pants photos and SKU",
+      "Brand pronunciation in the approved voice",
+      "Current video/voice/swap quote",
+      "Creative and budget approvals"
+    ],
+    "missingBeforeSend": [
+      "Verified recipient and Instagram ownership",
+      "Official logo asset",
+      "Two real brand ad creatives and source URLs",
+      "Approved generated video",
+      "Checked personalized two-page PDF",
+      "Named send authorization"
+    ],
+    "approvals": {
+      "creative": null,
+      "budget": null,
+      "video": null,
+      "send": null
+    },
+    "crm": {
+      "threadId": null,
+      "lastReply": null,
+      "nextAction": "Review concept"
+    },
+    "externalActionsExecuted": []
+  }
+]

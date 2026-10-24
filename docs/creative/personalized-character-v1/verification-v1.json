@@ -1,0 +1,11 @@
+{
+  "syntax": "pass",
+  "json_and_local_links": "pass",
+  "artifact_hashes": "pass",
+  "generated_contact_sheets": 2,
+  "concept_panels": 10,
+  "ui_observation": "Opened in normal Chrome. Accessibility readback verified the six Gymshark dialogue lines and package controls. Browser switched to another tab during the next interaction; no final layout screenshot or Alo toggle verification claimed.",
+  "production": "not_run",
+  "human_review": "pending",
+  "external_sends": 0
+}

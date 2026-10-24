@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "reviewType": "Primary-agent visual self-review, not an independent AI panel or human approval.",
+  "status": "concept_ready_for_human_review_production_not_approved",
+  "observations": [
+    {
+      "check": "Character",
+      "result": "Recognizable face, blond braids, skin tone and PS2 style carried into both generated boards. Fine facial geometry is not pixel-identical."
+    },
+    {
+      "check": "Shot coverage",
+      "result": "Six readable key poses: greeting, rise setup, standing reveal, garment view, explanation gesture and downward CTA. These are stills, so movement and temporal continuity remain untested."
+    },
+    {
+      "check": "Apparel visibility",
+      "result": "Full-body panels show top and pants. Gestures in the medium panels keep most chest details exposed."
+    },
+    {
+      "check": "Same garment within a column",
+      "result": "Black tee/charcoal pants and cream crewneck/light pants appear consistent across the two views in each brand concept."
+    },
+    {
+      "check": "Logo and product accuracy",
+      "result": "BLOCK for production. Gymshark mark is a generated approximation rather than the requested wordmark. Alo mark is also generated. Neither is bound to exact product references."
+    },
+    {
+      "check": "Room continuity",
+      "result": "Room palette, chair and skyline carry through. Window geometry and furniture perspective need checks at actual clip joins; no exact scene preservation claimed."
+    },
+    {
+      "check": "Hands",
+      "result": "No obvious gross hand defect at contact-sheet scale. Full-resolution individual frames and moving occlusions still require production review."
+    },
+    {
+      "check": "Pose continuity",
+      "result": "Rise is split across shots 02 and 03. Need matched final/first frames and foot contact when animating."
+    },
+    {
+      "check": "Dialogue",
+      "result": "Brand greetings and two joke lines differ; shared copy does not assume product performance or that current Meta ads were observed."
+    },
+    {
+      "check": "Audio and timing",
+      "result": "Not generated or heard. Timing, pronunciation, voice identity, lip-sync and music require full human playback approval."
+    }
+  ],
+  "humanDecision": null,
+  "independentAiReview": null,
+  "teracStudy": null,
+  "unimplemented": [
+    "Paid video and voice production",
+    "Exact apparel swaps",
+    "Live approval integration",
+    "Recipient-ready brand PDFs",
+    "Send/reply/CRM/deal automation"
+  ]
+}

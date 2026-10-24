@@ -1,0 +1,2313 @@
+{
+  "documentId": "1P7lJ33KhKspIkq-ick8k2oti9lR8aeAfxXDX2xCTuBg",
+  "title": "For Award Scholar - 10 AI UGC Ads - v7",
+  "revisionId": "AHj4eMTb2dJB_gbLPE9VCv1xgaJFvGNReshlsrIZrvmSJAHzn0WvVAhgLHWihlZKrrkEJLBRQwl3dMhKXko6DM3kpd-0GsNgwcCgwSEpM2E",
+  "suggestionsViewMode": "SUGGESTIONS_INLINE",
+  "url": null,
+  "body": null,
+  "tabs": [
+    {
+      "tabId": "t.0",
+      "title": "Award Scholar proposal",
+      "parentTabId": null,
+      "index": 0,
+      "nestingLevel": null,
+      "iconEmoji": null,
+      "body": {
+        "content": [
+          {
+            "endIndex": 1,
+            "sectionBreak": {
+              "sectionStyle": {
+                "columnSeparatorStyle": "NONE",
+                "contentDirection": "LEFT_TO_RIGHT",
+                "sectionType": "CONTINUOUS"
+              }
+            }
+          },
+          {
+            "startIndex": 1,
+            "endIndex": 3,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 2,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.217lrzn3njfs",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 2,
+                  "endIndex": 3,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "alignment": "CENTER",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "magnitude": 8,
+                  "unit": "PT"
+                },
+                "keepWithNext": true
+              }
+            }
+          },
+          {
+            "startIndex": 3,
+            "endIndex": 27,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 3,
+                  "endIndex": 27,
+                  "textRun": {
+                    "content": "Hey Award Scholar team,\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 27,
+            "endIndex": 28,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 27,
+                  "endIndex": 28,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 28,
+            "endIndex": 143,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 28,
+                  "endIndex": 72,
+                  "textRun": {
+                    "content": "My name is Ryan, and I\u2019m a content creator (",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 72,
+                  "endIndex": 82,
+                  "textRun": {
+                    "content": "account #1",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://www.instagram.com/ryancortenbach/"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 82,
+                  "endIndex": 84,
+                  "textRun": {
+                    "content": ", ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 84,
+                  "endIndex": 94,
+                  "textRun": {
+                    "content": "account #2",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://www.instagram.com/ryannnfromschool/"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 94,
+                  "endIndex": 128,
+                  "textRun": {
+                    "content": ") & Columbia Engineering Student (",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 128,
+                  "endIndex": 136,
+                  "textRun": {
+                    "content": "linkedin",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://www.linkedin.com/in/ryancortenbach/?isSelfProfile=true"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 136,
+                  "endIndex": 143,
+                  "textRun": {
+                    "content": " lol) \n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 143,
+            "endIndex": 144,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 143,
+                  "endIndex": 144,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 144,
+            "endIndex": 271,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 144,
+                  "endIndex": 180,
+                  "textRun": {
+                    "content": "I\u2019m currently at a Whop Hackathon & ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 180,
+                  "endIndex": 195,
+                  "textRun": {
+                    "content": "our goal is to ",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 14,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 195,
+                  "endIndex": 233,
+                  "textRun": {
+                    "content": "make as much money as possible with AI",
+                    "textStyle": {
+                      "bold": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 14,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 233,
+                  "endIndex": 271,
+                  "textRun": {
+                    "content": " til 6:30 PM today, October 24, 2026.\n",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 14,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "magnitude": 8,
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 271,
+            "endIndex": 276,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 271,
+                  "endIndex": 272,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.gmkhcv669grm",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 272,
+                  "endIndex": 274,
+                  "textRun": {
+                    "content": "  ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 274,
+                  "endIndex": 275,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.suc6rlnolgs3",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 275,
+                  "endIndex": 276,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 276,
+            "endIndex": 346,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 276,
+                  "endIndex": 301,
+                  "textRun": {
+                    "content": "(the hackathon luma link)",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://luma.com/naxtga5l?tk=SthOmH"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 301,
+                  "endIndex": 346,
+                  "textRun": {
+                    "content": " \t\t\t\t(me & my boy currently @ the hackathon)\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 346,
+            "endIndex": 347,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 346,
+                  "endIndex": 347,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 347,
+            "endIndex": 448,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 347,
+                  "endIndex": 389,
+                  "textRun": {
+                    "content": "I know you run ads for Award Scholar, and ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 389,
+                  "endIndex": 448,
+                  "textRun": {
+                    "content": "I can help create lots of high quality ads for your brand.\n",
+                    "textStyle": {
+                      "bold": true
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 448,
+            "endIndex": 449,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 448,
+                  "endIndex": 449,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 449,
+            "endIndex": 571,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 449,
+                  "endIndex": 569,
+                  "textRun": {
+                    "content": "Here\u2019s a piece of content we made targeting 18-21 year old Londoner\u2019s interested in football, Wingstop, and streetwear: ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 569,
+                  "endIndex": 570,
+                  "richLink": {
+                    "richLinkId": "kix.ie5jlkuebeul",
+                    "textStyle": {},
+                    "richLinkProperties": {
+                      "title": "PS2_penthouse_FINAL_v4.mp4",
+                      "uri": "https://drive.google.com/file/d/1UPSjg8V8ZgMfd0fgjmf4HCJUdURt7c6S/view?usp=sharing",
+                      "mimeType": "video/mp4"
+                    }
+                  }
+                },
+                {
+                  "startIndex": 570,
+                  "endIndex": 571,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 571,
+            "endIndex": 572,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 571,
+                  "endIndex": 572,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 572,
+            "endIndex": 637,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 572,
+                  "endIndex": 636,
+                  "textRun": {
+                    "content": "(fully made w/ AI btw, selling a general hoodie found on Amazon)",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 636,
+                  "endIndex": 637,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "bold": true
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "magnitude": 8,
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 637,
+            "endIndex": 675,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 637,
+                  "endIndex": 638,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.5i5k3drsuob",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 638,
+                  "endIndex": 639,
+                  "textRun": {
+                    "content": " ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 639,
+                  "endIndex": 640,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.9seotyl4da59",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 640,
+                  "endIndex": 641,
+                  "textRun": {
+                    "content": " ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 641,
+                  "endIndex": 675,
+                  "textRun": {
+                    "content": "  (I\u2019ve seen Award Scholar\u2019s ads)\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "alignment": "CENTER",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 675,
+            "endIndex": 676,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 675,
+                  "endIndex": 676,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 676,
+            "endIndex": 726,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 676,
+                  "endIndex": 726,
+                  "textRun": {
+                    "content": "Here\u2019s the promise I\u2019ll make for Award Scholar ->\n",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 14,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "magnitude": 11,
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                },
+                "keepWithNext": false,
+                "pageBreakBefore": false
+              }
+            }
+          },
+          {
+            "startIndex": 726,
+            "endIndex": 727,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 726,
+                  "endIndex": 727,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 727,
+            "endIndex": 790,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 727,
+                  "endIndex": 740,
+                  "textRun": {
+                    "content": "We\u2019ll create ",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 36,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 740,
+                  "endIndex": 742,
+                  "textRun": {
+                    "content": "10",
+                    "textStyle": {
+                      "bold": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 36,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 742,
+                  "endIndex": 790,
+                  "textRun": {
+                    "content": " High-Converting AI UGC ads for Award Scholar. \n",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 36,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 80,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                },
+                "pageBreakBefore": true
+              }
+            }
+          },
+          {
+            "startIndex": 790,
+            "endIndex": 844,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 790,
+                  "endIndex": 817,
+                  "textRun": {
+                    "content": "(& If you don\u2019t like them, ",
+                    "textStyle": {
+                      "bold": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.4,
+                            "green": 0.4,
+                            "blue": 0.4
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 18,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 817,
+                  "endIndex": 842,
+                  "textRun": {
+                    "content": "100% Money Back Guarantee",
+                    "textStyle": {
+                      "bold": true,
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.4,
+                            "green": 0.4,
+                            "blue": 0.4
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 18,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 842,
+                  "endIndex": 844,
+                  "textRun": {
+                    "content": ")\n",
+                    "textStyle": {
+                      "bold": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.4,
+                            "green": 0.4,
+                            "blue": 0.4
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 18,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 80,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 844,
+            "endIndex": 845,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 844,
+                  "endIndex": 845,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 845,
+            "endIndex": 889,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 845,
+                  "endIndex": 889,
+                  "textRun": {
+                    "content": "Normally, I\u2019d sell this service for $1,000 \n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 889,
+            "endIndex": 890,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 889,
+                  "endIndex": 890,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 890,
+            "endIndex": 946,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 890,
+                  "endIndex": 940,
+                  "textRun": {
+                    "content": "But because I\u2019m at this hackathon, I\u2019ll do it for ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 940,
+                  "endIndex": 945,
+                  "textRun": {
+                    "content": "$500 ",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": {
+                        "magnitude": 16,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 945,
+                  "endIndex": 946,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 12,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 946,
+            "endIndex": 947,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 946,
+                  "endIndex": 947,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 947,
+            "endIndex": 1125,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 947,
+                  "endIndex": 956,
+                  "textRun": {
+                    "content": "LMK ASAP!",
+                    "textStyle": {
+                      "bold": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "fontSize": {
+                        "magnitude": 14,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 956,
+                  "endIndex": 1125,
+                  "textRun": {
+                    "content": " Gotta build this by 6:30. Full Money Back Guarantee if you don\u2019t like results. Willing to work on your project as long as necessary too. Preciate you taking the time. \n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1125,
+            "endIndex": 1126,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1125,
+                  "endIndex": 1126,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1126,
+            "endIndex": 1127,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1126,
+                  "endIndex": 1127,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1127,
+            "endIndex": 1128,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1127,
+                  "endIndex": 1128,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1128,
+            "endIndex": 1156,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1128,
+                  "endIndex": 1156,
+                  "textRun": {
+                    "content": "And if you need more proof\u2026\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1156,
+            "endIndex": 1157,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1156,
+                  "endIndex": 1157,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1157,
+            "endIndex": 1320,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1157,
+                  "endIndex": 1289,
+                  "textRun": {
+                    "content": "Here\u2019s a creator ripping the same content whose made $100K in sales for his brand & does >1M views per month with AI ads like mine: ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 1289,
+                  "endIndex": 1304,
+                  "textRun": {
+                    "content": "link to account",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://www.instagram.com/lucamaxiim/"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 1304,
+                  "endIndex": 1306,
+                  "textRun": {
+                    "content": ", ",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 1306,
+                  "endIndex": 1319,
+                  "textRun": {
+                    "content": "link to brand",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      },
+                      "link": {
+                        "url": "https://www.childrenofkhan.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAacCUniH7a2UoiN6-1ig-5d3DprplkHbDV0NRzrIvX8j8gMCDUvdpj9Pp_dMhg_aem_tDuWwjDAxajsOEA7EJQl-A"
+                      }
+                    }
+                  }
+                },
+                {
+                  "startIndex": 1319,
+                  "endIndex": 1320,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "underline": true,
+                      "foregroundColor": {
+                        "color": {
+                          "rgbColor": {
+                            "red": 0.06666667,
+                            "green": 0.33333334,
+                            "blue": 0.8
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 115,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1320,
+            "endIndex": 1321,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1320,
+                  "endIndex": 1321,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {
+                      "fontSize": {
+                        "magnitude": 8,
+                        "unit": "PT"
+                      }
+                    }
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          },
+          {
+            "startIndex": 1321,
+            "endIndex": 1324,
+            "paragraph": {
+              "elements": [
+                {
+                  "startIndex": 1321,
+                  "endIndex": 1322,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.qwxq2zfjgv4j",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 1322,
+                  "endIndex": 1323,
+                  "inlineObjectElement": {
+                    "inlineObjectId": "kix.ezea3sfk401s",
+                    "textStyle": {}
+                  }
+                },
+                {
+                  "startIndex": 1323,
+                  "endIndex": 1324,
+                  "textRun": {
+                    "content": "\n",
+                    "textStyle": {}
+                  }
+                }
+              ],
+              "paragraphStyle": {
+                "namedStyleType": "NORMAL_TEXT",
+                "lineSpacing": 100,
+                "direction": "LEFT_TO_RIGHT",
+                "spaceAbove": {
+                  "unit": "PT"
+                },
+                "spaceBelow": {
+                  "unit": "PT"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "kix.b2mwgdthwm12": {
+          "headerId": "kix.b2mwgdthwm12",
+          "content": [
+            {
+              "endIndex": 1,
+              "paragraph": {
+                "elements": [
+                  {
+                    "endIndex": 1,
+                    "textRun": {
+                      "content": "\n",
+                      "textStyle": {}
+                    }
+                  }
+                ],
+                "paragraphStyle": {
+                  "namedStyleType": "NORMAL_TEXT",
+                  "direction": "LEFT_TO_RIGHT"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "footers": null,
+      "footnotes": null,
+      "documentStyle": {
+        "background": {
+          "color": {}
+        },
+        "defaultHeaderId": "kix.b2mwgdthwm12",
+        "pageNumberStart": 1,
+        "marginTop": {
+          "magnitude": 54,
+          "unit": "PT"
+        },
+        "marginBottom": {
+          "magnitude": 54,
+          "unit": "PT"
+        },
+        "marginRight": {
+          "magnitude": 54,
+          "unit": "PT"
+        },
+        "marginLeft": {
+          "magnitude": 54,
+          "unit": "PT"
+        },
+        "pageSize": {
+          "height": {
+            "magnitude": 792,
+            "unit": "PT"
+          },
+          "width": {
+            "magnitude": 612,
+            "unit": "PT"
+          }
+        },
+        "marginHeader": {
+          "magnitude": 36,
+          "unit": "PT"
+        },
+        "marginFooter": {
+          "magnitude": 36,
+          "unit": "PT"
+        },
+        "useCustomHeaderFooterMargins": true,
+        "documentFormat": {
+          "documentMode": "PAGES"
+        }
+      },
+      "suggestedDocumentStyleChanges": null,
+      "namedStyles": {
+        "styles": [
+          {
+            "namedStyleType": "NORMAL_TEXT",
+            "textStyle": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "smallCaps": false,
+              "backgroundColor": {},
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {}
+                }
+              },
+              "fontSize": {
+                "magnitude": 11,
+                "unit": "PT"
+              },
+              "weightedFontFamily": {
+                "fontFamily": "Arial",
+                "weight": 400
+              },
+              "baselineOffset": "NONE"
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "alignment": "START",
+              "lineSpacing": 115,
+              "direction": "LEFT_TO_RIGHT",
+              "spacingMode": "COLLAPSE_LISTS",
+              "spaceAbove": {
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "unit": "PT"
+              },
+              "borderBetween": {
+                "color": {},
+                "width": {
+                  "unit": "PT"
+                },
+                "padding": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID"
+              },
+              "borderTop": {
+                "color": {},
+                "width": {
+                  "unit": "PT"
+                },
+                "padding": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID"
+              },
+              "borderBottom": {
+                "color": {},
+                "width": {
+                  "unit": "PT"
+                },
+                "padding": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID"
+              },
+              "borderLeft": {
+                "color": {},
+                "width": {
+                  "unit": "PT"
+                },
+                "padding": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID"
+              },
+              "borderRight": {
+                "color": {},
+                "width": {
+                  "unit": "PT"
+                },
+                "padding": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID"
+              },
+              "indentFirstLine": {
+                "unit": "PT"
+              },
+              "indentStart": {
+                "unit": "PT"
+              },
+              "indentEnd": {
+                "unit": "PT"
+              },
+              "keepLinesTogether": false,
+              "keepWithNext": false,
+              "avoidWidowAndOrphan": true,
+              "shading": {
+                "backgroundColor": {}
+              },
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_1",
+            "textStyle": {
+              "fontSize": {
+                "magnitude": 20,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 20,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 6,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_2",
+            "textStyle": {
+              "bold": false,
+              "fontSize": {
+                "magnitude": 16,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 18,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 6,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_3",
+            "textStyle": {
+              "bold": false,
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {
+                    "red": 0.2627451,
+                    "green": 0.2627451,
+                    "blue": 0.2627451
+                  }
+                }
+              },
+              "fontSize": {
+                "magnitude": 14,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 16,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 4,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_4",
+            "textStyle": {
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {
+                    "red": 0.4,
+                    "green": 0.4,
+                    "blue": 0.4
+                  }
+                }
+              },
+              "fontSize": {
+                "magnitude": 12,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 14,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 4,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_5",
+            "textStyle": {
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {
+                    "red": 0.4,
+                    "green": 0.4,
+                    "blue": 0.4
+                  }
+                }
+              },
+              "fontSize": {
+                "magnitude": 11,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 12,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 4,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "HEADING_6",
+            "textStyle": {
+              "italic": true,
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {
+                    "red": 0.4,
+                    "green": 0.4,
+                    "blue": 0.4
+                  }
+                }
+              },
+              "fontSize": {
+                "magnitude": 11,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "magnitude": 12,
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 4,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "TITLE",
+            "textStyle": {
+              "fontSize": {
+                "magnitude": 26,
+                "unit": "PT"
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 3,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          },
+          {
+            "namedStyleType": "SUBTITLE",
+            "textStyle": {
+              "italic": false,
+              "foregroundColor": {
+                "color": {
+                  "rgbColor": {
+                    "red": 0.4,
+                    "green": 0.4,
+                    "blue": 0.4
+                  }
+                }
+              },
+              "fontSize": {
+                "magnitude": 15,
+                "unit": "PT"
+              },
+              "weightedFontFamily": {
+                "fontFamily": "Arial",
+                "weight": 400
+              }
+            },
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT",
+              "spaceAbove": {
+                "unit": "PT"
+              },
+              "spaceBelow": {
+                "magnitude": 16,
+                "unit": "PT"
+              },
+              "keepLinesTogether": true,
+              "keepWithNext": true,
+              "pageBreakBefore": false
+            }
+          }
+        ]
+      },
+      "suggestedNamedStylesChanges": null,
+      "lists": null,
+      "dropdownDefinitions": null,
+      "namedRanges": null,
+      "inlineObjects": {
+        "kix.217lrzn3njfs": {
+          "objectId": "kix.217lrzn3njfs",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/example-brand-logo.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 40,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 40,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.5i5k3drsuob": {
+          "objectId": "kix.5i5k3drsuob",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/example-brand-ad-1.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 177.77777777777777,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 100,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.9seotyl4da59": {
+          "objectId": "kix.9seotyl4da59",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/example-brand-ad-2.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 177.77777777777777,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 100,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.ezea3sfk401s": {
+          "objectId": "kix.ezea3sfk401s",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/brand-proof.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 184,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 468,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.gmkhcv669grm": {
+          "objectId": "kix.gmkhcv669grm",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/hackathon-event.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 172.3261041009464,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 169.125,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.qwxq2zfjgv4j": {
+          "objectId": "kix.qwxq2zfjgv4j",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/creator-proof.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 96.76355421686748,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 243.375,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        },
+        "kix.suc6rlnolgs3": {
+          "objectId": "kix.suc6rlnolgs3",
+          "inlineObjectProperties": {
+            "embeddedObject": {
+              "imageProperties": {
+                "assetPath": "assets/ryan-and-teammate.png",
+                "cropProperties": {}
+              },
+              "embeddedObjectBorder": {
+                "color": {
+                  "color": {
+                    "rgbColor": {}
+                  }
+                },
+                "width": {
+                  "unit": "PT"
+                },
+                "dashStyle": "SOLID",
+                "propertyState": "NOT_RENDERED"
+              },
+              "size": {
+                "height": {
+                  "magnitude": 152.3668212890625,
+                  "unit": "PT"
+                },
+                "width": {
+                  "magnitude": 114.05235745614036,
+                  "unit": "PT"
+                }
+              },
+              "marginTop": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginBottom": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginRight": {
+                "magnitude": 9,
+                "unit": "PT"
+              },
+              "marginLeft": {
+                "magnitude": 9,
+                "unit": "PT"
+              }
+            }
+          }
+        }
+      },
+      "positionedObjects": null,
+      "documentId": "1P7lJ33KhKspIkq-ick8k2oti9lR8aeAfxXDX2xCTuBg",
+      "document_url": "https://docs.google.com/document/d/1P7lJ33KhKspIkq-ick8k2oti9lR8aeAfxXDX2xCTuBg"
+    }
+  ],
+  "document_url": "https://docs.google.com/document/d/1P7lJ33KhKspIkq-ick8k2oti9lR8aeAfxXDX2xCTuBg"
+}

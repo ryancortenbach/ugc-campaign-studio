@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "files": {
+    "storyboard-v1.json": "b281c0e90c2d50a4e17b93c573fecbe648f232452052fdd43546c6875333e48b",
+    "workflow-v1.json": "06bf9b4b01c9607f83597e8c371a2f01fcc7d35050802672ccb737423da66a1d",
+    "task-packets-v1.json": "377046f8391f8a8825a849adb9805480f9bb5da9f989dcde9cc9c0136adad4e8",
+    "imagegen-prompts-v1.json": "562af390a63895bd4fbe8e2ced2fb1b0d6372d9892a3fe8f70a75938de27aba2",
+    "assets/storyboard-master-v1.png": "a1e36d70f81f0b8af03c0aab025e20bb97db5b889a4ff1ac82e4d103320959d1",
+    "assets/wardrobe-comparison-v1.png": "ab1415621fcceef819a079eba870775e7253ed6e95e2c9365c385ec05901002a",
+    "assets/pilot-medium-v1.png": "649683b62cd4512be598de980c50106f37833dee56b6cac6dbae61d24edd836b",
+    "assets/pilot-wide-v1.png": "567716666051abd0797842a08d94111f06522a775be1e3b20125613a87d62a9f",
+    "review-board.html": "7a62aeceb12551ad149564aab85a0c0dfa404a4e37bec1ca56dce23602c16468"
+  },
+  "status": "pending_human_review"
+}

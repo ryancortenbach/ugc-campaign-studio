@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "status": "awaiting_concept_review",
+  "title": "Your brand enters the cutscene",
+  "runtimeSeconds": 18,
+  "timingStatus": "Provisional three-second beats. Measure the approved voice and adjust shot boundaries without clipping words.",
+  "generationMode": "Built-in ImageGen, two contact sheets. Still concepts only.",
+  "locks": {
+    "character": "Existing penthouse avatar from October 19. Blond braids, warm brown skin, same face, build, hairline and adult appearance.",
+    "world": "Existing PS2 penthouse, tan chair, glass table, dusk skyline and game lighting.",
+    "voice": "Existing approved penthouse voice reference. Do not select a new voice or generate a new read before approval and quote.",
+    "style": "Polished early-2000s PS2 cutscene. Simple textures and game camera moves.",
+    "mutable": [
+      "Brand name and pronunciation",
+      "Two category-specific joke lines",
+      "Approved shirt or hoodie",
+      "Optional pants",
+      "Brand link and logo in postproduction"
+    ]
+  },
+  "shots": [
+    {
+      "id": "01",
+      "start": 0,
+      "end": 3,
+      "title": "Personal greeting",
+      "camera": "Seated frontal medium close-up, small physical rail movement.",
+      "action": "Right hand rises beside shoulder, pauses in greeting, then returns to armrest. Eyes alert and on camera.",
+      "line": "Yo, {{BRAND_SPOKEN_NAME}}. Quick idea for your next drop.",
+      "personalization": "Brand-name voice and matching mouth animation.",
+      "image": "assets/storyboard-master-v1.png"
+    },
+    {
+      "id": "02",
+      "start": 3,
+      "end": 6,
+      "title": "The setup",
+      "camera": "Hard cut to a distinct low, wide three-quarter position beside the table.",
+      "action": "Hands rest on thighs. He leans forward, plants both feet, then begins to rise. Hands remain clear of the torso.",
+      "line": "{{JOKE_SETUP}}",
+      "personalization": "Category-specific setup. Time to the actual voice read."
+    },
+    {
+      "id": "03",
+      "start": 6,
+      "end": 9,
+      "title": "The cutscene payoff",
+      "camera": "Hard cut to a full-body frontal camera with chair behind him.",
+      "action": "Complete the rise from shot 02. Settle into a self-important protagonist stance, both arms at sides. Small eyebrow lift.",
+      "line": "{{JOKE_PAYOFF}}",
+      "personalization": "Category-specific punchline. Full outfit visible."
+    },
+    {
+      "id": "04",
+      "start": 9,
+      "end": 12,
+      "title": "The outfit",
+      "camera": "Hard cut to a standing three-quarter waist-up garment view.",
+      "action": "He squares his shoulders. Arms stay clear of chest. No garment tugging, pointing over the logo, or complex hand interaction.",
+      "line": "Your kit. Our character. A different kind of ad.",
+      "personalization": "Exact selected top and optional pants, rendered as PS2 assets."
+    },
+    {
+      "id": "05",
+      "start": 12,
+      "end": 15,
+      "title": "The system",
+      "camera": "Hard cut to standing frontal medium shot, gentle physical sideways track.",
+      "action": "One restrained open right-palm gesture below chest height, then hold.",
+      "line": "Same face. New scenes. Built around your brand.",
+      "personalization": "Same approved voice and character, no pricing or unverified claims."
+    },
+    {
+      "id": "06",
+      "start": 15,
+      "end": 18,
+      "title": "The brief",
+      "camera": "Hard cut to a tighter waist-up frontal camera.",
+      "action": "Small half-smile and one downward index indication. Stop after the CTA.",
+      "line": "The full idea's in the brief. Take a look.",
+      "personalization": "Add the actual brand brief link in postproduction and in the accompanying message."
+    }
+  ],
+  "brands": [
+    {
+      "id": "gymshark",
+      "name": "Gymshark",
+      "spokenName": "Gymshark",
+      "website": "https://www.gymshark.com/",
+      "instagram": "https://www.instagram.com/gymshark/",
+      "instagramStatus": "Candidate profile, verify ownership before sending.",
+      "setup": "Says he's here for a quick session.",
+      "payoff": "Still waiting for his entrance music.",
+      "wardrobe": "Black training tee and charcoal training trousers. Optional pants swap only after exact product references are approved.",
+      "wardrobeStatus": "ImageGen concept only. No SKU or exact logo match approved.",
+      "initial": "Yo Gymshark team, Ryan here. We put together a PS2-style character concept for Gymshark, with a gym-entrance joke and your kit worked into the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?",
+      "followup": "Hey Gymshark team, following up on the character concept I sent. Is this something your creative team would want to test?",
+      "source": "https://www.gymshark.com/collections/crest/mens",
+      "lines": [
+        "Yo, Gymshark. Quick idea for your next drop.",
+        "Says he's here for a quick session.",
+        "Still waiting for his entrance music.",
+        "Your kit. Our character. A different kind of ad.",
+        "Same face. New scenes. Built around your brand.",
+        "The full idea's in the brief. Take a look."
+      ]
+    },
+    {
+      "id": "alo",
+      "name": "Alo",
+      "spokenName": "Alo",
+      "website": "https://www.aloyoga.com/",
+      "instagram": "https://www.instagram.com/aloyoga/",
+      "instagramStatus": "Candidate profile, verify ownership before sending.",
+      "setup": "Says he's keeping it low-key.",
+      "payoff": "Still gives the coffee run a title sequence.",
+      "wardrobe": "Off-white relaxed crewneck and light stone-gray sweatpants. Optional matching set after exact product references are approved.",
+      "wardrobeStatus": "ImageGen concept only. Not an exact approved Accolade or other SKU.",
+      "initial": "Yo Alo team, Ryan here. We put together a PS2-style character concept for Alo, turning a low-key coffee run into a character introduction with your apparel in the scene. Preview: {{VIDEO_LINK}}. Full brief: {{PERSONALIZED_PDF_LINK}}. Who handles creative on your team?",
+      "followup": "Hey Alo team, following up on the character concept I sent. Would it be useful to talk through how this could fit your next creative test?",
+      "source": "https://www.aloyoga.com/collections/mens-lounge-shop",
+      "lines": [
+        "Yo, Alo. Quick idea for your next drop.",
+        "Says he's keeping it low-key.",
+        "Still gives the coffee run a title sequence.",
+        "Your kit. Our character. A different kind of ad.",
+        "Same face. New scenes. Built around your brand.",
+        "The full idea's in the brief. Take a look."
+      ]
+    }
+  ],
+  "production": {
+    "sourceClipSeconds": 3,
+    "genjutsuApiSourceLimitSeconds": 15,
+    "sourceAudioPreserved": true,
+    "brandSpeech": "Separate approved voice and lip-sync stage for greeting and category lines. Genjutsu does not create the new spoken name.",
+    "clipStrategy": "Six separate source shots, each below the API source limit. Re-time to measured voice. Keep base sources immutable, derive each brand from the neutral base.",
+    "swapStrategy": "Test the hardest full-body shot with top only first. Add pants only after a passing review. Do not chain swaps from one brand to the next.",
+    "continuityReview": "Check identity, garment SKU, logos, hands, occlusions, room geometry, shot joins, audio sync, and the final brief URL."
+  }
+}
