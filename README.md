@@ -13,6 +13,15 @@ npm run dev
 
 Open the local address printed by the server. `npm test` validates intake and output behavior. `npm run check` checks JavaScript syntax.
 
+To run the three durable experiments as well, install each one and give each its own ignored `.env.local` containing `DURABLE_DEMO_ACCESS_TOKEN=` and a random secret:
+
+```sh
+for d in durable-workflow-v1 durable-workflow-v2 durable-dashboard-v3; do (cd experiments/$d && npm ci --ignore-scripts); done
+npm run dev:all
+```
+
+`npm run dev:all` starts the studio on 3000 and the experiments on 3101, 3102 and 3103, bound to 127.0.0.1. Ctrl-C stops all four. Stop it before `npm run build:preview`, because both write `experiments/durable-dashboard-v3/.nitro-build`.
+
 The dark dashboard includes guided intake, saved campaigns, compact task queues with run/pause/stop controls, input-version history, real readiness requests and alerts, a prompt review lab, Exa prospect discovery, and an editable financial model. Three marketing mocks live at `/shop/`, `/course/`, and `/brands/`. The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
 
 The browser saves drafts and campaigns locally and exports a production packet as JSON. This is not shared account storage. The packet leaves unknown facts and unapproved generation settings explicit.
