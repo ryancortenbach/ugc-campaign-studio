@@ -7,8 +7,23 @@ const day=t=>t?new Date(t).toLocaleDateString([],{month:'long',day:'numeric',yea
 function deliveryHTML(d,esc){
  const v=d.delivery,email=v.email?`Subject: ${v.email.subject}\n\n${v.email.body}`:'';
  const draft=v.draftUrl?`<p>${ic('mail-check')}Draft saved in Gmail for ${esc(d.order.buyerEmail)}. <a href="${esc(v.draftUrl)}" target="_blank" rel="noopener">Open the draft</a> and send it.</p>`
-  :`<p class="faint">Gmail is not connected, so copy this email to ${esc(d.order.buyerEmail||'the buyer')}:</p><textarea class="od-email" readonly rows="9">${esc(email)}</textarea><div class="od-actions"><button class="btn sm" type="button" data-copy="email">${ic('file-text')}Copy email</button></div>`;
+  :`<p class="faint">No current Gmail draft is linked. You can copy this email to ${esc(d.order.buyerEmail||'the buyer')}:</p><textarea class="od-email" readonly rows="9">${esc(email)}</textarea><div class="od-actions"><button class="btn sm" type="button" data-copy="email">${ic('file-text')}Copy email</button></div>`;
  return `<div class="od-delivery">${v.stale?'<p class="od-warn">This link is for an earlier version. Upload again to deliver the new one.</p>':''}<p>Download link ready until ${esc(day(v.expiresAt))}.</p><div class="od-link"><input type="text" readonly value="${esc(v.link)}" aria-label="Download link"><button class="btn sm" type="button" data-copy="link">${ic('link')}Copy link</button></div>${draft}</div>`;
+}
+
+function recoveryHTML(d,esc){
+ const r=d.draftRecovery;if(!r)return '';
+ const eligible=Number.isFinite(Date.parse(r.startedAt))&&Date.now()-Date.parse(r.startedAt)>=15*60*1000;
+ return `<section class="od-recovery" aria-label="Delivery draft recovery"><h4>Check the uncertain Gmail draft</h4>
+ <p>Gmail may have saved the draft even though the app did not receive confirmation. Automatic draft creation is blocked.</p>
+ <p><strong>Recipient:</strong> ${esc(r.recipient||d.order.buyerEmail||'Unknown')}<br><strong>Subject:</strong> ${esc(r.subject||'Not recorded')}</p>
+ <p class="faint">Attempt started ${esc(when(r.startedAt))}. Checking looks for the existing draft and does not send email.</p>
+ <div class="od-actions"><button class="btn sm" type="button" data-recover="check" ${d.setup.gmail?'':'disabled'}>Check Gmail for draft</button></div>
+ ${d.setup.gmail?'':'<p class="od-warn">Connect Gmail before checking or resetting this attempt.</p>'}
+ <details><summary>If no draft was created</summary><p>Search Gmail Drafts manually for this buyer and delivery subject. An empty app search does not prove the draft is absent. Resetting incorrectly could create a duplicate on your next upload.</p>
+ <label><input type="checkbox" data-recovery-confirm ${eligible&&d.setup.gmail?'':'disabled'}> I checked Gmail and confirm this attempt did not create a draft.</label>
+ <p class="faint">${eligible?'Reset only unlocks a future upload. It does not create or send a draft.':'Reset becomes available after 15 minutes. Reload this order then. The server checks the waiting period again.'}</p>
+ <button class="btn sm" type="button" data-recover="reset" disabled>Reset this attempt</button></details></section>`;
 }
 
 // The last step of a Whop order: join the finished shots into one video, then upload it to Supabase and draft the buyer's
@@ -26,15 +41,32 @@ export async function paintDelivery({el,api,esc,toast,paymentId,isCurrent=()=>tr
  else body=`<div class="od-body"><video class="od-video" controls preload="metadata" playsinline src="${esc(f.url)}"></video><div class="od-info">
   <p>Made ${esc(when(f.at))} from ${total} shots, ${mb(f.bytes)}, ${f.captions?'with captions':'without captions'}.</p>
   ${f.stale?'<p class="od-warn">A shot changed after this video was made.</p>':''}
-  <div class="od-actions"><button class="btn sm${f.stale?' go':''}" type="button" data-del="final">${ic('refresh-cw')}${f.stale?'Remake final video':'Make it again'}</button>${!v||v.stale?`<button class="btn sm go" type="button" data-del="deliver" ${d.setup.storage&&!f.stale?'':'disabled'}>${ic('send')}Upload and draft email</button>`:''}</div>
+  <div class="od-actions"><button class="btn sm${f.stale?' go':''}" type="button" data-del="final">${ic('refresh-cw')}${f.stale?'Remake final video':'Make it again'}</button>${!v||v.stale?`<button class="btn sm go" type="button" data-del="deliver" ${d.setup.storage&&!f.stale&&!d.draftRecovery?'':'disabled'}>${ic('send')}Upload and draft email</button>`:''}</div>
   ${d.setup.storage?'':'<p class="faint">To upload, add SUPABASE_SECRET_KEY to .env.local and restart the app.</p>'}
-  ${v?deliveryHTML(d,esc):''}</div></div>`;
- el.innerHTML=`<div class="od-head"><h3>Finished video</h3><span class="faint">Nothing is sent automatically</span></div>${body}`;
+  ${v&&!d.draftRecovery?deliveryHTML(d,esc):''}</div></div>`;
+ el.innerHTML=`<div class="od-head"><h3 tabindex="-1" data-delivery-heading>Finished video</h3><span class="faint">Nothing is sent automatically</span></div>${recoveryHTML(d,esc)}${body}`;
+ let pending=false;
+ const disableActions=()=>el.querySelectorAll('[data-del],[data-recover],[data-recovery-confirm]').forEach(b=>b.disabled=true);
+ const refresh=async()=>{if(isCurrent()){await paintDelivery({el,api,esc,toast,paymentId,isCurrent});if(isCurrent())el.querySelector('[data-delivery-heading]')?.focus();}};
  el.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
+  if(pending||b.disabled||!isCurrent())return;pending=true;disableActions();
   const step=b.dataset.del;b.disabled=true;b.innerHTML=`${ic('loader')}${step==='final'?'Making the video':'Uploading'}`;
-  try{await api(`${base}/${step}`,{});toast(step==='final'?'Final video made':'Delivery ready','ok',step==='final'?'Watch it before you deliver.':'Nothing was sent. Send it from Gmail.');}
-  catch(error){toast(error.message,'bad');}
-  if(isCurrent())await paintDelivery({el,api,esc,toast,paymentId,isCurrent});
+  try{await api(`${base}/${step}`,{});if(isCurrent())toast(step==='final'?'Final video made':'Delivery ready','ok',step==='final'?'Watch it before you deliver.':'Nothing was sent. Send it from Gmail.');}
+  catch(error){if(isCurrent())toast(error.message,'bad');}
+  await refresh();
+ });
+ const confirmation=el.querySelector('[data-recovery-confirm]'),reset=el.querySelector('[data-recover="reset"]');
+ if(confirmation)confirmation.onchange=()=>{reset.disabled=pending||confirmation.disabled||!confirmation.checked;};
+ el.querySelectorAll('[data-recover]').forEach(b=>b.onclick=async()=>{
+  if(pending||b.disabled||!isCurrent())return;
+  const confirmed=b.dataset.recover==='reset';
+  if(confirmed&&(!confirmation?.checked||confirmation.disabled))return;
+  pending=true;disableActions();
+  try{
+   await api(`${base}/delivery-draft-reconcile`,{intentToken:d.draftRecovery.intentToken,...(confirmed?{confirmNotCreated:true}:{})});
+   if(isCurrent())toast('Recovery state updated','ok','An existing draft was recovered or the attempt was reset. Nothing was created or sent. Review the final before preparing delivery again.');
+  }catch(error){if(isCurrent())toast(error.message,'bad');}
+  await refresh();
  });
  el.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
   const link=b.dataset.copy==='link',text=link?v.link:`Subject: ${v.email?.subject||''}\n\n${v.email?.body||''}`;
