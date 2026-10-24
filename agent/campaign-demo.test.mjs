@@ -68,28 +68,43 @@ test('the exact chat prompt works while spending is paused, and creates no provi
  assert.equal(calls,0);assert.equal(store.listDrafts().length,0);assert.equal(store.listRenders().length,0);assert.equal(store.spendSummary().total,0);assert.equal(store.db.prepare('select count(*) n from whop_orders').get().n,0);
 });
 
-test('the visual walkthrough is read-only throughout the simulated review and ignores stale mounts',async()=>{
- const store=openStore(':memory:'),data=service(store).get(),dom=new JSDOM('<main></main>',{url:'http://local/#/walkthrough/disobedient'}),host=dom.window.document.querySelector('main'),calls=[];
+test('chat progress shows inline tools without a stage dashboard and makes only read requests',async()=>{
+ const store=openStore(':memory:'),data=service(store).get(),dom=new JSDOM('<main id="view"></main>',{url:'http://local/#/home'}),host=dom.window.document.querySelector('main'),calls=[];
+ dom.window.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};dom.window.HTMLMediaElement.prototype.pause=function(){};
  const handle=await mountCampaignDemo(host,{fetch:async(url,options)=>{calls.push([url,options]);return {ok:true,json:async()=>data};}});
- assert.match(host.textContent,/PS2 cutscene/);assert.doesNotMatch(host.textContent,/demo|simulat/i);host.querySelector('[data-ap-demo-next]').click();assert.match(host.textContent,/Create the campaign task/);
- for(let i=0;i<4;i++)host.querySelector('[data-ap-demo-next]').click();
- const player=host.querySelector('video');assert.equal(player.getAttribute('src'),'/sample.mp4');assert.equal(player.controls,true);
- assert.deepEqual(calls.map(c=>c[0]),['/api/campaign-demo/disobedient']);
- handle.dispose();dom.window.close();store.db.close();
+ assert.equal(handle.data.brands.length,1);assert.equal(handle.data.brands[0].id,'disobedient');
+ assert.doesNotMatch(host.textContent,/VYLIN|next step|reset|tool call history|demo|simulat/i);
+ handle.controller.play();handle.controller.pause();assert.match(host.textContent,/Create the campaign task/);
+ for(let i=0;i<4;i++)handle.controller.next();
+ const player=host.querySelector('video');assert.equal(player.getAttribute('src'),'/sample.mp4');assert.equal(player.controls,false);
+ player.currentTime=2.5;handle.respond('pause');assert.equal(host.querySelector('video'),player);assert.equal(player.currentTime,2.5);
+ handle.respond('continue');assert.equal(host.querySelector('video'),player);assert.equal(player.currentTime,2.5);
+ assert.deepEqual(calls.map(c=>c[0]),['/api/campaign-demo/disobedient']);handle.dispose();dom.window.close();store.db.close();
 });
 
-
-test('automatic review waits then shows an approval notification using only a read request',async()=>{
- const store=openStore(':memory:'),data=service(store).get(),dom=new JSDOM('<main></main>',{url:'http://local/#/walkthrough/disobedient'}),host=dom.window.document.querySelector('main'),calls=[],pending=[];
- dom.window.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};
- const handle=await mountCampaignDemo(host,{autoPlay:true,fetch:async(url,options)=>{calls.push([url,options]);return {ok:true,json:async()=>data};},schedule:(fn,ms)=>{const job={fn,ms};pending.push(job);return job;},cancel:job=>{const i=pending.indexOf(job);if(i>=0)pending.splice(i,1);}});
+test('automatic chat review produces Gmail, Whop and video notifications without writes',async()=>{
+ const store=openStore(':memory:'),data=service(store).get(),dom=new JSDOM('<main id="view"></main>',{url:'http://local/#/home'}),host=dom.window.document.querySelector('main'),calls=[],pending=[],notices=[];
+ dom.window.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};dom.window.HTMLMediaElement.prototype.pause=function(){};
+ const handle=await mountCampaignDemo(host,{autoPlay:true,onNotify:n=>notices.push(n),fetch:async(url,options)=>{calls.push([url,options]);return {ok:true,json:async()=>data};},schedule:(fn,ms)=>{const job={fn,ms};pending.push(job);return job;},cancel:job=>{const i=pending.indexOf(job);if(i>=0)pending.splice(i,1);}});
  while(handle.controller.state.playing)pending.shift().fn();
  assert.equal(data.steps[handle.controller.state.index].id,'sample');
  host.querySelector('video').dispatchEvent(new dom.window.Event('ended'));
- assert.match(host.textContent,/Waiting for review/);assert.equal(pending[0].ms,4500);
- pending.shift().fn();assert.match(host.querySelector('[role=status]').textContent,/Someone approved/);
- while(handle.controller.state.playing)pending.shift().fn();
+ assert.match(host.textContent,/Waiting/);assert.equal(pending[0].ms,4500);
+ pending.shift().fn();assert.equal(notices.at(-1).title,'Sample approved');
+ while(handle.controller.state.playing){pending.shift().fn();assert.doesNotMatch(host.textContent,/demo|simulat|VYLIN/i);}
  assert.equal(data.steps[handle.controller.state.index].id,'delivery');
- assert.deepEqual(calls,[['/api/campaign-demo/disobedient',undefined]]);
- handle.dispose();dom.window.close();store.db.close();
+ assert.deepEqual(notices.map(n=>n.provider),['terac','gmail','gmail','whop','whop','higgsfield']);
+ assert.equal(notices.find(n=>n.title==='Checkout successful').detail,'Tobin checked out for $500');
+ assert.deepEqual(calls,[['/api/campaign-demo/disobedient',undefined]]);handle.dispose();dom.window.close();store.db.close();
+});
+
+test('persistent chat includes actual saved ICP and Terac evidence and survives route changes',async()=>{
+ const store=openStore(':memory:'),data=service(store).get(),dom=new JSDOM('<main id="view"><div id="chat"></div></main><aside id="cache" hidden></aside>',{url:'http://local/#/home'}),host=dom.window.document.querySelector('#chat'),pending=[],calls=[];
+ dom.window.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};dom.window.HTMLMediaElement.prototype.pause=function(){};
+ const handle=await mountCampaignDemo(host,{autoPlay:true,persistent:true,fetch:async(url,options)=>{calls.push([url,options]);return {ok:true,json:async()=>url.startsWith('/api/campaign-demo')?data:url==='/api/client-demo'?{brands:[{id:'disobedient',reportUrl:'/icp.pdf'}]}:{realToolCall:true,checkedAt:new Date().toISOString(),balanceUsd:100}};},schedule:(fn,ms)=>{const job={fn,ms};pending.push(job);return job;},cancel:job=>{const i=pending.indexOf(job);if(i>=0)pending.splice(i,1);}});
+ assert.ok(handle.data.steps.some(s=>s.id==='icp'&&s.output.url==='/icp.pdf'));
+ assert.ok(handle.data.steps.some(s=>s.id==='terac-sync'&&s.input.tool==='terac_get_context'));
+ dom.window.document.querySelector('#cache').append(host);dom.window.location.hash='#/tasks';await Promise.resolve();
+ pending.shift().fn();assert.equal(handle.controller.state.index,1);
+ assert.ok(calls.every(([,options])=>options===undefined));handle.dispose();dom.window.close();store.db.close();
 });

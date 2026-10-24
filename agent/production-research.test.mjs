@@ -129,7 +129,7 @@ test('HTTP tools, dossier persistence, historical media byte ranges and isolated
  const media=await fetch(base+'/production-media/final',{headers:{Range:'bytes=0-31'}});
  // Private historical files are intentionally absent in a clean checkout.
  assert.ok([206,404].includes(media.status));if(media.status===206){assert.equal((await media.arrayBuffer()).byteLength,32);assert.match(media.headers.get('content-range'),/^bytes 0-31\//);}
- const shell=await (await fetch(base+'/')).text();assert.match(shell,/#\/production/);
+ const shell=await (await fetch(base+'/')).text();assert.doesNotMatch(shell,/data-tab="production"/);
  const ui=await (await fetch(base+'/production-research.js')).text();assert.match(ui,/Historical playback/);assert.doesNotMatch(ui,/\/api\/assistant|\/api\/renders.*approve/);
  assert.equal(store.spendSummary().total,0);
 });

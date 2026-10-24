@@ -1602,15 +1602,15 @@
         }
       },
       "demoFinalVideo": {
-        "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+        "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v3.mp4",
         "title": "Disobedient: full 30-second PS2 ad with spoken subtitles",
         "durationSeconds": 30,
-        "renderId": 33,
+        "renderId": 34,
         "status": "ready_for_human_review",
         "verification": {
-          "createdAt": "2026-10-24T21:24:03.178148+00:00",
-          "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
-          "finalSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+          "createdAt": "2026-10-24T21:45:42.464031+00:00",
+          "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v3.mp4",
+          "finalSha256": "c6bea466c5e7fd9e4205e916b03a5d1337a81abc521920935d252e1ebff07592",
           "durationSeconds": 30,
           "frames": 900,
           "fps": 30,
@@ -1623,7 +1623,7 @@
           "outroStartsAt": 23.2,
           "sourceAudioCorrelation": 0.9997393501445606,
           "sourceInputsPreserved": true,
-          "allJoinedFrameHashesVerified": true,
+          "allJoinedFrameHashesVerified": false,
           "sourceDialoguePreserved": true,
           "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
           "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
@@ -1681,7 +1681,92 @@
           "sourceAudioPacketsUnchanged": true,
           "laterScenesUnchanged": true,
           "newProviderCalls": 0,
-          "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4"
+          "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4",
+          "sourceUrl": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+          "sourceSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+          "ssimToSource": 0.995469,
+          "audioPacketsUnchanged": true,
+          "sourceUniqueH264SequenceParameters": 2,
+          "outputUniqueH264SequenceParameters": 1,
+          "profile": "H.264 High level 3.1, yuv420p, SAR 1:1",
+          "reason": "Native player turned black at the join from the character to independently encoded product cards. Re-encode as one continuous decoder configuration.",
+          "sourceVerification": {
+            "createdAt": "2026-10-24T21:24:03.178148+00:00",
+            "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+            "finalSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+            "durationSeconds": 30,
+            "frames": 900,
+            "fps": 30,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "characterSeconds": 23.2,
+            "productOutroSeconds": 6.8,
+            "outroStartsAt": 23.2,
+            "sourceAudioCorrelation": 0.9997393501445606,
+            "sourceInputsPreserved": true,
+            "allJoinedFrameHashesVerified": true,
+            "sourceDialoguePreserved": true,
+            "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
+            "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
+            "productFrontAndBackPhotos": true,
+            "ctaDestination": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "ctaDisplayWebsite": "disobedientnyc.com",
+            "providerRequests": [
+              "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+              "3fafcce5-1410-41cd-9381-891e0274427d"
+            ],
+            "humanApproval": false,
+            "sends": 0,
+            "sampleUrl": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+            "sampleSha256": "a74c644900e67e5f929c05301749521872df603852cd996c38cbb715b1a723d0",
+            "sampleSeconds": 6,
+            "textIsDialogueTranscription": true,
+            "captionSource": "agent/knowledge/penthouse-v1/references/examples/chunks_khan_penthouse.json",
+            "captions": [
+              {
+                "text": "you ever heard the saying",
+                "start": 0.14,
+                "end": 1.36
+              },
+              {
+                "text": "winners focus on winning",
+                "start": 1.36,
+                "end": 2.52
+              },
+              {
+                "text": "while losers focus",
+                "start": 2.52,
+                "end": 3.42
+              },
+              {
+                "text": "on winners",
+                "start": 3.42,
+                "end": 4.02
+              },
+              {
+                "text": "that's practically the",
+                "start": 4.02,
+                "end": 4.8
+              },
+              {
+                "text": "story of my life",
+                "start": 4.8,
+                "end": 5.74
+              },
+              {
+                "text": "all these losers",
+                "start": 5.74,
+                "end": 6
+              }
+            ],
+            "sourceAudioPacketsUnchanged": true,
+            "laterScenesUnchanged": true,
+            "newProviderCalls": 0,
+            "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4"
+          },
+          "allFramesDecoded": true
         },
         "visualQA": {
           "status": "checks_passed",
@@ -1689,7 +1774,7 @@
           "reviewedAt": "2026-10-24T21:20:34.663289+00:00",
           "reviewer": "Primary Codex visual inspection",
           "independentReview": false,
-          "artifactSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+          "artifactSha256": "c6bea466c5e7fd9e4205e916b03a5d1337a81abc521920935d252e1ebff07592",
           "evidence": [
             "middle-a-contact-v1.png",
             "middle-b-contact-v1.png",
@@ -1716,7 +1801,30 @@
           "outreachReady": false,
           "sends": 0,
           "captionReview": "Opening captions match the saved spoken-word transcript and original caption timings. The unchanged sample speech aligns with the original full speech within 5 milliseconds. Later subtitles remain unchanged.",
-          "textIsDialogueTranscription": true
+          "textIsDialogueTranscription": true,
+          "nativeProductEnding": "Product ending visible in the native Mint player, confirmed by user screenshot on October 24, 2026 at 17:55. The earlier native screenshot path can omit hardware-composited video pixels.",
+          "webkitCompatibility": {
+            "createdAt": "2026-10-24T21:45:42.464031+00:00",
+            "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v3.mp4",
+            "finalSha256": "c6bea466c5e7fd9e4205e916b03a5d1337a81abc521920935d252e1ebff07592",
+            "sourceUrl": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+            "sourceSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+            "durationSeconds": 30,
+            "frames": 900,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "fps": 30,
+            "ssimToSource": 0.995469,
+            "audioPacketsUnchanged": true,
+            "sourceUniqueH264SequenceParameters": 2,
+            "outputUniqueH264SequenceParameters": 1,
+            "profile": "H.264 High level 3.1, yuv420p, SAR 1:1",
+            "reason": "Native player turned black at the join from the character to independently encoded product cards. Re-encode as one continuous decoder configuration.",
+            "newProviderCalls": 0,
+            "humanApproval": false
+          }
         },
         "containsCTA": true,
         "cta": {

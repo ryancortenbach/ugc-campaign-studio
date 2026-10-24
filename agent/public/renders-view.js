@@ -1,6 +1,7 @@
 // Renders: a media-first gallery. One 9:16 tile per lead (latest version), a detail panel on the right,
 // patched in place from the render stream. Mounted from app.js with rendersView({view,api,esc,toast,arg,isCurrent}).
 // Nothing here spends money on its own: Approve opens an in-panel confirm that shows the price first.
+import {playerHTML,bindPlayers} from './mint-player.js';
 import {icons} from './icons.js';
 import {renderActive,reviewReady,renderLength,renderModel} from './render-monitor.js';
 
@@ -19,6 +20,7 @@ export const brandFromTitle=t=>String(t||'').replace(/\s*\(v\d+\)\s*$/i,'').repl
 
 // One group per lead. Renders without a lead group by title, and a render superseded by another joins that one's group.
 export function groupRenders(list,names={}){
+ list=list.filter(r=>!r.plan?.hiddenFromGallery);
  const byId=new Map(list.map(r=>[r.id,r]));
  const key=new Map(list.map(r=>[r.id,r.lead_id?`lead:${r.lead_id}`:`title:${normTitle(r.title)}`]));
  for(let pass=0;pass<4;pass++)for(const r of list){const to=r.plan?.supersededByRenderId;if(to&&byId.has(to)&&to!==r.id)key.set(r.id,key.get(to));}
@@ -35,6 +37,7 @@ export function groupRenders(list,names={}){
 export function stateOf(r){
  const you=(label,cls,icon,rank=0)=>({label,cls,icon,tab:'you',rank});
  if(r.stale||r.status==='submission_unknown')return you('Check Higgsfield','s-bad','triangle-alert');
+ if(r.status==='completed'&&r.plan?.presentationReady)return {label:'Ready',cls:'s-ok',icon:'circle-check',tab:'done',rank:3};
  if(reviewReady(r))return you('Needs review','s-you','circle-alert');
  if(renderActive(r))return {label:r.status==='checking'||r.revising?'Checking':'Rendering',cls:'s-run',icon:'loader',tab:'work',rank:2};
  if(r.status==='completed')return r.review==='rejected'?you('Needs work','s-bad','circle-x',1):{label:'Done',cls:'s-ok',icon:'circle-check',tab:'done',rank:3};
@@ -210,7 +213,7 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
  function panelMediaHTML(r,name,mi){
   const c=mediaCandidates(r)[mi];
   if(!c)return `<div class="rvp-frame">${fallbackHTML(r,name)}</div>`;
-  if(c.kind==='video')return `<div class="rvp-frame"><video src="${esc(c.src)}${c.poster?'':'#t=0.1'}" ${c.poster?`poster="${esc(c.poster)}"`:''} controls playsinline preload="metadata"></video></div>`;
+  if(c.kind==='video')return playerHTML(c.src,{label:'Completed campaign video',poster:c.poster});
   return `<div class="rvp-frame"><img${c.kind==='hero'?' class="hero"':''} src="${esc(c.src)}" alt="">${c.kind==='hero'&&conceptOK(r)?'<span class="rv-concept">Concept</span>':''}</div>`;
  }
 
@@ -223,7 +226,7 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   const hsig=JSON.stringify([t.name,r.id,st.label,t.count]);
   if(force||head.dataset.sig!==hsig){head.dataset.sig=hsig;head.innerHTML=`<span class="rvp-brand">${r.lead_id?`<span class="rv-badge sm"><b>${esc(t.name[0].toUpperCase())}</b><img src="/api/leads/${r.lead_id}/logo" alt="" data-logo></span>`:''}<span class="rvp-title"><b>${esc(t.name)}</b><span class="rvp-sub">#${r.id}${t.count>1?` &middot; v${t.versions.indexOf(r)+1} of ${t.count}`:''}</span></span></span>${pillHTML(st)}<button type="button" class="iconbtn rvp-x" data-a="close" aria-label="Close" data-tip="Close (Esc)">${ic('x')}</button>`;}
   const mk=mediaKey(r);
-  if(force||pmedia.dataset.mk!==mk){pmedia.dataset.mk=mk;pmedia.dataset.mi='0';pmedia.innerHTML=panelMediaHTML(r,t.name,0);}
+  if(force||pmedia.dataset.mk!==mk){pmedia.dataset.mk=mk;pmedia.dataset.mi='0';pmedia.innerHTML=panelMediaHTML(r,t.name,0);bindPlayers(pmedia);}
   const sig=panelSig(t,r),typing=pbody.contains(doc.activeElement)&&/^(INPUT|TEXTAREA)$/.test(doc.activeElement.tagName);
   if(!force&&pbody.dataset.sig===sig)return;
   if(typing&&!force)return;

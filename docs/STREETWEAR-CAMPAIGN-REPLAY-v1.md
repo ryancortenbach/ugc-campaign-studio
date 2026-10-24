@@ -1,33 +1,43 @@
-# Streetwear campaign replay
+# Disobedient campaign presentation
 
-The chat message `Find me streetwear brands we can run AI UGC content campaigns for` opens `#/walkthrough/disobedient?autoplay=1`. `Run the streetwear demo` is an alias. Other research prompts keep their normal behavior.
+The exact Home prompt is `Find me streetwear brands we can run AI UGC content campaigns for`. It stays inside the existing chat. `Run the streetwear demo` is an alias. The legacy walkthrough route returns to Home. Other prompts retain their normal behavior outside an active presentation.
 
-The replay uses the saved Disobedient and VYLIN research and tool records. Disobedient has the actual repaired six-second sample with subtitles matching the spoken words. VYLIN remains unavailable after its provider failure and is not presented as a generated success. No PDF is included in the outreach rehearsal.
+The conversation appends compact Offload-style tool rows, keeps older calls in a disclosure, shows references and the saved ICP document, plays the six-second sample, waits for visual review, then advances through outreach, replies, two checkout notifications and the complete ad. It takes about 70 seconds including the 30-second ad. There is no separate stage dashboard or simulation chip. Execution metadata retains the actual saved-versus-staged distinction.
 
-The presentation has no demo or simulation badges. Execution metadata keeps the actual saved-versus-staged distinction internally. The flow shows the task, Exa evidence, official product reference, ImageGen character concept, sample playback, review wait, approval notification, sample email, positive reply, Whop checkout link, $500 checkout notification, generation replay and final character ad.
+Home keeps the composer in an opaque footer with its own conversation scroll area. Media cannot scroll below it. Existing paid AI UGC purchases sit beneath the composer. Tasks has Client work and Brand research, without automation switches, daily budget or Video review. Disobedient's compact card advances live and ends at Client booked. Its document, storyboard and video links remain usable. Waddle and Award Scholar are retained. Retired VYLIN client failures and the BLAN, Brooklyn Industries and Gifted Elite research attempts are hidden, with all records preserved.
 
-The Terac step is visual only, following the user's correction. It waits 4.5 seconds and shows a simulated approval notification. It makes no API request and saves no approval, panel or review record. All outreach, replies, checkout links and payment notifications are simulated. No real email, DM, Whop transaction or CRM update occurs. Actual delivery approvals remain separate.
+The Renders gallery keeps the current Disobedient sample and complete ad. The cleanup script applies recoverable visibility flags to the retired attempts and keeps all files and review records. The sidebar uses a small pulsing dot instead of a numbered yellow badge. Production remains available by its existing route and API, but is absent from navigation. Mutual connections use an orange chip, and chip labels remain on one line.
 
-The exact chat trigger records the local conversation and reuses existing tasks. All subsequent replay steps use one read-only manifest request, local timers and local saved media. The global spending pause remains enabled. Replay cannot submit new provider work.
+## Events and accounting
 
-## Media
+The right Live rail follows only the current presentation's steps while it runs. It includes the provider logos, collected revenue and the campaign cost allocation. Bottom-right Gmail, Terac, Whop and Higgsfield notifications identify the provider. Revenue advances from zero to one $500 checkout and then two orders totaling $1,041.25. These replay events never create payment, email, approval or CRM records.
 
-- Corrected opening: `/streetwear-demo-assets/disobedient-garment-review-v3.mp4`, six seconds, render 28.
-- Outreach sample: `/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4`, six seconds. Captions use the original spoken-word transcript and caption timings. Audio packets are unchanged.
-- Complete ad: `/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4`, published only after actual generation, assembly and review.
+Campaign cost allocations animate the saved rendering, research and model costs. They do not write to the real spend ledger. Creating a Terac project is free, so it shows a project count rather than an invented charge. ElevenLabs reports character usage rather than an unsupported dollar conversion. The payment and provider accounting APIs retain their actual values.
 
-The complete ad retains the original character dialogue, uses the printed hoodie variation requested by the user, and closes with official front/back product photographs and disobedientnyc.com. The printed-front character styling is a creative variation. The official product photograph places that artwork on the back. The replay does not represent exact front-placement fidelity to the ecommerce garment.
+The Terac review wait is visual only. It launches no panel and records no production approval. The exact trigger records the local chat and reuses existing tasks. Playback uses read-only manifests and saved media. No replay step submits new paid generation or sends an email or DM.
 
-Missing samples stop the replay before outreach. A missing final stops at generation and never substitutes the six-second sample for the full ad. Autoplay follows the actual sample's ended event. Reset, pause, route changes and removed mounts cancel pending replay timers.
+## Real provider verification
 
-## Implementation and checks
+On October 24 the read-only `terac_get_context` call returned $100 credit. The real `Disobedient hoodie campaign` project was created in Terac at zero charge. Its dashboard link and receipt are in `provider-status/terac-project-v1.json`. A real three-person UK, English-language concept review draft was created, collecting TXT or PDF feedback with manual payout review. Terac quoted $31.50 total, above the proposed $10 cap. Recruitment remains unlaunched pending approval of the higher quote. The project and draft are free.
 
-`agent/campaign-demo.mjs` prepares the saved manifest and chat response. `agent/public/campaign-demo.js` owns playback, notifications and expandable normalized tool summaries. Raw saved Exa records remain separately inspectable. The actual paid rendering scripts have bounded authorization, persisted request IDs and no automatic retry. They are separate from this replay.
+A real Solari browser read Disobedient's public website and closed successfully. The saved receipt includes the observed page title and text. The ICP flow includes this Solari evidence alongside the saved Exa research. The existing `CYBORG PS2 UK voice (studio r1)`, voice ID `EsBKDmM9f0GZP1raVDSa`, was verified in ElevenLabs and added locally as `UK Guy · Studio r1`. Its existing preview was downloaded without new generation. Account usage was 63,232 of 610,000 characters.
 
-Run `npm test --prefix agent`, `npm test`, and `npm run check`. The demo tests cover trigger isolation, sample ordering, unavailable media, cleanup, no provider work, no checkout creation and a fully read-only simulated review sequence. Native Mint playback must be checked separately from these tests.
+The backend's macOS lookup path failed for provider hosts. `network-dns.mjs` falls back to the resolver listed in `/etc/resolv.conf` after ENOTFOUND or EAI_AGAIN. An idle HTTP-only activation replaced PID 25669 with PID 54760. All eight providers passed their configured, reachable or verified checks. Background watchers remain off, and `spendingPaused=false` was preserved. `scripts/serve-mint-manual.mjs` documents this HTTP-only entry point.
 
-## Activated result
+## Media and player
 
-The corrected complete ad is render 33. The first caption is “you ever heard the saying,” followed by the words he speaks. All 900 decoded pictures passed the assembly check. The revised sample and full ad preserve their audio packets exactly. The untouched historical versions remain available locally. The original dialogue still uses the word jacket; the product ending says SHOP THE HOODIE and shows the brand website.
+- Opening: `/streetwear-demo-assets/disobedient-garment-review-v3.mp4`, render 28 source.
+- Spoken-caption sample: `/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4`, six seconds.
+- Complete ad: `/streetwear-demo-assets/disobedient-full-ad-30s-v3.mp4`, render 34, 30 seconds.
 
-Home history uses a persisted visible-message cutoff. Existing messages and task records remain saved, and new messages appear normally. The prior conversation was hidden at message 6. The Simulation chip was removed from Leads and native Mint was refreshed to verify its absence. Home was verified empty in native Mint.
+The complete ad uses one continuous H.264 configuration for native playback. All 900 frames decode, audio packets are unchanged, and SSIM against v2 is 0.995469. The product ending was visible in Ryan's native Mint screenshot at 17:55. Native screenshot tools can omit hardware-composited video pixels, so a black capture alone is not a decoding failure.
+
+The Mint player supplies play/pause, seeking, elapsed time and mute controls in chat, the task media dialog and Renders details. It uses the actual video element without native video chrome. Old media versions are retained.
+
+Content limits remain: the original spoken dialogue says jacket, and the end card says hoodie. The printed-front character garment is a user-directed variation of the official blank-front, printed-back product. Small generated lettering variations remain. Human approval metadata is unchanged.
+
+## Component provenance and checks
+
+The tool rows reuse the existing native DOM adaptation of Offload's AgentActivity and Beautiful ToolChips, documented in `OFFLOAD-CHAT-ACTIVITY-v1.md`. The requested nine-key loading treatment is implemented locally. The original Offload checkout named in that handoff is unavailable on this machine, so this change does not claim to have imported that missing loader source. Assistant UI's thread/composer primitives were reviewed; this patch preserves Mint's existing native DOM architecture rather than adding an unused React runtime.
+
+Run `npm test --prefix agent`, `npm test`, `npm run check`, and `bash desktop/build.sh --no-install`. Tests cover trigger isolation, sample ordering, cross-route continuity, read-only review, checkout notifications, cost progression, player controls and DNS fallback. Native interaction verification is separate from these automated checks.

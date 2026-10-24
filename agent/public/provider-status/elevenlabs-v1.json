@@ -1,0 +1,12 @@
+{
+  "provider": "ElevenLabs",
+  "checkedAt": "2026-10-24T21:58:12.161Z",
+  "realToolCall": true,
+  "readOnly": true,
+  "tier": "pro",
+  "status": "active",
+  "used": 63232,
+  "limit": 610000,
+  "resetAt": "2026-11-04T18:32:23.000Z",
+  "usdPerChar": null
+}

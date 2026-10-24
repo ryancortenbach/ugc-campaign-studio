@@ -185,7 +185,7 @@ test('completed videos get Approve and Reject review buttons; reject needs a not
  const {view,dom}=await mount({calls});
  try{
   view.querySelector('.rv-card[data-key="title:disobedient: hoodie opening"]').click();
-  assert.ok(view.querySelector('.rvp-frame video[controls]'));
+  assert.ok(view.querySelector('[data-mint-player] video:not([controls])'));assert.ok(view.querySelector('[data-mp-seek]'));
   view.querySelector('[data-a="rev-no"]').click();
   view.querySelector('[data-a="rev-send"]').click();await tick();
   assert.ok(!calls.some(([p])=>/review/.test(p)));

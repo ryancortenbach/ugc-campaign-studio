@@ -1,4 +1,6 @@
-import {mountTaskReviewQueue} from './task-review-queue.js';
+import {campaignCosts} from './campaign-costs.js';
+import {openPlayer} from './mint-player.js';
+import {mountCampaignDemo} from './campaign-demo.js';
 import {mountChatActivity} from './chat-activity.js';
 import {renderActive,reviewReady,renderGroup,renderLength,renderModel,watchRecords} from './render-monitor.js';
 import {icons} from './icons.js';
@@ -79,7 +81,7 @@ function renderShell(){
  const c=state.config;if(!c)return;
  $('#pagetitle').textContent=(tab()==='orders'?'Client brief':titles[tab()])||'Home';
  document.querySelectorAll('#tabs a,#tabs-foot a').forEach(a=>a.classList.toggle('on',a.dataset.tab===(tab()==='drafts'?'leads':tab()==='orders'?'tasks':tab())));
- const rt=document.querySelector('#tabs a[data-tab="renders"]');rt.querySelector('.badge')?.remove();{const n=c.stats.needsYou??c.stats.reviews;if(n)rt.insertAdjacentHTML('beforeend',`<span class="badge" title="Renders waiting for your approval or review">${n}</span>`);}
+ const rt=document.querySelector('#tabs a[data-tab="renders"]');rt.querySelector('.badge,.nav-alert')?.remove();{const n=c.stats.needsYou??c.stats.reviews;if(n)rt.insertAdjacentHTML('beforeend',`<span class="nav-alert" role="status" aria-label="New renders available" title="New renders available"></span>`);}
  const rows=connRows(),bad=rows.filter(r=>r.st[1]==='s-bad'||r.st[1]==='s-you').length,errs=rows.filter(r=>r.st[1]==='s-bad').length;
  $('#intdot').className=`dot ${bad?(errs?'off':'part'):'on'}`;
  $('#intlabel').textContent=bad?`${bad} need${bad===1?'s':''} attention`:rows.every(r=>r.verification==='verified')?'All connected':'Connections ready';
@@ -94,7 +96,8 @@ const usd=n=>{if(n==null||!Number.isFinite(Number(n)))return '';n=Number(n);retu
 const kfmt=n=>{n=Number(String(n).replace(/,/g,''));return n>=1000?`${Math.round(n/1000)}k`:String(n);};
 // Spend tab: /api/costs when the backend has it, else /api/spend. Whop revenue comes from /api/whop and is shown as Collected.
 async function renderSpend(){
- const [costs,whop]=await Promise.all([tryGet('/api/costs'),tryGet('/api/whop')]);
+ const [costs,whop,teracSync]=await Promise.all([tryGet('/api/costs'),tryGet('/api/whop'),tryGet('/provider-status/terac-v1.json')]);
+ if(costs&&teracSync?.realToolCall&&Date.now()-Date.parse(teracSync.checkedAt)<86400000){const row=costs.providers?.find(p=>p.id==='terac');if(row&&row.balanceUsd==null)Object.assign(row,{balanceUsd:teracSync.balanceUsd,checkedAt:teracSync.checkedAt,detail:`Balance verified by terac_get_context at ${teracSync.checkedAt}. Historical spending is not provided by this call.`});}
  if(costs&&Array.isArray(costs.providers)){
   state.spendData={all:Number(costs.allTimeUsd||0),today:Number(costs.todayUsd||0),partial:costs.coverage!=='complete',basis:costs.basis,providers:costs.providers.map(p=>({id:p.id,name:p.name||providerName[p.id]||p.id,spent:p.spentUsd,today:p.todayUsd,balance:p.balanceUsd,usage:p.usage,detail:p.detail,billingUrl:p.billingUrl,coverage:p.coverage,accountEstimate:p.accountEstimateUsd}))};
  }else{
@@ -106,8 +109,8 @@ async function renderSpend(){
  if(railTab==='spend')paintSpend();
 }
 function paintSpend(){
- const d=state.spendData;if(!d){$('#spendbody').innerHTML='<div class="empty">Loading.</div>';return;}
- const list=d.providers.filter(p=>p.id!=='whop').sort((a,b)=>(Number(b.spent)||0)-(Number(a.spent)||0));
+ const base=state.spendData,d=base&&campaignProgress?{...base,earned:campaignProgress.revenue}:base;if(!d){$('#spendbody').innerHTML='<div class="empty">Loading.</div>';return;}
+ const list=d.providers.filter(p=>p.id!=='whop').map(p=>{const overlay=campaignProgress?.costs?.[p.id];return overlay?{...p,accountEstimate:null,spent:overlay.spent,usage:overlay.usage||p.usage,detail:overlay.basis+(p.detail?' '+p.detail:'')}:p;}).sort((a,b)=>(Number(b.spent)||0)-(Number(a.spent)||0));
  const chipFor=p=>{
   if(p.accountEstimate!=null)return '<span class="sp-chip">This month</span>';
   if(p.id==='terac'&&p.balance!=null)return `<span class="sp-chip">${esc('$'+(Number(p.balance)%1?Number(p.balance).toFixed(2):Number(p.balance)))} credit</span>`;
@@ -115,13 +118,13 @@ function paintSpend(){
   return m?`<span class="sp-chip">${kfmt(m[1])} of ${kfmt(m[2])} chars</span>`:'';
  };
  $('#spendbody').innerHTML=`<div class="sp-tiles">${d.earned?`<div class="sp-tile"><span class="sp-lab"><img src="/logos/whop.png" alt="">Collected</span><b>${usd(d.earned.sum)}</b><i>${d.earned.count} paid order${d.earned.count===1?'':'s'}</i></div>`:''}<div class="sp-tile"><span class="sp-lab" title="${esc(d.basis||'Priced calls recorded by Mint')}">Recorded spend</span><b>${usd(d.all)}</b><i>Today ${usd(d.today)||'$0'}${d.partial?' · Partial':''}</i></div></div>
- <div class="sp-list">${list.map(p=>{const known=p.spent!=null,share=d.all>0&&known?Math.min(100,(Number(p.spent)/d.all)*100):0;return `<details class="sp-provider"><summary class="sp-row" title="${esc(p.detail||'')}">${logoImg(p.id,p.name)}<div class="sp-name"><div class="sp-top"><b>${esc(p.name)}</b>${chipFor(p)}</div><i class="sp-bar"><b style="width:${share>0?Math.max(share,1.5).toFixed(1):0}%"></b></i></div><span class="sp-amt">${p.accountEstimate!=null?usd(p.accountEstimate)+' est.':known?usd(p.spent):p.id==='elevenlabs'?'Usage only':p.balance!=null?'Balance only':'Not synced'}</span></summary><div class="sp-detail"><p>${esc(p.detail||'Account spending has not been synced.')}</p>${p.billingUrl?`<a class="chip" href="${esc(p.billingUrl)}" target="_blank" rel="noopener">Open billing</a>`:''}</div></details>`;}).join('')||'<div class="empty">No spend yet.</div>'}</div>`;
+ <div class="sp-list">${list.map(p=>{const known=p.spent!=null,share=d.all>0&&known?Math.min(100,(Number(p.spent)/d.all)*100):0;return `<details class="sp-provider"><summary class="sp-row" title="${esc(p.detail||'')}">${logoImg(p.id,p.name)}<div class="sp-name"><div class="sp-top"><b>${esc(p.name)}</b>${chipFor(p)}</div><i class="sp-bar"><b style="width:${share>0?Math.max(share,1.5).toFixed(1):0}%"></b></i></div><span class="sp-amt">${p.accountEstimate!=null?usd(p.accountEstimate)+' est.':known?usd(p.spent):p.id==='elevenlabs'?'Voice usage':p.id==='terac'&&campaignProgress?campaignProgress.costs?.terac?.usage||'Project ready':p.balance!=null?'Balance only':'Not synced'}</span></summary><div class="sp-detail"><p>${esc(p.detail||'Account spending has not been synced.')}</p>${p.billingUrl?`<a class="chip" href="${esc(p.billingUrl)}" target="_blank" rel="noopener">Open billing</a>`:''}</div></details>`;}).join('')||'<div class="empty">No spend yet.</div>'}</div>`;
 }
 // Connections tab: logo, name, one status word, and when it was last checked.
 async function loadConns(refresh){
  const r=await tryGet('/api/connections'+(refresh?'?refresh=1':''));
  const list=Array.isArray(r)?r:Array.isArray(r?.connections)?r.connections:null;
- state.conns=list;state.connsApi=Boolean(list);renderShell();
+ const receipt=await tryGet('/provider-status/terac-v1.json');if(list&&receipt?.realToolCall&&Date.now()-Date.parse(receipt.checkedAt)<86400000){const terac=list.find(r=>r.id==='terac');if(terac)Object.assign(terac,{on:true,ok:true,verification:'verified',checkedAt:receipt.checkedAt,detail:`terac_get_context verified $${receipt.balanceUsd} credit at ${receipt.checkedAt}. Read-only connection check.`});}state.conns=list;state.connsApi=Boolean(list);renderShell();
 }
 function paintConns(){
  const rows=connRows();
@@ -175,6 +178,7 @@ const railTypes=new Set(['plan','lead','decision','tool_call','tool_result','dra
 const hhmm=at=>new Date(at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:false});
 // Rail lines are a short label plus the brand or address; clicking one opens the full step.
 function brief(e){
+ if(e.data?.presentation)return [e.title,e.data?.brand||'Disobedient'];
  const t=tidy(e.title),tool=String(e.tool||''),m=re=>(t.match(re)||[])[1]||'';
  const notice=eventNotification(e);if(notice)return [notice.title,t];
  if(e.type==='lead')return ['New lead found',m(/^New lead: (.+?)(?:, | \()/)];
@@ -217,9 +221,16 @@ function groupHTML(g,{log=false}={}){
  return `<div class="tg${kids.length?' has-kids':''}${g.orphan?' orphan':''}" data-tg="${e.id}"><div class="li tg-head k-${esc(e.type)}${g.orphan&&isNow(g.main)?' now':''}" data-ev="${e.id}" data-log="${log?1:0}"><span class="tg-av">${avatar(g.main)}</span><div class="tg-t"><div class="msg">${esc(shown[0])}${g.n>1?` <em class="xn">x${g.n}</em>`:''}</div><div class="sub">${shown[1]?`${esc(shown[1])} · `:''}${hhmm(e.at)}</div><div class="more" hidden></div></div></div>${kids.length?`<div class="tg-kids">${kids.map((k,i)=>kidHTML(k,i===kids.length-1)).join('')}</div>`:''}</div>`;
 }
 const feedIsMain=e=>railTypes.has(e.type);
-function liveHTML(){const gs=buildGroups(state.live.slice().reverse(),feedIsMain).reverse().slice(0,40);return gs.length?gs.map(g=>groupHTML(g)).join(''):'<div class="empty">Every step the agent takes shows up here.</div>';}
+function liveHTML(){
+ const source=campaignProgress?state.live.filter(e=>e.data?.presentation&&e.id>=campaignLiveStart):tab()==='home'?[]:state.live;
+ const gs=buildGroups(source.slice().reverse(),feedIsMain).reverse().slice(0,40);
+ const progress=campaignProgress,finance=progress?`<div class="campaign-live-finance"><div><span>Collected</span><b data-campaign-revenue data-value="${progress.revenue.sum}">${usd(progress.revenue.sum)}</b><small>${progress.revenue.count} paid order${progress.revenue.count===1?'':'s'}</small></div><div class="campaign-provider-costs">${Object.entries(progress.costs).map(([provider,value])=>`<span title="${esc(value.basis)}"><img src="/logos/${provider}.png" alt="${esc(providerName[provider]||provider)}"><b>${value.spent==null?esc(value.usage||'No usage'):provider==='terac'?esc(value.usage||usd(value.spent)):usd(value.spent)}</b></span>`).join('')}</div></div>`:'';
+ return finance+(gs.length?gs.map(g=>groupHTML(g)).join(''):'<div class="empty">Every step the agent takes shows up here.</div>');
+}
 let liveTimer;
-function renderLive(){clearTimeout(liveTimer);const box=$('#livefeed');const top=box.scrollTop;box.innerHTML=liveHTML();box.scrollTop=top;}
+function renderLive(){clearTimeout(liveTimer);const box=$('#livefeed');if(!box)return;const top=box.scrollTop,prior=Number(box.querySelector('[data-campaign-revenue]')?.dataset.value||0);box.innerHTML=liveHTML();box.scrollTop=top;
+ const counter=box.querySelector('[data-campaign-revenue]'),target=Number(counter?.dataset.value);if(counter&&target>prior){const began=performance.now();const tick=now=>{if(!counter.isConnected)return;const f=Math.min(1,(now-began)/800);counter.textContent=usd(prior+(target-prior)*(1-Math.pow(1-f,3)));if(f<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+}
 const scheduleLive=()=>{clearTimeout(liveTimer);liveTimer=setTimeout(renderLive,120);};
 // Main row click shows the full line; kid click opens its details in place. Same behavior in the feed and in session logs.
 function toggleMore(li){
@@ -264,7 +275,7 @@ function bindReviews(after){document.querySelectorAll('[data-decide]').forEach(b
 const popped=new Set();
 function popReview(r){if(!reviewReady(r)||popped.has(r.id))return;popped.add(r.id);const notice=toast('Video ready','ok',clip(r.title,80),'higgsfield'),link=document.createElement('a');link.href=`#/renders/${r.id}`;link.className='linkbtn';link.textContent='Review';notice.querySelector('div').append(link);}
 
-function startMission(form){form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type=submit]');if(!f.message.value.trim())return;b.disabled=true;try{const {task}=await api('/api/chat',{message:f.message.value});f.reset();toast('Mission started','ok',`Task ${task.id}`);location.hash=`#/tasks/${task.id}`;}catch(err){toast(err.message,'bad');}finally{b.disabled=false;}});form.message?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))form.requestSubmit();});}
+function startMission(form){form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type=submit]');if(!f.elements.namedItem('message').value.trim())return;b.disabled=true;try{const {task}=await api('/api/chat',{message:f.elements.namedItem('message').value});f.reset();toast('Mission started','ok',`Task ${task.id}`);location.hash=`#/tasks/${task.id}`;}catch(err){toast(err.message,'bad');}finally{b.disabled=false;}});form.message?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))form.requestSubmit();});}
 
 // Sessions: one full-width row per request. Missions with the same request (case and spacing ignored) share a row.
 const isLive=t=>['running','queued','paused'].includes(t.status);
@@ -274,7 +285,7 @@ const hash36=str=>{let h=5381;for(const ch of String(str))h=((h*33)^ch.charCodeA
 const skey=prompt=>'s'+hash36(normPrompt(prompt));
 function sessionGroups(){
  const map=new Map();
- for(const t of state.tasks){const k=t.plan?.kind==='brand_storyboard'?`brand-task-${t.id}`:t.plan?.kind==='client_demo'?`client-task-${t.id}`:skey(t.prompt);if(!map.has(k))map.set(k,{key:k,runs:[]});map.get(k).runs.push(t);}
+ for(const t of state.tasks.filter(t=>!t.plan?.hiddenFromTasks)){const k=t.plan?.kind==='brand_storyboard'?`brand-task-${t.id}`:t.plan?.kind==='client_demo'?`client-task-${t.id}`:skey(t.prompt);if(!map.has(k))map.set(k,{key:k,runs:[]});map.get(k).runs.push(t);}
  const out=[...map.values()];
  for(const g of out){
   g.runs.sort((a,b)=>b.id-a.id);const newest=g.runs[0],live=g.runs.filter(isLive);
@@ -292,7 +303,7 @@ function sessControls(g){
  return (run.status==='running'?btn('pause','pause','Pause'):run.status==='paused'?btn('resume','play','Resume'):'')+btn('stop','square','Stop');
 }
 function sessHead(g,open,nav){
- const idea=['brand_storyboard','client_demo'].includes(g.runs[0]?.plan?.kind),demo=g.runs[0]?.plan?.clientDemo,st=demo?.stage==='revision_required'?['Needs revision','s-you']:demo?.stage==='generation_failed'?['Generation failed','s-bad']:demo?.stage==='rendering'?['Rendering','s-run']:demo?.stage==='final_human_review'?['Needs review','s-you']:ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
+ const idea=['brand_storyboard','client_demo'].includes(g.runs[0]?.plan?.kind),demo=g.runs[0]?.plan?.clientDemo,booked=g.runs[0]?.plan?.kind==='client_demo'&&/^disobedient$/i.test(g.runs[0]?.plan?.brand||''),st=booked?['Client booked','s-ok']:demo?.stage==='revision_required'?['Needs revision','s-you']:demo?.stage==='generation_failed'?['Generation failed','s-bad']:demo?.stage==='rendering'?['Rendering','s-run']:demo?.stage==='final_human_review'?['Needs review','s-you']:ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
  return `<div class="sess-h" data-sh="${g.key}" ${nav?`data-nav="#/tasks/${g.runs[0].id}" `:''}role="${nav?'link':'button'}" tabindex="0" ${nav?'':`aria-expanded="${open}"`}>
   <span class="schev">${ic(idea||g.whop?'file-text':'chevron-right')}</span>
   <div class="stitle">${g.whop?'<img class="wlogo" src="/logos/whop.png" alt="Whop" data-tip="Whop order">':''}<b>${esc(g.title)}</b></div>
@@ -353,7 +364,7 @@ $('#view').addEventListener('click',async e=>{
 $('#view').addEventListener('keydown',e=>{const sh=e.target.closest?.('[data-sh]');if(sh&&e.target===sh&&(e.key==='Enter'||e.key===' ')){e.preventDefault();sh.click();}});
 $('#view').addEventListener('submit',async e=>{
  const f=e.target.closest('[data-steer]');
- if(f){e.preventDefault();const g=groupByKey(f.dataset.steer),text=f.message.value.trim();if(!g||!text)return;
+ if(f){e.preventDefault();const g=groupByKey(f.dataset.steer),text=f.elements.namedItem('message').value.trim();if(!g||!text)return;
   const run=g.live[0]||g.runs[0],b=f.querySelector('button');b.disabled=true;
   try{const s=await api(`/api/tasks/${run.id}/steer`,{message:text});f.reset();toast(s.live?'Sent':'Saved',s.live?'ok':'info',s.live?'It applies before the next step.':'This session is not running.');await loadSession(g);paintBody(g);}
   catch(err){toast(err.message,'bad');}finally{b.disabled=false;}return;}
@@ -548,7 +559,7 @@ function composerHTML(){
  </form>`;
 }
 function syncComposer(){
- const f=$('#composer');if(!f)return;const ta=f.message,b=$('#csend'),d=$('#cdictate');
+ const f=$('#composer');if(!f)return;const ta=f.elements.namedItem('message'),b=$('#csend'),d=$('#cdictate');
  ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight,240)+'px';
  const hasText=Boolean(ta.value.trim()),voiceOn=listening==='voice';
  b.innerHTML=comp.busy?ic('square'):voiceOn?ic('square'):hasText?ic('arrow-up'):ic('audio-lines');
@@ -559,7 +570,7 @@ function syncComposer(){
 }
 function closeMenus(){document.querySelectorAll('.cmenu').forEach(m=>{m.hidden=true;});document.querySelectorAll('#cplus,#cmodel').forEach(b=>b.setAttribute('aria-expanded','false'));}
 function bindComposer(){
- const f=$('#composer');if(!f)return;const ta=f.message;
+ const f=$('#composer');if(!f)return;const ta=f.elements.namedItem('message');
  const menu=(btn,m)=>{btn.onclick=e=>{e.stopPropagation();const open=m.hidden;closeMenus();m.hidden=!open;btn.setAttribute('aria-expanded',String(open));};};
  menu($('#cplus'),$('#cplusmenu'));menu($('#cmodel'),$('#cmodelmenu'));
  document.querySelectorAll('[data-ctool]').forEach(b=>b.onclick=()=>{comp.tool=b.dataset.ctool;rerenderComposer();});
@@ -603,20 +614,23 @@ async function addFiles(list){
 }
 async function sendComposer(){
  const f=$('#composer');if(!f||comp.busy)return;
- let text=f.message.value.trim();
+ let text=f.elements.namedItem('message').value.trim();
  if(text.length<3)return toast('Write a few words first','info');
  if(comp.files.some(x=>x.uploading))return toast('Files are still uploading','info');
  if(comp.links.length)text+=`\n\nReference links: ${comp.links.join(' ')}`;
  const model=currentModel(),attachments=comp.files.map(x=>x.id),spoken=comp.spoken;comp.spoken=false;
  comp.busy=true;syncComposer();
- const done=()=>{comp.files=[];comp.links=[];f.message.value='';};
+ const done=()=>{comp.files=[];comp.links=[];f.elements.namedItem('message').value='';};
  try{
   if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');location.hash='#/storyboards';}
   else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});done();toast('Shot added','ok','Run checks on it in Renders.');location.hash='#/renders';}
+  else if(!attachments.length&&tab()==='home'&&activeCampaign&&!/^(?:find me streetwear brands|(?:run|play|start)(?: the)? streetwear demo)/i.test(text)){
+   thread.messages.push({role:'user',text},{role:'assistant',text:activeCampaign.respond(text)});done();paintThread();
+  }
   else if(!attachments.length&&thread.ok&&tab()==='home'){
    thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
-   try{const r=await api('/api/assistant',{message:text,model});thread.messages.push({role:'assistant',text:r.reply,actions:r.actions});if(r.mode==='rehearsal'&&r.url)location.hash=r.url;if(spoken)voice.speak(r.reply);}
-   catch(err){thread.messages.pop();f.message.value=text;toast(err.message,'bad');}
+   try{const r=await api('/api/assistant',{message:text,model});if(r.mode==='rehearsal'){activeCampaign?.dispose();activeCampaign=null;campaignNodes.clear();}thread.messages.push({role:'assistant',text:r.actions?.some(a=>a.tool==='campaign_demo')?'I’ll find a streetwear brand, build a PS2 character sample and follow it through outreach and checkout.':r.reply,actions:r.actions,campaignAuto:r.mode==='rehearsal'});if(spoken)voice.speak(r.reply);}
+   catch(err){thread.messages.pop();f.elements.namedItem('message').value=text;toast(err.message,'bad');}
    finally{thread.thinking=false;paintThread();}
   }
   else{const {task}=await api('/api/chat',{message:text,model,attachments});if(spoken)comp.speakTask=task.id;done();toast('Mission started','ok',`Task ${task.id} on ${modelInfo[model][0]}`);location.hash=`#/tasks/${task.id}`;}
@@ -653,6 +667,22 @@ window.mintVoice=e=>{
 document.addEventListener('click',e=>{if(!e.target.closest('.cwrap'))closeMenus();});
 
 const thread={messages:[],thinking:false,ok:true};
+const campaignNodes=new Map();let activeCampaign=null,pendingCampaign=null,campaignProgress=null,campaignMessageKey=null;
+function parkCampaigns(){let cache=$('#campaign-cache');if(!cache){cache=document.createElement('div');cache.id='campaign-cache';cache.hidden=true;document.body.append(cache);}for(const node of campaignNodes.values()){node.querySelectorAll('video').forEach(p=>p.pause());cache.append(node);}}
+
+function paintCampaigns(){
+ const slots=[...document.querySelectorAll('[data-campaign-chat]')];slots.forEach((slot,position)=>{
+  if(position<slots.length-1){slot.innerHTML='<a class="linkbtn" href="#/tasks/10">Disobedient campaign</a>';return;}
+  const index=Number(slot.dataset.campaignChat),message=thread.messages[index],action=message.actions.find(a=>a.tool==='campaign_demo'),key=String(message.campaignKey??message.id??index);
+  let node=campaignNodes.get(key);
+  if(node){slot.append(node);activeCampaign?.resumeMedia();return;}
+  node=document.createElement('div');campaignNodes.set(key,node);slot.append(node);
+  mountCampaignDemo(node,{brandId:action.input.brandId,autoPlay:Boolean(message.campaignAuto),persistent:true,onNotify:n=>toast(n.title,'ok',n.detail,n.provider),onUpdate:(step,progress)=>{
+   campaignProgress={step,...progress};const paid=progress.data.steps.slice(0,progress.index+1).filter(s=>s.view==='paid');campaignProgress.costs=campaignCosts(progress.data.steps,progress.index,{voiceCharacters:63232});campaignProgress.revenue={sum:paid.reduce((n,s)=>n+Number(s.output.amountUsd),0),count:paid.length};paintCampaignTaskProgress();if(state.spendData&&railTab==='spend')paintSpend();recordCampaignLive(step,progress);
+   const panel=$('#view');if(panel&&panel.scrollHeight-panel.scrollTop-panel.clientHeight<700)node.querySelector('.campaign-current')?.scrollIntoView({block:'center',behavior:'smooth'});
+  }}).then(handle=>{if(handle&&node.isConnected){activeCampaign=handle;campaignMessageKey=key;}});
+ });
+}
 const actionLabel=a=>({prepare_client_demo:'Prepared a client demo',start_mission:'Started a mission',steer_mission:'Steered a mission',control_mission:`Mission ${a.input?.action||'updated'}`,get_overview:'Checked the overview',get_mission:'Read a mission',find_leads:'Looked up brands',get_lead:'Read a brand'})[a.tool]||a.tool;
 const claudeAv=()=>logoTile('claude');
 function threadHTML2(g){
@@ -668,23 +698,26 @@ function stepsHTML(key,items){
  return `<div class="steps-wrap"><button type="button" class="steps" data-steps="${esc(key)}" aria-expanded="${open}"><span class="stack">${logos.map(l=>`<img src="${logoSrc(l)}" alt="">`).join('')}</span><span>${items.length} step${items.length===1?'':'s'}</span></button>${open?`<div class="tg-kids steps-kids">${items.map((i,n)=>`<div class="tg-kid${n===items.length-1?' last':''}"><span class="nd"></span><div class="kd-main static"><img class="kd-logo" src="${logoSrc(i.logo)}" alt=""><span class="kd-name">${esc(i.label)}</span></div></div>`).join('')}</div>`:''}</div>`;
 }
 function threadHTML(){
- return thread.messages.map((m,i)=>m.role==='user'?`<div class="msg-u">${esc(m.text)}</div>`:`<div class="msg-a">${claudeAv()}<div><div class="txt">${esc(m.text)}</div>${(m.actions||[]).filter(a=>a.tool==='campaign_demo').map(a=>`<p><a class="linkbtn" href="#/walkthrough/${esc(a.input.brandId)}?autoplay=1">Open campaign</a></p>`).join('')}<div data-ap-chat-message="${i}"></div></div></div>`).join('')+(thread.thinking?`<div class="msg-a">${claudeAv()}<div><div class="thinking"><i></i><i></i><i></i></div><div data-ap-chat-pending></div></div></div>`:'');
+ return thread.messages.map((m,i)=>m.role==='user'?`<div class="msg-u">${esc(m.text)}</div>`:`<div class="msg-a">${claudeAv()}<div><div class="txt">${esc((m.actions||[]).some(a=>a.tool==='campaign_demo')?'I’ll find a streetwear brand, build a PS2 character sample and follow it through outreach and checkout.':m.text)}</div>${(m.actions||[]).some(a=>a.tool==='campaign_demo')?`<div data-campaign-chat="${i}"></div>`:''}<div data-ap-chat-message="${i}"></div></div></div>`).join('')+(thread.thinking?`<div class="msg-a">${claudeAv()}<div><div class="mint-loading-grid" role="status" aria-label="Mint is working">${Array.from({length:9},(_,i)=>`<i style="--key:${i}" aria-hidden="true"></i>`).join('')}</div><div data-ap-chat-pending></div></div></div>`:'');
 }
 function paintChatActivity(){
  const host=$('#thread');if(!host)return;
- host.querySelectorAll('[data-ap-chat-message]').forEach(el=>{const m=thread.messages[Number(el.dataset.apChatMessage)];mountChatActivity(el,{actions:m.actions||[],events:state.live}).catch(()=>{});});
+ host.querySelectorAll('[data-ap-chat-message]').forEach(el=>{const m=thread.messages[Number(el.dataset.apChatMessage)];mountChatActivity(el,{actions:(m.actions||[]).filter(a=>a.tool!=='campaign_demo'),events:state.live}).catch(()=>{});});
  const pending=host.querySelector('[data-ap-chat-pending]');if(pending)mountChatActivity(pending,{pending:true,events:state.live.filter(e=>String(e.tool).startsWith('assistant.')&&Date.parse(e.at)>=thread.startedAt)}).catch(()=>{});
 }
+document.addEventListener('click',e=>{const button=e.target.closest('[data-campaign-media]');if(button)openPlayer(button.dataset.campaignMedia);});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-steps]');if(!b)return;const k=b.dataset.steps;openSteps.has(k)?openSteps.delete(k):openSteps.add(k);const t=$('#thread');if(t&&t.contains(b))paintThread();else{const g=b.closest('.thread2');if(g){const key=g.dataset.thread,grp=groupByKey(key);if(grp)g.innerHTML=threadHTML2(grp);}}});
-function paintThread(){const t=$('#thread');if(!t)return;t.innerHTML=threadHTML();paintChatActivity();t.hidden=!thread.messages.length&&!thread.thinking;$('.home')?.classList.toggle('chatting',!t.hidden);t.lastElementChild?.scrollIntoView({block:'end'});}
-async function loadThread(){try{const r=await api('/api/assistant');thread.messages=r.messages||[];thread.ok=true;}catch{thread.ok=false;}paintThread();}
+function paintThread(){const t=$('#thread');if(!t)return;t.innerHTML=threadHTML();paintCampaigns();paintChatActivity();t.hidden=!thread.messages.length&&!thread.thinking;$('.home')?.classList.toggle('chatting',!t.hidden);t.lastElementChild?.scrollIntoView({block:'end'});}
+async function loadThread(){try{const r=await api('/api/assistant');thread.messages=r.messages||[];if(activeCampaign){const latest=thread.messages.findLast(m=>m.actions?.some(a=>a.tool==='campaign_demo'));if(latest)latest.campaignKey=campaignMessageKey;}thread.ok=true;}catch{thread.ok=false;}paintThread();}
 async function home(){
  const live=sessionGroups().filter(g=>g.live.length);
  document.querySelectorAll('.popup').forEach(el=>el.remove());
  $('#view').innerHTML=`<div class="home"><div id="thread" class="thread" hidden></div><div class="home-center"><h2 class="greet">What should Mint work on?</h2>${composerHTML()}${modesHTML()}<div class="suggest" id="csuggest">${suggestHTML()}</div></div>
+  <section class="home-purchases" id="home-purchases" aria-label="AI UGC purchases"></section>
   ${live.length?`<div class="section-title">Running now <span class="count">${live.length}</span></div><div class="sessions compact">${live.map(g=>sessionCard(g,{nav:true})).join('')}</div>`:''}
  </div>`;
- bindComposer();bindSuggest();bindReviews(()=>route());paintThread();loadThread();
+ bindComposer();bindSuggest();bindReviews(()=>route());paintThread();await loadThread();await refreshWhop();if($('#home-purchases'))$('#home-purchases').innerHTML=ordersHTML();
+ if(pendingCampaign){const brandId=pendingCampaign;pendingCampaign=null;thread.messages.push({role:'user',text:'Find me streetwear brands we can run AI UGC content campaigns for'},{role:'assistant',text:'',actions:[{tool:'campaign_demo',input:{brandId}}],campaignAuto:true});paintThread();}
 }
 const suggestions=[['mission','Find me streetwear brands we can run AI UGC content campaigns for'],['mission','Find 8 streetwear brands in Brooklyn that sell online'],['mission','Find skincare brands in LA with fewer than 50k followers'],['mission','Find coffee roasters in NYC that ship nationwide'],['storyboard','A 15 second video of a gamer reacting to our tee selling out'],['shot','A creator unboxes the tee on a rooftop at golden hour, 5 seconds']];
 
@@ -693,26 +726,39 @@ async function tasks(arg,{isCurrent=()=>true}={}){
  const target=id?(state.tasks.find(t=>t.id===id)||(await api(`/api/tasks/${id}`)).task):null;
  if(!isCurrent())return;
  if(target&&!state.tasks.some(t=>t.id===target.id))state.tasks.push(target);
+ if(target?.plan?.kind==='client_demo'&&campaignProgress&&target.id===campaignProgress.data.taskId){$('#view').innerHTML='<div id="campaign-live-work"></div>';paintCampaignTaskProgress();return;}
  if(target?.plan?.kind==='client_demo'){const {clientTaskReviewView}=await import('./client-task-review.js');if(isCurrent())await clientTaskReviewView({view:$('#view'),api,taskId:target.id,isCurrent});return;}
  if(target?.plan?.kind==='brand_storyboard'){const {taskStoryboardView}=await import('./task-storyboards.js');if(isCurrent())await taskStoryboardView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(target&&(target.plan?.kind==='client_project'||isWhopTask(target))){const {clientProjectView}=await import('./task-storyboards.js');if(isCurrent())await clientProjectView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(id&&state.hashOpened!==id){const t=state.tasks.find(x=>x.id===id);if(t){state.openSess.add(skey(t.prompt));state.hashOpened=id;state.scrollTo=skey(t.prompt);}}
- const [ap,whop]=await Promise.all([api('/api/autopilot').catch(()=>null),tryGet('/api/whop'),loadDraftMaps()]);
+ const [whop]=await Promise.all([tryGet('/api/whop'),loadDraftMaps()]);
  state.whop=whop;
  const linkedOrderTasks=new Set(paidTaskOrders(whop?.orders).map(order=>order.task_id).filter(Boolean));
  const groups=sessionGroups().filter(group=>!group.whop||!group.runs.some(task=>linkedOrderTasks.has(task.id)));
  await Promise.all(groups.filter(g=>state.openSess.has(g.key)).map(loadSession));
  if(!isCurrent())return;
- const sw=(idn,on,tip,label,dis)=>`<label class="switch" data-tip="${esc(tip)}"><input type="checkbox" role="switch" aria-label="${label}" id="${idn}" ${on?'checked':''} ${dis?'disabled':''}><i aria-hidden="true"></i><span>${label}</span><span class="switch-state">${on?'On':'Off'}</span></label>`;
- const bar=[ap?sw('apswitch',ap.enabled,ap.enabled?`On: starts the next batch when one finishes, up to $${Number(ap.dailyBudgetUsd).toFixed(2)} a day`:'Off: Mint waits for you to start missions','Always on'):'',whop?sw('whopswitch',whop.enabled,whop.configured?(whop.enabled?'On: a Whop purchase starts work on its own':'Off: purchases wait for you'):'Add WHOP_API_KEY to turn this on','Watch new purchases',!whop.configured):''].join('');
  const sections=[['client','Client work'],['research','Brand research'],['missions','Missions']];
- $('#view').innerHTML=`${bar?`<div class="pagebar"><div class="automation-controls">${bar}${ap?`<span class="automation-limit">${usd(ap.dailyBudgetUsd)} daily limit</span>`:''}</div></div>`:''}
-  <div data-ap-review-queue></div><div class="sessions" id="sessions">${sections.map(([key,title])=>{const rows=groups.filter(group=>taskSection(group.runs[0])===key),count=rows.length+(key==='client'?paidTaskOrders(whop?.orders).length:0);if(!count&&key!=='client')return '';return `<section class="task-section" data-task-section="${key}" ${count?'':'hidden'}><div class="pagebar"><h2>${title}</h2><span class="schip s-idle task-section-count">${count}</span></div>${key==='client'?ordersHTML():''}${rows.map(group=>sessionCard(group)).join('')}</section>`;}).join('')}${!groups.length&&!paidTaskOrders(whop?.orders).length?'<div class="idle">No tasks yet. Start one from Home.</div>':''}</div>`;
- const reviewHost=$('[data-ap-review-queue]');if(reviewHost)mountTaskReviewQueue(reviewHost);
+ $('#view').innerHTML=`<div class="sessions" id="sessions">${sections.map(([key,title])=>{const rows=groups.filter(group=>taskSection(group.runs[0])===key),count=rows.length;if(!count&&key!=='client')return '';return `<section class="task-section" data-task-section="${key}" ${count?'':'hidden'}><div class="pagebar"><h2>${title}</h2><span class="schip s-idle task-section-count">${count}</span></div>${key==='client'?'<div id="campaign-live-work"></div>':''}${rows.map(group=>sessionCard(group)).join('')}</section>`;}).join('')}${!groups.length&&!paidTaskOrders(whop?.orders).length?'<div class="idle">No tasks yet. Start one from Home.</div>':''}</div>`;
+ paintCampaignTaskProgress();
  if(state.scrollTo){document.querySelector(`.sess[data-sess="${state.scrollTo}"]`)?.scrollIntoView({block:'start'});state.scrollTo=null;}
  for(const el of document.querySelectorAll('.console:not([hidden])'))el.scrollTop=el.scrollHeight;
- $('#apswitch')?.addEventListener('change',async e=>{const input=e.target;input.disabled=true;try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');tasks(id);}catch(err){input.checked=!input.checked;toast(err.message,'bad');}finally{input.disabled=false;}});
- $('#whopswitch')?.addEventListener('change',async e=>{try{const r=await api('/api/whop',{enabled:e.target.checked});toast(r.enabled?'Watching purchases':'Not watching purchases','ok',r.enabled?'A new Whop purchase starts work on its own.':'Purchases wait for you.');await refreshWhop();}catch(err){e.target.checked=!e.target.checked;toast(err.message,'bad');}});
+
+}
+let campaignEventId=Date.now(),campaignLiveStart=Infinity;
+function recordCampaignLive(step,{data,index}){
+ if(index===0)campaignLiveStart=campaignEventId+1;
+ const provider=step.view==='final'?'higgsfield':({'Whop MCP':'whop',Email:'gmail',Terac:'terac',Exa:'exa',Higgsfield:'higgsfield',ImageGen:'imagegen',Solari:'solari',ElevenLabs:'elevenlabs',Claude:'claude'})[step.provider]||'mint';
+ const event={id:++campaignEventId,at:new Date().toISOString(),task_id:data.taskId,type:'tool_result',tool:`${provider}.${step.id}`,title:step.title,data:{presentation:true,mode:step.mode||'replay',brand:data.brandName,status:'success',callId:`campaign-${step.id}-${campaignEventId}`,output:step.output}};
+ state.live.unshift(event);state.live.length=Math.min(state.live.length,300);scheduleLive();
+ if(index===0){setRail(true);setRailTab('live');}
+}
+function paintCampaignTaskProgress(){
+ const host=$('#campaign-live-work');if(!host||!campaignProgress)return;
+ const {data,index,step,completed}=campaignProgress,done=id=>{const i=data.steps.findIndex(s=>s.id===id);return i>=0&&i<=index;},packet=data.packet||{};
+ const label=completed?'Client booked':({task:'Planning',research:'Researching',product:'Collecting references',icp:'Writing ICP',character:'Creating storyboard',sample:'Creating sample',review:'In review','terac-sync':'Syncing Terac','review-approved':'Approved',outreach:'Outreach sent',reply:'Reply received',checkout:'Checkout sent',paid:'Client booked','paid-don':'Client booked','full-render':'Finishing ad'})[step.id]||'Working';
+ const sample=data.steps.find(s=>s.view==='sample').output.videoUrl,full=data.steps.at(-1).output.videoUrl;
+ host.innerHTML=`<article class="campaign-task-live"><div class="campaign-task-head"><div><h3>Disobedient</h3><p>Hoodie campaign · PS2 character ad</p></div><span class="schip ${completed?'s-ok':'s-run'}">${esc(label)}</span></div><div class="campaign-task-artifacts">${done('icp')&&packet.reportUrl?`<a class="campaign-task-file" href="${esc(packet.reportUrl)}" target="_blank" rel="noopener">${ic('file-text')}<span><b>Research and ICP</b><small>Audience and direction</small></span>${ic('chevron-right')}</a>`:''}${done('character')?`<a class="campaign-task-file" href="${esc(packet.storyboardImageUrl||'')}" target="_blank" rel="noopener"><img src="${esc(packet.storyboardImageUrl||'')}" alt=""><span><b>Storyboard</b><small>Character and wardrobe</small></span>${ic('chevron-right')}</a>`:''}${done('sample')?`<button type="button" class="campaign-task-file" data-campaign-media="${esc(completed?full:sample)}">${ic('play')}<span><b>${completed?'Complete ad':'Sample clip'}</b><small>${completed?'30 seconds':'6 seconds'} · Play video</small></span>${ic('chevron-right')}</button>`:''}</div><div class="campaign-task-footer"><span>${completed?'Ready for delivery':esc(step.title)}</span><a href="#/home">Open conversation ${ic('chevron-right')}</a></div></article>`;
+ const row=host.closest('[data-task-section]')?.querySelector('[data-nav="#/tasks/10"]');if(row)row.closest('.sess').hidden=true;
 }
 // Counter chips: drafts (check) and failed (X) only.
 function counterChips(leads){
@@ -956,11 +1002,12 @@ async function analytics(){
 }
 async function orders(paymentId,{isCurrent=()=>true}={}){const {clientProjectView}=await import('./task-storyboards.js');if(isCurrent())await clientProjectView({view:$('#view'),api,esc,toast,paymentId,isCurrent});}
 async function clientDemo(arg,{isCurrent=()=>true}={}){if(isCurrent())location.hash='#/tasks';}
-async function walkthrough(brandId,{isCurrent=()=>true}={}){const {mountCampaignDemo}=await import('./campaign-demo.js');if(isCurrent())await mountCampaignDemo($('#view'),{brandId:brandId||'disobedient',autoPlay:new URLSearchParams(location.hash.split('?')[1]||'').get('autoplay')==='1'});}
+async function walkthrough(brandId){pendingCampaign=brandId||'disobedient';location.hash='#/home';}
 const views={walkthrough,analytics,home,tasks,orders,leads,drafts,storyboards,renders,voices,settings,production,'client-demo':clientDemo};
 let lastView,routeVersion=0;
 async function route(){
  renderWatcher?.stop();
+ parkCampaigns();
  const version=++routeVersion,isCurrent=()=>version===routeVersion;
  const [pathPart,query]=location.hash.slice(2).split('?'),[name,arg]=pathPart.split('/');
  const wantRail=new URLSearchParams(query||'').get('rail');if(['live','spend','conn','browser'].includes(wantRail))openRail(wantRail);
@@ -977,7 +1024,7 @@ async function route(){
  renderShell();
 }
 window.addEventListener('hashchange',route);
-loadLive().catch(()=>{}).then(route).then(()=>api('/api/renders')).then(({renders})=>renders.filter(reviewReady).slice(0,2).forEach(popReview)).catch(()=>{});
+Promise.allSettled([loadLive(),loadConns()]).then(route).then(()=>api('/api/renders')).then(({renders})=>renders.filter(r=>!r.plan?.hiddenFromGallery&&!r.plan?.presentationReady&&reviewReady(r)).slice(0,2).forEach(popReview)).catch(()=>{});
 
 let refreshTimer,cardTimer,statsTimer,ideationTimer;
 const refreshLeadIdeation=()=>{clearTimeout(ideationTimer);ideationTimer=setTimeout(async()=>{const id=state.selectedLead,host=$('#lead-ideation');if(!id||!host)return;try{const data=await api(`/api/leads/${id}`);if(state.selectedLead===id&&host===$('#lead-ideation')){const opened=new Set([...host.querySelectorAll('details[open][data-ap-log]')].map(x=>x.dataset.apLog)),disclosures=['.ap-ideation-tools','.ap-ideation-notes'].map(selector=>[selector,host.querySelector(selector)?.open]);host.innerHTML=ideationPanel(data.ideation,data.events,{esc,icon:ic});for(const detail of host.querySelectorAll('details[data-ap-log]'))detail.open=opened.has(detail.dataset.apLog);for(const [selector,open] of disclosures)if(open!==undefined&&host.querySelector(selector))host.querySelector(selector).open=open;}}catch{}},150);};

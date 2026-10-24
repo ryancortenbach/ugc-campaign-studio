@@ -1,0 +1,23 @@
+{
+  "provider": "Terac",
+  "tool": "terac_get_context",
+  "checkedAt": "2026-10-24T21:50:21.556Z",
+  "balanceUsd": 100,
+  "readOnly": true,
+  "realToolCall": true,
+  "newOpportunities": 0,
+  "calls": [
+    {
+      "method": "initialize",
+      "tool": null
+    },
+    {
+      "method": "notifications/initialized",
+      "tool": null
+    },
+    {
+      "method": "tools/call",
+      "tool": "terac_get_context"
+    }
+  ]
+}

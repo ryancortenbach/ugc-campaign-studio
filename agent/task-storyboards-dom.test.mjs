@@ -50,7 +50,10 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  hideTask=false;location.hash='#/tasks';await wait(()=>view.querySelector(`[data-sh="brand-task-${wa.task.id}"]`));
  assert.equal(document.querySelector('#tabs [data-tab="client-demo"]'),null);
  const clientRow=view.querySelector(`[data-sh="client-task-${client.task.id}"]`);assert.equal(clientRow.getAttribute('role'),'link');assert.equal(clientRow.getAttribute('aria-expanded'),null);assert.equal(clientRow.querySelector('.stitle b').textContent,'Disobedient');
- assert.equal(view.querySelector('a[href="#/orders/pay_don_failed"]'),null);assert.equal(view.querySelectorAll('a[href="#/orders/pay_don_paid"]').length,1);
+ assert.equal(view.querySelector('a[href="#/orders/pay_don_failed"]'),null);assert.equal(view.querySelectorAll('a[href="#/orders/pay_don_paid"]').length,0);
+ assert.doesNotMatch(view.textContent,/Always on|Watch new purchases|daily limit|Video review/);
+ location.hash='#/home';await wait(()=>view.querySelectorAll('a[href="#/orders/pay_don_paid"]').length===1);assert.equal(view.querySelector('a[href="#/orders/pay_don_failed"]'),null);
+ location.hash='#/tasks';await wait(()=>view.querySelector('[data-task-section]'));
  assert.deepEqual([...view.querySelectorAll('[data-task-section]')].map(section=>section.dataset.taskSection),['client','research','missions']);
  await wait(()=>document.querySelector('#toasts a[href="#/renders/901"]'));assert.equal(document.querySelector('#toasts video,.popup'),null);
  const videoNotice=document.querySelector('#toasts a[href="#/renders/901"]').closest('.toast');assert.ok(videoNotice.querySelector('img[alt="Higgsfield"]'));assert.equal(videoNotice.querySelector('i svg'),null);
@@ -66,9 +69,9 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  eventStreams.forEach(stream=>stream.onmessage?.({data:JSON.stringify({kind:'event',event:{id:99992,at:new Date().toISOString(),type:'email_received',tool:'gmail.inbound',title:'Reply from person@example.com',data:{messageId:'received'}}})}));
  assert.match(document.querySelector('[data-notice-key="gmail-event:99992"]').textContent,/Email received/);
  const card=view.querySelector(`[data-sh="brand-task-${wa.task.id}"]`);assert.ok(!card.querySelector('.scnt'));assert.ok(!card.querySelector('.scost'));assert.ok(!card.textContent.includes('Storyboard:'));assert.ok(!card.querySelector('.schev').innerHTML.includes('m9 18 6-6-6-6'));
- assert.equal(view.querySelector('#apswitch').checked,false);assert.match(view.querySelector('.automation-limit').textContent,/daily limit/);assert.ok(document.querySelector('#tabs a[data-tab="storyboards"]')===null);
- assert.ok(view.querySelector('.ord-open[href="#/orders/pay_fixture"]'));
- clientRow.click();await wait(()=>view.querySelector('#client-task-review'));
+ assert.equal(view.querySelector('#apswitch'),null);assert.equal(view.querySelector('.automation-limit'),null);assert.ok(document.querySelector('#tabs a[data-tab="storyboards"]')===null);
+ assert.equal(view.querySelector('.ord-open[href="#/orders/pay_fixture"]'),null);
+ view.querySelector(`[data-sh="client-task-${client.task.id}"]`).click();await wait(()=>view.querySelector('#client-task-review'));
  assert.ok(view.querySelector('.ct-products img'));assert.equal(view.querySelector('object,iframe'),null);assert.doesNotMatch(view.textContent,/Open task|Tool call replay|Brand and people/);
  view.querySelector('[data-ct-approve="research"]').click();await wait(()=>view.querySelector('[data-ct-approve="research"]')?.textContent==='Approved');
  holdDemo=true;location.hash='#/leads';await wait(()=>releaseDemo);view.innerHTML='';location.hash=`#/tasks/${client.task.id}`;await wait(()=>view.querySelector('#client-task-review'));releaseDemo();await delay(100);
@@ -77,7 +80,7 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  assert.equal(view.querySelectorAll('[data-lf]').length,5);assert.equal(view.querySelector('.lbar .cchips'),null);assert.ok(view.querySelector('.ct-leads-table #crm .th'));
  const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.tbrand>div>b').textContent)),new Set(['VYLIN','Disobedient']));
  for(const row of view.querySelectorAll('#crm .trow[data-id]'))assert.equal(row.querySelectorAll('.ct-status [data-primary-status]').length,1);
- assert.ok(pinned.every(row=>/Whop checkout.*simulated/.test(row.querySelector('[data-primary-status]').textContent)));assert.ok(pinned.every(row=>!row.querySelector('[data-primary-status]').textContent.includes('Outreach sent')));
+ assert.ok(pinned.every(row=>/^Whop checkout successful$/.test(row.querySelector('[data-primary-status]').textContent)));assert.ok(pinned.every(row=>!row.querySelector('[data-primary-status]').textContent.includes('Outreach sent')));
  assert.equal(view.querySelector(`[data-id="${a.id}"] [data-contact-summary]`).textContent,'Email found');assert.equal(view.querySelector(`[data-id="${b.id}"] [data-contact-summary]`).textContent,'Shared inbox');
  assert.equal(view.querySelectorAll('#crm .contact .mono').length,0);
  location.hash='#/renders';await wait(()=>view.querySelector('#render-empty'));assert.equal(view.querySelector('#render-empty').hidden,false);

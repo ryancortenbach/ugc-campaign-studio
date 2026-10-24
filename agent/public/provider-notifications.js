@@ -1,4 +1,4 @@
-const providers={higgsfield:'Higgsfield',gmail:'Gmail'};
+const providers={higgsfield:'Higgsfield',gmail:'Gmail',whop:'Whop',terac:'Terac'};
 export function notificationIcon(provider){
  return Object.hasOwn(providers,provider)?`<img src="/logos/${provider}.png" alt="${providers[provider]}">`:'';
 }

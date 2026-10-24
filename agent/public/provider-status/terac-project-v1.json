@@ -1,0 +1,21 @@
+{
+  "provider": "Terac",
+  "tool": "terac_create_project",
+  "checkedAt": "2026-10-24T22:01:09.052Z",
+  "projectId": "m26lelbb5ckf4g9fejz4ttiz",
+  "name": "Disobedient hoodie campaign",
+  "dashboardUrl": "https://terac.com/mint-labs-mvmpy6hm/disobedient-hoodie-campaign-mvmy0xmk/opportunities",
+  "realToolCall": true,
+  "costUsd": 0,
+  "recruitmentStarted": false,
+  "review": {
+    "opportunityId": "vnsbeznlk5ejnwyf66t732zb",
+    "title": "Review a streetwear hoodie ad concept",
+    "status": "draft",
+    "reviewers": 3,
+    "quotedTotalUsd": 31.5,
+    "dashboardUrl": "https://terac.com/mint-labs-mvmpy6hm/disobedient-hoodie-campaign-mvmy0xmk/opportunities/vnsbeznlk5ejnwyf66t732zb",
+    "method": "Written concept feedback uploaded as TXT or PDF",
+    "launchAuthorized": false
+  }
+}

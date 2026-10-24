@@ -27,7 +27,7 @@
 .ct-leads-table #crm .trow.th{position:sticky;top:0;background:var(--panel);margin:0;padding:12px 14px}
 .ct-journey{display:flex;gap:6px;flex-wrap:wrap}.ct-journey .schip{font-size:10.5px}
 .toast i.toast-provider{background:var(--raise)}.toast .toast-provider img{display:block;width:26px;height:26px;object-fit:contain}
-.ct-primary-status{height:auto;min-height:22px;max-width:100%;white-space:normal;line-height:1.4;padding:4px 9px}
+.ct-primary-status{height:auto;min-height:22px;max-width:100%;white-space:nowrap;line-height:1.4;padding:4px 9px}
 .ct-primary-status img{width:13px;height:13px;object-fit:contain;flex:none}.ct-primary-status svg{flex:none}
 .tbrand>.thumb{display:grid;place-items:center;flex:none}.tbrand>.thumb>b{display:block;font-size:13px;line-height:1;text-align:center}
 .ct-leads-table #crm .tbrand>.thumb{width:36px;height:36px}
@@ -38,3 +38,10 @@
 .ct-leads-table #crm .tbrand .socs{display:flex;align-items:center;justify-content:flex-start;gap:8px;width:auto;height:18px;overflow:visible}
 .ct-leads-table #crm .tbrand .socs [data-social]{grid-column:auto;flex:none}
 @media(max-width:650px){.ct-heading{flex-wrap:wrap}.ct-creative{grid-template-columns:minmax(0,1fr)}.ct-products{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-products img{height:190px}.ct-board img,.ct-character img{height:280px}}
+
+.schip.s-mutual{background:var(--orange-bg);color:var(--orange)}
+.schip,.chip,.sbadge{white-space:nowrap;flex-shrink:0}
+
+#tabs .nav-alert{width:7px;height:7px;margin-left:auto;flex:none;border-radius:50%;background:var(--yellow);animation:nav-alert-pulse 2s ease-out infinite}
+@keyframes nav-alert-pulse{0%,100%{box-shadow:0 0 0 0 transparent;opacity:.7}45%{box-shadow:0 0 0 4px var(--yellow-bg);opacity:1}}
+@media(prefers-reduced-motion:reduce){#tabs .nav-alert{animation:none}}

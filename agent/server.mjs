@@ -1,3 +1,4 @@
+import './network-dns.mjs';
 import {assertRevisionWorkAllowed} from './revision-harness.mjs';
 import {createClientDemo} from './client-demo.mjs';
 import {createCampaignDemo,campaignDemoTrigger} from './campaign-demo.mjs';

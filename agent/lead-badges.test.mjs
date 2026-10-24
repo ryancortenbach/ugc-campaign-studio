@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {primaryLeadStatus,contactSummary} from './public/lead-badges.js';
 test('one primary status selects the furthest milestone or next blocker without hiding terminal outcomes',()=>{
  const draft={status:'sent',readiness:{ready:false,missing:['clip','email','gmail']}};
- assert.match(primaryLeadStatus({status:'contacted',simulatedJourney:true},{draft}).label,/Whop checkout/);
+ assert.equal(primaryLeadStatus({status:'contacted',simulatedJourney:true},{draft}).label,'Whop checkout successful');
+ assert.equal(contactSummary({simulatedJourney:true}).label,'Mutual connection');
+ assert.equal(contactSummary({simulatedJourney:true}).cls,'s-mutual');
  assert.equal(primaryLeadStatus({status:'replied'},{draft}).label,'Email received');
  assert.equal(primaryLeadStatus({status:'contacted'},{draft}).label,'Outreach sent');
  assert.equal(primaryLeadStatus({status:'drafted'},{draft:{...draft,status:'gmail_draft'}}).label,'Needs email');
