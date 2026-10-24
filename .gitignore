@@ -7,3 +7,6 @@ work/
 .DS_Store
 .data/
 desktop/build/
+
+# image-prep hook markers
+.claude_prepped

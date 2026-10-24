@@ -10,7 +10,7 @@ import {buildInput,priceFrom,shotsFromStoryboard} from './tools/higgsfield.mjs';
 import http from 'node:http';
 import {createApp} from './server.mjs';
 
-const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
+const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,socials:{instagram:`https://www.instagram.com/${domain.split('.')[0]}/`},pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
 function fakeTools(over={}){
  const calls={drafts:[],sends:0};
  const tools={
@@ -20,6 +20,8 @@ function fakeTools(over={}){
   plan:async()=>({data:{reply:'ok',markets:['streetwear'],territories:['Brooklyn'],maxDrafts:2,qualify:'sells online',exclusions:[],searchQueries:[{query:'q1',market:'streetwear',territory:'Brooklyn'},{query:'q2',market:'streetwear',territory:'Queens'}]},cost:0.001,model:'fake'}),
   search:async q=>({via:'fake exa',costUsd:0.007,requestId:'r',results:q==='q1'?[{title:'Alpha | Shop',url:'https://alpha.com/x',text:'a'},{title:'Amazon',url:'https://www.amazon.com/y',text:''},{title:'NoMail',url:'https://nomail.com/',text:''},{title:'Beta',url:'https://beta.com/',text:''}]:[{title:'Gamma',url:'https://gamma.com/',text:''}]}),
   visit:async url=>{const d=new URL(url).hostname;return page(d,d==='nomail.com'?null:`hello@${d}`);},
+  logo:async()=>({ok:true,checked:true,cost:0,logo:{checked:true,isRealLogo:true,matchesBrand:true,quality:90,reason:'fake'}}),
+  value:async()=>({data:{valueScore:90,verdict:'keep',reason:'established brand'},cost:0.0001,model:'fake'}),
   score:async({lead,visit})=>({data:{company:lead.company,fitScore:80,decision:'pursue',reasons:['good'],risks:[],personalDetail:'detail'},cost:0.0001,model:'fake'}),
   draft:async({graded})=>({data:{subject:`Hi ${graded.company}`,body:'Body'},cost:0.001,model:'fake'}),
   createDraft:async d=>{calls.drafts.push(d);return {draftId:'d1',messageId:'m1',url:'https://mail.google.com/x'};},
@@ -189,6 +191,38 @@ test('marking a draft sent by hand moves the brand to contacted',async()=>{
  assert.equal(store.markDraftSent(d.id).status,'sent');
  assert.equal(store.getLead(d.lead_id).status,'contacted');
  assert.equal(store.markDraftSent(99999),null);
+});
+
+test('chat attachments are stored, typed, and handed to the planner with the chosen model',async()=>{
+ const {mkdtempSync}=await import('node:fs');const {tmpdir}=await import('node:os');const path=await import('node:path');
+ process.env.AGENT_UPLOAD_DIR=mkdtempSync(path.join(tmpdir(),'mint-up-'));
+ const {saveUpload,getUpload,attachmentBlocks}=await import('./tools/uploads.mjs');
+ const {currentMainModel}=await import('./tools/llm.mjs');
+ const png=saveUpload({name:'brief.png',type:'image/png',data:Buffer.from('fakepng').toString('base64')});
+ const txt=saveUpload({name:'brands.csv',type:'',data:Buffer.from('name\nVYLIN').toString('base64')});
+ assert.equal(png.kind,'image');assert.equal(txt.kind,'text');assert.deepEqual(getUpload(png.id),png);
+ assert.equal(getUpload('../../etc/passwd'),null);
+ assert.throws(()=>saveUpload({name:'x.exe',type:'application/x-msdownload',data:'AA=='}),/Attach an image/);
+ const blocks=attachmentBlocks([png,txt]);
+ assert.equal(blocks[0].type,'image');assert.match(blocks[1].text,/brands\.csv[\s\S]*VYLIN/);
+ const seen={};
+ const store=openStore(':memory:');
+ const runner=createRunner(store,fakeTools({plan:async(prompt,profile,attachments)=>{seen.files=attachments;seen.model=currentMainModel();return {data:{reply:'ok',markets:['x'],territories:['y'],maxDrafts:1,qualify:'q',exclusions:[],searchQueries:[]},cost:0,model:'fake'};}}));
+ const t=runner.start('find brands',{model:'claude-haiku-5-5',attachments:[png]});
+ await runner.wait(t.id);
+ assert.equal(seen.model,'claude-haiku-5-5');assert.equal(seen.files[0].id,png.id);
+ assert.equal(store.getTask(t.id).model,'claude-haiku-5-5');
+ const server=http.createServer(createApp({store,runner:{start:(p,o)=>({id:1,prompt:p,...o}),control(){},steer(){},isRunning:()=>false}}));
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const post=(p,b)=>fetch(`http://127.0.0.1:${server.address().port}${p}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(async r=>({status:r.status,body:await r.json()}));
+ try{
+  assert.equal((await post('/api/chat',{message:'find brands',model:'claude-opus-5-5'})).status,400);
+  assert.equal((await post('/api/chat',{message:'find brands',attachments:['nope']})).status,400);
+  const ok=await post('/api/chat',{message:'find brands',model:'claude-sonnet-5-5',attachments:[txt.id]});
+  assert.equal(ok.status,200);assert.equal(ok.body.task.attachments[0].name,'brands.csv');
+  const up=await post('/api/uploads',{name:'note.txt',type:'text/plain',data:Buffer.from('hi').toString('base64')});
+  assert.equal(up.status,200);assert.equal(up.body.upload.kind,'text');
+ }finally{server.close();}
 });
 
 test('higgsfield price sheet becomes a total for the chosen resolution and length',()=>{

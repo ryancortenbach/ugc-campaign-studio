@@ -1,5 +1,103 @@
 import Cocoa
 import WebKit
+import Speech
+import AVFoundation
+
+// Speech for the chat box: the page posts {type: listen|stop|speak|hush} to window.webkit.messageHandlers.mint
+// and gets {type: start|partial|final|error, text} back through window.mintVoice. Listening stops after a pause.
+final class VoiceBridge: NSObject, WKScriptMessageHandler {
+    weak var webView: WKWebView?
+    private let synth = AVSpeechSynthesizer()
+    private let engine = AVAudioEngine()
+    private var request: SFSpeechAudioBufferRecognitionRequest?
+    private var task: SFSpeechRecognitionTask?
+    private var silence: Timer?
+    private var latest = ""
+    private var finalSent = true
+    private var session = 0
+
+    func userContentController(_ controller: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let body = message.body as? [String: Any], let type = body["type"] as? String else { return }
+        switch type {
+        case "listen":
+            authorize { ok in
+                if ok { self.listen() } else { self.send("error", "Allow Microphone and Speech Recognition for Mint Labs in System Settings, Privacy & Security.") }
+            }
+        case "stop": finish()
+        case "speak":
+            guard let text = body["text"] as? String, !text.isEmpty else { return }
+            synth.stopSpeaking(at: .immediate)
+            synth.speak(AVSpeechUtterance(string: String(text.prefix(600))))
+        case "hush": synth.stopSpeaking(at: .immediate)
+        default: break
+        }
+    }
+
+    private func authorize(_ done: @escaping (Bool) -> Void) {
+        SFSpeechRecognizer.requestAuthorization { status in
+            guard status == .authorized else { return DispatchQueue.main.async { done(false) } }
+            AVCaptureDevice.requestAccess(for: .audio) { ok in DispatchQueue.main.async { done(ok) } }
+        }
+    }
+
+    private func listen() {
+        finish()
+        guard let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")), recognizer.isAvailable else {
+            return send("error", "Speech recognition is not available right now.")
+        }
+        let req = SFSpeechAudioBufferRecognitionRequest()
+        req.shouldReportPartialResults = true
+        let input = engine.inputNode
+        input.removeTap(onBus: 0)
+        input.installTap(onBus: 0, bufferSize: 1024, format: input.outputFormat(forBus: 0)) { buffer, _ in req.append(buffer) }
+        engine.prepare()
+        do { try engine.start() } catch {
+            input.removeTap(onBus: 0)
+            return send("error", "Could not start the microphone: \(error.localizedDescription)")
+        }
+        request = req; latest = ""; finalSent = false; session += 1
+        send("start", "")
+        task = recognizer.recognitionTask(with: req) { [weak self] result, error in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                if let result {
+                    self.latest = result.bestTranscription.formattedString
+                    if result.isFinal { self.sendFinal() } else { self.send("partial", self.latest); self.armSilence(after: 1.8) }
+                } else if error != nil { self.sendFinal() }
+            }
+        }
+        armSilence(after: 6)
+    }
+
+    private func armSilence(after seconds: TimeInterval) {
+        silence?.invalidate()
+        silence = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { [weak self] _ in self?.finish() }
+    }
+
+    // Stops the microphone; the recognizer then delivers its final text. A short fallback covers a recognizer that never answers.
+    private func finish() {
+        silence?.invalidate(); silence = nil
+        guard request != nil else { return }
+        engine.stop(); engine.inputNode.removeTap(onBus: 0)
+        request?.endAudio(); request = nil
+        let current = session
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in if self?.session == current { self?.sendFinal() } }
+    }
+
+    private func sendFinal() {
+        guard !finalSent else { return }
+        finalSent = true
+        if request != nil { engine.stop(); engine.inputNode.removeTap(onBus: 0); request = nil }
+        silence?.invalidate(); silence = nil
+        task?.cancel(); task = nil
+        send("final", latest)
+    }
+
+    private func send(_ type: String, _ text: String) {
+        guard let data = try? JSONSerialization.data(withJSONObject: ["type": type, "text": text]), let json = String(data: data, encoding: .utf8) else { return }
+        webView?.evaluateJavaScript("window.mintVoice&&window.mintVoice(\(json))")
+    }
+}
 
 // Native window around the local agent app. Starts agent/server.mjs if nothing is listening on the port,
 // and stops only the server it started when the app quits.
@@ -7,6 +105,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     var window: NSWindow!
     var webView: WKWebView!
     var server: Process?
+    let voice = VoiceBridge()
     let port = Int(ProcessInfo.processInfo.environment["AGENT_PORT"] ?? "") ?? 3200
     var base: URL { URL(string: "http://127.0.0.1:\(port)/")! }
     var repo: String {
@@ -22,7 +121,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         buildMenu()
-        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        let config = WKWebViewConfiguration()
+        config.userContentController.add(voice, name: "mint")
+        webView = WKWebView(frame: .zero, configuration: config)
+        voice.webView = webView
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.underPageBackgroundColor = NSColor(red: 13/255, green: 16/255, blue: 24/255, alpha: 1)
@@ -48,7 +150,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         let parts = ((note.object as? String) ?? "").split(separator: " ").map(String.init)
         guard let route = parts.first, route.range(of: "^#/[a-z]+(/[0-9]+)?$", options: .regularExpression) != nil else { return }
         let actions = ["spend": "document.querySelector('#spendbtn').click()", "integrations": "document.querySelector('#intbtn').click()",
-                       "lead": "document.querySelector('.trow[data-id]')?.click()", "bottom": "document.querySelector('#view').scrollTop=1e6"]
+                       "lead": "document.querySelector('.trow[data-id]')?.click()", "bottom": "document.querySelector('#view').scrollTop=1e6",
+                       "plus": "document.querySelector('#cplus')?.click()", "model": "document.querySelector('#cmodel')?.click()", "rail": "document.querySelector('#railbtn')?.click()"]
         let action = parts.count > 1 ? actions[parts[1]] : nil
         let name = (route.dropFirst(2).replacingOccurrences(of: "/", with: "-")) + (parts.count > 1 && action != nil ? "-" + parts[1] : "")
         webView.evaluateJavaScript("location.hash='\(route)';document.querySelectorAll('.intpanel').forEach(p=>p.hidden=true);1") { _, _ in

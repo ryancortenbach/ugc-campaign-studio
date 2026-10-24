@@ -1,9 +1,12 @@
 import path from 'node:path';
 import * as brain from './brain.mjs';
 import {searchBrands,exaMode} from './tools/exa.mjs';
-import {visitSite,siteMode} from './tools/site.mjs';
+import {visitSite,siteMode,fetchHomepage} from './tools/site.mjs';
 import {createDraft,gmailEnabled,draftAccount} from './tools/gmail.mjs';
 import {dataDir} from './store.mjs';
+import {withModel} from './tools/llm.mjs';
+import {videoTools,prepareLeadVideo} from './ugc.mjs';
+import {gateLead,logoGate,companyFrom} from './quality.mjs';
 
 class Stopped extends Error{}
 const domainOf=url=>{try{const u=new URL(url);return u.protocol==='https:'||u.protocol==='http:'?u.hostname.replace(/^www\./,'').toLowerCase():null;}catch{return null;}};
@@ -13,7 +16,8 @@ const SOLARI_USD_PER_MS=0.10/3600000;
 export const realTools={
  plan:brain.plan,score:brain.score,draft:brain.draft,steer:brain.steer,
  search:searchBrands,visit:visitSite,createDraft,
- gmailEnabled,draftAccount,exaMode,siteMode,brainMode:brain.brainMode,loadProfile:brain.loadProfile
+ value:brain.valueGrade,logo:({lead,onSpend})=>logoGate({lead,onSpend,check:brain.logoCheck}),fetchHome:fetchHomepage,
+ gmailEnabled,draftAccount,exaMode,siteMode,brainMode:brain.brainMode,loadProfile:brain.loadProfile,video:videoTools()
 };
 
 export function createRunner(store,tools=realTools){
@@ -34,7 +38,7 @@ export function createRunner(store,tools=realTools){
   const task=store.getTask(taskId);
   const c={paused:false,stopped:false,skip:new Set()};controls.set(taskId,c);
   const log=(type,title,extra={})=>store.addEvent({taskId,type,title,...extra});
-  const spend=(usd,provider)=>{if(usd){store.addCost(taskId,usd);store.addSpend({provider,usd,taskId});}};
+  const spend=(usd,provider,note)=>{if(usd){store.addCost(taskId,usd);store.addSpend({provider,usd,taskId,note});}};
   let current;
   const checkpoint=async progress=>{
    for(const s of store.pendingSteers(taskId)){
@@ -56,13 +60,13 @@ export function createRunner(store,tools=realTools){
   try{
    store.updateTask(taskId,{status:'running'});
    const profile=tools.loadProfile();
-   log('status',`Started. Brain: ${tools.brainMode()}. Search: Exa ${tools.exaMode()==='rest'?'REST API':'free MCP'}. Sites: ${tools.siteMode()==='solari'?'Solari cloud browser':'plain fetch'}. Drafts: ${tools.gmailEnabled()?`Gmail drafts in ${tools.draftAccount()}`:'saved in CRM only'}.`);
+   log('status',`Started. Brain: ${tools.brainMode()}. Search: Exa ${tools.exaMode()==='rest'?'REST API':'free MCP'}. Sites: ${tools.siteMode()==='solari'?'Solari cloud browser':'plain fetch'}. Drafts: ${tools.gmailEnabled()?`Gmail drafts in ${tools.draftAccount()}`:'saved in CRM only'}.${tools.video?` Video: ${tools.video.enabled().ok?'each email waits for a personalized video you approve':'off, '+tools.video.enabled().reason}.`:''}`);
    log('tool_call','Planning the search',{tool:'claude.plan',data:{prompt:task.prompt}});
-   const planned=await tools.plan(task.prompt,profile);spend(planned.cost,'claude');
+   const planned=await tools.plan(task.prompt,profile,task.attachments);spend(planned.cost,'claude');
    current={...planned.data,maxDrafts:Math.min(15,Math.max(1,planned.data.maxDrafts||5)),offer:profile.offer};
    store.updateTask(taskId,{plan:current});
    log('plan',current.reply,{tool:`claude.plan (${planned.model})`,detail:`Markets: ${current.markets.join(', ')}. Territories: ${current.territories.join(', ')}. Good fit: ${current.qualify}`,data:current});
-   const progress={queue:[...current.searchQueries],drafted:0,visited:0,skipped:0};
+   const progress={queue:[...current.searchQueries],drafted:0,visited:0,skipped:0,rejected:0};
    const seen=new Set();
    while(progress.queue.length&&progress.drafted<current.maxDrafts){
     await checkpoint({...progress,remainingQueries:progress.queue});
@@ -82,7 +86,7 @@ export function createRunner(store,tools=realTools){
      const existing=store.findLeadByDomain(domain);
      if(existing){log('decision',`Skipped ${domain}: already in CRM as ${existing.status} (lead ${existing.id})`,{tool:'crm',leadId:existing.id});continue;}
      const home=`https://${new URL(r.url).hostname}/`;
-     const lead=store.createLead({taskId,domain,company:r.title.split(/[|\-\u2013\u2014:•]/)[0].trim()||domain,url:home,market:q.market,territory:q.territory,evidence:r.text.slice(0,600)});
+     const lead=store.createLead({taskId,domain,company:companyFrom(r.title,domain),url:home,market:q.market,territory:q.territory,evidence:r.text.slice(0,600),logo:r.favicon||r.image||null});
      log('lead',`New lead: ${lead.company} (${domain})`,{tool:'crm.create',leadId:lead.id,data:{url:r.url}});
      let visit;
      store.updateLead(lead.id,{status:'visiting'});
@@ -92,13 +96,20 @@ export function createRunner(store,tools=realTools){
      catch(error){store.updateLead(lead.id,{status:'unreachable',notes:error.message});log('error',`Could not load ${domain}: ${error.message}`,{tool:'solari.browser',leadId:lead.id});continue;}
      if(visit.via==='solari.browser')spend((Date.now()-started)*SOLARI_USD_PER_MS,'solari');
      progress.visited++;
-     store.updateLead(lead.id,{emails:visit.emails,screenshot:visit.screenshot,contact_email:visit.best?.email||null,contact_source:visit.best?.sourceUrl||null,contact_excerpt:visit.best?.excerpt||null,status:'grading'});
+     store.updateLead(lead.id,{emails:visit.emails,screenshot:visit.screenshot,contact_email:visit.best?.email||null,contact_source:visit.best?.sourceUrl||null,contact_excerpt:visit.best?.excerpt||null,socials:visit.socials||{},status:'grading'});
      log('tool_result',visit.best?`Found ${visit.emails.length} email(s). Best: ${visit.best.email} on ${visit.best.sourceUrl}`:`No public email on ${visit.pages.map(p=>p.url).join(' or ')}`,{tool:visit.via,leadId:lead.id,data:{session:visit.sessionId,pages:visit.pages,emails:visit.emails}});
+     const reject=gate=>{progress.rejected++;store.updateLead(lead.id,{status:'rejected',notes:gate.reason,value:gate.value});log('decision',gate.title,{tool:'quality gate',leadId:lead.id,data:{reason:gate.reason,value:gate.value}});};
+     let gate;
+     try{gate=await gateLead({lead,socials:visit.socials,site:visit,exa:{title:r.title,url:r.url,text:(r.text||'').slice(0,1500)},tools,spend,log:(type,title,extra={})=>log(type,title,{leadId:lead.id,...extra})});}
+     catch(error){store.updateLead(lead.id,{status:'error',notes:error.message});log('error',`Quality check failed: ${error.message}`,{leadId:lead.id});continue;}
+     if(!gate.pass){reject(gate);continue;}
+     store.updateLead(lead.id,{value:gate.value});
+     log('tool_result',`Brand quality ${gate.value.score}/100: keep. ${gate.value.reason}`,{tool:'claude.value',leadId:lead.id,data:gate.value});
      log('tool_call',`Grading fit for ${lead.company}`,{tool:'claude.score',leadId:lead.id});
      let graded;
      try{graded=await tools.score({lead,visit,planned:{...q,offer:current.offer,qualify:current.qualify,exclusions:current.exclusions}});spend(graded.cost,'claude');}
      catch(error){store.updateLead(lead.id,{status:'error',notes:error.message});log('error',`Grading failed: ${error.message}`,{leadId:lead.id});continue;}
-     const g=graded.data;
+     const g=graded.data;g.company=companyFrom(g.company||lead.company,domain,{split:false});
      store.updateLead(lead.id,{company:g.company||lead.company,fit_score:g.fitScore,reasons:g.reasons,risks:g.risks});
      if(g.decision!=='pursue'||!visit.best){
       progress.skipped++;store.updateLead(lead.id,{status:'skipped'});
@@ -111,6 +122,17 @@ export function createRunner(store,tools=realTools){
      let written;
      try{written=await tools.draft({lead:{...lead,company:g.company},profile,graded:g});spend(written.cost,'claude');}
      catch(error){store.updateLead(lead.id,{status:'error',notes:error.message});log('error',`Drafting failed: ${error.message}`,{leadId:lead.id});continue;}
+     if(tools.video){
+      store.addDraft({leadId:lead.id,taskId,to:visit.best.email,...written.data,status:'waiting_video'});
+      store.updateLead(lead.id,{status:'awaiting_video'});
+      progress.drafted++;
+      log('draft',`Email for ${visit.best.email} written and held until its video is approved. Not sent.`,{tool:'crm',leadId:lead.id,data:{subject:written.data.subject,body:written.data.body,gmailUrl:null}});
+      const ready=tools.video.enabled();
+      if(!ready.ok){log('decision',`No video made for ${g.company}: ${ready.reason}. The lead stays awaiting_video and its Gmail draft is not created.`,{tool:'higgsfield',leadId:lead.id});continue;}
+      try{await prepareLeadVideo({store,lead:store.getLead(lead.id),ctx:{company:g.company,url:home,offer:current.offer,personalDetail:g.personalDetail,reasons:g.reasons,evidence:lead.evidence,homeText:visit.homeText},video:tools.video,spend:(usd,note,renderId)=>{if(usd){store.addCost(taskId,usd);store.addSpend({provider:'claude',usd,taskId,renderId,note});}},log:(type,title,extra={})=>log(type,title,{leadId:lead.id,...extra})});}
+      catch(error){log('error',`Video concept failed for ${g.company}: ${error.message}. The lead stays awaiting_video.`,{tool:'claude.video',leadId:lead.id});}
+      continue;
+     }
      let gmail=null;
      if(tools.gmailEnabled()){
       log('tool_call',`Saving Gmail draft in ${tools.draftAccount()}`,{tool:'gmail.drafts.create',leadId:lead.id});
@@ -123,7 +145,7 @@ export function createRunner(store,tools=realTools){
      log('draft',gmail?`Draft ready in Gmail for ${visit.best.email}. Not sent.`:`Draft saved in CRM for ${visit.best.email}. Not sent.`,{tool:gmail?'gmail.drafts.create':'crm',leadId:lead.id,data:{subject:written.data.subject,body:written.data.body,gmailUrl:gmail?.url||null}});
     }
    }
-   const summary=`${progress.drafted} draft(s), ${progress.visited} site(s) visited, ${progress.skipped} skipped.`;
+   const summary=`${progress.drafted} draft(s), ${progress.visited} site(s) visited, ${progress.skipped} skipped${progress.rejected?`, ${progress.rejected} rejected as low value`:''}.`;
    store.updateTask(taskId,{status:'done',summary});log('done',`Finished: ${summary}`);
   }catch(error){
    if(error instanceof Stopped){store.updateTask(taskId,{status:'stopped',summary:'Stopped by operator.'});log('status','Stopped by operator. Nothing further will run.');}
@@ -132,7 +154,7 @@ export function createRunner(store,tools=realTools){
  }
 
  return {
-  start(prompt){const t=store.createTask(prompt);running.set(t.id,run(t.id));return t;},
+  start(prompt,{model=null,attachments=[]}={}){const t=store.createTask(prompt,{model,attachments});running.set(t.id,withModel(model,()=>run(t.id)));return t;},
   control,
   steer(taskId,message){const s=store.addSteer(taskId,message);const live=controls.has(taskId);store.addEvent({taskId,type:'steer',tool:'operator',title:live?`Queued steer: ${message}`:`Noted (task not running): ${message}`});return {...s,live};},
   isRunning:taskId=>controls.has(taskId),

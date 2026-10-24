@@ -1,5 +1,5 @@
 #!/usr/bin/env swift
-// Ask the running Mint Labs app to save a PNG of one page: swift desktop/snapshot.swift "#/tasks" [lead|spend|integrations|bottom]
+// Ask the running Mint Labs app to save a PNG of one page: swift desktop/snapshot.swift "#/tasks" [lead|spend|integrations|bottom|plus|model|rail]
 // Files land in ~/Library/Caches/Mint Labs/snapshots.
 import Foundation
 

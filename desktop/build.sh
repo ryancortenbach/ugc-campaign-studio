@@ -7,7 +7,7 @@ repo="$(cd .. && pwd)"
 app="build/Mint Labs.app"
 rm -rf build && mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources" build/AppIcon.iconset
 
-swiftc -O -swift-version 5 MintLabs.swift -o "$app/Contents/MacOS/MintLabs" -framework Cocoa -framework WebKit
+swiftc -O -swift-version 5 MintLabs.swift -o "$app/Contents/MacOS/MintLabs" -framework Cocoa -framework WebKit -framework Speech -framework AVFoundation
 
 python3 make_icon.py build/icon.png
 for s in 16 32 128 256 512; do
@@ -32,6 +32,8 @@ cat > "$app/Contents/Info.plist" <<PLIST
  <key>NSHighResolutionCapable</key><true/>
  <key>NSPrincipalClass</key><string>NSApplication</string>
  <key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict>
+ <key>NSMicrophoneUsageDescription</key><string>Mint Labs listens only while you press Dictate or Voice in the chat box.</string>
+ <key>NSSpeechRecognitionUsageDescription</key><string>Mint Labs turns what you say into text for the chat box.</string>
  <key>MintLabsRepo</key><string>${repo}</string>
 </dict></plist>
 PLIST

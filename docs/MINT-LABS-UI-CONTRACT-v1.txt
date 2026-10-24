@@ -1,0 +1,369 @@
+MINT LABS UI CONTRACT v1
+For: Codex (apparel storyboard editing)
+From: Claude (Opus orchestrator)
+Scope: how to build UI that is indistinguishable from the existing Mint Labs app.
+Describes stable conventions, not line numbers. The shell files change live.
+
+======================================================================
+1. OWNERSHIP
+======================================================================
+
+Claude owns the shell. Do not edit any of these:
+  agent/public/index.html   (markup, nav, top bar, live rail, drawer mount)
+  agent/public/style.css    (tokens, typography, spacing, every shared class)
+  agent/public/app.js       (router, state, SSE stream, shared helpers, existing views)
+  agent/public/icons.js     (Lucide subset; ask Claude to add an icon)
+  agent/public/voices.js, voices.css
+  Existing views: Home chat, Tasks, Leads, Drafts, Storyboards list, Renders,
+  Voices, Settings. Also the live rail, top bar (Active, Spend, rail button)
+  and the lead drawer.
+
+Codex owns only its new files:
+  agent/apparel-storyboards.mjs
+  agent/public/apparel-storyboards.js
+  agent/public/apparel-storyboards.css
+  agent/research/...
+
+Claude is actively changing: everything in agent/public/* except Codex's new
+files, plus agent/server.mjs, store.mjs, runner.mjs, tools/site.mjs, brain.mjs.
+Do not edit those. If you need a server route, a store method, a new icon, a
+new shared class or a nav item, write the exact request in your hand-off note
+and Claude adds it. Never patch around a missing shared class by copying it
+into your CSS with different values.
+
+Your CSS file may only define classes with your own prefix (use ".ap-").
+Never restyle a shared class (.card, .btn, .chip, ...) from your file.
+
+======================================================================
+2. HOW TO ADD A PAGE MODULE (mirror voices.js)
+======================================================================
+
+JS module: one exported async function that renders into the passed-in view.
+
+  // apparel-storyboards.js
+  const when=iso=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+
+  export async function apparelView({view,api,esc,toast,sbadge,svg}){
+   const data=await api('/api/apparel-storyboards');
+   const again=()=>apparelView({view,api,esc,toast,sbadge,svg});
+   view.innerHTML=`...template literal, every dynamic value through esc()...`;
+   // bind handlers after innerHTML, then call again() after any mutation
+  }
+
+Rules for the module:
+  - Receive helpers as arguments. Do not import from app.js (it is not a library).
+    The only allowed import is './icons.js' if you need Lucide glyphs, and only
+    names that already exist in it.
+  - api(path) is a GET. api(path, bodyObject) is a POST with JSON. It throws
+    Error(message) on a non-2xx response, so wrap calls in try/catch and show
+    toast(err.message,'bad').
+  - esc() every interpolated string. No exceptions, including ids in attributes.
+  - Render with view.innerHTML, bind with view.querySelectorAll(...). Re-render by
+    calling your own function again after a mutation. The shell re-renders the
+    page on live SSE changes, so keep half-typed form fields in a <form id="..">
+    with named inputs: the router restores text and focus for those.
+  - Namespace every data attribute and id with "ap" (data-apsave, #apnew).
+  - Browser storage only inside try/catch.
+
+CSS file: its own file, linked AFTER style.css so shared tokens exist.
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="voices.css">
+  <link rel="stylesheet" href="apparel-storyboards.css">
+Start the file with a one-line comment like "/* Apparel storyboards page */".
+Use only var(--token) values from section 3. No hard-coded hex except where the
+shell itself does (see section 5, .btn.go text color #0d1018).
+
+What Claude adds in the shell when you hand off (exact shapes used for Voices):
+
+  index.html, stylesheet link:
+    <link rel="stylesheet" href="voices.css">
+  index.html, nav item inside <nav id="tabs"> (Lucide path data inline, 24x24):
+    <a href="#/voices" data-tab="voices" data-tip="Voices" aria-label="Voices"><svg viewBox="0 0 24 24">...paths...</svg><span>Voices</span></a>
+  app.js, import at the top:
+    import {voicesView} from './voices.js';
+  app.js, title map:
+    const titles={...,voices:'Voices',...};
+  app.js, view wrapper and route table:
+    async function voices(){await voicesView({view:$('#view'),api,esc,toast,sbadge,svg});}
+    const views={home,tasks,leads,drafts,storyboards,renders,voices,settings};
+  app.js, live updates (optional): SSE messages carry change.kind
+    ('event','lead','task','spend','storyboard','voice','render'). A page that
+    wants live refresh asks Claude to add a branch that calls softRefresh(route).
+
+Hand-off note must list: route name, page title, nav label, Lucide icon name,
+module export name, CSS file name, and any SSE change.kind to listen for.
+
+======================================================================
+3. DESIGN TOKENS (:root in style.css)
+======================================================================
+
+Surfaces (dark, layered; separate areas by stepping up a surface, not by lines)
+  --shell   #0a0d14   sidebar, live rail, console wells. Darkest.
+  --bg      #0d1018   page background, input fields, segmented-control track.
+  --panel   #121621   cards, popovers, menus, toasts.
+  --panel2  #161a25   hover state, nested blocks inside a card, check boxes.
+  --raise   #1b2030   raised rows, chips, selected nav item, icon tiles.
+            (row hover uses #20263a; only for .trow:hover)
+
+Lines (hairline outlines on cards/inputs only, never as dividers)
+  --line    rgba(238,240,244,.07)  default card/input outline.
+  --line2   rgba(238,240,244,.14)  hover outline, buttons, focused containers.
+
+Text
+  --text    #eef0f4                primary.
+  --muted   rgba(238,240,244,.64)  secondary copy, labels, inactive icons.
+  --faint   rgba(238,240,244,.44)  hints, metadata, eyebrows, zero states.
+
+Status colors and their washes (see section 4)
+  --green   #37de8f   --green-bg  rgba(55,222,143,.10)   done, primary action
+  --red     #f2555a   --red-bg    rgba(242,85,90,.12)    failed, destructive
+  --orange  #ff9f2e   --orange-bg rgba(255,159,46,.13)   working
+  --yellow  #f7d44c   --yellow-bg rgba(247,212,76,.13)   needs Ryan
+  --amber   #f5b83d   --amber-bg  rgba(245,184,61,.10)   cost and caution notes
+  --blue    #6aa6ff   --blue-bg   rgba(106,166,255,.10)   tool names in logs only
+  --wait-bg rgba(238,240,244,.08)                        waiting badge wash
+
+Fonts
+  --sans  'Geist', system-ui, ...      all UI text. Base 13px / 1.45.
+  --mono  'Geist Mono', ui-monospace   ids, prices, counts, hashes, model names.
+Use class .mono for mono text. Fonts load from Google Fonts in index.html.
+
+Type scale in use (match it, do not invent sizes)
+  page title 17/600, section heading h2 15/600 (20/700 for page-level group
+  heads), body 13, secondary 12 to 12.5, hints 11.5, meta 11, eyebrow and table
+  headers 10.5 uppercase with wide tracking, buttons 11/600 uppercase tracked.
+  Negative letter-spacing on large headings (-.01em to -.035em).
+
+Radius: inputs 7, buttons 6, cards 10, large cards and rows 12 to 14, chips
+999 (pill) or 4 to 5 (tags), thumbs 6 to 14 by size. Spacing is 4/6/8/10/12/14/
+16/22 px; page padding is 20px 22px 40px, card body padding 16px.
+
+Shadows: only on floating things (menus, toasts, drawer): 0 18px 50px
+rgba(0,0,0,.55). Flat cards have none.
+
+======================================================================
+4. STATUS PALETTE
+======================================================================
+
+Meaning is fixed across the whole app. Never repurpose a color.
+  orange  = working now         .s-run
+  yellow  = needs Ryan          .s-you
+  green   = done                .s-ok
+  red     = failed              .s-bad
+  white   = waiting, queued     .s-wait   (text color)
+  faint   = idle, skipped       .s-idle
+
+Status maps are plain objects of [label, class]; labels are short:
+  const status={needs_checks:['Needs checks','s-wait'],checking:['Checking','s-run'],
+                checks_failed:['Checks failed','s-bad'],saved:['Saved','s-ok']};
+  const st=status[v.status]||[v.status,'s-idle'];
+
+Three ways to show a status. Pick one per context, do not stack them:
+  1. .pill       small text status with a 6px dot: <span class="pill s-ok">Done</span>
+                 (the dot is static; never animate it).
+  2. sbadge(st)  icon tile plus bold label, the standard for cards and rows.
+                 Passed in as a helper: ${sbadge(['Saved','s-ok'])}.
+                 Renders <span class="sbadge s-ok"><i>svg</i><b>Saved</b></span>.
+                 Only .s-run spins its icon, because it means work is happening.
+  3. .cchip      counter chip: icon square plus mono count, for page headers.
+                 <span class="cchip c-ok"><i>${svg('ok')}</i><b>3</b></span>
+                 variants c-ok, c-run, c-wait, c-bad. Add class "zero" at 0
+                 (dims it and stops the spin). Wrap several in <div class="cchips">.
+Plain colored text uses the same classes: <span class="s-bad">nothing</span>.
+
+svg(key) glyphs available to pages: ok, bad, run, wait, you, idle, info, play,
+pause, stop, clone, open, mail, eye. Used as ${svg('info')} inside a flex row;
+give the svg a class or parent rule that sets size and stroke if you use it
+outside .sbadge/.cchip/.toast (see .vwarn svg in voices.css for the pattern).
+
+Inline notices: .banner (yellow, needs Ryan, with an <i> icon tile) and a
+amber cost note like .vwarn in voices.css (icon plus one sentence).
+
+======================================================================
+5. COMPONENTS AND CLASSES TO REUSE
+======================================================================
+
+Layout
+  .grid          display:grid, gap 14px. Stack cards in one .grid.
+  .card          panel surface, hairline outline, radius 10.
+    .head        flex row, 12px 16px. Holds <b> or <h2>, and .right (buttons, badges).
+    .body        16px padding content.
+  .section-title uppercase faint caption with optional .count and .more link.
+  .pagebar       toolbar row with no panel behind it: .seg on the left, one
+                 .btn or select pushed right (margin-left:auto), optional .cchips.
+  .meta          faint 11px inline facts row (dates, ids, counts).
+  .idle          one-line centered empty state in a panel.   <div class="idle">Nothing yet.</div>
+  .empty         padded faint empty text inside a card.      <div class="card"><div class="empty">No boards yet.</div></div>
+  .hint          11.5px faint helper line under a control. Put the price and
+                 the consequence of a button here.
+
+Buttons (uppercase, 11px, tracked, 32px tall)
+  .btn           outline button.     .btn.sm   26px tall.
+  .btn.go        solid green, the one primary action per card.
+  .btn.warn      amber outline, risky or override (Save anyway).
+  .btn.stop      red outline, destructive.
+  .btn:disabled  35% opacity. Always give disabled buttons a title saying why.
+  Icon inside a button: ${ic('check')} renders svg.lu at 14px.
+  .iconbtn       30px square ghost button for a Lucide icon. Always add data-tip
+                 and aria-label. .linkbtn is a green text-only action.
+  .tact          grouped icon actions on a track (used in .trow). .cbtn is the
+                 round composer icon button; leave that to Home.
+
+Chips and tags
+  .chips         flex wrap, gap 6.   .chip   pill, raised surface, 12px muted.
+  .chip.mono     for measured values: <span class="chip mono">word accuracy 96%</span>
+  .tag           small squared label, 10.5px.   .badge   amber count dot (nav only).
+
+Rows and cards for lists
+  .trows > .trow raised row (grid, 10px radius, --raise surface). For dense
+                 tabular lists. Columns are set per page: define your own grid
+                 template on your own row class rather than editing .trow.
+                 .trow.th is a header row (faint caps, no surface).
+  .gcard         group card with a gradient .gface, count and action strip.
+                 Home/Tasks only; do not reuse for storyboards.
+  .dcard         full-width list card: 40px thumb, text, right-aligned actions.
+  .rcard         media card: preview left, text and .ractions right.
+  .thumb         brand mark tile; sizes: default 32, .md 40, .lg 44, .xl 64.
+                 Real logo image over a first-letter fallback.
+  .seg           segmented control, buttons inside, .on marks the active one.
+                 <div class="seg"><button class="on">All <span class="n">12</span></button>...</div>
+  .cbox          <details> block on --panel2 for expandable detail.
+  .locks, .shots, .shot   storyboard blocks (locked rules, shot cards with dl).
+                 Reuse as is for read-only storyboard text. For editable
+                 shots build your own .ap-shot using the same surfaces.
+
+Forms
+  label (block, 12px muted), input[type=text|url|number], select, textarea are
+  already styled globally. Focus turns the border green. Do not restyle them.
+  Form pattern: <form class="body" id="apnew"> label, field, label, field,
+  one <p><button class="btn go" type="submit">...</button></p>, then a cost hint.
+
+Tooltips: add data-tip="Short label" to any icon-only control. CSS-only, shows
+  above on hover and keyboard focus. Do not add title for the same text.
+
+Icons: Lucide only. svg.lu is 18px, 2px stroke, round caps, currentColor.
+  Build with the ic helper pattern from app.js:
+    const ic=n=>`<svg class="lu" viewBox="0 0 24 24" aria-hidden="true">${icons[n]}</svg>`;
+  Available names right now: panel-right-open, panel-right-close, arrow-up,
+  audio-lines, check, chevron-down, clapperboard, file-text, film, house, image,
+  link, list-checks, mail, mic, paperclip, plus, search, settings,
+  shopping-bag, square, users, video, x. Need another: ask Claude.
+
+Toasts: toast(title, kind, sub). kind is 'ok' (green), 'bad' (red, stays 9s) or
+  'info'. Title is 2 to 4 words, sub is one short sentence, max two lines.
+    toast('Voice saved','ok','Warm Amy is in your ElevenLabs voices.');
+    toast(err.message,'bad');
+
+Menus: .cmenu (floating list: button > <span><b>Label</b><i>detail</i></span>)
+  and .intpanel (top-bar dropdown, rows .introw). Anchor inside a position:
+  relative wrapper (.cwrap or .integr), toggle with the hidden attribute,
+  close on outside click. They fade and scale in from the trigger.
+
+Brand logos: /logos/*.png (claude, elevenlabs, exa, gmail, higgsfield, solari,
+  whop) and /logo.png (Mint Labs). Use <img src="/logos/higgsfield.png" alt="">
+  in a .ico (28px) or .thumb. Retailer/brand marks for apparel brands: use the
+  logo image with .thumb; the first letter is only the load-failure fallback.
+
+Motion: only these, all short.
+  - menus and new panels: animation pop .16s (fade, scale from .96)
+  - drawer: slidein .22s;  toast: tin .22s
+  - hover lift on cards: translateY(-2px) .15s;  color/border transitions .15s
+  - spin (1.1s linear) only on a run-state icon while work is happening
+  The shell already disables all motion under prefers-reduced-motion.
+
+Responsive: shell collapses at 1280 (icon sidebar), 1100 (grids go single
+  column), 960 (rail hidden). Your page must work at 760px of content width
+  with no horizontal page scroll. Use minmax(0,1fr) in grids and min-width:0
+  on flex children so long text truncates instead of overflowing.
+
+======================================================================
+6. RULES FROM RYAN (apply to UI copy, code, comments, docs, commit text)
+======================================================================
+
+Copy
+  - No em dash characters anywhere. Use a period, comma, colon or parentheses.
+  - No emojis. Exclamation marks are rare (almost never). Never the word "really".
+  - Short labels; put detail behind a click (<details>, a drawer, a hint line).
+    Buttons are 1 to 3 words. Titles are 2 to 4 words.
+  - Say what happened and what is next, plainly. "Draft ready, not sent."
+
+Visual
+  - No divider lines. Separate areas with surface color (--panel on --bg, --raise
+    on --panel, --panel2 inside cards) and spacing. The shell zeroes out
+    border-bottom on heads, rows and tables for this reason. Card outlines are
+    hairlines only; do not add border-top/bottom, <hr>, or ::after rules.
+  - No glowing, pulsing or blinking status dots. No box-shadow glows. A spinner
+    appears only while something is actually running (.s-run icon).
+  - Content pages are a single column of full-width stacked cards. Do not build
+    small side-by-side cards or a narrow form column beside a list. If you need
+    a form and a list, stack the form card above the list.
+  - Brand logos over letters. Use the real logo image; letters are fallback only.
+  - Fonts are Geist and Geist Mono. The dark palette is tokens only.
+  - Icons are Lucide (svg.lu). Brand logos are /logos/*.png.
+  - Zetamac-style restraint: flat, quiet surfaces, no gradients except the
+    existing .gface, no decorative illustration.
+
+Behavior and money
+  - Every paid call (Claude, Exa, Higgsfield, ElevenLabs, Solari) runs only from an
+    explicit button click, and the price or unit is shown BEFORE the click, in the
+    button label or a .hint/.vwarn line under it. Confirm larger spends with
+    window.confirm stating the amount.
+  - Nothing is ever sent for Ryan. No email send, no DM, no post, no publish.
+    Produce drafts and show them; sending stays outside this app.
+  - Disabled controls explain themselves (title or hint). Show a busy label while
+    a call runs ("Designing, about 20 seconds") and restore it on error.
+  - Failures surface as toast(err.message,'bad') plus a normal re-render. Never
+    swallow errors silently. Never leave a button stuck disabled.
+
+======================================================================
+7. DO AND DON'T
+======================================================================
+
+DO  stack full-width cards:
+    <div class="grid"><div class="card"><div class="head"><b>Board 3</b><div class="right">${sbadge(['Draft','s-wait'])}</div></div><div class="body">...</div></div></div>
+DON'T put three narrow cards in a row or a 340px form column beside a list.
+
+DO  show the price next to the paid action:
+    <button class="btn go" data-apgen="3">Generate frames</button>
+    <div class="hint">Higgsfield, about $0.40 per frame, 6 frames. Nothing runs until you click.</div>
+DON'T auto-run generation on page load, on input change, or from an SSE event.
+
+DO  use status classes and sbadge with the fixed meanings:
+    ${sbadge(['Rendering','s-run'])}  ${sbadge(['Needs your pick','s-you'])}
+DON'T invent a purple "review" color or tint a done state orange.
+
+DO  separate areas with surface steps:
+    .ap-shot{padding:12px 14px;background:var(--panel2);border-radius:10px}
+DON'T write border-bottom:1px solid, <hr>, or a gradient strip between sections.
+
+DO  name icon buttons:
+    <button class="iconbtn" data-tip="Duplicate shot" aria-label="Duplicate shot">${ic('plus')}</button>
+DON'T leave an icon-only button without data-tip and aria-label.
+
+DO  show brand marks as logos:
+    <span class="thumb md"><b>N</b><img src="/api/.../logo" alt="" onerror="this.remove()"></span>
+DON'T render a bare colored circle with a letter as the only mark.
+
+DO  keep labels short and hide detail:
+    <details class="cbox"><summary>Shot notes</summary>...</details>
+DON'T print paragraphs of prompt text in the card face.
+
+DO  tokens: color:var(--muted); background:var(--raise); gap:10px
+DON'T hard-code #1a1a2e, rgba(0,0,0,.3), Inter, or 15px/17px type sizes.
+
+DO  esc() every value, call again() after a mutation, toast on both outcomes.
+DON'T build HTML from raw strings, or mutate state without re-rendering.
+
+DO  copy: "Frames ready. Not sent." / "Could not reach Higgsfield."
+DON'T copy: "Success!!" / "Your amazing frames are really ready" / any em dash.
+
+======================================================================
+8. DELIVERY CHECKLIST (before you hand off)
+======================================================================
+  [ ] Only your own files changed. No edits to the shell or server files.
+  [ ] grep for the em dash character (U+2014) in your files returns nothing.
+  [ ] No emojis, no "really", no stray exclamation marks in copy.
+  [ ] Every CSS value is a token or follows section 3; every class is .ap- prefixed.
+  [ ] Every paid action is click-gated and shows its price first.
+  [ ] Page renders at 760px with no horizontal scroll, and in the empty state.
+  [ ] Hand-off note lists the shell additions from section 2 for Claude to wire in.

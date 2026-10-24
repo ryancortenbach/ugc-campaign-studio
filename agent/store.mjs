@@ -18,6 +18,7 @@ create table if not exists leads(id integer primary key,task_id integer,domain t
 create table if not exists drafts(id integer primary key,lead_id integer not null,task_id integer,to_email text,subject text not null,body text not null,gmail_draft_id text,gmail_url text,status text not null,created_at text not null);
 create table if not exists renders(id integer primary key,title text not null,endpoint text not null,input text not null,status text not null,checks text,estimate_usd text,request_id text,result_url text,local_file text,error text,approved_at text,created_at text not null,updated_at text not null);
 create table if not exists storyboards(id integer primary key,title text not null,brief text not null,plan text not null,status text not null,checks text,version integer not null default 1,parent_id integer,note text,cost_usd real not null default 0,created_at text not null,updated_at text not null);
+create table if not exists voices(id integer primary key,name text not null,description text not null,line text not null,status text not null,generated_voice_id text,voice_id text,sample_file text,checks text,characters integer not null default 0,storyboard_id integer,created_at text not null,updated_at text not null);
 create table if not exists spend(id integer primary key,at text not null,provider text not null,usd real not null,task_id integer,storyboard_id integer,render_id integer,note text);
 create index if not exists events_task on events(task_id,id);
 create index if not exists events_lead on events(lead_id,id);`;
@@ -27,7 +28,11 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  const db=new DatabaseSync(file);
  if(file!==':memory:')db.exec('pragma journal_mode=wal');
  db.exec(schema);
- for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text','submission_key text','reconciled_at text'])try{db.exec(`alter table renders add column ${col}`);}catch{}
+ for(const col of ['model text','attachments text'])try{db.exec(`alter table tasks add column ${col}`);}catch{}
+ for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text','submission_key text','reconciled_at text','lead_id integer'])try{db.exec(`alter table renders add column ${col}`);}catch{}
+ try{db.exec('alter table leads add column logo text');}catch{}
+ for(const col of ['socials text','value text'])try{db.exec(`alter table leads add column ${col}`);}catch{}
+ try{db.exec('alter table drafts add column render_id integer');}catch{}
  // One time: itemize spend recorded before the ledger existed. Exa prices were logged on its events; the rest was Claude.
  if(!db.prepare('select count(*) n from spend').get().n){
   const add=db.prepare('insert into spend(at,provider,usd,task_id,storyboard_id,note) values(?,?,?,?,?,?)');
@@ -39,13 +44,14 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   for(const s of db.prepare('select id,cost_usd,updated_at from storyboards where cost_usd>0').all())add.run(s.updated_at,'claude',s.cost_usd,null,s.id,'itemized from earlier totals');
  }
  const bus=new EventEmitter();bus.setMaxListeners(100);
- const task=row=>row&&{...row,plan:parse(row.plan)};
+ const task=row=>row&&{...row,plan:parse(row.plan),attachments:parse(row.attachments)||[]};
  const event=row=>row&&{...row,data:parse(row.data)};
- const lead=row=>row&&{...row,reasons:parse(row.reasons)||[],risks:parse(row.risks)||[],emails:parse(row.emails)||[]};
+ const lead=row=>row&&{...row,reasons:parse(row.reasons)||[],risks:parse(row.risks)||[],emails:parse(row.emails)||[],socials:parse(row.socials)||{},value:parse(row.value)||null};
  const render=row=>row&&{...row,input:parse(row.input),checks:parse(row.checks)};
+ const voice=row=>row&&{...row,checks:parse(row.checks)};
  const board=row=>row&&{...row,brief:parse(row.brief),plan:parse(row.plan),checks:parse(row.checks)};
  const store={db,bus,
-  createTask(prompt){const at=now();const id=Number(db.prepare('insert into tasks(prompt,status,created_at,updated_at) values(?,?,?,?)').run(prompt,'queued',at,at).lastInsertRowid);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
+  createTask(prompt,{model=null,attachments=[]}={}){const at=now();const id=Number(db.prepare('insert into tasks(prompt,status,model,attachments,created_at,updated_at) values(?,?,?,?,?,?)').run(prompt,'queued',model,json(attachments),at,at).lastInsertRowid);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
   getTask(id){return task(db.prepare('select * from tasks where id=?').get(id));},
   listTasks(){return db.prepare("select t.*,(select count(*) from leads l where l.task_id=t.id) leads,(select count(*) from drafts d where d.task_id=t.id) drafts,(select count(*) from leads l where l.task_id=t.id and l.status in ('visiting','grading','drafting')) working,(select count(*) from leads l where l.task_id=t.id and l.status in ('unreachable','error')) failed from tasks t order by t.id desc limit 200").all().map(task);},
   updateTask(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update tasks set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>c==='plan'?json(fields[c]):fields[c]),at,id);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
@@ -57,17 +63,18 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   listSteers(taskId){return db.prepare('select * from steers where task_id=? order by id').all(taskId);},
   markSteer(id,reply){db.prepare('update steers set applied_at=?,reply=? where id=?').run(now(),reply,id);},
   findLeadByDomain(domain){return lead(db.prepare('select * from leads where domain=?').get(domain));},
-  createLead(fields){const at=now();const id=Number(db.prepare('insert into leads(task_id,domain,company,url,market,territory,status,evidence,created_at,updated_at) values(?,?,?,?,?,?,?,?,?,?)').run(fields.taskId,fields.domain,fields.company,fields.url,fields.market,fields.territory,fields.status||'found',fields.evidence||null,at,at).lastInsertRowid);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
+  createLead(fields){const at=now();const id=Number(db.prepare('insert into leads(task_id,domain,company,url,market,territory,status,evidence,logo,created_at,updated_at) values(?,?,?,?,?,?,?,?,?,?,?)').run(fields.taskId,fields.domain,fields.company,fields.url,fields.market,fields.territory,fields.status||'found',fields.evidence||null,fields.logo||null,at,at).lastInsertRowid);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
   getLead(id){return lead(db.prepare('select * from leads where id=?').get(id));},
   listLeads({taskId}={}){const rows=taskId?db.prepare('select * from leads where task_id=? order by id desc').all(taskId):db.prepare('select * from leads order by id desc limit 1000').all();return rows.map(lead);},
-  updateLead(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update leads set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['reasons','risks','emails'].includes(c)?json(fields[c]):fields[c]),at,id);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
-  addDraft(fields){const id=Number(db.prepare('insert into drafts(lead_id,task_id,to_email,subject,body,gmail_draft_id,gmail_url,status,created_at) values(?,?,?,?,?,?,?,?,?)').run(fields.leadId,fields.taskId,fields.to,fields.subject,fields.body,fields.gmailDraftId||null,fields.gmailUrl||null,fields.status,now()).lastInsertRowid);return db.prepare('select * from drafts where id=?').get(id);},
+  updateLead(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update leads set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['reasons','risks','emails','socials','value'].includes(c)?json(fields[c]):fields[c]),at,id);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
+  addDraft(fields){const id=Number(db.prepare('insert into drafts(lead_id,task_id,to_email,subject,body,gmail_draft_id,gmail_url,status,render_id,created_at) values(?,?,?,?,?,?,?,?,?,?)').run(fields.leadId,fields.taskId,fields.to,fields.subject,fields.body,fields.gmailDraftId||null,fields.gmailUrl||null,fields.status,fields.renderId||null,now()).lastInsertRowid);return db.prepare('select * from drafts where id=?').get(id);},
+  updateDraft(id,fields){const cols=Object.keys(fields);if(cols.length)db.prepare(`update drafts set ${cols.map(c=>`${c}=?`).join(',')} where id=?`).run(...cols.map(c=>fields[c]),id);return store.getDraft(id);},
   getDraft(id){return db.prepare('select * from drafts where id=?').get(id);},
-  markDraftSent(id){const d=store.getDraft(id);if(!d)return null;db.prepare("update drafts set status='sent' where id=?").run(id);const l=store.getLead(d.lead_id);if(l&&['drafted','found'].includes(l.status))store.updateLead(l.id,{status:'contacted'});return store.getDraft(id);},
+  markDraftSent(id){const d=store.getDraft(id);if(!d)return null;db.prepare("update drafts set status='sent' where id=?").run(id);const l=store.getLead(d.lead_id);if(l&&['drafted','found','awaiting_video'].includes(l.status))store.updateLead(l.id,{status:'contacted'});return store.getDraft(id);},
   listDrafts({leadId,taskId}={}){if(leadId)return db.prepare('select * from drafts where lead_id=? order by id desc').all(leadId);if(taskId)return db.prepare('select * from drafts where task_id=? order by id desc').all(taskId);return db.prepare('select * from drafts order by id desc limit 500').all();},
-  createRender({title,endpoint,input,group=null,shotId=null}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,group_name,shot_id,created_at,updated_at) values(?,?,?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',group,shotId,at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
+  createRender({title,endpoint,input,group=null,shotId=null,leadId=null}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,group_name,shot_id,lead_id,created_at,updated_at) values(?,?,?,?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',group,shotId,leadId,at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   getRender(id){return render(db.prepare('select * from renders where id=?').get(id));},
-  listRenders(){return db.prepare('select * from renders order by id desc').all().map(render);},
+  listRenders({leadId}={}){return (leadId?db.prepare('select * from renders where lead_id=? order by id desc').all(leadId):db.prepare('select * from renders order by id desc').all()).map(render);},
   // A render keeps its first key, so approving again after a never-started reconcile sends Higgsfield the same Idempotency-Key.
   claimRenderSubmission(id,estimate,key){const at=now();const changed=db.prepare("update renders set status='submitting',submission_key=coalesce(submission_key,?),approved_at=?,updated_at=? where id=? and status='checks_passed' and estimate_usd=?").run(key,at,at,id,String(estimate));if(Number(changed.changes)!==1)return null;const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   // Settles an uncertain submission: Higgsfield has the request, or it never started and the render goes back to awaiting approval.
@@ -77,7 +84,13 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   getStoryboard(id){return board(db.prepare('select * from storyboards where id=?').get(id));},
   listStoryboards(){return db.prepare('select * from storyboards order by id desc limit 200').all().map(board);},
   updateStoryboard(id,fields,addCost=0){const at=now();const cols=Object.keys(fields);db.prepare(`update storyboards set ${cols.map(c=>`${c}=?`).join(',')}${cols.length?',':''}cost_usd=cost_usd+?,updated_at=? where id=?`).run(...cols.map(c=>['brief','plan','checks'].includes(c)?json(fields[c]):fields[c]),addCost,at,id);const s=store.getStoryboard(id);bus.emit('change',{kind:'storyboard',storyboard:s});return s;},
+  createVoice({name,description,line,generatedVoiceId=null,sampleFile=null,storyboardId=null,characters=0}){const at=now();const id=Number(db.prepare('insert into voices(name,description,line,status,generated_voice_id,sample_file,characters,storyboard_id,created_at,updated_at) values(?,?,?,?,?,?,?,?,?,?)').run(name,description,line,'needs_checks',generatedVoiceId,sampleFile,characters,storyboardId,at,at).lastInsertRowid);const v=store.getVoice(id);bus.emit('change',{kind:'voice',voice:v});return v;},
+  getVoice(id){return voice(db.prepare('select * from voices where id=?').get(id));},
+  listVoices(){return db.prepare('select * from voices order by id desc limit 300').all().map(voice);},
+  updateVoice(id,fields,addCharacters=0){const at=now();const cols=Object.keys(fields);db.prepare(`update voices set ${cols.map(c=>`${c}=?`).join(',')}${cols.length?',':''}characters=characters+?,updated_at=? where id=?`).run(...cols.map(c=>c==='checks'?json(fields[c]):fields[c]),addCharacters,at,id);const v=store.getVoice(id);bus.emit('change',{kind:'voice',voice:v});return v;},
   addSpend({provider,usd,taskId=null,storyboardId=null,renderId=null,note=null}){if(!(usd>0))return;db.prepare('insert into spend(at,provider,usd,task_id,storyboard_id,render_id,note) values(?,?,?,?,?,?,?)').run(now(),provider,usd,taskId,storyboardId,renderId,note);bus.emit('change',{kind:'spend'});},
+  // Usage with no known dollar figure (ElevenLabs credits). Kept as a zero dollar ledger row so the note records what was used.
+  addUsage({provider,taskId=null,storyboardId=null,renderId=null,note=null}){db.prepare('insert into spend(at,provider,usd,task_id,storyboard_id,render_id,note) values(?,?,?,?,?,?,?)').run(now(),provider,0,taskId,storyboardId,renderId,note);bus.emit('change',{kind:'spend'});},
   spendSummary(){
    const day=new Date();day.setHours(0,0,0,0);
    const rows=db.prepare('select provider,sum(usd) total,count(*) n,sum(case when at>=? then usd else 0 end) today from spend group by provider order by total desc').all(day.toISOString());

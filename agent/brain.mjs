@@ -29,6 +29,8 @@ const planSchema=z.object({
  searchQueries:z.array(z.object({query:z.string(),market:z.string(),territory:z.string()}))
 });
 const scoreSchema=z.object({company:z.string(),fitScore:z.number().int(),decision:z.enum(['pursue','skip']),reasons:z.array(z.string()),risks:z.array(z.string()),personalDetail:z.string()});
+const valueSchema=z.object({valueScore:z.number().int(),verdict:z.enum(['keep','reject']),reason:z.string()});
+const logoSchema=z.object({isRealLogo:z.boolean(),matchesBrand:z.boolean(),quality:z.number().int(),reason:z.string()});
 const draftSchema=z.object({subject:z.string(),body:z.string()});
 const steerSchema=z.object({reply:z.string(),action:z.enum(['continue','pause','stop']),plan:planSchema.omit({reply:true}),skipDomains:z.array(z.string())});
 
@@ -40,9 +42,9 @@ export function rulesPlan(prompt){
  return {reply:`Searching for ${market} brands in ${territories.join(', ')}. Up to ${count} drafts.`,markets:[market],territories,maxDrafts:count,qualify:`Independent ${market} brands that sell online and could use short-form UGC video.`,exclusions:[],searchQueries:territories.map(t=>({query:`official website of a direct-to-consumer ${market} brand based in ${t}`,market,territory:t}))};
 }
 
-export async function plan(prompt,profile){
+export async function plan(prompt,profile,attachments=[]){
  if(!llmEnabled())return {data:rulesPlan(prompt),cost:0,model:'rules'};
- return structured({role:'main',effort:'low',schema:planSchema,system:`You plan lead research for ${profile.company}. Offer: ${profile.offer} Turn the operator's request into Exa neural search queries that return official brand websites (not marketplaces, listicles, news, or agencies). Write each query as a description of the page you want, e.g. "official website of an independent streetwear brand based in Brooklyn". Use at most 6 queries. maxDrafts is how many outreach drafts to produce: use the number the operator gave, otherwise 5, never more than 15. qualify is one sentence on what makes a brand a good fit. reply is one short sentence to the operator describing the plan. No em dashes.`,prompt});
+ return structured({role:'main',effort:'low',schema:planSchema,attachments,system:`You plan lead research for ${profile.company}. Offer: ${profile.offer} Turn the operator's request into Exa neural search queries that return official brand websites (not marketplaces, listicles, news, or agencies). Write each query as a description of the page you want, e.g. "official website of an independent streetwear brand based in Brooklyn". Use at most 6 queries. maxDrafts is how many outreach drafts to produce: use the number the operator gave, otherwise 5, never more than 15. qualify is one sentence on what makes a brand a good fit. reply is one short sentence to the operator describing the plan. No em dashes.`,prompt});
 }
 
 export async function score({lead,visit,planned}){
@@ -54,6 +56,22 @@ export async function score({lead,visit,planned}){
   return {data:{company:lead.company,fitScore:Math.min(100,s),decision:s>=60?'pursue':'skip',reasons,risks,personalDetail:(visit.homeText.split(/(?<=[.!?])\s+/).find(x=>x.length>30&&x.length<160)||'').trim()},cost:0,model:'rules'};
  }
  return structured({role:'grader',effort:'low',schema:scoreSchema,system:`You grade whether a brand is a good outreach target for this offer: ${planned.offer}. Good fit: ${planned.qualify} Exclusions: ${planned.exclusions.join('; ')||'none'}. Use only the page text given. fitScore is 0 to 100; choose pursue only if fitScore is at least 60 and a contact email exists. reasons and risks are short factual bullets citing what the page says. personalDetail is one specific true detail from their site that an email could mention, copied or closely paraphrased, or empty. company is the brand's proper name.`,prompt:JSON.stringify({market:planned.market,territory:planned.territory,url:lead.url,searchTitle:lead.company,contactEmail:visit.best?.email||null,contactSource:visit.best?.sourceUrl||null,homepageText:visit.homeText,contactPageText:visit.contactText})});
+}
+
+// Haiku decides whether a lead is worth any spend: an established DTC brand with real socials and a plausible UGC budget.
+export async function valueGrade({lead,site={},socials={},exa={}}){
+ if(!llmEnabled()){
+  const shop=/shop|cart|collection|add to bag|new arrivals|add to cart/i.test(site.homeText||'');
+  const s=Math.min(100,40+Object.keys(socials).length*10+(shop?15:0)+(site.best?10:0));
+  return {data:{valueScore:s,verdict:s>=70?'keep':'reject',reason:'Rules mode (no ANTHROPIC_API_KEY): scored from linked socials and a visible shop.'},cost:0,model:'rules'};
+ }
+ return structured({role:'grader',effort:'low',schema:valueSchema,system:'You decide whether a brand is a high-value outreach lead for a UGC video studio. KEEP only a real, established direct-to-consumer brand that has its own products and a professional site, an active social presence linked from the site, and a plausible budget for paid UGC. REJECT dropshipping stores, print-on-demand shops, generic resellers, placeholder or spammy stores, joke or low-effort names, marketplaces and agencies. valueScore is 0 to 100; give 70 or more only for a clear keep. verdict is keep only when valueScore is at least 70. reason is one short factual sentence citing the evidence. Use only the data given. No em dashes.',prompt:JSON.stringify({brand:lead.company,url:lead.url,domain:lead.domain,socials,searchResultTitle:exa.title||null,searchResultText:(exa.text||'').slice(0,1500),evidence:lead.evidence||null,homepageText:(site.homeText||'').slice(0,3000),contactPageText:(site.contactText||'').slice(0,1500)})});
+}
+
+// Haiku vision: is this image a real brand mark for this brand, or a generic icon, platform default, blank or placeholder?
+export async function logoCheck({data,type,company,domain}){
+ if(!llmEnabled())return {data:{isRealLogo:true,matchesBrand:true,quality:50,reason:'Not checked (no ANTHROPIC_API_KEY)'},cost:0,model:'rules'};
+ return structured({role:'grader',effort:'low',schema:logoSchema,images:[{data,type}],system:'You check a brand logo image. isRealLogo is true for a real brand mark of an actual company: a wordmark, a monogram, or a pictorial symbol with no text (an object, animal, building or shape on a plain or colored tile counts, since many brands use one). It is false only for something clearly generic: a default globe, an auto-generated letter tile, loading dots, a generic icon, a globe, a platform or theme default (Shopify, Wix, Squarespace, WordPress), a blank or placeholder image, a stock photo, or a product photo with no brand mark. matchesBrand is false ONLY when the image shows readable text naming a different company, or is the well-known mark of a different company. A symbol or picture with no readable text always counts as matching, because you cannot know the symbol of every brand. quality is 0 to 100 for how clean and usable the mark is. reason is one short sentence. No em dashes.',prompt:JSON.stringify({brand:company,domain})});
 }
 
 export async function draft({lead,profile,graded}){

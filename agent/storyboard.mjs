@@ -29,9 +29,9 @@ async function generate(args,minShots){
  for(let attempt=0;attempt<2;attempt++){const out=await structured(args);cost+=out.cost;const problem=malformed(out.data,minShots);if(!problem)return {plan:normalizePlan(out.data),cost,model:out.model};if(attempt)throw Object.assign(Error(`The model returned a malformed storyboard twice (${problem}). Try again.`),{status:502});}
 }
 
-export async function draftStoryboard(brief){
+export async function draftStoryboard(brief,{attachments=[]}={}){
  const total=[5,15,30].includes(Number(brief.length))?Number(brief.length):15;
- return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,system:rules(total),prompt:JSON.stringify(brief)},Math.min(2,Math.ceil(total/10)));
+ return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,attachments,system:rules(total),prompt:JSON.stringify(brief)},Math.min(2,Math.ceil(total/10)));
 }
 
 export async function checkStoryboard(plan){
