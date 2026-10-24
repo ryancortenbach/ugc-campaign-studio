@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "documented_original_file_recovered_privately",
+  "recoveredAt": "2026-10-24T17:27:36.278858+00:00",
+  "file": "PS2_penthouse_FINAL_v4.mp4",
+  "bytes": 7705699,
+  "sha256": "eb34229fa2448f0655fa94bb576b982477b91b92625763110d0f96abdd6f3880",
+  "source_and_destination_match": true,
+  "durationSeconds": 23.157,
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "videoCodec": "h264",
+  "audioCodec": "aac",
+  "full_decode_passed": true,
+  "original_source_modified": false,
+  "media_publicly_uploaded": false,
+  "historical_approved_hash_available": false,
+  "fresh_visual_approval": false,
+  "new_campaign_identity_approval": false,
+  "limits": "Matches the documented V4 filename and historical specifications. Original reference images remain authoritative. This recovery does not grant a new creative or generation approval."
+}
