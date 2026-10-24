@@ -65,7 +65,7 @@ async function clientCatalog({domain,taskId}){
  }
  return {products,source:result.source};
 }
-export const realWhopTools={catalog:clientCatalog,visit:visitSite,siteMode,search:q=>searchBrands(q,{numResults:5}),llmEnabled,makeBrief,draft:boards.draftStoryboard,check:boards.checkStoryboard,revise:boards.reviseStoryboard,shots:hf.shotsFromStoryboard,endpoint:hf.endpoints['text-to-video'],runCheckers:hf.runCheckers,estimate:hf.estimate,priceFrom:hf.priceFrom,higgsfieldEnabled:hf.higgsfieldEnabled};
+export const realWhopTools={catalog:clientCatalog,visit:visitSite,siteMode,search:q=>searchBrands(q,{numResults:5}),llmEnabled,makeBrief,draft:boards.draftStoryboard,check:boards.checkStoryboard,revise:boards.reviseStoryboard,shots:hf.shotsFromStoryboard,endpoint:hf.endpoints['text-to-video'],runCheckers:hf.runCheckers,reviseShot:hf.reviseShot,estimate:hf.estimate,priceFrom:hf.priceFrom,higgsfieldEnabled:hf.higgsfieldEnabled};
 
 const money=n=>Number(n).toFixed(2);
 
@@ -79,7 +79,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
  const iso=()=>new Date(now()).toISOString();
  const shotDir=path.join(dataDir,'shots');
  const active=new Map();
- let timer=null,polling=false,last='idle';
+ let timer=null,polling=false,last='idle',cancelEpoch=0;
 
  const order=id=>{const r=db.prepare('select * from whop_orders where payment_id=?').get(id);return r&&{...r,render_ids:r.render_ids?JSON.parse(r.render_ids):[],payment:r.payment?JSON.parse(r.payment):null};};
  const upd=(id,fields)=>{const cols=Object.keys(fields);db.prepare(`update whop_orders set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where payment_id=?`).run(...cols.map(c=>c==='render_ids'||c==='payment'?JSON.stringify(fields[c]):fields[c]),iso(),id);const o=order(id);store.bus.emit('change',{kind:'whop',order:o});return o;};
@@ -96,10 +96,13 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
 
  function failOrder(id,error){
   const o=order(id);upd(id,{state:'failed',error:error.message});
-  if(o?.task_id){store.updateTask(o.task_id,{status:'failed',summary:error.message});store.addEvent({taskId:o.task_id,type:'error',tool:'whop',title:`Order failed: ${error.message}`});}
+  if(o?.task_id){store.updateTask(o.task_id,{status:error.code==='work_stopped'?'stopped':'failed',summary:error.message});store.addEvent({taskId:o.task_id,type:'error',tool:'whop',title:`Order failed: ${error.message}`});}
  }
 
  async function run(pid){
+  const epoch=cancelEpoch;
+  const ensure=()=>{assertRevisionWorkAllowed(store);if(epoch!==cancelEpoch)throw Object.assign(Error('Stopped by operator. Saved work is retained.'),{code:'work_stopped'});};
+  ensure();
   let o=order(pid);
   const p=o.payment||{};
   let task=o.task_id?store.getTask(o.task_id):null;
@@ -118,7 +121,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
    const buyer=await whop.buyerInfo({...p,email:o.buyer_email,name:o.buyer_name});
    if(buyer.fields.length)log('tool_result',`Checkout answers: ${buyer.fields.map(f=>`${f.question}: ${f.answer}`).join('; ').slice(0,400)}`,{tool:'whop.members'});
    let hit=null;
-   try{hit=await identifyBrand({buyer:{...buyer,email:buyer.email||o.buyer_email},search:q=>T.search(q)});}
+   try{hit=await identifyBrand({buyer:{...buyer,email:buyer.email||o.buyer_email},search:q=>{ensure();return T.search(q);}});}
    catch(e){log('error',`Exa search for the brand failed: ${e.message}`,{tool:'exa'});}
    if(hit?.costUsd)spend(hit.costUsd,'exa','whop brand lookup');
    if(!hit?.domain){
@@ -135,6 +138,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
   // 2. Research
   const domain=o.brand_domain,home=`https://${domain}/`;
   log('tool_call',`Visiting ${home}`,{tool:T.siteMode()==='solari'?'solari.browser':'fetch'});
+  ensure();
   const started=Date.now();let visit;
   try{visit=await T.visit(home,{shotDir});}
   catch(e){
@@ -150,6 +154,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
   let evidence=[];
   try{
    log('tool_call',`Searching for evidence about ${company}`,{tool:'exa'});
+  ensure();
    const found=await T.search(`${company} ${domain} products brand`);spend(found.costUsd||0,'exa','whop brand evidence');
    evidence=(found.results||[]).slice(0,5).map(r=>({title:r.title,url:r.url,text:(r.text||'').slice(0,500)}));
    log('tool_result',`Exa returned ${(found.results||[]).length} pages`,{tool:found.via||'exa',data:{results:evidence.map(r=>({title:r.title,url:r.url}))}});
@@ -164,6 +169,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
 
   // 3. Storyboard
   log('tool_call','Writing the brief',{tool:'claude.brief'});
+  ensure();
   const made=await T.makeBrief({brand:company,domain,purchased:o.product,homeText:visit.homeText,evidence,products});spend(made.cost,'claude','whop brief');
   const {research,...simpleBrief}=made.brief;
   const brief=Object.fromEntries(Object.entries({...simpleBrief,length:'15'}).map(([k,v])=>[k,String(v??'').slice(0,2000).trim()]).filter(([,v])=>v));
@@ -171,18 +177,20 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
   Object.assign(brief,{brand:company,domain,purchased:o.product,source:'whop'});
   store.updateTask(taskId,{plan:{...(store.getTask(taskId).plan||{}),kind:'client_project',brand:company,domain,brief,creativeBrief:normalizeCreativeResearch(research,[`https://${domain}/`,...evidence.map(e=>e.url),...products.map(p=>p.url)]),researchModel:made.model||null,researchSources:evidence}});
   log('tool_call','Drafting the storyboard',{tool:'claude.storyboard'});
-  const drafted=await T.draft(brief);
+  ensure();
+  const drafted=await T.draft(brief,{checkpoint:async()=>ensure()});
   let sb=store.createStoryboard({title:drafted.plan.title||`${company} UGC video`,brief,plan:drafted.plan,cost:drafted.cost});
   spend(drafted.cost,'claude','whop storyboard draft',{storyboardId:sb.id});
   upd(pid,{storyboard_id:sb.id});
-  await reviseUntilPassed({candidate:sb,checkpoint:async()=>assertRevisionWorkAllowed(store),
+  await reviseUntilPassed({candidate:sb,checkpoint:async()=>ensure(),
    check:async candidate=>{store.updateStoryboard(candidate.id,{status:'checking'});const checks=await T.check(candidate.plan);spend(checks.cost,'claude','whop storyboard checkers',{storyboardId:candidate.id});return checks;},
    onChecked:async(candidate,checks)=>{sb=store.updateStoryboard(candidate.id,{status:checks.passed?'checks_passed':'checks_failed',checks},checks.cost);log('tool_result',`Storyboard v${sb.version} ${checks.passed?'passed':'did not pass'} the checkers: ${checks.results.map(r=>`${r.name} ${r.score}`).join(', ')}`,{tool:'claude.check',data:{storyboardId:sb.id}});},
    onRevision:async(candidate,checks,revision)=>log('tool_call',`Revising the storyboard from the checker notes (revision ${revision})`,{tool:'claude.revise'}),
-   revise:async(candidate,checks)=>{const rev=await T.revise(candidate.plan,checks,'');sb=store.createStoryboard({title:candidate.title,brief,plan:rev.plan,version:candidate.version+1,parentId:candidate.id,cost:rev.cost});spend(rev.cost,'claude','whop storyboard revision',{storyboardId:sb.id});upd(pid,{storyboard_id:sb.id});return sb;}
+   revise:async(candidate,checks)=>{const rev=await T.revise(candidate.plan,checks,'',{checkpoint:async()=>ensure()});sb=store.createStoryboard({title:candidate.title,brief,plan:rev.plan,version:candidate.version+1,parentId:candidate.id,cost:rev.cost});spend(rev.cost,'claude','whop storyboard revision',{storyboardId:sb.id});upd(pid,{storyboard_id:sb.id});return sb;}
   });
 
   // 4. Approve the storyboard exactly like the approve route: its shots become renders, still unsubmitted.
+  ensure();
   const shots=T.shots({brief:{brand:`${sb.title} v${sb.version}`},storyboard:sb.plan});
   const renders=shots.map(x=>store.createRender({title:x.title,endpoint:T.endpoint,input:x.input,group:x.group,shotId:x.shotId}));
   store.updateStoryboard(sb.id,{status:'approved'});
@@ -192,11 +200,13 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
   // 5. Check and price every shot. Nothing is submitted.
   let total=0,priced=0,ready=0;
   for(const r of renders){
-   store.updateRender(r.id,{status:'checking'});
-   let checks;
-   try{checks=await T.runCheckers({title:r.title,input:r.input});}
-   catch(e){store.updateRender(r.id,{status:'draft',error:e.message});log('error',`Shot checkers failed for ${r.title}: ${e.message}`,{tool:'claude.check'});continue;}
-   spend(checks.cost,'claude','whop shot checkers',{renderId:r.id});
+   const reviewed=await reviseUntilPassed({candidate:r.input,checkpoint:async()=>ensure(),
+    check:async input=>{store.updateRender(r.id,{status:'checking',input});const checks=await T.runCheckers({title:r.title,input});spend(checks.cost,'claude','whop shot checkers',{renderId:r.id});return checks;},
+    onChecked:async(input,checks,revision)=>{store.updateRender(r.id,{checks});log('tool_result',`Shot review ${revision}: ${checks.passed?'passed':'applying feedback'}`,{tool:'claude.check',data:{renderId:r.id,revision,checks}});},
+    onRevision:async(input,checks,revision)=>log('tool_call',`Revising ${r.title} from checker feedback (revision ${revision})`,{tool:'claude.revise',data:{renderId:r.id,revision}}),
+    revise:async(input,checks)=>{const next=await T.reviseShot({title:r.title,input,checks});spend(next.cost,'claude','whop shot revision',{renderId:r.id});return next.input;}
+   });
+   const checks=reviewed.checks;r.input=reviewed.candidate;
    let estimate=null,error=null;
    if(checks.passed&&T.higgsfieldEnabled()){try{const e=await T.estimate(r.endpoint,r.input);estimate=T.priceFrom(e,r.input);if(!estimate)error='Higgsfield returned no usable price for this resolution';}catch(e){error=e.message;}}
    store.updateRender(r.id,{status:checks.passed?'checks_passed':'checks_failed',checks,estimate_usd:estimate,error});
@@ -241,7 +251,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
    for(const r of db.prepare("select payment_id,task_id from whop_orders where state='working'").all())if(!active.has(r.payment_id))failOrder(r.payment_id,Error('Interrupted by a restart. Click Run on the order to start it again.'));
    timer=setInterval(safePoll,intervalMs);timer.unref?.();safePoll();return this;
   },
-  stop(){if(timer){clearInterval(timer);timer=null;}},
+  stop(){cancelEpoch++;if(timer){clearInterval(timer);timer=null;}},
   idle:()=>Promise.all([...active.values()]),
   summary(){return {enabled:enabled(),orders:total(),working:active.size};},
   get(){
@@ -250,7 +260,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
     orders:db.prepare("select payment_id,status,substatus,amount,currency,product,buyer_email,buyer_name,brand_domain,brand_source,task_id,storyboard_id,render_ids,shots,estimate_usd,state,error,payment_at,created_at,updated_at from whop_orders order by coalesce(payment_at,created_at) desc limit 30").all().map(r=>({...r,render_ids:r.render_ids?JSON.parse(r.render_ids):[]}))};
   },
   set(patch={}){
-   if('enabled' in patch){write('whop_enabled',Boolean(patch.enabled));if(patch.enabled&&timer)safePoll();}
+   if('enabled' in patch){if(!patch.enabled)cancelEpoch++;write('whop_enabled',Boolean(patch.enabled));if(patch.enabled&&timer)safePoll();}
    return this.get();
   },
   order,

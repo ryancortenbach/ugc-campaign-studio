@@ -15,12 +15,12 @@ const plan={title:'Acme demo',identity:'A woman in her 20s, brown bob',wardrobe:
 const pass={passed:true,results:[{name:'Continuity',score:95,issues:[]}],cost:0.02};
 const fail={passed:false,results:[{name:'Continuity',score:60,issues:[{severity:'major',evidence:'x',fix:'y'}]}],cost:0.02};
 
-function setup({payments=[],fields={},checks=[],visitFails=false,searchResults=[{url:'https://www.annlee.co/about',title:'Ann Lee',text:'Founder of Annlee'}],shotPasses=true,catalogProducts=[],research=null}={}){
+function setup({payments=[],fields={},checks=[],visitFails=false,searchResults=[{url:'https://www.annlee.co/about',title:'Ann Lee',text:'Founder of Annlee'}],shotPasses=true,shotFailures=0,catalogProducts=[],research=null,onStoryboardCheck=null}={}){
  const store=openStore(':memory:');
  const state={payments:[...payments]};
  const calls={search:[],visit:[],draft:0,revise:0,check:0,estimate:0};
  const whop={whopEnabled:()=>true,listPayments:async()=>({payments:[...state.payments],next:null}),buyerInfo:async p=>({email:p.email,name:p.name,fields:fields[p.id]||[]})};
- const queue=[...checks];
+ const queue=[...checks];let shotChecks=0;
  const tools={
   llmEnabled:()=>true,siteMode:()=>'fetch',
   search:async q=>{calls.search.push(q);return {via:'exa',results:searchResults,costUsd:0.007};},
@@ -28,10 +28,11 @@ function setup({payments=[],fields={},checks=[],visitFails=false,searchResults=[
   catalog:async()=>({products:catalogProducts,source:'test fixture'}),
   makeBrief:async input=>{calls.briefProducts=input.products;return {brief:{...(research?{research}:{}),product:'Shoes',audience:'Runners',idea:'Unboxing',offer:'',identity:'a',wardrobe:'b',environment:'c',voice:'d'},cost:0.01,model:'sonnet-fixture'};},
   draft:async()=>{calls.draft++;return {plan:structuredClone(plan),cost:0.05};},
-  check:async()=>{calls.check++;return queue.length?queue.shift():pass;},
+  check:async()=>{calls.check++;onStoryboardCheck?.();return queue.length?queue.shift():pass;},
   revise:async()=>{calls.revise++;return {plan:structuredClone(plan),cost:0.04};},
   shots:shotsFromStoryboard,endpoint:endpoints['text-to-video'],
-  runCheckers:async()=>shotPasses?pass:fail,
+  runCheckers:async()=>++shotChecks<=shotFailures?fail:shotPasses?pass:fail,
+  reviseShot:async({input})=>{calls.shotRevisions=(calls.shotRevisions||0)+1;return {input:{...input,prompt:input.prompt+' Fixed.'},cost:0.01};},
   estimate:async()=>{calls.estimate++;return {usd:'1.50'};},priceFrom,higgsfieldEnabled:()=>true
  };
  const watch=createWhopWatch({store,runner:{isRunning:()=>false},tools,whop});
@@ -92,12 +93,10 @@ test('client storyboards continue beyond five revisions until the checkers pass'
  assert.equal(store.getStoryboard(o.storyboard_id).version,9);assert.ok(store.listRenders().every(r=>r.request_id===null));
 });
 
-test('shots that fail their checks leave the order in review, unpriced', async () => {
- const {store,state,watch}=setup({shotPasses:false});
- await watch.tick();state.payments.unshift(pay('pay_1'));
- await watch.tick();
- assert.equal(watch.order('pay_1').state,'review');
- assert.ok(store.listRenders().every(r=>r.status==='checks_failed'&&!r.estimate_usd));
+test('individual client shots keep revising beyond five failures before being priced',async()=>{
+ const {store,state,watch,calls}=setup({shotFailures:8});
+ await watch.tick();state.payments.unshift(pay('pay_1'));await watch.tick();
+ assert.equal(calls.shotRevisions,8);assert.equal(watch.order('pay_1').state,'ready');assert.ok(store.listRenders().every(r=>r.status==='checks_passed'&&r.request_id===null));
 });
 
 test('brand identification order: checkout field, email domain, Exa, then needs_brand', async () => {
@@ -262,4 +261,10 @@ test('a client with no CRM lead keeps catalog photos and the complete research b
   const order=fixture.watch.order('pay_complete'),task=store.getTask(order.task_id);assert.equal(store.listLeads().length,0);assert.deepEqual(task.plan.productReferences,catalogProducts);assert.equal(task.plan.creativeBrief.researchBrief,'Saved Sonnet narrative.');assert.equal(task.plan.researchModel,'sonnet-fixture');assert.deepEqual(fixture.calls.briefProducts,catalogProducts);
   const report=clientOrderReport({store,paymentId:'pay_complete'});assert.deepEqual(report.lead.products,catalogProducts);const pdf=await PDFDocument.load((await buildTaskIdeasPdf(report)).bytes);assert.ok(pdf.getPages().some(p=>p.node.Resources()?.lookup(PDFName.of('XObject'))?.keys().length));
  }finally{store?.db.close();if(previous===undefined)delete process.env.AGENT_UPLOAD_DIR;else process.env.AGENT_UPLOAD_DIR=previous;rmSync(folder,{recursive:true,force:true});}
+});
+
+test('turning the watcher off interrupts an active revision before the next paid call',async()=>{
+ let activeWatch;const {state,watch,calls}=setup({checks:Array(20).fill(fail),onStoryboardCheck:()=>{if(calls.check===7)activeWatch.set({enabled:false});}});activeWatch=watch;
+ await watch.tick();state.payments.unshift(pay('pay_stop'));await watch.tick();
+ assert.equal(calls.check,7);assert.equal(calls.revise,6);assert.equal(watch.order('pay_stop').state,'failed');assert.match(watch.order('pay_stop').error,/Stopped by operator/);
 });

@@ -18,4 +18,3 @@ export function fakePage(cdp,{url='https://example.com/',title='Example'}={}){
  page.context=()=>({newCDPSession:async()=>cdp});
  return page;
 }
-

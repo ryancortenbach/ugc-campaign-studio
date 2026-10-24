@@ -50,6 +50,10 @@ export async function runCheckers({title,input,brief=''}){
  const passed=results.every(r=>r.score>=PASS_SCORE&&!r.issues.some(i=>i.severity!=='minor'));
  return {passed,results,cost:results.reduce((s,r)=>s+r.cost,0),checkedAt:new Date().toISOString()};
 }
+export async function reviseShot({title,input,checks}){
+ const out=await structured({role:'main',effort:'low',schema:z.object({prompt:z.string().min(1)}),system:'Revise this existing video shot prompt using all checker feedback. Preserve the exact character, clothing, setting, dialogue, format and existing continuity locks. Resolve contradictions with minimal edits. Do not add people, props, claims or new story beats. Do not change duration or other generation settings. No em dashes.',prompt:JSON.stringify({title,input,findings:checks.results})});
+ return {input:{...input,prompt:out.data.prompt},cost:out.cost};
+}
 // Accepts a studio production packet, its storyboard, or a bare plan, and returns one render request per shot.
 export function shotsFromStoryboard(packet){
  const seen=new Set();

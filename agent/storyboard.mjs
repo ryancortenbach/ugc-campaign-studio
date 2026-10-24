@@ -24,14 +24,21 @@ export function malformed(plan,minShots=2){
  const bad=texts.find(t=>/\{\s*\\?"|\\?"\s*\}|<\/?\w+>|"(id|duration|camera|action|dialogue|audio)"\s*:/.test(String(t||'')));
  return bad?`structured text leaked into a field: ${String(bad).slice(0,80)}`:null;
 }
-async function generate(args,minShots){
- let cost=0;
- for(let attempt=0;attempt<2;attempt++){const out=await structured(args);cost+=out.cost;const problem=malformed(out.data,minShots);if(!problem)return {plan:normalizePlan(out.data),cost,model:out.model};if(attempt)throw Object.assign(Error(`The model returned a malformed storyboard twice (${problem}). Try again.`),{status:502});}
+async function generate(args,minShots,checkpoint=async()=>{}){
+ let cost=0,problem=null;
+ try{
+  for(;;){
+   await checkpoint();
+   const out=await structured(problem?{...args,prompt:args.prompt+`\n\nRepair the previous malformed output: ${problem}. Return ordinary text inside every text field and preserve the required shots.`}:args);cost+=out.cost;
+   problem=malformed(out.data,minShots);
+   if(!problem)return {plan:normalizePlan(out.data),cost,model:out.model};
+  }
+ }catch(error){error.cost=cost;throw error;}
 }
 
-export async function draftStoryboard(brief,{attachments=[]}={}){
+export async function draftStoryboard(brief,{attachments=[],checkpoint=async()=>{}}={}){
  const total=[5,15,30].includes(Number(brief.length))?Number(brief.length):15;
- return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,attachments,system:rules(total),prompt:JSON.stringify(brief)},Math.min(2,Math.ceil(total/10)));
+ return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,attachments,system:rules(total),prompt:JSON.stringify(brief)},Math.min(2,Math.ceil(total/10)),checkpoint);
 }
 
 export async function checkStoryboard(plan){
@@ -42,7 +49,7 @@ export async function checkStoryboard(plan){
  return {passed:results.every(r=>r.score>=PASS_SCORE&&!r.issues.some(i=>i.severity!=='minor')),results,cost:results.reduce((s,r)=>s+r.cost,0),checkedAt:new Date().toISOString()};
 }
 
-export async function reviseStoryboard(plan,checks,note=''){
+export async function reviseStoryboard(plan,checks,note='',{checkpoint=async()=>{}}={}){
  const findings=checks.results.flatMap(r=>r.issues.map(i=>({checker:r.name,...i})));
- return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,system:`${rules(plan.durationSeconds)} You are revising an existing storyboard. Fix every blocking and major finding, and minor ones where it is cheap, without changing the concept or any dialogue the operator wrote unless a finding says that line is the problem. Fix by simplifying: remove details that are not needed rather than adding new ones, because added detail creates new contradictions. Ignore any finding that asks for reference images, voice clips, seeds or asset IDs, since this renderer cannot use them. Before answering, reread every shot against identity, wardrobe, environment, camera, action, dialogue timing and constraints, and remove every contradiction. Keep the title.`,prompt:JSON.stringify({storyboard:plan,findings,operatorNote:note})},Math.min(2,plan.shots.length));
+ return generate({role:'main',effort:'high',schema:planSchema,maxTokens:16000,system:`${rules(plan.durationSeconds)} You are revising an existing storyboard. Fix every blocking and major finding, and minor ones where it is cheap, without changing the concept or any dialogue the operator wrote unless a finding says that line is the problem. Fix by simplifying: remove details that are not needed rather than adding new ones, because added detail creates new contradictions. Ignore any finding that asks for reference images, voice clips, seeds or asset IDs, since this renderer cannot use them. Before answering, reread every shot against identity, wardrobe, environment, camera, action, dialogue timing and constraints, and remove every contradiction. Keep the title.`,prompt:JSON.stringify({storyboard:plan,findings,operatorNote:note})},Math.min(2,plan.shots.length),checkpoint);
 }

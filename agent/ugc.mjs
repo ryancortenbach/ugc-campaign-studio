@@ -92,7 +92,7 @@ async function estimateSteps(video,plan){
 }
 
 // Write the concept and keep applying checker feedback until every checker scores PASS_SCORE or more,
-// fetch the Higgsfield price, and park the render at checks_passed. Returns {render,usd} or {render,failed:true}. Throws only if nothing could be created.
+// fetch the Higgsfield price, and park the render at checks_passed. Returns the passing render and price. Provider errors and explicit stop/pause requests retain the current render.
 // `spend(usd,note,renderId)` records every Claude cost. Nothing here submits to Higgsfield.
 export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()=>{},checkpoint=async()=>{}}){
  const company=ctx.company||lead.company||lead.domain;
