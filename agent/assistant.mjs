@@ -91,7 +91,7 @@ export function createAssistant({store,runner,client,production=createProduction
       out=await def.run({store,runner,production},input);summary=def.summary(out);
      }catch(e){is_error=true;out={error:e instanceof z.ZodError?e.issues.map(i=>`${i.path.join('.')||'input'}: ${i.message}`).join('; '):e.message};summary=`error: ${out.error}`;}
      store.addEvent({...context,type:'tool_result',tool,title:safeLogValue(summary),data:{callId,status:is_error?'error':'success',durationMs:Math.round(performance.now()-started),...(is_error?{error:safeLogValue(out.error)}:{output:clip(JSON.stringify(safeLogValue(out)),MAX_RESULT)})}});
-     actions.push({tool:c.name,input:c.input??{},result_summary:summary});
+     actions.push({tool:c.name,callId,status:is_error?'error':'success',input:safeLogValue(c.input??{}),output:safeLogValue(out),durationMs:Math.round(performance.now()-started),result_summary:safeLogValue(summary)});
      results.push({type:'tool_result',tool_use_id:c.id,content:clip(JSON.stringify(out),MAX_RESULT),...(is_error?{is_error:true}:{})});
     }
     messages.push({role:'user',content:results});

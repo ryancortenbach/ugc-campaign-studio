@@ -1,7 +1,7 @@
 {
   "version": 2,
   "mode": "demo",
-  "preparedAt": "2026-10-24T20:31:55.212Z",
+  "preparedAt": "2026-10-24T20:50:08.857Z",
   "activeBrandIds": [
     "disobedient",
     "vylin"
@@ -162,8 +162,8 @@
         "posterUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
         "note": "Earlier generic lettering-cleanup asset. This source is real, but it is not a newly rendered branded garment swap."
       },
-      "storyboardImageUrl": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
-      "storyboardCaption": "Combined ImageGen approval sheet: Disobedient at left, VYLIN at right. Static concepts only. Exact logo fidelity and motion remain unverified.",
+      "storyboardImageUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
+      "storyboardCaption": "ImageGen revision frames: the same blank-front official hoodie in both poses. Still-image concept only; a corrected video has not been generated.",
       "script": {
         "durationSeconds": 8,
         "hook": "Same London character. Low Lives Hoodie. Shop disobedientnyc.com.",
@@ -203,20 +203,28 @@
         },
         "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
         "limitations": [
-          "Preparation only; no new branded video submitted or generated.",
           "Six-second source is within the first-15-second processing limit.",
           "Audio is preserved by Genjutsu; any new brand-specific speech requires separate voice/lip-sync work.",
           "Provider-accessible historical source verified: six seconds at30fps, without audio. Restore original local audio after garment repair.",
           "Planning estimate: $1.20 per brand at 720p, subject to account quote.",
           "Append a two-second website/product end card after the six-second garment repair."
-        ]
+        ],
+        "submission": {
+          "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+          "status": "completed",
+          "submittedAt": "2026-10-24T20:38:27.258Z",
+          "completedAt": "2026-10-24T20:44:11.165Z",
+          "estimatedUsd": 1.2,
+          "actualItemizedUsd": null,
+          "error": null
+        }
       },
       "outboundDemo": {
         "channel": "Email",
         "recipientLabel": "Disobedient team",
         "recipientStatus": "Brand email not yet verified.",
         "status": "draft",
-        "message": "Hey, this is a real outbound test of our creative workflow using Disobedient. The task contains the sourced research, a two-page brief and a hoodie concept around our London game character. The branded motion sample is still awaiting production. Product: https://disobedientnyc.com/products/low-lives-hoodie"
+        "message": "Hi Disobedient team, I made a short sample using our London game character and your Low Lives Hoodie. The two-page brief explains the audience hypothesis, product references and creative plan. The CTA leads to your product page: https://disobedientnyc.com/products/low-lives-hoodie. Would this be a useful creative direction to test?"
       },
       "reportUrl": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
       "offerPdfUrl": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
@@ -247,8 +255,14 @@
         "No verified paid-client relationship or inbound message",
         "Brand customer demographics, revenue and founder identity",
         "No verified target Meta ad or individual organic video",
-        "Human concept approval, production quote approval and actual branded Genjutsu output",
-        "Exact garment/logo motion QA and full audio review"
+        "Exact garment/logo motion QA and full audio review",
+        "Actual branded render/finishing and frame review in progress",
+        "Actual branded render/finishing and frame review in progress",
+        "Final human review of the generated sample before any email send",
+        "Final human review of the generated sample before any email send",
+        "Final human review of the generated sample before any email send",
+        "Final human review of the generated sample before any email send",
+        "Final human review of the generated sample before any email send"
       ],
       "cta": {
         "label": "Shop Low Lives Hoodie",
@@ -716,21 +730,381 @@
           "id": "production-approval",
           "stage": 5,
           "tool": "production approval",
-          "title": "Actual production approval pending",
+          "title": "User authorized the bounded sample generation",
           "mode": "recorded",
           "kind": "gate",
-          "status": "pending",
+          "status": "complete",
           "input": {
-            "planningEstimateUsd": 1.2
+            "maxTotalUsd": 3,
+            "retryCap": 0
           },
           "output": {
-            "approved": false,
-            "submitted": false
+            "approved": true,
+            "generationOnly": true,
+            "sendingAuthorized": false
           },
           "evidence": [],
-          "note": "This is a real unresolved gate. Replay does not approve or run it."
+          "note": "User requested generation after reviewing the displayed hoodie concepts and the quoted ceiling. This does not record approval of the finished media."
+        },
+        {
+          "id": "revision-storyboard-v2",
+          "stage": 4,
+          "tool": "ChatGPT ImageGen",
+          "title": "Prepare consistent blank-front revision frames",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "sourceFrames": 2,
+            "garmentReference": "Official front image only"
+          },
+          "output": {
+            "imageUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
+            "paidVideoRetrySubmitted": false
+          },
+          "note": "Static frames show the proposed fix. They do not establish video motion continuity or human approval."
+        },
+        {
+          "id": "genjutsu-render",
+          "stage": 4,
+          "tool": "higgsfield.genjutsu-light",
+          "title": "Disobedient: actual hoodie video render",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "completed",
+          "startedAt": "2026-10-24T20:38:27.258Z",
+          "completedAt": "2026-10-24T20:44:11.165Z",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+            "resolution": "720p",
+            "sourceSeconds": 6,
+            "inputSha256": "29b4d9eeb072027a9e5ab12f7d131f45281b35d9c35e75eda7c586f234bb7194"
+          },
+          "output": {
+            "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+            "renderId": 26,
+            "estimatedUsd": 1.2,
+            "actualItemizedUsd": null,
+            "rawVideoSha256": "bbd3f7ed892509f15f54b8f13d46dcc30f8daba2ed2ae37383e5204f9676ad15",
+            "error": null
+          },
+          "evidence": [],
+          "note": "Actual provider receipt. Final human review and email sending remain separate."
+        },
+        {
+          "id": "sample-assembly",
+          "stage": 4,
+          "tool": "ffmpeg + local CTA assembly",
+          "title": "Restore source audio and add the brand website CTA",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "sourceSeconds": 6,
+            "endCardSeconds": 2,
+            "cta": {
+              "label": "Shop Low Lives Hoodie",
+              "websiteUrl": "https://disobedientnyc.com/",
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+              "checkoutUrl": null
+            }
+          },
+          "output": {
+            "videoUrl": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4",
+            "verification": {
+              "brand": "disobedient",
+              "status": "local_media_checks_passed_human_review_pending",
+              "raw_file": "work/streetwear-demo-v1/disobedient-genjutsu-raw-v1.mp4",
+              "raw_sha256": "bbd3f7ed892509f15f54b8f13d46dcc30f8daba2ed2ae37383e5204f9676ad15",
+              "final_file": "agent/public/streetwear-demo-assets/disobedient-sample-v1.mp4",
+              "final_sha256": "4a7f4a07c7d89883a2ddc33799402eea28857685c708e1daf34063824f68dc15",
+              "raw_metadata": {
+                "width": 720,
+                "height": 1280,
+                "fps": 30,
+                "fps_rational": "30",
+                "duration": 6,
+                "codec": "h264",
+                "pixel_format": "yuv420p",
+                "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 8382 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+                "audio_present": false
+              },
+              "final_metadata": {
+                "width": 720,
+                "height": 1280,
+                "fps": 30,
+                "fps_rational": "30",
+                "duration": 8,
+                "codec": "h264",
+                "pixel_format": "yuv420p",
+                "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 6308 kb/s, 30 fps, 30 tbr, 90k tbn (default)",
+                "audio_present": true
+              },
+              "raw_frames": 180,
+              "final_frames": 240,
+              "raw_segment_decoded_frame_hashes_unchanged": true,
+              "video_encoding": "Provider frames concat-copied; only new CTA pictures encoded.",
+              "audio": {
+                "sample_rate": 48000,
+                "comparison": "decoded mono float32 PCM",
+                "compared_samples": 288000,
+                "source_rms": 0.21567000193125346,
+                "final_first_six_seconds_rms": 0.2154459042400082,
+                "peak_lag_samples": 0,
+                "peak_lag_seconds": 0,
+                "zero_lag_correlation": 0.9998690059888394,
+                "max_absolute_pcm_difference": 0.05569919943809509,
+                "endcard_rms_after_6_05_seconds": 0,
+                "note": "AAC is encoded once for the restored audio track; decoded correlation verifies alignment. Provider video is stream-copied."
+              },
+              "endcard": {
+                "brand": "Disobedient",
+                "product_name": "Low Lives Hoodie",
+                "cta": "Shop the hoodie",
+                "website_domain": "disobedientnyc.com",
+                "product_url": "https://disobedientnyc.com/products/low-lives-hoodie",
+                "logo_source_file": "agent/public/streetwear-demo-assets/disobedient-official-logo-v1.png",
+                "logo_sha256": "71484eba17113ae8c1ff9f6a96e7e0432004318f8b8bc9ad902c1c3c222dca6a",
+                "width": 720,
+                "height": 1280,
+                "text_bounds": [
+                  {
+                    "text": "Low Lives Hoodie",
+                    "bounds": [
+                      182,
+                      627,
+                      539,
+                      657
+                    ],
+                    "font": "Arial Bold"
+                  },
+                  {
+                    "text": "Shop the hoodie",
+                    "bounds": [
+                      184,
+                      832,
+                      536,
+                      873
+                    ],
+                    "font": "Arial Bold"
+                  },
+                  {
+                    "text": "disobedientnyc.com",
+                    "bounds": [
+                      232,
+                      922,
+                      488,
+                      949
+                    ],
+                    "font": "Arial"
+                  }
+                ],
+                "text_overflow": false,
+                "background": "#0a0a0c",
+                "font_family": "Arial",
+                "mint_checkout": false,
+                "source_asset_unchanged": true
+              },
+              "endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-v1.png",
+              "decoded_endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-decoded-v1.png",
+              "raw_input_preserved": true,
+              "paid_calls": 0,
+              "sends": 0,
+              "human_approval": false,
+              "visual_garment_qa": "separate_parent_review_required"
+            }
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4",
+              "title": "Actual generated and finished sample"
+            }
+          ],
+          "note": "Generated garment video with local audio/CTA finishing. Human approval is pending."
+        },
+        {
+          "id": "motion-qa",
+          "stage": 5,
+          "tool": "AI visual review + local media verification",
+          "title": "Review garment continuity and the website CTA",
+          "mode": "recorded",
+          "kind": "analysis",
+          "status": "needs_revision",
+          "input": {
+            "sampleUrl": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4"
+          },
+          "output": {
+            "status": "needs_revision",
+            "checkedAt": "2026-10-24T20:47:21.969481+00:00",
+            "method": "Visual inspection of 12 sampled provider frames and decoded CTA frame, plus full-stream decode checks",
+            "findings": [
+              "Near 4.5 to 6 seconds, the reference back artwork appears on the chest. The official front is blank.",
+              "Brand-specific dialogue was not generated. This preview retains the original source performance."
+            ],
+            "humanApproval": false,
+            "outreachReady": false
+          },
+          "note": "Human review is pending. The generated garment requires revision before outreach."
         }
-      ]
+      ],
+      "sampleVideo": {
+        "url": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4",
+        "title": "Disobedient: generated hoodie sample",
+        "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+        "status": "needs_revision",
+        "durationSeconds": 6,
+        "cta": {
+          "label": "Shop Low Lives Hoodie",
+          "websiteUrl": "https://disobedientnyc.com/",
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "checkoutUrl": null
+        },
+        "verification": {
+          "brand": "disobedient",
+          "status": "local_media_checks_passed_human_review_pending",
+          "raw_file": "work/streetwear-demo-v1/disobedient-genjutsu-raw-v1.mp4",
+          "raw_sha256": "bbd3f7ed892509f15f54b8f13d46dcc30f8daba2ed2ae37383e5204f9676ad15",
+          "final_file": "agent/public/streetwear-demo-assets/disobedient-sample-v1.mp4",
+          "final_sha256": "4a7f4a07c7d89883a2ddc33799402eea28857685c708e1daf34063824f68dc15",
+          "raw_metadata": {
+            "width": 720,
+            "height": 1280,
+            "fps": 30,
+            "fps_rational": "30",
+            "duration": 6,
+            "codec": "h264",
+            "pixel_format": "yuv420p",
+            "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 8382 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+            "audio_present": false
+          },
+          "final_metadata": {
+            "width": 720,
+            "height": 1280,
+            "fps": 30,
+            "fps_rational": "30",
+            "duration": 8,
+            "codec": "h264",
+            "pixel_format": "yuv420p",
+            "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 6308 kb/s, 30 fps, 30 tbr, 90k tbn (default)",
+            "audio_present": true
+          },
+          "raw_frames": 180,
+          "final_frames": 240,
+          "raw_segment_decoded_frame_hashes_unchanged": true,
+          "video_encoding": "Provider frames concat-copied; only new CTA pictures encoded.",
+          "audio": {
+            "sample_rate": 48000,
+            "comparison": "decoded mono float32 PCM",
+            "compared_samples": 288000,
+            "source_rms": 0.21567000193125346,
+            "final_first_six_seconds_rms": 0.2154459042400082,
+            "peak_lag_samples": 0,
+            "peak_lag_seconds": 0,
+            "zero_lag_correlation": 0.9998690059888394,
+            "max_absolute_pcm_difference": 0.05569919943809509,
+            "endcard_rms_after_6_05_seconds": 0,
+            "note": "AAC is encoded once for the restored audio track; decoded correlation verifies alignment. Provider video is stream-copied."
+          },
+          "endcard": {
+            "brand": "Disobedient",
+            "product_name": "Low Lives Hoodie",
+            "cta": "Shop the hoodie",
+            "website_domain": "disobedientnyc.com",
+            "product_url": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "logo_source_file": "agent/public/streetwear-demo-assets/disobedient-official-logo-v1.png",
+            "logo_sha256": "71484eba17113ae8c1ff9f6a96e7e0432004318f8b8bc9ad902c1c3c222dca6a",
+            "width": 720,
+            "height": 1280,
+            "text_bounds": [
+              {
+                "text": "Low Lives Hoodie",
+                "bounds": [
+                  182,
+                  627,
+                  539,
+                  657
+                ],
+                "font": "Arial Bold"
+              },
+              {
+                "text": "Shop the hoodie",
+                "bounds": [
+                  184,
+                  832,
+                  536,
+                  873
+                ],
+                "font": "Arial Bold"
+              },
+              {
+                "text": "disobedientnyc.com",
+                "bounds": [
+                  232,
+                  922,
+                  488,
+                  949
+                ],
+                "font": "Arial"
+              }
+            ],
+            "text_overflow": false,
+            "background": "#0a0a0c",
+            "font_family": "Arial",
+            "mint_checkout": false,
+            "source_asset_unchanged": true
+          },
+          "endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-v1.png",
+          "decoded_endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-decoded-v1.png",
+          "raw_input_preserved": true,
+          "paid_calls": 0,
+          "sends": 0,
+          "human_approval": false,
+          "visual_garment_qa": "separate_parent_review_required"
+        },
+        "visualQA": {
+          "status": "needs_revision",
+          "checkedAt": "2026-10-24T20:47:21.969481+00:00",
+          "method": "Visual inspection of 12 sampled provider frames and decoded CTA frame, plus full-stream decode checks",
+          "findings": [
+            "Near 4.5 to 6 seconds, the reference back artwork appears on the chest. The official front is blank.",
+            "Brand-specific dialogue was not generated. This preview retains the original source performance."
+          ],
+          "humanApproval": false,
+          "outreachReady": false
+        },
+        "assembledVideoUrl": "/streetwear-demo-assets/disobedient-sample-v1.mp4",
+        "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
+        "containsCTA": false
+      },
+      "revisionDraft": {
+        "brandId": "disobedient",
+        "createdAt": "2026-10-24T20:50:08.761568+00:00",
+        "status": "prepared_not_submitted",
+        "paidRetryAuthorized": false,
+        "previousRequestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+        "revisionReason": "The back artwork leaked onto the chest in later shots.",
+        "referenceRule": "Use one front image only. The actual official front is blank.",
+        "request": {
+          "prompt": "Replace only the original blue zip hoodie with the exact light heather grey pullover shown in the sole reference image. The front is blank: no logo, no lettering, no musical staff, no treble clef, no artwork, no zipper and no drawstrings. Keep this same blank-front pullover continuously in EVERY frame, every camera angle, including the late reclined arms-behind-head pose. Keep its colour, fabric, seams, kangaroo pocket and construction consistent. There is no view of the back in this source, so no back artwork should be visible at any time. Use only the provided front photograph. Preserve the original fictional male face, blond braids, facial animation, hands, body, trousers, shoes, furniture, original camera shots, timing, penthouse, London skyline, dusk lighting and PS2 rendering. Do not create transitions, extra scenes, text, brand marks, title cards or CTAs. Garment repair only.",
+          "resolution": "720p",
+          "image_urls": [
+            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389"
+          ],
+          "video_url": "[existing six-second provider source, private binding retained locally]"
+        },
+        "estimatedUsd": 1.2,
+        "estimateStatus": "Planning estimate at previously verified 720p list rate; refresh before submission",
+        "storyboardUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
+        "staticReview": {
+          "blankFrontAcrossBothPoses": true,
+          "zipperAbsent": true,
+          "sameCharacterAndScene": true,
+          "motionContinuity": "Not verified by still images",
+          "humanApproval": false
+        },
+        "ctaRule": "Garment-only footage review first. Separate CTA still preview. Append CTA only after garment approval.",
+        "sends": 0
+      }
     },
     {
       "id": "vylin",
@@ -915,13 +1289,21 @@
         },
         "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
         "limitations": [
-          "Preparation only; no new branded video submitted or generated.",
           "Six-second source is within the first-15-second processing limit.",
           "Audio is preserved by Genjutsu; any new brand-specific speech requires separate voice/lip-sync work.",
           "Provider-accessible historical source verified: six seconds at30fps, without audio. Restore original local audio after garment repair.",
           "Planning estimate: $1.20 per brand at 720p, subject to account quote.",
           "Append a two-second website/product end card after the six-second garment repair."
-        ]
+        ],
+        "submission": {
+          "requestId": "f0b00cae-6ade-4a03-a54a-329424d63223",
+          "status": "failed",
+          "submittedAt": "2026-10-24T20:38:27.724Z",
+          "completedAt": null,
+          "estimatedUsd": 1.2,
+          "actualItemizedUsd": null,
+          "error": "Your credit balance is too low to complete this request. Please top up your balance and try again."
+        }
       },
       "outboundDemo": {
         "channel": "Email",
@@ -963,8 +1345,14 @@
         "No verified paid-client relationship or inbound message",
         "Brand customer demographics, revenue and founder identity",
         "No verified target Meta ad or individual organic video",
-        "Human concept approval, production quote approval and actual branded Genjutsu output",
-        "Exact garment/logo motion QA and full audio review"
+        "Exact garment/logo motion QA and full audio review",
+        "Actual branded render/finishing and frame review in progress",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted.",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted.",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted.",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted.",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted.",
+        "Provider failed: Your credit balance is too low to complete this request. Please top up your balance and try again.. No retry submitted."
       ],
       "cta": {
         "label": "Shop Cream Headphones Black Zip Hoodie",
@@ -1432,19 +1820,47 @@
           "id": "production-approval",
           "stage": 5,
           "tool": "production approval",
-          "title": "Actual production approval pending",
+          "title": "User authorized the bounded sample generation",
           "mode": "recorded",
           "kind": "gate",
-          "status": "pending",
+          "status": "complete",
           "input": {
-            "planningEstimateUsd": 1.2
+            "maxTotalUsd": 3,
+            "retryCap": 0
           },
           "output": {
-            "approved": false,
-            "submitted": false
+            "approved": true,
+            "generationOnly": true,
+            "sendingAuthorized": false
           },
           "evidence": [],
-          "note": "This is a real unresolved gate. Replay does not approve or run it."
+          "note": "User requested generation after reviewing the displayed hoodie concepts and the quoted ceiling. This does not record approval of the finished media."
+        },
+        {
+          "id": "genjutsu-render",
+          "stage": 4,
+          "tool": "higgsfield.genjutsu-light",
+          "title": "VYLIN: actual hoodie video render",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "failed",
+          "startedAt": "2026-10-24T20:38:27.724Z",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+            "resolution": "720p",
+            "sourceSeconds": 6,
+            "inputSha256": "e490753c0052ede168e6b812716dc29306d18404ed1333fe92fd3fb0f3f101bf"
+          },
+          "output": {
+            "requestId": "f0b00cae-6ade-4a03-a54a-329424d63223",
+            "renderId": 27,
+            "estimatedUsd": 1.2,
+            "actualItemizedUsd": null,
+            "rawVideoSha256": null,
+            "error": "Your credit balance is too low to complete this request. Please top up your balance and try again."
+          },
+          "evidence": [],
+          "note": "Actual provider receipt. Final human review and email sending remain separate."
         }
       ]
     },

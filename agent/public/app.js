@@ -1,3 +1,6 @@
+import {mountTaskReviewQueue} from './task-review-queue.js';
+import {mountChatActivity} from './chat-activity.js';
+import {renderActive,reviewReady,renderGroup,renderLength,renderModel,watchRecords} from './render-monitor.js';
 import {icons} from './icons.js';
 import {voicesView} from './voices.js';
 import {connectionStatus} from './connection-status.js';
@@ -246,10 +249,10 @@ $('#livefeed').addEventListener('click',e=>{
 
 
 const video=r=>r.local_file?`<video src="/renders/${esc(r.local_file)}#t=0.1" controls playsinline preload="metadata"></video>`:r.result_url?`<video src="${esc(r.result_url)}#t=0.1" controls playsinline preload="metadata"></video>`:'';
-function reviewCard(r){return `<div class="review" data-review="${r.id}">${video(r)}<div class="rbody"><div class="eyebrow" style="margin-bottom:6px">Scene ready for review</div><div style="font-weight:600">${esc(r.title)}</div><div class="faint" style="font-size:11.5px;margin:2px 0 8px">${esc(r.group_name||'Single shot')} · ${r.input.duration}s · ${esc(r.input.resolution)}${r.estimate_usd?` · about $${esc(r.estimate_usd)}`:''}</div><input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button></div></div></div>`;}
+function reviewCard(r){return `<div class="review" data-review="${r.id}">${video(r)}<div class="rbody"><div class="eyebrow" style="margin-bottom:6px">Scene ready for review</div>${r.plan?.visualQA?.status==='needs_revision'?`<p class="s-bad">AI review: needs revision. ${esc(r.plan.visualQA.findings[0])}</p>`:''}<div style="font-weight:600">${esc(r.title)}</div><div class="faint" style="font-size:11.5px;margin:2px 0 8px">${esc(r.group_name||'Single shot')} · ${renderLength(r)?esc(renderLength(r))+'s':'Length pending'} · ${esc(r.input.resolution)}${r.estimate_usd?` · about $${esc(r.estimate_usd)}`:''}</div><input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button></div></div></div>`;}
 function bindReviews(after){document.querySelectorAll('[data-decide]').forEach(b=>b.onclick=async()=>{const id=b.dataset.id;const note=document.querySelector(`[data-note="${id}"]`)?.value||'';try{await api(`/api/renders/${id}/review`,{decision:b.dataset.decide,note});b.dataset.decide==='approved'?toast('Scene approved','ok'):toast('Scene rejected','bad','Use Revise to queue a fixed version.');document.querySelector(`#pop-${id}`)?.remove();after?.();}catch(err){toast(err.message,'bad');}});}
 const popped=new Set();
-function popReview(r){if(popped.has(r.id))return;popped.add(r.id);const el=document.createElement('div');el.className='popup';el.id=`pop-${r.id}`;el.innerHTML=`<button class="x" title="Dismiss">×</button>${reviewCard(r)}`;document.body.append(el);el.querySelector('.x').onclick=()=>el.remove();bindReviews(()=>route());}
+function popReview(r){if(tab()==='home'||!reviewReady(r)||popped.has(r.id))return;popped.add(r.id);const el=document.createElement('div');el.className='popup';el.id=`pop-${r.id}`;el.innerHTML=`<button class="x" title="Dismiss">×</button>${reviewCard(r)}`;document.body.append(el);el.querySelector('.x').onclick=()=>el.remove();bindReviews(()=>route());}
 
 function startMission(form){form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type=submit]');if(!f.message.value.trim())return;b.disabled=true;try{const {task}=await api('/api/chat',{message:f.message.value});f.reset();toast('Mission started','ok',`Task ${task.id}`);location.hash=`#/tasks/${task.id}`;}catch(err){toast(err.message,'bad');}finally{b.disabled=false;}});form.message?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))form.requestSubmit();});}
 
@@ -279,7 +282,7 @@ function sessControls(g){
  return (run.status==='running'?btn('pause','pause','Pause'):run.status==='paused'?btn('resume','play','Resume'):'')+btn('stop','square','Stop');
 }
 function sessHead(g,open,nav){
- const idea=g.runs[0]?.plan?.kind==='brand_storyboard',st=ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
+ const idea=g.runs[0]?.plan?.kind==='brand_storyboard',demo=g.runs[0]?.plan?.clientDemo,st=demo?.stage==='revision_required'?['Needs revision','s-you']:demo?.stage==='generation_failed'?['Generation failed','s-bad']:demo?.stage==='rendering'?['Rendering','s-run']:demo?.stage==='final_human_review'?['Needs review','s-you']:ts(g.status),cnt=(cls,icon,n)=>`<span class="scnt ${n?cls:'zero'}" data-tip="${cls==='s-ok'?'Drafts ready':'Failed'}">${ic(icon)}${n}</span>`;
  return `<div class="sess-h" data-sh="${g.key}" ${nav?`data-nav="#/tasks/${g.runs[0].id}" `:''}role="button" tabindex="0" aria-expanded="${open}">
   <span class="schev">${ic(idea||g.whop?'file-text':'chevron-right')}</span>
   <div class="stitle">${g.whop?'<img class="wlogo" src="/logos/whop.png" alt="Whop" data-tip="Whop order">':''}<b>${esc(g.title)}</b></div>
@@ -601,7 +604,7 @@ async function sendComposer(){
   if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');location.hash='#/storyboards';}
   else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});done();toast('Shot added','ok','Run checks on it in Renders.');location.hash='#/renders';}
   else if(!attachments.length&&thread.ok&&tab()==='home'){
-   thread.messages.push({role:'user',text});thread.thinking=true;done();paintThread();
+   thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
    try{const r=await api('/api/assistant',{message:text,model});thread.messages.push({role:'assistant',text:r.reply,actions:r.actions});if(spoken)voice.speak(r.reply);}
    catch(err){thread.messages.pop();f.message.value=text;toast(err.message,'bad');}
    finally{thread.thinking=false;paintThread();}
@@ -655,16 +658,20 @@ function stepsHTML(key,items){
  return `<div class="steps-wrap"><button type="button" class="steps" data-steps="${esc(key)}" aria-expanded="${open}"><span class="stack">${logos.map(l=>`<img src="${logoSrc(l)}" alt="">`).join('')}</span><span>${items.length} step${items.length===1?'':'s'}</span></button>${open?`<div class="tg-kids steps-kids">${items.map((i,n)=>`<div class="tg-kid${n===items.length-1?' last':''}"><span class="nd"></span><div class="kd-main static"><img class="kd-logo" src="${logoSrc(i.logo)}" alt=""><span class="kd-name">${esc(i.label)}</span></div></div>`).join('')}</div>`:''}</div>`;
 }
 function threadHTML(){
- return thread.messages.map((m,i)=>m.role==='user'?`<div class="msg-u">${esc(m.text)}</div>`:`<div class="msg-a">${claudeAv()}<div><div class="txt">${esc(m.text)}</div>${(m.actions||[]).filter(a=>a.tool==='prepare_client_demo'&&Number.isInteger(a.input?.taskId)).map(a=>`<p><a class="linkbtn" href="#/tasks/${a.input.taskId}">Open ${esc(({waddle:'Waddle',awardscholar:'Award Scholar',disobedient:'Disobedient',vylin:'VYLIN'})[a.input.brandId]||'client')} demo</a></p>`).join('')}${stepsHTML('a'+i,(m.actions||[]).map(a=>({label:actionLabel(a),logo:'claude'})))}</div></div>`).join('')+(thread.thinking?`<div class="msg-a">${claudeAv()}<div class="thinking"><i></i><i></i><i></i></div></div>`:'');
+ return thread.messages.map((m,i)=>m.role==='user'?`<div class="msg-u">${esc(m.text)}</div>`:`<div class="msg-a">${claudeAv()}<div><div class="txt">${esc(m.text)}</div><div data-ap-chat-message="${i}"></div></div></div>`).join('')+(thread.thinking?`<div class="msg-a">${claudeAv()}<div><div class="thinking"><i></i><i></i><i></i></div><div data-ap-chat-pending></div></div></div>`:'');
+}
+function paintChatActivity(){
+ const host=$('#thread');if(!host)return;
+ host.querySelectorAll('[data-ap-chat-message]').forEach(el=>{const m=thread.messages[Number(el.dataset.apChatMessage)];mountChatActivity(el,{actions:m.actions||[],events:state.live}).catch(()=>{});});
+ const pending=host.querySelector('[data-ap-chat-pending]');if(pending)mountChatActivity(pending,{pending:true,events:state.live.filter(e=>String(e.tool).startsWith('assistant.')&&Date.parse(e.at)>=thread.startedAt)}).catch(()=>{});
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-steps]');if(!b)return;const k=b.dataset.steps;openSteps.has(k)?openSteps.delete(k):openSteps.add(k);const t=$('#thread');if(t&&t.contains(b))paintThread();else{const g=b.closest('.thread2');if(g){const key=g.dataset.thread,grp=groupByKey(key);if(grp)g.innerHTML=threadHTML2(grp);}}});
-function paintThread(){const t=$('#thread');if(!t)return;t.innerHTML=threadHTML();t.hidden=!thread.messages.length&&!thread.thinking;$('.home')?.classList.toggle('chatting',!t.hidden);t.lastElementChild?.scrollIntoView({block:'end'});}
+function paintThread(){const t=$('#thread');if(!t)return;t.innerHTML=threadHTML();paintChatActivity();t.hidden=!thread.messages.length&&!thread.thinking;$('.home')?.classList.toggle('chatting',!t.hidden);t.lastElementChild?.scrollIntoView({block:'end'});}
 async function loadThread(){try{const r=await api('/api/assistant');thread.messages=r.messages||[];thread.ok=true;}catch{thread.ok=false;}paintThread();}
 async function home(){
- const {renders}=await api('/api/renders');
- const pending=renders.filter(r=>r.review==='pending'),live=sessionGroups().filter(g=>g.live.length);
+ const live=sessionGroups().filter(g=>g.live.length);
+ document.querySelectorAll('.popup').forEach(el=>el.remove());
  $('#view').innerHTML=`<div class="home"><div id="thread" class="thread" hidden></div><div class="home-center"><h2 class="greet">What should Mint work on?</h2>${composerHTML()}${modesHTML()}<div class="suggest" id="csuggest">${suggestHTML()}</div></div>
-  ${pending.length?`<div class="section-title">Scenes awaiting your review <span class="badge">${pending.length}</span></div><div class="reviews">${pending.map(reviewCard).join('')}</div>`:''}
   ${live.length?`<div class="section-title">Running now <span class="count">${live.length}</span></div><div class="sessions compact">${live.map(g=>sessionCard(g,{nav:true})).join('')}</div>`:''}
  </div>`;
  bindComposer();bindSuggest();bindReviews(()=>route());paintThread();loadThread();
@@ -687,8 +694,9 @@ async function tasks(arg,{isCurrent=()=>true}={}){
  if(!isCurrent())return;
  const sw=(idn,on,tip,label,dis)=>`<label class="switch" data-tip="${esc(tip)}"><input type="checkbox" role="switch" aria-label="${label}" id="${idn}" ${on?'checked':''} ${dis?'disabled':''}><i aria-hidden="true"></i><span>${label}</span><span class="switch-state">${on?'On':'Off'}</span></label>`;
  const bar=[ap?sw('apswitch',ap.enabled,ap.enabled?`On: starts the next batch when one finishes, up to $${Number(ap.dailyBudgetUsd).toFixed(2)} a day`:'Off: Mint waits for you to start missions','Always on'):'',whop?sw('whopswitch',whop.enabled,whop.configured?(whop.enabled?'On: a Whop purchase starts work on its own':'Off: purchases wait for you'):'Add WHOP_API_KEY to turn this on','Watch new purchases',!whop.configured):''].join('');
- $('#view').innerHTML=`${bar?`<div class="pagebar"><div class="automation-controls">${bar}${ap?`<span class="automation-limit">${usd(ap.dailyBudgetUsd)} daily limit</span>`:''}</div></div>`:''}${ordersHTML()}
+ $('#view').innerHTML=`${bar?`<div class="pagebar"><div class="automation-controls">${bar}${ap?`<span class="automation-limit">${usd(ap.dailyBudgetUsd)} daily limit</span>`:''}</div></div>`:''}${ordersHTML()}<div data-ap-review-queue></div>
   <div class="sessions" id="sessions">${groups.map(g=>sessionCard(g)).join('')||'<div class="idle">No missions yet. Start one from Home.</div>'}</div>`;
+ const reviewHost=$('[data-ap-review-queue]');if(reviewHost)mountTaskReviewQueue(reviewHost);
  if(state.scrollTo){document.querySelector(`.sess[data-sess="${state.scrollTo}"]`)?.scrollIntoView({block:'start'});state.scrollTo=null;}
  for(const el of document.querySelectorAll('.console:not([hidden])'))el.scrollTop=el.scrollHeight;
  $('#apswitch')?.addEventListener('change',async e=>{const input=e.target;input.disabled=true;try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');tasks(id);}catch(err){input.checked=!input.checked;toast(err.message,'bad');}finally{input.disabled=false;}});
@@ -814,15 +822,18 @@ async function drafts(){location.replace('#/leads/drafts');}
 
 const renderStatus={draft:['Needs checks','s-wait'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Awaiting spend approval','s-you'],submitting:['Submitting once','s-run'],submission_unknown:['Outcome uncertain: reconcile before retry','s-bad'],queued:['Queued','s-run'],in_progress:['Rendering','s-run'],completed:['Rendered','s-ok'],failed:['Failed','s-bad'],nsfw:['Blocked','s-bad'],canceled:['Canceled','s-idle']};
 const reviewStatus={pending:['Awaiting your review','s-you'],approved:['Approved','s-ok'],rejected:['Rejected','s-bad']};
-const renderGroup=r=>r.stale||r.status==='submission_unknown'?'fix':r.revising||r.status==='checking'?'work':r.review==='pending'||r.status==='checks_passed'?'you':['queued','in_progress','submitting','checking'].includes(r.status)?'work':['checks_failed','failed','nsfw','submission_unknown','draft'].includes(r.status)||r.review==='rejected'?'fix':'done';
-async function renders(){
- const {renders:list,enabled}=await api('/api/renders');
+let renderWatcher;
+const renderViewBusy=()=>[...document.querySelectorAll('#view video,#view audio')].some(v=>!v.paused&&!v.ended)||Boolean(document.querySelector('#newshot:not([hidden])'))||[...document.querySelectorAll('#view input[type="text"],#view textarea')].some(el=>el===document.activeElement||el.value);
+async function renders(arg,{isCurrent=()=>tab()==='renders'}={}){
+ renderWatcher?.stop();
+ const payload=await api('/api/renders');if(!isCurrent())return;
+ const {renders:list,enabled}=payload;
  // One status per real state, with its own icon: queued, rendering, needs approval, done, failed.
  const renderState=r=>{
   if(r.stale||r.status==='submission_unknown')return ['Check Higgsfield','s-bad','triangle-alert'];
-  if(r.review==='pending')return ['Review the scene','s-you','circle-alert'];
-  if(r.review==='approved')return ['Approved','s-ok','circle-check'];
-  if(r.review==='rejected')return ['Rejected','s-bad','circle-x'];
+  if(reviewReady(r))return ['Review the scene','s-you','circle-alert'];
+  if(r.status==='completed'&&r.review==='approved')return ['Approved','s-ok','circle-check'];
+  if(r.status==='completed'&&r.review==='rejected')return ['Rejected','s-bad','circle-x'];
   if(r.status==='checking'||(r.status==='checks_failed'&&r.revising))return ['Working','s-run','loader'];
   return ({draft:['Needs checks','s-wait','clock'],checks_failed:['Needs work','s-bad','circle-x'],checks_passed:['Needs your approval','s-you','circle-alert'],submitting:['Submitting','s-run','loader'],queued:['Queued','s-wait','clock'],in_progress:['Rendering','s-run','loader'],completed:['Done','s-ok','circle-check'],failed:['Failed','s-bad','circle-x'],nsfw:['Blocked','s-bad','circle-x'],canceled:['Canceled','s-idle','ban']})[r.status]||[r.status,'s-idle','circle-alert'];
  };
@@ -835,21 +846,21 @@ async function renders(){
   r.review==='rejected'||r.status==='checks_failed'?iconBtn(`data-revise="${r.id}"`,'wand-sparkles','Revise with checker notes'):'',
   r.status==='checks_passed'&&r.estimate_usd?`<button class="btn sm go" data-approve="${r.id}" data-est="${esc(r.estimate_usd)}" title="About $${esc(r.estimate_usd)} on Higgsfield">Approve</button>`:'',
   r.status==='queued'?`<button class="btn sm stop" data-cancel="${r.id}">Cancel</button>`:'',
-  r.review==='pending'?`<button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button>`:''].join('');
+  reviewReady(r)?`<button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button>`:''].join('');
   const next=stuck?'Find this shot in Higgsfield before anything else. If it is there, paste its request ID. If Higgsfield has no job for it, mark it never started and approve it again.':'';
   const media=video(r),prev=media?`<div class="rmedia">${media}</div>`:r.lead_id?`<div class="rtile">${brandThumb({id:r.lead_id,company:r.title},'fill')}</div>`:`<div class="rtile hf"><img src="/logos/higgsfield.png" alt=""></div>`;
-  return `<div class="rcard${media?'':' no-media'}" data-state="${renderGroup(r)}"><div class="rprev${media?'':' placeholder'}">${prev}</div><div class="rmain"><div class="rtitle"><b>${esc(r.title)}</b><span class="mono faint">#${r.id}</span><span class="rside2">${rstat(st)}</span></div>
+  return `<div class="rcard${media?'':' no-media'}" data-ap-render-id="${r.id}" data-state="${renderGroup(r)}"><div class="rprev${media?'':' placeholder'}">${prev}</div><div class="rmain"><div class="rtitle"><b>${esc(r.title)}</b><span class="mono faint">#${r.id}</span><span class="rside2">${rstat(st)}</span></div>
    <div class="rrow">${low?`<span class="ringwrap" data-tip="Lowest checker: ${esc(low.name)}">${ring(low.score,'sm')}</span>`:''}<button type="button" class="hfbtn" data-hf="${r.id}" aria-expanded="false" data-tip="Details" aria-label="Details"><img src="/logos/higgsfield.png" alt=""></button><span class="ractions">${acts}</span></div>
-   ${r.review_note?`<div class="${r.review==='rejected'?'s-bad':'muted'}" style="font-size:11.5px">Review: ${esc(r.review_note)}</div>`:''}${r.error?`<div class="s-bad" style="font-size:11.5px">${esc(r.error)}</div>`:''}
-   <div class="rdetail" data-hfbody="${r.id}" hidden><dl><dt>Model</dt><dd>Seedance 2.5</dd><dt>Length</dt><dd>${r.input.duration}s</dd><dt>Resolution</dt><dd>${esc(r.input.resolution)}</dd><dt>Price</dt><dd>${r.estimate_usd?`about $${esc(r.estimate_usd)}`:'Shown after checks pass'}</dd><dt>Prompt</dt><dd>${esc(r.input.prompt)}</dd>${r.checks?`<dt>Checks</dt><dd>${ringsHTML(r.checks)}</dd>`:''}${r.status==='completed'&&r.result_url?`<dt>Human</dt><dd data-panel="${r.id}"></dd>`:''}</dl></div>
-   ${next?`<div class="hint">${esc(next)}</div>`:''}${stuck?`<form id="reconcile-${r.id}" data-reconcile="${r.id}" style="margin-top:10px"><div class="meta">${r.approved_at?`<span>Approved ${esc(new Date(r.approved_at).toLocaleString())}</span>`:''}<span class="mono">Key ${esc(r.submission_key||'none')}</span></div><input type="text" name="requestId" placeholder="Higgsfield request ID" autocomplete="off" style="margin-top:8px"><div class="ractions"><button class="btn sm go" type="submit">It went through</button><button class="btn sm" type="button" data-never="${r.id}">It never started</button></div></form>`:''}${r.review==='pending'?`<input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix" style="margin-top:8px">`:''}</div></div>`;};
+   ${renderActive(r)?'<p class="hint">Rendering on Higgsfield. The player appears when the clip is ready.</p>':''}${r.plan?.visualQA?.status==='needs_revision'?`<p class="s-bad" style="font-size:12px">AI review: needs revision. ${esc(r.plan.visualQA.findings.join(' '))}</p>`:''}${r.review_note?`<div class="${r.review==='rejected'?'s-bad':'muted'}" style="font-size:11.5px">Review: ${esc(r.review_note)}</div>`:''}${r.error?`<div class="s-bad" style="font-size:11.5px">${esc(r.error)}</div>`:''}
+   <div class="rdetail" data-hfbody="${r.id}" hidden><dl><dt>Model</dt><dd>${esc(renderModel(r))}</dd><dt>Length</dt><dd>${renderLength(r)?esc(renderLength(r))+'s':'Length pending'}</dd><dt>Resolution</dt><dd>${esc(r.input.resolution)}</dd><dt>Price</dt><dd>${r.estimate_usd?`about $${esc(r.estimate_usd)}`:'Shown after checks pass'}</dd><dt>Prompt</dt><dd>${esc(r.input.prompt)}</dd>${r.checks?`<dt>Checks</dt><dd>${ringsHTML(r.checks)}</dd>`:''}${r.status==='completed'&&r.result_url?`<dt>Human</dt><dd data-panel="${r.id}"></dd>`:''}</dl></div>
+   ${next?`<div class="hint">${esc(next)}</div>`:''}${stuck?`<form id="reconcile-${r.id}" data-reconcile="${r.id}" style="margin-top:10px"><div class="meta">${r.approved_at?`<span>Approved ${esc(new Date(r.approved_at).toLocaleString())}</span>`:''}<span class="mono">Key ${esc(r.submission_key||'none')}</span></div><input type="text" name="requestId" placeholder="Higgsfield request ID" autocomplete="off" style="margin-top:8px"><div class="ractions"><button class="btn sm go" type="submit">It went through</button><button class="btn sm" type="button" data-never="${r.id}">It never started</button></div></form>`:''}${reviewReady(r)?`<input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix" style="margin-top:8px">`:''}</div></div>`;};
  const groups=[['all','All','layers'],['you','Needs you','circle-alert'],['work','Rendering','loader'],['fix','Needs work','wrench'],['done','Done','circle-check']],counts=Object.fromEntries(groups.map(([k])=>[k,k==='all'?list.length:list.filter(r=>renderGroup(r)===k).length]));
  const savedFilter=pref.get('rfilter','all'),filter=groups.some(([k])=>k===savedFilter)?savedFilter:'all';
  $('#view').innerHTML=`<div class="pagebar"><div class="seg">${groups.map(([k,l,i])=>`<button type="button" data-rf="${k}" class="${k===filter?'on':''}">${ic(i)}${l}${counts[k]?` <span class="n">${counts[k]}</span>`:''}</button>`).join('')}</div><button class="btn go sm" id="newshotbtn" type="button">${ic('plus')}New shot</button></div>
   <form class="card newshot" id="newshot" hidden><div class="body"><input type="text" name="title" placeholder="Shot title, e.g. Hook shot, rooftop" required aria-label="Title"><textarea name="prompt" rows="3" required placeholder="Describe one shot: character, action, camera and dialogue" aria-label="Prompt"></textarea><div class="row"><select name="duration" aria-label="Length"><option value="5">5 seconds</option><option value="8">8 seconds</option><option value="10">10 seconds</option></select><select name="resolution" aria-label="Resolution"><option>720p</option><option>480p</option><option>1080p</option></select><span class="faint" style="flex:1">${enabled?'Seedance 2.5 on Higgsfield. Checks run first, then you approve the price.':'Higgsfield is not connected.'}</span><button type="button" class="btn sm" id="newshotx">Cancel</button><button class="btn sm go" type="submit">Add shot</button></div></div></form>
-  <div class="rcards">${list.map(row).join('')}<div class="idle" id="render-empty" role="status" hidden></div></div>`;
+  <p class="hint" data-ap-render-monitor role="status">Monitoring render status every 5 seconds.</p><div class="rcards">${list.map(row).join('')}<div class="idle" id="render-empty" role="status" hidden></div></div>`;
  const applyFilter=k=>{pref.set('rfilter',k);document.querySelectorAll('[data-rf]').forEach(b=>b.classList.toggle('on',b.dataset.rf===k));document.querySelectorAll('.rcard').forEach(c=>{c.hidden=k!=='all'&&c.dataset.state!==k;});const empty=$('#render-empty');empty.hidden=counts[k]>0;empty.textContent=({all:'No renders available yet.',you:'Nothing needs your review.',work:'No renders in progress.',fix:'No renders need work.',done:'No completed renders available.'})[k];};
- document.querySelectorAll('[data-rf]').forEach(b=>b.onclick=()=>applyFilter(b.dataset.rf));applyFilter(filter);
+ document.querySelectorAll('[data-rf]').forEach(b=>b.onclick=()=>applyFilter(b.dataset.rf));applyFilter(Number.isInteger(arg)?'all':filter);if(Number.isInteger(arg))document.querySelector(`[data-ap-render-id="${arg}"]`)?.scrollIntoView({block:'center'});
  $('#newshotbtn').onclick=()=>{$('#newshot').hidden=false;$('#newshot input').focus();};$('#newshotx').onclick=()=>{$('#newshot').hidden=true;};
  $('#newshot').onsubmit=async e=>{e.preventDefault();const f=e.target;try{await api('/api/renders',{title:f.title.value,prompt:f.prompt.value,duration:Number(f.duration.value),resolution:f.resolution.value});toast('Shot added','ok','Run checks on it next.');renders();}catch(err){toast(err.message,'bad');}};
  document.querySelectorAll('[data-check]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.classList.add('spin');try{await api(`/api/renders/${b.dataset.check}/check`,{});}catch(err){toast(err.message,'bad');}renders();});
@@ -860,6 +871,8 @@ async function renders(){
  document.querySelectorAll('[data-never]').forEach(b=>b.onclick=async()=>{if(!confirm('Only continue if Higgsfield has no job for this shot. Approving it again sends the same key.'))return;try{await api(`/api/renders/${b.dataset.never}/reconcile`,{outcome:'not_submitted'});toast('Marked as never started','ok','Approve it again when you are ready.');}catch(err){toast(err.message,'bad');}renders();});
  document.querySelectorAll('[data-hf]').forEach(b=>b.onclick=()=>{const body=document.querySelector(`[data-hfbody="${b.dataset.hf}"]`);body.hidden=!body.hidden;b.setAttribute('aria-expanded',String(!body.hidden));b.classList.toggle('on',!body.hidden);});
  bindReviews(()=>renders());
+ const host=$('#view'),cards=host.querySelector('.rcards');
+ renderWatcher=watchRecords({schedule:(fn,ms)=>window.setTimeout(fn,ms),cancel:id=>window.clearTimeout(id),initial:payload,isCurrent:()=>tab()==='renders'&&host.isConnected&&document.querySelector('#view')===host&&host.querySelector('.rcards')===cards,canUpdate:()=>!renderViewBusy(),read:async signal=>{const response=await fetch('/api/renders',{signal});if(!response.ok)throw Error('Render status unavailable');return response.json();},onChange:async()=>{const top=host.scrollTop;await renders();host.scrollTop=top;},onStatus:({ok,at})=>{const label=host.querySelector('[data-ap-render-monitor]');if(label)label.textContent=ok?'Monitoring active. Checked '+new Date(at).toLocaleTimeString()+'.':'Connection interrupted. Monitoring will retry without submitting another render.';}});
  import('/panel-check.js').then(m=>document.querySelectorAll('[data-panel]').forEach(host=>m.panelSection({render:list.find(x=>x.id===Number(host.dataset.panel)),api,esc,toast,host}))).catch(()=>{});
 }
 const boardStatus={draft:['Needs checks','s-wait'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Ready for your approval','s-you'],approved:['Approved, in Renders','s-ok']};
@@ -929,6 +942,7 @@ async function clientDemo(arg,{isCurrent=()=>true}={}){const {mountClientDemo}=a
 const views={analytics,home,tasks,orders,leads,drafts,storyboards,renders,voices,settings,production,'client-demo':clientDemo};
 let lastView,routeVersion=0;
 async function route(){
+ renderWatcher?.stop();
  const version=++routeVersion,isCurrent=()=>version===routeVersion;
  const [pathPart,query]=location.hash.slice(2).split('?'),[name,arg]=pathPart.split('/');
  const wantRail=new URLSearchParams(query||'').get('rail');if(['live','spend','conn','browser'].includes(wantRail))openRail(wantRail);
@@ -945,7 +959,7 @@ async function route(){
  renderShell();
 }
 window.addEventListener('hashchange',route);
-loadLive().catch(()=>{}).then(route).then(()=>api('/api/renders')).then(({renders})=>renders.filter(r=>r.review==='pending').slice(0,2).forEach(popReview)).catch(()=>{});
+loadLive().catch(()=>{}).then(route).then(()=>api('/api/renders')).then(({renders})=>renders.filter(reviewReady).slice(0,2).forEach(popReview)).catch(()=>{});
 
 let refreshTimer,cardTimer,statsTimer,ideationTimer;
 const refreshLeadIdeation=()=>{clearTimeout(ideationTimer);ideationTimer=setTimeout(async()=>{const id=state.selectedLead,host=$('#lead-ideation');if(!id||!host)return;try{const data=await api(`/api/leads/${id}`);if(state.selectedLead===id&&host===$('#lead-ideation')){const opened=new Set([...host.querySelectorAll('details[open][data-ap-log]')].map(x=>x.dataset.apLog)),disclosures=['.ap-ideation-tools','.ap-ideation-notes'].map(selector=>[selector,host.querySelector(selector)?.open]);host.innerHTML=ideationPanel(data.ideation,data.events,{esc,icon:ic});for(const detail of host.querySelectorAll('details[data-ap-log]'))detail.open=opened.has(detail.dataset.apLog);for(const [selector,open] of disclosures)if(open!==undefined&&host.querySelector(selector))host.querySelector(selector).open=open;}}catch{}},150);};
@@ -959,6 +973,7 @@ stream.onmessage=msg=>{
  if((change.kind==='ideation'&&change.leadId===state.selectedLead)||(change.kind==='event'&&change.event.lead_id===state.selectedLead))refreshLeadIdeation();
  if(change.kind==='event'){
   const e=change.event;
+  if(tab()==='home'&&thread.thinking&&String(e.tool).startsWith('assistant.'))setTimeout(paintChatActivity,0);
   if(tab()==='tasks'&&document.querySelector('#task-ideas-report'))import('./task-storyboards.js').then(m=>m.refreshTaskStoryboardActivity()).catch(()=>{});state.live.unshift(e);state.live.length=Math.min(state.live.length,300);noteDraft(e);
   noteLead(e);if(e.task_id)state.lastStep.set(e.task_id,e);
   if(railTypes.has(e.type)||isTraceEv(e)){scheduleLive();if(railTypes.has(e.type)&&document.body.classList.contains('rail-off')){railUnseen++;setRail(false);}}
@@ -995,5 +1010,5 @@ stream.onmessage=msg=>{
  if(change.kind==='storyboard'&&tab()==='storyboards')softRefresh(route);
  if(change.kind==='assistant'&&tab()==='home'&&!thread.thinking)loadThread();
  if(change.kind==='voice'&&tab()==='voices'&&![...document.querySelectorAll('audio')].some(a=>!a.paused))softRefresh(route);
- if(change.kind==='render'){if(change.render.review==='pending')popReview(change.render);if(['renders','home'].includes(tab()))softRefresh(route);else loadState().catch(()=>{});}
+ if(change.kind==='render'){if(reviewReady(change.render))popReview(change.render);if(tab()==='renders'){if(!renderViewBusy())softRefresh(route);}else if(tab()==='home')softRefresh(route);else loadState().catch(()=>{});}
 };
