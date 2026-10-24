@@ -24,4 +24,4 @@ Package copy on Whop: both packages include scripts, editing, captions, vertical
 ## Not done
 
 - The read-only offer checker (`src/course-offer.js`, `/api/course-offer/verify`) still expects a $97 course plan. It never takes payments. Retarget it to the UGC plans or remove it.
-- No Whop API key is configured, so nothing reads purchases yet. The agent's Whop card only checks whether `WHOP_API_KEY` is set.
+- The fulfillment service (ops/, https://mint-labs-ops.vercel.app) receives `payment.succeeded` at `/api/whop` once a Whop webhook is created and its `ws_` secret is stored as `WHOP_WEBHOOK_SECRET` on Vercel. Until then, create orders by hand in its console. The agent's Whop card only checks whether `WHOP_API_KEY` is set.
