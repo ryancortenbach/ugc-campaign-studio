@@ -1,0 +1,187 @@
+{
+  "provider": "Exa free MCP",
+  "searchedAt": "2026-10-24T08:27:12.823Z",
+  "source": "https://mcp.exa.ai/mcp",
+  "rawResponseSha256": "b4b9560c4add52775ebdd200c93b379a831c30e6f00c88c93e04a1a6afc7ed45",
+  "label": "Recorded live search, not a fresh request or outreach permission",
+  "prospects": [
+    {
+      "name": "Contact Us – EPOMAKER",
+      "url": "https://epomaker.com/pages/contact-us",
+      "evidence": "Contact Us – EPOMAKER\n\nWe're here to get it right.\n\nWhether it's a switch that doesn't sound the way you expected or a partnership that's been on your mind — there's a real team behind every reply.\n\nReach the right team\n\n## Choose your channel.\n\nDifferent inquiries go to different people. Pick the right door and we'll get you the right answer — faster.\n\nCustomer support\n\n### Orders, products, warranty\n\nOrder tracking, missing items, warranty clai",
+      "sourceStatus": "Search result. Official ownership has not been verified.",
+      "emails": [
+        "agnes@epomaker.com",
+        "business@epomaker.com",
+        "marketing@epomaker.com",
+        "community@epomaker.com"
+      ],
+      "emailEvidence": [
+        {
+          "email": "agnes@epomaker.com",
+          "sourceUrl": "https://epomaker.com/pages/contact-us",
+          "excerpt": "go coordination for product launches.\n\n agnes@epomaker.com \n\nResponse · within 48h · press kit on ",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "business@epomaker.com",
+          "sourceUrl": "https://epomaker.com/pages/contact-us",
+          "excerpt": "und Lab co-tuning, and custom builds.\n\n business@epomaker.com \n\nResponse · within 2 business days\n\n##",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "marketing@epomaker.com",
+          "sourceUrl": "https://epomaker.com/pages/contact-us",
+          "excerpt": "am applications, and creator collabs.\n\n marketing@epomaker.com \n\nResponse · within 3 business days\n\n..",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "community@epomaker.com",
+          "sourceUrl": "https://epomaker.com/pages/contact-us",
+          "excerpt": "s, affiliate applications, community.\n\n community@epomaker.com →\n\n...\n\n## Or just hang out.\n\nFind the ",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        }
+      ],
+      "emailStatus": "Published candidates, verify business purpose",
+      "personalizationEvidence": {
+        "quote": "We're here to get it right.",
+        "sourceUrl": "https://epomaker.com/pages/contact-us"
+      },
+      "draft": "Hi Contact Us – EPOMAKER team, your page mentions \"We're here to get it right.\". I have an original five-second creator concept for your product: a clear everyday use moment followed by a product close-up. Would you be open to reviewing the concept?",
+      "sampleBrief": "5-second sample plan: 0-1s original avatar in a customer-relevant setting; 1-4s demonstrate one verified product use; 4-5s product close-up. Product, use, character and claims still need approval. No video generated.",
+      "status": "draft_unsent"
+    },
+    {
+      "name": "nuphy.com",
+      "url": "https://nuphy.com/pages/contact-us",
+      "evidence": "# Contact Us\n\nFor Anything Related to Your Order:\n\nservice@nuphy.com\n\nFor Press Inquiries:\n\nmadison@nuphy.com\n\nFor Business Cooperation:\n\nsales@nuphy.com\n\n---",
+      "sourceStatus": "Search result. Official ownership has not been verified.",
+      "emails": [
+        "service@nuphy.com",
+        "madison@nuphy.com",
+        "sales@nuphy.com"
+      ],
+      "emailEvidence": [
+        {
+          "email": "service@nuphy.com",
+          "sourceUrl": "https://nuphy.com/pages/contact-us",
+          "excerpt": "s\n\nFor Anything Related to Your Order:\n\nservice@nuphy.com\n\nFor Press Inquiries:\n\nmadison@nuphy.co",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "madison@nuphy.com",
+          "sourceUrl": "https://nuphy.com/pages/contact-us",
+          "excerpt": "ervice@nuphy.com\n\nFor Press Inquiries:\n\nmadison@nuphy.com\n\nFor Business Cooperation:\n\nsales@nuphy",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "sales@nuphy.com",
+          "sourceUrl": "https://nuphy.com/pages/contact-us",
+          "excerpt": "n@nuphy.com\n\nFor Business Cooperation:\n\nsales@nuphy.com\n\n---",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        }
+      ],
+      "emailStatus": "Published candidates, verify business purpose",
+      "personalizationEvidence": {
+        "quote": "For Anything Related to Your Order:",
+        "sourceUrl": "https://nuphy.com/pages/contact-us"
+      },
+      "draft": "Hi nuphy.com team, your page mentions \"For Anything Related to Your Order:\". I have an original five-second creator concept for your product: a clear everyday use moment followed by a product close-up. Would you be open to reviewing the concept?",
+      "sampleBrief": "5-second sample plan: 0-1s original avatar in a customer-relevant setting; 1-4s demonstrate one verified product use; 4-5s product close-up. Product, use, character and claims still need approval. No video generated.",
+      "status": "draft_unsent"
+    },
+    {
+      "name": "Contact – Orbitkey",
+      "url": "https://www.orbitkey.com/pages/contact",
+      "evidence": "Contact – Orbitkey \n\n## Clip-on Glasses Pouch \n\n$24.90 \n\n A slim glasses pouch with a built-in carabiner clip for easy bag attachment. Squeeze-open access, soft interior lining, and a hidden essentials pocket. \n\n## Crossbody Bag Strap \n\n$20.00 \n\n Transform your Orbitkey Daily Tote into a crossbody bag with this padded strap. Designed for all-day comfort, it matches tote colors perfectly while adding an elegant, functional touch for versatile ever",
+      "sourceStatus": "Search result. Official ownership has not been verified.",
+      "emails": [
+        "hello@orbitkey.com",
+        "press@orbitkey.com",
+        "sales@orbitkey.com"
+      ],
+      "emailEvidence": [
+        {
+          "email": "hello@orbitkey.com",
+          "sourceUrl": "https://www.orbitkey.com/pages/contact",
+          "excerpt": "ty, and or shipping. Please email us at hello@orbitkey.com or fill in the form below.\n\nPress Inqui",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "press@orbitkey.com",
+          "sourceUrl": "https://www.orbitkey.com/pages/contact",
+          "excerpt": "est so feel free to drop us an email at press@orbitkey.com\n\nWholesale\n\nInterested in becoming our ",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        },
+        {
+          "email": "sales@orbitkey.com",
+          "sourceUrl": "https://www.orbitkey.com/pages/contact",
+          "excerpt": " this application form or contact us at sales@orbitkey.com\n\nCustom Orders\n\nIf you’re interested in",
+          "domainMatchesPage": true,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        }
+      ],
+      "emailStatus": "Published candidates, verify business purpose",
+      "personalizationEvidence": {
+        "quote": "A slim glasses pouch with a built-in carabiner clip for easy bag",
+        "sourceUrl": "https://www.orbitkey.com/pages/contact"
+      },
+      "draft": "Hi Contact – Orbitkey team, your page mentions \"A slim glasses pouch with a built-in carabiner clip for easy bag\". I have an original five-second creator concept for your product: a clear everyday use moment followed by a product close-up. Would you be open to reviewing the concept?",
+      "sampleBrief": "5-second sample plan: 0-1s original avatar in a customer-relevant setting; 1-4s demonstrate one verified product use; 4-5s product close-up. Product, use, character and claims still need approval. No video generated.",
+      "status": "draft_unsent"
+    },
+    {
+      "name": "EPOMAKER Programs",
+      "url": "https://epomaker.com/pages/epomaker-programs",
+      "evidence": "EPOMAKER Programs\n\n \n\n## EPOMAKER PROGRAMS \n\nJoin the EPOMAKER community through our exciting programs! \n\n### Affiliate Program\n\nUnlock your earning potential with the EPOMAKER Affiliate Program! Join us to promote cutting-edge mechanical keyboards and accessories, earn commissions, and be part of our vibrant community.\n\n### New Product Ambassador\n\nJoin the EPOMAKER Product Ambassador Program and be at the forefront of our exciting product launch",
+      "sourceStatus": "Search result. Official ownership has not been verified.",
+      "emails": [],
+      "emailEvidence": [],
+      "emailStatus": "Not found",
+      "personalizationEvidence": {
+        "quote": "Join the EPOMAKER community through our exciting programs!",
+        "sourceUrl": "https://epomaker.com/pages/epomaker-programs"
+      },
+      "draft": "Hi EPOMAKER Programs team, your page mentions \"Join the EPOMAKER community through our exciting programs!\". I have an original five-second creator concept for your product: a clear everyday use moment followed by a product close-up. Would you be open to reviewing the concept?",
+      "sampleBrief": "5-second sample plan: 0-1s original avatar in a customer-relevant setting; 1-4s demonstrate one verified product use; 4-5s product close-up. Product, use, character and claims still need approval. No video generated.",
+      "status": "draft_unsent"
+    },
+    {
+      "name": "NuPhy Custom Keyboard Projects  – Nuphy",
+      "url": "https://nuphy.com/custom-keyboards",
+      "evidence": "NuPhy Custom Keyboard Projects – Nuphy\n\n# Custom NuPhy Keyboards for Your Brand\n\nCreate a custom keyboard your team, customers, or community will want to use every day.\n\n### Keycaps\n\nCustomize keycap colors, legends, accent keys, and logo keys to match your brand identity.\n\n### Switches\n\nChoose from available switch options to shape the typing feel and sound.\n\n### Keyboard Details\n\nAdd your logo or brand details to selected areas of the keyboard,",
+      "sourceStatus": "Search result. Official ownership has not been verified.",
+      "emails": [
+        "maggie@nuphys.com"
+      ],
+      "emailEvidence": [
+        {
+          "email": "maggie@nuphys.com",
+          "sourceUrl": "https://nuphy.com/custom-keyboards",
+          "excerpt": "nd? Tell us about your project.\n\nEmail: maggie@nuphys.com",
+          "domainMatchesPage": false,
+          "verification": "Published candidate only. Business purpose and site ownership require review."
+        }
+      ],
+      "emailStatus": "Published candidates, verify business purpose",
+      "personalizationEvidence": {
+        "quote": "NuPhy Custom Keyboard Projects – Nuphy",
+        "sourceUrl": "https://nuphy.com/custom-keyboards"
+      },
+      "draft": "Hi NuPhy Custom Keyboard Projects  – Nuphy team, your page mentions \"NuPhy Custom Keyboard Projects – Nuphy\". I have an original five-second creator concept for your product: a clear everyday use moment followed by a product close-up. Would you be open to reviewing the concept?",
+      "sampleBrief": "5-second sample plan: 0-1s original avatar in a customer-relevant setting; 1-4s demonstrate one verified product use; 4-5s product close-up. Product, use, character and claims still need approval. No video generated.",
+      "status": "draft_unsent"
+    }
+  ],
+  "sent": 0,
+  "generatedSamples": 0
+}

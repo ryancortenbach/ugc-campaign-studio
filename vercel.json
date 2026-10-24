@@ -7,6 +7,9 @@
     },
     "api/review.js": {
       "maxDuration": 300
+    },
+    "api/prospects.js": {
+      "maxDuration": 60
     }
   }
 }
