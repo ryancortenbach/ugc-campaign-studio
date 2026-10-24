@@ -24,14 +24,18 @@
 .topbar,.live-head{border-bottom-color:transparent;background:linear-gradient(90deg,transparent,rgba(61,220,138,.24) 28%,rgba(61,220,138,.08) 72%,transparent) bottom/100% 1px no-repeat}
 .brand::after{content:'Mint Labs';font-size:15px;font-weight:650;letter-spacing:-.015em;background:linear-gradient(180deg,#f2fff7 15%,#7fe8ae 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .logo{box-shadow:0 0 0 1px rgba(120,240,175,.3),0 0 18px -3px var(--glow)}
-#tabs a:hover{background:rgba(120,240,175,.06)}
-#tabs a.on{background:linear-gradient(90deg,rgba(61,220,138,.17),rgba(61,220,138,.05) 70%,transparent);box-shadow:inset 2px 0 0 var(--green),inset 0 1px 0 rgba(190,255,220,.06)}
-#tabs a.on svg{color:var(--green)}
+@media(max-width:1280px){.brand::after{display:none}}
+#tabs a:hover,#tabs-foot a:hover{background:rgba(120,240,175,.06)}
+#tabs a.on,#tabs-foot a.on{background:linear-gradient(90deg,rgba(61,220,138,.17),rgba(61,220,138,.05) 70%,transparent);box-shadow:inset 2px 0 0 var(--green),inset 0 1px 0 rgba(190,255,220,.06)}
+#tabs a.on svg,#tabs-foot a.on svg{color:var(--green)}
 /* Every page title carries a small cut gem from the stone. */
 .topbar h1{display:flex;align-items:center;gap:10px}
 .topbar h1::before{content:'';flex:none;width:12px;height:12px;background:conic-gradient(from 210deg at 50% 42%,#c9ffe3,#3ddc8a 18%,#0b6b3c 36%,#1fb466 52%,#8ff5c0 68%,#0f7a43 84%,#c9ffe3);clip-path:polygon(50% 0,100% 38%,81% 100%,19% 100%,0 38%)}
-.fchip.on{background:rgba(61,220,138,.12);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,220,138,.24)}
+.fchip.on,.ap-an-tab[aria-pressed=true]{background:rgba(61,220,138,.12);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,220,138,.24)}
 .fchip.on .n{color:rgba(61,220,138,.75)}
+/* Fields without a type attribute (the Production brand field) otherwise fall back to the browser's white box. */
+input:not([type]){width:100%;height:40px;padding:9px 11px;border:1px solid var(--line2);border-radius:7px;background:var(--bg);color:var(--text);outline:none}
+input:not([type]):focus{border-color:var(--green)}
 
 /* Gem buttons: every primary action is a cut piece of the stone. */
 .btn.go,.btn.go:hover,.iconbtn.go,.iconbtn.go:hover,.csend.go,.csend.go:hover,.rvp-btn.go,body .bp-ctl.on{background:var(--gem);border-color:transparent;color:#f4fff8;box-shadow:var(--gem-shadow);text-shadow:0 1px 1px rgba(0,0,0,.5)}
@@ -64,10 +68,13 @@ body .bp-img{background:#030906}
 .cmode.on{background:rgba(61,220,138,.12);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,220,138,.24)}
 .cmode.on svg.lu{color:var(--green)}
 .suggest button:hover{border-color:rgba(61,220,138,.32);background:rgba(61,220,138,.06)}
-.home:not(.chatting) .home-center>*{animation:gem-rise .7s cubic-bezier(.2,.75,.2,1) both}
-.home:not(.chatting) .home-center>:nth-child(2){animation-delay:.08s}
-.home:not(.chatting) .home-center>:nth-child(3){animation-delay:.16s}
-.home:not(.chatting) .home-center>:nth-child(4){animation-delay:.24s}
-.home:not(.chatting) .home-center>.greet{animation:gem-rise .7s cubic-bezier(.2,.75,.2,1) both,gem-sheen 2.8s cubic-bezier(.3,.1,.2,1) .35s both}
+/* Only the title animates in. The composer, modes and suggestions never wait on an animation (a hidden window can
+   pause it), and the composer sits above its siblings so its model and attachment menus are never painted over. */
+.home-center>.composer{z-index:3}
+.home:not(.chatting) .home-center>.greet{animation:gem-rise .7s cubic-bezier(.2,.75,.2,1) backwards,gem-sheen 2.8s cubic-bezier(.3,.1,.2,1) .35s both}
 @keyframes gem-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.greet,.home:not(.chatting) .home-center>*,.home:not(.chatting) .home-center>.greet{animation:none}}
+@media (prefers-reduced-motion:reduce){.greet,.home:not(.chatting) .home-center>.greet{animation:none}}
+
+/* style.css redeclares .live{display:flex} after its 960px breakpoint, so narrow windows stacked the rail under
+   the page. Restore the intended hide. */
+@media(max-width:960px){.live{display:none}}
