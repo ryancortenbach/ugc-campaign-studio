@@ -106,6 +106,7 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
  const db=store.db;
  // final_version counts remakes; prepared_for names the version the current link and draft deliver.
  db.exec('create table if not exists deliveries(payment_id text primary key,final_file text,final_render_ids text,final_at text,final_bytes integer,final_version integer,captions integer,storage_path text,link text,link_expires_at text,draft_id text,draft_url text,email text,prepared_at text,prepared_for integer,updated_at text not null)');
+ db.exec("create table if not exists delivery_draft_intents(payment_id text primary key,token text not null,state text not null,recipient text not null,subject text not null,draft_id text,draft_url text,started_at text not null)");
  const iso=()=>new Date(now()).toISOString();
  const row=id=>db.prepare('select * from deliveries where payment_id=?').get(id);
  const save=(id,fields)=>{
@@ -120,6 +121,21 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
  const need=id=>{const o=order(id);if(!o)throw fail(404,'No such Whop order.');return o;};
  const log=(o,title,tool)=>{if(o.task_id)store.addEvent({taskId:o.task_id,type:'status',tool,title});};
  const localFile=f=>f?path.join(renderDir,f):null;
+ const intentRow=id=>db.prepare('select * from delivery_draft_intents where payment_id=?').get(id);
+ const recoveryError=()=>fail(409,'Gmail may have created the delivery draft. Check its status before retrying; another draft will not be created automatically.');
+ const rememberDraft=(id,intent,draft)=>{
+  if(!/^[A-Za-z0-9_-]+$/.test(draft?.draftId||''))throw recoveryError();
+  const moved=db.prepare("update delivery_draft_intents set state='known',draft_id=?,draft_url=? where payment_id=? and token=? and state='creating'").run(draft.draftId,draft.url||null,id,intent.token);
+  if(!moved.changes){const current=intentRow(id);if(current?.token!==intent.token||current?.state!=='known'||current?.draft_id!==draft.draftId)throw recoveryError();}
+  return draft;
+ };
+ const recoverIntent=async(id,intent)=>{
+  if(!gmail.gmailEnabled?.()||!gmail.findDeliveryDraft)throw recoveryError();
+  const found=await gmail.findDeliveryDraft({token:intent.token,to:intent.recipient,subject:intent.subject});
+  if(!found)throw recoveryError();
+  return rememberDraft(id,intent,found);
+ };
+
 
  // Each shot uses its newest finished version that review did not reject. Revisions are new renders with the same shot id.
  function shots(o){
@@ -141,6 +157,7 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
    ready:list.length>0&&list.every(s=>s.render),
    final,
    delivery:d?.link?{link:d.link,expiresAt:d.link_expires_at,draftUrl:d.draft_url,email:d.email?JSON.parse(d.email):null,preparedAt:d.prepared_at,stale:!final||final.stale||d.prepared_for!==d.final_version}:null,
+   draftRecovery:intentRow(id)?.state==='creating'?{state:'unknown',intentToken:intentRow(id).token,startedAt:intentRow(id).started_at}:null,
    setup:{ffmpeg:Boolean(ffmpeg()),storage:Boolean(supabaseUrl(env)&&supabaseKey(env)),gmail:Boolean(gmail.gmailEnabled?.())}
   };
  }
@@ -180,6 +197,8 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
    if(!state.final||state.final.stale||saved.final_version!==d.final_version||saved.final_file!==d.final_file)throw fail(409,'The final video changed or is stale. Remake and review it before preparing delivery.');
   };
   requireCurrent();
+  let intent=intentRow(id);const expectedIntentToken=intent?.token||null;let knownDraftId=intent?.state==='known'?intent.draft_id:d.draft_id;
+  if(intent?.state==='creating'){const recovered=await recoverIntent(id,intent);knownDraftId=recovered.draftId;}
   if(!o.buyer_email)throw fail(409,'This order has no buyer email on Whop.');
   if(!supabaseUrl(env)||!supabaseKey(env))throw fail(503,'Add SUPABASE_URL and SUPABASE_SECRET_KEY to .env.local, then restart the app.');
   // The bucket stays private: buyers only get time-limited signed links.
@@ -200,13 +219,28 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
   let draft=null;
   if(gmail.gmailEnabled?.()){
    // Rewrite this order's earlier draft when there is one. Never send.
-   if(d.draft_id)try{draft=await gmail.updateDraft({draftId:d.draft_id,to:o.buyer_email,subject:email.subject,body:email.body});}catch(error){if(error.status!==404)throw error;draft=null;}
-   draft??=await gmail.createDraft({to:o.buyer_email,subject:email.subject,body:email.body});
+   if(knownDraftId)try{draft=await gmail.updateDraft({draftId:knownDraftId,to:o.buyer_email,subject:email.subject,body:email.body});}catch(error){if(error.status!==404)throw error;draft=null;}
+   if(!draft){
+    const token=randomUUID();
+    const claim=db.prepare("insert into delivery_draft_intents(payment_id,token,state,recipient,subject,started_at) values(?,?,'creating',?,?,?) on conflict(payment_id) do update set token=excluded.token,state='creating',recipient=excluded.recipient,subject=excluded.subject,draft_id=null,draft_url=null,started_at=excluded.started_at where delivery_draft_intents.state in ('known','absent') and delivery_draft_intents.token is ? returning token").get(id,token,o.buyer_email,email.subject,iso(),expectedIntentToken);
+    if(!claim)throw recoveryError();
+    intent=intentRow(id);
+    try{draft=await gmail.createDraft({to:o.buyer_email,subject:email.subject,body:email.body,deliveryToken:token});rememberDraft(id,intent,draft);}catch(error){throw recoveryError();}
+   }
   }
-  save(o.payment_id,{storage_path:name,link,link_expires_at:expiresAt,draft_id:draft?.draftId||d.draft_id||null,draft_url:draft?.url||null,email:JSON.stringify(email),prepared_at:iso(),prepared_for:d.final_version});
+  save(o.payment_id,{storage_path:name,link,link_expires_at:expiresAt,draft_id:draft?.draftId||knownDraftId||d.draft_id||null,draft_url:draft?.url||null,email:JSON.stringify(email),prepared_at:iso(),prepared_for:d.final_version});
   log(o,draft?`Delivery email drafted in Gmail for ${o.buyer_email} with a ${LINK_DAYS}-day download link. Not sent.`:`Download link ready for ${o.buyer_email}. Gmail is not connected, so copy the email from the order page. Not sent.`,'supabase.storage');
   return get(id);
  });
 
- return {get,finish,deliver};
+ const reconcileDraft=(id,{intentToken,confirmNotCreated=false}={})=>once(id,'recover',async()=>{
+  need(id);const intent=intentRow(id);if(!intent||intent.state!=='creating'||intent.token!==intentToken)throw fail(409,'This draft recovery state changed. Reload the order.');
+  if(!gmail.gmailEnabled?.()||!gmail.findDeliveryDraft)throw recoveryError();
+  const found=await gmail.findDeliveryDraft({token:intent.token,to:intent.recipient,subject:intent.subject});
+  if(found){rememberDraft(id,intent,found);return get(id);}
+  if(confirmNotCreated!==true||Date.parse(iso())-Date.parse(intent.started_at)<15*60*1000)throw recoveryError();
+  const moved=db.prepare("update delivery_draft_intents set state='absent' where payment_id=? and token=? and state='creating'").run(id,intent.token);if(!moved.changes)throw recoveryError();
+  return get(id);
+ });
+ return {get,finish,deliver,reconcileDraft};
 }

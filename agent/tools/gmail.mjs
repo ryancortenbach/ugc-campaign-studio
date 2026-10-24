@@ -29,9 +29,10 @@ const wrap76=b64=>b64.replace(/(.{76})/g,'$1\r\n');
 const attachmentList=(attachments,attachment)=>[...(Array.isArray(attachments)?attachments:[]),...(attachment?[attachment]:[])].filter(Boolean);
 // With attachments the message is multipart/mixed: the plain text body, then each file as base64.
 // `attachments` is a list of {filename,mime,data}; the older single `attachment` still works and is appended last.
-export function buildMime({from,to,subject,body,attachment=null,attachments=[]}){
+export function buildMime({from,to,subject,body,attachment=null,attachments=[],deliveryToken=null}){
  if(/[\r\n]/.test(to+subject))throw Error('Header injection blocked');
  const head=[`From: ${from}`,`To: ${to}`,`Subject: ${header(subject)}`,'MIME-Version: 1.0'];
+ if(deliveryToken)head.push(`Message-ID: <${deliveryMessageId(deliveryToken)}>`);
  const text=body.replace(/\r?\n/g,'\r\n');
  const files=attachmentList(attachments,attachment);
  if(!files.length)return [...head,'Content-Type: text/plain; charset="UTF-8"','Content-Transfer-Encoding: 8bit','',text].join('\r\n');
@@ -50,9 +51,9 @@ async function ownAccount(){
 }
 const draftUrl=(account,draft)=>`https://mail.google.com/mail/u/?authuser=${encodeURIComponent(account)}#drafts?compose=${draft.message?.id}`;
 
-export async function createDraft({to,subject,body,attachment=null,attachments=[]}){
+export async function createDraft({to,subject,body,attachment=null,attachments=[],deliveryToken=null}){
  const account=await ownAccount();
- const raw=Buffer.from(buildMime({from:account,to,subject,body,attachment,attachments})).toString('base64url');
+ const raw=Buffer.from(buildMime({from:account,to,subject,body,attachment,attachments,deliveryToken})).toString('base64url');
  const draft=await gmail('drafts',{method:'POST',body:JSON.stringify({message:{raw}})});
  return {draftId:draft.id,messageId:draft.message?.id,account,url:draftUrl(account,draft)};
 }
@@ -70,4 +71,24 @@ export async function sendDraft(draftId){
  await ownAccount();
  const out=await gmail('drafts/send',{method:'POST',body:JSON.stringify({id:draftId})});
  return {messageId:out.id,threadId:out.threadId};
+}
+
+
+export function deliveryMessageId(token){
+ if(!/^[a-f0-9-]{36}$/i.test(String(token||'')))throw Error('Invalid delivery intent token');
+ return `mint-delivery-${token.toLowerCase()}@mint-labs.invalid`;
+}
+// Read-only lookup. A missing or ambiguous match never authorizes another create.
+export async function findDeliveryDraft({token,to,subject},{request=gmail,account}={}){
+ const messageId=deliveryMessageId(token);account??=await ownAccount();
+ const list=await request(`drafts?maxResults=2&q=${encodeURIComponent(`rfc822msgid:<${messageId}>`)}`);
+ if(list.nextPageToken||(list.drafts||[]).length>1)throw Object.assign(Error('More than one draft matches this delivery. Review Gmail before continuing.'),{status:409});
+ const found=list.drafts?.[0];if(!found)return null;
+ if(!/^[A-Za-z0-9_-]+$/.test(found.id||''))throw Error('Gmail returned an invalid draft ID');
+ const draft=await request(`drafts/${found.id}?format=full`);
+ const items=draft.message?.payload?.headers||[],headers={};
+ for(const h of items){const key=String(h.name||'').toLowerCase();if(['to','cc','bcc','from','subject','message-id'].includes(key)&&key in headers)throw Object.assign(Error('Draft has duplicate identity headers.'),{status:409});headers[key]=h.value;}
+ const oneAddress=value=>{const raw=String(value||'').trim();if(/[,;\r\n]/.test(raw))return null;const match=raw.match(/^[^<>]*<([^<>]+)>$/);const address=(match?match[1]:raw).trim().toLowerCase();return /^[^\s@<>]+@[^\s@<>]+$/.test(address)?address:null;};
+ if(String(headers['message-id']||'').replace(/[<>]/g,'').trim().toLowerCase()!==messageId||oneAddress(headers.to)!==String(to).trim().toLowerCase()||oneAddress(headers.from)!==String(account).trim().toLowerCase()||String(headers.cc||'').trim()||String(headers.bcc||'').trim()||![subject,header(subject)].includes(headers.subject))throw Object.assign(Error('Draft identity does not match this delivery intent.'),{status:409});
+ return{draftId:found.id,messageId:draft.message?.id,account,url:draftUrl(account,draft)};
 }

@@ -217,3 +217,42 @@ test('a Gmail disconnect preserves known draft identity for reuse after reconnec
  const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let connected=true;gmail.gmailEnabled=()=>connected;
  try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await d.deliver('pay_1');connected=false;const offline=await d.deliver('pay_1');assert.equal(offline.delivery.draftUrl,null);assert.equal(f.store.db.prepare('select draft_id from deliveries where payment_id=?').get('pay_1').draft_id,'draft1');connected=true;await d.deliver('pay_1');assert.deepEqual(gmail.drafts.map(x=>x.action),['create','update']);assert.equal(gmail.drafts[1].draftId,'draft1');}finally{f.done();}
 });
+
+test('accepted create with lost response is recovered after restart without another create',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let creates=0,savedToken;
+ gmail.createDraft=async args=>{creates++;savedToken=args.deliveryToken;throw Error('response lost after acceptance');};gmail.findDeliveryDraft=async args=>{assert.equal(args.token,savedToken);return{draftId:'accepted',url:'https://mail.example.test/accepted'};};
+ try{const opts={store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail};let d=createDelivery(opts);await d.finish('pay_1');await assert.rejects(d.deliver('pay_1'),e=>e.status===409);assert.equal(d.get('pay_1').draftRecovery.state,'unknown');d=createDelivery(opts);await d.deliver('pay_1');assert.equal(creates,1);assert.equal(gmail.drafts[0].action,'update');assert.equal(gmail.drafts[0].draftId,'accepted');assert.equal(d.get('pay_1').draftRecovery,null);}finally{f.done();}
+});
+
+test('missing recovery result blocks retries before new uploads or draft creation',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let creates=0;gmail.createDraft=async()=>{creates++;throw Error('unknown result');};gmail.findDeliveryDraft=async()=>null;
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await assert.rejects(d.deliver('pay_1'));const calls=sb.calls.length;await assert.rejects(d.deliver('pay_1'),e=>e.status===409);assert.equal(creates,1);assert.equal(sb.calls.length,calls);}finally{f.done();}
+});
+
+test('local final-save failure after draft acceptance preserves the known ID for retry',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');f.store.db.exec("create trigger fail_delivery_save before update on deliveries when new.prepared_at is not null begin select raise(ABORT,'injected save failure');end;");await assert.rejects(d.deliver('pay_1'),/injected save/);f.store.db.exec('drop trigger fail_delivery_save');await d.deliver('pay_1');assert.deepEqual(gmail.drafts.map(x=>x.action),['create','update']);}finally{f.done();}
+});
+
+test('unknown intent cannot be reset by a stale token, early confirmation or string truthiness',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let time=new Date('2026-10-24T20:00:00Z');gmail.createDraft=async()=>{throw Error('unknown');};gmail.findDeliveryDraft=async()=>null;
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail,now:()=>time});await d.finish('pay_1');await assert.rejects(d.deliver('pay_1'));const token=d.get('pay_1').draftRecovery.intentToken;await assert.rejects(d.reconcileDraft('pay_1',{intentToken:'wrong',confirmNotCreated:true}));await assert.rejects(d.reconcileDraft('pay_1',{intentToken:token,confirmNotCreated:true}));time=new Date('2026-10-24T20:16:00Z');await assert.rejects(d.reconcileDraft('pay_1',{intentToken:token,confirmNotCreated:'false'}));await d.reconcileDraft('pay_1',{intentToken:token,confirmNotCreated:true});assert.equal(d.get('pay_1').draftRecovery,null);}finally{f.done();}
+});
+
+
+test('a delayed second delivery cannot replace a newly known draft intent',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let entered,release;const seen=new Promise(r=>entered=r),hold=new Promise(r=>release=r);
+ try{const base={store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',gmail};const a=createDelivery({...base,fetch:sb.fetch});await a.finish('pay_1');const b=createDelivery({...base,fetch:async(url,opts)=>{if(url.endsWith('/storage/v1/bucket')){entered();await hold;}return sb.fetch(url,opts);}});const delayed=b.deliver('pay_1');await seen;await a.deliver('pay_1');release();await assert.rejects(delayed,e=>e.status===409);assert.equal(gmail.drafts.filter(x=>x.action==='create').length,1);assert.equal(f.store.db.prepare('select draft_id from delivery_draft_intents where payment_id=?').get('pay_1').draft_id,'draft1');}finally{release?.();f.done();}
+});
+
+test('failure to save accepted intent identity is recoverable without creating again',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let token;const create=gmail.createDraft;gmail.createDraft=async args=>{token=args.deliveryToken;return create(args);};gmail.findDeliveryDraft=async args=>{assert.equal(args.token,token);return{draftId:'draft1',url:'https://mail.example.test/draft1'};};
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');f.store.db.exec("create trigger fail_intent before update on delivery_draft_intents when new.state='known' begin select raise(ABORT,'intent save failure');end;");await assert.rejects(d.deliver('pay_1'));f.store.db.exec('drop trigger fail_intent');await d.deliver('pay_1');assert.deepEqual(gmail.drafts.map(x=>x.action),['create','update']);}finally{f.done();}
+});
+
+
+test('draft reconciliation route works while paused and never creates or sends a second draft',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let creates=0;gmail.createDraft=async()=>{creates++;throw Error('response lost');};gmail.findDeliveryDraft=async()=>({draftId:'recovered',url:'https://mail.example.test/recovered'});
+ const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});let server;
+ try{await d.finish('pay_1');await assert.rejects(d.deliver('pay_1'));const intentToken=d.get('pay_1').draftRecovery.intentToken;const app=createApp({store:f.store,delivery:d,gmailApi:gmail});f.store.db.prepare("insert into settings(key,value) values('spendingPaused','true') on conflict(key) do update set value='true'").run();server=http.createServer(app);await new Promise(r=>server.listen(0,'127.0.0.1',r));const res=await fetch(`http://127.0.0.1:${server.address().port}/api/whop/orders/pay_1/delivery-draft-reconcile`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intentToken})});assert.equal(res.status,200);assert.equal((await res.json()).draftRecovery,null);assert.equal(creates,1);assert.equal(f.store.spendSummary().total,0);}finally{if(server)await new Promise(r=>server.close(r));f.done();}
+});

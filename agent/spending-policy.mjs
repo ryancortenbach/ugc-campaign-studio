@@ -19,7 +19,7 @@ export function spendingRequestAllowed(method,pathname,body={}){
  if(/^\/api\/tasks\/\d+\/storyboard$/.test(pathname)||/^\/api\/leads\/\d+(?:\/storyboard)?$/.test(pathname))return true;
  if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/context$/.test(pathname))return true;
  // Final video and delivery use local ffmpeg, free Supabase Storage and a Gmail draft. No paid provider is called.
- if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/(?:final|deliver)$/.test(pathname))return true;
+ if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/(?:final|deliver|delivery-draft-reconcile)$/.test(pathname))return true;
  if(/^\/api\/tasks\/\d+\/control$/.test(pathname))return ['pause','stop'].includes(body.action);
  if(pathname==='/api/autopilot'||pathname==='/api/whop')return body.enabled===false;
  if(/^\/api\/browser\/[\w.:-]+\/close$/.test(pathname)||/^\/api\/renders\/\d+\/cancel$/.test(pathname))return true;

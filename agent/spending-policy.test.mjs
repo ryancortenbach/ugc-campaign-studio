@@ -9,7 +9,7 @@ test('no-spend review allows reports, local edits and stopping work, blocks paid
  for(const [method,url,body] of [
   ['GET','/api/tasks/7/ideas.pdf'],['GET','/api/whop/orders/pay_1/brief.pdf'],['GET','/api/leads/1/logo'],
   ['POST','/api/whop/orders/pay_1/context'],['POST','/api/tasks/7/storyboard'],
-  ['POST','/api/whop/orders/pay_1/final'],['POST','/api/whop/orders/pay_1/deliver'],
+  ['POST','/api/whop/orders/pay_1/delivery-draft-reconcile'],['POST','/api/whop/orders/pay_1/final'],['POST','/api/whop/orders/pay_1/deliver'],
   ['POST','/api/production/call'],['POST','/api/tasks/7/control',{action:'stop'}],
   ['POST','/api/autopilot',{enabled:false}],['POST','/api/whop',{enabled:false}],
   ['POST','/api/browser/session-1/close'],['POST','/api/renders/1/cancel']
