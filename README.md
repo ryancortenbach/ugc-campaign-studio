@@ -80,3 +80,7 @@ The optional AI adapter follows [OpenAI Structured Outputs](https://developers.o
 `docs/FINANCIAL-MODEL-NOTES.txt` documents sources, assumptions, formulas, exclusions, and guarantee limits. `docs/financial-scenarios-v2.json` contains the evaluated planning cases. `docs/prospect-seeds-v1.csv` contains eight unsent, source-labeled outreach candidates, with contact suitability distinguished from mere public availability.
 
 The browser task runner uses Web Locks to avoid duplicate readiness requests across open tabs. It runs only while the page is open. It does not claim to execute external browser sessions or publish media. Late results cannot override paused, stopped, or newer runs.
+
+## Mac app
+
+`desktop/` builds **Mint Labs.app**, a native macOS app (Swift and WebKit, about 250 KB) that opens the agent in its own window with a Dock icon. Run `bash desktop/build.sh` to build it and install it in `/Applications`. Opening the app starts `agent/server.mjs` with the repo's `.env.local` if nothing is already listening on port 3200, and quitting stops the server it started. Links to Gmail and brand sites open in the default browser. The agent log is at `~/Library/Logs/Mint Labs/agent.log` (View > Open Agent Log). It needs Node 22.13 or newer from Homebrew, and the build records this checkout's path, so rebuild after moving the repo.
