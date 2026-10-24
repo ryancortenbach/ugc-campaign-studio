@@ -11,3 +11,6 @@
 #hosted-cloud{border-top:1px solid #384732;margin-top:24px;padding-top:16px}.hosted-cloud-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;border-top:1px solid #303a2c;padding:15px 0}.hosted-cloud-row strong,.hosted-cloud-row p{overflow-wrap:anywhere}.hosted-cloud-row strong{font-size:11px}@media(max-width:700px){.hosted-cloud-row{grid-template-columns:minmax(0,1fr)}}
 
 #course-offer-check{border-top:1px solid #384732;margin-top:24px;padding-top:16px}#course-offer-result{white-space:pre-wrap;overflow-wrap:anywhere}
+
+.concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.concept-card{min-width:0}.concept-card p,.concept-card a{overflow-wrap:anywhere}.concept-card p{font-size:12px;line-height:1.7}.concept-card a{font-size:12px}@media(max-width:800px){.concept-grid{grid-template-columns:minmax(0,1fr)}}
+#plan-origin{overflow-wrap:anywhere}

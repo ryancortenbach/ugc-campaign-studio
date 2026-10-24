@@ -13,6 +13,12 @@ function normalizePlan(input,brief){
  if(Math.abs(cursor-input.durationSeconds)>.001)throw Error('Shot durations must add up to the storyboard duration.');
  if(!Array.isArray(input.references)||input.references.length>100)throw Error('References must be an array of up to 100 records.');
  plan.references=input.references.map(ref=>{if(!object(ref)||!Number.isInteger(ref.version)||ref.version<1)throw Error('Each reference needs a positive integer version.');const result={tag:text(ref.tag,'Reference tag',200),role:text(ref.role,'Reference role',200),assetId:text(ref.assetId,'Reference asset ID',1000),version:ref.version};if(!result.tag||!result.role||!result.assetId)throw Error('Each reference needs a tag, role and asset ID.');return result;});
+ if(input.conceptSource!==undefined){
+  const source=input.conceptSource;if(!object(source)||!Array.isArray(source.sourceUrls)||source.sourceUrls.length>10)throw Error('Invalid concept source metadata.');
+  const sourceUrls=source.sourceUrls.map(value=>{const raw=text(value,'Research source URL',2000);let url;try{url=new URL(raw);}catch{throw Error('Research source must be an HTTPS URL.');}if(url.protocol!=='https:'||url.username||url.password)throw Error('Research source must be HTTPS without credentials.');return url.href;});
+  const reportUrl=text(source.reportUrl,'Research report URL',500);if(!/^\/research\/report\.html(?:#[a-z0-9-]+)?$/.test(reportUrl))throw Error('Choose the local research report as concept provenance.');
+  plan.conceptSource={id:text(source.id,'Concept ID',100),title:text(source.title,'Concept title',200),reportUrl,sourceUrls,sourceStatus:'unverified_import'};
+ }
  // Imported planning data never grants approval or describes an executed request.
  plan.status='draft_for_review';plan.generation={model:null,estimatedCredits:null,spendApproved:false,submitted:false};return plan;
 }
