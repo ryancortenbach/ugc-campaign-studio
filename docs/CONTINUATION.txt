@@ -24,7 +24,7 @@ Independent reviewer confirmed stale final delivery, mixed-version finish/upload
 3. Gmail update errors create a replacement only after confirmed404absence. Unknown/other update errors propagate.
 4. Disconnect preserves the known draft ID for later reuse while clearing the URL of a draft that was not updated.
 No frontend file changed. Source/test contract still allows completed pending/non-rejected clips; no approved-only rule was invented.
-Independent re-review cleared these targeted fixes and reran14delivery tests. Local90root tests/syntax pass. Actual focused ffmpeg test joined synthetic mismatched clips into720x1280video with audio. CI40136784120passed sourceb82469a:90root and388agent tests,0failures,0skips. Another source run may still be finishing; inspect actual results before claiming both. CI prerequisites now declare Poppler/Pillow for imported PDF/image tests.
+Independent re-review cleared these targeted fixes and reran14delivery tests. Local90root tests/syntax pass. Actual focused ffmpeg test joined synthetic mismatched clips into720x1280video with audio. CI40136784120passed sourceb82469a:90root and388agent tests,0failures,0skips. Both source CI runs passed:40136784120and40136860158. Later handoff-only commits add no runtime changes. CI prerequisites now declare Poppler/Pillow for imported PDF/image tests.
 Details: docs/MAC-DELIVERY-REVIEW-v1.md; work/mac-delivery-fixed-v2.log, mac-delivery-root-tests-v1.log, mac-delivery-ci-v1.log. No live Gmail/storage/provider/order action. The .app on Air was not modified or opened by this worker. No release/distribution/production deployment.
 
 CURRENT DELIVERY LIMITS
