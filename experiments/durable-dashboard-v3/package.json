@@ -1,0 +1,18 @@
+{
+  "name": "ugc-hosted-dashboard-v3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nitro dev --port 3103",
+    "build": "nitro build"
+  },
+  "dependencies": {
+    "workflow": "5.2.3",
+    "express": "5.1.0",
+    "nitro": "3.0.260903-beta",
+    "rollup": "4.52.5"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

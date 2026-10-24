@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-24T11:50:44.592Z",
+  "base": "https://duolingo-library-phone-v1-lqaf1ltrn-ryancortenbachs-projects.vercel.app",
+  "checks": [
+    {
+      "name": "health",
+      "http": 200,
+      "body": {
+        "experiment": "durable-dashboard-v3",
+        "dashboard": true,
+        "modelEnabled": false,
+        "mediaEnabled": false,
+        "vercelRuntime": true
+      }
+    },
+    {
+      "name": "unauthorized_submit",
+      "http": 401,
+      "body": {
+        "error": "Private operator access required."
+      }
+    },
+    {
+      "name": "accepted_cancel_candidate",
+      "http": 202,
+      "body": {
+        "runId": "wrun_41M5PVZFP40GVN8BXXBKA1DE8X",
+        "requestId": "43e77d33-00db-4be1-90e9-0c73ce64b2f0",
+        "status": "accepted"
+      }
+    },
+    {
+      "name": "unauthorized_read",
+      "http": 401,
+      "body": {
+        "error": "A valid ticket for this job is required."
+      }
+    },
+    {
+      "name": "forged_cancel_denied",
+      "http": 401,
+      "body": {
+        "error": "A valid ticket for this job is required."
+      }
+    },
+    {
+      "name": "actual_cancel",
+      "http": 200,
+      "body": {
+        "runId": "wrun_41M5PVZFP40GVN8BXXBKA1DE8X",
+        "status": "cancelled",
+        "result": null,
+        "checkedAt": "2026-10-24T11:50:47.227Z"
+      }
+    },
+    {
+      "name": "cancelled_recovery",
+      "http": 200,
+      "body": {
+        "runId": "wrun_41M5PVZFP40GVN8BXXBKA1DE8X",
+        "status": "cancelled",
+        "result": null,
+        "checkedAt": "2026-10-24T11:50:47.508Z"
+      }
+    },
+    {
+      "name": "accepted_completion_candidate",
+      "http": 202,
+      "body": {
+        "runId": "wrun_41M5PVZJ380GQ9AF9W2VAQ4NEV",
+        "requestId": "936777ec-c78a-4593-b26b-34425ed0fe9c",
+        "status": "accepted"
+      }
+    },
+    {
+      "name": "cross_run_ticket_denied",
+      "http": 401,
+      "body": {
+        "error": "A valid ticket for this job is required."
+      }
+    },
+    {
+      "name": "actual_completed_result",
+      "http": 200,
+      "body": {
+        "runId": "wrun_41M5PVZJ380GQ9AF9W2VAQ4NEV",
+        "status": "completed",
+        "result": {
+          "status": "needs_attention",
+          "issues": [
+            {
+              "severity": "blocking",
+              "category": "budget",
+              "evidence": "No current positive cost estimate.",
+              "fix": "Obtain a current Higgsfield quote before requesting spend approval."
+            }
+          ],
+          "fingerprint": "ed1f732c0aedafff70ef51739b395868abc549e419b41cb4bfc7c0ccbc54bb8a",
+          "modelCalls": 0,
+          "started": "2026-10-24T11:50:47.829Z",
+          "completed": "2026-10-24T11:51:04.063Z",
+          "spendApproved": false,
+          "generationSubmitted": false
+        },
+        "checkedAt": "2026-10-24T11:51:04.933Z"
+      }
+    },
+    {
+      "name": "completed_recovery",
+      "http": 200,
+      "body": {
+        "runId": "wrun_41M5PVZJ380GQ9AF9W2VAQ4NEV",
+        "status": "completed",
+        "result": {
+          "status": "needs_attention",
+          "issues": [
+            {
+              "severity": "blocking",
+              "category": "budget",
+              "evidence": "No current positive cost estimate.",
+              "fix": "Obtain a current Higgsfield quote before requesting spend approval."
+            }
+          ],
+          "fingerprint": "ed1f732c0aedafff70ef51739b395868abc549e419b41cb4bfc7c0ccbc54bb8a",
+          "modelCalls": 0,
+          "started": "2026-10-24T11:50:47.829Z",
+          "completed": "2026-10-24T11:51:04.063Z",
+          "spendApproved": false,
+          "generationSubmitted": false
+        },
+        "checkedAt": "2026-10-24T11:51:05.144Z"
+      }
+    },
+    {
+      "name": "completed_cancel_conflict",
+      "http": 409,
+      "body": {
+        "runId": "wrun_41M5PVZJ380GQ9AF9W2VAQ4NEV",
+        "status": "completed",
+        "result": {
+          "status": "needs_attention",
+          "issues": [
+            {
+              "severity": "blocking",
+              "category": "budget",
+              "evidence": "No current positive cost estimate.",
+              "fix": "Obtain a current Higgsfield quote before requesting spend approval."
+            }
+          ],
+          "fingerprint": "ed1f732c0aedafff70ef51739b395868abc549e419b41cb4bfc7c0ccbc54bb8a",
+          "modelCalls": 0,
+          "started": "2026-10-24T11:50:47.829Z",
+          "completed": "2026-10-24T11:51:04.063Z",
+          "spendApproved": false,
+          "generationSubmitted": false
+        },
+        "checkedAt": "2026-10-24T11:51:05.427Z",
+        "error": "Job was already terminal. It was not cancelled."
+      }
+    }
+  ],
+  "verified": true,
+  "scope": "Dashboard readiness backend verified through actual HTTP. Authenticated local browser lifecycle verified with a fictional local credential. Authenticated hosted browser lifecycle not tested. No model, media or publishing calls."
+}
