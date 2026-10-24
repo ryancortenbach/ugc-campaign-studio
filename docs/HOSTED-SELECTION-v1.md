@@ -6,8 +6,10 @@ A real local browser test used an ignored response-delay proxy in front of the a
 
 The local test also exposed root workflow scanning of generated files. The V3 scanner now only reads src, while generated output remains isolated in .nitro-build. Two consecutive preview builds and compiled guards passed. Workflow identity stays stable for recovery.
 
-82 offline tests pass, including asynchronous stale-response regressions. Final preview: https://duolingo-library-phone-v1-roahotf73-ryancortenbachs-projects.vercel.app/#operations
+82 offline tests pass, including asynchronous stale-response regressions. Final preview: https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/#operations
 
 86 public assets and eight API compatibility checks passed. Anonymous hosted browser selection and 390px layout were verified. Authenticated hosted browser and physical iPhone remain untested. The project-owned local server was restarted to clear old module caches; six actual gate cases passed on port3000. Browser-saved campaigns were not modified by the restart.
 
-Evidence: work/hosted-selection-local-browser-v1.json, work/hosted-selection-delay-v1.json, work/hosted-selection-hosted-browser-v1.json, work/hosted-selection-main-dev-gate-v1.json and work/hosted-selection-final-verification-v1.json. Temporary test servers were stopped. Sponsor, model and rendering dependencies remain incomplete.
+Evidence: work/hosted-selection-local-browser-v1.json, work/hosted-selection-delay-v1.json, work/hosted-selection-hosted-browser-v1.json, work/hosted-selection-main-dev-gate-v1.json and work/hosted-selection-final-verification-v2.json. Temporary test servers were stopped. Sponsor, model and rendering dependencies remain incomplete.
+
+Concurrent Air runner, generated-folder cleanup and sponsor MCP registration commits were merged without discarding either continuation branch. The scanner restriction fixes generated-input discovery; the Air cleanup is retained as additional build hygiene. Sponsor authentication is not established by .mcp.json registration. Lovable is skipped per the Air handoff.

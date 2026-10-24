@@ -2,7 +2,7 @@
   "version": 17,
   "date": "2026-10-24",
   "scope": "UGC hackathon only",
-  "preview": "https://duolingo-library-phone-v1-roahotf73-ryancortenbachs-projects.vercel.app/",
+  "preview": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/",
   "completed": [
     "Private GitHub repository and CI",
     "Guided chat intake, editable briefs, campaign persistence and JSON export",
@@ -50,10 +50,6 @@
       "dependency": "Real $97 product checkout URL and authorized developer setup."
     },
     {
-      "item": "Lovable sponsor usage",
-      "dependency": "Actual authorized builder session/export. Local coding is not Lovable usage."
-    },
-    {
       "item": "Hosted orchestration and posting",
       "dependency": "Hosted readiness and private execution-metadata discovery work. Durable unified task storage, atomic deduplication, multi-user ownership, push alerts, browser execution and publishing remain."
     },
@@ -67,13 +63,13 @@
   "outreach_sent": 0,
   "physical_phone_tested": false,
   "whole_goal_complete": false,
-  "preview_evidence": "work/hosted-selection-final-verification-v1.json",
+  "preview_evidence": "work/hosted-selection-final-verification-v2.json",
   "preservation_limits": [
     "Original normalized Exa sample v1 retained. Its original raw response was overwritten by an ignored diagnostic. V2 explicitly documents missing raw provenance. See docs/EXA-FREE-MCP-v2.md."
   ],
-  "review_hub": "https://duolingo-library-phone-v1-roahotf73-ryancortenbachs-projects.vercel.app/delivery/",
+  "review_hub": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/delivery/",
   "plugin_discovery": {
-    "Lovable": "Available, not installed. Suggested once October 24; confirmation required before tools become usable.",
+    "Lovable": "Skipped per Air handoff. No builder session claimed.",
     "Whop": "No plugin found in returned search results. Directory search is not exhaustive.",
     "Terac": "No plugin found in returned search results. Directory search is not exhaustive."
   },
@@ -102,8 +98,8 @@
   },
   "hosted_dashboard": {
     "version": 3,
-    "url": "https://duolingo-library-phone-v1-roahotf73-ryancortenbachs-projects.vercel.app/#operations",
-    "deployment": "dpl_DADSkHfctWbvYLRTLvnudQTwQMCp",
+    "url": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/#operations",
+    "deployment": "dpl_BwnhU8q3AmVbTXFB6XjbZPUxbYXQ",
     "optional_panel_connected": true,
     "legacy_queue_still_local": true,
     "authenticated_local_browser_lifecycle_tested": true,
@@ -181,5 +177,16 @@
     "local_evidence": "work/hosted-selection-local-browser-v1.json",
     "hosted_anonymous_evidence": "work/hosted-selection-hosted-browser-v1.json",
     "repeated_builds_verified": 2
+  },
+  "air_handoff": {
+    "merged_commits": [
+      "e7b8641",
+      "ed8a2c5",
+      "9861a27"
+    ],
+    "mcp_servers_registered_in_project_config": true,
+    "account_connections_independently_verified": false,
+    "Lovable": "skipped per Air handoff",
+    "paid_actions_authorized": false
   }
 }
