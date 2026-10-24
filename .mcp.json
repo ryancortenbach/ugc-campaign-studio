@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "terac": {
+      "type": "http",
+      "url": "https://terac.com/api/mcp"
+    },
+    "exa": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "whop-api": {
+      "type": "http",
+      "url": "https://mcp.whop.com/mcp"
+    },
+    "whop-docs": {
+      "type": "http",
+      "url": "https://docs.whop.com/mcp"
+    }
+  }
+}
