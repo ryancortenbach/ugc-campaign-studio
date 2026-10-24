@@ -1,2 +1,5 @@
 # CSV exports intentionally use standard CRLF record endings.
 *.csv whitespace=cr-at-eol
+
+# Generated PDF streams must remain binary.
+*.pdf binary

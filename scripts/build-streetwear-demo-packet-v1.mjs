@@ -94,6 +94,6 @@ try{
  mkdirSync(path.join(root,'reports'),{recursive:true});
  const lines=['# Streetwear research and product demo','',packet.historyDisclosure,''];
  for(const b of brands){lines.push(`## ${b.name}`,'',b.product.summary,'',`[Two-page ICP and creative PDF](${b.offerPdfUrl})`,'',b.icp.summary,'',`Product CTA: [${b.cta.label}](${b.cta.url}). Brand website: [${b.name}](${b.website}).`,'',`Research task ${b.taskId}: four real Exa searches. [Complete MCP call history](/streetwear-demo-records/${b.id}-exa-rpc-v1.json).`,'',...b.gaps.map(g=>'- '+g),'',...b.sources.map(s=>`- [${s.title}](${s.url})`),'');}
- writeFileSync(path.join(root,'reports/streetwear-demo-v1.md'),lines.join('\n')+'\n');
+ writeFileSync(path.join(root,'reports/streetwear-demo-v1.md'),lines.join('\n').trimEnd()+'\n');
  console.log(JSON.stringify({brands:brands.map(b=>({id:b.id,taskId:b.taskId,history:b.history.length,brief:b.offerPdfUrl})),rpcCalls:rpc.filter(r=>r.type==='call').length,paidSubmissions:0,sends:0}));
 }finally{store.db.close();}

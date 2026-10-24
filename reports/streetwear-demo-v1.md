@@ -50,4 +50,3 @@ Research task 11: four real Exa searches. [Complete MCP call history](/streetwea
 - [official contact](https://www.wearvylin.com/pages/contact)
 - [official product](https://www.wearvylin.com/products/cream-headphones-on-black-hoodie)
 - [official Shopify product JSON](https://www.wearvylin.com/products/cream-headphones-on-black-hoodie.js)
-
