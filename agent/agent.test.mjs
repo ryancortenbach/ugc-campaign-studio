@@ -130,6 +130,32 @@ test('finished renders need a review, and a rejection needs a reason',async()=>{
  }finally{server.close();}
 });
 
+test('storyboards are normalized, gated by checkers, and approval sends shots to renders',async()=>{
+ const {normalizePlan,malformed}=await import('./storyboard.mjs');
+ const base={title:'t',identity:'i',wardrobe:'w',environment:'e',voice:'v',creativeDirection:'c',offer:'o',constraints:''};
+ assert.equal(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:'room tone'},{id:'shot-02',duration:5,camera:'c',action:'a',dialogue:'Hi.',audio:'x'}]}),null);
+ assert.match(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:'tone.\\"}, {\\"id\\":\\"shot-02\\"'},{id:'shot-02',duration:5,camera:'c',action:'a',dialogue:'',audio:''}]}),/leaked/);
+ assert.match(malformed({...base,shots:[{id:'shot-01',duration:5,camera:'c',action:'a',dialogue:'',audio:''}]}),/only 1 shot/);
+ const plan=normalizePlan({title:'Drop day',identity:'i',wardrobe:'w',environment:'e',voice:'v',creativeDirection:'c',offer:'o',constraints:'',shots:[{id:'a',duration:2,camera:'Wide',action:'Walks in',dialogue:'Okay — here it is',audio:'Door'},{id:'b',duration:30,camera:'Close',action:'Holds shirt',dialogue:'',audio:''}]});
+ assert.deepEqual(plan.shots.map(s=>[s.id,s.start,s.duration]),[['shot-01',0,4],['shot-02',4,10]]);
+ assert.equal(plan.durationSeconds,14);
+ assert.equal(plan.shots[0].dialogue,'Okay, here it is');
+ const store=openStore(':memory:');
+ const server=http.createServer(createApp({store,runner:{start(){},control(){},steer(){},isRunning:()=>false}}));
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const post=(p,b={})=>fetch(`http://127.0.0.1:${server.address().port}${p}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(async r=>({status:r.status,body:await r.json()}));
+ try{
+  const s=store.createStoryboard({title:'Drop day',brief:{product:'tee',idea:'x'},plan});
+  assert.equal((await post(`/api/storyboards/${s.id}/approve`)).status,409);
+  store.updateStoryboard(s.id,{status:'checks_passed'});
+  const ok=await post(`/api/storyboards/${s.id}/approve`);
+  assert.equal(ok.body.storyboard.status,'approved');
+  assert.equal(ok.body.renders.length,2);
+  assert.ok(ok.body.renders.every(r=>r.status==='draft'&&r.group_name==='Drop day v1'));
+  assert.equal((await post(`/api/storyboards/${s.id}/check`)).status,409);
+ }finally{server.close();}
+});
+
 test('higgsfield price sheet becomes a total for the chosen resolution and length',()=>{
  const sheet={type:'description',pricing_description:'your request costs roughly $0.2056 per second of generated video at 480p, $0.4622 at 720p, and $1.1372 at 1080p.'};
  assert.equal(priceFrom(sheet,{resolution:'720p',duration:5}),'2.31');

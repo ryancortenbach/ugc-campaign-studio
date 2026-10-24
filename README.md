@@ -38,6 +38,8 @@ The browser saves drafts and campaigns locally and exports a production packet a
 
 Every step is a live log line naming the tool or MCP it called. Pause, resume, stop, or type a steering message into a running task ("skip anyone outside NYC", "max 3"); steering applies before the next step. Leads, evidence, screenshots and drafts live in a local SQLite CRM at `agent/.data/` (ignored).
 
+The Storyboards tab drafts a studio-compatible storyboard from a short brief with Sonnet 5.5 (character, wardrobe, environment and voice locks plus timed shots with exact dialogue), grades the whole storyboard with the seven checkers on Haiku 5.5, and revises it from their findings on request. Each revision is a new version. The pass bar is 85 on every checker with no blocking or major finding; only a passing storyboard can be approved, and approval sends its shots to Renders. Malformed model output is rejected and retried once.
+
 The Renders tab queues Higgsfield Seedance 2.5 shots. Each shot runs the seven scene checkers on Haiku; only a passing shot gets a price from Higgsfield, and it is submitted only when you press Approve on that shot.
 
 Keys in the root `.env.local`: `ANTHROPIC_API_KEY`, `EXA_API_KEY`, `SOLARI_API_KEY`, `HF_CREDENTIALS` (Higgsfield `id:secret`), optional `GMAIL_TOKEN_PATH` (Google OAuth token JSON with refresh token) and `GMAIL_DRAFT_ACCOUNT`. Run it alone with `npm start --prefix agent`; test with `npm test --prefix agent`.

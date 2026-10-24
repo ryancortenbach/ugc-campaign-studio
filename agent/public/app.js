@@ -127,6 +127,27 @@ async function renders(){
  document.querySelectorAll('[data-revise]').forEach(b=>b.onclick=async()=>{try{await api(`/api/renders/${b.dataset.revise}/revise`,{});toast('Queued a revised draft with your notes. Run checks on it.');}catch(err){toast(err.message);}renders();});
  bindReviews(()=>renders());
 }
+const boardStatus={draft:['Needs checks','s-idle'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Ready for your approval','s-wait'],approved:['Approved, in Renders','s-ok']};
+function checkList(checks){const low=Math.min(...checks.results.map(x=>x.score));return `<details ${checks.passed?'':'open'}><summary class="mono">${checks.passed?'pass':'fail'} · lowest ${low} · $${checks.cost.toFixed(4)}</summary>${checks.results.map(x=>`<div style="margin:8px 0"><b>${esc(x.name)}</b> <span class="mono ${x.score>=85?'s-ok':'s-bad'}">${x.score}</span><div class="muted" style="font-size:11.5px">${esc(x.summary)}</div>${x.issues.map(i=>`<div style="font-size:11.5px" class="${i.severity==='minor'?'faint':'s-bad'}">${esc(i.severity)}: ${esc(i.evidence)} → ${esc(i.fix)}</div>`).join('')}</div>`).join('')}</details>`;}
+function boardCard(s){
+ const p=s.plan,st=boardStatus[s.status]||[s.status,'s-idle'];
+ return `<div class="card"><div class="head"><div style="min-width:0"><div class="meta" style="margin-bottom:4px">${pill(st)}<span class="mono">v${s.version}</span><span>${p.durationSeconds}s · ${p.shots.length} shots</span><span class="mono">${money(s.cost_usd)}</span><span>${ago(s.created_at)}</span></div><h2>${esc(s.title)}</h2></div><div class="right">${s.status!=='approved'?`<button class="btn sm" data-bcheck="${s.id}">Run checkers</button>`:''}${s.status==='checks_passed'?`<button class="btn sm go" data-bapprove="${s.id}">Approve storyboard</button>`:''}${s.status==='approved'?`<a class="btn sm" href="#/renders">Open renders</a>`:''}</div></div>
+ <div class="body"><div class="meta" style="margin-bottom:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px"><span><b class="muted">Character</b> ${esc(p.identity)}</span><span><b class="muted">Wardrobe</b> ${esc(p.wardrobe)}</span><span><b class="muted">Environment</b> ${esc(p.environment)}</span><span><b class="muted">Voice</b> ${esc(p.voice)}</span></div>
+ <table class="checks"><thead><tr><th>Shot</th><th>Sec</th><th>Camera</th><th>Action</th><th>Dialogue</th><th>Audio</th></tr></thead><tbody>${p.shots.map(x=>`<tr><td class="mono">${esc(x.id)}</td><td class="mono">${x.start}-${x.start+x.duration}</td><td>${esc(x.camera)}</td><td>${esc(x.action)}</td><td>${x.dialogue?`"${esc(x.dialogue)}"`:'<span class="faint">silent</span>'}</td><td class="muted">${esc(x.audio)}</td></tr>`).join('')}</tbody></table>
+ ${s.checks?`<div style="margin-top:12px">${checkList(s.checks)}</div>`:''}
+ ${s.status!=='approved'?`<form class="steer" data-brevise="${s.id}" style="padding:12px 0 0;border:0"><input type="text" name="note" placeholder="Optional note for the revision, e.g. make the hook land in the first 2 seconds"><button class="btn" type="submit">Fix with checker notes</button></form>`:''}</div></div>`;
+}
+async function storyboards(){
+ const {storyboards:list}=await api('/api/storyboards');
+ const field=(n,l,ph,area)=>`<label>${l}</label>${area?`<textarea name="${n}" rows="2" placeholder="${esc(ph)}"></textarea>`:`<input type="text" name="${n}" placeholder="${esc(ph)}">`}`;
+ $('#view').innerHTML=`<div class="grid split"><div class="card" style="align-self:start"><div class="head"><h2>Draft a storyboard</h2></div><form class="body" id="newboard">${field('product','Product or brand','Mint Labs graphic tee drop')}${field('audience','Audience','Gamers who grew up on PS2 era games')}${field('idea','Video idea or hook','Character reacts to the shirt selling out like a boss fight win',true)}${field('offer','Offer or call to action (optional)','Link in bio')}<label>Length</label><select name="length"><option value="15">15 seconds</option><option value="5">5 seconds</option><option value="30">30 seconds</option></select><details style="margin-top:12px"><summary class="muted">Lock the character (optional)</summary>${field('identity','Identity','Face, age, hair, build',true)}${field('wardrobe','Wardrobe','Exact outfit')}${field('environment','Environment','Location and lighting')}${field('voice','Voice','Tone and delivery')}</details><p><button class="btn go" type="submit">Draft storyboard</button></p><div class="hint">Sonnet 5.5 drafts it, seven Haiku checkers grade it, and you approve it. Approved shots go to Renders, where each shot still needs its own checks and your spend approval.</div></form></div>
+ <div class="grid" style="align-content:start">${list.map(boardCard).join('')||'<div class="card"><div class="empty">No storyboards yet.</div></div>'}</div></div>`;
+ $('#newboard').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button[type=submit]');b.disabled=true;b.textContent='Drafting, about 30 seconds';try{await api('/api/storyboards',Object.fromEntries(new FormData(e.target)));toast('Storyboard drafted. Run the checkers next.');storyboards();}catch(err){toast(err.message);b.disabled=false;b.textContent='Draft storyboard';}};
+ document.querySelectorAll('[data-bcheck]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='Checking';try{await api(`/api/storyboards/${b.dataset.bcheck}/check`,{});}catch(err){toast(err.message);}storyboards();});
+ document.querySelectorAll('[data-bapprove]').forEach(b=>b.onclick=async()=>{try{const {renders:made}=await api(`/api/storyboards/${b.dataset.bapprove}/approve`,{});toast(`Approved. ${made.length} shots added to Renders.`);}catch(err){toast(err.message);}storyboards();});
+ document.querySelectorAll('[data-brevise]').forEach(f=>f.onsubmit=async e=>{e.preventDefault();const b=f.querySelector('button');b.disabled=true;b.textContent='Revising';try{await api(`/api/storyboards/${f.dataset.brevise}/revise`,{note:f.note.value});toast('Revised version added. Run the checkers on it.');}catch(err){toast(err.message);}storyboards();});
+}
+
 async function settings(){
  await loadState();const c=state.config,p=c.profile;
  const row=(k,v)=>`<tr><td class="faint">${k}</td><td>${esc(v)}</td></tr>`;
@@ -135,7 +156,7 @@ async function settings(){
  $('#profile').onsubmit=async e=>{e.preventDefault();try{await api('/api/profile',Object.fromEntries(new FormData(e.target)));toast('Profile saved');}catch(err){toast(err.message);}};
 }
 
-const views={home,tasks,leads,drafts,renders,settings};
+const views={home,tasks,leads,drafts,storyboards,renders,settings};
 async function route(){
  const [name,arg]=location.hash.slice(2).split('/');
  try{await loadState();await (views[name]||home)(arg?Number(arg):undefined);}catch(err){$('#view').innerHTML=`<div class="card"><div class="empty">${esc(err.message)}</div></div>`;}
@@ -157,5 +178,6 @@ stream.onmessage=msg=>{
  }
  if(change.kind==='task'){const i=state.tasks.findIndex(t=>t.id===change.task.id);if(i<0)softRefresh(route);else if(tab()==='tasks'&&state.mission?.task.id===change.task.id)softRefresh(route);}
  if(change.kind==='event'&&change.event.type==='draft'&&tab()==='home')softRefresh(route);
+ if(change.kind==='storyboard'&&tab()==='storyboards')softRefresh(route);
  if(change.kind==='render'){if(change.render.review==='pending')popReview(change.render);if(['renders','home'].includes(tab()))softRefresh(route);else loadState().catch(()=>{});}
 };

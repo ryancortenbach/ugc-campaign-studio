@@ -10,6 +10,8 @@ const base='https://api.higgsfield.ai';
 export const higgsfieldEnabled=()=>/^[^:\s]+:[^:\s]+$/.test(process.env.HF_CREDENTIALS||'');
 export const endpoints={'text-to-video':'bytedance/seedance-2.5/text-to-video','image-to-video':'bytedance/seedance-2.5/image-to-video'};
 export const PASS_SCORE=85;
+// The renderer is text only, so continuity has to live in repeated text locks, not in reference files.
+export const renderMode='Generation mode: Higgsfield Seedance 2.5 text-to-video, one separate call per shot, with no reference images, no voice reference clips, no seeds and no asset IDs. Every shot prompt automatically repeats the identity, wardrobe, environment, voice, creative direction and constraints text, so continuity depends on those descriptions being exact and complete.';
 
 async function hf(pathname,init={}){
  if(!higgsfieldEnabled())throw Error('HF_CREDENTIALS is not set');
@@ -40,7 +42,7 @@ const gradeSchema=z.object({score:z.number().int(),summary:z.string(),issues:z.a
 export async function runCheckers({title,input,brief=''}){
  if(!llmEnabled())throw Error('Checkers need ANTHROPIC_API_KEY');
  const results=await Promise.all(reviewers.map(async([id,name,focus])=>{
-  try{const out=await structured({role:'grader',effort:'low',schema:gradeSchema,system:`You are the ${name} checker for a short AI-generated video shot. ${focus} Score 0 to 100. Use blocking or major only for problems that would visibly ruin or invalidate the render. Cite exact words from the prompt as evidence.`,prompt:JSON.stringify({shotTitle:title,brief,prompt:input.prompt,durationSeconds:input.duration,resolution:input.resolution,hasReferenceImage:Boolean(input.image_url)})});return {id,name,...out.data,cost:out.cost};}
+  try{const out=await structured({role:'grader',effort:'medium',schema:gradeSchema,system:`You are the ${name} checker for a short AI-generated video shot. ${focus} ${input.image_url?'This shot also has one reference image as its first frame.':renderMode} Do not flag the absence of reference files. Score 0 to 100. Use blocking or major only for problems that would visibly ruin or invalidate the render. Cite exact words from the prompt as evidence.`,prompt:JSON.stringify({shotTitle:title,brief,prompt:input.prompt,durationSeconds:input.duration,resolution:input.resolution,hasReferenceImage:Boolean(input.image_url)})});return {id,name,...out.data,cost:out.cost};}
   catch(error){return {id,name,score:0,summary:`Checker failed: ${error.message}`,issues:[{severity:'blocking',evidence:'checker unavailable',fix:'rerun checks'}],cost:0};}
  }));
  const passed=results.every(r=>r.score>=PASS_SCORE&&!r.issues.some(i=>i.severity!=='minor'));

@@ -17,6 +17,7 @@ create table if not exists steers(id integer primary key,task_id integer not nul
 create table if not exists leads(id integer primary key,task_id integer,domain text not null unique,company text,url text,market text,territory text,status text not null,fit_score integer,reasons text,risks text,evidence text,contact_email text,contact_source text,contact_excerpt text,emails text,screenshot text,notes text,created_at text not null,updated_at text not null);
 create table if not exists drafts(id integer primary key,lead_id integer not null,task_id integer,to_email text,subject text not null,body text not null,gmail_draft_id text,gmail_url text,status text not null,created_at text not null);
 create table if not exists renders(id integer primary key,title text not null,endpoint text not null,input text not null,status text not null,checks text,estimate_usd text,request_id text,result_url text,local_file text,error text,approved_at text,created_at text not null,updated_at text not null);
+create table if not exists storyboards(id integer primary key,title text not null,brief text not null,plan text not null,status text not null,checks text,version integer not null default 1,parent_id integer,note text,cost_usd real not null default 0,created_at text not null,updated_at text not null);
 create index if not exists events_task on events(task_id,id);
 create index if not exists events_lead on events(lead_id,id);`;
 
@@ -31,6 +32,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  const event=row=>row&&{...row,data:parse(row.data)};
  const lead=row=>row&&{...row,reasons:parse(row.reasons)||[],risks:parse(row.risks)||[],emails:parse(row.emails)||[]};
  const render=row=>row&&{...row,input:parse(row.input),checks:parse(row.checks)};
+ const board=row=>row&&{...row,brief:parse(row.brief),plan:parse(row.plan),checks:parse(row.checks)};
  const store={db,bus,
   createTask(prompt){const at=now();const id=Number(db.prepare('insert into tasks(prompt,status,created_at,updated_at) values(?,?,?,?)').run(prompt,'queued',at,at).lastInsertRowid);const t=store.getTask(id);bus.emit('change',{kind:'task',task:t});return t;},
   getTask(id){return task(db.prepare('select * from tasks where id=?').get(id));},
@@ -54,7 +56,11 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   getRender(id){return render(db.prepare('select * from renders where id=?').get(id));},
   listRenders(){return db.prepare('select * from renders order by id desc').all().map(render);},
   updateRender(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update renders set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['input','checks'].includes(c)?json(fields[c]):fields[c]),at,id);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
-  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(cost_usd),0) n from tasks').get().n};}
+  createStoryboard({title,brief,plan,version=1,parentId=null,cost=0}){const at=now();const id=Number(db.prepare('insert into storyboards(title,brief,plan,status,version,parent_id,cost_usd,created_at,updated_at) values(?,?,?,?,?,?,?,?,?)').run(title,json(brief),json(plan),'draft',version,parentId,cost,at,at).lastInsertRowid);const s=store.getStoryboard(id);bus.emit('change',{kind:'storyboard',storyboard:s});return s;},
+  getStoryboard(id){return board(db.prepare('select * from storyboards where id=?').get(id));},
+  listStoryboards(){return db.prepare('select * from storyboards order by id desc limit 200').all().map(board);},
+  updateStoryboard(id,fields,addCost=0){const at=now();const cols=Object.keys(fields);db.prepare(`update storyboards set ${cols.map(c=>`${c}=?`).join(',')}${cols.length?',':''}cost_usd=cost_usd+?,updated_at=? where id=?`).run(...cols.map(c=>['brief','plan','checks'].includes(c)?json(fields[c]):fields[c]),addCost,at,id);const s=store.getStoryboard(id);bus.emit('change',{kind:'storyboard',storyboard:s});return s;},
+  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(cost_usd),0) n from tasks').get().n+db.prepare('select coalesce(sum(cost_usd),0) n from storyboards').get().n};}
  };
  return store;
 }
