@@ -1,7 +1,7 @@
 {
   "version": 2,
   "mode": "demo",
-  "preparedAt": "2026-10-24T20:29:02.493Z",
+  "preparedAt": "2026-10-24T20:31:55.212Z",
   "activeBrandIds": [
     "disobedient",
     "vylin"
@@ -17,7 +17,7 @@
       "founders": [
         {
           "name": "Founder not established",
-          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. Friend test recipient has not been supplied.",
+          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. The outreach recipient requires a verified email address.",
           "status": "Identity unresolved",
           "url": "https://disobedientnyc.com/"
         }
@@ -212,9 +212,9 @@
         ]
       },
       "outboundDemo": {
-        "channel": "DM",
-        "recipientLabel": "Friend test recipient",
-        "recipientStatus": "Recipient handle and platform not supplied",
+        "channel": "Email",
+        "recipientLabel": "Disobedient team",
+        "recipientStatus": "Brand email not yet verified.",
         "status": "draft",
         "message": "Hey, this is a real outbound test of our creative workflow using Disobedient. The task contains the sourced research, a two-page brief and a hoodie concept around our London game character. The branded motion sample is still awaiting production. Product: https://disobedientnyc.com/products/low-lives-hoodie"
       },
@@ -243,7 +243,7 @@
         }
       ],
       "gaps": [
-        "Actual friend DM handles and platform",
+        "Verified recipient email for each brand",
         "No verified paid-client relationship or inbound message",
         "Brand customer demographics, revenue and founder identity",
         "No verified target Meta ad or individual organic video",
@@ -741,7 +741,7 @@
       "founders": [
         {
           "name": "Founder not established",
-          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. Friend test recipient has not been supplied.",
+          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. The outreach recipient requires a verified email address.",
           "status": "Identity unresolved",
           "url": "https://www.wearvylin.com/"
         }
@@ -924,9 +924,9 @@
         ]
       },
       "outboundDemo": {
-        "channel": "DM",
-        "recipientLabel": "Friend test recipient",
-        "recipientStatus": "Recipient handle and platform not supplied",
+        "channel": "Email",
+        "recipientLabel": "VYLIN team: info@wearvylin.com",
+        "recipientStatus": "Public collaboration email verified on the official contact page; not sent.",
         "status": "draft",
         "message": "Hey, this is a real outbound test of our creative workflow using VYLIN. The task contains the sourced research, a two-page brief and a hoodie concept around our London game character. The branded motion sample is still awaiting production. Product: https://www.wearvylin.com/products/cream-headphones-on-black-hoodie"
       },
@@ -959,7 +959,7 @@
         }
       ],
       "gaps": [
-        "Actual friend DM handles and platform",
+        "Verified recipient email for each brand",
         "No verified paid-client relationship or inbound message",
         "Brand customer demographics, revenue and founder identity",
         "No verified target Meta ad or individual organic video",

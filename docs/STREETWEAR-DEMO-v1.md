@@ -22,7 +22,7 @@ The provider's estimate endpoint confirmed billing based on output seconds plus 
 
 Genjutsu preserves audio and processes only the first 15 seconds of a source. The proposed pilot repairs six seconds of hoodie footage, restores the original local audio, and adds a two-second product/website CTA. Any new spoken brand-specific script would require separate voice/lip-sync work. A full 23-second ad is not covered by one Light request or by this pilot estimate.
 
-Both CTAs target the respective official hoodie product pages. No Mint checkout destination is used. Actual friend handles and the delivery platform are still required before sending. The UI only claims a sent DM when a real provider ID and sent timestamp are present.
+Both CTAs target the respective official hoodie product pages. No Mint checkout destination is used. Outreach uses email with the brief attached. VYLIN publishes info@wearvylin.com for collaborations; Disobedient still needs a verified recipient email. The UI only claims a sent message when a real provider ID and sent timestamp are present.
 
 ## Open and replay
 

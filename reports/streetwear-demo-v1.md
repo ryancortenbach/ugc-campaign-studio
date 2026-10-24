@@ -14,7 +14,7 @@ Product CTA: [Shop Low Lives Hoodie](https://disobedientnyc.com/products/low-liv
 
 Research task 10: four real Exa searches. [Complete MCP call history](/streetwear-demo-records/disobedient-exa-rpc-v1.json).
 
-- Actual friend DM handles and platform
+- Verified recipient email for each brand
 - No verified paid-client relationship or inbound message
 - Brand customer demographics, revenue and founder identity
 - No verified target Meta ad or individual organic video
@@ -38,7 +38,7 @@ Product CTA: [Shop Cream Headphones Black Zip Hoodie](https://www.wearvylin.com/
 
 Research task 11: four real Exa searches. [Complete MCP call history](/streetwear-demo-records/vylin-exa-rpc-v1.json).
 
-- Actual friend DM handles and platform
+- Verified recipient email for each brand
 - No verified paid-client relationship or inbound message
 - Brand customer demographics, revenue and founder identity
 - No verified target Meta ad or individual organic video
