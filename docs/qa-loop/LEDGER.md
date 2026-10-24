@@ -27,3 +27,15 @@ Independent review returned fixes for incomplete approval fingerprints, refresh/
 Final full validation: 346 agent tests, 90 root tests, root syntax checks and direct syntax checks for all changed runtime modules passed. Full-suite results and push receipts are retained locally in ignored work/qa-loop. The 10-minute native heartbeat is ACTIVE for this chat and uses only this QA worktree. Scheduled future fixes remain on codex/mint-qa-loop. Ryan separately authorized integration of this initial reviewed pass into main.
 
 Next area: draft editing and unsaved-state handling.
+
+## 2026-10-24: compact Leads rows and provider notifications
+
+User-directed pass: brand names and domains now use the full text column, with a compact social row and no empty platform slots. Fallback initials are centered inside consistently sized brand logos. Long names and domains wrap instead of competing with social icons for width.
+
+Each lead displays one primary status, choosing the reached milestone or next blocking action. Simulated checkout supersedes simulated outreach and stays explicitly labeled. Contact discovery uses a single chip: Email found for a recorded personal address, Shared inbox for role mailboxes, No public email for researched leads without one, or Not checked while research is pending. Server and browser share role-mailbox classification to prevent shared inboxes being marked personal.
+
+Video notifications show Higgsfield; confirmed sent and inbound email show Gmail with distinct labels. Failed and pending events cannot claim delivery. Send-response and sent-watcher aliases deduplicate the same message across event replay and dismissal. The sent watcher only adds the internal draft ID to its existing confirmed-sent event, with no new provider work or polling.
+
+Validation: 29 focused tests passed. The full suite passed 352 agent tests and 90 root tests, plus root and changed-module syntax checks. The isolated execution environment could not import Pillow for an unchanged PDF fixture test; rerunning the full agent suite in the normal host environment passed all 352 tests. Independent harsh review: scoped PASS, including role-address regressions, failed-event exclusion, persistent notification alias deduplication and winning combined CSS rules. Native pixel/layout acceptance remains unverified. No paid requests, outreach sends, live database changes, app restart or desktop control.
+
+Integration must retain main's newer Renders gallery, row-click details and product-image cache tags. Other sessions' uncommitted delivery tests and client media metadata remain outside this change.

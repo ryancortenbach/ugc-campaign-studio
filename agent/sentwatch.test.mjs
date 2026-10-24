@@ -29,7 +29,8 @@ test('draft gone and a sent message exists: marked sent, lead contacted, event l
  assert.equal(store.getDraft(draft.id).status,'sent');
  assert.equal(store.getLead(lead.id).status,'contacted');
  assert.deepEqual(titles(store),['Sent: hello@alpha.com']);
- assert.equal(store.listEvents().find(e=>e.tool==='sentwatch').type,'draft');
+ const notice=store.listEvents().find(e=>e.tool==='sentwatch');
+ assert.equal(notice.type,'draft');assert.equal(notice.data.draftId,draft.id);assert.equal(notice.data.messageId,'m9');
  const list=calls.find(c=>new URL(c.url).pathname.endsWith('/messages'));
  const q=new URL(list.url).searchParams.get('q');
  assert.match(q,/^in:sent to:hello@alpha\.com after:\d{4}\/\d{2}\/\d{2}$/);

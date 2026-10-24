@@ -47,7 +47,7 @@ export function createSentWatch({store,gmail={},intervalMs=180000}){
     try{
      if(await get(`drafts/${encodeURIComponent(d.gmail_draft_id)}?format=minimal`))continue;
      const msg=await sentAfter(d);
-     if(msg){store.markDraftSent(d.id);store.addEvent({taskId:d.task_id,leadId:d.lead_id,type:'draft',tool:'sentwatch',title:`Sent: ${d.to_email}`,data:{messageId:msg.id,threadId:msg.threadId}});out.sent++;continue;}
+     if(msg){store.markDraftSent(d.id);store.addEvent({taskId:d.task_id,leadId:d.lead_id,type:'draft',tool:'sentwatch',title:`Sent: ${d.to_email}`,data:{draftId:d.id,messageId:msg.id,threadId:msg.threadId}});out.sent++;continue;}
      const title=`Draft deleted in Gmail: ${d.to_email}`;
      if(!store.listEvents({leadId:d.lead_id}).some(e=>e.title===title)){store.addEvent({taskId:d.task_id,leadId:d.lead_id,type:'draft',tool:'sentwatch',title});out.deleted++;}
     }catch{out.errors++;}

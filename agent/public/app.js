@@ -7,6 +7,8 @@ import {connectionStatus} from './connection-status.js';
 import {ideationPanel} from './brand-ideation.js';
 import {buildGroups,pairTools} from './live-feed-model.js';
 import {paidTaskOrders,taskSection,sortTaskGroups} from './task-list-model.js';
+import {notificationIcon,eventNotification} from './provider-notifications.js';
+import {primaryLeadStatus,contactSummary} from './lead-badges.js';
 // tool-logs.js is untracked: load it dynamically and fall back to plain log rows if it is missing.
 const {toolLogDetails}=await import('./tool-logs.js').catch(()=>({toolLogDetails:null}));
 const $=s=>document.querySelector(s);
@@ -20,11 +22,17 @@ const glyph={ok:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',bad:'<path d="M7 7l10 10M17
  open:'<path d="M14 4.5h5.5V10M19.5 4.5L11 13M17 13.5v5a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5"/>',mail:'<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/>',eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>'};
 const svg=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${k==='ok'?icons.check:glyph[k]}</svg>`;
 const ic=n=>`<svg class="lu" viewBox="0 0 24 24" aria-hidden="true">${icons[n]}</svg>`;
-// Cyber style toasts: big status icon, bold title, detail line, stacked bottom right.
-function toast(title,kind='info',sub=''){
+const recentNotices=new Map();
+// Compact notifications identify the provider and retain delivery deduplication.
+function toast(title,kind='info',sub='',provider=null,key=null){
  let box=$('#toasts');if(!box){box=document.createElement('div');box.id='toasts';document.body.append(box);}
+ const keys=(Array.isArray(key)?key:[key]).filter(value=>value!=null).map(String);
+ const remember=notice=>{for(const alias of keys)recentNotices.set(alias,notice);while(recentNotices.size>256)recentNotices.delete(recentNotices.keys().next().value);};
+ const previous=keys.map(alias=>recentNotices.get(alias)).find(Boolean);if(previous){remember(previous);return previous;}
  const t=document.createElement('div');t.className=`toast t-${kind}`;
- t.innerHTML=`<i>${svg(kind==='ok'?'ok':kind==='bad'?'bad':'info')}</i><div style="min-width:0"><b>${esc(title)}</b>${sub?`<span>${esc(sub)}</span>`:''}</div><button class="x" title="Dismiss">×</button>`;
+ if(keys.length)t.dataset.noticeKey=keys[0];remember(t);t.setAttribute('role',kind==='bad'?'alert':'status');
+ const logo=notificationIcon(provider);
+ t.innerHTML=`<i${logo?' class="toast-provider"':''}>${logo||svg(kind==='ok'?'ok':kind==='bad'?'bad':'info')}</i><div style="min-width:0"><b>${esc(title)}</b>${sub?`<span>${esc(sub)}</span>`:''}</div><button class="x" title="Dismiss">×</button>`;
  t.querySelector('.x').onclick=()=>t.remove();box.prepend(t);while(box.children.length>4)box.lastChild.remove();setTimeout(()=>t.remove(),kind==='bad'?9000:5000);
  return t;
 }
@@ -40,15 +48,10 @@ const statusIcon={'s-ok':'circle-check','s-bad':'circle-x','s-you':'circle-alert
 const instaUrl=l=>l.instagram_handle?`https://www.instagram.com/${encodeURIComponent(String(l.instagram_handle).replace(/^@/,''))}/`:(l.socials?.instagram&&/^https:\/\//.test(l.socials.instagram)?l.socials.instagram:'');
 const brandSvg=new Set(['instagram','tiktok','youtube','facebook']);
 const igMark=()=>`<img class="si" src="${logoSrc('instagram')}" alt="">`;
-// Who the email goes to: personal email green, Instagram DM neutral, generic inbox yellow (needs Ryan), nothing red.
+// Contact discovery distinguishes personal addresses, shared inboxes and missing email.
 function contactChip(l){
- const k=l.contact_kind;if(!k)return '';
- const who=l.contact_name?`${esc(String(l.contact_name).split(' ')[0])}, `:'';
- if(k==='personal')return `<span class="schip s-ok">${ic('mail')}${who?who:''}${who?'personal email':'Personal email'}</span>`;
- if(k==='role')return `<span class="schip s-you" title="Needs you: a shared inbox">${ic('mail')}Generic inbox</span>`;
- if(k==='instagram'){const u=instaUrl(l),h=l.instagram_handle?` @${esc(String(l.instagram_handle).replace(/^@/,''))}`:'';const inner=`${igMark()}Instagram DM${h}`;return u?`<a class="schip s-ig" href="${esc(u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${inner}</a>`:`<span class="schip s-ig">${inner}</span>`;}
- if(k==='none')return `<span class="schip s-bad">${ic('x')}No contact</span>`;
- return '';
+ const contact=contactSummary(l);
+ return `<span class="schip ${contact.cls}" data-contact-summary title="${esc(contact.detail)}">${ic(contact.icon)}${esc(contact.label)}</span>`;
 }
 const ls=s=>leadStatus[s]||[s,'s-idle'];const ts=s=>taskStatus[s]||[s,'s-idle'];
 const titles={analytics:'Analytics',home:'Home',tasks:'Tasks',leads:'Leads',drafts:'Drafts',storyboards:'Storyboards',renders:'Renders',voices:'Voices',settings:'Settings',production:'Production','client-demo':'Tasks'};
@@ -166,11 +169,12 @@ const toolName=t=>{const raw=String(t||'').replace(/\s*\(claude-.*\)$/,'');retur
 const tidy=t=>String(t??'').replace(/\s*\(fit \d+\)/g,'').replace(/\s*\u2014\s*/g,', ');
 const isNow=e=>e.type==='tool_call'&&state.lastStep.get(e.task_id)===e&&state.tasks.some(t=>t.id===e.task_id&&t.status==='running');
 // The rail shows what the agent is doing and decided; raw results and status chatter stay in the mission console.
-const railTypes=new Set(['plan','lead','decision','tool_call','tool_result','draft','done','error','steer']);
+const railTypes=new Set(['plan','lead','decision','tool_call','tool_result','draft','done','error','steer','email_sent','sent','email_received','inbound','reply','replied','received']);
 const hhmm=at=>new Date(at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:false});
 // Rail lines are a short label plus the brand or address; clicking one opens the full step.
 function brief(e){
  const t=tidy(e.title),tool=String(e.tool||''),m=re=>(t.match(re)||[])[1]||'';
+ const notice=eventNotification(e);if(notice)return [notice.title,t];
  if(e.type==='lead')return ['New lead found',m(/^New lead: (.+?)(?:, | \()/)];
  if(e.type==='draft')return [/^Draft ready in Gmail/.test(t)?'Draft saved in Gmail':'Draft saved',m(/for (\S+@[^\s]+?)\.? Not sent/)];
  if(e.type==='done')return ['Mission finished',m(/^Finished: (\d+ draft)/)?`${m(/^Finished: (\d+) draft/)} drafts`:''];
@@ -193,6 +197,8 @@ const leadNames=new Map();
 const noteLead=e=>{if(e.lead_id&&e.type==='lead'){const m=String(e.title||'').match(/^New lead: (.+?) \(/);if(m)leadNames.set(e.lead_id,m[1]);}};
 const kidKey=k=>(k.call||k.result).id;
 function avatar(e){
+ const provider=logoFor(e.tool)||(e.tool==='sentwatch'?'gmail':null);
+ if(['higgsfield','gmail'].includes(provider))return logoTile(provider);
  if(e.lead_id){const nm=leadNames.get(e.lead_id)||brief(e)[1]||'?';return brandThumb({id:e.lead_id,company:nm});}
  if(e.tool==='operator')return '<span class="ico">You</span>';
  return logoTile(logoFor(e.tool)||'claude');
@@ -254,7 +260,7 @@ const video=r=>r.local_file?`<video src="/renders/${esc(r.local_file)}#t=0.1" co
 function reviewCard(r){return `<div class="review" data-review="${r.id}">${video(r)}<div class="rbody">${r.plan?.visualQA?.status==='needs_revision'?`<p class="s-bad">AI review: needs revision. ${esc(r.plan.visualQA.findings[0])}</p>`:''}<div style="font-weight:600">${esc(r.title)}</div><div class="faint" style="font-size:11.5px;margin:2px 0 8px">${esc(r.group_name||'Single shot')} · ${renderLength(r)?esc(renderLength(r))+'s':'Length pending'} · ${esc(r.input.resolution)}${r.estimate_usd?` · about $${esc(r.estimate_usd)}`:''}</div><input type="text" data-note="${r.id}" placeholder="If rejecting, say what to fix"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn sm go" data-decide="approved" data-id="${r.id}">Approve scene</button><button class="btn sm stop" data-decide="rejected" data-id="${r.id}">Reject</button></div></div></div>`;}
 function bindReviews(after){document.querySelectorAll('[data-decide]').forEach(b=>b.onclick=async()=>{const id=b.dataset.id;const note=document.querySelector(`[data-note="${id}"]`)?.value||'';try{await api(`/api/renders/${id}/review`,{decision:b.dataset.decide,note});b.dataset.decide==='approved'?toast('Scene approved','ok'):toast('Scene rejected','bad','Use Revise to queue a fixed version.');document.querySelector(`#pop-${id}`)?.remove();after?.();}catch(err){toast(err.message,'bad');}});}
 const popped=new Set();
-function popReview(r){if(!reviewReady(r)||popped.has(r.id))return;popped.add(r.id);const notice=toast('Video ready','ok',clip(r.title,80)),link=document.createElement('a');link.href=`#/renders/${r.id}`;link.className='linkbtn';link.textContent='Review';notice.querySelector('div').append(link);}
+function popReview(r){if(!reviewReady(r)||popped.has(r.id))return;popped.add(r.id);const notice=toast('Video ready','ok',clip(r.title,80),'higgsfield'),link=document.createElement('a');link.href=`#/renders/${r.id}`;link.className='linkbtn';link.textContent='Review';notice.querySelector('div').append(link);}
 
 function startMission(form){form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type=submit]');if(!f.message.value.trim())return;b.disabled=true;try{const {task}=await api('/api/chat',{message:f.message.value});f.reset();toast('Mission started','ok',`Task ${task.id}`);location.hash=`#/tasks/${task.id}`;}catch(err){toast(err.message,'bad');}finally{b.disabled=false;}});form.message?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))form.requestSubmit();});}
 
@@ -724,22 +730,16 @@ async function loadDraftMaps(){
  }
  return list;
 }
-const missingLabel={email:'Needs email',clip:'Needs clip',pdf:'Needs PDF',gmail:'Needs Gmail draft',instagram:'Connect Instagram',handle:'Needs handle'};
 const lstat=([label,cls])=>`<span class="lstat ${cls}">${ic(statusIcon[cls]||'circle-alert')}<span>${esc(label)}</span></span>`;
-// "Draft ready" only when the draft is truly ready. Otherwise show what is missing as quiet chips.
+// One primary update: latest reached milestone, or the next required action.
 function leadStatusCell(l){
- if(l.simulatedJourney)return `<div class="ct-journey"><span class="schip s-ok">Outreach sent</span><span class="schip s-ok">Whop checkout successful</span><span class="schip s-idle">Simulation</span></div>`;
- const d=state.dr.get(l.id);
- if(l.status==='drafted'&&d?.readiness&&!d.readiness.ready){
-  const miss=(d.readiness.missing||[]).map(m=>schip([missingLabel[m]||`Needs ${m}`,'s-idle'])).join('');
-  return `<div class="miss">${miss||schip(['Not ready','s-idle'])}</div>`;
- }
- return lstat(ls(l.status));
+ const badge=primaryLeadStatus(l,{draft:state.dr.get(l.id),dmReady:state.dm.get(l.id)?.status==='dm_ready',fallback:ls(l.status)});
+ const mark=badge.provider?`<img src="${logoSrc(badge.provider)}" alt="${esc(socialNames[badge.provider]||providerName[badge.provider]||badge.provider)}">`:ic(badge.icon||statusIcon[badge.cls]||'circle-alert');
+ return `<span class="schip ct-primary-status ${badge.cls}" data-primary-status>${mark}${esc(badge.label)}</span>`;
 }
 function leadRow(l){
  const g=state.gmail.get(l.id),dm=state.dm.get(l.id),why=skipWhy(l);
- const mailText=l.contact_email||(l.contact_kind?'':(l.status==='found'?'Not checked yet':'No public email'));
- return `<div class="trow${state.selectedLead===l.id?' sel':''}" data-id="${l.id}" data-status="${esc(l.status)}"><div class="tbrand">${brandThumb(l)}<div style="min-width:0"><b>${esc(l.company||l.domain)}</b><div class="sub"><em>${esc(l.domain)}</em>${socialLinks(l)}</div></div></div><div class="where">${esc(l.territory||'')}<span>${esc(l.market||'')}</span></div><div class="contact">${contactChip(l)}${mailText?`<div class="mono mail">${esc(mailText)}</div>`:''}</div><div style="min-width:0" title="${esc(why)}">${leadStatusCell(l)}${dm?.status==='dm_ready'?'<div class="why">'+schip(['DM ready','s-ok'],'circle-check')+'</div>':''}${why?`<div class="why">${esc(why)}</div>`:''}</div><div class="tact"><button type="button" title="Details">${svg('eye')}</button>${dm&&dm.handle?`<a class="gmailicon" href="https://instagram.com/${encodeURIComponent(dm.handle)}" target="_blank" rel="noopener" data-tip="Open Instagram profile" aria-label="Open Instagram profile">${igMark()}</a>`:g?`<a class="gmailicon" href="${esc(g)}" target="_blank" rel="noopener" data-tip="Open draft in Gmail" aria-label="Open draft in Gmail"><img src="/logos/gmail.png" alt=""></a>`:`<button type="button" disabled title="No draft for this brand">${svg('mail')}</button>`}<a href="${esc(l.url||`https://${l.domain}`)}" target="_blank" rel="noopener" title="Open the website">${svg('open')}</a></div></div>`;
+ return `<div class="trow${state.selectedLead===l.id?' sel':''}" data-id="${l.id}" data-status="${esc(l.status)}"><div class="tbrand">${brandThumb(l)}<div class="ct-brand-copy"><b title="${esc(l.company||l.domain)}">${esc(l.company||l.domain)}</b><div class="sub"><em title="${esc(l.domain)}">${esc(l.domain)}</em>${socialLinks(l)}</div></div></div><div class="where">${esc(l.territory||'')}<span>${esc(l.market||'')}</span></div><div class="contact">${contactChip(l)}</div><div class="ct-status" title="${esc(why)}">${leadStatusCell(l)}</div><div class="tact"><button type="button" title="Details">${svg('eye')}</button>${dm&&dm.handle?`<a class="gmailicon" href="https://instagram.com/${encodeURIComponent(dm.handle)}" target="_blank" rel="noopener" data-tip="Open Instagram profile" aria-label="Open Instagram profile">${igMark()}</a>`:g?`<a class="gmailicon" href="${esc(g)}" target="_blank" rel="noopener" data-tip="Open draft in Gmail" aria-label="Open draft in Gmail"><img src="/logos/gmail.png" alt=""></a>`:`<button type="button" disabled title="No draft for this brand">${svg('mail')}</button>`}<a href="${esc(l.url||`https://${l.domain}`)}" target="_blank" rel="noopener" title="Open the website">${svg('open')}</a></div></div>`;
 }
 $('#drawer').addEventListener('click',async e=>{traceClick(e);const button=e.target.closest('[data-retry-ideation]');if(button){const id=state.selectedLead;button.disabled=true;try{await api(`/api/leads/${id}/ideation`,{});refreshLeadIdeation();}catch(error){toast(error.message,'bad');button.disabled=false;}}});
 const clip=(t,n=96)=>{t=String(t||'');return t.length>n?t.slice(0,t.lastIndexOf(' ',n-1)>40?t.lastIndexOf(' ',n-1):n)+'...':t;};
@@ -791,7 +791,7 @@ async function openLead(id){
   const slot=$('#sendslot');
   slot.innerHTML=`<span class="sendask"><span>${isDm?'Send the DM to':'Send to'} ${esc(mail.to_email)}?</span><button type="button" class="btn sm go" id="sendyes">Send</button><button type="button" class="btn sm" id="sendno">Cancel</button></span>`;
   $('#sendno').onclick=()=>openLead(id);
-  $('#sendyes').onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await api(`/api/drafts/${mail.id}/${isDm?'send-dm':'send'}`,{confirm:true});toast(isDm?'DM sent':'Email sent','ok',`To ${mail.to_email}`);}catch(err){toast(err.message,'bad');}openLead(id);softRefresh(route);};
+  $('#sendyes').onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await api(`/api/drafts/${mail.id}/${isDm?'send-dm':'send'}`,{confirm:true});toast(isDm?'DM sent':'Email sent','ok',`To ${mail.to_email}`,isDm?null:'gmail',isDm?null:`gmail-sent-draft:${mail.id}`);}catch(err){toast(err.message,'bad');}openLead(id);softRefresh(route);};
  });
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden){$('#drawer').hidden=true;state.selectedLead=null;}});
@@ -995,7 +995,9 @@ stream.onmessage=msg=>{
     if(e.type==='steer')loadSession(g).then(()=>{if(tab()==='tasks'&&state.openSess.has(g.key)){const t=bodyEl(g.key)?.querySelector('.thread2');if(t){t.innerHTML=threadHTML2(g);t.scrollTop=t.scrollHeight;}}});
    }
   }
-  if(e.type==='draft')toast('Draft saved, not sent','ok',e.title.replace(/\. Not sent\.$/,''));
+  const notice=eventNotification(e);
+  if(notice)toast(notice.title,notice.kind,notice.detail,notice.provider,notice.keys);
+  else if(e.type==='draft')toast('Draft saved, not sent','ok',e.title.replace(/\. Not sent\.$/,''));
   if(e.type==='error')toast('Error','bad',tidy(e.title));
   if(e.type==='done')toast('Mission finished','ok',e.title.replace(/^Finished: /,''));
  }

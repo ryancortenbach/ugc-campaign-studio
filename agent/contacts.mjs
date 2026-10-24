@@ -1,15 +1,15 @@
 import {extractEmails,extractSocials,excerptAround} from './tools/site.mjs';
+import {isRoleMailbox} from './public/email-classification.js';
+export {ROLE_WORDS} from './public/email-classification.js';
 
 // Ryan's rule: never a generic inbox. A lead needs a personal email that is literally printed on a public page, or an Instagram handle to DM.
 // Emails are only ever copied out of fetched text. Nothing in this file builds an address from a name and a domain.
 export const MAX_EXA_CALLS=3;
 export const NO_CONTACT='No reachable contact';
 export const ONLY_GENERIC='Only a generic inbox';
-export const ROLE_WORDS=new Set(['info','support','cs','cx','returns','exchanges','billing','accounts','payments','hello','hi','hey','hola','contact','contactus','sales','press','team','admin','orders','order','help','care','service','services','customerservice','customercare','customersupport','wholesale','shop','store','marketing','partnerships','partnership','partners','partner','collabs','collab','collaborations','noreply','donotreply','office','general','inquiries','inquiry','enquiries','enquiry','mail','studio','media','pr','creators','creator','influencer','influencers','brand','brands','newsletter','feedback','questions','booking','bookings','events','community','social','content','hq','web','website','ecommerce','returns','billing','accounts','accounting','jobs','careers','hr','sale','ambassador','ambassadors']);
 const FREE_MAIL=new Set(['gmail.com','googlemail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','me.com','live.com','aol.com','proton.me','protonmail.com']);
 const words=local=>local.toLowerCase().split(/[._+\-]+/).map(w=>w.replace(/\d+$/,'')).filter(Boolean);
 const letters=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'');
-const brandLabel=domain=>letters(String(domain||'').toLowerCase().replace(/^www\./,'').split('.')[0]);
 const hostOf=u=>{try{return new URL(u).hostname.toLowerCase().replace(/^(www|m)\./,'');}catch{return '';}};
 const sameDomain=(host,domain)=>Boolean(host&&domain)&&(host===domain||host.endsWith('.'+domain)||domain.endsWith('.'+host));
 const cleanDomain=d=>String(d||'').toLowerCase().replace(/^www\./,'');
@@ -20,9 +20,8 @@ export function classifyEmail(email,{domain='',names=[]}={}){
  const [local='',host='']=String(email||'').trim().toLowerCase().split('@');
  if(!local||!host)return 'other';
  const w=words(local);
- if(ROLE_WORDS.has(letters(local))||w.some(x=>ROLE_WORDS.has(x)))return 'role';
+ if(isRoleMailbox(email,{domain}))return 'role';
  domain=cleanDomain(domain);
- if(letters(local)===brandLabel(domain)||(w.length&&w.every(x=>x===brandLabel(domain))))return 'role';
  const sq=letters(local),known=names.map(n=>String(n||'').toLowerCase().split(/\s+/).map(letters).filter(x=>x.length>1)).filter(p=>p.length);
  const named=known.some(p=>{const f=p[0],l=p[p.length-1];return [f,l,f+l,l+f,f[0]+l,f+l[0]].includes(sq)||w.includes(f)||(p.length>1&&w.includes(l)&&w.length>1);});
  const free=FREE_MAIL.has(host),brandHost=sameDomain(host,domain);
