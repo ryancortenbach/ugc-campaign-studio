@@ -131,7 +131,8 @@ test('legacy service role keys are also sent as the Bearer token, and missing se
   const out=await delivery.deliver('pay_1');
   assert.equal(sb.calls[1].headers.Authorization,'Bearer eyJlegacy');assert.match(sb.calls[1].url,/^https:\/\/panel\.supabase\.co\//);
   assert.equal(out.delivery.draftUrl,null);assert.match(out.delivery.email.body,/watch and download it here/);
-  const unset=createDelivery({store:f.store,env:{},renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>null});
+  // Gmail is stubbed off here too, so a real Gmail token on the machine running the tests cannot flip the setup report.
+  const unset=createDelivery({store:f.store,env:{},renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>null,gmail:{gmailEnabled:()=>false}});
   assert.deepEqual(unset.get('pay_1').setup,{ffmpeg:false,storage:false,gmail:false});
   await assert.rejects(unset.deliver('pay_1'),e=>e.status===503&&/SUPABASE_SECRET_KEY/.test(e.message));
  }finally{f.done();}
