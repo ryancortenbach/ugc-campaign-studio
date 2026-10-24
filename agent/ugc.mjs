@@ -71,9 +71,11 @@ export async function writeConcept(ctx,llm=structured){
  return conceptOut(out,ctx);
 }
 export async function reviseConcept(ctx,fields,checks,llm=structured){
- const findings=checks.results.flatMap(r=>r.issues.map(i=>({checker:r.name,...i})));
+ // Only what keeps a checker under the bar, worst first: polish notes from checkers that already pass make the reviser churn.
+ const rank={blocking:0,major:1,minor:2};
+ const findings=checks.results.filter(r=>r.score<hf.PASS_SCORE||r.issues.some(i=>i.severity!=='minor')).flatMap(r=>r.issues.map(i=>({checker:r.name,score:r.score,...i}))).sort((x,y)=>rank[x.severity]-rank[y.severity]);
  const base=ctx.hero?heroRules:rules;
- const out=await llm({role:'main',effort:'low',schema:ctx.hero?heroSchema:conceptSchema,system:`${base} You are revising an existing concept. Every checker must score at least ${hf.PASS_SCORE}, so resolve every finding, including minor ones, with the smallest exact edit. When a finding asks for a precise bound (a dialogue time window inside the 5 seconds, framing that keeps the whole product in frame, a camera drift limit, the voice's age and accent, how the product's own label looks), add that one bounded detail. When two details contradict, delete one. Never add new story beats, props, people or claims, and keep every field inside its word limit. This is a private pitch sample for the brand, not a public testimonial, so no call to action and no AI disclosure line are needed. Ignore any finding that asks for reference images, voice clips, seeds or asset IDs. Keep it personalized to the brand.`,prompt:JSON.stringify({brand:JSON.parse(brandBrief(ctx)),concept:fields,findings})});
+ const out=await llm({role:'main',effort:'medium',schema:ctx.hero?heroSchema:conceptSchema,system:`${base} You are revising an existing concept. Every checker must score at least ${hf.PASS_SCORE}, so resolve every finding, including minor ones, with the smallest exact edit. When a finding asks for a precise bound (a dialogue time window inside the 5 seconds, framing that keeps the whole product in frame, a camera drift limit, the voice's age and accent, how the product's own label looks), add that one bounded detail. When two details contradict, delete one. Never add new story beats, props, people or claims, and keep every field inside its word limit. This is a private pitch sample for the brand, not a public testimonial, so no call to action and no AI disclosure line are needed. Ignore any finding that asks for reference images, voice clips, seeds or asset IDs. Keep it personalized to the brand.`,prompt:JSON.stringify({brand:JSON.parse(brandBrief(ctx)),concept:fields,findings})});
  return conceptOut(out,ctx);
 }
 
