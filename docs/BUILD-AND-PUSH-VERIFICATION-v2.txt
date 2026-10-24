@@ -1,0 +1,27 @@
+Mint Labs final local verification, October 24, 2026
+
+This supplements BUILD-AND-PUSH-VERIFICATION-v1.txt after the final mocked
+interruption regressions and source review were completed.
+
+- Agent suite: 284 passed, 0 failed, using node --test --test-timeout=30000.
+- Root suite: 90 passed, 0 failed.
+- Fulfillment suite: 19 passed, 0 failed, using its installed dependencies and
+  its own ffmpeg-static binary without path or font overrides.
+- Total: 393 passing tests.
+- Web preview build and canonical workflow build validation passed.
+- Native arm64 macOS app build, strict signature verification and plist lint
+  passed. The installed app was not replaced or restarted.
+- Root syntax command and all 107 agent/fulfillment module syntax checks passed.
+  The subsequently edited setup script also passed node --check.
+- Portable creative-package hashes, relative links and browser-script syntax
+  passed. Credentials, runtime databases, dependencies and build outputs stay
+  ignored. Temporary install cache and DNS adapter were removed.
+- Final revision-loop source/mock review reports PASS in
+  MINT-LABS-REVISION-LOOP-REVIEW-v1.txt. The added regression tests verify that
+  completed revisions survive a spending pause, no later call starts, and
+  interrupted formatting costs are recorded once.
+
+No live paid-provider, native visual, outreach-send, deployment or production
+acceptance result is implied by these local builds and mocked checks. Earlier
+feature handoffs continue to document those separate limits. Test and build
+logs remain in ignored work/git-finalization-v1/.
