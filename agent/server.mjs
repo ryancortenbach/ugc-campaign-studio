@@ -32,6 +32,7 @@ import {createSentWatch} from './sentwatch.mjs';
 import {createWhopWatch,brandDomain} from './whopwatch.mjs';
 import {createDelivery} from './delivery.mjs';
 import {createOrderCoverage} from './order-coverage.mjs';
+import {createOrderVideoPlan} from './order-video-plan.mjs';
 import {whopEnabled} from './tools/whop.mjs';
 import {createRequalifier} from './quality.mjs';
 import {createProductionResearch,localWorkflowAsset} from './production-research.mjs';
@@ -64,6 +65,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=def
  whopwatch??=createWhopWatch({store,runner});
  delivery??=createDelivery({store,gmail:gmailApi,sender:()=>realTools.loadProfile()?.company||'Mint Labs'});
  const orderCoverage=createOrderCoverage({store,delivery});
+ const orderVideoPlan=createOrderVideoPlan({store});
  costs??=createCosts({store});
  analytics??=createAnalytics({store});
  connections??=createConnections();
@@ -255,6 +257,9 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['POST',/^\/api\/whop\/orders\/([\w-]+)\/brand$/,(m,b)=>({order:whopwatch.setBrand(m[1],b.domain)})],
   ['POST',/^\/api\/whop\/orders\/([\w-]+)\/run$/,m=>({order:whopwatch.runOrder(m[1])})],
   // Delivery: join the finished shots into the final video, then upload it to Supabase and draft the buyer's email. Never sends.
+  ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan$/,m=>orderVideoPlan.get(m[1])],
+  ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan$/,(m,b)=>orderVideoPlan.save(m[1],b)],
+  ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan\/versions\/(\d+)$/,m=>orderVideoPlan.version(m[1],Number(m[2]))],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/coverage$/,m=>orderCoverage.get(m[1])],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/delivery$/,m=>delivery.get(m[1])],
   ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/final$/,m=>delivery.finish(m[1])],

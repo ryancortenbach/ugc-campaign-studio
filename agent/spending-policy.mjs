@@ -18,6 +18,8 @@ export function spendingRequestAllowed(method,pathname,body={}){
  if(pathname==='/api/production/call'||pathname==='/api/uploads'||pathname==='/api/profile')return true;
  if(/^\/api\/tasks\/\d+\/storyboard$/.test(pathname)||/^\/api\/leads\/\d+(?:\/storyboard)?$/.test(pathname))return true;
  if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/context$/.test(pathname))return true;
+ // Video assignments only save local planning metadata.
+ if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/video-plan$/.test(pathname))return true;
  // Final video and delivery use local ffmpeg, free Supabase Storage and a Gmail draft. No paid provider is called.
  if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/(?:final|deliver|delivery-draft-reconcile)$/.test(pathname))return true;
  if(/^\/api\/tasks\/\d+\/control$/.test(pathname))return ['pause','stop'].includes(body.action);
