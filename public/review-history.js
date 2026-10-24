@@ -1,0 +1,17 @@
+import {createReviewRecord,reviewFreshness,reviewLabel} from './review-records.js';
+const $=s=>document.querySelector(s),storage='ugc-review-history-v1';let volatile=[],storageFailed=false;
+function records(){if(storageFailed)return volatile;try{const saved=JSON.parse(localStorage.getItem(storage));return Array.isArray(saved)?saved:volatile;}catch{return volatile;}}
+export function reviewFormInput(){let brief={};try{brief=JSON.parse(localStorage.getItem('ugc-studio-v1'))?.brief||{};}catch{}const references=JSON.parse($('#review-refs').value);if(!Array.isArray(references))throw Error('Reference manifest must be a JSON array.');return {prompt:$('#review-prompt').value,brief,references,lockedDialogue:$('#review-dialogue').value.split('\n').filter(x=>x.trim()),settings:{durationSeconds:Number($('#review-duration').value),estimatedCredits:Number($('#review-credits').value)}};}
+export function recordReview(input,result,mode){const entry={id:crypto.randomUUID(),...createReviewRecord(input,result,mode)};volatile=[entry,...records()];try{localStorage.setItem(storage,JSON.stringify(volatile));storageFailed=false;}catch{storageFailed=true;$('#review-history-status').textContent='Storage unavailable. Export history before leaving this page.';}renderReviewHistory();return entry;}
+export function renderReviewHistory(){
+ const area=$('#review-history');if(!area)return;let current=null;try{current=reviewFormInput();}catch{}
+ area.replaceChildren();const history=records();if(!history.length){area.textContent='No saved reviews. Run a readiness check to start an audit trail.';return;}
+ for(const entry of history){
+  const card=document.createElement('article');card.className='panel document';const title=document.createElement('h4');title.textContent=reviewLabel(entry);const summary=document.createElement('p');summary.textContent=new Date(entry.createdAt).toLocaleString()+' / '+(reviewFreshness(entry,current)==='matches_current_inputs'?'Matches current inputs':'Stale for current inputs')+' / Reported model requests: '+(entry.reportedModelRequests??'not recorded');
+  const note=document.createElement('p');note.className='muted';note.textContent='This saved report never grants spend or generation approval. Prompt, brief, reference, settings or dialogue changes require a new review.';
+  const details=document.createElement('details'),label=document.createElement('summary'),raw=document.createElement('pre');label.textContent='Inputs, rounds and findings';raw.textContent=JSON.stringify(entry,null,2);details.append(label,raw);card.append(title,summary,note,details);area.append(card);
+ }
+}
+$('#review-history-export').onclick=()=>{const payload={schemaVersion:'1.0',records:records(),spendApproved:false,generationSubmitted:false,disclosure:'Browser-local review evidence. Request counts do not establish billed cost. Historical reports are not approvals for changed inputs.'};const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ugc-review-history.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+for(const id of ['review-prompt','review-refs','review-dialogue','review-duration','review-credits'])$('#'+id).addEventListener('input',renderReviewHistory);
+window.addEventListener('ugc-review-inputs-loaded',renderReviewHistory);window.addEventListener('ugc-campaign-change',renderReviewHistory);window.addEventListener('storage',renderReviewHistory);renderReviewHistory();

@@ -24,11 +24,20 @@ export async function revisePrompt(input,report){
 }
 export async function runReviewLoop(input,review=reviewPrompt,revise=revisePrompt){
  let current={...input};const rounds=[];const maxRounds=Math.min(3,Math.max(1,Number(input.maxRounds)||1));
+ const output=status=>{let calls=0;for(const round of rounds){if(!Number.isInteger(round.report?.modelCalls)){calls=null;break;}calls+=round.report.modelCalls;if(round.revision)calls++;}return {status,prompt:current.prompt,fingerprint:fingerprint(current),rounds,modelCalls:calls,spendApproved:false,generationSubmitted:false};};
  for(let n=1;n<=maxRounds;n++){
   const report=await review(current);rounds.push({round:n,prompt:current.prompt,report});
-  if(report.status==='ready_for_human_and_spend_review')return {status:report.status,prompt:current.prompt,fingerprint:fingerprint(current),rounds,spendApproved:false,generationSubmitted:false};
-  if(report.localIssues?.length||report.errors?.length)return {status:'blocked',prompt:current.prompt,rounds,spendApproved:false,generationSubmitted:false};
-  if(n<maxRounds){const revision=await revise(current,report);if(typeof revision.prompt!=='string'||!revision.prompt.trim())throw Error('Revision was empty');rounds[rounds.length-1].revision={changes:revision.changes,usage:revision.usage};const candidate={...current,prompt:revision.prompt};const revisionIssues=preflight(candidate);if(revisionIssues.length){rounds[rounds.length-1].revision={...rounds[rounds.length-1].revision,rejected:true,proposedPrompt:revision.prompt,issues:revisionIssues};return {status:'blocked',prompt:current.prompt,fingerprint:fingerprint(current),rounds,spendApproved:false,generationSubmitted:false};}current=candidate;}
+  if(report.status==='ready_for_human_and_spend_review')return output(report.status);
+  if(report.localIssues?.length||report.errors?.length)return output('blocked');
+  if(n<maxRounds){
+   let revision;
+   try{revision=await revise(current,report);if(typeof revision.prompt!=='string'||!revision.prompt.trim())throw Error('Revision was empty');}
+   catch{rounds[rounds.length-1].revision={attempted:true,error:'Revision request did not produce a usable prompt. Prior findings and draft preserved.',usage:null};return output('blocked');}
+   rounds[rounds.length-1].revision={attempted:true,changes:revision.changes,usage:revision.usage};
+   const candidate={...current,prompt:revision.prompt},revisionIssues=preflight(candidate);
+   if(revisionIssues.length){rounds[rounds.length-1].revision={...rounds[rounds.length-1].revision,rejected:true,proposedPrompt:revision.prompt,issues:revisionIssues};return output('blocked');}
+   current=candidate;
+  }
  }
- return {status:'revision_limit_reached',prompt:current.prompt,fingerprint:fingerprint(current),rounds,spendApproved:false,generationSubmitted:false};
+ return output('revision_limit_reached');
 }

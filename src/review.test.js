@@ -21,3 +21,8 @@ test('invalid reviewer severity fails closed instead of silently disappearing fr
  const result=await reviewPrompt(validInput,async()=>({score:99,summary:'fixture',issues:[{severity:'unknown',evidence:'fixture',fix:'fixture'}]}));
  assert.equal(result.status,'needs_revision');assert.equal(result.errors.length,7);assert.equal(result.finalJudge.verdict,'block');
 });
+test('revision failure preserves the seven specialist findings and attempted request count',async()=>{
+ const report={status:'needs_revision',modelCalls:7,grades:[{id:'script',score:65}]};
+ const result=await runReviewLoop({...validInput,maxRounds:3},async()=>report,async()=>{throw Error('fixture provider failure');});
+ assert.equal(result.status,'blocked');assert.equal(result.modelCalls,8);assert.equal(result.rounds[0].report.grades[0].score,65);assert.equal(result.rounds[0].revision.attempted,true);assert.equal(result.prompt,validInput.prompt);assert.equal(result.spendApproved,false);
+});
