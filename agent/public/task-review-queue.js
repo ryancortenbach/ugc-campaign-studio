@@ -1,6 +1,6 @@
 import {reviewReady,watchRecords} from './render-monitor.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export const needsTaskReview=r=>reviewReady(r)||(r.status==='completed'&&r.plan?.visualQA?.status==='needs_revision');
+export const needsTaskReview=r=>!r.plan?.supersededByRenderId&&(reviewReady(r)||(r.status==='completed'&&r.plan?.visualQA?.status==='needs_revision'));
 export function taskReviewHTML(renders){
  const pending=renders.filter(needsTaskReview);
  if(!pending.length)return '';

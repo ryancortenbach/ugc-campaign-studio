@@ -34,6 +34,21 @@ test('a rejected garment is reviewed separately from its static CTA and the corr
  },data);
 });
 
+test('a submitted correction shows its real provider state instead of the stale preparation message',async()=>{
+ const data=fixture(),brand=data.brands[2];
+ brand.revisionDraft={requestId:'correction-id',status:'in_progress',referenceRule:'Match printed hoodie from first frame.',ctaRule:'CTA stays separate.',estimatedUsd:1.2,request:{prompt:'Match the printed anchor.'}};
+ brand.genjutsuPreparation.submission={requestId:'correction-id',status:'in_progress'};
+ await setup(async({host,calls})=>{
+  await mountClientDemo(host);host.querySelector('[data-ap-cd-stage="4"]').click();
+  const preparation=host.querySelector('.ap-cd-preparation');
+  assert.match(preparation.textContent,/Actual correction request correction-id/);
+  assert.match(preparation.textContent,/in_progress/);
+  assert.doesNotMatch(preparation.textContent,/No retry submitted|No Genjutsu request has been submitted/);
+  assert.equal(host.querySelector('video'),null);
+  assert.deepEqual(calls,[{url:'/api/client-demo'}]);
+ },data);
+});
+
 async function setup(fn, data = fixture()) {
   const originalFetch = globalThis.fetch, calls = [];
   const dom = new JSDOM('<style></style><div id="host"></div>');

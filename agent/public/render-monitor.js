@@ -1,6 +1,6 @@
 // Read-only monitoring. Provider submission and retries are outside this module.
 export const renderActive = r => ['queued','in_progress','submitting','checking'].includes(r.status) || Boolean(r.revising);
-export const reviewReady = r => r.status === 'completed' && Boolean(r.local_file || r.result_url) && r.review === 'pending';
+export const reviewReady = r => !r.plan?.supersededByRenderId && r.status === 'completed' && Boolean(r.local_file || r.result_url) && r.review === 'pending';
 export const renderGroup = r => r.stale || r.status === 'submission_unknown' ? 'fix' : renderActive(r) ? 'work' : reviewReady(r) || r.status === 'checks_passed' ? 'you' : ['checks_failed','failed','nsfw','draft'].includes(r.status) || r.review === 'rejected' ? 'fix' : 'done';
 export const renderLength = r => r.plan?.finalSeconds || r.input?.duration || r.plan?.sourceSeconds || null;
 export const renderModel = r => String(r.endpoint).includes('genjutsu') ? 'Genjutsu Light' : String(r.endpoint).includes('seedance') ? 'Seedance 2.5' : r.endpoint || 'Higgsfield';

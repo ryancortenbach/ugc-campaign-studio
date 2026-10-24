@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {renderGroup,reviewReady,renderLength,renderModel,watchRecords} from './public/render-monitor.js';
+import {needsTaskReview} from './public/task-review-queue.js';
+
+test('the task queue retires an older rejected scene when a newer repaired render replaces it',()=>{
+ const previous={status:'completed',review:'rejected',plan:{visualQA:{status:'needs_revision'},supersededByRenderId:28}};
+ assert.equal(needsTaskReview(previous),false);
+ assert.equal(needsTaskReview({status:'completed',review:'pending',local_file:'v3.mp4',plan:{}}),true);
+ assert.equal(needsTaskReview({status:'in_progress',review:'pending',plan:{}}),false);
+});
 
 test('pending review metadata cannot turn active or failed jobs into reviewable scenes',()=>{
  for(const status of ['queued','in_progress','submitting','checking']){

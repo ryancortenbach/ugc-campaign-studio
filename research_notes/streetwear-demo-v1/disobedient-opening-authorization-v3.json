@@ -1,0 +1,18 @@
+{
+  "authorizedBy": "user",
+  "authorizedAt": "2026-10-24T20:57:23.639137+00:00",
+  "instruction": "Go fix those first few frames with the new corrected prompt.",
+  "intentClarification": "The blank hoodie in the opening is the defect. Match the later printed hoodie in the opening. Do not continue the earlier blank-front proposal.",
+  "generateAuthorized": true,
+  "maxAdditionalUsd": 1.3,
+  "maxSubmissions": 1,
+  "automaticRetries": 0,
+  "brand": "disobedient",
+  "sourceOpeningSeconds": 5.5,
+  "preserveOriginalTailSeconds": 0.5,
+  "ctaInThisPass": false,
+  "sendingAuthorized": false,
+  "openingSha256": "bf5f14e61bc0c3ec31bc1f6aeecca3dbc3394b3a81b7e9ca98310bbab8d1bbae",
+  "anchorSha256": "e9edbbf66d10c1fc2794fc6f2bd5b67478748adfdaa64fb773f5ce04a41dad01",
+  "promptSha256": "ebefeeb450ba6a1c39ebd266b1b5de4f0f3392be202704e9008dc119f44ba37f"
+}

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "mode": "demo",
-  "preparedAt": "2026-10-24T20:50:08.857Z",
+  "preparedAt": "2026-10-24T21:05:31.565Z",
   "activeBrandIds": [
     "disobedient",
     "vylin"
@@ -97,7 +97,7 @@
       "persona": {
         "name": "Original London game character",
         "description": "Reuse the existing fictional adult PS2-style London presenter: blond braids, same face, grey trousers and white sneakers. This is a historical owned creative asset, not a newly discovered creator or customer.",
-        "wardrobe": "Light heather grey Low Lives pullover, blank front, no zipper or chest mark. Blue/red rear artwork only on the back.",
+        "wardrobe": "The same heather grey pullover and blue/red printed chest artwork throughout the PS2 cutscene. User-directed printed-front creative variation.",
         "imageUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
         "environment": "Existing Canary Wharf penthouse at dusk, leather armchair, floor lamp and London skyline. Preserve camera, pose, voice and scene through the garment edit.",
         "rationale": "The current user-selected direction uses an existing character. Exact brand audience fit remains a creative hypothesis. The ImageGen garment concept is a still preview, not a Genjutsu result."
@@ -162,8 +162,8 @@
         "posterUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
         "note": "Earlier generic lettering-cleanup asset. This source is real, but it is not a newly rendered branded garment swap."
       },
-      "storyboardImageUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
-      "storyboardCaption": "ImageGen revision frames: the same blank-front official hoodie in both poses. Still-image concept only; a corrected video has not been generated.",
+      "storyboardImageUrl": "/streetwear-demo-assets/disobedient-printed-anchor-v3.png",
+      "storyboardCaption": "Corrected PS2 game-character garment reference from the existing generated video. Preserve the fictional low-poly avatar, printed hoodie and game world throughout.",
       "script": {
         "durationSeconds": 8,
         "hook": "Same London character. Low Lives Hoodie. Shop disobedientnyc.com.",
@@ -194,11 +194,11 @@
       "genjutsuPreparation": {
         "model": "higgsfield/genjutsu-light/object-swap/v1.0",
         "request": {
-          "prompt": "Replace only the existing blue hoodie on the original male character with the exact Disobedient Low Lives Hoodie. Use the first supplied image for the front and construction: light heather grey pullover, no zipper, kangaroo pocket, no visible chest logo, no added front lettering and no added drawcord. Use the second supplied image only for the back artwork: preserve the supplied blue lettering and red musical staff/treble-clef placement when the back actually faces camera. Never place back artwork on the chest. Do not invent a Disobedient chest logo. Preserve the same original fictional character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering from the immutable six-second generic master. Copy only garment construction and artwork from the reference photos. Do not copy a real product model face, body, skin, hair, identity or background. Preserve natural occlusion and consistent garment texture during motion. Do not add extra people, accessories, dialogue or lettering.",
+          "prompt": "The opening shots must show exactly the SAME PRINTED HOODIE as the attached late-shot reference. This is one continuous garment, not a changing outfit. Keep the current heather grey pullover construction and put the reference's identical blue HIGH HEELS / 'N LOW LIVES chest lettering, red musical staff and treble-clef, and blue smaller NEW YORK line on its FRONT from the very first frame through every shot. The source video is blank in the early shots: those blank fronts are the defect to repair. The printed chest artwork must already be present in the opening wide shot and every following seated close-up. Match the reference artwork's shapes, colours, placement, scale relative to the chest, and orientation; keep it fixed to the same fabric throughout, with natural folds and occlusion. The artwork must not appear, disappear, morph, switch sides or become a different logo. Preserve the same heather grey colour, pullover neckline, hood, kangaroo pocket, sleeves and cuffs in all frames. Do not replace the garment with a generic blank hoodie. Edit only the garment front in the supplied opening footage. Keep the original fictional character face, blond braids, skin, expressions, mouth animation, hands, trousers, shoes, chair, original shot cuts, timing, camera movement, penthouse, London skyline, lighting, PS2 low-poly rendering and all non-garment pixels as close to the source as possible. The reference contains the same fictional character only to show the exact printed garment; do not change the input poses to its reclined pose. No new objects, no extra people, no inserted shots, no overlays, no CTA, no end card, no additional writing outside the existing garment artwork. This is the user-requested printed-front creative variation, matched to the later scene, not a claim about the official product's front/back construction.",
           "resolution": "720p",
+          "video_url": "[private upload of opening section]",
           "image_urls": [
-            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
-            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389"
+            "/streetwear-demo-assets/disobedient-printed-anchor-v3.png"
           ]
         },
         "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
@@ -210,13 +210,12 @@
           "Append a two-second website/product end card after the six-second garment repair."
         ],
         "submission": {
-          "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+          "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
           "status": "completed",
-          "submittedAt": "2026-10-24T20:38:27.258Z",
-          "completedAt": "2026-10-24T20:44:11.165Z",
-          "estimatedUsd": 1.2,
-          "actualItemizedUsd": null,
-          "error": null
+          "submittedAt": "2026-10-24T20:57:38.798Z",
+          "completedAt": "2026-10-24T21:02:32.725Z",
+          "error": null,
+          "estimatedUsd": 1.2000000000000002
         }
       },
       "outboundDemo": {
@@ -945,14 +944,160 @@
             "outreachReady": false
           },
           "note": "Human review is pending. The generated garment requires revision before outreach."
+        },
+        {
+          "id": "opening-repair-v3",
+          "stage": 4,
+          "tool": "higgsfield.genjutsu-light",
+          "title": "Repair the blank opening to match the printed later hoodie",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "completed",
+          "startedAt": "2026-10-24T20:57:38.798Z",
+          "completedAt": "2026-10-24T21:02:32.725Z",
+          "input": {
+            "sourceOpeningSeconds": 5.5,
+            "preservedTailSeconds": 0.5,
+            "anchorUrl": "/streetwear-demo-assets/disobedient-printed-anchor-v3.png",
+            "prompt": "The opening shots must show exactly the SAME PRINTED HOODIE as the attached late-shot reference. This is one continuous garment, not a changing outfit. Keep the current heather grey pullover construction and put the reference's identical blue HIGH HEELS / 'N LOW LIVES chest lettering, red musical staff and treble-clef, and blue smaller NEW YORK line on its FRONT from the very first frame through every shot. The source video is blank in the early shots: those blank fronts are the defect to repair. The printed chest artwork must already be present in the opening wide shot and every following seated close-up. Match the reference artwork's shapes, colours, placement, scale relative to the chest, and orientation; keep it fixed to the same fabric throughout, with natural folds and occlusion. The artwork must not appear, disappear, morph, switch sides or become a different logo. Preserve the same heather grey colour, pullover neckline, hood, kangaroo pocket, sleeves and cuffs in all frames. Do not replace the garment with a generic blank hoodie. Edit only the garment front in the supplied opening footage. Keep the original fictional character face, blond braids, skin, expressions, mouth animation, hands, trousers, shoes, chair, original shot cuts, timing, camera movement, penthouse, London skyline, lighting, PS2 low-poly rendering and all non-garment pixels as close to the source as possible. The reference contains the same fictional character only to show the exact printed garment; do not change the input poses to its reclined pose. No new objects, no extra people, no inserted shots, no overlays, no CTA, no end card, no additional writing outside the existing garment artwork. This is the user-requested printed-front creative variation, matched to the later scene, not a claim about the official product's front/back construction."
+          },
+          "output": {
+            "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
+            "renderId": 28,
+            "estimatedUsd": 1.2000000000000002,
+            "actualItemizedUsd": null
+          },
+          "note": "User clarified that the missing print in the early shots is the defect. One authorized repair, no automatic retries."
+        },
+        {
+          "id": "opening-join-v3",
+          "stage": 4,
+          "tool": "local video assembly",
+          "title": "Join the repaired opening to the unchanged later shot and restore original audio",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "repairedOpeningSeconds": 5.5,
+            "preservedTailSeconds": 0.5
+          },
+          "output": {
+            "version": 3,
+            "createdAt": "2026-10-24T21:05:02.282674+00:00",
+            "mediaChecksPassed": true,
+            "finalUrl": "/streetwear-demo-assets/disobedient-garment-review-v3.mp4",
+            "finalSha256": "3b1521c70157b3dcaa69e83fe563e51b0da3004d431ff004dca1ada708de1783",
+            "durationSeconds": 6,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "fps": 30,
+            "totalFrames": 180,
+            "repairedOpeningFrames": 165,
+            "preservedEndingFrames": 15,
+            "generatedOpeningReencodedOnce": true,
+            "openingSSIMToProvider": 0.99772,
+            "joinedOpeningFrameHashesUnchanged": true,
+            "originalEndingFrameHashesUnchanged": true,
+            "sourceInputsUnchanged": true,
+            "audio": {
+              "sampleRate": 48000,
+              "comparedSamples": 288000,
+              "peakLagSamples": 0,
+              "zeroLagCorrelation": 0.9998690059888394,
+              "rms": 0.2154459042400082,
+              "containsCTA": false
+            },
+            "containsCTA": false,
+            "humanApproval": false,
+            "visualReview": "Separate visual review required. Media checks do not establish garment consistency.",
+            "sends": 0
+          },
+          "note": "No CTA appended during garment review."
+        },
+        {
+          "id": "opening-qa-v3",
+          "stage": 5,
+          "tool": "AI visual review",
+          "title": "Check printed garment continuity across the actual repaired video",
+          "mode": "recorded",
+          "kind": "analysis",
+          "status": "checks_passed",
+          "output": {
+            "status": "checks_passed",
+            "checkedAt": "2026-10-24T21:05:31.392181+00:00",
+            "method": "Visual inspection of 12 evenly spaced frames of the actual six-second joined video, with full-stream decode and frame-hash verification.",
+            "findings": [
+              "Printed blue lettering and the red musical staff are visible in the opening wide shot and the following seated poses. The earlier blank-to-printed change is corrected.",
+              "The same grey pullover construction remains visible across sampled poses.",
+              "The original final 15 frames are preserved without decoded pixel changes."
+            ],
+            "limitations": [
+              "This is a user-directed printed-front creative variation. Fine lettering is less legible in distant shots.",
+              "Human playback and sound review are pending."
+            ],
+            "humanApproval": false,
+            "outreachReady": false,
+            "containsCTA": false
+          }
+        },
+        {
+          "id": "full-ad-assembly-v1",
+          "stage": 5,
+          "tool": "local video assembly",
+          "title": "Complete the 30-second character ad with the official hoodie and website CTA",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "providerRequests": [
+              "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+              "3fafcce5-1410-41cd-9381-891e0274427d"
+            ],
+            "reusedOpeningRequestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77"
+          },
+          "output": {
+            "createdAt": "2026-10-24T21:20:03.826332+00:00",
+            "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4",
+            "finalSha256": "98e6723d5773a0302bb685a6995fb18eb6026c97353f4cbbf3578282da805070",
+            "durationSeconds": 30,
+            "frames": 900,
+            "fps": 30,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "characterSeconds": 23.2,
+            "productOutroSeconds": 6.8,
+            "outroStartsAt": 23.2,
+            "sourceAudioCorrelation": 0.9997393501445606,
+            "sourceInputsPreserved": true,
+            "allJoinedFrameHashesVerified": true,
+            "sourceDialoguePreserved": true,
+            "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
+            "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
+            "productFrontAndBackPhotos": true,
+            "ctaDestination": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "ctaDisplayWebsite": "disobedientnyc.com",
+            "providerRequests": [
+              "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+              "3fafcce5-1410-41cd-9381-891e0274427d"
+            ],
+            "humanApproval": false,
+            "sends": 0
+          },
+          "note": "Generated garment edit reviewed at sampled frames. Original dialogue retained. Human delivery approval remains pending."
         }
       ],
       "sampleVideo": {
-        "url": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4",
-        "title": "Disobedient: generated hoodie sample",
-        "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
-        "status": "needs_revision",
+        "url": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+        "title": "Disobedient PS2 character sample with spoken subtitles",
+        "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
         "durationSeconds": 6,
+        "status": "ready_for_human_review",
+        "containsCTA": false,
+        "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
         "cta": {
           "label": "Shop Low Lives Hoodie",
           "websiteUrl": "https://disobedientnyc.com/",
@@ -960,151 +1105,632 @@
           "checkoutUrl": null
         },
         "verification": {
-          "brand": "disobedient",
-          "status": "local_media_checks_passed_human_review_pending",
-          "raw_file": "work/streetwear-demo-v1/disobedient-genjutsu-raw-v1.mp4",
-          "raw_sha256": "bbd3f7ed892509f15f54b8f13d46dcc30f8daba2ed2ae37383e5204f9676ad15",
-          "final_file": "agent/public/streetwear-demo-assets/disobedient-sample-v1.mp4",
-          "final_sha256": "4a7f4a07c7d89883a2ddc33799402eea28857685c708e1daf34063824f68dc15",
-          "raw_metadata": {
-            "width": 720,
-            "height": 1280,
-            "fps": 30,
-            "fps_rational": "30",
-            "duration": 6,
-            "codec": "h264",
-            "pixel_format": "yuv420p",
-            "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 8382 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
-            "audio_present": false
-          },
-          "final_metadata": {
-            "width": 720,
-            "height": 1280,
-            "fps": 30,
-            "fps_rational": "30",
-            "duration": 8,
-            "codec": "h264",
-            "pixel_format": "yuv420p",
-            "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 6308 kb/s, 30 fps, 30 tbr, 90k tbn (default)",
-            "audio_present": true
-          },
-          "raw_frames": 180,
-          "final_frames": 240,
-          "raw_segment_decoded_frame_hashes_unchanged": true,
-          "video_encoding": "Provider frames concat-copied; only new CTA pictures encoded.",
+          "version": 3,
+          "createdAt": "2026-10-24T21:05:02.282674+00:00",
+          "mediaChecksPassed": true,
+          "finalUrl": "/streetwear-demo-assets/disobedient-garment-review-v3.mp4",
+          "finalSha256": "3b1521c70157b3dcaa69e83fe563e51b0da3004d431ff004dca1ada708de1783",
+          "durationSeconds": 6,
+          "dimensions": [
+            720,
+            1280
+          ],
+          "fps": 30,
+          "totalFrames": 180,
+          "repairedOpeningFrames": 165,
+          "preservedEndingFrames": 15,
+          "generatedOpeningReencodedOnce": true,
+          "openingSSIMToProvider": 0.99772,
+          "joinedOpeningFrameHashesUnchanged": true,
+          "originalEndingFrameHashesUnchanged": true,
+          "sourceInputsUnchanged": true,
           "audio": {
-            "sample_rate": 48000,
-            "comparison": "decoded mono float32 PCM",
-            "compared_samples": 288000,
-            "source_rms": 0.21567000193125346,
-            "final_first_six_seconds_rms": 0.2154459042400082,
-            "peak_lag_samples": 0,
-            "peak_lag_seconds": 0,
-            "zero_lag_correlation": 0.9998690059888394,
-            "max_absolute_pcm_difference": 0.05569919943809509,
-            "endcard_rms_after_6_05_seconds": 0,
-            "note": "AAC is encoded once for the restored audio track; decoded correlation verifies alignment. Provider video is stream-copied."
+            "sampleRate": 48000,
+            "comparedSamples": 288000,
+            "peakLagSamples": 0,
+            "zeroLagCorrelation": 0.9998690059888394,
+            "rms": 0.2154459042400082,
+            "containsCTA": false
           },
-          "endcard": {
-            "brand": "Disobedient",
-            "product_name": "Low Lives Hoodie",
-            "cta": "Shop the hoodie",
-            "website_domain": "disobedientnyc.com",
-            "product_url": "https://disobedientnyc.com/products/low-lives-hoodie",
-            "logo_source_file": "agent/public/streetwear-demo-assets/disobedient-official-logo-v1.png",
-            "logo_sha256": "71484eba17113ae8c1ff9f6a96e7e0432004318f8b8bc9ad902c1c3c222dca6a",
-            "width": 720,
-            "height": 1280,
-            "text_bounds": [
+          "containsCTA": false,
+          "humanApproval": false,
+          "visualReview": "Separate visual review required. Media checks do not establish garment consistency.",
+          "sends": 0,
+          "captionReceipt": {
+            "createdAt": "2026-10-24T21:24:03.178148+00:00",
+            "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+            "finalSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+            "durationSeconds": 30,
+            "frames": 900,
+            "fps": 30,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "characterSeconds": 23.2,
+            "productOutroSeconds": 6.8,
+            "outroStartsAt": 23.2,
+            "sourceAudioCorrelation": 0.9997393501445606,
+            "sourceInputsPreserved": true,
+            "allJoinedFrameHashesVerified": true,
+            "sourceDialoguePreserved": true,
+            "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
+            "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
+            "productFrontAndBackPhotos": true,
+            "ctaDestination": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "ctaDisplayWebsite": "disobedientnyc.com",
+            "providerRequests": [
+              "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+              "3fafcce5-1410-41cd-9381-891e0274427d"
+            ],
+            "humanApproval": false,
+            "sends": 0,
+            "sampleUrl": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+            "sampleSha256": "a74c644900e67e5f929c05301749521872df603852cd996c38cbb715b1a723d0",
+            "sampleSeconds": 6,
+            "textIsDialogueTranscription": true,
+            "captionSource": "agent/knowledge/penthouse-v1/references/examples/chunks_khan_penthouse.json",
+            "captions": [
               {
-                "text": "Low Lives Hoodie",
-                "bounds": [
-                  182,
-                  627,
-                  539,
-                  657
-                ],
-                "font": "Arial Bold"
+                "text": "you ever heard the saying",
+                "start": 0.14,
+                "end": 1.36
               },
               {
-                "text": "Shop the hoodie",
-                "bounds": [
-                  184,
-                  832,
-                  536,
-                  873
-                ],
-                "font": "Arial Bold"
+                "text": "winners focus on winning",
+                "start": 1.36,
+                "end": 2.52
               },
               {
-                "text": "disobedientnyc.com",
-                "bounds": [
-                  232,
-                  922,
-                  488,
-                  949
-                ],
-                "font": "Arial"
+                "text": "while losers focus",
+                "start": 2.52,
+                "end": 3.42
+              },
+              {
+                "text": "on winners",
+                "start": 3.42,
+                "end": 4.02
+              },
+              {
+                "text": "that's practically the",
+                "start": 4.02,
+                "end": 4.8
+              },
+              {
+                "text": "story of my life",
+                "start": 4.8,
+                "end": 5.74
+              },
+              {
+                "text": "all these losers",
+                "start": 5.74,
+                "end": 6
               }
             ],
-            "text_overflow": false,
-            "background": "#0a0a0c",
-            "font_family": "Arial",
-            "mint_checkout": false,
-            "source_asset_unchanged": true
-          },
-          "endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-v1.png",
-          "decoded_endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-decoded-v1.png",
-          "raw_input_preserved": true,
-          "paid_calls": 0,
-          "sends": 0,
-          "human_approval": false,
-          "visual_garment_qa": "separate_parent_review_required"
+            "sourceAudioPacketsUnchanged": true,
+            "laterScenesUnchanged": true,
+            "newProviderCalls": 0,
+            "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4"
+          }
         },
         "visualQA": {
-          "status": "needs_revision",
-          "checkedAt": "2026-10-24T20:47:21.969481+00:00",
-          "method": "Visual inspection of 12 sampled provider frames and decoded CTA frame, plus full-stream decode checks",
+          "status": "checks_passed",
+          "checkedAt": "2026-10-24T21:05:31.392181+00:00",
+          "method": "Visual inspection of 12 evenly spaced frames of the actual six-second joined video, with full-stream decode and frame-hash verification.",
           "findings": [
-            "Near 4.5 to 6 seconds, the reference back artwork appears on the chest. The official front is blank.",
-            "Brand-specific dialogue was not generated. This preview retains the original source performance."
+            "Printed blue lettering and the red musical staff are visible in the opening wide shot and the following seated poses. The earlier blank-to-printed change is corrected.",
+            "The same grey pullover construction remains visible across sampled poses.",
+            "The original final 15 frames are preserved without decoded pixel changes."
+          ],
+          "limitations": [
+            "This is a user-directed printed-front creative variation. Fine lettering is less legible in distant shots.",
+            "Human playback and sound review are pending."
           ],
           "humanApproval": false,
-          "outreachReady": false
-        },
-        "assembledVideoUrl": "/streetwear-demo-assets/disobedient-sample-v1.mp4",
-        "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
-        "containsCTA": false
+          "outreachReady": false,
+          "containsCTA": false,
+          "textIsDialogueTranscription": true
+        }
       },
       "revisionDraft": {
         "brandId": "disobedient",
-        "createdAt": "2026-10-24T20:50:08.761568+00:00",
-        "status": "prepared_not_submitted",
-        "paidRetryAuthorized": false,
-        "previousRequestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
-        "revisionReason": "The back artwork leaked onto the chest in later shots.",
-        "referenceRule": "Use one front image only. The actual official front is blank.",
+        "version": 3,
+        "createdAt": "2026-10-24T20:58:13.967817+00:00",
+        "referenceRule": "Match the same printed hoodie seen in the later shot, including blue lettering and red musical staff, from the first opening frame.",
+        "ctaRule": "Garment-only repair and review. The CTA remains a separate still preview.",
+        "supersedes": "Blank-front plan v2",
+        "targetAnchorUrl": "/streetwear-demo-assets/disobedient-printed-anchor-v3.png",
+        "sourceOpeningSeconds": 5.5,
+        "preservedTailSeconds": 0.5,
+        "constructionNote": "User-directed printed-front creative variation based on the existing later shot. This is not an exact-front ecommerce product claim.",
         "request": {
-          "prompt": "Replace only the original blue zip hoodie with the exact light heather grey pullover shown in the sole reference image. The front is blank: no logo, no lettering, no musical staff, no treble clef, no artwork, no zipper and no drawstrings. Keep this same blank-front pullover continuously in EVERY frame, every camera angle, including the late reclined arms-behind-head pose. Keep its colour, fabric, seams, kangaroo pocket and construction consistent. There is no view of the back in this source, so no back artwork should be visible at any time. Use only the provided front photograph. Preserve the original fictional male face, blond braids, facial animation, hands, body, trousers, shoes, furniture, original camera shots, timing, penthouse, London skyline, dusk lighting and PS2 rendering. Do not create transitions, extra scenes, text, brand marks, title cards or CTAs. Garment repair only.",
+          "prompt": "The opening shots must show exactly the SAME PRINTED HOODIE as the attached late-shot reference. This is one continuous garment, not a changing outfit. Keep the current heather grey pullover construction and put the reference's identical blue HIGH HEELS / 'N LOW LIVES chest lettering, red musical staff and treble-clef, and blue smaller NEW YORK line on its FRONT from the very first frame through every shot. The source video is blank in the early shots: those blank fronts are the defect to repair. The printed chest artwork must already be present in the opening wide shot and every following seated close-up. Match the reference artwork's shapes, colours, placement, scale relative to the chest, and orientation; keep it fixed to the same fabric throughout, with natural folds and occlusion. The artwork must not appear, disappear, morph, switch sides or become a different logo. Preserve the same heather grey colour, pullover neckline, hood, kangaroo pocket, sleeves and cuffs in all frames. Do not replace the garment with a generic blank hoodie. Edit only the garment front in the supplied opening footage. Keep the original fictional character face, blond braids, skin, expressions, mouth animation, hands, trousers, shoes, chair, original shot cuts, timing, camera movement, penthouse, London skyline, lighting, PS2 low-poly rendering and all non-garment pixels as close to the source as possible. The reference contains the same fictional character only to show the exact printed garment; do not change the input poses to its reclined pose. No new objects, no extra people, no inserted shots, no overlays, no CTA, no end card, no additional writing outside the existing garment artwork. This is the user-requested printed-front creative variation, matched to the later scene, not a claim about the official product's front/back construction.",
           "resolution": "720p",
+          "video_url": "[private upload of opening section]",
           "image_urls": [
-            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389"
+            "/streetwear-demo-assets/disobedient-printed-anchor-v3.png"
+          ]
+        },
+        "generateAuthorized": true,
+        "maxAdditionalUsd": 1.3,
+        "sends": 0,
+        "status": "completed",
+        "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
+        "renderId": 28,
+        "paidRetryAuthorized": true,
+        "estimatedUsd": 1.2000000000000002
+      },
+      "supersededConcepts": [
+        {
+          "url": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
+          "note": "Superseded blank-front interpretation. User requested matching printed artwork in the opening."
+        }
+      ],
+      "archivedSampleVideos": [
+        {
+          "url": "/streetwear-demo-assets/disobedient-garment-review-v2.mp4",
+          "title": "Previous attempt: opening print is missing",
+          "requestId": "631fcb1b-3825-4aa8-9d8c-3965fb28ee29",
+          "status": "needs_revision",
+          "durationSeconds": 6,
+          "cta": {
+            "label": "Shop Low Lives Hoodie",
+            "websiteUrl": "https://disobedientnyc.com/",
+            "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "checkoutUrl": null
+          },
+          "verification": {
+            "brand": "disobedient",
+            "status": "local_media_checks_passed_human_review_pending",
+            "raw_file": "work/streetwear-demo-v1/disobedient-genjutsu-raw-v1.mp4",
+            "raw_sha256": "bbd3f7ed892509f15f54b8f13d46dcc30f8daba2ed2ae37383e5204f9676ad15",
+            "final_file": "agent/public/streetwear-demo-assets/disobedient-sample-v1.mp4",
+            "final_sha256": "4a7f4a07c7d89883a2ddc33799402eea28857685c708e1daf34063824f68dc15",
+            "raw_metadata": {
+              "width": 720,
+              "height": 1280,
+              "fps": 30,
+              "fps_rational": "30",
+              "duration": 6,
+              "codec": "h264",
+              "pixel_format": "yuv420p",
+              "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 8382 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+              "audio_present": false
+            },
+            "final_metadata": {
+              "width": 720,
+              "height": 1280,
+              "fps": 30,
+              "fps_rational": "30",
+              "duration": 8,
+              "codec": "h264",
+              "pixel_format": "yuv420p",
+              "video_stream": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 6308 kb/s, 30 fps, 30 tbr, 90k tbn (default)",
+              "audio_present": true
+            },
+            "raw_frames": 180,
+            "final_frames": 240,
+            "raw_segment_decoded_frame_hashes_unchanged": true,
+            "video_encoding": "Provider frames concat-copied; only new CTA pictures encoded.",
+            "audio": {
+              "sample_rate": 48000,
+              "comparison": "decoded mono float32 PCM",
+              "compared_samples": 288000,
+              "source_rms": 0.21567000193125346,
+              "final_first_six_seconds_rms": 0.2154459042400082,
+              "peak_lag_samples": 0,
+              "peak_lag_seconds": 0,
+              "zero_lag_correlation": 0.9998690059888394,
+              "max_absolute_pcm_difference": 0.05569919943809509,
+              "endcard_rms_after_6_05_seconds": 0,
+              "note": "AAC is encoded once for the restored audio track; decoded correlation verifies alignment. Provider video is stream-copied."
+            },
+            "endcard": {
+              "brand": "Disobedient",
+              "product_name": "Low Lives Hoodie",
+              "cta": "Shop the hoodie",
+              "website_domain": "disobedientnyc.com",
+              "product_url": "https://disobedientnyc.com/products/low-lives-hoodie",
+              "logo_source_file": "agent/public/streetwear-demo-assets/disobedient-official-logo-v1.png",
+              "logo_sha256": "71484eba17113ae8c1ff9f6a96e7e0432004318f8b8bc9ad902c1c3c222dca6a",
+              "width": 720,
+              "height": 1280,
+              "text_bounds": [
+                {
+                  "text": "Low Lives Hoodie",
+                  "bounds": [
+                    182,
+                    627,
+                    539,
+                    657
+                  ],
+                  "font": "Arial Bold"
+                },
+                {
+                  "text": "Shop the hoodie",
+                  "bounds": [
+                    184,
+                    832,
+                    536,
+                    873
+                  ],
+                  "font": "Arial Bold"
+                },
+                {
+                  "text": "disobedientnyc.com",
+                  "bounds": [
+                    232,
+                    922,
+                    488,
+                    949
+                  ],
+                  "font": "Arial"
+                }
+              ],
+              "text_overflow": false,
+              "background": "#0a0a0c",
+              "font_family": "Arial",
+              "mint_checkout": false,
+              "source_asset_unchanged": true
+            },
+            "endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-v1.png",
+            "decoded_endcard_png": "work/streetwear-demo-v1/postprocess-v1/disobedient/disobedient-endcard-decoded-v1.png",
+            "raw_input_preserved": true,
+            "paid_calls": 0,
+            "sends": 0,
+            "human_approval": false,
+            "visual_garment_qa": "separate_parent_review_required"
+          },
+          "visualQA": {
+            "status": "needs_revision",
+            "findings": [
+              "Opening shots are blank, while later shots have printed chest artwork. The repair must make the print consistent from the first frame."
+            ],
+            "humanApproval": false,
+            "outreachReady": false
+          },
+          "assembledVideoUrl": "/streetwear-demo-assets/disobedient-sample-v1.mp4",
+          "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
+          "containsCTA": false
+        },
+        {
+          "url": "/streetwear-demo-assets/disobedient-garment-review-v3.mp4",
+          "title": "Disobedient: repaired printed hoodie opening v3",
+          "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
+          "durationSeconds": 6,
+          "status": "ready_for_human_review",
+          "containsCTA": false,
+          "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
+          "cta": {
+            "label": "Shop Low Lives Hoodie",
+            "websiteUrl": "https://disobedientnyc.com/",
+            "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "checkoutUrl": null
+          },
+          "verification": {
+            "version": 3,
+            "createdAt": "2026-10-24T21:05:02.282674+00:00",
+            "mediaChecksPassed": true,
+            "finalUrl": "/streetwear-demo-assets/disobedient-garment-review-v3.mp4",
+            "finalSha256": "3b1521c70157b3dcaa69e83fe563e51b0da3004d431ff004dca1ada708de1783",
+            "durationSeconds": 6,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "fps": 30,
+            "totalFrames": 180,
+            "repairedOpeningFrames": 165,
+            "preservedEndingFrames": 15,
+            "generatedOpeningReencodedOnce": true,
+            "openingSSIMToProvider": 0.99772,
+            "joinedOpeningFrameHashesUnchanged": true,
+            "originalEndingFrameHashesUnchanged": true,
+            "sourceInputsUnchanged": true,
+            "audio": {
+              "sampleRate": 48000,
+              "comparedSamples": 288000,
+              "peakLagSamples": 0,
+              "zeroLagCorrelation": 0.9998690059888394,
+              "rms": 0.2154459042400082,
+              "containsCTA": false
+            },
+            "containsCTA": false,
+            "humanApproval": false,
+            "visualReview": "Separate visual review required. Media checks do not establish garment consistency.",
+            "sends": 0
+          },
+          "visualQA": {
+            "status": "checks_passed",
+            "checkedAt": "2026-10-24T21:05:31.392181+00:00",
+            "method": "Visual inspection of 12 evenly spaced frames of the actual six-second joined video, with full-stream decode and frame-hash verification.",
+            "findings": [
+              "Printed blue lettering and the red musical staff are visible in the opening wide shot and the following seated poses. The earlier blank-to-printed change is corrected.",
+              "The same grey pullover construction remains visible across sampled poses.",
+              "The original final 15 frames are preserved without decoded pixel changes."
+            ],
+            "limitations": [
+              "This is a user-directed printed-front creative variation. Fine lettering is less legible in distant shots.",
+              "Human playback and sound review are pending."
+            ],
+            "humanApproval": false,
+            "outreachReady": false,
+            "containsCTA": false
+          }
+        }
+      ],
+      "demoSampleVideo": {
+        "url": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+        "title": "Disobedient PS2 character sample with spoken subtitles",
+        "requestId": "3e0feb08-78c6-4feb-abc9-4600f039ae77",
+        "durationSeconds": 6,
+        "status": "ready_for_human_review",
+        "containsCTA": false,
+        "ctaPreviewUrl": "/streetwear-demo-assets/disobedient-cta-preview-v1.png",
+        "cta": {
+          "label": "Shop Low Lives Hoodie",
+          "websiteUrl": "https://disobedientnyc.com/",
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "checkoutUrl": null
+        },
+        "verification": {
+          "version": 3,
+          "createdAt": "2026-10-24T21:05:02.282674+00:00",
+          "mediaChecksPassed": true,
+          "finalUrl": "/streetwear-demo-assets/disobedient-garment-review-v3.mp4",
+          "finalSha256": "3b1521c70157b3dcaa69e83fe563e51b0da3004d431ff004dca1ada708de1783",
+          "durationSeconds": 6,
+          "dimensions": [
+            720,
+            1280
           ],
-          "video_url": "[existing six-second provider source, private binding retained locally]"
+          "fps": 30,
+          "totalFrames": 180,
+          "repairedOpeningFrames": 165,
+          "preservedEndingFrames": 15,
+          "generatedOpeningReencodedOnce": true,
+          "openingSSIMToProvider": 0.99772,
+          "joinedOpeningFrameHashesUnchanged": true,
+          "originalEndingFrameHashesUnchanged": true,
+          "sourceInputsUnchanged": true,
+          "audio": {
+            "sampleRate": 48000,
+            "comparedSamples": 288000,
+            "peakLagSamples": 0,
+            "zeroLagCorrelation": 0.9998690059888394,
+            "rms": 0.2154459042400082,
+            "containsCTA": false
+          },
+          "containsCTA": false,
+          "humanApproval": false,
+          "visualReview": "Separate visual review required. Media checks do not establish garment consistency.",
+          "sends": 0,
+          "captionReceipt": {
+            "createdAt": "2026-10-24T21:24:03.178148+00:00",
+            "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+            "finalSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+            "durationSeconds": 30,
+            "frames": 900,
+            "fps": 30,
+            "dimensions": [
+              720,
+              1280
+            ],
+            "characterSeconds": 23.2,
+            "productOutroSeconds": 6.8,
+            "outroStartsAt": 23.2,
+            "sourceAudioCorrelation": 0.9997393501445606,
+            "sourceInputsPreserved": true,
+            "allJoinedFrameHashesVerified": true,
+            "sourceDialoguePreserved": true,
+            "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
+            "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
+            "productFrontAndBackPhotos": true,
+            "ctaDestination": "https://disobedientnyc.com/products/low-lives-hoodie",
+            "ctaDisplayWebsite": "disobedientnyc.com",
+            "providerRequests": [
+              "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+              "3fafcce5-1410-41cd-9381-891e0274427d"
+            ],
+            "humanApproval": false,
+            "sends": 0,
+            "sampleUrl": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+            "sampleSha256": "a74c644900e67e5f929c05301749521872df603852cd996c38cbb715b1a723d0",
+            "sampleSeconds": 6,
+            "textIsDialogueTranscription": true,
+            "captionSource": "agent/knowledge/penthouse-v1/references/examples/chunks_khan_penthouse.json",
+            "captions": [
+              {
+                "text": "you ever heard the saying",
+                "start": 0.14,
+                "end": 1.36
+              },
+              {
+                "text": "winners focus on winning",
+                "start": 1.36,
+                "end": 2.52
+              },
+              {
+                "text": "while losers focus",
+                "start": 2.52,
+                "end": 3.42
+              },
+              {
+                "text": "on winners",
+                "start": 3.42,
+                "end": 4.02
+              },
+              {
+                "text": "that's practically the",
+                "start": 4.02,
+                "end": 4.8
+              },
+              {
+                "text": "story of my life",
+                "start": 4.8,
+                "end": 5.74
+              },
+              {
+                "text": "all these losers",
+                "start": 5.74,
+                "end": 6
+              }
+            ],
+            "sourceAudioPacketsUnchanged": true,
+            "laterScenesUnchanged": true,
+            "newProviderCalls": 0,
+            "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4"
+          }
         },
-        "estimatedUsd": 1.2,
-        "estimateStatus": "Planning estimate at previously verified 720p list rate; refresh before submission",
-        "storyboardUrl": "/streetwear-demo-assets/disobedient-consistent-front-storyboard-v2.png",
-        "staticReview": {
-          "blankFrontAcrossBothPoses": true,
-          "zipperAbsent": true,
-          "sameCharacterAndScene": true,
-          "motionContinuity": "Not verified by still images",
-          "humanApproval": false
+        "visualQA": {
+          "status": "checks_passed",
+          "checkedAt": "2026-10-24T21:05:31.392181+00:00",
+          "method": "Visual inspection of 12 evenly spaced frames of the actual six-second joined video, with full-stream decode and frame-hash verification.",
+          "findings": [
+            "Printed blue lettering and the red musical staff are visible in the opening wide shot and the following seated poses. The earlier blank-to-printed change is corrected.",
+            "The same grey pullover construction remains visible across sampled poses.",
+            "The original final 15 frames are preserved without decoded pixel changes."
+          ],
+          "limitations": [
+            "This is a user-directed printed-front creative variation. Fine lettering is less legible in distant shots.",
+            "Human playback and sound review are pending."
+          ],
+          "humanApproval": false,
+          "outreachReady": false,
+          "containsCTA": false,
+          "textIsDialogueTranscription": true
+        }
+      },
+      "demoFinalVideo": {
+        "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+        "title": "Disobedient: full 30-second PS2 ad with spoken subtitles",
+        "durationSeconds": 30,
+        "renderId": 33,
+        "status": "ready_for_human_review",
+        "verification": {
+          "createdAt": "2026-10-24T21:24:03.178148+00:00",
+          "url": "/streetwear-demo-assets/disobedient-full-ad-30s-v2.mp4",
+          "finalSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+          "durationSeconds": 30,
+          "frames": 900,
+          "fps": 30,
+          "dimensions": [
+            720,
+            1280
+          ],
+          "characterSeconds": 23.2,
+          "productOutroSeconds": 6.8,
+          "outroStartsAt": 23.2,
+          "sourceAudioCorrelation": 0.9997393501445606,
+          "sourceInputsPreserved": true,
+          "allJoinedFrameHashesVerified": true,
+          "sourceDialoguePreserved": true,
+          "providerTimingPolicy": "Trim the rounded final padding. Keep original frame timing; do not speed up generated footage.",
+          "sceneCutAlignmentFile": "scene-cut-alignment-v1.json",
+          "productFrontAndBackPhotos": true,
+          "ctaDestination": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "ctaDisplayWebsite": "disobedientnyc.com",
+          "providerRequests": [
+            "50a1d638-ac54-44a8-abb4-581cd3bb3d4d",
+            "3fafcce5-1410-41cd-9381-891e0274427d"
+          ],
+          "humanApproval": false,
+          "sends": 0,
+          "sampleUrl": "/streetwear-demo-assets/disobedient-outreach-sample-v5.mp4",
+          "sampleSha256": "a74c644900e67e5f929c05301749521872df603852cd996c38cbb715b1a723d0",
+          "sampleSeconds": 6,
+          "textIsDialogueTranscription": true,
+          "captionSource": "agent/knowledge/penthouse-v1/references/examples/chunks_khan_penthouse.json",
+          "captions": [
+            {
+              "text": "you ever heard the saying",
+              "start": 0.14,
+              "end": 1.36
+            },
+            {
+              "text": "winners focus on winning",
+              "start": 1.36,
+              "end": 2.52
+            },
+            {
+              "text": "while losers focus",
+              "start": 2.52,
+              "end": 3.42
+            },
+            {
+              "text": "on winners",
+              "start": 3.42,
+              "end": 4.02
+            },
+            {
+              "text": "that's practically the",
+              "start": 4.02,
+              "end": 4.8
+            },
+            {
+              "text": "story of my life",
+              "start": 4.8,
+              "end": 5.74
+            },
+            {
+              "text": "all these losers",
+              "start": 5.74,
+              "end": 6
+            }
+          ],
+          "sourceAudioPacketsUnchanged": true,
+          "laterScenesUnchanged": true,
+          "newProviderCalls": 0,
+          "supersedes": "/streetwear-demo-assets/disobedient-full-ad-30s-v1.mp4"
         },
-        "ctaRule": "Garment-only footage review first. Separate CTA still preview. Append CTA only after garment approval.",
-        "sends": 0
-      }
+        "visualQA": {
+          "status": "checks_passed",
+          "scope": "Garment continuity, visible scene preservation, text layout and product ending at sampled actual output frames. This is not final human creative approval.",
+          "reviewedAt": "2026-10-24T21:20:34.663289+00:00",
+          "reviewer": "Primary Codex visual inspection",
+          "independentReview": false,
+          "artifactSha256": "c8092d8f95a2fa28e9919afe401fd635363856d3775f49b66db14a388edf4f52",
+          "evidence": [
+            "middle-a-contact-v1.png",
+            "middle-b-contact-v1.png",
+            "full-ad-contact-v1.png",
+            "join-6s-v1.png",
+            "join-14s-v1.png",
+            "product-outro-check-v1.png"
+          ],
+          "findings": [
+            "The grey pullover and blue/red chest artwork remain present in sampled visible character shots from the opening through the final character shot.",
+            "No sampled visible character shot returns to the blank or blue hoodie. Hands and bag occlude the garment naturally.",
+            "The original fictional character, woman, bag and penthouse remain recognizable.",
+            "The sampled joins maintain scene continuity. Source-to-provider scene cuts differ by at most two frames. Generated end padding was trimmed without speeding up the footage.",
+            "The official front and back hoodie photographs and disobedientnyc.com are legible in the ending.",
+            "The opening now uses the spoken subtitles. Advertising text overlays were removed."
+          ],
+          "limitations": [
+            "Generative garment lettering has small variations. Exact logo typography in every frame is not established.",
+            "The printed-front styling is the user-directed creative variation. The official product places the graphic on its back.",
+            "Original source dialogue remains unchanged and includes the word jacket. The new visual product CTA says SHOP THE HOODIE and directs to the brand website.",
+            "No independent human review or delivery approval has occurred."
+          ],
+          "humanApproval": false,
+          "outreachReady": false,
+          "sends": 0,
+          "captionReview": "Opening captions match the saved spoken-word transcript and original caption timings. The unchanged sample speech aligns with the original full speech within 5 milliseconds. Later subtitles remain unchanged.",
+          "textIsDialogueTranscription": true
+        },
+        "containsCTA": true,
+        "cta": {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "displayWebsite": "disobedientnyc.com"
+        }
+      },
+      "visualStyle": {
+        "id": "ps2-cutscene",
+        "label": "PS2 cutscene",
+        "direction": "Early-2000s 3D game character, visible low-poly geometry, game textures and cutscene lighting. Keep the existing fictional London avatar and world.",
+        "exclude": "Photorealistic humans, live-action footage, photographic skin, replacement actors or product-model identities."
+      },
+      "storyboardImageKind": "generated_video_frame"
     },
     {
       "id": "vylin",
@@ -1862,7 +2488,13 @@
           "evidence": [],
           "note": "Actual provider receipt. Final human review and email sending remain separate."
         }
-      ]
+      ],
+      "visualStyle": {
+        "id": "ps2-cutscene",
+        "label": "PS2 cutscene",
+        "direction": "Early-2000s 3D game character, visible low-poly geometry, game textures and cutscene lighting. Keep the existing fictional London avatar and world.",
+        "exclude": "Photorealistic humans, live-action footage, photographic skin, replacement actors or product-model identities."
+      }
     },
     {
       "id": "awardscholar",

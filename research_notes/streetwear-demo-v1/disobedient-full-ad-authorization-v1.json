@@ -1,0 +1,20 @@
+{
+  "authorizedBy": "user",
+  "authorizedAt": "2026-10-24T21:10:25.129870+00:00",
+  "instruction": "like the entire thing, but with their product at the end and everything, you know, like the full 30 second clip, you're allowed to do that and then make sure it works.",
+  "generateAuthorized": true,
+  "maxAdditionalUsd": 3.6,
+  "budgetBasis": "Two remaining 8.6-second segments. Conservative list-rate estimate of $1.80 each, stated to user before generation.",
+  "maxSubmissions": 2,
+  "automaticRetries": 0,
+  "sourceOpening": "Reuse completed render 28",
+  "inputs": {
+    "middle-a": "7847b6b993a53d360b83ddef7bafa22add37aacae14af60672057951ce5eeddf",
+    "middle-b": "be24ce143387ed0d4e7426955ed794118fc0850fb36a506b9772d15622564fd7"
+  },
+  "anchorSha256": "e9edbbf66d10c1fc2794fc6f2bd5b67478748adfdaa64fb773f5ce04a41dad01",
+  "targetDuration": 30,
+  "characterSeconds": 23.2,
+  "productOutroSeconds": 6.8,
+  "sends": 0
+}

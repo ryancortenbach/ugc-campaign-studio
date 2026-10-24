@@ -1,5 +1,6 @@
 import {assertRevisionWorkAllowed} from './revision-harness.mjs';
 import {createClientDemo} from './client-demo.mjs';
+import {createCampaignDemo,campaignDemoTrigger} from './campaign-demo.mjs';
 import {createClientReview} from './client-review.mjs';
 import {createAnalytics} from './analytics.mjs';
 import {spendingPaused,spendingRequestAllowed} from './spending-policy.mjs';
@@ -56,6 +57,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=def
  runner??=createRunner(store);
  const clientDemo=createClientDemo({store});
  const clientReview=createClientReview({store,clientDemo});
+ const campaignDemo=createCampaignDemo({store,clientDemo});
  autopilot??=createAutopilot({store,runner});
  whopwatch??=createWhopWatch({store,runner});
  delivery??=createDelivery({store,gmail:gmailApi,sender:()=>realTools.loadProfile()?.company||'Mint Labs'});
@@ -206,6 +208,8 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
  }
  const routes=[
   ['GET',/^\/api\/client-demo$/,()=>clientDemo.get()],
+  ['GET',/^\/api\/campaign-demo\/([a-z]+)$/,m=>campaignDemo.get(m[1])],
+  ['POST',/^\/api\/campaign-demo\/start$/,(m,b)=>campaignDemo.start(b.message)],
   ['POST',/^\/api\/client-demo\/tasks$/,(m,b)=>clientDemo.prepare(b.brandId)],
   ['GET',/^\/api\/tasks\/(\d+)\/client-review$/,m=>clientReview.get(Number(m[1]))],
   ['POST',/^\/api\/tasks\/(\d+)\/client-review$/,(m,b)=>clientReview.review(Number(m[1]),b)],
@@ -226,13 +230,13 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['GET',/^\/api\/production\/dossiers\/([a-zA-Z0-9-]+)$/,m=>({dossier:production.get(m[1])})],
   ['POST',/^\/api\/production\/call$/,async(m,b)=>({result:await production.call(b.name,b.input||{})})],
   ['GET',/^\/api\/state$/,()=>({config:config(),tasks:store.listTasks()})],
-  ['POST',/^\/api\/chat$/,(m,b)=>{const text=String(b.message||'').trim();if(text.length<3||text.length>2000)throw Object.assign(Error('Write a request between 3 and 2000 characters.'),{status:400});const demo=clientDemo.fromPrompt(text);if(demo)return demo;return {task:runner.start(text,{model:chatModel(b),attachments:chatFiles(b)})};}],
+  ['POST',/^\/api\/chat$/,(m,b)=>{const text=String(b.message||'').trim();if(text.length<3||text.length>2000)throw Object.assign(Error('Write a request between 3 and 2000 characters.'),{status:400});if(campaignDemoTrigger(text))return campaignDemo.start(text);const demo=clientDemo.fromPrompt(text);if(demo)return demo;return {task:runner.start(text,{model:chatModel(b),attachments:chatFiles(b)})};}],
   ['POST',/^\/api\/uploads$/,(m,b)=>({upload:saveUpload(b)})],
   ['GET',/^\/api\/tasks\/(\d+)$/,m=>{const id=Number(m[1]);const task=store.getTask(id);if(!task)throw Object.assign(Error('No such task'),{status:404});return {task,running:runner.isRunning(id),events:store.listEvents({taskId:id}),steers:store.listSteers(id),leads:store.listLeads({taskId:id}),drafts:store.listDrafts({taskId:id}).filter(d=>d.status!=='withdrawn').map(withReadiness)};}],
   ['POST',/^\/api\/tasks\/(\d+)\/steer$/,(m,b)=>{const text=String(b.message||'').trim();if(!text)throw Object.assign(Error('Write a steering message.'),{status:400});return runner.steer(Number(m[1]),text);}],
   ['POST',/^\/api\/tasks\/(\d+)\/control$/,(m,b)=>{if(!['pause','resume','stop'].includes(b.action))throw Object.assign(Error('Unknown action'),{status:400});return {ok:runner.control(Number(m[1]),b.action)};}],
-  ['GET',/^\/api\/assistant$/,()=>({messages:assistant.history(),enabled:llmEnabled(),mainModels})],
-  ['POST',/^\/api\/assistant$/,async(m,b)=>{const message=String(b.message??'').trim();if(message.length<1||message.length>4000)throw Object.assign(Error('Write a message between 1 and 4000 characters.'),{status:400});const demo=clientDemo.conversation(message);if(demo)return demo;if(!llmEnabled())throw Object.assign(Error('Add ANTHROPIC_API_KEY to talk to Mint.'),{status:503});if(b.model!=null&&b.model!==''&&!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return await assistant.reply({message,model:b.model||null});}],
+  ['GET',/^\/api\/assistant$/,()=>{const after=Number(store.db.prepare("select value from settings where key='homeHistoryAfterId'").get()?.value||0);return {messages:assistant.history().filter(message=>!after||message.id>after),enabled:llmEnabled(),mainModels};}],
+  ['POST',/^\/api\/assistant$/,async(m,b)=>{const message=String(b.message??'').trim();if(message.length<1||message.length>4000)throw Object.assign(Error('Write a message between 1 and 4000 characters.'),{status:400});if(campaignDemoTrigger(message))return campaignDemo.start(message);const demo=clientDemo.conversation(message);if(demo)return demo;if(!llmEnabled())throw Object.assign(Error('Add ANTHROPIC_API_KEY to talk to Mint.'),{status:503});if(b.model!=null&&b.model!==''&&!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return await assistant.reply({message,model:b.model||null});}],
   ['GET',/^\/api\/autopilot$/,()=>autopilot.get()],
   ['POST',/^\/api\/autopilot$/,(m,b)=>{
    const bad=t=>Object.assign(Error(t),{status:400}),patch={};

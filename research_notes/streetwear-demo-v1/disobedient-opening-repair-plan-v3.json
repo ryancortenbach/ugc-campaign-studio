@@ -1,0 +1,23 @@
+{
+  "brandId": "disobedient",
+  "version": 3,
+  "createdAt": "2026-10-24T20:58:13.967817+00:00",
+  "referenceRule": "Match the same printed hoodie seen in the later shot, including blue lettering and red musical staff, from the first opening frame.",
+  "ctaRule": "Garment-only repair and review. The CTA remains a separate still preview.",
+  "supersedes": "Blank-front plan v2",
+  "targetAnchorUrl": "/streetwear-demo-assets/disobedient-printed-anchor-v3.png",
+  "sourceOpeningSeconds": 5.5,
+  "preservedTailSeconds": 0.5,
+  "constructionNote": "User-directed printed-front creative variation based on the existing later shot. This is not an exact-front ecommerce product claim.",
+  "request": {
+    "prompt": "The opening shots must show exactly the SAME PRINTED HOODIE as the attached late-shot reference. This is one continuous garment, not a changing outfit. Keep the current heather grey pullover construction and put the reference's identical blue HIGH HEELS / 'N LOW LIVES chest lettering, red musical staff and treble-clef, and blue smaller NEW YORK line on its FRONT from the very first frame through every shot. The source video is blank in the early shots: those blank fronts are the defect to repair. The printed chest artwork must already be present in the opening wide shot and every following seated close-up. Match the reference artwork's shapes, colours, placement, scale relative to the chest, and orientation; keep it fixed to the same fabric throughout, with natural folds and occlusion. The artwork must not appear, disappear, morph, switch sides or become a different logo. Preserve the same heather grey colour, pullover neckline, hood, kangaroo pocket, sleeves and cuffs in all frames. Do not replace the garment with a generic blank hoodie. Edit only the garment front in the supplied opening footage. Keep the original fictional character face, blond braids, skin, expressions, mouth animation, hands, trousers, shoes, chair, original shot cuts, timing, camera movement, penthouse, London skyline, lighting, PS2 low-poly rendering and all non-garment pixels as close to the source as possible. The reference contains the same fictional character only to show the exact printed garment; do not change the input poses to its reclined pose. No new objects, no extra people, no inserted shots, no overlays, no CTA, no end card, no additional writing outside the existing garment artwork. This is the user-requested printed-front creative variation, matched to the later scene, not a claim about the official product's front/back construction.",
+    "resolution": "720p",
+    "video_url": "[private upload of opening section]",
+    "image_urls": [
+      "/streetwear-demo-assets/disobedient-printed-anchor-v3.png"
+    ]
+  },
+  "generateAuthorized": true,
+  "maxAdditionalUsd": 1.3,
+  "sends": 0
+}

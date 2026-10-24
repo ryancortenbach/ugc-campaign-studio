@@ -1,0 +1,48 @@
+/* Campaign rehearsal flow, scoped to the demo. */
+.ap-demo-root{display:grid;gap:18px;max-width:1200px;margin:0 auto;min-width:0}
+.ap-demo-header{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ap-demo-header h2{margin:10px 0 4px;font-size:24px;letter-spacing:-.03em}
+.ap-demo-header p{max-width:75ch;margin:0}
+.ap-demo-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ap-demo-controls .hint{margin-left:auto}
+.ap-demo-switch{width:fit-content}
+.ap-demo-grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px;align-items:start}
+.ap-demo-stages{list-style:none;padding:0;margin:0;display:grid;gap:3px;max-height:55vh;overflow:auto}
+.ap-demo-stages li{display:flex;gap:9px;align-items:center;padding:9px;color:var(--faint);font-size:12px;border-radius:8px;min-height:40px}
+.ap-demo-stages li>span{width:22px;height:22px;display:grid;place-items:center;background:var(--panel2);border-radius:6px;flex:none;font-size:10px}
+.ap-demo-stages li small{display:block;font-size:10px;margin-top:3px}
+.ap-demo-stages .current{background:var(--raise);color:var(--text)}
+.ap-demo-stages .done{color:var(--muted)}
+.ap-demo-stage{min-width:0;min-height:380px}
+.ap-demo-stage .head{flex-wrap:wrap;gap:8px}
+.ap-demo-stage video{display:block;width:auto;max-width:100%;height:450px;max-height:55vh;margin:auto;background:var(--shell);border-radius:8px}
+.ap-demo-mode{font-size:10px;white-space:nowrap;color:var(--muted);padding:4px 7px;border-radius:5px;background:var(--panel2)}
+.ap-demo-simulated{color:var(--yellow);background:var(--yellow-bg)}
+.ap-demo-notification{padding:15px 18px;background:var(--green-bg);color:var(--green);border-radius:10px;font-size:14px;font-weight:500}
+.ap-demo-brands-found{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ap-demo-brands-found article,.ap-demo-email,.ap-demo-payment{padding:20px;background:var(--panel2);border-radius:10px;overflow-wrap:anywhere}
+.ap-demo-email p{white-space:pre-wrap;line-height:1.7}
+.ap-demo-email small,.ap-demo-payment small{color:var(--faint);font-size:11px}
+.ap-demo-payment{text-align:center;padding:36px 20px}
+.ap-demo-payment h3{font-size:28px;margin:15px 0}
+.ap-demo-checkout{display:block;background:var(--raise);padding:13px;border-radius:8px;margin:20px 0;color:var(--green)}
+.ap-demo-product{display:block;max-width:100%;max-height:420px;object-fit:contain;margin:auto;background:transparent;border:0}
+.ap-demo-references{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ap-demo-references figure{margin:0;min-width:0}
+.ap-demo-references img{width:100%;max-height:400px;object-fit:contain}
+.ap-demo-references figcaption{font-size:11px;color:var(--muted);margin-top:8px}
+.ap-demo-progress{text-align:center;padding:70px 15px}
+.ap-demo-progress span{display:block;width:40px;height:40px;border-radius:50%;border:3px solid var(--raise);border-top-color:var(--green);margin:0 auto 18px;animation:ap-demo-spin 1s linear infinite}
+.ap-demo-progress p{font-size:12px;color:var(--muted)}
+.ap-demo-call{margin:5px 0;border-radius:7px;background:var(--panel2);overflow:hidden}
+.ap-demo-call>summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:center;padding:12px;font-size:12px;flex-wrap:wrap}
+.ap-demo-call>summary img{width:21px;height:21px;object-fit:contain}
+.ap-demo-call>summary b{font-weight:500}
+.ap-demo-call>summary>span{color:var(--muted);min-width:0;overflow-wrap:anywhere;flex:1}
+.ap-demo-call>div{padding:0 14px 14px}
+.ap-demo-call pre{font:11px/1.6 var(--mono);white-space:pre-wrap;max-height:300px;overflow:auto;overflow-wrap:anywhere;color:var(--muted)}
+.ap-demo-chat-mode{font-size:11px;padding:5px 9px;border:0;border-radius:6px;background:var(--raise);color:var(--muted);cursor:pointer}
+.ap-demo-chat-mode[aria-pressed=true]{color:var(--green);background:var(--green-bg)}
+@keyframes ap-demo-spin{to{transform:rotate(360deg)}}
+@media(max-width:800px){.ap-demo-grid{grid-template-columns:1fr}.ap-demo-stages{display:flex;overflow-x:auto;max-height:none}.ap-demo-stages li{min-width:160px}.ap-demo-stage video{height:400px}}
+@media(prefers-reduced-motion:reduce){.ap-demo-progress span{animation:none}}
