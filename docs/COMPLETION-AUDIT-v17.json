@@ -116,8 +116,11 @@
     "commit": "5ff144c8d14cc8ce720aedcdaa0d7473e0991f20",
     "files_sha256_verified": 2674,
     "tests_passed": 59,
-    "latest_source_sync": "pending, SSH unreachable",
-    "credentials_copied": false
+    "latest_source_sync": "Pending: reachable, clean at9861a27 but active dev:all workers preserved",
+    "credentials_copied": false,
+    "latest_preview_shortcut": "/Users/ryancortenbach/Desktop/UGC Campaign Studio-v2.webloc",
+    "shortcut_url": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/delivery/",
+    "shortcut_readback_verified": true
   },
   "whop_offer_checker": {
     "implemented": true,
