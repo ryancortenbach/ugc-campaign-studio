@@ -18,3 +18,6 @@ Still incomplete: durable unified task table, server-side deduplication, multi-u
 
 Final preview: https://duolingo-library-phone-v1-e6m7kfqje-ryancortenbachs-projects.vercel.app/#operations
 Final deployment dpl_EKgNjkN4wZxtZz9G5upEzHMf3ids is READY targetnull.81publicfiles matched source, with only exact deployment-specific Vercel feedback suffixes allowed on HTML. Eight final API checks passed, including cross-deployment recovery of the completed prior run. Existing project build settings matched V18.
+
+
+Current build requirement: use root npm run build:preview. Generated workflow files use the experiment-owned .nitro-build directory, outside the shared dependency symlink. scripts/check-workflow-build.mjs verifies the compiled bundle does not resolve V1 validation. Canonical readiness validation is src/readiness.js. See docs/READINESS-GATE-v1.md and docs/CONTINUATION.txt for current preview and actual hosted regression evidence. Earlier deployment records above are historical.
