@@ -24,4 +24,4 @@ Package copy on Whop: both packages include scripts, editing, captions, vertical
 ## Not done
 
 - The read-only offer checker (`src/course-offer.js`, `/api/course-offer/verify`) still expects a $97 course plan. It never takes payments. Retarget it to the UGC plans or remove it.
-- The fulfillment service (ops/, https://mint-labs-ops.vercel.app) receives `payment.succeeded` at `/api/whop` once a Whop webhook is created and its `ws_` secret is stored as `WHOP_WEBHOOK_SECRET` on Vercel. Until then, create orders by hand in its console. The agent's Whop card only checks whether `WHOP_API_KEY` is set.
+- Orders are handled in the Mac app. Its Whop watcher reads paid orders with `WHOP_API_KEY` (no webhook), prepares the storyboard and shots, and the order page makes the final video and drafts the delivery email with a Supabase download link. The hosted fulfillment service (ops/, mint-labs-ops.vercel.app) and its Whop webhook were retired on 2026-10-24. The agent's Whop card only checks whether `WHOP_API_KEY` is set.

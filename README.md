@@ -42,7 +42,9 @@ The Storyboards tab drafts a studio-compatible storyboard from a short brief wit
 
 The Renders tab queues Higgsfield Seedance 2.5 shots. Each shot runs the seven scene checkers on Haiku; only a passing shot gets a price from Higgsfield, and it is submitted only when you press Approve on that shot.
 
-Keys in the root `.env.local`: `ANTHROPIC_API_KEY`, `EXA_API_KEY`, `SOLARI_API_KEY`, `HF_CREDENTIALS` (Higgsfield `id:secret`), optional `GMAIL_TOKEN_PATH` (Google OAuth token JSON with refresh token) and `GMAIL_DRAFT_ACCOUNT`. Run it alone with `npm start --prefix agent`; test with `npm test --prefix agent`.
+Whop orders finish in the app too; nothing is hosted on Vercel. Once every shot of an order has rendered, the order's page has a Finished video section. Make final video joins the newest unrejected take of each shot into one 720x1280 MP4 with captions from the storyboard dialogue. ffmpeg comes from the optional `ffmpeg-static` package, `FFMPEG_PATH` or Homebrew. Upload and draft email puts the video in the private `deliveries` bucket of the team's Supabase project and drafts the buyer's email in Gmail with a 30-day download link. Nothing is sent; you send the draft. Without Gmail, the page shows the email to copy.
+
+Keys in the root `.env.local`: `ANTHROPIC_API_KEY`, `EXA_API_KEY`, `SOLARI_API_KEY`, `HF_CREDENTIALS` (Higgsfield `id:secret`), `SUPABASE_URL` and `SUPABASE_SECRET_KEY` (Supabase project mint-labs, for delivered videos), optional `GMAIL_TOKEN_PATH` (Google OAuth token JSON with refresh token) and `GMAIL_DRAFT_ACCOUNT`. Run it alone with `npm start --prefix agent`; test with `npm test --prefix agent`.
 
 ## Sponsor connections
 

@@ -17,3 +17,17 @@
 .client-brand-form input{width:180px}
 .ord-open{color:inherit;text-decoration:none}
 .ord-open:hover b{color:var(--green)}
+.order-delivery{display:flex;flex-direction:column;gap:10px;padding:16px 18px;margin-bottom:18px;font-size:12px}
+.order-delivery p{margin:0}
+.order-delivery h3{margin:0;font-size:13px}
+.order-delivery p svg.lu{width:14px;height:14px;margin-right:6px;vertical-align:-2px;color:var(--green)}
+.od-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.od-body{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}
+.od-video{width:100%;max-width:240px;aspect-ratio:9/16;background:#000;border-radius:8px}
+.od-info{display:flex;flex:1;flex-direction:column;gap:10px;min-width:240px}
+.od-actions{display:flex;gap:8px;flex-wrap:wrap}
+.od-warn{color:var(--amber)}
+.od-delivery{display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:1px solid var(--line)}
+.od-link{display:flex;align-items:center;gap:8px}
+.od-link input{flex:1;min-width:0;height:30px;padding:0 10px;font-family:var(--mono);font-size:11px}
+.od-email{width:100%;font:12px/1.5 var(--sans);resize:vertical}

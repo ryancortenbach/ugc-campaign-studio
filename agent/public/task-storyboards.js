@@ -1,5 +1,6 @@
 import {icons} from './icons.js';
 import {toolLogRow} from './tool-logs.js';
+import {paintDelivery} from './delivery.js';
 let active=null;
 const planningStatus={planning:['Ideation in progress','s-run'],running:['Research in progress','s-run'],researching:['Research in progress','s-run'],queued:['Research queued','s-wait'],research_queued:['Research queued','s-wait'],paused:['Paused','s-you'],stopped:['Stopped','s-idle'],done:['Brief saved','s-ok'],ready:['Ideas ready','s-ok'],needs_brand:['Needs brand','s-you'],not_started:['Not started','s-idle'],needs_research:['Research needs review','s-you'],failed:['Research paused','s-bad']};
 const statusChip=status=>{const [label,cls]=planningStatus[status]||['Not started','s-idle'];return `<span class="schip ${cls}"><svg class="lu" viewBox="0 0 24 24" aria-hidden="true">${icons[cls==='s-run'?'loader':cls==='s-ok'?'circle-check':cls==='s-wait'?'clock':'circle-alert']}</svg>${label}</span>`;};
@@ -58,8 +59,10 @@ export async function clientProjectView({view,api,esc,toast,paymentId,taskId,isC
  const brand=workspace.order.brand_domain||workspace.order.buyer_name||'Client project';
  view.innerHTML=`<div class="pagebar task-ideas-heading"><div><a class="faint" href="#/tasks">Tasks</a><h2>${esc(brand)}</h2><p class="faint">${esc(workspace.order.product||'Creative brief')}</p></div><span id="task-ideas-status"></span><a class="btn sm" href="${url}" target="_blank" rel="noopener">Open PDF</a></div>
  ${!workspace.order.brand_domain?'<form class="client-brand-form"><label for="client-brand">Which brand is this for?</label><input type="text" id="client-brand" name="domain" placeholder="brand.com" required><button class="btn sm" type="submit">Save brand</button><span class="faint">Saves context only. Research stays paused.</span></form>':''}
+ <section id="order-delivery" class="card order-delivery" aria-live="polite"></section>
  <object id="task-ideas-report" class="task-ideas-report" type="application/pdf" aria-label="Client creative brief" data="${url}"><p><a href="${url}" target="_blank" rel="noopener">Open the creative brief PDF</a>.</p></object><details class="task-ideas-activity"><summary>Task activity</summary><div id="task-board-activity">${activityHTML(workspace,esc)}</div></details>`;
  paintProgress(context,workspace);
+ paintDelivery({el:view.querySelector('#order-delivery'),api,esc,toast,paymentId:id,isCurrent:()=>active===context&&isCurrent()});
  const form=view.querySelector('.client-brand-form');if(form)form.onsubmit=async e=>{e.preventDefault();const b=form.querySelector('button');b.disabled=true;try{await api(`/api/whop/orders/${encodeURIComponent(id)}/context`,{domain:form.querySelector('input').value});if(active===context&&isCurrent())await clientProjectView({view,api,esc,toast,paymentId:id,isCurrent});}catch(error){toast(error.message,'bad');b.disabled=false;}};
 }
 export async function storyboardTasksView({view,api,esc,isCurrent=()=>true}){
