@@ -112,7 +112,7 @@ export async function prepareLeadVideo({store,lead,ctx,video,spend=()=>{},log=()
    check:async candidate=>{store.updateRender(render.id,{status:'checking',input:candidate.plan?candidate.plan.still.input:candidate.input,plan:candidate.plan||null});const checks=await video.check({title:`${company} video`,input:checkInput(candidate),brief});note(checks.cost,'video checkers');return checks;},
    onChecked:async(candidate,checks,revision)=>{store.updateRender(render.id,{input:candidate.plan?candidate.plan.still.input:candidate.input,plan:candidate.plan||null,status:strong(checks)?'checks_passed':'checking',checks});log('tool_result',`Video review ${revision}: ${strong(checks)?'passed':'applying feedback'}`,{tool:'higgsfield.checks',data:{renderId:render.id,revision,checks}});},
    onRevision:async(candidate,checks,revision)=>log('tool_call',`Video concept for ${company} needs fixes, revising (${revision})`,{tool:'claude.video revise',data:{revision,notes:checks.results.flatMap(r=>r.issues.map(i=>i.fix)).slice(0,6),lowest:Math.min(...checks.results.map(r=>r.score))}}),
-   revise:async(candidate,checks)=>{const next=await video.revise(ctx,candidate.fields,checks);note(next.cost,'video concept revision');return next;}
+   revise:async(candidate,checks)=>{const next=await video.revise(ctx,candidate.fields,checks);note(next.cost,'video concept revision');store.updateRender(render.id,{input:next.plan?next.plan.still.input:next.input,plan:next.plan||null,status:'checking'});return next;}
   });
   made=reviewed.candidate;const checks=reviewed.checks;
   const plan=made.plan||null;

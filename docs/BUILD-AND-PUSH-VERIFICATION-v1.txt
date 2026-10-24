@@ -1,0 +1,41 @@
+Mint Labs local verification, October 24, 2026
+
+Scope
+Integrated the current Mint Labs source, the newer remote fulfillment service,
+and the personalized character outreach review package. The creative package is
+at docs/creative/personalized-character-v1/review-board.html and includes its
+approved proposal template, images, exact prompts and preparation records.
+
+Fresh local results
+- Root tests: 90 passed, 0 failed.
+- Agent tests: 280 passed, 0 failed. Run with a 30-second per-test timeout.
+- Fulfillment service tests: 19 passed, 0 failed, including actual local video
+  stitching across different source dimensions and missing audio.
+- Root syntax command passed. Another syntax pass checked 107 agent and
+  fulfillment JavaScript modules with no failures.
+- npm run build:preview passed, including the canonical workflow build check.
+- bash desktop/build.sh --no-install produced the native arm64 Mint Labs.app.
+  codesign --verify --deep --strict passed and Info.plist lint passed.
+- Portable creative package asset hashes, relative links and embedded browser
+  script syntax passed. Credential candidate scans found no likely secrets in
+  the pending source and creative package. Git whitespace checks passed.
+
+Environment
+Node v26.9.0, npm 11.19.1. The fulfillment dependencies were installed from the
+committed lockfile. Its final test run used its own ffmpeg-static package and
+bundled font with no FFMPEG_PATH or CAPTION_FONT override. A process-local DNS
+lookup adapter was used for dependency installation because system hostname
+lookup failed. It is an ignored verification helper, not an app change.
+
+Review limits
+The revision-loop review identified pause propagation, interrupted-cost
+accounting and immediate candidate preservation issues. The subsequent source
+fixes were included in the final 280-test and 107-file syntax checks. Those
+checks do not constitute a new independent review or a live paid-provider test.
+Existing native visual and production acceptance limits remain documented in
+the feature handoffs. The new creative workflow remains a concept package.
+
+No deployment, app installation, paid generation, outreach send, study launch,
+or spending-pause change was performed by this verification work. Local runtime
+data, credentials, dependency folders and build outputs remain Git-ignored.
+Build/test logs are retained locally in work/git-finalization-v1/.

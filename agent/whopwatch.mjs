@@ -95,7 +95,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
  }
 
  function failOrder(id,error){
-  const o=order(id);upd(id,{state:'failed',error:error.message});
+  const o=order(id);if(error.cost>0){if(o?.task_id)store.addCost(o.task_id,error.cost);store.addSpend({provider:'claude',usd:error.cost,taskId:o?.task_id||null,note:'interrupted storyboard formatting repairs'});}upd(id,{state:'failed',error:error.message});
   if(o?.task_id){store.updateTask(o.task_id,{status:error.code==='work_stopped'?'stopped':'failed',summary:error.message});store.addEvent({taskId:o.task_id,type:'error',tool:'whop',title:`Order failed: ${error.message}`});}
  }
 
@@ -204,7 +204,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
     check:async input=>{store.updateRender(r.id,{status:'checking',input});const checks=await T.runCheckers({title:r.title,input});spend(checks.cost,'claude','whop shot checkers',{renderId:r.id});return checks;},
     onChecked:async(input,checks,revision)=>{store.updateRender(r.id,{checks});log('tool_result',`Shot review ${revision}: ${checks.passed?'passed':'applying feedback'}`,{tool:'claude.check',data:{renderId:r.id,revision,checks}});},
     onRevision:async(input,checks,revision)=>log('tool_call',`Revising ${r.title} from checker feedback (revision ${revision})`,{tool:'claude.revise',data:{renderId:r.id,revision}}),
-    revise:async(input,checks)=>{const next=await T.reviseShot({title:r.title,input,checks});spend(next.cost,'claude','whop shot revision',{renderId:r.id});return next.input;}
+    revise:async(input,checks)=>{const next=await T.reviseShot({title:r.title,input,checks});spend(next.cost,'claude','whop shot revision',{renderId:r.id});store.updateRender(r.id,{input:next.input,status:'checking'});return next.input;}
    });
    const checks=reviewed.checks;r.input=reviewed.candidate;
    let estimate=null,error=null;

@@ -1,0 +1,22 @@
+REVISION LOOP REVIEW v1
+Status: FAIL pending final caller checkpoint, interrupted-cost and candidate-preservation fixes.
+Scope: revision-harness.mjs, ugc.mjs, Whop storyboard/shot loops, storyboard malformed-output repair and relevant server callers. No implementation edits, paid calls, unpauses or native UI actions by reviewer.
+
+PASSED EVIDENCE
+- Main UGC checker loop continues beyond five failures and stops for quality only after all checkers meet the required threshold.
+- Whop storyboard loop continues beyond eight failures, persists each new storyboard version and does not submit a Higgsfield generation.
+- New Whop per-shot loop now revises beyond eight failures before pricing. Latest Whop suite passed 17/17; an earlier concurrent test snapshot had a temporary fixture failure that was resolved.
+- Runner supplies its pause/stop checkpoint to the UGC preparation loop, with persisted spending checks before paid concept/check/revise calls.
+- Latest Whop cancellation epoch check prevents continued revision after disabling the watcher. Independent mock reproduction disabled during the first failed check: one check, zero subsequent revisions, failed/stopped saved work. No external tools were called.
+- Malformed storyboard output now repairs without a fixed count and includes the previous formatting defect in the next prompt.
+
+REQUIRED FIXES STILL OPEN AT REVIEW TIME
+1. Server standalone storyboard draft/revise callers do not pass the new checkpoint option. Their malformed-output loops therefore use a no-op checkpoint and can keep making model calls after a spending pause starts mid-request. Pass the persisted spending assertion into those callers.
+2. storyboard.generate attaches accumulated error.cost, but current outer callers do not consistently record it when a checkpoint or transport failure interrupts formatting repair. Book those completed paid-call costs exactly once, even when no valid final storyboard is returned.
+3. UGC and Whop per-shot revision callbacks persist the next candidate only at the following check entry. A checkpoint can stop between a paid revision response and that next check, losing the new candidate from stored render input/plan. Persist every returned revision immediately before returning to the harness.
+
+FINAL CHECKS REQUIRED
+- Pause or stop during check and during revision: no next paid call starts, and the newest completed candidate remains saved.
+- Interrupt malformed-output repair: standalone routes honor spending pause and completed call costs remain visible.
+- More than five failures followed by pass remains covered for UGC, Whop storyboard and Whop individual shot paths.
+- Run final focused and required repository checks after shared source edits settle. This source review is not proof that the later full tree is compiled or pushed.
