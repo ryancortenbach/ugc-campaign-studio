@@ -1,7 +1,7 @@
 {
   "version": 2,
   "mode": "demo",
-  "preparedAt": "2026-10-24T20:25:22.885Z",
+  "preparedAt": "2026-10-24T20:29:02.493Z",
   "activeBrandIds": [
     "disobedient",
     "vylin"
@@ -295,6 +295,10 @@
             {
               "url": "https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie",
               "title": "Disobedient Oversized Zip Up Hoodie"
+            },
+            {
+              "url": "/streetwear-demo-records/disobedient-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/disobedient-brand-exa-v1.json",
@@ -334,6 +338,10 @@
             {
               "url": "https://disobedientnyc.com/products/low-lives-hoodie",
               "title": "Low Lives Hoodie"
+            },
+            {
+              "url": "/streetwear-demo-records/disobedient-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/disobedient-audience-exa-v1.json",
@@ -365,6 +373,10 @@
             {
               "url": "https://disobedientnyc.com/",
               "title": "disobedient"
+            },
+            {
+              "url": "/streetwear-demo-records/disobedient-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/disobedient-creators-exa-v1.json",
@@ -396,6 +408,10 @@
             {
               "url": "https://disobedientnyc.com/",
               "title": "Disobedient NYC"
+            },
+            {
+              "url": "/streetwear-demo-records/disobedient-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/disobedient-formats-exa-v1.json",
@@ -987,6 +1003,10 @@
             {
               "url": "https://www.wearvylin.com/collections/drop-line",
               "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            },
+            {
+              "url": "/streetwear-demo-records/vylin-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/vylin-brand-exa-v1.json",
@@ -1022,6 +1042,10 @@
             {
               "url": "https://www.wearvylin.com/collections/drop-line",
               "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            },
+            {
+              "url": "/streetwear-demo-records/vylin-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/vylin-audience-exa-v1.json",
@@ -1057,6 +1081,10 @@
             {
               "url": "https://www.wearvylin.com/collections/drop-line",
               "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            },
+            {
+              "url": "/streetwear-demo-records/vylin-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/vylin-creators-exa-v1.json",
@@ -1088,6 +1116,10 @@
             {
               "url": "https://www.wearvylin.com/",
               "title": "VYLIN — Streetwear for the Sonically Lifted | NYC-Born Brand"
+            },
+            {
+              "url": "/streetwear-demo-records/vylin-exa-rpc-v1.json",
+              "title": "Full MCP request and response history"
             }
           ],
           "rawRecordUrl": "/streetwear-demo-records/vylin-formats-exa-v1.json",
