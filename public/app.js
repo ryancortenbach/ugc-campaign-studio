@@ -1,3 +1,4 @@
+import {makePlan} from './planner.js';
 import {parseProductionPacket} from './import-packet.js';
 import {getProductionPlan,getProductionVersions,renderProduction,installProductionPlan} from './production.js';
 import {fields,emptyBrief,normalizeBrief,nextField,guidedTurn,productionPacket} from './brief.js';
@@ -49,3 +50,11 @@ function importSource(source){
 $('#import-packet').onclick=()=>$('#import-file').click();
 $('#import-file').onchange=async()=>{const file=$('#import-file').files?.[0];if(!file)return;try{if(file.size>2*1024*1024)throw Error('Choose a JSON packet no larger than 2 MB.');importSource(await file.text());}catch(error){$('#import-status').textContent='Import stopped: '+error.message;}finally{$('#import-file').value='';}};
 $('#import-pasted').onclick=()=>importSource($('#import-json').value);
+
+window.addEventListener('ugc-prospect-campaign',event=>{
+ const brief=normalizeBrief(event.detail?.brief),newId=crypto.randomUUID();
+ try{installProductionPlan(brief,makePlan(brief,5),[],newId);
+  if(fields.some(([key])=>state.brief[key]?.trim())){const oldId=state.id||crypto.randomUUID();state.campaigns=[{id:oldId,brief:{...state.brief},messages:[...state.messages],planId:state.planId,updatedAt:new Date().toISOString()},...state.campaigns.filter(c=>c.id!==oldId)];}
+  state.id=newId;state.planId=newId;state.brief=brief;state.messages=[{role:'assistant',text:'Created a five-second campaign draft from public prospect research. Add the actual product, audience, avatar, voice, references and approved script before rendering.'}];state.campaigns.unshift({id:newId,planId:newId,brief:{...brief},messages:[...state.messages],updatedAt:new Date().toISOString()});persist();render();view('production');$('#plan-status').textContent='Five-second draft created. No video generated, no message sent, approvals pending.';
+ }catch(error){$('#outreach-save-status').textContent=error.message;}
+});

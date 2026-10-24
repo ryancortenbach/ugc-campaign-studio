@@ -1,7 +1,7 @@
 export function prospectFromResult(result,query){
  let url;try{url=new URL(result.url);if(url.protocol!=='https:'||url.username||url.password)return null;}catch{return null;}
  const text=typeof result.text==='string'?result.text:'';
- const title=(result.title||url.hostname).replace(/[\r\n]+/g,' ').slice(0,120);
+ const pageTitle=(result.title||'').replace(/[\r\n]+/g,' ').trim();const title=!pageTitle||/^(contact|contact us|n\/a)$/i.test(pageTitle)?url.hostname.replace(/^www\./,''):pageTitle.slice(0,120);
  const candidates=[...new Set(text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)||[])].filter(email=>!email.match(/example\.|sentry|wixpress|@2x|^(support|privacy|gdpr|legal|careers|returns|orders)@/i)).slice(0,4);
  const emailEvidence=candidates.map(email=>{const index=text.indexOf(email);const domain=email.split('@')[1].toLowerCase();return {email,sourceUrl:url.href,excerpt:text.slice(Math.max(0,index-40),index+email.length+40),domainMatchesPage:url.hostname===domain||url.hostname.endsWith('.'+domain),verification:'Published candidate only. Business purpose and site ownership require review.'};});
  const observation=text.split(/[\n]+|(?<=[.!?])\s+/).map(line=>line.trim()).find(line=>line.length>=25&&!/privacy|cookie|terms of service|all rights reserved/i.test(line));
