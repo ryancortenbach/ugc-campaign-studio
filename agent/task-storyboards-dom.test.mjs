@@ -18,6 +18,8 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  store.createLead({taskId:mission.id,company:'Disobedient',domain:'disobedientnyc.com',url:'https://disobedientnyc.com',market:'streetwear',territory:'NYC',status:'qualified'});
  store.createLead({taskId:mission.id,company:'VYLIN',domain:'wearvylin.com',url:'https://wearvylin.com',market:'streetwear',territory:'NYC',status:'qualified'});
  store.updateLead(a.id,{products:[{title:'Blue Hoodie',kind:'top',imageUrl:'https://alpha.example/hoodie.png',image:'0.png'}]});
+ store.updateLead(a.id,{contact_kind:'personal',contact_email:'morgan@alpha.example',contact_name:'Morgan',socials:{instagram:'https://instagram.com/alpha',tiktok:'https://tiktok.com/@alpha'}});
+ store.updateLead(b.id,{contact_kind:'role',contact_email:'support@beta.example'});
  const wa=boards.ensure(a.id),wb=boards.ensure(b.id);store.updateTask(wa.task.id,{status:'ready'});
  const rows=['claude','exa','solari'].map(id=>({id,name:id,on:true,ok:true,verification:id==='exa'?'configured':id==='solari'?'reachable':'verified'}));
  const app=createApp({store,taskStoryboards:boards,connections:{get:async()=>rows},costs:{get:async()=>({allTimeUsd:0,todayUsd:0,providers:[]})}});
@@ -28,7 +30,7 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  const dom=new JSDOM(readFileSync(new URL('./public/index.html',import.meta.url),'utf8'),{url:base+'/#/tasks',pretendToBeVisual:true}),{window}=dom;
  for(const key of ['window','document','location','localStorage','HTMLElement','Event','MouseEvent'])Object.defineProperty(globalThis,key,{value:key==='window'?window:window[key],configurable:true});
  window.HTMLElement.prototype.scrollIntoView=function(){};window.HTMLElement.prototype.scrollTo=function(){};
- globalThis.EventSource=class{};globalThis.setInterval=(...args)=>{const timer=original.setInterval(...args);timers.push(timer);return timer;};
+ const eventStreams=[];globalThis.EventSource=class{constructor(){eventStreams.push(this);}close(){}};globalThis.setInterval=(...args)=>{const timer=original.setInterval(...args);timers.push(timer);return timer;};
  let hideTask=true,showNotification=true,holdDemo=false,releaseDemo;
  globalThis.fetch=async(url,init={})=>{url=new URL(url,base);assert.equal(url.origin,base,'No external requests');calls.push({path:url.pathname,method:init.method||'GET'});if(url.pathname==='/api/client-demo'&&holdDemo){holdDemo=false;await new Promise(resolve=>releaseDemo=resolve);}if(url.pathname==='/api/renders'&&showNotification){showNotification=false;return Response.json({renders:[{id:901,title:'A finished fixture video',status:'completed',local_file:'fixture.mp4',review:'pending'}]});}const r=await original.fetch(url,init);if(url.pathname==='/api/state'&&hideTask){const data=await r.json();data.tasks=data.tasks.filter(t=>t.id!==wa.task.id);return Response.json(data);}return r;};
  t.after(async()=>{timers.forEach(clearInterval);globalThis.setInterval=original.setInterval;globalThis.fetch=original.fetch;dom.window.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));boards.close();store.db.close();rmSync(dir,{recursive:true,force:true});});
@@ -51,6 +53,18 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  assert.equal(view.querySelector('a[href="#/orders/pay_don_failed"]'),null);assert.equal(view.querySelectorAll('a[href="#/orders/pay_don_paid"]').length,1);
  assert.deepEqual([...view.querySelectorAll('[data-task-section]')].map(section=>section.dataset.taskSection),['client','research','missions']);
  await wait(()=>document.querySelector('#toasts a[href="#/renders/901"]'));assert.equal(document.querySelector('#toasts video,.popup'),null);
+ const videoNotice=document.querySelector('#toasts a[href="#/renders/901"]').closest('.toast');assert.ok(videoNotice.querySelector('img[alt="Higgsfield"]'));assert.equal(videoNotice.querySelector('i svg'),null);
+ const sent={id:99991,at:new Date().toISOString(),type:'draft',tool:'gmail.send',title:'Sent to person@example.com',data:{draftId:321,messageId:'confirmed'}};
+ for(let i=0;i<2;i++)eventStreams.forEach(stream=>stream.onmessage?.({data:JSON.stringify({kind:'event',event:sent})}));
+ assert.equal(document.querySelectorAll('[data-notice-key="gmail-sent-draft:321"]').length,1);assert.ok(document.querySelector('[data-notice-key="gmail-sent-draft:321"] img[alt="Gmail"]'));
+ const watcherSent={...sent,id:99993,tool:'sentwatch',title:'Sent: person@example.com',data:{messageId:'confirmed'}};
+ eventStreams.forEach(stream=>stream.onmessage?.({data:JSON.stringify({kind:'event',event:watcherSent})}));
+ assert.equal([...document.querySelectorAll('#toasts .toast')].filter(notice=>notice.querySelector('b')?.textContent==='Email sent').length,1,'The send response and sent watcher must not notify twice for the same message');
+ document.querySelector('[data-notice-key="gmail-sent-draft:321"] .x').click();
+ eventStreams.forEach(stream=>stream.onmessage?.({data:JSON.stringify({kind:'event',event:watcherSent})}));
+ assert.equal(document.querySelectorAll('[data-notice-key="gmail-sent-draft:321"]').length,0,'Dismissed notifications stay dismissed on event replay');
+ eventStreams.forEach(stream=>stream.onmessage?.({data:JSON.stringify({kind:'event',event:{id:99992,at:new Date().toISOString(),type:'email_received',tool:'gmail.inbound',title:'Reply from person@example.com',data:{messageId:'received'}}})}));
+ assert.match(document.querySelector('[data-notice-key="gmail-event:99992"]').textContent,/Email received/);
  const card=view.querySelector(`[data-sh="brand-task-${wa.task.id}"]`);assert.ok(!card.querySelector('.scnt'));assert.ok(!card.querySelector('.scost'));assert.ok(!card.textContent.includes('Storyboard:'));assert.ok(!card.querySelector('.schev').innerHTML.includes('m9 18 6-6-6-6'));
  assert.equal(view.querySelector('#apswitch').checked,false);assert.match(view.querySelector('.automation-limit').textContent,/daily limit/);assert.ok(document.querySelector('#tabs a[data-tab="storyboards"]')===null);
  assert.ok(view.querySelector('.ord-open[href="#/orders/pay_fixture"]'));
@@ -61,7 +75,11 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  assert.ok(view.querySelector('#client-task-review'),'A late Leads packet must not replace the client task opened afterwards');
  location.hash='#/leads';await wait(()=>view.querySelector('#crm'));view.querySelector(`.trow[data-id="${a.id}"]`).click();await wait(()=>document.querySelector('#drawer .refs img'));assert.match(document.querySelector('#drawer').textContent,/Product photos/);assert.equal(document.querySelectorAll('#drawer .kind').length,0);
  assert.equal(view.querySelectorAll('[data-lf]').length,5);assert.equal(view.querySelector('.lbar .cchips'),null);assert.ok(view.querySelector('.ct-leads-table #crm .th'));
- const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.tbrand>div>b').textContent)),new Set(['VYLIN','Disobedient']));assert.ok(pinned.every(row=>!row.querySelector('.ct-journey').textContent.includes('Simulation')));
+ const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.tbrand>div>b').textContent)),new Set(['VYLIN','Disobedient']));
+ for(const row of view.querySelectorAll('#crm .trow[data-id]'))assert.equal(row.querySelectorAll('.ct-status [data-primary-status]').length,1);
+ assert.ok(pinned.every(row=>/Whop checkout.*simulated/.test(row.querySelector('[data-primary-status]').textContent)));assert.ok(pinned.every(row=>!row.querySelector('[data-primary-status]').textContent.includes('Outreach sent')));
+ assert.equal(view.querySelector(`[data-id="${a.id}"] [data-contact-summary]`).textContent,'Email found');assert.equal(view.querySelector(`[data-id="${b.id}"] [data-contact-summary]`).textContent,'Shared inbox');
+ assert.equal(view.querySelectorAll('#crm .contact .mono').length,0);
  location.hash='#/renders';await wait(()=>view.querySelector('#render-empty'));assert.equal(view.querySelector('#render-empty').hidden,false);
  for(const k of ['you','work','done','all']){view.querySelector(`[data-tab="${k}"]`).click();assert.equal(view.querySelector('#render-empty').hidden,false);assert.ok(view.querySelector('#render-empty').textContent.length>8);}
  assert.equal(store.spendSummary().total,0);assert.equal(store.listRenders().length,0);assert.ok(!calls.some(c=>c.method==='POST'&&/chat|assistant|research|\/run$|approve|ideation/.test(c.path)));
