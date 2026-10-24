@@ -1,0 +1,40 @@
+{
+  "url": "https://duolingo-library-phone-v1-2vlt6x5ki-ryancortenbachs-projects.vercel.app/",
+  "anonymous_http": 200,
+  "served_module_sha256": "9f2f6347df214132be9f98acea233b903f418769aa6059df967a839fef6deab8",
+  "source_matches": true,
+  "deployment": {
+    "id": "dpl_2Byw6sXJ3qHfweQz5ddPDsJENvu8",
+    "target": "preview",
+    "environment": null,
+    "readyState": "READY"
+  },
+  "real_accounts": false,
+  "physical_device_tested": false,
+  "first_accidental_production": {
+    "id": "dpl_FhHmS4h1vCatQi6JxBKqPtL617Wq",
+    "removed": true,
+    "reason": "First deployment was auto-classified production despite explicit --target preview. Removed immediately. No live app/backend.",
+    "anonymous_http_after_removal": 404
+  },
+  "browser": {
+    "connected_normal_chrome": true,
+    "anonymous_login_gate_observed": false,
+    "states_tested": [
+      "found",
+      "no_match",
+      "explicit_reset",
+      "early",
+      "disconnected"
+    ],
+    "independent_review": true,
+    "mobile_viewport": {
+      "width": 390,
+      "height": 844,
+      "document_width": 390,
+      "physical_device": false
+    },
+    "native_app_tested": false,
+    "live_gmail_tested": false
+  }
+}

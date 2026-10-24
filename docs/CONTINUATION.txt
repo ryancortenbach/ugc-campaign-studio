@@ -1,4 +1,25 @@
 UGC HACKATHON CONTINUATION
+Updated 2026-10-24 18:58 ET. Current audit: docs/COMPLETION-AUDIT-v31.json.
+
+LATEST STATE, SUPERSEDES HISTORICAL HANDOFF BELOW
+Another session merged PR2 at22:51:17UTC into main2f866f0 while this worker was building the UI. This worker did not merge it. Current Mini branch review/mac-delivery-recovery-ui-v1, functional source6aa1ce1 based on main2f866f0. DraftPR3: https://github.com/ryancortenbach/ugc-campaign-studio/pull/3 . Old review/mac-delivery-audit-v1 branch was recreated by a push during the concurrent merge and retains8968fbc; do not open another PR for it.
+
+Frontend recovery controls are now complete in draftPR3, not installed in the running Air app. The order page shows the saved recipient/subject, blocks upload and prior delivery links while uncertain, offers a read-only Gmail check, and requires an explicit checked manual absence assertion after15minutes. Backend checks the token, timing and strict confirmation again. Pending actions serialize, late route results are ignored, errors reload state and focus returns to the heading. Independent reviewer found and cleared false reset success copy, missing saved identity, old links and lost keyboard focus. No further concrete defect found in scoped code/state and fixture review.
+
+33focused tests passed, including6actual-module DOM tests. Both source6aa1ce1CI runs40140558044and40140561298passed90root and410agent tests,0failures/skips. Details: docs/MAC-DRAFT-RECOVERY-UI-v1.md. Receipt: docs/MAC-RECOVERY-UI-PREVIEW-v1.json.
+
+Isolated fixture: https://duolingo-library-phone-v1-2vlt6x5ki-ryancortenbachs-projects.vercel.app/ . AnonymousHTTP200, served delivery module hash matched. Normal Chrome and independent review verified found/no-match/explicit-reset/early/disconnected states. Reviewer inspected390by844viewport with document width390and no overflow, then restored viewport. All responses fictional, no backend/account calls, empty video hidden. Vercel inspect verified target Preview and READY. This does not validate the current Mac app, real Gmail indexing or physical phones.
+
+Deployment correction: the first fixture attempt on the previously unused ugc-campaign-studio Vercel project was auto-classified Production despite explicit --target preview. It was immediately removed, including generated aliases (dpl_FhHmS4h1vCatQi6JxBKqPtL617Wq, anonymous404after removal). Do not hide this incident or claim no deployments. The final fixture uses the existing preview project with no production alias. No retired backend/live app was deployed. Do not restore retired ops or root Vercel config. Fixture source is isolated under experiments/delivery-recovery-preview-v1, staging script scripts/stage-delivery-recovery-preview.mjs.
+
+Air read-only this batch: HEAD0cef260, no dirty status lines. Its shell lacked rg, so remote process filtering failed; do not infer its app stopped. Mini process inventory showed no task app/build worker. The independent review worker finished. No live collection, app build, live-account request, Air write/restart/spending-setting change, sending, purchase, paid generation or release by this worker.
+
+Next: inspect current main/PR3/workers before editing. Do not duplicate recovery UI or media collection. Continue remaining full-pack fulfillment planning/coverage with fake transports. Real Gmail/native/physical-device/full-pack fulfillment and approved branded sample dependencies remain open. All original scope, no-spend/no-send constraints and the active single30minute timer remain in force. Whole goal incomplete, noDONE.
+
+HISTORICAL 18:36 HANDOFF FOR SCOPE AND PRIOR EVIDENCE
+The statements below about current branch, PR2 not merged, no frontend controls and no new preview are superseded above.
+
+UGC HACKATHON CONTINUATION
 Updated 2026-10-24 18:36 ET. Current audit: docs/COMPLETION-AUDIT-v30.json.
 Root: /Users/ryancortenbach/Development/ugc-campaign-studio
 Repo: https://github.com/ryancortenbach/ugc-campaign-studio
