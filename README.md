@@ -26,6 +26,17 @@ The dark dashboard includes guided intake, saved campaigns, compact task queues 
 
 The browser saves drafts and campaigns locally and exports a production packet as JSON. This is not shared account storage. The packet leaves unknown facts and unapproved generation settings explicit.
 
+## Sponsor connections
+
+`.mcp.json` registers the hackathon MCP servers for Claude Code. None of them take a key in the file. Open Claude Code in this folder, approve the project servers, then run `/mcp` and sign in to each with your own account.
+
+- Terac (required for submission): `https://terac.com/api/mcp`, OAuth. Launch studies for the General Population. Credits belong to a Terac organization, so redeem the event link only after Terac sets yours up.
+- Exa: `https://mcp.exa.ai/mcp`, free and keyless. The app's paid search route reads `EXA_API_KEY` from your own `.env.local`.
+- Whop API: `https://mcp.whop.com/mcp`, OAuth. The grant is your Whop user, so you need team access to the project's Whop business. Consequential operations return a confirmation token before anything executes.
+- Whop docs: `https://docs.whop.com/mcp`.
+
+Other MCP clients can use the same URLs. Never commit keys; each teammate keeps their own `.env.local`.
+
 ## Structure
 
 - `public/`: responsive dashboard and browser intake.
