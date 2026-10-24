@@ -26,7 +26,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  const db=new DatabaseSync(file);
  if(file!==':memory:')db.exec('pragma journal_mode=wal');
  db.exec(schema);
- for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text'])try{db.exec(`alter table renders add column ${col}`);}catch{}
+ for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text','submission_key text'])try{db.exec(`alter table renders add column ${col}`);}catch{}
  const bus=new EventEmitter();bus.setMaxListeners(100);
  const task=row=>row&&{...row,plan:parse(row.plan)};
  const event=row=>row&&{...row,data:parse(row.data)};
@@ -55,6 +55,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   createRender({title,endpoint,input,group=null,shotId=null}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,group_name,shot_id,created_at,updated_at) values(?,?,?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',group,shotId,at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   getRender(id){return render(db.prepare('select * from renders where id=?').get(id));},
   listRenders(){return db.prepare('select * from renders order by id desc').all().map(render);},
+  claimRenderSubmission(id,estimate,key){const at=now();const changed=db.prepare("update renders set status='submitting',submission_key=?,approved_at=?,updated_at=? where id=? and status='checks_passed' and estimate_usd=? and submission_key is null").run(key,at,at,id,String(estimate));if(Number(changed.changes)!==1)return null;const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   updateRender(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update renders set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['input','checks'].includes(c)?json(fields[c]):fields[c]),at,id);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   createStoryboard({title,brief,plan,version=1,parentId=null,cost=0}){const at=now();const id=Number(db.prepare('insert into storyboards(title,brief,plan,status,version,parent_id,cost_usd,created_at,updated_at) values(?,?,?,?,?,?,?,?,?)').run(title,json(brief),json(plan),'draft',version,parentId,cost,at,at).lastInsertRowid);const s=store.getStoryboard(id);bus.emit('change',{kind:'storyboard',storyboard:s});return s;},
   getStoryboard(id){return board(db.prepare('select * from storyboards where id=?').get(id));},

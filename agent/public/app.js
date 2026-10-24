@@ -111,7 +111,7 @@ async function drafts(){
  bindFeed();
 }
 
-const renderStatus={draft:['Needs checks','s-idle'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Awaiting spend approval','s-wait'],queued:['Queued','s-run'],in_progress:['Rendering','s-run'],completed:['Rendered','s-ok'],failed:['Failed','s-bad'],nsfw:['Blocked','s-bad'],canceled:['Canceled','s-idle']};
+const renderStatus={draft:['Needs checks','s-idle'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Awaiting spend approval','s-wait'],submitting:['Submitting once','s-run'],submission_unknown:['Outcome uncertain: reconcile before retry','s-bad'],queued:['Queued','s-run'],in_progress:['Rendering','s-run'],completed:['Rendered','s-ok'],failed:['Failed','s-bad'],nsfw:['Blocked','s-bad'],canceled:['Canceled','s-idle']};
 const reviewStatus={pending:['Awaiting your review','s-wait'],approved:['Approved','s-ok'],rejected:['Rejected','s-bad']};
 async function renders(){
  const {renders,enabled}=await api('/api/renders');

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "status": "offline_application_checks_passed",
+  "scope": "Local Mint Labs agent submission path. This is not a public generation endpoint or live provider verification.",
+  "checkedAt": "2026-10-24T16:26:34.745093+00:00",
+  "studio_tests": 82,
+  "agent_tests": 16,
+  "provider": "injected fake provider only",
+  "real_provider_requests": 0,
+  "paid_generation": false,
+  "checks": [
+    {
+      "case": "Two concurrent approvals for one render",
+      "result": "One fake submission; duplicate request rejected with HTTP409."
+    },
+    {
+      "case": "Ambiguous provider exception or response missing request ID",
+      "result": "Saved as submission_unknown; repeat approval rejected. No automatic retry."
+    },
+    {
+      "case": "Two SQLite connections and database reopen",
+      "result": "One shared atomic claim and stable submission key retained."
+    },
+    {
+      "case": "Zero, negative, nonfinite or changed quote",
+      "result": "Rejected before fake provider call."
+    }
+  ],
+  "limits": [
+    "No paid generation or provider-level idempotency guarantee verified.",
+    "Atomic claim is per render row in one SQLite database, not global deduplication of separately created renders.",
+    "The running Air agent has not been restarted or updated by this patch.",
+    "An uncertain submission needs manual provider reconciliation; no automatic reconciliation adapter exists."
+  ]
+}
