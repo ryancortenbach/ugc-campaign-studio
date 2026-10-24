@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "client": "Waddle",
+  "researched_at": "2026-10-24",
+  "purpose": "Research and original creative demo for human review. No outreach sent.",
+  "official_website": "https://www.waddlecouples.com/",
+  "app_store_id": "6753086654",
+  "sources": [
+    {
+      "id": "waddle_site",
+      "url": "https://www.waddlecouples.com/",
+      "type": "official_website",
+      "access": "opened_live",
+      "confidence": "high",
+      "facts": [
+        "6,100+ couples paired",
+        "510k+ questions answered",
+        "10,100+ photos shared",
+        "81-day longest streak",
+        "3,000+ expert-written questions",
+        "Daily connection and a shared virtual duck"
+      ]
+    },
+    {
+      "id": "waddle_apple",
+      "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+      "type": "official_app_store",
+      "access": "opened_live",
+      "confidence": "high",
+      "facts": [
+        "App ID 6753086654",
+        "Seller Dovey LLC",
+        "98 US ratings at 4.2",
+        "Free download with in-app purchases",
+        "Raise a pet, daily questions, photos, quests and streaks",
+        "Listed Waddle monthly SKU $9.99; annual SKUs $29.99, $39.99 and $49.99; current checkout offer unverified"
+      ]
+    },
+    {
+      "id": "donald_portfolio",
+      "url": "https://donaldvchu.com/",
+      "type": "founder_owned_portfolio",
+      "access": "opened_live",
+      "confidence": "high",
+      "facts": [
+        "Donald Chu lists Waddle founder, 2026 to present, with official website link",
+        "Studying computer science at Columbia",
+        "Public contact donaldvchu@gmail.com",
+        "Previously at Phia, Revision Dojo and ELSA"
+      ]
+    },
+    {
+      "id": "xander_portfolio",
+      "url": "https://www.xanderwanagel.com/",
+      "type": "individual_owned_portfolio",
+      "access": "opened_live",
+      "confidence": "high",
+      "facts": [
+        "Xander identifies as Dovey founder and NYU Stern business/CS student",
+        "Portfolio Dovey link points to a separate App Store app ID 6759009985",
+        "Claims short-form editing experience; not verified independently"
+      ]
+    },
+    {
+      "id": "dovey_apple",
+      "url": "https://apps.apple.com/us/app/dovey-couples-questions/id6759009985",
+      "type": "official_app_store",
+      "access": "opened_live",
+      "confidence": "high",
+      "facts": [
+        "Separate Dovey app with seller Alexander Wanagel; do not conflate metrics or revenue with Waddle"
+      ]
+    },
+    {
+      "id": "core_bio",
+      "url": "https://coreatcu.com/talk-to-board",
+      "type": "campus_organization",
+      "access": "index_snippet_only_for_bio",
+      "confidence": "low",
+      "facts": [
+        "Indexed Donald bio claims unnamed consumer app is top 200 US Lifestyle and $10k/month",
+        "Fresh open did not show biography; Waddle attribution and revenue metric are unverified; excluded from actual-revenue field"
+      ]
+    }
+  ],
+  "founders": [
+    {
+      "name": "Donald Chu",
+      "role": "Founder",
+      "status": "verified_primary_source",
+      "source_id": "donald_portfolio",
+      "public_email": "donaldvchu@gmail.com",
+      "email_status": "published_by_person; not deliverability verified"
+    },
+    {
+      "name": "Xander Wanagel",
+      "role": "Waddle cofounder",
+      "status": "user_supplied_not_independently_verified",
+      "qualification": "Public search index associates @xander.wan Waddle posts, while his current portfolio links a separate Dovey app."
+    }
+  ],
+  "revenue": {
+    "actual_monthly_revenue_usd": null,
+    "status": "unknown",
+    "excluded_claims": [
+      {
+        "claim": "$10k/month unnamed consumer app in indexed CORE biography",
+        "reason": "Fresh page did not expose bio; app attribution and current timing not verified"
+      },
+      {
+        "claim": "Dovey revenue",
+        "reason": "Different app; cannot attribute to Waddle"
+      }
+    ],
+    "scenarios": [
+      {
+        "label": "Illustrative monthly SKU scenario only",
+        "assumptions": {
+          "paying_subscriptions": 100,
+          "usd_per_month": 9.99
+        },
+        "gross_monthly_billings_usd": 999
+      },
+      {
+        "label": "Illustrative monthly SKU scenario only",
+        "assumptions": {
+          "paying_subscriptions": 500,
+          "usd_per_month": 9.99
+        },
+        "gross_monthly_billings_usd": 4995
+      },
+      {
+        "label": "Illustrative annual SKU normalized scenario only",
+        "assumptions": {
+          "annual_subscriptions": 1000,
+          "usd_per_year": 39.99
+        },
+        "gross_monthly_equivalent_usd": 3332.5
+      }
+    ],
+    "caveat": "These scenarios are arithmetic, not estimates of actual revenue. Exclude store fees, refunds and taxes. Paying-subscription counts, plan mix and current checkout pricing are unknown."
+  },
+  "lead_score": {
+    "value": 74,
+    "maximum": 100,
+    "type": "editorial_demo_priority",
+    "not_a_probability": true,
+    "rubric": [
+      {
+        "category": "Product and sample fit",
+        "score": 20,
+        "max": 20,
+        "reason": "Clear consumer app with demonstrable shared activities and a visual mascot."
+      },
+      {
+        "category": "Original creative potential",
+        "score": 18,
+        "max": 20,
+        "reason": "Daily connection plus shared duck supports a distinct visual pitch."
+      },
+      {
+        "category": "Decision maker reachability",
+        "score": 18,
+        "max": 20,
+        "reason": "Founder identity and public contact verified; mailbox not deliverability tested."
+      },
+      {
+        "category": "Commercial evidence",
+        "score": 12,
+        "max": 20,
+        "reason": "Usage and listed paid products verified; actual paying users, revenue and budget unknown."
+      },
+      {
+        "category": "Usable social reference",
+        "score": 6,
+        "max": 20,
+        "reason": "Candidate Xander posts found, but exact Instagram and playable source footage remain unverified."
+      }
+    ]
+  },
+  "icp": {
+    "evidence": [
+      "Product explicitly supports couples living together or at a distance.",
+      "Daily questions, photos, shared duck and streaks anchor connection.",
+      "Official site foregrounds long-distance user testimonials."
+    ],
+    "hypotheses": [
+      "Primary sample audience: 18-29-year-old dating couples who want a lightweight daily ritual.",
+      "First creative test: geographically separated college or early-career couples with repetitive text conversations.",
+      "Buyer: founder-led consumer-app team seeking additional original short-form creatives."
+    ],
+    "not_verified": [
+      "Audience age and gender split",
+      "Paid media budget or acquisition cost",
+      "Retention, payer conversion and active usage",
+      "Actual outreach need or buying intent"
+    ]
+  },
+  "social": {
+    "official_instagram": null,
+    "xander_instagram": null,
+    "access_gap": "Instagram remains unverified. Snapchat public HTML later exposed first-party transcripts and media; see waddle-ads-v1.json.",
+    "candidate_references": [
+      {
+        "id": "xander_candidate_1",
+        "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYdnZteHh4YWV4AZ9ioQMjAZ9ioDOsAAAAAQ",
+        "platform": "Snapchat",
+        "creator_handle": "xander.wan",
+        "access": "ordinary_public_html_and_first_party_metadata",
+        "date_displayed_in_index": "Jul 14; year unverified",
+        "candidate_hook": "First-person long-distance relationship story, with comment-to-try CTA naming Waddle",
+        "hook_status": "platform_transcript_read",
+        "video_watched": false,
+        "format_observed": [],
+        "date_verified_utc": "2026-07-14",
+        "frame_review_seconds": []
+      },
+      {
+        "id": "xander_candidate_2",
+        "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+        "platform": "Snapchat",
+        "creator_handle": "xander.wan",
+        "access": "ordinary_public_html_and_first_party_metadata",
+        "date_displayed_in_index": "Aug 16; year unverified",
+        "candidate_hook": "Couple has run out of fresh conversation; indexed creator comment names Waddle",
+        "hook_status": "platform_transcript_read",
+        "video_watched": false,
+        "format_observed": [
+          "9:16 close selfie",
+          "Dark hoodie, wired earbud held near mouth",
+          "Public waiting-area seats and ceiling panels",
+          "Bold upper hook at opening; small lower subtitles",
+          "App minigame and duck recording overlaid at 29 seconds"
+        ],
+        "date_verified_utc": "2026-08-16",
+        "frame_review_seconds": [
+          0,
+          8,
+          18,
+          29
+        ]
+      },
+      {
+        "id": "xander_candidate_3",
+        "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+        "platform": "Snapchat",
+        "creator_handle": "xander.wan",
+        "access": "ordinary_public_html_and_first_party_metadata",
+        "date_displayed_in_index": "Aug 6; year unverified",
+        "candidate_hook": "Long-distance couple wants deeper conversations",
+        "hook_status": "platform_transcript_read",
+        "video_watched": false,
+        "format_observed": [
+          "9:16 close selfie",
+          "Dark hoodie, wired earbuds and blue bottle prop",
+          "Casual cafe-like background with exposed ceiling and red pipe",
+          "Bold top hook at opening and short lower subtitles"
+        ],
+        "date_verified_utc": "2026-08-06",
+        "frame_review_seconds": [
+          0,
+          13,
+          31
+        ]
+      }
+    ],
+    "reference_status": "first_party_snapchat_transcripts_verified_and_two_posts_selected_frames_reviewed",
+    "do_not_claim": "No continuous source playback or audio review. Selected frames and platform transcripts support structural observations, not exact motion or voice parity.",
+    "initial_access_gap": "Guessed profile URLs were throttled; no verified Instagram handle or exact Instagram post found. No evasion attempted.",
+    "detailed_reference_evidence": "research_notes/client-avatar-demo-v1/waddle-ads-v1.json"
+  },
+  "creative": {
+    "status": "original_proposal_not_observed_reference_reconstruction",
+    "persona": {
+      "name": "Jamie",
+      "description": "Fictional adult, approximately 24, warm playful delivery, wavy dark hair, small round glasses, sage sweatshirt with no logo, charcoal relaxed trousers. No resemblance to Donald or Xander.",
+      "voice": "Original licensed or synthetic voice, not a founder clone.",
+      "identity_lock": [
+        "same face",
+        "same glasses",
+        "same hairstyle",
+        "same clothing",
+        "same room",
+        "same time of day"
+      ]
+    },
+    "environment": "Warm lived-in apartment couch at dusk, cream wall, small amber lamp, one houseplant, smartphone as neutral prop; avoid invented visible app UI.",
+    "script_seconds": 15,
+    "script": [
+      {
+        "seconds": "0-3",
+        "shot": "Chest-up, original avatar on a cozy couch, speaking to lens. Small illustrative AI-character label.",
+        "line": "Still asking, \"How was your day?\""
+      },
+      {
+        "seconds": "3-7",
+        "shot": "Same avatar leans in, then glances toward a separately composited, verified Waddle screen.",
+        "line": "Waddle gives you better questions to ask together."
+      },
+      {
+        "seconds": "7-12",
+        "shot": "Same character gestures at a second verified app insert showing the shared duck. Do not generate fake app UI.",
+        "line": "Share a photo, raise a duck, make a little time for each other."
+      },
+      {
+        "seconds": "12-15",
+        "shot": "Same couch and face, warm smile; app name and website composited in edit.",
+        "line": "Try a daily check-in with Waddle."
+      }
+    ],
+    "disclosure": "Illustrative AI character. Do not present fictional experience as real customer testimony.",
+    "asset_requirements": [
+      "Human approved original character sheet",
+      "Human approved storyboard frames",
+      "Current owner supplied Waddle logo and permitted app recording",
+      "Playable source reference if adapting specific existing content",
+      "Brand signoff on product claims and pronunciation"
+    ]
+  },
+  "outreach_draft": {
+    "to": "donaldvchu@gmail.com",
+    "status": "draft_only_not_sent",
+    "subject": "An original Waddle creative sample",
+    "body": "Hi Donald, I put together a short AI-character concept for Waddle around turning the usual daily check-in into better questions and a shared duck. The sample uses an original character and includes the storyboard, product claims, and reference notes for review. Would you be open to taking a look and telling us which angle is closest to what you want to test next?",
+    "note": "Attach approved sample and personalized brief only after the required human approval. Do not claim to have watched Xander posts."
+  },
+  "gaps": [
+    "Xander formal Waddle cofounder role",
+    "Exact official Instagram and Xander Instagram post URLs",
+    "Actual revenue, downloads, active users and payers",
+    "Current checkout pricing",
+    "Permission for production brand assets",
+    "Human review of any generated persona and frames",
+    "Continuous playback and audio review of public reference before any exact audiovisual adaptation"
+  ]
+}

@@ -1,0 +1,553 @@
+{
+  "reviewed_at": "2026-10-24",
+  "scope": "Independent classification of saved Exa outputs, no new provider/search calls",
+  "input_searches": 8,
+  "total_result_rows": 29,
+  "unique_urls": 19,
+  "official_domain_result_rows": 16,
+  "official_domain_unique_urls": 7,
+  "independently_visited_official_result_rows": 9,
+  "actual_target_brand_ads_verified": 0,
+  "target_brand_organic_posts_verified": 0,
+  "target_brand_customer_interviews_verified": 0,
+  "rules": [
+    "Exact official domain supports brand relevance; search excerpt alone does not verify a complete page.",
+    "Section name does not confer evidence type. A homepage returned under creators or audience remains a homepage.",
+    "Generic articles and template sites are ideation context, not actual target-brand ads or customers.",
+    "No video cadence, views, retention or ad conversion is established by these excerpts.",
+    "Do not infer brand affiliation from unrelated handles or similar spellings."
+  ],
+  "gaps": [
+    "No verified individual official organic post or actual target-brand Meta ad.",
+    "No creator directly connected to either target brand has been established.",
+    "No target customer interviews, audience analytics, age/demographic breakdown or quantified demand evidence.",
+    "No founder identity or decision-maker role verified.",
+    "No company revenue, ad spend or conversion evidence.",
+    "No actual inbound DM or paid-client relationship established."
+  ],
+  "inputs": [
+    {
+      "file": "work/streetwear-demo-v1/disobedient-audience.json",
+      "sha256": "7236b85aae7eb12958c21ef1ccac843d7f3ae5fa8e3073f23b453e5b7550ad46"
+    },
+    {
+      "file": "work/streetwear-demo-v1/disobedient-brand.json",
+      "sha256": "ee3db7a6b25c1a554baa725dd1ac2612e959dc69487a377a7fe5a0e66e3416a3"
+    },
+    {
+      "file": "work/streetwear-demo-v1/disobedient-creators.json",
+      "sha256": "7441069d687fc40720e0e9515d91c6572fd995e4f255c5157efec1af41e23fee"
+    },
+    {
+      "file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "sha256": "7a50d797ce9c4668b440b46af94aaddb8c55fcb8af9a5de8d0cca6f07b068001"
+    },
+    {
+      "file": "work/streetwear-demo-v1/vylin-audience.json",
+      "sha256": "917e2e4a76a6ba44ba70c7a7e49d15d8c74f001f922b8d15c3183e18ede3fc8f"
+    },
+    {
+      "file": "work/streetwear-demo-v1/vylin-brand.json",
+      "sha256": "ef80bcdc6da63433e46d9b6cc8753807ee1e6a1092fa5871e1982b9169c951e6"
+    },
+    {
+      "file": "work/streetwear-demo-v1/vylin-creators.json",
+      "sha256": "1c860b25f659bbf6406b33df5dce0fa9bec9c4c14cf59ef3264db486faf42fb9"
+    },
+    {
+      "file": "work/streetwear-demo-v1/vylin-formats.json",
+      "sha256": "5801db9a401c135f7e383e8b154088b82378e809cde29f132aba89769c8e08d0"
+    }
+  ],
+  "rows": [
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-audience.json",
+      "result_index": 0,
+      "brand_id": "disobedient",
+      "search_section": "audience",
+      "url": "https://disobedientnyc.com/",
+      "title": "disobedient",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-audience.json",
+      "result_index": 1,
+      "brand_id": "disobedient",
+      "search_section": "audience",
+      "url": "https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie",
+      "title": "Disobedient Oversized Zip Up Hoodie",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-audience.json",
+      "result_index": 2,
+      "brand_id": "disobedient",
+      "search_section": "audience",
+      "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+      "title": "Low Lives Hoodie",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-brand.json",
+      "result_index": 0,
+      "brand_id": "disobedient",
+      "search_section": "brand",
+      "url": "https://disobedientnyc.com/",
+      "title": "disobedient",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-brand.json",
+      "result_index": 1,
+      "brand_id": "disobedient",
+      "search_section": "brand",
+      "url": "https://disobedientnyc.com/products/black-thermal",
+      "title": "Black Disobedient Thermal",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-brand.json",
+      "result_index": 2,
+      "brand_id": "disobedient",
+      "search_section": "brand",
+      "url": "https://disobedientnyc.com/products/white-disobedient-thermal",
+      "title": "White Disobedient Thermal",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-brand.json",
+      "result_index": 3,
+      "brand_id": "disobedient",
+      "search_section": "brand",
+      "url": "https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie",
+      "title": "Disobedient Oversized Zip Up Hoodie",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-creators.json",
+      "result_index": 0,
+      "brand_id": "disobedient",
+      "search_section": "creators",
+      "url": "https://disobedientnyc.com/",
+      "title": "disobedient",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-creators.json",
+      "result_index": 1,
+      "brand_id": "disobedient",
+      "search_section": "creators",
+      "url": "https://urlebird.com/user/disobedient_/",
+      "title": "Lexie  (@disobedient_) - Urlebird",
+      "classification": "reject_false_positive",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Lexie at a different handle with parenting material, not the official disobedientnyc account.",
+      "permitted_use": []
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-creators.json",
+      "result_index": 2,
+      "brand_id": "disobedient",
+      "search_section": "creators",
+      "url": "https://www.instagram.com/denny623/reel/C_0g0t9RUX2/",
+      "title": "Denny Balmaceda. on Instagram: \"One of my favorites( @nn07.official ) is now in NYC!! I stopped by to check it out and left with 3 full looks!! If you\u2019re in Soho, be sure to stop by. I\u2019m bringing that Copenhagen style to NYC! \ud83e\udd18\ud83c\udffd\ud83e\udd18\ud83c\udffd #menswear #shopping #nyc #soho #preppy #prep #fashion #style #streetwear #streetstyle #nn07 #thebear\"",
+      "classification": "adjacent_primary_post_lead_only",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "An individual menswear reel about NN07, not Disobedient. Not independently opened or watched here.",
+      "permitted_use": [
+        "possible_adjacent_style_reference_after_direct_review"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-creators.json",
+      "result_index": 3,
+      "brand_id": "disobedient",
+      "search_section": "creators",
+      "url": "https://nypost.com/2023/08/04/i-model-fashions-in-nyc-subways-haters-say-i-look-homeless/",
+      "title": "I model fashions in NYC subways haters say I look 'homeless'",
+      "classification": "adjacent_secondary_creator_article",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General NYC fashion creator coverage from2023, no target-brand affiliation established.",
+      "permitted_use": [
+        "possible_adjacent_format_research_only"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "result_index": 0,
+      "brand_id": "disobedient",
+      "search_section": "formats",
+      "url": "https://disobedientnyc.com/",
+      "title": "Disobedient NYC",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "result_index": 1,
+      "brand_id": "disobedient",
+      "search_section": "formats",
+      "url": "https://adsturbo.ai/explore/68",
+      "title": "Streetwear Apparel UGC Ad Breakdown & Prompt - AdsTurbo",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "result_index": 2,
+      "brand_id": "disobedient",
+      "search_section": "formats",
+      "url": "https://framenotion.com/blog/streetwear-brand-ugc-ad-examples",
+      "title": "Streetwear Brand UGC Ad Examples That Actually Convert \u00b7 FrameNotion",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "result_index": 3,
+      "brand_id": "disobedient",
+      "search_section": "formats",
+      "url": "https://gen.pro/blog/top-10-hooks-streetwear-creators/",
+      "title": "Top 10 Hooks for Streetwear Content That Stop the Scroll",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/disobedient-formats.json",
+      "result_index": 4,
+      "brand_id": "disobedient",
+      "search_section": "formats",
+      "url": "https://workbrow.com/templates/vertical/fashion-streetwear-merch",
+      "title": "Streetwear & Merch Ads - 13+ UGC Examples & Templates \u00b7 Workbrow",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-audience.json",
+      "result_index": 0,
+      "brand_id": "vylin",
+      "search_section": "audience",
+      "url": "https://www.wearvylin.com/",
+      "title": "VYLIN - Streetwear for the Sonically Lifted | NYC-Born Brand",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-audience.json",
+      "result_index": 1,
+      "brand_id": "vylin",
+      "search_section": "audience",
+      "url": "https://www.wearvylin.com/collections/drop-line",
+      "title": "VYLIN Top Line | Premium Drops & Curated Streetwear",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-audience.json",
+      "result_index": 2,
+      "brand_id": "vylin",
+      "search_section": "audience",
+      "url": "https://theses.liacs.nl/pdf/2022-2023-RomanKKamil.pdf",
+      "title": "Streetwear: What is the Hype about?",
+      "classification": "category_research_not_target_customer_evidence",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Streetwear category thesis, not VYLIN customer research or current brand analytics.",
+      "permitted_use": [
+        "general_category_context_after_document_review"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-brand.json",
+      "result_index": 0,
+      "brand_id": "vylin",
+      "search_section": "brand",
+      "url": "https://www.wearvylin.com/",
+      "title": "VYLIN - Streetwear for the Sonically Lifted | NYC-Born Brand",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-brand.json",
+      "result_index": 1,
+      "brand_id": "vylin",
+      "search_section": "brand",
+      "url": "https://www.wearvylin.com/collections/drop-line",
+      "title": "VYLIN Top Line | Premium Drops & Curated Streetwear",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-creators.json",
+      "result_index": 0,
+      "brand_id": "vylin",
+      "search_section": "creators",
+      "url": "https://www.wearvylin.com/",
+      "title": "VYLIN - Streetwear for the Sonically Lifted | NYC-Born Brand",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-creators.json",
+      "result_index": 1,
+      "brand_id": "vylin",
+      "search_section": "creators",
+      "url": "https://www.wearvylin.com/collections/drop-line",
+      "title": "VYLIN Top Line | Premium Drops & Curated Streetwear",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "brand_identity_or_product_lead"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-creators.json",
+      "result_index": 2,
+      "brand_id": "vylin",
+      "search_section": "creators",
+      "url": "https://www.instagram.com/reel/DJNuUNuP63h/",
+      "title": "Rizka.esteye4 | Styling my cargo jeans by @vierlinstore #vierlin #vierlinjeans #ootdfashion #outfit #fashioninspiration #ootd | Instagram",
+      "classification": "reject_false_positive",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Excerpt tags vierlinstore and Vierlin jeans, a different brand from VYLIN.",
+      "permitted_use": []
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-formats.json",
+      "result_index": 0,
+      "brand_id": "vylin",
+      "search_section": "formats",
+      "url": "https://www.wearvylin.com/",
+      "title": "VYLIN - Streetwear for the Sonically Lifted | NYC-Born Brand",
+      "classification": "relevant_official_domain",
+      "official_target_domain": true,
+      "independently_visited_in_current_research": true,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Exact target brand domain. Product or brand evidence, not customer/creator/ad evidence.",
+      "permitted_use": [
+        "independently_visited_brand_or_product_facts_with_existing_source_limits"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-formats.json",
+      "result_index": 1,
+      "brand_id": "vylin",
+      "search_section": "formats",
+      "url": "https://contra.com/community/heMrQXLH-streetwear-short-form-fashion-ad-for-tik-tok",
+      "title": "Streetwear Short-Form Fashion Ad for TikTok and Reels",
+      "classification": "unrelated_creator_concept",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "Creator portfolio explicitly describes a concept ad for another garment/brand using stock footage; not a VYLIN ad.",
+      "permitted_use": [
+        "possible_adjacent_editing_reference_after_review"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-formats.json",
+      "result_index": 2,
+      "brand_id": "vylin",
+      "search_section": "formats",
+      "url": "https://ugcfast.ai/en/scripts/clothing",
+      "title": "Fashion UGC Video Scripts (2026) | UGCFast",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-formats.json",
+      "result_index": 3,
+      "brand_id": "vylin",
+      "search_section": "formats",
+      "url": "https://gethandler.ai/outliers/outfit-planning-tiktok-app-demo-3x/",
+      "title": "Outfit Planning TikTok example (App Demo) | Handler",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    },
+    {
+      "source_file": "work/streetwear-demo-v1/vylin-formats.json",
+      "result_index": 4,
+      "brand_id": "vylin",
+      "search_section": "formats",
+      "url": "https://gen.pro/blog/top-10-hooks-streetwear-creators/",
+      "title": "Top 10 Hooks for Streetwear Content That Stop the Scroll",
+      "classification": "generic_format_or_secondary_breakdown",
+      "official_target_domain": false,
+      "independently_visited_in_current_research": false,
+      "accepted_as_actual_target_brand_ad": false,
+      "accepted_as_target_brand_customer_or_creator": false,
+      "reason": "General template, marketing article or third-party breakdown for another brand/product, not a target-brand ad or verified high-view source.",
+      "permitted_use": [
+        "original_ideation_context_only_no_brand_or_performance_claims"
+      ]
+    }
+  ]
+}

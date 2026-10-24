@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "startedAt": "2026-10-24T20:20:12.636Z",
+  "completedAt": "2026-10-24T20:20:38.925Z",
+  "prompt": "Edit the existing original PS2 game-style London male character into a two-panel garment approval sheet. Two equal vertical 9:16 panels side by side, NO white gutters, NO text or labels. Reference 1 is the ORIGINAL CHARACTER and exact penthouse camera, sunset London skyline with Shard, leather chair and floor lamp. Preserve his exact original low-poly adult face, blond braids, skin, expression, pose seated with crossed leg, grey jeans, white sneakers, camera, scene and PS2 video game style. Reference 2 is Disobedient's real Low Lives Hoodie FRONT: light heather grey PULLOVER with kangaroo pocket and NO zipper, NO drawcord, NO chest logo. LEFT panel: replace only the source blue hoodie with that exact grey pullover, correct fleece shape and no invented marks. Reference 3 is VYLIN real garment front on a real model: use ONLY the garment, NEVER the model face/body/identity. RIGHT panel: same original London character wearing the black ZIP hoodie with silver zipper and small cream oval globe/stylized leaf logo on character's left chest, as in reference. Do not add the large rear headphones print to the chest. Both panels keep original character identity completely unchanged and the SAME original room geometry. Garment seams, cuffs, collar and natural occlusion by hands must be plausible and match the product source. Front-facing camera cannot show rear garment graphics, so do not invent them. No new persons, no slogans, no UI, no end card, no captions, no white product-photo background. These are original ImageGen preproduction concept STILL images, not actual Genjutsu video results.",
+  "references": [
+    "original-london-character-1s.jpg",
+    "disobedient-hoodie-front.jpg",
+    "vylin-hoodie-front.jpg"
+  ],
+  "output": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+  "itemizedCostUsd": null,
+  "videoGenerated": false,
+  "humanApproved": false
+}

@@ -1,3 +1,5 @@
+import {clientDemoPromptBrands} from './client-demo.mjs';
+
 // Persisted review mode. It has no HTTP unlock route.
 export function spendingPaused(store){
  if(!store.db.prepare("select name from sqlite_master where type='table' and name='settings'").get())return false;
@@ -9,6 +11,8 @@ export function spendingRequestAllowed(method,pathname,body={}){
  // Logo and offer GETs disable their paid fallback in the server's shared resolver.
  if(method==='GET')return true;
  if(method!=='POST')return false;
+ if(pathname==='/api/client-demo/tasks')return true;
+ if(['/api/chat','/api/assistant'].includes(pathname)&&clientDemoPromptBrands(body.message).length)return true;
  if(pathname==='/api/production/call'||pathname==='/api/uploads'||pathname==='/api/profile')return true;
  if(/^\/api\/tasks\/\d+\/storyboard$/.test(pathname)||/^\/api\/leads\/\d+(?:\/storyboard)?$/.test(pathname))return true;
  if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/context$/.test(pathname))return true;

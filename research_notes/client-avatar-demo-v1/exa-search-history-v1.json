@@ -1,0 +1,71 @@
+{
+  "provenance": "Live free Exa MCP calls this session. Raw results retained in ignored work/exa-raw. Only verified source matches are included here.",
+  "searches": {
+    "exa-ads-1.json": {
+      "query": "\"xander.wan\" site:instagram.com",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 5,
+      "verifiedSources": [],
+      "excludedOtherCandidates": 5
+    },
+    "exa-3.json": {
+      "query": "\"Kyle Fung\" \"Award Scholar\"",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 3,
+      "verifiedSources": [
+        {
+          "title": "Kyle Fung",
+          "url": "https://linkedin.com/in/kylefung1"
+        }
+      ],
+      "excludedOtherCandidates": 2
+    },
+    "exa-2.json": {
+      "query": "site:instagram.com/reel \"Waddle\" \"xander\"",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 2,
+      "verifiedSources": [],
+      "excludedOtherCandidates": 2
+    },
+    "exa-ads-3.json": {
+      "query": "\"Waddle\" site:facebook.com/ads/library",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 5,
+      "verifiedSources": [],
+      "excludedOtherCandidates": 5
+    },
+    "exa-1.json": {
+      "query": "Xander Waddle couples app Instagram xander.wan",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 5,
+      "verifiedSources": [],
+      "excludedOtherCandidates": 5
+    },
+    "exa-ads-2.json": {
+      "query": "\"Waddle\" \"waddlecouples.com\" \"ads\"",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 5,
+      "verifiedSources": [
+        {
+          "title": "Waddle - The relationship app with a duck to raise",
+          "url": "https://www.waddlecouples.com/"
+        }
+      ],
+      "excludedOtherCandidates": 4
+    },
+    "exa-ads-4.json": {
+      "query": "\"awardscholar\" site:instagram.com/reel",
+      "provider": "Exa free keyless MCP",
+      "tool": "web_search_exa",
+      "returnedResults": 4,
+      "verifiedSources": [],
+      "excludedOtherCandidates": 4
+    }
+  }
+}

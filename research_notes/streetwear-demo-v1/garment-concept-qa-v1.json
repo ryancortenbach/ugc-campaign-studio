@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-24T20:23:12.393056+00:00",
+  "reviewType": "Independent static visual comparison",
+  "artifact": "agent/public/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+  "verdict": "conditional_pass_for_concept_direction_only",
+  "humanApprovalRecorded": false,
+  "genjutsuAfterVideoReviewed": false,
+  "productionReady": false,
+  "artifacts": [
+    {
+      "path": "agent/public/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "b42732fd4763563aaaa9d38ef7b025110dbaf8f84a05cfade47794830adffda4",
+      "inspection": "Viewed full image with tools.view_image."
+    },
+    {
+      "path": "agent/public/streetwear-demo-assets/original-london-character-1s.jpg",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "sha256": "cac30f9e5934adcc305b3ae5d76776891f449cdaf10462dc63fc5eedee3a1f3a",
+      "inspection": "Viewed full image with tools.view_image."
+    },
+    {
+      "path": "agent/public/streetwear-demo-assets/disobedient-hoodie-front.jpg",
+      "dimensions": [
+        1080,
+        1080
+      ],
+      "sha256": "a7a6073b5b806755010054bd5f801bca731b5ccaa6e25ba9f4b489485fe893f9",
+      "inspection": "Viewed full image with tools.view_image."
+    },
+    {
+      "path": "agent/public/streetwear-demo-assets/vylin-hoodie-front.jpg",
+      "dimensions": [
+        2048,
+        3072
+      ],
+      "sha256": "d873d519b62d4c5541a00c79b65948013134d949ca765aa84bd3f85f768c674c",
+      "inspection": "Viewed full image with tools.view_image."
+    }
+  ],
+  "scope": {
+    "performed": [
+      "Viewed the complete two-panel concept sheet.",
+      "Compared it with the original London character frame.",
+      "Compared each garment direction with its supplied official front reference."
+    ],
+    "notPerformed": [
+      "Continuous video playback or temporal consistency review",
+      "Genjutsu execution or output review",
+      "Exact logo geometry validation",
+      "Pixel-level identity or environment match",
+      "Human approval"
+    ]
+  },
+  "identityAndScene": {
+    "assessment": "Visually coherent fictional character direction, not pixel-identical preservation.",
+    "observations": [
+      "Both panels retain a stylized seated character with blond braids, a similar face design, crossed leg pose, beige trousers and white trainers.",
+      "The brown lounge chair, floor lamp, dusk window view and Shard-like tower retain the original scene language.",
+      "The concept sheet reframes the source more tightly and changes apparent scale and placement of chair, lamp, skyline and room details. Source and generated face geometry, shading and clothing folds are not identical.",
+      "The left and right panels are visually consistent as the same character concept. This is a static observation and does not establish animated identity consistency."
+    ]
+  },
+  "disobedient": {
+    "panel": "left",
+    "directionalMatch": true,
+    "observations": [
+      "Light grey heather pullover matches the supplied front garment direction.",
+      "The chest remains blank, with no invented front brand graphic.",
+      "The pullover construction, hood and kangaroo pocket read correctly in the seated pose. No front zipper is added."
+    ],
+    "limitations": [
+      "Material texture, precise cut, seam construction, ribbing and fit have not been validated as an exact product reproduction.",
+      "The supplied front view cannot establish back artwork or garment details hidden by pose."
+    ],
+    "verdict": "Suitable for human review of the wardrobe direction."
+  },
+  "vylin": {
+    "panel": "right",
+    "directionalMatch": true,
+    "observations": [
+      "Black zip hoodie and a cream oval/globe-like chest motif match the supplied product direction.",
+      "The motif is on the wearer left chest, which appears on the viewer right.",
+      "The center zipper remains visible and the garment stays dark.",
+      "The concept retains the original blond-braided stylized character rather than adopting the product model hairstyle or overall portrait appearance. No obvious facial transfer from the real model is visible in this static sheet."
+    ],
+    "limitations": [
+      "The small cream motif is an approximation at this viewing scale. Exact symbol topology, line weights, proportions, placement and production print size are not verified.",
+      "The product photo includes garment hardware and construction details that are not established by the generated sheet.",
+      "This comparison cannot establish a pixel-identical face or a fully faithful garment reproduction."
+    ],
+    "verdict": "Suitable for human review of color, construction and logo placement. Exact logo fidelity remains open."
+  },
+  "requiredBeforeProduction": [
+    "Human chooses or approves the garment concepts.",
+    "Confirm precise VYLIN artwork and garment details using the approved source assets.",
+    "Review any eventual Genjutsu output separately for garment/logo consistency, face and hand drift, motion and source-audio behavior."
+  ],
+  "safeDescription": "ImageGen static wardrobe concepts for review. Original-scene visual continuity is directional. No Genjutsu after video or human approval is established by this sheet.",
+  "actionsTaken": "Read-only image inspection and this JSON report only. No image editing, generation or network calls."
+}

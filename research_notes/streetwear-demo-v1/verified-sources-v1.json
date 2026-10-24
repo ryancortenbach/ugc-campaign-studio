@@ -1,0 +1,294 @@
+{
+  "researched_at": "2026-10-24",
+  "scope": "Independent public official source verification. No UI or backend edits, provider spend, sends, purchases or CRM writes.",
+  "demo_narrative": {
+    "inbound_dm": "simulated_not_actual_message",
+    "paid_client_relationship": "not_established_for_either_brand",
+    "founder_relationship": "not_established",
+    "revenue": "unknown_for_both"
+  },
+  "brands": [
+    {
+      "name": "Disobedient",
+      "exact_domain": "https://disobedientnyc.com/",
+      "identity_status": "verified_user_supplied_domain_visited",
+      "official_positioning": "NYC apparel brand with independence and defiance positioning; streetwear interpretation supported by products and brand copy.",
+      "sources": [
+        {
+          "url": "https://disobedientnyc.com/",
+          "visited": true,
+          "method": "web_open_and_normal_public_html_GET",
+          "kind": "official_homepage",
+          "claims_supported": [
+            "NYC positioning",
+            "Apparel collection",
+            "Official-linked Instagram and TikTok hrefs"
+          ]
+        },
+        {
+          "url": "https://disobedientnyc.com/collections/sweat-suits",
+          "visited": true,
+          "method": "web_click",
+          "kind": "official_collection",
+          "claims_supported": [
+            "Low Lives Hoodie and matching sweatpants listing"
+          ]
+        },
+        {
+          "url": "https://disobedientnyc.com/collections/sweat-suits/products/low-lives-hoodie",
+          "visited": true,
+          "method": "web_click",
+          "kind": "official_product",
+          "claims_supported": [
+            "Displayed150 price",
+            "Vendor composition description",
+            "Product images",
+            "Vendor About copy"
+          ]
+        },
+        {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie.js",
+          "visited": true,
+          "method": "normal_public_HTTPS_GET",
+          "kind": "official_Shopify_product_JSON",
+          "claims_supported": [
+            "Product identifier",
+            "price15000_minor_units",
+            "Official original product image URLs"
+          ]
+        }
+      ],
+      "selected_demo_product": {
+        "name": "Low Lives Hoodie",
+        "selection_type": "proposed_demo_hero_not_verified_bestseller",
+        "product_url": "https://disobedientnyc.com/products/low-lives-hoodie",
+        "displayed_price": "$150.00",
+        "currency_iso": "not_separately_verified",
+        "vendor_claims": [
+          "14oz heavy fleece",
+          "98% cotton,2% polyester"
+        ],
+        "visually_observed": [
+          "Light heather grey pullover hoodie",
+          "Kangaroo front pocket",
+          "Blank visible front, no visible chest mark or drawcord",
+          "Large blue back lettering with red musical staff and treble clef",
+          "Official on-body rear view provides fit reference"
+        ],
+        "inventory": "Do not promise current availability; per-variant checkout stock untested."
+      },
+      "socials": [
+        {
+          "url": "https://www.instagram.com/disobedientnyc/",
+          "official_association": "exact_href_in_official_homepage",
+          "content_visit": "throttled_no_posts_verified"
+        },
+        {
+          "url": "https://www.tiktok.com/@disobedientnyc",
+          "official_association": "exact_href_in_official_homepage",
+          "content_visit": "unavailable_no_posts_verified"
+        }
+      ],
+      "founder": null,
+      "public_email": null,
+      "contact_route": {
+        "type": "product_question_form",
+        "source": "https://disobedientnyc.com/products/low-lives-hoodie",
+        "submitted": false
+      },
+      "quality_limits": [
+        "Official product page includes generic placeholder testimonial copy and authors, not usable as actual customer evidence.",
+        "No actual Meta Ad Library record independently located in this pass.",
+        "No organic post URL independently verified.",
+        "Do not merge with other businesses called Disobedient."
+      ]
+    },
+    {
+      "name": "VYLIN",
+      "exact_domain": "https://www.wearvylin.com/",
+      "identity_status": "verified_user_supplied_domain_www_version_visited",
+      "official_positioning": "NYC streetwear with music and cannabis-culture imagery.",
+      "sources": [
+        {
+          "url": "https://www.wearvylin.com/",
+          "visited": true,
+          "method": "web_open",
+          "kind": "official_homepage",
+          "claims_supported": [
+            "Streetwear positioning",
+            "Hoodies and tees",
+            "Official-linked Instagram and public email"
+          ]
+        },
+        {
+          "url": "https://www.wearvylin.com/pages/about",
+          "visited": true,
+          "method": "web_click",
+          "kind": "official_about",
+          "claims_supported": [
+            "NYC music/streetwear/cannabis culture brand narrative"
+          ]
+        },
+        {
+          "url": "https://www.wearvylin.com/pages/contact",
+          "visited": true,
+          "method": "web_click",
+          "kind": "official_contact",
+          "claims_supported": [
+            "Explicit collab contact",
+            "info@wearvylin.com",
+            "Instagram@wearvylin"
+          ]
+        },
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+          "visited": true,
+          "method": "web_click",
+          "kind": "official_product",
+          "claims_supported": [
+            "74USD price",
+            "Front/back graphic placement",
+            "Vendor fabric/build description"
+          ]
+        },
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie.js",
+          "visited": true,
+          "method": "normal_public_HTTPS_GET",
+          "kind": "official_Shopify_product_JSON",
+          "claims_supported": [
+            "Product identifier",
+            "price7400_minor_units",
+            "Official original product image URLs"
+          ]
+        }
+      ],
+      "selected_demo_product": {
+        "name": "Cream Headphones Black Zip Hoodie",
+        "selection_type": "proposed_demo_hero_not_verified_bestseller",
+        "product_url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+        "displayed_price": "$74.00 USD",
+        "currency_iso": "USD",
+        "vendor_claims": [
+          "10oz3-end fleece",
+          "70/30 cotton/poly,100% cotton face",
+          "Relaxed unisex fit",
+          "Hand-screened in South Brooklyn",
+          "Nickel zipper, rib cuffs and hem"
+        ],
+        "visually_observed": [
+          "Black zip hoodie",
+          "Cream globe and stylized leaf mark at left chest",
+          "Large cream headphones surrounding stylized leaf on back",
+          "Official on-model front and rear studio photos"
+        ],
+        "inventory": "Do not promise stock; parsed page contains both soldout and add-to-cart strings and individual variants were not checked."
+      },
+      "socials": [
+        {
+          "url": "https://instagram.com/wearvylin",
+          "official_association": "linked_by_official_homepage_and_contact_page",
+          "content_visit": "throttled_no_posts_verified"
+        }
+      ],
+      "founder": null,
+      "public_email": {
+        "email": "info@wearvylin.com",
+        "type": "general_brand_collaboration_contact",
+        "source_url": "https://www.wearvylin.com/pages/contact",
+        "founder_mailbox": false,
+        "sent": false
+      },
+      "quality_limits": [
+        "Do not merge with similarly named brands or infer founder from shop models.",
+        "No actual Meta Ad Library record independently located in this pass.",
+        "No organic post URL independently verified.",
+        "Product photos are not proof of demand, sales, revenue, ad performance or customer outcomes."
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "work/streetwear-demo-v1/source-images/disobedient-hoodie-front.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
+      "source_type": "official_ecommerce_product_photo",
+      "retrieved_and_visually_inspected": true,
+      "bytes": 82577,
+      "sha256": "a7a6073b5b806755010054bd5f801bca731b5ccaa6e25ba9f4b489485fe893f9",
+      "meta_ad_status": "not_established",
+      "organic_social_post_status": "not_established"
+    },
+    {
+      "file": "work/streetwear-demo-v1/source-images/disobedient-hoodie-back.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389",
+      "source_type": "official_ecommerce_product_photo",
+      "retrieved_and_visually_inspected": true,
+      "bytes": 95360,
+      "sha256": "364290bbf8204e9bf4303eb83a6d8563dfe24c29a3787f9b23275ec53ba5d088",
+      "meta_ad_status": "not_established",
+      "organic_social_post_status": "not_established"
+    },
+    {
+      "file": "work/streetwear-demo-v1/source-images/disobedient-hoodie-model.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/2B2DEE9F-F368-4F75-B134-4833B9FCEE7F.jpg?v=1770218378",
+      "source_type": "official_ecommerce_product_photo",
+      "retrieved_and_visually_inspected": true,
+      "bytes": 583179,
+      "sha256": "83e8237aa2f72e8c4b5cdb624e312440d3b0e7ed3bacdc66b470680f382a8c11",
+      "meta_ad_status": "not_established",
+      "organic_social_post_status": "not_established"
+    },
+    {
+      "file": "work/streetwear-demo-v1/source-images/vylin-hoodie-front.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Front.jpg?v=1760118047",
+      "source_type": "official_ecommerce_product_photo",
+      "retrieved_and_visually_inspected": true,
+      "bytes": 213273,
+      "sha256": "d873d519b62d4c5541a00c79b65948013134d949ca765aa84bd3f85f768c674c",
+      "meta_ad_status": "not_established",
+      "organic_social_post_status": "not_established"
+    },
+    {
+      "file": "work/streetwear-demo-v1/source-images/vylin-hoodie-back.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Black.jpg?v=1760118047",
+      "source_type": "official_ecommerce_product_photo",
+      "retrieved_and_visually_inspected": true,
+      "bytes": 214207,
+      "sha256": "a5625c0f56e325ba665bd6cb2048cd4f90edaa8ffc6a141243cc843939e74f42",
+      "meta_ad_status": "not_established",
+      "organic_social_post_status": "not_established"
+    }
+  ],
+  "transport_notes": "Default local DNS sometimes failed. Ordinary DNS lookup through existing resolver plus curl --resolve retained the exact public hostname and TLS origin. No identity changes or access-control bypass. Product image web links with unresolved width templates404ed; exact public image URLs were obtained from official product JSON instead.",
+  "source_policy": "Search snippets were leads only. Accepted findings come from visited official pages, official HTML/product JSON or visually inspected official image bytes. No registry or similarly named person was promoted into a founder claim.",
+  "logo_assets": [
+    {
+      "brand_id": "disobedient",
+      "file": "agent/public/streetwear-demo-assets/disobedient-official-logo-v1.png",
+      "source_url": "https://disobedientnyc.com/cdn/shop/files/logo-removebg-preview_400x.png?v=1767466372",
+      "verified_via": "Exact img source with itemprop=logo in visited official homepage HTML",
+      "visually_observed": "Light script Disobedient wordmark on existing transparent background.",
+      "rendering_note": "Use existing transparent logo on a contrasting dark surface. No background editing applied.",
+      "bytes": 70574,
+      "sha256": "71484eba17113ae8c1ff9f6a96e7e0432004318f8b8bc9ad902c1c3c222dca6a",
+      "downloaded_and_visually_inspected": true,
+      "source_type": "official_site_header_logo"
+    },
+    {
+      "brand_id": "vylin",
+      "file": "agent/public/streetwear-demo-assets/vylin-official-wordmark-v1.png",
+      "source_url": "https://www.wearvylin.com/cdn/shop/files/VYLIN_wordmark_white_transparent.png?v=1759338576&width=600",
+      "verified_via": "Exact header__heading-logo img source in visited official homepage HTML",
+      "visually_observed": "White uppercase VYLIN wordmark on existing transparent background.",
+      "rendering_note": "Use on a contrasting dark surface. No background editing applied.",
+      "bytes": 13243,
+      "sha256": "2cc2cd578d00c5dbe53f40d48cdc92923a3fc3d75fd6e8705e3006f19b728f19",
+      "downloaded_and_visually_inspected": true,
+      "source_type": "official_site_header_logo"
+    }
+  ],
+  "cached_logo_review": {
+    "disobedientnyc.com.jpg": "Rejected as logo: tiny product/beanie favicon, not the verified wordmark.",
+    "wearvylin.com.png": "Not reused. Fresh official header wordmark downloaded instead; cache provenance not independently established."
+  }
+}

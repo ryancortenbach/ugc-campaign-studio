@@ -1,0 +1,605 @@
+{
+  "provenance": "Actual request and response bodies. Session and authorization headers were never recorded. Search excerpts are unverified candidates, not accepted findings.",
+  "records": [
+    {
+      "id": "7182cf4a-ff96-4872-a312-3947a5e2fc6d",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:07.658Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "7182cf4a-ff96-4872-a312-3947a5e2fc6d",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:07.658Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:07.975Z",
+      "durationMs": 317,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":true},\"prompts\":{\"listChanged\":true},\"resources\":{\"listChanged\":true}},\"serverInfo\":{\"name\":\"exa-search-server\",\"title\":\"Exa\",\"version\":\"3.5.0\",\"description\":\"Exa web search, page fetching and research-agent tools for AI agents over MCP.\",\"websiteUrl\":\"https://exa.ai\",\"icons\":[{\"src\":\"https://exa.ai/images/logo/exa-logomark-blue.svg\",\"mimeType\":\"image/svg+xml\",\"sizes\":[\"any\"]},{\"src\":\"https://exa.ai/images/favicon-32x32.png\",\"mimeType\":\"image/png\",\"sizes\":[\"32x32\"]}]},\"instructions\":\"Only use tools returned by tools/list. If web_search_exa is listed, use it to find relevant pages and current information by describing the page you want to find. If web_fetch_exa is listed, use it to read known URLs when search highlights are insufficient or you already have a URL. If agent_run is listed, use it for multi-step research, list-building, or enrichment. If a run is still running, continue with its runId rather than starting a duplicate run.\"},\"jsonrpc\":\"2.0\",\"id\":1}\n\n"
+    },
+    {
+      "id": "59e20bdc-c64d-444c-bde1-3c98f8e57ce9",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:07.979Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "call"
+    },
+    {
+      "id": "59e20bdc-c64d-444c-bde1-3c98f8e57ce9",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:07.979Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:08.121Z",
+      "durationMs": 142,
+      "httpStatus": 202,
+      "responseBody": ""
+    },
+    {
+      "id": "f41ce85b-cdc6-4b6e-a2ab-fa7fadc3f2a3",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:08.121Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "call"
+    },
+    {
+      "id": "f41ce85b-cdc6-4b6e-a2ab-fa7fadc3f2a3",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:08.121Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:08.423Z",
+      "durationMs": 302,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"tools\":[{\"name\":\"web_search_exa\",\"title\":\"Web Search\",\"description\":\"Search the web for any topic and get clean, ready-to-use content.\\n\\n      Best for: Finding current information, news, facts, people, companies, or answering questions about any topic.\\n      Returns: Clean text content from top search results.\\n\\n      Query tips:\\n      describe the ideal page, not keywords. \\\"blog post comparing React and Vue performance\\\" not \\\"React vs Vue\\\".\\n      Use category:people / category:company to search through Linkedin profiles / companies respectively.\\n      If highlights are insufficient, follow up with web_fetch_exa on the best URLs.\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"minLength\":1,\"description\":\"Natural language search query. Should be a semantically rich description of the ideal page, not just keywords. Optionally include category:<type> (company, people) to focus results — e.g. 'category:people John Doe software engineer'.\"},\"numResults\":{\"type\":\"number\",\"description\":\"Number of search results to return (default: 10).\"},\"objective\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096,\"description\":\"Goal for this search turn; say which documents should rank first, which should be excluded, and what specific facts or figures to pull from them.\"}},\"required\":[\"query\",\"objective\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}},{\"name\":\"web_fetch_exa\",\"title\":\"Fetch Web Pages\",\"description\":\"Read a webpage's full content as clean markdown. Use after web_search_exa when highlights are insufficient or to read any URL.\\n\\nBest for: Extracting full content from known URLs. Batch multiple URLs in one call.\\nReturns: Clean text content and metadata from the page(s).\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"urls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"URLs to read. Batch multiple URLs in one call.\"},\"maxCharacters\":{\"type\":\"number\",\"minimum\":1,\"description\":\"Maximum characters to extract per page (default: 3000)\"}},\"required\":[\"urls\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}}]},\"jsonrpc\":\"2.0\",\"id\":2}\n\n"
+    },
+    {
+      "id": "ec216acf-321e-4548-8be9-4681a58c8946",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:08.423Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ official products about pricing positioning Instagram X TikTok YouTube",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "ec216acf-321e-4548-8be9-4681a58c8946",
+      "brandId": "disobedient",
+      "section": "brand",
+      "startedAt": "2026-10-24T20:19:08.423Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ official products about pricing positioning Instagram X TikTok YouTube",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:09.827Z",
+      "durationMs": 1404,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"Title: disobedient\\nURL: https://disobedientnyc.com/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\ndisobedient \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n## Featured collection \\n\\n \\n\\n \\n\\nIntellectual Baby Tee $30.00 \\n\\n \\n\\n \\n\\nBlack Thermal Beanie $40.00 \\n\\n \\n\\n \\n\\nBlack on Black Thermal Beanie $50.00 \\n\\n \\n\\n \\n\\nLow Lives Sweatpants $140.00 \\n\\n \\n\\nBlack Disobedient Thermal $45.00 \\n\\n## Shop by category\\n\\n Thermal Beanies \\n\\n Thermal Long Sleeves \\n\\n## Born in NYC\\n\\nRooted in New York City and shaped by defiance. Disobedient reflects the energy of the streets and the confidence to stand alone.\\n\\n---\\n\\nTitle: Black Disobedient Thermal\\nURL: https://disobedientnyc.com/products/black-thermal\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\n# Black Disobedient Thermal\\nSold by: disobedientnyc.com\\n\\n## Specifications\\nSizes: S, M, L, XL\\n\\n## Pricing & Reviews\\nPrice: 45 USD.\\n\\n## Description\\nBlack Thermal Long Sleeve featuring a white embroidered Disobedient logo. Made from a high-quality cotton blend with a soft, durable feel. Designed for everyday wear and easy layering. Crafted in New York. Fabric: 80% cotton, 20% polyester\\n\\nThis store supports UCP (Universal Commerce Protocol): https://disobedientnyc.com/.well-known/ucp lists the capabilities you can use.\\n\\n---\\n\\nTitle: White Disobedient Thermal\\nURL: https://disobedientnyc.com/products/white-disobedient-thermal\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\n# White Disobedient Thermal\\nSold by: disobedientnyc.com\\n\\n## Specifications\\nSize: S, M, L, XL\\n\\n## Pricing & Reviews\\nPrice: 45 USD.\\n\\n## Description\\nWhite Thermal Long Sleeve featuring a black embroidered Disobedient logo. Made from a high-quality cotton blend with a lightweight, semi–see-through feel. Designed for easy layering, wear it with a men’s undershirt or style it with a women’s bodysuit or bra. Crafted in New York. Fabric: 80% cotton, 20% polyester\\n\\nThis store supports UCP (Universal Commerce Protocol): https://disobedientnyc.com/.well-known/ucp lists the capabilities you can use.\\n\\n---\\n\\nTitle: FAQ\\n– disobedient\\nURL: https://disobedientnyc.com/pages/faq\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nFAQ – dis ... ient \\n\\n How can I track my order? \\n\\nOnce your order has been placed, we will send a confirmation email immediately and follow up with a shipping notification and tracking number. Please note that all shipping labels take a moment to update.\\n\\n How do I find my confirmation email? \\n\\nThe order confirmation email with your order details will be sent to the email used on our website when purchasing the order. Before contacting us, be sure to check your junk or spam email; we might've gotten lost in there. If you still can't find it, please get in touch with us using the form on our Contact Page and include the name and address of the order so we can do our best to help you locate it.\\n\\n How long will it take to ship my order? \\n\\nPlease allow two to three business days for shipping and fulfillment. We locally source our product and take time with intricate details. \\n\\n Do I have to pay duties and taxes? \\n\\nThe delivery charges do not include import costs that may be due when the package reaches your destination country. We are not responsible for the costs incurred after it has left our fulfillment center. \\n\\n What if I haven't received my package? \\n\\nWe are very sorry if you haven't received your package within the expected delivery timeframe. We will investigate the matter and provide assistance in getting you your order so please reach out to our dedicated customer support team using our Contact page.\\n\\n What if my package got lost? \\n\\nPlease allow 48 hours after delivery for tracking before contacting us, as the tracking can sometimes be updated incorrectly. If you still can't find your package, try calling the carrier with your tracking number. They can help you quicker than we can since they were the last to have your package and can connect you directly to your local delivery teams! If all else fails, our customer support team would be happy to step in and help. Use our contact page. \\n\\n What is the return policy? \\n\\nDue to the limited nature of our releases, all Disobedient products are final sale. We do not accept returns or exchanges.\\n\\nThe only exception is if you receive an incorrect item or a defective product. In this case, please contact us through the Contact page within 48 hours of delivery, and we’ll make it right.\\n\\n---\\n\\nTitle: Disobedient Oversized Zip Up Hoodie\\nURL: https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\n# Disobedient Oversized Zip Up Hoodie\\nSold by: disobedientnyc.com\\n\\n## Specifications\\nSize: M, L\\n\\n## Pricing & Reviews\\nPrice: 100 USD.\\n\\n## Description\\nMade from our premium 14oz heavyweight fleece to keep you warm Essential hoodie styling perfect for all occasions Loose fit for a full range of motion Full-zip closure: Easy on, easy off, perfect fit Kangaroo front pocket for storage Ribbed cuffs and hem to keep the cold out\\n\\nThis store supports UCP (Universal Commerce Protocol): https://disobedientnyc.com/.well-known/ucp lists the capabilities you can use.\",\"_meta\":{\"searchTime\":1129.9}}]},\"jsonrpc\":\"2.0\",\"id\":3}\n\n"
+    },
+    {
+      "id": "9e2c2e2e-9706-497b-a223-693a88fde6bd",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:09.830Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "9e2c2e2e-9706-497b-a223-693a88fde6bd",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:09.830Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:10.129Z",
+      "durationMs": 299,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":true},\"prompts\":{\"listChanged\":true},\"resources\":{\"listChanged\":true}},\"serverInfo\":{\"name\":\"exa-search-server\",\"title\":\"Exa\",\"version\":\"3.5.0\",\"description\":\"Exa web search, page fetching and research-agent tools for AI agents over MCP.\",\"websiteUrl\":\"https://exa.ai\",\"icons\":[{\"src\":\"https://exa.ai/images/logo/exa-logomark-blue.svg\",\"mimeType\":\"image/svg+xml\",\"sizes\":[\"any\"]},{\"src\":\"https://exa.ai/images/favicon-32x32.png\",\"mimeType\":\"image/png\",\"sizes\":[\"32x32\"]}]},\"instructions\":\"Only use tools returned by tools/list. If web_search_exa is listed, use it to find relevant pages and current information by describing the page you want to find. If web_fetch_exa is listed, use it to read known URLs when search highlights are insufficient or you already have a URL. If agent_run is listed, use it for multi-step research, list-building, or enrichment. If a run is still running, continue with its runId rather than starting a duplicate run.\"},\"jsonrpc\":\"2.0\",\"id\":1}\n\n"
+    },
+    {
+      "id": "6a75be4d-053c-4a89-b3ae-5c3c6aa69cd5",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.130Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "call"
+    },
+    {
+      "id": "6a75be4d-053c-4a89-b3ae-5c3c6aa69cd5",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.130Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:10.361Z",
+      "durationMs": 232,
+      "httpStatus": 202,
+      "responseBody": ""
+    },
+    {
+      "id": "7ffbe894-268d-4978-b49d-051d698991a6",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.362Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "call"
+    },
+    {
+      "id": "7ffbe894-268d-4978-b49d-051d698991a6",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.362Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:10.647Z",
+      "durationMs": 286,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"tools\":[{\"name\":\"web_search_exa\",\"title\":\"Web Search\",\"description\":\"Search the web for any topic and get clean, ready-to-use content.\\n\\n      Best for: Finding current information, news, facts, people, companies, or answering questions about any topic.\\n      Returns: Clean text content from top search results.\\n\\n      Query tips:\\n      describe the ideal page, not keywords. \\\"blog post comparing React and Vue performance\\\" not \\\"React vs Vue\\\".\\n      Use category:people / category:company to search through Linkedin profiles / companies respectively.\\n      If highlights are insufficient, follow up with web_fetch_exa on the best URLs.\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"minLength\":1,\"description\":\"Natural language search query. Should be a semantically rich description of the ideal page, not just keywords. Optionally include category:<type> (company, people) to focus results — e.g. 'category:people John Doe software engineer'.\"},\"numResults\":{\"type\":\"number\",\"description\":\"Number of search results to return (default: 10).\"},\"objective\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096,\"description\":\"Goal for this search turn; say which documents should rank first, which should be excluded, and what specific facts or figures to pull from them.\"}},\"required\":[\"query\",\"objective\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}},{\"name\":\"web_fetch_exa\",\"title\":\"Fetch Web Pages\",\"description\":\"Read a webpage's full content as clean markdown. Use after web_search_exa when highlights are insufficient or to read any URL.\\n\\nBest for: Extracting full content from known URLs. Batch multiple URLs in one call.\\nReturns: Clean text content and metadata from the page(s).\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"urls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"URLs to read. Batch multiple URLs in one call.\"},\"maxCharacters\":{\"type\":\"number\",\"minimum\":1,\"description\":\"Maximum characters to extract per page (default: 3000)\"}},\"required\":[\"urls\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}}]},\"jsonrpc\":\"2.0\",\"id\":2}\n\n"
+    },
+    {
+      "id": "dfb58263-cdbb-4ca3-97d3-fdb65c153d98",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.648Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "dfb58263-cdbb-4ca3-97d3-fdb65c153d98",
+      "brandId": "disobedient",
+      "section": "audience",
+      "startedAt": "2026-10-24T20:19:10.648Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:12.170Z",
+      "durationMs": 1522,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"Title: disobedient\\nURL: https://disobedientnyc.com/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\ndisobedient \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n## Featured collection \\n\\n \\n\\n \\n\\nIntellectual Baby Tee $30.00 \\n\\n \\n\\n \\n\\nBlack Thermal Beanie $40.00 \\n\\n \\n\\n \\n\\nBlack on Black Thermal Beanie $50.00 \\n\\n \\n\\n \\n\\nLow Lives Sweatpants $140.00 \\n\\n \\n\\nBlack Disobedient Thermal $45.00 \\n\\n## Shop by category\\n\\n Thermal Beanies \\n\\n Thermal Long Sleeves \\n\\n## Born in NYC\\n\\nRooted in New York City and shaped by defiance. Disobedient reflects the energy of the streets and the confidence to stand alone.\\n\\n---\\n\\nTitle: FAQ\\n– disobedient\\nURL: https://disobedientnyc.com/pages/faq\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nFAQ – disobedient \\n\\n How can I track my order? \\n\\nOnce your order has been placed, we will send a confirmation email immediately and follow up with a shipping notification and tracking number. Please note that all shipping labels take a moment to update.\\n\\n How do I find my confirmation email? \\n\\nThe order confirmation email with your order details will be sent to the email used on our website when purchasing the order. Before contacting us, be sure to check your junk or spam email; we might've gotten lost in there. If you still can't find it, please get in touch with us using the form on our Contact Page and include the name and address of the order so we can do our best to help you locate it.\\n\\n How long will it take to ship my order? \\n\\nPlease allow two to three business days for shipping and fulfillment. We locally source our product and take time with intricate details. \\n\\n Do I have to pay duties and taxes? \\n\\nThe delivery charges do not include import costs that may be due when the package reaches your destination country. We are not responsible for the costs incurred after it has left our fulfillment center. \\n\\n What if I haven't received my package? \\n\\nWe are very sorry if you haven't received your package within the expected delivery timeframe. We will investigate the matter and provide assistance in getting you your order so please reach out to our dedicated customer support team using our Contact page.\\n\\n What if my package got lost? \\n\\nPlease allow 48 hours after delivery for tracking before contacting us, as the tracking can sometimes be updated incorrectly. If you still can't find your package, try calling the carrier with your tracking number. They can help you quicker than we can since they were the last to have your package and can connect you directly to your local delivery teams! If all else fails, our customer support team would be happy to step in and help. Use our contact page. \\n\\n What is the return policy? \\n\\nDue to the limited nature of our releases, all Disobedient products are final sale. We do not accept returns or exchanges.\\n\\nThe only exception is if you receive an incorrect item or a defective product. In this case, please contact us through the Contact page within 48 hours of delivery, and we’ll make it right.\\n\\n---\\n\\nTitle: Contact\\n– disobedient\\nURL: https://disobedientnyc.com/pages/contact\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nContact – disobedient \\n\\n## Get In Touch\\n\\nIf you have any questions regarding your order, sizing, or a defective item, please contact us using the form below or email us directly at Info@disobedientnyc.com.\\n\\nFor inquiries related to an order or product, please be sure to include your order number in your message.\\n\\nWe are a small team and strive to respond as quickly as possible. During product drops or periods of high order volume, response times may be slightly delayed. We appreciate your patience.\\n\\n## Contact us \\n\\nPlease contact us using the form below and allow 1-2 business days for your response.\\n\\n---\\n\\nTitle: Disobedient Oversized Zip Up Hoodie\\nURL: https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\n# Disobedient Oversized Zip Up Hoodie\\nSold by: disobedientnyc.com\\n\\n## Specifications\\nSize: M, L\\n\\n## Pricing & Reviews\\nPrice: 100 USD.\\n\\n## Description\\nMade from our premium 14oz heavyweight fleece to keep you warm Essential hoodie styling perfect for all occasions Loose fit for a full range of motion Full-zip closure: Easy on, easy off, perfect fit Kangaroo front pocket for storage Ribbed cuffs and hem to keep the cold out\\n\\nThis store supports UCP (Universal Commerce Protocol): https://disobedientnyc.com/.well-known/ucp lists the capabilities you can use.\\n\\n---\\n\\nTitle: Low Lives Hoodie\\nURL: https://disobedientnyc.com/products/low-lives-hoodie\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\n# Low Lives Hoodie\\nSold by: disobedientnyc.com\\n\\n## Pricing & Reviews\\nPrice: 150 USD.\\n\\n## Description\\n14oz Heavy Fleece Hoodie 98% Cotton 2% Polyester\\n\\nThis store supports UCP (Universal Commerce Protocol): https://disobedientnyc.com/.well-known/ucp lists the capabilities you can use.\",\"_meta\":{\"searchTime\":1171.9}}]},\"jsonrpc\":\"2.0\",\"id\":3}\n\n"
+    },
+    {
+      "id": "358e1b29-a43c-4622-9262-32f9ef322ec3",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.174Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "358e1b29-a43c-4622-9262-32f9ef322ec3",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.174Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:12.606Z",
+      "durationMs": 431,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":true},\"prompts\":{\"listChanged\":true},\"resources\":{\"listChanged\":true}},\"serverInfo\":{\"name\":\"exa-search-server\",\"title\":\"Exa\",\"version\":\"3.5.0\",\"description\":\"Exa web search, page fetching and research-agent tools for AI agents over MCP.\",\"websiteUrl\":\"https://exa.ai\",\"icons\":[{\"src\":\"https://exa.ai/images/logo/exa-logomark-blue.svg\",\"mimeType\":\"image/svg+xml\",\"sizes\":[\"any\"]},{\"src\":\"https://exa.ai/images/favicon-32x32.png\",\"mimeType\":\"image/png\",\"sizes\":[\"32x32\"]}]},\"instructions\":\"Only use tools returned by tools/list. If web_search_exa is listed, use it to find relevant pages and current information by describing the page you want to find. If web_fetch_exa is listed, use it to read known URLs when search highlights are insufficient or you already have a URL. If agent_run is listed, use it for multi-step research, list-building, or enrichment. If a run is still running, continue with its runId rather than starting a duplicate run.\"},\"jsonrpc\":\"2.0\",\"id\":1}\n\n"
+    },
+    {
+      "id": "940f0739-6f26-4685-9cb2-56e63fecb404",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.606Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "call"
+    },
+    {
+      "id": "940f0739-6f26-4685-9cb2-56e63fecb404",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.606Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:12.842Z",
+      "durationMs": 236,
+      "httpStatus": 202,
+      "responseBody": ""
+    },
+    {
+      "id": "92bea8ae-6067-41f3-baf3-b60dd0315e81",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.842Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "call"
+    },
+    {
+      "id": "92bea8ae-6067-41f3-baf3-b60dd0315e81",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:12.842Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:13.103Z",
+      "durationMs": 261,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"tools\":[{\"name\":\"web_search_exa\",\"title\":\"Web Search\",\"description\":\"Search the web for any topic and get clean, ready-to-use content.\\n\\n      Best for: Finding current information, news, facts, people, companies, or answering questions about any topic.\\n      Returns: Clean text content from top search results.\\n\\n      Query tips:\\n      describe the ideal page, not keywords. \\\"blog post comparing React and Vue performance\\\" not \\\"React vs Vue\\\".\\n      Use category:people / category:company to search through Linkedin profiles / companies respectively.\\n      If highlights are insufficient, follow up with web_fetch_exa on the best URLs.\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"minLength\":1,\"description\":\"Natural language search query. Should be a semantically rich description of the ideal page, not just keywords. Optionally include category:<type> (company, people) to focus results — e.g. 'category:people John Doe software engineer'.\"},\"numResults\":{\"type\":\"number\",\"description\":\"Number of search results to return (default: 10).\"},\"objective\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096,\"description\":\"Goal for this search turn; say which documents should rank first, which should be excluded, and what specific facts or figures to pull from them.\"}},\"required\":[\"query\",\"objective\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}},{\"name\":\"web_fetch_exa\",\"title\":\"Fetch Web Pages\",\"description\":\"Read a webpage's full content as clean markdown. Use after web_search_exa when highlights are insufficient or to read any URL.\\n\\nBest for: Extracting full content from known URLs. Batch multiple URLs in one call.\\nReturns: Clean text content and metadata from the page(s).\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"urls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"URLs to read. Batch multiple URLs in one call.\"},\"maxCharacters\":{\"type\":\"number\",\"minimum\":1,\"description\":\"Maximum characters to extract per page (default: 3000)\"}},\"required\":[\"urls\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}}]},\"jsonrpc\":\"2.0\",\"id\":2}\n\n"
+    },
+    {
+      "id": "674d7995-dc7c-4b9a-9225-873547163c11",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:13.104Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "674d7995-dc7c-4b9a-9225-873547163c11",
+      "brandId": "disobedient",
+      "section": "creators",
+      "startedAt": "2026-10-24T20:19:13.104Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:14.562Z",
+      "durationMs": 1459,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"Title: disobedient\\nURL: https://disobedientnyc.com/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\ndisobedient \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n## Featured collection \\n\\n \\n\\n \\n\\nIntellectual Baby Tee $30.00 \\n\\n \\n\\n \\n\\nBlack Thermal Beanie $40.00 \\n\\n \\n\\n \\n\\nBlack on Black Thermal Beanie $50.00 \\n\\n \\n\\n \\n\\nLow Lives Sweatpants $140.00 \\n\\n \\n\\nBlack Disobedient Thermal $45.00 \\n\\n## Shop by category\\n\\n Thermal Beanies \\n\\n Thermal Long Sleeves \\n\\n## Born in NYC\\n\\nRooted in New York City and shaped by defiance. Disobedient reflects the energy of the streets and the confidence to stand alone.\\n\\n---\\n\\nTitle: Contact\\n– disobedient\\nURL: https://disobedientnyc.com/pages/contact\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nContact – disobedient \\n\\n## Get In Touch\\n\\nIf you have any questions regarding your order, sizing, or a defective item, please contact us using the form below or email us directly at Info@disobedientnyc.com.\\n\\nFor inquiries related to an order or product, please be sure to include your order number in your message.\\n\\nWe are a small team and strive to respond as quickly as possible. During product drops or periods of high order volume, response times may be slightly delayed. We appreciate your patience.\\n\\n## Contact us \\n\\nPlease contact us using the form below and allow 1-2 business days for your response.\\n\\n---\\n\\nTitle: Lexie  (@disobedient_) - Urlebird\\nURL: https://urlebird.com/user/disobedient_/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nLexie (@disobedient_) - Urlebird\\n\\n## @disobedient_\\n\\n Click here to see analytics 📈 \\n\\n- Videos per month: 5\\n- Video engagement: 23.14% ( terrific )\\n- Follower engagement: 100% ( terrific )\\n- Estimated profit per video: 1$\\n- Estimated montly profit: 5$\\n- Estimated yearly profit: 60$\\n- Average views per video: 1.67K\\n- Average hearts per video: 294\\n- Average comments per video: 48\\n- Average shares per video: 44\\n\\nLexie is a TikTok nano influencer with 58 videos and a terrific engagement rate 23.14%. They post 5 videos in month and earn up to 1$ per post, yearly earnings could reach 60$. Each video averages 1.67K views, 294 likes, and 48 comments. Lexie usually posts a few times a month, last video was uploaded 4 days ago.\\n\\n Disobedient_ is the username of a TikTok creator named Lexie \\n\\n 4 days ago 357 59 3\\n\\n@disobedient_\\n\\n 6 days ago 520 91 11\\n\\nShe’s counting and I’m just over here tr...\\n\\nIt’s hard work being a hardworking mom who still n...\\n\\nPOV: your baby takes her baby everywhere 🤣 #creatorsearchins...\\n\\nMornings with mommy and Lani🥰 #toddlermomsoftiktok #fyp #get...\\n\\nWest side since birth ✊🏾 #creatorsearchinsights #toddlermoms...\\n\\nThe sweetest baby🥰🥹 #momlifestyle #babytok #fyppp @pybcvrrd...\\n\\nAfter we brush our teeth, we dance 🤣🪥 #toddler #toddlertok #...\\n\\nPOV: your toddler hears music 🤣🤣🤣 #motherhood #girlythings...\\n\\n 3 months ago 1.32K 116 19\\n\\nSend help. How do I survive this stage of parenting??? #bab...\\n\\nWhen uncle comes into town🥰 #fam #babiesoftiktok #babygirl #...\\n\\nPOV: Your kid swears everything is ‘stinky&rsq...\\n\\n---\\n\\nTitle: Denny Balmaceda. on Instagram: \\\"One of my favorites( @nn07.official ) is now in NYC!! I stopped by to check it out and left with 3 full looks!! If you’re in Soho, be sure to stop by. I’m bringing that Copenhagen style to NYC! 🤘🏽🤘🏽 #menswear #shopping #nyc #soho #preppy #prep #fashion #style #streetwear #streetstyle #nn07 #thebear\\\"\\nURL: https://www.instagram.com/denny623/reel/C_0g0t9RUX2/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nInstagram\\n\\n•\\n\\nFollow\\n\\n---\\n\\nOne of my favorites(@nn07.official) is now in NYC!! I stopped by to check it out and left with 3 full looks!! If you’re in Soho, be sure to stop by. I’m bringing that Copenhagen style to NYC! 🤘🏽🤘🏽#menswear#shopping#nyc#soho#preppy#prep#fashion#style#streetwear#streetstyle#nn07#thebear\\n\\nI miss Theo\\n\\n1 like\\n\\nReply\\n\\nGreen sweater 🔥👏\\n\\n1 like\\n\\nReply\\n\\nThe store is too good\\n\\n1 like\\n\\nReply\\n\\n🔥\\n\\n1 like\\n\\nReply\\n\\nThanks Denny!\\n\\n1 like\\n\\nReply\\n\\n👏👏🔥🔥❤️❤️\\n\\n1 like\\n\\nReply\\n\\n1 like\\n\\nReply\\n\\nThanks brother - love to have you❤️\\n\\n1 like\\n\\nReply\\n\\nWhat is the zip jacket with the flap chest pockets? 👏\\n\\nLike\\n\\nReply\\n\\n🔥🔥🔥\\n\\n1 like\\n\\nReply\\n\\n24\\n\\nSeptember 12, 2024\\n\\nLog in to like or comment.\\n\\n---\\n\\nMore posts from denny623\\n\\nSee more posts\\n\\n...\\n\\n---\\n\\n---\\n\\nTitle: I model fashions in NYC subways haters say I look 'homeless'\\nURL: https://nypost.com/2023/08/04/i-model-fashions-in-nyc-subways-haters-say-i-look-homeless/\\nPublished: 2023-08-04T12:26:56.000Z\\nAuthor: Asia Grace\\nHighlights:\\nI model fashions in NYC subways haters say I look 'homeless'\\n\\n# I model my wild fashions in NYC train stations — haters say I look ‘homeless’ but I love it \\n\\n By \\n\\n Asia Grace \\n\\n Published Aug. 4, 2023 Updated Aug. 4, 2023, 7:27 a.m. PDT \\n\\n Kristina Avakyan has amassed over 11 million views for her outfits shared on TikTok with her #SubwaySessions hashtag. Courtesy of Kristina Avakyan \\n\\n \\n\\n### Fed investigators met with Tish James whistleblower who claimed he was pushed to dig up dirt on Trump: sources \\n\\n \\n\\n### Mamdani’s 200-strong ‘influencer’ army revealed — with some PR peddlers pocketing taxpayer cash \\n\\nShe’s turned the subway into her runway. \\n\\nA nude bodysuit, oversized basketball shorts and purple pumps. A gray unitard underneath a trench coat paired with apple green heels. A blue plaid skirt and an ultrathick brown scarf that barely covers her bare breasts. \\n\\nThese are just a few of the head-turning outfits streetwear fashionista Kristina Avakyan rocks while stationed on the 6\",\"_meta\":{\"searchTime\":1218.4}}]},\"jsonrpc\":\"2.0\",\"id\":3}\n\n"
+    },
+    {
+      "id": "823708f1-439e-43b2-b25f-843bc12c7451",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.565Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "823708f1-439e-43b2-b25f-843bc12c7451",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.565Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-03-26",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mint-labs-zero-budget-research",
+            "version": "1"
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:14.712Z",
+      "durationMs": 147,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":true},\"prompts\":{\"listChanged\":true},\"resources\":{\"listChanged\":true}},\"serverInfo\":{\"name\":\"exa-search-server\",\"title\":\"Exa\",\"version\":\"3.5.0\",\"description\":\"Exa web search, page fetching and research-agent tools for AI agents over MCP.\",\"websiteUrl\":\"https://exa.ai\",\"icons\":[{\"src\":\"https://exa.ai/images/logo/exa-logomark-blue.svg\",\"mimeType\":\"image/svg+xml\",\"sizes\":[\"any\"]},{\"src\":\"https://exa.ai/images/favicon-32x32.png\",\"mimeType\":\"image/png\",\"sizes\":[\"32x32\"]}]},\"instructions\":\"Only use tools returned by tools/list. If web_search_exa is listed, use it to find relevant pages and current information by describing the page you want to find. If web_fetch_exa is listed, use it to read known URLs when search highlights are insufficient or you already have a URL. If agent_run is listed, use it for multi-step research, list-building, or enrichment. If a run is still running, continue with its runId rather than starting a duplicate run.\"},\"jsonrpc\":\"2.0\",\"id\":1}\n\n"
+    },
+    {
+      "id": "0fa4e07d-ea6f-43b7-8d94-5ef731a84450",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.712Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "call"
+    },
+    {
+      "id": "0fa4e07d-ea6f-43b7-8d94-5ef731a84450",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.712Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:14.940Z",
+      "durationMs": 229,
+      "httpStatus": 202,
+      "responseBody": ""
+    },
+    {
+      "id": "19166a6d-68a4-47c0-89e4-1bf18f274cec",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.941Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "call"
+    },
+    {
+      "id": "19166a6d-68a4-47c0-89e4-1bf18f274cec",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:14.941Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:15.183Z",
+      "durationMs": 243,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"tools\":[{\"name\":\"web_search_exa\",\"title\":\"Web Search\",\"description\":\"Search the web for any topic and get clean, ready-to-use content.\\n\\n      Best for: Finding current information, news, facts, people, companies, or answering questions about any topic.\\n      Returns: Clean text content from top search results.\\n\\n      Query tips:\\n      describe the ideal page, not keywords. \\\"blog post comparing React and Vue performance\\\" not \\\"React vs Vue\\\".\\n      Use category:people / category:company to search through Linkedin profiles / companies respectively.\\n      If highlights are insufficient, follow up with web_fetch_exa on the best URLs.\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"minLength\":1,\"description\":\"Natural language search query. Should be a semantically rich description of the ideal page, not just keywords. Optionally include category:<type> (company, people) to focus results — e.g. 'category:people John Doe software engineer'.\"},\"numResults\":{\"type\":\"number\",\"description\":\"Number of search results to return (default: 10).\"},\"objective\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096,\"description\":\"Goal for this search turn; say which documents should rank first, which should be excluded, and what specific facts or figures to pull from them.\"}},\"required\":[\"query\",\"objective\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}},{\"name\":\"web_fetch_exa\",\"title\":\"Fetch Web Pages\",\"description\":\"Read a webpage's full content as clean markdown. Use after web_search_exa when highlights are insufficient or to read any URL.\\n\\nBest for: Extracting full content from known URLs. Batch multiple URLs in one call.\\nReturns: Clean text content and metadata from the page(s).\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"urls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"description\":\"URLs to read. Batch multiple URLs in one call.\"},\"maxCharacters\":{\"type\":\"number\",\"minimum\":1,\"description\":\"Maximum characters to extract per page (default: 3000)\"}},\"required\":[\"urls\"],\"additionalProperties\":false,\"$schema\":\"http://json-schema.org/draft-07/schema#\"},\"annotations\":{\"readOnlyHint\":true,\"destructiveHint\":false,\"openWorldHint\":true,\"idempotentHint\":true},\"execution\":{\"taskSupport\":\"forbidden\"}}]},\"jsonrpc\":\"2.0\",\"id\":2}\n\n"
+    },
+    {
+      "id": "c57128b7-23c0-43c0-a42b-8f81c99d98cf",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:15.184Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "call"
+    },
+    {
+      "id": "c57128b7-23c0-43c0-a42b-8f81c99d98cf",
+      "brandId": "disobedient",
+      "section": "formats",
+      "startedAt": "2026-10-24T20:19:15.184Z",
+      "url": "https://mcp.exa.ai/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+            "numResults": 5
+          }
+        }
+      },
+      "type": "result",
+      "completedAt": "2026-10-24T20:19:17.564Z",
+      "durationMs": 2381,
+      "httpStatus": 200,
+      "responseBody": "event: message\ndata: {\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"Title: Disobedient NYC\\nURL: https://disobedientnyc.com/\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\ndisobedient \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n Disobedient NYC \\n\\n## Featured collection \\n\\n \\n\\n \\n\\nIntellectual Baby Tee $30.00 \\n\\n \\n\\n \\n\\nBlack Thermal Beanie $40.00 \\n\\n \\n\\n \\n\\nBlack on Black Thermal Beanie $50.00 \\n\\n \\n\\n \\n\\nLow Lives Sweatpants $140.00 \\n\\n \\n\\nBlack Disobedient Thermal $45.00 \\n\\n## Shop by category\\n\\n Thermal Beanies \\n\\n Thermal Long Sleeves \\n\\n## Born in NYC\\n\\nRooted in New York City and shaped by defiance. Disobedient reflects the energy of the streets and the confidence to stand alone.\\n\\n---\\n\\nTitle: Streetwear Apparel UGC Ad Breakdown & Prompt - AdsTurbo\\nURL: https://adsturbo.ai/explore/68\\nPublished: 2026-06-28T16:00:00.000Z\\nAuthor: Aelfric Eden\\nHighlights:\\n## Prompt\\n\\nA smartphone-shot studio video of an athletic East Asian model in a white tank top transitioning attention down to black pleated wide-leg pants, turning smoothly under soft natural daylight.\\n\\n## Creative Intelligence Digest\\n\\nDeconstructed key creative mechanics and generative parameters for newblood66's apparel drop video.\\n\\n### Formula\\n\\nFounder Camera Hook + Cultural Design Backstory + Dynamic Fit Demo + Hard Scarcity Deadline\\n\\n### Hook Shots\\n\\n1. Fit athletic founder in high-contrast monochrome studio setup locks direct eye contact within 1 second.\\n2. Verbal restock declaration instantly signals prior sellout proof to trigger immediate demand.\\n3. Continuous tilt-down shot leads the viewer's eyes directly into moving fabric drape without jarring cuts.\\n\\n## Deconstructing newblood66's Founder-Led Streetwear Showcase\\n\\nThis 18-second video creative from newblood66 demonstrates how independent streetwear brands can present complex garment tailoring without high-budget studio overhead. Built around their signature Haka Pants, the creative bypasses commercial tropes by using a creator-led presentation format, continuous camera motion, and a relaxed Lo-fi audio bed to emphasize authenticity.\\n\\nRather than listing generic features, the ad uses concise cultural storytelling tied to historical Bushido virtues, grounding the design in craftsmanship. Paired with a direct-response pre-order caption, the video acts as an efficient bridge between brand narrative and volume sales mechanics.\\n\\n...\\n\\n## 18-Second Beat-by-Beat Script Breakdown\\n\\n1. 01\\n\\n0:00–0:03\\n\\n### Hook & Social Proof\\n\\nEstablishes prior demand through a restock announcement while the model makes direct eye contact.\\n\\n> My two best pant designs will be getting a restock.\\n2. 02\\n\\n0:03–0:10\\n\\n### Design Narrative & Value Add\\n\\nConnects structural pleating to heritage storytelling as the camera pans down to moving fabric.\\n\\n> The Haka is inspired by the traditional Japanese Hakama, featuring eight pleats around each leg representing the eight virtues of Bushido.\\n3. 03\\n\\n0:10–0:13\\n\\n### Feature Alternative Demo\\n\\nPresents a variant silhouette to appeal to alternative buyer aesthetics while maintaining interest.\\n\\n> And the Tome features two pleats on the front and studs that have a hidden Easter egg.\\n4. 04\\n\\n0:13–0:16\\n\\n### Supply Scarcity\\n\\nSupplies a logical manufacturing reason for low volume to induce fear of missing out.\\n\\n> They're both very limited due to stock and fabric availability, so make sure you don't miss it.\\n5. 05\\n\\n0:16–0:18\\n\\n### Clear Call to Action\\n\\nGives buyers an unambiguous calendar trigger to take action and secure their order.\\n\\n> Restocking July 16th.\\n\\n---\\n\\nTitle: Streetwear Brand UGC Ad Examples That Actually Convert · FrameNotion\\nURL: https://framenotion.com/blog/streetwear-brand-ugc-ad-examples\\nPublished: 2026-10-10T11:33:05.000Z\\nAuthor: N/A\\nHighlights:\\nStreetwear brand UGC ad examples work when they feel like a friend's camera roll, not a lookbook. The best ones open mid-action — someone unboxing a drop, checking a fit in a mirror, reacting to a restock alert — and they sell the feeling of the piece (status, comfort, rarity) before they sell the fabric. Below are real-world patterns you can study, swipe, and adapt, plus a breakdown of what separates a scroll-stopping streetwear UGC ad from one that gets skipped in half a second.\\n\\n Key takeaways\\n\\nStreetwear UGC ads perform best when the hook shows a moment (unboxing, fit check, restock reaction) instead of a voiceover intro. Keep the proof visual — fabric close-ups, sizing comparisons, how it layers — rather than claims. Design for sound-off viewing with captions, since streetwear buyers often browse in public or on mute. Rotate 3-5 hook variants per product drop and track which angle (price, drop scarcity, fit, styling) gets the lowest cost per click before scaling spend.\\n\\n...\\n\\n## What Makes a Streetwear Brand UGC Ad Actually Work\\n\\nStreetwear buyers are visually literate. They've seen a thousand ads with studio lighting and a model turning in a circle, and they scroll past most of them. UGC-style ads work because they look like content, not like advertising — even when a brand scripts and produces them deliberately.\\n\\nThree things separate a strong streetwear UGC ad from a weak one:\\n\\n- The hook is a moment, not a sentence. Someone opening a box, pulling a hoodie over their head, or reacting to a sold-out restock beats any opening line like \\\"Check out this new drop.\\\"\\n- The proof is visual, not verbal. Close-ups on stitching, a side-by-side of the fit on two different body types, or a hand stretching the fabric say more than a claim like \\\"premium quality.\\\"\\n- It's built to work with the sound off. Captions carry the message on their own, because a lot of streetwear shopping happens while scrolling in public, in a car, or between classes.\\n\\n...\\n\\n## How to Brief a Creator (or an AI Tool) for a Streetwear UGC Ad\\n\\nA strong brief is the difference between a creator handing you generic footage and one who nails the fit, lighting, and tone your audience expects. Use this checklist before any shoot or AI-generated draft:\\n\\n- Name the one feeling the piece should sell — rarity, comfort, status, versatility. Pick one, not all four.\\n- Specify the hook moment, not just the topic. \\\"Open with pulling the hoodie out of the mailer\\\" beats \\\"show the hoodie.\\\"\\n- List the proof shots you need: fabric close-up, stitching, how it fits two body types, how it layers with other pieces.\\n- Decide the sound plan up front. If it needs to work muted, write captions into the script, not as an afterthought.\\n- Give one clear CTA, tied to urgency when it's genuine — a real restock window, a real limited colorway, not manufactured scarcity.\\n\\n---\\n\\nTitle: Top 10 Hooks for Streetwear Content That Stop the Scroll\\nURL: https://gen.pro/blog/top-10-hooks-streetwear-creators/\\nPublished: 2026-08-04T19:35:37.000Z\\nAuthor: Madison Blake\\nHighlights:\\n## The real reason your streetwear posts underperform\\n\\nThe fit is strong. The lighting is decent. The audio is trending. And it still barely moves. The problem is almost always the first two seconds — a hook that assumes the viewer already cares, rather than giving them a reason to. Streetwear is a visually saturated niche; the scroll speed is punishing. The hooks below are built for that environment: they surface the payoff fast, create a gap the viewer needs to close, and give the outfit a role in a story rather than just a frame.\\n\\n### How a winning streetwear hook is built\\n\\n1 Surface the payoff instantly\\n\\nShow or name the most compelling element of the fit in the first 1-2 seconds -- not a countdown to it.\\n\\n2 Open a curiosity gap\\n\\nSet up a tension, contradiction, or unanswered question that only the rest of the video resolves.\\n\\n3 Earn the watch-through\\n\\nDeliver on the premise clearly -- close-up details, visible transitions, real process. Don't bury the goods.\\n\\n4 Leave a save-worthy residue\\n\\nEnd with something the viewer wants to reference later -- a specific piece, a pose, a styling trick they'll use.\\n\\n## Winners vs. losers in streetwear hooks\\n\\n- Winners open on the most visually interesting element -- the oversized silhouette, the colorway clash, the unexpected layer -- and name the tension upfront.\\n- Winners treat the outfit as the answer to a question, not just a thing to display.\\n- Losers open with a slow walk-in or a caption-only intro that hides the fit for three seconds.\\n- Losers lead with \\\"shop my look\\\" or a discount code -- that signals the video is an ad before it's earned trust.\\n- Losers rely on hashtag volume as the distribution lever instead of a hook that creates organic shares and saves.\\n- Losers shoot full-body wide only -- no close-up of the details that actually make the fit interesting.\\n\\nCreators like @jamie.leigh.87 and the duo @ziadhalloumi / @salmaek_ both use an \\\"adaptable opening premise\\\" -- they anchor immediately in a recognizable tension or reference (a style debate, a cultural moment like Spider-Man poses) before the fit is even fully visible. That's the structural move to reverse-engineer.\\n\\n...\\n\\n## 10 hooks to try for streetwear content\\n\\n1. \\\"Both work -- here's why I can't choose\\\" Template: \\\"Actually a mix of both -- [Style A] silhouette, [Style B] palette.\\\" Why it works: Forces the viewer to pick a side mentally, which drives comments and watch-through. It withholds the verdict. Streetwear adapt: Baggy vs. slim, monochrome vs. color-block, archive vs. new drop. Loser pattern avoided: \\\"Here's my outfit today\\\" -- no tension, no reason to stay. \\n2. The cultural reference anchor Template: \\\"Dressing like [recognizable character/era/scene] but make it wearable.\\\" Why it works: Borrows an existing emotional resonance. The @ziadhalloumi Spider-Man duo post is a clean example -- the reference does the hook's heavy lifting. Streetwear adapt: Anime characters, 90s skate scenes, a specific film or city's aesthetic. Loser pattern avoided: Generic \\\"outfit inspo\\\" with no cultural anchor -- easily scrolled past. \\n3. The price-to-look ratio reveal Template: \\\"This whole fit cost [amount] -- here's where every piece is from.\\\" Why it works: Saves are high because people bookmark for purchase reference. The specificity signals authenticity. Streetwear adapt: Thrift haul builds, budget grails, or \\\"grail for less\\\" dupes. Loser pattern avoided: Vague \\\"affordable streetwear\\\" without actual price anchors. \\n4. The hard styling rule (stated as opinion) Template: \\\"I will never style [item] [common way] -- here's why.\\\" Why it works: Contrarian opinions generate comments from people who disagree and saves from people who agree. The outfit becomes proof of the rule. Streetwear adapt: \\\"I will never tuck a graphic tee,\\\" \\\"I will never wear matching sets without breaking them up.\\\" Loser pattern avoided: \\\"How to style [item]\\\" -- informational but not emotionally charged. \\n5. The single-piece feature Template: \\\"Built the entire fit around this one [piece] -- watch.\\\" Why it works: Tight narrative focus. The viewer knows exactly what to track, so they watch to see if the central piece lands. Streetwear adapt: A vintage coach jacket, an unusual colorway sneaker, an archive tee. Loser pattern avoided: Full outfit dump with no focal point -- the eye doesn't know where to go. \\n6. The \\\"I was wrong about this\\\" reversal Template: \\\"I hated [item/trend] until I tried it like this.\\\" Why it works: Narrative arc in three seconds. Vulnerability plus resolution drives watch-through. Streetwear adapt: Cargo pants, wide-leg denim, platform sneakers -- anything with a polarizing reputation. Loser pattern avoided: Trend review with no personal stake -- reads like an ad. \\n7. The duo / mirror comparison Template: \\\"Same [item / color / reference] -- two completely different fits.\\\" Why it works: Side-by-side contrast is processed in a split second. Forces a judgment call from the viewer. Streetwear adapt: Two creators styling the same piece; two interpretations of the same era or aesthetic. The @ziadhalloumi + @salmaek_ collab format does this well with poses. Loser pattern avoided: Solo static lookbook -- no contrast, no engagement trigger. \\n8. The process reveal (\\\"this took longer than it looks\\\") Template: \\\"Spent [X time] hunting for this piece -- here's what I got.\\\" Why it works: Effort signals value. The viewer's perceived worth of the fit goes up when they understand the hunt. Streetwear adapt: Thrift runs, archive grail hunts, sample-sale finds. Loser pattern avoided: Outfit with no origin story -- looks like a brand package deal. \\n9. The location-fit lock Template: \\\"Dressing for [specific city / neighbourhood / context] -- not a general vibe, a specific place.\\\" Why it works: Hyper-specificity signals taste and authority. People from that place save it; people who aspire to it save it too. Streetwear adapt: \\\"Harajuku layering,\\\" \\\"Lower East Side skate fit,\\\" \\\"South London market run.\\\" Real locations, not just aesthetics. Loser pattern avoided: \\\"Urban streetwear look\\\" -- too generic to be memorable. \\n10. The \\\"would you wear this?\\\" direct challenge Template: \\\"Would you actually wear this? Most people won't.\\\" Why it works: Opens a loop that only a comment can close. The viewer feels called out -- that's a strong retention mechanism. Streetwear adapt: Statement pieces, clashing colorways, experimental silhouettes. Loser pattern avoided: Passive lookbook energy -- nothing to react to, nothing to debate.\\n\\n...\\n\\n## Turn one source video into 3-5 posts\\n\\nA single fit shoot has far more content inside it than one post. Here's the extraction workflow:\\n\\n1. Identify the core tension -- what's the most debatable or interesting element of the fit? (The piece, the styling rule, the price point, the reference.) That becomes Hook #1.\\n2. Isolate the focal piece -- cut a tight close-up sequence of the single item that anchors the fit. That's a standalone \\\"single-piece feature\\\" post (Hook #5).\\n3. Extract the process -- if there's a hunt, a decision moment, or a layering sequence, that becomes a \\\"process reveal\\\" post (Hook #8).\\n4. Reframe for a different tension -- the same outfit can be framed as a cultural reference (Hook #2), a styling rule (Hook #4), or a location-fit lock\\n\\n---\\n\\nTitle: Streetwear & Merch Ads — 13+ UGC Examples & Templates · Workbrow\\nURL: https://workbrow.com/templates/vertical/fashion-streetwear-merch\\nPublished: N/A\\nAuthor: N/A\\nHighlights:\\nStreetwear runs on drops and belonging. These concepts film the ritual: drop day, the fit built around one piece, the fabric weight felt in hand.\\n\\n## Streetwear & Merch ad examples you can start from\\n\\nEvery concept is a complete beat-by-beat storyboard — open one to see exactly what it films, then generate it for your own product:\\n\\n- Drop-day fit pic — it's drop day.\\n- Fit Pic — Styling — an influencer-style fit pic built around the streetwear piece.\\n- Heavyweight feel demo — a founder shows the build of one piece up close — the fabric in hand, the print, the stitch.\\n- How I Style It — Reveal — an influencer-style reveal of how to style the streetwear piece, kept clean.\\n\\n## What makes a streetwear & merch ad convert\\n\\nDrop-day energy is the format — fresh piece on, fit assembled, choices talked through like the feed post it imitates. The heavyweight-feel demo matters because fabric weight IS the quality argument in this category, and it films: the drape, the hand, the print up close.\\n\\n## How to make one from a single product photo\\n\\n1. Pick a concept — its storyboard shows every beat before you commit.\\n2. Add your product: one clear photo (a readable label helps), plus your brand and product names and any line you want spoken.\\n3. Check the cost — the credit cost shows before you generate.\\n4. Generate — minutes later, a vertical 9:16 video of your actual product.\\n5. Post or promote on Reels, TikTok, Shorts, or as Meta/TikTok ad creative.\\n\\n## Storyboards, not stock clips\\n\\nEach of the concepts here is an original storyboard authored for this product type, previewed with a sample product staged in it. Your product takes the sample's place inside the same arc when you generate. This collection is part\",\"_meta\":{\"searchTime\":2063}}]},\"jsonrpc\":\"2.0\",\"id\":3}\n\n"
+    }
+  ]
+}

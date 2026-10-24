@@ -1,0 +1,100 @@
+{
+  "startedFor": "Two-brand streetwear product demo",
+  "completedAt": "2026-10-24T20:19:28.228Z",
+  "brands": [
+    {
+      "brand": {
+        "id": "disobedient",
+        "name": "Disobedient",
+        "website": "https://disobedientnyc.com/"
+      },
+      "taskId": 10,
+      "dossierId": "4300654b-f4fc-4a85-aabb-3cfa664e3752",
+      "searches": [
+        {
+          "section": "brand",
+          "query": "Disobedient streetwear brand https://disobedientnyc.com/ official products about pricing positioning Instagram X TikTok YouTube",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:09.829Z",
+          "costUsd": 0,
+          "resultCount": 4
+        },
+        {
+          "section": "audience",
+          "query": "Disobedient streetwear brand https://disobedientnyc.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:12.170Z",
+          "costUsd": 0,
+          "resultCount": 3
+        },
+        {
+          "section": "creators",
+          "query": "Disobedient streetwear brand https://disobedientnyc.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:14.563Z",
+          "costUsd": 0,
+          "resultCount": 4
+        },
+        {
+          "section": "formats",
+          "query": "Disobedient streetwear brand https://disobedientnyc.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:17.566Z",
+          "costUsd": 0,
+          "resultCount": 5
+        }
+      ],
+      "evidenceCount": 16
+    },
+    {
+      "brand": {
+        "id": "vylin",
+        "name": "VYLIN",
+        "website": "https://www.wearvylin.com/"
+      },
+      "taskId": 11,
+      "dossierId": "ca18edde-05ca-48a9-ac23-d49c0ae0b146",
+      "searches": [
+        {
+          "section": "brand",
+          "query": "VYLIN streetwear brand https://www.wearvylin.com/ official products about pricing positioning Instagram X TikTok YouTube",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:20.620Z",
+          "costUsd": 0,
+          "resultCount": 2
+        },
+        {
+          "section": "audience",
+          "query": "VYLIN streetwear brand https://www.wearvylin.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:22.981Z",
+          "costUsd": 0,
+          "resultCount": 3
+        },
+        {
+          "section": "creators",
+          "query": "VYLIN streetwear brand https://www.wearvylin.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:25.797Z",
+          "costUsd": 0,
+          "resultCount": 3
+        },
+        {
+          "section": "formats",
+          "query": "VYLIN streetwear brand https://www.wearvylin.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+          "provider": "Exa free keyless MCP",
+          "checkedAt": "2026-10-24T20:19:28.222Z",
+          "costUsd": 0,
+          "resultCount": 5
+        }
+      ],
+      "evidenceCount": 13
+    }
+  ],
+  "provider": "Exa free keyless MCP",
+  "paidFallback": false,
+  "quotaBlocked": false,
+  "providerCostUsd": 0,
+  "rawLedger": "work/streetwear-demo-v1/exa-rpc.jsonl",
+  "note": "Actual research calls. No payment, DM receipt, model-generated ICP, video or send is invented."
+}

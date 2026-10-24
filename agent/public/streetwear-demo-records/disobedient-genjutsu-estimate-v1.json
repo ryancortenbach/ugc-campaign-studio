@@ -1,0 +1,4 @@
+{
+  "type": "description",
+  "pricing_description": "Priced per total second by resolution: 480p $0.05, 720p $0.10, or 1080p $0.20. Rates shown are before any applicable customer discount. Billable seconds = output duration + the sum of input reference video durations. Input video durations are measured during preprocessing; without video references, only output duration is billed. Genjutsu Light trims the source to 15 seconds; output duration is rounded up to whole seconds before billing."
+}

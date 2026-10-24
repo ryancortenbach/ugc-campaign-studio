@@ -1,0 +1,169 @@
+{
+  "reviewed_at": "2026-10-24",
+  "review_type": "independent_AI_visual_review_of_static_images",
+  "human_approval": false,
+  "full_source_video_reviewed": false,
+  "production_gate": "pending_human_review_and_final_frame_continuity_checks",
+  "awardscholar": {
+    "asset": "agent/public/client-demo-assets/awardscholar-maya-persona-v1.png",
+    "status": "usable_persona_concept_with_format_and_continuity_adjustments",
+    "strengths": [
+      "Face, short curls, clear glasses, green crewneck and skin tone read as one consistent original adult presenter across three views.",
+      "No obvious facial or visible-limb malformation at the reviewed image resolution.",
+      "Study setting and informal close-up fit the broad student-tool subject and home setting seen in saved ad1 preview.",
+      "Generated persona is visibly distinct from both reviewed reference creators, with different facial features, hair, glasses and wardrobe."
+    ],
+    "limitations": [
+      "Three panels are a persona sheet, not final individual vertical production frames.",
+      "Maya is calmer and more polished than the exaggerated frustration and surprised reaction in the actual reference previews.",
+      "Window and background geography vary across the sheet. Lock a single room reference and camera map before sequencing animation.",
+      "The raised hand is partially framed, so the review does not establish perfect finger anatomy across every pose.",
+      "No movement, lip sync, audio or real product UI is validated."
+    ],
+    "recommended_next_frame": "Tight vertical handheld-style reaction shot of the same Maya in the same desk position, mild exasperation at multiple scholarship tabs, with the original new hook added editorially rather than copying source wording.",
+    "source_comparison": [
+      "Ad1798011228292318: informal vertical home close-up, daylight, time-spent-applying discovery theme.",
+      "Ad2962095170805548: exaggerated surprised close-up, public indoor study-like setting, tuition/discovery theme."
+    ],
+    "sources": [
+      {
+        "ad_id": "1798011228292318",
+        "file": "/Users/ryancortenbach/Documents/Codex/2026-10-24/awardscholar-ad-research-v1/award-scholar-ad-1-1798011228292318.jpg"
+      },
+      {
+        "ad_id": "2962095170805548",
+        "file": "/Users/ryancortenbach/Documents/Codex/2026-10-24/awardscholar-ad-research-v1/award-scholar-ad-2-2962095170805548.jpg"
+      }
+    ]
+  },
+  "waddle": {
+    "asset": "agent/public/client-demo-assets/waddle-jamie-persona-v1.png",
+    "status": "usable_original_identity_concept_but_weaker_source_format_fit_pending_v2",
+    "strengths": [
+      "Face, glasses, dark wavy hair, green sweatshirt and adult male identity remain coherent across three views.",
+      "Lamp, couch and windows establish a broadly consistent evening domestic setting.",
+      "No obvious facial or visible-hand malformation at the reviewed image resolution.",
+      "Presenter is visibly distinct from Xander in the viewed source thumbnails."
+    ],
+    "limitations": [
+      "The reviewed source frames show casual hoodie delivery in public cafe or transit-like spaces with white wired earbuds. V1 is a polished evening sofa scene, so source-format fit is limited.",
+      "Three source thumbnails do not establish full motion, cadence, spoken script, retention or performance.",
+      "Source UI thumbnail shows gameplay, but generated V1 has no product proof. Use an actual authorized app capture later rather than invented UI.",
+      "V2 cafe/charcoal hoodie is being created by parent and has not been reviewed here yet."
+    ],
+    "recommended_next_frame": "Review the same Jamie identity in cafe setting with charcoal hoodie and candid vertical close-up, followed by a genuine current approved app capture. Retain original dialogue and avoid implying the AI presenter had a real long-distance relationship.",
+    "sources": [
+      "agent/public/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg",
+      "agent/public/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg",
+      "agent/public/client-demo-assets/waddle-ref-xander-snap-20260816-29s.jpg"
+    ]
+  },
+  "reference_media_access": {
+    "award_raw_records": "/Users/ryancortenbach/Documents/Codex/2026-10-24/awardscholar-ad-research-v1/brand-ads.json",
+    "initial_result": "Default DNS resolution failed.",
+    "followup": "Ordinary DNS resolver repair and curl --resolve to exact public HD URLs succeeded for both saved ad URLs.",
+    "downloaded": true,
+    "platform_block_evasion": false,
+    "full_audio_or_real_time_playback_reviewed": false,
+    "decoded_visual_samples_reviewed": true,
+    "provenance": "work/client-avatar-demo-v1/awardscholar-reference/provenance.json",
+    "items": [
+      {
+        "ad_id": "1798011228292318",
+        "permanent_source_url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+        "file": "work/client-avatar-demo-v1/awardscholar-reference/1798011228292318.mp4",
+        "sha256": "824e9e96e5abe333f7759db32c51b47f547ed64f2133b1d691dfdd28d789191a",
+        "bytes": 2735616,
+        "duration_seconds": 13.68,
+        "width": 720,
+        "height": 1280,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "visual_review": "Decoded samples at roughly 0,3,6,9,12 seconds; not full real-time playback or audio review.",
+        "contact_sheet": "work/client-avatar-demo-v1/awardscholar-reference/1798011228292318-samples.jpg"
+      },
+      {
+        "ad_id": "2962095170805548",
+        "permanent_source_url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+        "file": "work/client-avatar-demo-v1/awardscholar-reference/2962095170805548.mp4",
+        "sha256": "a0f35213b6a485ed9eb0e734147b39334a2e96458de6ef48165e7b0f265ab6f5",
+        "bytes": 3074430,
+        "duration_seconds": 15.83,
+        "width": 720,
+        "height": 1280,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "visual_review": "Decoded samples at roughly 0,3,6,9,12 seconds; not full real-time playback or audio review.",
+        "contact_sheet": "work/client-avatar-demo-v1/awardscholar-reference/2962095170805548-samples.jpg"
+      }
+    ],
+    "observed_structure": "Both sampled sequences progress from expressive close-face hook to laptop/dashboard footage showing matching or scholarship cards, draft text and apply/submit UI. This is advertiser creative evidence, not independent live product validation."
+  },
+  "waddle_v2": {
+    "asset": "agent/public/client-demo-assets/waddle-jamie-persona-v2.png",
+    "status": "stronger_source_format_fit_usable_concept_with_mic_continuity_fix",
+    "strengths": [
+      "Same recognizable original Jamie identity as v1: glasses, dark wavy hair, facial structure and stubble remain coherent.",
+      "Charcoal hoodie, cafe setting, close conversational framing and candid gesture are materially closer to the observed Xander source format.",
+      "Original face remains visibly distinct from the reference creator.",
+      "No obvious visible facial or hand anatomy defects at the reviewed resolution."
+    ],
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "A black clip-on microphone appears at the neckline in the left panel but is absent in the middle and right panels.",
+        "action": "Remove it from all frames or include the same microphone consistently before production."
+      },
+      {
+        "severity": "low",
+        "finding": "Triptych is a persona concept with camera-distance changes, not final vertical animation frames.",
+        "action": "Choose one cafe seat and window direction as the fixed room reference; derive individual vertical shots from that reference."
+      }
+    ],
+    "limits": [
+      "Static image review only.",
+      "No source video cadence or full spoken transcript reviewed.",
+      "Human approval, animation, lip sync, voice, captions and product UI remain pending."
+    ],
+    "recommendation": "Prefer v2 cafe direction over v1 sofa for the proposed source-format adaptation after microphone continuity is fixed."
+  },
+  "four_panel_storyboards": {
+    "reviewed_at": "2026-10-24",
+    "review_type": "independent_static_visual_review",
+    "human_approval": false,
+    "motion_timing_lip_sync_verified": false,
+    "overall": "Both sheets are suitable for human storyboard review. No blocking obvious anatomy or identity defect found at the reviewed image resolution.",
+    "awardscholar": {
+      "asset": "agent/public/client-demo-assets/awardscholar-storyboard-v1.png",
+      "status": "pass_for_human_static_storyboard_review",
+      "observations": [
+        "Same Maya face, short curls, clear glasses, earrings and green crewneck remain coherent in all four panels.",
+        "Actions read as concerned close-up, open-hand explanation, pointing toward future insert and friendly open-hand invitation. The initial concern is more expressive than the earlier persona sheet.",
+        "Desk, notebook at viewer left, laptop at viewer right, window at left edge and plant at right provide stronger scene continuity than the earlier sheet.",
+        "No obvious visible finger, hand, face or limb defect was found at this image resolution."
+      ],
+      "remaining": [
+        "The pointing panel has no actual product insert yet. Add a genuine approved current app capture or a clearly labeled reference insert during editing.",
+        "No caption layout, individual vertical export, animation, voice, lip sync or 15-second timing has been validated.",
+        "Do not convert the fictional presenter into a testimonial about personal funding or results."
+      ]
+    },
+    "waddle": {
+      "asset": "agent/public/client-demo-assets/waddle-storyboard-v1.png",
+      "status": "pass_for_human_static_storyboard_review",
+      "observations": [
+        "Same original Jamie face, glasses, dark hair, facial hair and charcoal hoodie remain coherent in all four panels.",
+        "Cafe seat, window-left daylight and pendant lights support consistent scene geography.",
+        "The previously inconsistent clip-on microphone is absent from all four storyboard panels, resolving that visible issue.",
+        "Actions read as close conversational opening, open-hand explanation, pointing toward a future app insert and invitation with phone on the table.",
+        "No obvious visible finger, hand, face or limb defect was found at this image resolution."
+      ],
+      "remaining": [
+        "The cafe and hoodie direction fits the broad observed source format, but the individual original script is not a transcript or duplicate of Xander content.",
+        "The phone has no generated fake product UI. Add genuine approved app footage during editing.",
+        "No caption layout, individual vertical export, animation, voice, lip sync or final timing has been validated."
+      ]
+    },
+    "approval_boundary": "AI static review completed. A real human must approve the persona, script, storyboard and final generated sample. This review is not human approval or a production runtime pass."
+  }
+}

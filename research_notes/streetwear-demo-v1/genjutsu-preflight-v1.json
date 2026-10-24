@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24",
+  "mode": "preparation_only",
+  "sources": [
+    {
+      "url": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
+      "role": "Model-specific endpoint and shown input example; first-15-second processing and preserved audio"
+    },
+    {
+      "url": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/playground",
+      "role": "Current model pricing text and billing rule"
+    },
+    {
+      "url": "https://open.higgsfield.ai/pricing",
+      "role": "List-price and maximum-discount distinction"
+    },
+    {
+      "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Pilot_Notes_v1.json",
+      "sha256": "3d56bc6ca120e143fc875b68b19f868807c2951c8b38bab12446e537a0d82b5a",
+      "role": "Earlier cleanup result record, not a new branded-swap test"
+    },
+    {
+      "path": "agent/knowledge/penthouse-v1/manifest.json",
+      "role": "Immutable original video and historical provenance"
+    },
+    {
+      "path": "docs/creative/personalized-character-v1/storyboard-v1.json",
+      "role": "Prior six-shot concept; not current Disobedient or VYLIN generated assets"
+    }
+  ],
+  "contract": {
+    "endpoint": "higgsfield/genjutsu-light/object-swap/v1.0",
+    "shownInputFields": [
+      {
+        "name": "prompt",
+        "type": "string",
+        "verification": "Shown in official model example; formal requiredness and length limits are not exposed in the fetched reference."
+      },
+      {
+        "name": "video_url",
+        "type": "string URL",
+        "verification": "Shown source-video URL. Provider-accessible URL needed; local paths are not an upload."
+      },
+      {
+        "name": "image_urls",
+        "type": "array of URL strings",
+        "verification": "Shown garment/reference image array. Maximum count and image-size limits not exposed in the fetched model page."
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "example": "720p",
+        "documentedPricingValues": [
+          "480p",
+          "720p",
+          "1080p"
+        ]
+      }
+    ],
+    "firstSourceSecondsProcessed": 15,
+    "preservesSourceAudio": true,
+    "unknownConstraints": [
+      "Formal required-field schema and default resolution",
+      "Minimum source duration for Genjutsu Light Object Swap specifically",
+      "Maximum image count, image dimensions and upload file size for this model",
+      "Accepted source codecs and frame-rate constraints",
+      "Whether an untrimmed long source increases billable reference duration before the first-15-second trim"
+    ],
+    "avoidUnsupportedFields": [
+      "No duration, start_time, end_time, seed, generate_audio, voice_id or speech text is shown as an input in the verified model-specific example. Do not add them from a different model."
+    ],
+    "sdkCaution": "The model page mixes @higgsfield/client/v2 plus HF_CREDENTIALS with a second generic @higgsfield-ai/client example. Request-field verification does not verify either SDK installation or account capability."
+  },
+  "pricing": {
+    "status": "public_list_prices_not_account_quote",
+    "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/playground",
+    "listUsdPerBillableSecond": {
+      "480p": 0.05,
+      "720p": 0.1,
+      "1080p": 0.2
+    },
+    "rule": "Billable seconds add output duration and input reference-video durations. Output duration rounds up to whole seconds. Inputs are measured in preprocessing.",
+    "discountQualification": "Pricing overview advertises up to 50% off, from $0.025/sec. No account discount, balance or live executable quote has been checked.",
+    "pilotPlanningAssumption": "Conservatively count the supplied six-second source as six input-reference seconds plus six output seconds. Final provider quote must resolve input billing treatment.",
+    "pilotPlanningBillableSecondsPerBrand": 12,
+    "pilotPlanningCostUsdAt720pPerBrand": 1.2,
+    "twoBrandPlanningCostUsdAt720p": 2.4,
+    "notActualCharge": true,
+    "fullMasterCaution": "Never submit the 23.158-second master expecting a full-length result: only its first 15 seconds are processed. Split/reassemble short immutable source segments for a later full ad after pilot review."
+  },
+  "historicalPilot": {
+    "recordedRequestId": "bf216b2a-aca6-4543-b2fd-d05fcb2e9737",
+    "paidRenderAttempts": 1,
+    "estimatedGenerationCostUsd": 1.2,
+    "actualItemizedChargeReturned": false,
+    "recordedResult": "Completed. Printed lettering removed from blue hoodie in all 144 normalized frames reviewed. Scene and character visually recognizable; pixel-identical preservation not established.",
+    "recordedScope": "Six-second generic garment-cleanup pilot. Exact branded product replacement and full 23-second master are not yet tested.",
+    "recordedAudioHandling": "Original spoken opening restored locally through 5.74s, then silence to 6s. No new voice API call.",
+    "recordedPaidCallsAfterTest": 0,
+    "qualification": "Imported earlier test result. This run verified file hashes, metadata and full decode, but did not freshly review all 144 frames for garment lettering.",
+    "doesNotProve": [
+      "Exact Disobedient product replacement",
+      "Exact VYLIN product replacement",
+      "Full-master correction",
+      "Pixel-identical character or scene preservation",
+      "Voice personalization or new brand-name speech"
+    ]
+  },
+  "sourceAssets": {
+    "originalMaster": {
+      "path": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/PS2_penthouse_FINAL_v4.mp4",
+      "sha256": "eb34229fa2448f0655fa94bb576b982477b91b92625763110d0f96abdd6f3880",
+      "bytes": 7705699,
+      "durationSeconds": 23.158,
+      "width": 720,
+      "height": 1280
+    },
+    "historicalGenericMaster": {
+      "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Mint_Labs_Generic_Master_6s_v1.mp4",
+      "sha256": "9059def29fe13a5e0692548f25b0a378a13291466bd7d10c97901aff5e6bd121",
+      "bytes": 2069539,
+      "durationSeconds": 6.0,
+      "width": 720,
+      "height": 1280
+    },
+    "genericMasterFreshDecode": {
+      "tool": "ops/node_modules/ffmpeg-static/ffmpeg",
+      "result": "success",
+      "videoCodec": "h264 High",
+      "audioCodec": "aac LC",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "frameRate": 24,
+      "decodedFrames": 144
+    },
+    "originalManifestHashMatched": true
+  },
+  "brandPreflights": [
+    {
+      "brandId": "disobedient",
+      "brandName": "Disobedient",
+      "status": "prepared_incomplete_not_submitted",
+      "providerSubmitted": false,
+      "executable": false,
+      "sourceVideoBinding": {
+        "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Mint_Labs_Generic_Master_6s_v1.mp4",
+        "sha256": "9059def29fe13a5e0692548f25b0a378a13291466bd7d10c97901aff5e6bd121",
+        "bytes": 2069539,
+        "durationSeconds": 6.0,
+        "width": 720,
+        "height": 1280
+      },
+      "garmentReferenceBinding": {
+        "status": "awaiting_verified_exact_product_and_human_selection",
+        "productPageUrl": null,
+        "imageUrl": null,
+        "localPath": null,
+        "sha256": null,
+        "viewsRequested": [
+          "front",
+          "back if artwork is visible in source"
+        ],
+        "qualification": "No brand domain, product, SKU or garment photograph has been invented by this preflight."
+      },
+      "preparedRequest": {
+        "endpoint": "higgsfield/genjutsu-light/object-swap/v1.0",
+        "documentedInputFieldsBound": {
+          "prompt": "Replace only the existing blue hoodie on the main male character with the Disobedient top shown in the supplied garment reference image. Follow that reference for garment construction, color, print placement and logo shape. Preserve the same original character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering. Keep garment graphics stable as the torso moves and preserve natural occlusion. Do not invent extra lettering, accessories, branding, dialogue or additional people.",
+          "resolution": "720p"
+        },
+        "unboundRequiredFields": [
+          "video_url",
+          "image_urls"
+        ],
+        "bindingInstructions": "Upload the immutable six-second source and selected permitted real garment photograph after approval. Populate video_url and image_urls with provider-accessible URLs. Do not pass local paths to the API."
+      },
+      "plannedScope": "Six-second top-only pilot. Optional trousers are a separate reviewed change.",
+      "spendAuthorized": false,
+      "sendingAuthorized": false
+    },
+    {
+      "brandId": "vylin",
+      "brandName": "VYLIN",
+      "status": "prepared_incomplete_not_submitted",
+      "providerSubmitted": false,
+      "executable": false,
+      "sourceVideoBinding": {
+        "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Mint_Labs_Generic_Master_6s_v1.mp4",
+        "sha256": "9059def29fe13a5e0692548f25b0a378a13291466bd7d10c97901aff5e6bd121",
+        "bytes": 2069539,
+        "durationSeconds": 6.0,
+        "width": 720,
+        "height": 1280
+      },
+      "garmentReferenceBinding": {
+        "status": "awaiting_verified_exact_product_and_human_selection",
+        "productPageUrl": null,
+        "imageUrl": null,
+        "localPath": null,
+        "sha256": null,
+        "viewsRequested": [
+          "front",
+          "back if artwork is visible in source"
+        ],
+        "qualification": "No brand domain, product, SKU or garment photograph has been invented by this preflight."
+      },
+      "preparedRequest": {
+        "endpoint": "higgsfield/genjutsu-light/object-swap/v1.0",
+        "documentedInputFieldsBound": {
+          "prompt": "Replace only the existing blue hoodie on the main male character with the VYLIN top shown in the supplied garment reference image. Follow that reference for garment construction, color, print placement and logo shape. Preserve the same original character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering. Keep garment graphics stable as the torso moves and preserve natural occlusion. Do not invent extra lettering, accessories, branding, dialogue or additional people.",
+          "resolution": "720p"
+        },
+        "unboundRequiredFields": [
+          "video_url",
+          "image_urls"
+        ],
+        "bindingInstructions": "Upload the immutable six-second source and selected permitted real garment photograph after approval. Populate video_url and image_urls with provider-accessible URLs. Do not pass local paths to the API."
+      },
+      "plannedScope": "Six-second top-only pilot. Optional trousers are a separate reviewed change.",
+      "spendAuthorized": false,
+      "sendingAuthorized": false
+    }
+  ],
+  "approvalGates": [
+    "Verify each brand and select its exact product image with source URL.",
+    "Human reviews selected source, garment references and top-only scope.",
+    "Confirm current price and authorize the exact paid request while preserving unrelated global pause.",
+    "Generate one hardest short pilot per brand independently from the generic base.",
+    "Inspect all pilot frames for face, hands, lettering, product construction, occlusion, room and camera drift.",
+    "Human watches each complete pilot with audio.",
+    "Only then prepare any additional segments, voice/lip-sync personalization or a permitted outbound message."
+  ],
+  "currentExecution": {
+    "publicDocumentationReads": true,
+    "metadataAndDecodeChecks": true,
+    "paidVideoCalls": 0,
+    "voiceCalls": 0,
+    "mediaUploads": 0,
+    "brandSwapsCompleted": 0,
+    "outboundMessages": 0,
+    "spendingPauseCleared": false
+  },
+  "audioPlan": "Apparel-only repair retains existing speech. Speaking Disobedient or VYLIN would need a separately approved voice and matching mouth-animation stage, then final audio QA; it is not an object-swap prompt effect."
+}

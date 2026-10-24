@@ -1,0 +1,1559 @@
+{
+  "version": 1,
+  "mode": "demo",
+  "preparedAt": "2026-10-24",
+  "historyDisclosure": "Recorded steps summarize completed research and artifact work. Replay uses saved evidence, not live providers. Future approvals, renders, replies and CRM events are simulations.",
+  "brands": [
+    {
+      "id": "awardscholar",
+      "name": "Award Scholar",
+      "website": "https://www.awardscholar.com/",
+      "founders": [
+        {
+          "name": "Kyle Fung",
+          "role": "User-supplied founder lead. Candidate Columbia profile and UGC background found through Exa; Award Scholar affiliation remains unverified.",
+          "status": "Affiliation unverified",
+          "url": "https://www.linkedin.com/in/kylefung1"
+        },
+        {
+          "name": "Orchard St, Inc.",
+          "role": "Legal entity named in official website footer; not an identified founder.",
+          "status": "Publisher verified",
+          "url": "https://www.awardscholar.com/"
+        }
+      ],
+      "product": {
+        "summary": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms.",
+        "features": [
+          "Profile-based scholarship matching",
+          "Editable AI application drafts",
+          "User-selected application support on supported forms",
+          "No scholarship award guarantee"
+        ]
+      },
+      "score": {
+        "total": 72,
+        "max": 100,
+        "confidence": "Moderate creative fit; commercial metrics unverified",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Clear consumer workflow with a concise demonstrable product story."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 18,
+            "max": 20,
+            "rationale": "Application overload and discovery support several original hooks."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 7,
+            "max": 20,
+            "rationale": "Kyle is a user-supplied lead; brand affiliation and founder mailbox are unverified."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 11,
+            "max": 20,
+            "rationale": "Subscription description and two actual Meta records; actual company revenue and budget unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 16,
+            "max": 20,
+            "rationale": "Two exact Meta records and inspected video samples; full audio and motion review pending."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Actual revenue unknown",
+        "summary": "No verified subscriber count, numerical checkout price or company revenue. Scholarship awards claimed by the site are not company revenue.",
+        "scenarios": [
+          {
+            "label": "Illustrative arithmetic only",
+            "value": "$2,000 gross monthly billings",
+            "assumptions": "Assume 100 paying accounts at an invented $20/month. Neither input is verified."
+          },
+          {
+            "label": "Illustrative arithmetic only",
+            "value": "$10,000 gross monthly billings",
+            "assumptions": "Assume 500 paying accounts at an invented $20/month. This is not a forecast."
+          }
+        ],
+        "limitations": [
+          "Price, plan mix, payers, refunds, taxes and store/payment fees unknown.",
+          "Do not use these illustrative numbers in outreach as actual performance."
+        ]
+      },
+      "icp": {
+        "summary": "Hypothesis: adult college applicants and enrolled students with repetitive scholarship search and writing work. Buyer hypothesis: a founder or growth operator who needs more creative tests.",
+        "evidence": [
+          "Official product supports student profiles, matching and editable drafts.",
+          "Two historical ads use application-time or tuition/discovery hooks."
+        ],
+        "hypotheses": [
+          "Test adults aged 18-25 in the US or Canada; age/geography are proposed, not measured analytics.",
+          "Test a direct pain point opener followed by genuine product footage."
+        ],
+        "painPoints": [
+          "Time spent finding eligible opportunities",
+          "Repeated application writing",
+          "Unclear next step and eligibility rules"
+        ]
+      },
+      "persona": {
+        "name": "Maya Brooks",
+        "description": "Original fictional adult, age 23, medium-brown skin, short curly dark bob, clear round glasses and silver stud earrings. Practical student-tools presenter, not a customer testimonial.",
+        "wardrobe": "Forest-green crewneck and beige trousers, no university marks.",
+        "imageUrl": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+        "environment": "Modest apartment study corner, oak desk, closed cream notebook, gray laptop and pothos. Lock one room map and soft daylight from camera left.",
+        "rationale": "Adapts candid close-face framing and discovery-to-product structure. Identity, dialogue, styling and scene are original. Existing creator likenesses and voices are not reused."
+      },
+      "references": [
+        {
+          "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+          "title": "Award Scholar Meta ad 1798011228292318",
+          "status": "Ad record + sampled video frames reviewed",
+          "observation": "Informal vertical close-face framing at home with daylight and an application-time discovery hook. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/awardscholar-meta-1798011228292318.png"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+          "title": "Award Scholar Meta ad 2962095170805548",
+          "status": "Ad record + sampled video frames reviewed",
+          "observation": "Expressive surprised face in indoor study-like public setting with tuition/discovery headline. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/awardscholar-meta-2962095170805548.png"
+        }
+      ],
+      "script": {
+        "durationSeconds": 15,
+        "hook": "Scholarship search taking over your weekend?",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Vertical chest-up, same desk and camera axis.",
+            "action": "Eyebrow lift and direct eye contact; avoid a fabricated personal success story.",
+            "line": "Scholarship search taking over your weekend?"
+          },
+          {
+            "start": 3,
+            "end": 7,
+            "camera": "Same scene, medium framing.",
+            "action": "Small open-hand gesture. Later composite a genuine approved matching-screen capture.",
+            "line": "Award Scholar matches opportunities to your profile"
+          },
+          {
+            "start": 7,
+            "end": 11,
+            "camera": "Same camera and wardrobe.",
+            "action": "Indicate space beside presenter for genuine editable-draft footage; no generated UI.",
+            "line": "and helps draft applications you can review."
+          },
+          {
+            "start": 11,
+            "end": 15,
+            "camera": "Return to chest-up.",
+            "action": "Small smile and plain CTA; app name and URL composited later.",
+            "line": "Check your matches, read each provider's rules, and start there."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.awardscholar.com/",
+          "title": "Product description, FAQ, legal entity footer"
+        },
+        {
+          "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+          "title": "Free start and subscription description"
+        },
+        {
+          "url": "https://www.madebyorchard.com/tos/",
+          "title": "Public publisher contact candidate"
+        },
+        {
+          "url": "https://donaldvchu.com/",
+          "title": "Donald maps to Waddle, not verified for Award Scholar"
+        },
+        {
+          "url": "https://www.linkedin.com/in/kylefung1",
+          "title": "Candidate Kyle background only, no verified Award Scholar affiliation"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+          "title": "Award Scholar Meta ad 1798011228292318"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+          "title": "Award Scholar Meta ad 2962095170805548"
+        }
+      ],
+      "gaps": [
+        "Kyle Fung affiliation and intended recipient mailbox",
+        "Actual pricing, revenue, payers, acquisition cost and retention",
+        "Current ad delivery and exact Instagram post verification",
+        "Continuous source playback/audio QA",
+        "Human approval of persona, frames, product claims and current demo offer deadline"
+      ],
+      "outreachDraft": {
+        "status": "Local draft, not sent",
+        "subject": "An original Award Scholar creative concept",
+        "body": "Hi Award Scholar team, we put together an original avatar concept around scholarship-search overload, with a storyboard and the two-page offer attached for review. Would this be a useful angle for your next creative test?"
+      },
+      "storyboardImageUrl": "/client-demo-assets/awardscholar-storyboard-v1.png",
+      "reportUrl": "/client-demo-reports/awardscholar-research-v1.html",
+      "offerPdfUrl": "/client-demo-reports/awardscholar-offer-v1.pdf",
+      "offerPreviewUrls": [
+        "/client-demo-assets/awardscholar-offer-page-1.png",
+        "/client-demo-assets/awardscholar-offer-page-2.png"
+      ],
+      "history": [
+        {
+          "id": "exa-0",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Kyle Fung\" \"Award Scholar\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 3,
+            "verifiedSourceMatches": 1,
+            "otherCandidatesNotEvidence": 2,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [
+            {
+              "url": "https://linkedin.com/in/kylefung1",
+              "title": "Kyle Fung"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-1",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"awardscholar\" site:instagram.com/reel",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 4,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 4,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "verify",
+          "stage": 0,
+          "tool": "web.run / public HTTP",
+          "title": "Verify founder and product sources",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.awardscholar.com/",
+              "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "https://www.madebyorchard.com/tos/"
+            ]
+          },
+          "output": {
+            "people": [
+              {
+                "name": "Kyle Fung",
+                "role": "User-supplied founder lead. Candidate Columbia profile and UGC background found through Exa; Award Scholar affiliation remains unverified.",
+                "status": "Affiliation unverified",
+                "url": "https://www.linkedin.com/in/kylefung1"
+              },
+              {
+                "name": "Orchard St, Inc.",
+                "role": "Legal entity named in official website footer; not an identified founder.",
+                "status": "Publisher verified",
+                "url": "https://www.awardscholar.com/"
+              }
+            ],
+            "product": {
+              "summary": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms.",
+              "features": [
+                "Profile-based scholarship matching",
+                "Editable AI application drafts",
+                "User-selected application support on supported forms",
+                "No scholarship award guarantee"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            },
+            {
+              "url": "https://www.madebyorchard.com/tos/",
+              "title": "Public publisher contact candidate"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "references",
+          "stage": 4,
+          "tool": "ffmpeg + view_image",
+          "title": "Inspect real creative references",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.facebook.com/ads/library/?id=1798011228292318",
+              "https://www.facebook.com/ads/library/?id=2962095170805548"
+            ]
+          },
+          "output": {
+            "references": [
+              {
+                "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+                "title": "Award Scholar Meta ad 1798011228292318",
+                "status": "Ad record + sampled video frames reviewed",
+                "observation": "Informal vertical close-face framing at home with daylight and an application-time discovery hook. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/awardscholar-meta-1798011228292318.png"
+              },
+              {
+                "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+                "title": "Award Scholar Meta ad 2962095170805548",
+                "status": "Ad record + sampled video frames reviewed",
+                "observation": "Expressive surprised face in indoor study-like public setting with tuition/discovery headline. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/awardscholar-meta-2962095170805548.png"
+              }
+            ],
+            "coverage": "Downloaded source media and sampled decoded frames. No continuous playback/audio QA."
+          },
+          "evidence": [
+            {
+              "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+              "title": "Award Scholar Meta ad 1798011228292318"
+            },
+            {
+              "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+              "title": "Award Scholar Meta ad 2962095170805548"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "score",
+          "stage": 1,
+          "tool": "agent.research_synthesis",
+          "title": "Build commercial scenarios and score",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "rubric": "five explicit categories, 20 points each"
+          },
+          "output": {
+            "score": {
+              "total": 72,
+              "max": 100,
+              "confidence": "Moderate creative fit; commercial metrics unverified",
+              "components": [
+                {
+                  "name": "Product and sample fit",
+                  "score": 20,
+                  "max": 20,
+                  "rationale": "Clear consumer workflow with a concise demonstrable product story."
+                },
+                {
+                  "name": "Original creative potential",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Application overload and discovery support several original hooks."
+                },
+                {
+                  "name": "Decision maker reachability",
+                  "score": 7,
+                  "max": 20,
+                  "rationale": "Kyle is a user-supplied lead; brand affiliation and founder mailbox are unverified."
+                },
+                {
+                  "name": "Commercial evidence",
+                  "score": 11,
+                  "max": 20,
+                  "rationale": "Subscription description and two actual Meta records; actual company revenue and budget unknown."
+                },
+                {
+                  "name": "Usable content reference",
+                  "score": 16,
+                  "max": 20,
+                  "rationale": "Two exact Meta records and inspected video samples; full audio and motion review pending."
+                }
+              ]
+            },
+            "revenue": {
+              "status": "Actual revenue unknown",
+              "summary": "No verified subscriber count, numerical checkout price or company revenue. Scholarship awards claimed by the site are not company revenue.",
+              "scenarios": [
+                {
+                  "label": "Illustrative arithmetic only",
+                  "value": "$2,000 gross monthly billings",
+                  "assumptions": "Assume 100 paying accounts at an invented $20/month. Neither input is verified."
+                },
+                {
+                  "label": "Illustrative arithmetic only",
+                  "value": "$10,000 gross monthly billings",
+                  "assumptions": "Assume 500 paying accounts at an invented $20/month. This is not a forecast."
+                }
+              ],
+              "limitations": [
+                "Price, plan mix, payers, refunds, taxes and store/payment fees unknown.",
+                "Do not use these illustrative numbers in outreach as actual performance."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            }
+          ],
+          "note": "Editorial synthesis performed during this session, not an analytics model or measured business outcome."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "agent.research_synthesis",
+          "title": "Draft an evidence-backed ICP",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "product": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms."
+          },
+          "output": {
+            "icp": {
+              "summary": "Hypothesis: adult college applicants and enrolled students with repetitive scholarship search and writing work. Buyer hypothesis: a founder or growth operator who needs more creative tests.",
+              "evidence": [
+                "Official product supports student profiles, matching and editable drafts.",
+                "Two historical ads use application-time or tuition/discovery hooks."
+              ],
+              "hypotheses": [
+                "Test adults aged 18-25 in the US or Canada; age/geography are proposed, not measured analytics.",
+                "Test a direct pain point opener followed by genuine product footage."
+              ],
+              "painPoints": [
+                "Time spent finding eligible opportunities",
+                "Repeated application writing",
+                "Unclear next step and eligibility rules"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona",
+          "stage": 3,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate an original persona sheet",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "persona": "Original fictional adult, age 23, medium-brown skin, short curly dark bob, clear round glasses and silver stud earrings. Practical student-tools presenter, not a customer testimonial.",
+            "environment": "Modest apartment study corner, oak desk, closed cream notebook, gray laptop and pothos. Lock one room map and soft daylight from camera left."
+          },
+          "output": {
+            "imageUrl": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+            "humanApproved": false,
+            "itemizedImageCostUsd": null
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+              "title": "Generated original persona"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona-qa",
+          "stage": 3,
+          "tool": "view_image + static review",
+          "title": "Review identity, anatomy and source-format fit",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent inspection and independent agent static image review"
+          },
+          "output": {
+            "findings": "Consistent original identity; lock room geography and strengthen reaction.",
+            "motionReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Static AI review is recorded. A real human has not approved these assets."
+        },
+        {
+          "id": "storyboard",
+          "stage": 4,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate the original four-shot storyboard",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Award Scholar"
+          },
+          "output": {
+            "assetUrl": "/client-demo-assets/awardscholar-storyboard-v1.png",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/awardscholar-storyboard-v1.png",
+              "title": "Generate the original four-shot storyboard"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Assemble the personalized two-page demo offer",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Award Scholar"
+          },
+          "output": {
+            "assetUrl": "/client-demo-reports/awardscholar-offer-v1.pdf",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-reports/awardscholar-offer-v1.pdf",
+              "title": "Assemble the personalized two-page demo offer"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "storyboard-qa",
+          "stage": 4,
+          "tool": "view_image + independent static review",
+          "title": "Check the four storyboard frames",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent and independent agent static image inspection"
+          },
+          "output": {
+            "result": "Suitable for human static review; identity and wardrobe coherent, no obvious blocking anatomy defects. Jamie microphone removed consistently.",
+            "motionAndAudioReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "approval",
+          "stage": 5,
+          "tool": "demo.human_approval",
+          "title": "Human approves storyboard and brief in the simulation",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": true,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "approval": "Simulated only",
+            "realApproval": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "render",
+          "stage": 5,
+          "tool": "demo.video_render",
+          "title": "Simulate generating the approved sample",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "sample": "Fictional placeholder event; no video asset or paid provider call",
+            "providerSubmitted": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "quality",
+          "stage": 5,
+          "tool": "demo.ai_and_human_review",
+          "title": "Simulate AI and human sample checks",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "checks": [
+              "Identity and wardrobe consistency",
+              "Product claims and authentic UI",
+              "Audio, timing and captions"
+            ],
+            "result": "Simulated pass, not actual media QA"
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "outreach",
+          "stage": 5,
+          "tool": "demo.outreach_package",
+          "title": "Preview the personalized message and attachments",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "draft": {
+              "status": "Local draft, not sent",
+              "subject": "An original Award Scholar creative concept",
+              "body": "Hi Award Scholar team, we put together an original avatar concept around scholarship-search overload, with a storyboard and the two-page offer attached for review. Would this be a useful angle for your next creative test?"
+            },
+            "attachments": [
+              "Approved sample placeholder",
+              "/client-demo-reports/awardscholar-offer-v1.pdf"
+            ],
+            "recipient": "recipient@example.invalid",
+            "sent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "send",
+          "stage": 5,
+          "tool": "demo.outreach_send",
+          "title": "Simulate sending the sample and brief",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "mockDelivery": "Sent in simulation",
+            "messageId": "demo-message-001",
+            "realMessageSent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "reply",
+          "stage": 5,
+          "tool": "demo.reply",
+          "title": "Show a fictional interested reply",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "from": "recipient@example.invalid",
+            "text": "This looks interesting. Can we talk through the pilot?",
+            "receivedFromRealPerson": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "crm",
+          "stage": 5,
+          "tool": "demo.crm_and_call",
+          "title": "Simulate a CRM update and call handoff",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "crmStatus": "Interested (simulation)",
+            "call": "Mock scheduling handoff",
+            "crmWritten": false,
+            "calendarEventCreated": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        }
+      ]
+    },
+    {
+      "id": "waddle",
+      "name": "Waddle",
+      "website": "https://www.waddlecouples.com/",
+      "founders": [
+        {
+          "name": "Donald Chu",
+          "role": "Waddle founder and Columbia computer-science student, confirmed on his own portfolio. Public contact published there; deliverability not tested.",
+          "status": "Founder verified",
+          "url": "https://donaldvchu.com/"
+        },
+        {
+          "name": "Xander Wanagel",
+          "role": "User identifies him as cofounder. @xander.wan Waddle promotion is verified; formal role remains user-supplied. His current portfolio links a separate Dovey app.",
+          "status": "Creator verified; role unresolved",
+          "url": "https://www.xanderwanagel.com/"
+        }
+      ],
+      "product": {
+        "summary": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks.",
+        "features": [
+          "3,000+ questions, according to the official site",
+          "Daily check-ins and question decks",
+          "Shared duck, photos and playful activities",
+          "Official site self-reports 6,100+ paired couples; not an audited active-user count"
+        ]
+      },
+      "score": {
+        "total": 85,
+        "max": 100,
+        "confidence": "Moderate creative fit; commercial metrics unverified",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Clear consumer product, visible duck mascot and sample-friendly daily ritual."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 18,
+            "max": 20,
+            "rationale": "Questions and shared play support original short-form variations."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 18,
+            "max": 20,
+            "rationale": "Founder and public personal contact confirmed; mailbox deliverability not tested."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 12,
+            "max": 20,
+            "rationale": "Usage claims and paid SKUs visible, but revenue, payers and buying budget unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 17,
+            "max": 20,
+            "rationale": "Xander source transcripts and selected video frames now verified; Instagram, Meta delivery and audio QA unresolved."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Actual revenue unknown",
+        "summary": "App Store lists paid products. There is no verified payer count or revenue. Do not transfer revenue from the separate Dovey app.",
+        "scenarios": [
+          {
+            "label": "Illustrative monthly scenario",
+            "value": "$999 gross monthly billings",
+            "assumptions": "100 hypothetical subscribers x listed $9.99 monthly SKU."
+          },
+          {
+            "label": "Illustrative monthly scenario",
+            "value": "$4,995 gross monthly billings",
+            "assumptions": "500 hypothetical subscribers x listed $9.99 monthly SKU."
+          },
+          {
+            "label": "Illustrative annual scenario",
+            "value": "$3,332.50 monthly equivalent",
+            "assumptions": "1,000 hypothetical annual subscribers x listed $39.99/year divided by 12."
+          }
+        ],
+        "limitations": [
+          "Current checkout offer and plan mix unverified.",
+          "Payer counts are hypothetical; these are arithmetic examples, not actual-revenue estimates.",
+          "Excludes store fees, refunds and taxes."
+        ]
+      },
+      "icp": {
+        "summary": "Hypothesis: adult dating couples who want a lightweight daily connection ritual, especially geographically separated college or early-career couples. Buyer: founder-led consumer-app team testing creative.",
+        "evidence": [
+          "Official site supports couples together or at a distance.",
+          "Daily questions, photos, streaks and shared duck are real product themes.",
+          "Xander posts discuss repetitive remote relationship check-ins."
+        ],
+        "hypotheses": [
+          "Test adults aged 18-29; no audience analytics validate this range.",
+          "Compare repetitive daily-text angle against playful shared-duck angle."
+        ],
+        "painPoints": [
+          "Repetitive small talk",
+          "Feeling distant between visits",
+          "Difficulty starting deeper conversations"
+        ]
+      },
+      "persona": {
+        "name": "Jamie",
+        "description": "Original fictional adult, age 25, olive skin, wavy dark hair, light stubble, round dark glasses and charcoal hoodie. Warm direct-to-camera presenter, with an original voice.",
+        "wardrobe": "Charcoal hoodie and relaxed charcoal trousers, no logos.",
+        "imageUrl": "/client-demo-assets/waddle-jamie-persona-v2.png",
+        "environment": "Modest neighborhood cafe in daylight. One table, dark ceiling beams, soft window light and neutral phone prop. Fix the background and remove the inconsistent clip-on microphone before production.",
+        "rationale": "Original character adapted to the observed candid hoodie/cafe format. The earlier evening-sofa concept is retained as v1, but v2 is the selected demo direction. No Xander or Donald likeness, voice or personal testimony."
+      },
+      "references": [
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-06",
+          "status": "Public organic-format post; paid distribution unknown",
+          "observation": "9:16 close selfie; Dark hoodie, wired earbuds and blue bottle prop; Casual cafe-like background with exposed ceiling and red pipe; Bold top hook at opening and short lower subtitles. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-16",
+          "status": "Public organic-format post; paid distribution unknown",
+          "observation": "9:16 close selfie; Dark hoodie, wired earbud held near mouth; Public waiting-area seats and ceiling panels; Bold upper hook at opening; small lower subtitles; App minigame and duck recording overlaid at 29 seconds. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg"
+        }
+      ],
+      "script": {
+        "durationSeconds": 15,
+        "hook": "Still asking, \"How was your day?\"",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Vertical close selfie at cafe table.",
+            "action": "Raised eyebrow, natural candid delivery; no creator identity or voice reuse.",
+            "line": "Still asking, \"How was your day?\""
+          },
+          {
+            "start": 3,
+            "end": 7,
+            "camera": "Same scene, slightly wider medium.",
+            "action": "Small open-hand gesture; genuine approved question-card footage goes in edit.",
+            "line": "Waddle gives you better questions to ask together."
+          },
+          {
+            "start": 7,
+            "end": 12,
+            "camera": "Same camera axis and charcoal hoodie.",
+            "action": "Gesture toward separately composited genuine duck/photo recording. No generated app screen.",
+            "line": "Share a photo, raise a duck, make time for each other."
+          },
+          {
+            "start": 12,
+            "end": 15,
+            "camera": "Return to close selfie.",
+            "action": "Friendly small smile; simple brand/URL end card added in edit.",
+            "line": "Try a daily check-in with Waddle."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.waddlecouples.com/",
+          "title": "waddle site"
+        },
+        {
+          "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+          "title": "waddle apple"
+        },
+        {
+          "url": "https://donaldvchu.com/",
+          "title": "donald portfolio"
+        },
+        {
+          "url": "https://www.xanderwanagel.com/",
+          "title": "xander portfolio"
+        },
+        {
+          "url": "https://apps.apple.com/us/app/dovey-couples-questions/id6759009985",
+          "title": "dovey apple"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-06"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-16"
+        }
+      ],
+      "gaps": [
+        "Formal Xander cofounder role and exact Instagram handles/posts",
+        "No verified Waddle Meta advertiser or ad IDs; this does not prove no ads exist",
+        "Actual revenue, active users, payer count and current checkout offer",
+        "Continuous source playback/audio QA",
+        "Microphone continuity and fixed room/camera map",
+        "Human review of persona, frames, permitted production assets and offer copy"
+      ],
+      "outreachDraft": {
+        "status": "Local draft, not sent",
+        "subject": "An original Waddle creative concept",
+        "body": "Hi Donald, we built an original avatar concept for Waddle around turning routine daily check-ins into better conversations and shared duck play. The storyboard, reference notes and two-page demo offer are attached for review. Would this be a useful angle to test?"
+      },
+      "storyboardImageUrl": "/client-demo-assets/waddle-storyboard-v1.png",
+      "reportUrl": "/client-demo-reports/waddle-research-v1.html",
+      "offerPdfUrl": "/client-demo-reports/waddle-offer-v1.pdf",
+      "offerPreviewUrls": [
+        "/client-demo-assets/waddle-offer-page-1.png",
+        "/client-demo-assets/waddle-offer-page-2.png"
+      ],
+      "history": [
+        {
+          "id": "exa-0",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "Xander Waddle couples app Instagram xander.wan",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-1",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "site:instagram.com/reel \"Waddle\" \"xander\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 2,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 2,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-2",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"xander.wan\" site:instagram.com",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-3",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Waddle\" \"waddlecouples.com\" \"ads\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 1,
+            "otherCandidatesNotEvidence": 4,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "Waddle - The relationship app with a duck to raise"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-4",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Waddle\" site:facebook.com/ads/library",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "verify",
+          "stage": 0,
+          "tool": "web.run / public HTTP",
+          "title": "Verify founder and product sources",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.waddlecouples.com/",
+              "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "https://donaldvchu.com/"
+            ]
+          },
+          "output": {
+            "people": [
+              {
+                "name": "Donald Chu",
+                "role": "Waddle founder and Columbia computer-science student, confirmed on his own portfolio. Public contact published there; deliverability not tested.",
+                "status": "Founder verified",
+                "url": "https://donaldvchu.com/"
+              },
+              {
+                "name": "Xander Wanagel",
+                "role": "User identifies him as cofounder. @xander.wan Waddle promotion is verified; formal role remains user-supplied. His current portfolio links a separate Dovey app.",
+                "status": "Creator verified; role unresolved",
+                "url": "https://www.xanderwanagel.com/"
+              }
+            ],
+            "product": {
+              "summary": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks.",
+              "features": [
+                "3,000+ questions, according to the official site",
+                "Daily check-ins and question decks",
+                "Shared duck, photos and playful activities",
+                "Official site self-reports 6,100+ paired couples; not an audited active-user count"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            },
+            {
+              "url": "https://donaldvchu.com/",
+              "title": "donald portfolio"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "references",
+          "stage": 4,
+          "tool": "ffmpeg + view_image",
+          "title": "Inspect real creative references",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+              "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ"
+            ]
+          },
+          "output": {
+            "references": [
+              {
+                "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+                "title": "Xander @xander.wan, Snapchat, 2026-08-06",
+                "status": "Public organic-format post; paid distribution unknown",
+                "observation": "9:16 close selfie; Dark hoodie, wired earbuds and blue bottle prop; Casual cafe-like background with exposed ceiling and red pipe; Bold top hook at opening and short lower subtitles. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg"
+              },
+              {
+                "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+                "title": "Xander @xander.wan, Snapchat, 2026-08-16",
+                "status": "Public organic-format post; paid distribution unknown",
+                "observation": "9:16 close selfie; Dark hoodie, wired earbud held near mouth; Public waiting-area seats and ceiling panels; Bold upper hook at opening; small lower subtitles; App minigame and duck recording overlaid at 29 seconds. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg"
+              }
+            ],
+            "coverage": "Downloaded source media and sampled decoded frames. No continuous playback/audio QA."
+          },
+          "evidence": [
+            {
+              "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+              "title": "Xander @xander.wan, Snapchat, 2026-08-06"
+            },
+            {
+              "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+              "title": "Xander @xander.wan, Snapchat, 2026-08-16"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "score",
+          "stage": 1,
+          "tool": "agent.research_synthesis",
+          "title": "Build commercial scenarios and score",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "rubric": "five explicit categories, 20 points each"
+          },
+          "output": {
+            "score": {
+              "total": 85,
+              "max": 100,
+              "confidence": "Moderate creative fit; commercial metrics unverified",
+              "components": [
+                {
+                  "name": "Product and sample fit",
+                  "score": 20,
+                  "max": 20,
+                  "rationale": "Clear consumer product, visible duck mascot and sample-friendly daily ritual."
+                },
+                {
+                  "name": "Original creative potential",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Questions and shared play support original short-form variations."
+                },
+                {
+                  "name": "Decision maker reachability",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Founder and public personal contact confirmed; mailbox deliverability not tested."
+                },
+                {
+                  "name": "Commercial evidence",
+                  "score": 12,
+                  "max": 20,
+                  "rationale": "Usage claims and paid SKUs visible, but revenue, payers and buying budget unknown."
+                },
+                {
+                  "name": "Usable content reference",
+                  "score": 17,
+                  "max": 20,
+                  "rationale": "Xander source transcripts and selected video frames now verified; Instagram, Meta delivery and audio QA unresolved."
+                }
+              ]
+            },
+            "revenue": {
+              "status": "Actual revenue unknown",
+              "summary": "App Store lists paid products. There is no verified payer count or revenue. Do not transfer revenue from the separate Dovey app.",
+              "scenarios": [
+                {
+                  "label": "Illustrative monthly scenario",
+                  "value": "$999 gross monthly billings",
+                  "assumptions": "100 hypothetical subscribers x listed $9.99 monthly SKU."
+                },
+                {
+                  "label": "Illustrative monthly scenario",
+                  "value": "$4,995 gross monthly billings",
+                  "assumptions": "500 hypothetical subscribers x listed $9.99 monthly SKU."
+                },
+                {
+                  "label": "Illustrative annual scenario",
+                  "value": "$3,332.50 monthly equivalent",
+                  "assumptions": "1,000 hypothetical annual subscribers x listed $39.99/year divided by 12."
+                }
+              ],
+              "limitations": [
+                "Current checkout offer and plan mix unverified.",
+                "Payer counts are hypothetical; these are arithmetic examples, not actual-revenue estimates.",
+                "Excludes store fees, refunds and taxes."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            }
+          ],
+          "note": "Editorial synthesis performed during this session, not an analytics model or measured business outcome."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "agent.research_synthesis",
+          "title": "Draft an evidence-backed ICP",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "product": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks."
+          },
+          "output": {
+            "icp": {
+              "summary": "Hypothesis: adult dating couples who want a lightweight daily connection ritual, especially geographically separated college or early-career couples. Buyer: founder-led consumer-app team testing creative.",
+              "evidence": [
+                "Official site supports couples together or at a distance.",
+                "Daily questions, photos, streaks and shared duck are real product themes.",
+                "Xander posts discuss repetitive remote relationship check-ins."
+              ],
+              "hypotheses": [
+                "Test adults aged 18-29; no audience analytics validate this range.",
+                "Compare repetitive daily-text angle against playful shared-duck angle."
+              ],
+              "painPoints": [
+                "Repetitive small talk",
+                "Feeling distant between visits",
+                "Difficulty starting deeper conversations"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona",
+          "stage": 3,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate an original persona sheet",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "persona": "Original fictional adult, age 25, olive skin, wavy dark hair, light stubble, round dark glasses and charcoal hoodie. Warm direct-to-camera presenter, with an original voice.",
+            "environment": "Modest neighborhood cafe in daylight. One table, dark ceiling beams, soft window light and neutral phone prop. Fix the background and remove the inconsistent clip-on microphone before production."
+          },
+          "output": {
+            "imageUrl": "/client-demo-assets/waddle-jamie-persona-v2.png",
+            "humanApproved": false,
+            "itemizedImageCostUsd": null
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/waddle-jamie-persona-v2.png",
+              "title": "Generated original persona"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona-qa",
+          "stage": 3,
+          "tool": "view_image + static review",
+          "title": "Review identity, anatomy and source-format fit",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent inspection and independent agent static image review"
+          },
+          "output": {
+            "findings": "V2 improves cafe/hoodie format fit; microphone only visible in first persona panel. Remove it in storyboard.",
+            "motionReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Static AI review is recorded. A real human has not approved these assets."
+        },
+        {
+          "id": "storyboard",
+          "stage": 4,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate the original four-shot storyboard",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Waddle"
+          },
+          "output": {
+            "assetUrl": "/client-demo-assets/waddle-storyboard-v1.png",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/waddle-storyboard-v1.png",
+              "title": "Generate the original four-shot storyboard"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Assemble the personalized two-page demo offer",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Waddle"
+          },
+          "output": {
+            "assetUrl": "/client-demo-reports/waddle-offer-v1.pdf",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-reports/waddle-offer-v1.pdf",
+              "title": "Assemble the personalized two-page demo offer"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "storyboard-qa",
+          "stage": 4,
+          "tool": "view_image + independent static review",
+          "title": "Check the four storyboard frames",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent and independent agent static image inspection"
+          },
+          "output": {
+            "result": "Suitable for human static review; identity and wardrobe coherent, no obvious blocking anatomy defects. Jamie microphone removed consistently.",
+            "motionAndAudioReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "approval",
+          "stage": 5,
+          "tool": "demo.human_approval",
+          "title": "Human approves storyboard and brief in the simulation",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": true,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "approval": "Simulated only",
+            "realApproval": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "render",
+          "stage": 5,
+          "tool": "demo.video_render",
+          "title": "Simulate generating the approved sample",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "sample": "Fictional placeholder event; no video asset or paid provider call",
+            "providerSubmitted": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "quality",
+          "stage": 5,
+          "tool": "demo.ai_and_human_review",
+          "title": "Simulate AI and human sample checks",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "checks": [
+              "Identity and wardrobe consistency",
+              "Product claims and authentic UI",
+              "Audio, timing and captions"
+            ],
+            "result": "Simulated pass, not actual media QA"
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "outreach",
+          "stage": 5,
+          "tool": "demo.outreach_package",
+          "title": "Preview the personalized message and attachments",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "draft": {
+              "status": "Local draft, not sent",
+              "subject": "An original Waddle creative concept",
+              "body": "Hi Donald, we built an original avatar concept for Waddle around turning routine daily check-ins into better conversations and shared duck play. The storyboard, reference notes and two-page demo offer are attached for review. Would this be a useful angle to test?"
+            },
+            "attachments": [
+              "Approved sample placeholder",
+              "/client-demo-reports/waddle-offer-v1.pdf"
+            ],
+            "recipient": "recipient@example.invalid",
+            "sent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "send",
+          "stage": 5,
+          "tool": "demo.outreach_send",
+          "title": "Simulate sending the sample and brief",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "mockDelivery": "Sent in simulation",
+            "messageId": "demo-message-001",
+            "realMessageSent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "reply",
+          "stage": 5,
+          "tool": "demo.reply",
+          "title": "Show a fictional interested reply",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "from": "recipient@example.invalid",
+            "text": "This looks interesting. Can we talk through the pilot?",
+            "receivedFromRealPerson": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "crm",
+          "stage": 5,
+          "tool": "demo.crm_and_call",
+          "title": "Simulate a CRM update and call handoff",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "crmStatus": "Interested (simulation)",
+            "call": "Mock scheduling handoff",
+            "crmWritten": false,
+            "calendarEventCreated": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        }
+      ]
+    }
+  ]
+}

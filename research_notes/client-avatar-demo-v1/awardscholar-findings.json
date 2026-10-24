@@ -1,0 +1,231 @@
+{
+  "brand": "Award Scholar",
+  "researched_at": "2026-10-24",
+  "mode": "research_and_draft_only",
+  "website": "https://www.awardscholar.com/",
+  "product_summary": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms.",
+  "identity": {
+    "legal_entity": {
+      "name": "Orchard St, Inc.",
+      "status": "official_homepage_footer"
+    },
+    "founder": null,
+    "user_supplied_leads": [
+      "Kyle Fung",
+      "Donald Chu"
+    ],
+    "kyle_fung": {
+      "candidate_profile": "https://www.linkedin.com/in/kylefung1",
+      "association_to_award_scholar": "unverified",
+      "email": null
+    },
+    "donald_chu": {
+      "portfolio": "https://donaldvchu.com/",
+      "verified_association": "Waddle founder",
+      "award_scholar_association": "not_verified_do_not_use"
+    },
+    "contact_candidates": [
+      {
+        "email": "hello@madebyorchard.com",
+        "source_url": "https://www.madebyorchard.com/tos/",
+        "status": "public_publisher_candidate_not_verified_founder_mailbox",
+        "send_ready": false
+      }
+    ],
+    "draft_salutation": "Award Scholar team"
+  },
+  "monetization": {
+    "model": "subscription_with_free_start_vendor_description",
+    "numerical_price": null,
+    "price_status": "exact_terms_shown_at_checkout_not_verified_here",
+    "revenue": null,
+    "revenue_status": "unknown_no_actual_estimate",
+    "scenario_is_actual_estimate": false,
+    "hypothetical_scenarios": [
+      {
+        "label": "low",
+        "assumed_paying_accounts": 100,
+        "assumed_monthly_realized_arpu_usd": 10,
+        "implied_monthly_gross_subscription_revenue_usd": 1000
+      },
+      {
+        "label": "base",
+        "assumed_paying_accounts": 1000,
+        "assumed_monthly_realized_arpu_usd": 20,
+        "implied_monthly_gross_subscription_revenue_usd": 20000
+      },
+      {
+        "label": "high",
+        "assumed_paying_accounts": 5000,
+        "assumed_monthly_realized_arpu_usd": 30,
+        "implied_monthly_gross_subscription_revenue_usd": 150000
+      }
+    ],
+    "scenario_warning": "Invented planning inputs, not verified prices or subscribers. No probability assigned. Excludes fees, refunds, taxes and costs. Scholarship awards are not company revenue."
+  },
+  "socials": [
+    {
+      "url": "https://www.instagram.com/awardscholar/",
+      "status": "brand_tag_in_saved_primary_ad_record_current_profile_unverified"
+    },
+    {
+      "url": "https://facebook.com/61592849491031",
+      "status": "branded_content_page_in_saved_primary_ad_record"
+    }
+  ],
+  "references": [
+    {
+      "id": "1798011228292318",
+      "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+      "creator_url": "https://www.instagram.com/sadiescholar/",
+      "reviewed": "original_preview_and_decoded_video_visual_samples_not_full_audio_or_real_time_playback",
+      "observed": "Informal vertical close-face framing at home with daylight and an application-time discovery hook.",
+      "repo_image": "docs/creative/personalized-character-v1/proposal-template/assets/example-brand-ad-1.png",
+      "active_status": "saved_true_not_live_reverified",
+      "downloaded_video": {
+        "ad_id": "1798011228292318",
+        "permanent_source_url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+        "file": "work/client-avatar-demo-v1/awardscholar-reference/1798011228292318.mp4",
+        "sha256": "824e9e96e5abe333f7759db32c51b47f547ed64f2133b1d691dfdd28d789191a",
+        "bytes": 2735616,
+        "duration_seconds": 13.68,
+        "width": 720,
+        "height": 1280,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "visual_review": "Decoded samples at roughly 0,3,6,9,12 seconds; not full real-time playback or audio review.",
+        "contact_sheet": "work/client-avatar-demo-v1/awardscholar-reference/1798011228292318-samples.jpg"
+      }
+    },
+    {
+      "id": "2962095170805548",
+      "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+      "creator_url": "https://www.instagram.com/petuhparkuh/",
+      "reviewed": "original_preview_and_decoded_video_visual_samples_not_full_audio_or_real_time_playback",
+      "observed": "Expressive surprised face in indoor study-like public setting with tuition/discovery headline.",
+      "repo_image": "docs/creative/personalized-character-v1/proposal-template/assets/example-brand-ad-2.png",
+      "active_status": "saved_true_not_live_reverified",
+      "downloaded_video": {
+        "ad_id": "2962095170805548",
+        "permanent_source_url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+        "file": "work/client-avatar-demo-v1/awardscholar-reference/2962095170805548.mp4",
+        "sha256": "a0f35213b6a485ed9eb0e734147b39334a2e96458de6ef48165e7b0f265ab6f5",
+        "bytes": 3074430,
+        "duration_seconds": 15.83,
+        "width": 720,
+        "height": 1280,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "visual_review": "Decoded samples at roughly 0,3,6,9,12 seconds; not full real-time playback or audio review.",
+        "contact_sheet": "work/client-avatar-demo-v1/awardscholar-reference/2962095170805548-samples.jpg"
+      }
+    }
+  ],
+  "reference_record_fetched_at": "2026-10-24T15:37:14.936Z",
+  "reference_limitations": [
+    "Decoded visual samples reviewed, but no full real-time playback, audio, retention or conversion analysis.",
+    "Current Ad Library activity and Instagram profile ownership remain unverified.",
+    "Two exact records only; no third reference invented.",
+    "Advertiser product footage is historical creative evidence, not independent live UI verification."
+  ],
+  "lead_fit": {
+    "score": 72,
+    "max": 100,
+    "label": "Editorial outreach prioritization, not revenue, probability, performance or personal worth",
+    "rubric": [
+      {
+        "criterion": "product_sample_fit",
+        "score": 20,
+        "max": 20,
+        "evidence": "Official product sequence can be explained in a short original sample."
+      },
+      {
+        "criterion": "original_creative_potential",
+        "score": 18,
+        "max": 20,
+        "evidence": "Application overload and discovery themes support original hook variants."
+      },
+      {
+        "criterion": "reachable_decision_maker",
+        "score": 7,
+        "max": 20,
+        "evidence": "Publisher contact candidate and user-known Kyle lead, affiliation and target mailbox unverified."
+      },
+      {
+        "criterion": "commercial_evidence",
+        "score": 11,
+        "max": 20,
+        "evidence": "Subscription description and historical primary ad presence; user describes previous clients, not independently verified revenue."
+      },
+      {
+        "criterion": "usable_content_reference",
+        "score": 16,
+        "max": 20,
+        "evidence": "Two primary ad records and visually reviewed previews, no full motion review."
+      }
+    ]
+  },
+  "icp": {
+    "end_user_hypothesis": "Adult U.S. and Canadian college applicants or enrolled students who face repeated scholarship search and writing tasks.",
+    "buyer_hypothesis": "Founder or growth operator accountable for short-form creative output.",
+    "unknowns": [
+      "Audience analytics",
+      "Budget owner",
+      "Actual CAC",
+      "Conversion and retention",
+      "Paying customers"
+    ]
+  },
+  "persona": {
+    "name": "Maya Brooks",
+    "fictional": true,
+    "age": 22,
+    "role": "Practical adult student tools presenter",
+    "appearance": "Warm medium-brown skin, short dark curly bob, hazel eyes, round clear glasses.",
+    "wardrobe": "Forest-green crewneck, beige trousers, small silver stud earrings.",
+    "likeness_policy": "Original fictional character, no founder, customer or existing creator likeness."
+  },
+  "environment": "Bright modest apartment study corner; oak desk, closed cream notebook, laptop, plant; window light camera left; no school marks.",
+  "sample": {
+    "target_duration_seconds": 15,
+    "word_count": 30,
+    "script": "Scholarship search taking over your weekend? Award Scholar matches opportunities to your profile and helps draft applications you can review. Check your matches, read each provider's rules, and start there.",
+    "actual_timing_verified": false,
+    "product_ui": "Use genuine approved current capture later, no fabricated app UI."
+  },
+  "approval_status": {
+    "persona": "pending_human_review",
+    "script": "pending_human_review",
+    "sample": "not_generated",
+    "recipient": "unverified",
+    "send": "draft_only"
+  },
+  "sources": [
+    {
+      "url": "https://www.awardscholar.com/",
+      "kind": "official",
+      "used_for": "Product description, FAQ, legal entity footer"
+    },
+    {
+      "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+      "kind": "official_vendor_article",
+      "used_for": "Free start and subscription description"
+    },
+    {
+      "url": "https://www.madebyorchard.com/tos/",
+      "kind": "official_publisher_terms",
+      "used_for": "Public publisher contact candidate"
+    },
+    {
+      "url": "https://donaldvchu.com/",
+      "kind": "primary_portfolio",
+      "used_for": "Donald maps to Waddle, not verified for Award Scholar"
+    },
+    {
+      "url": "https://www.linkedin.com/in/kylefung1",
+      "kind": "primary_self_profile",
+      "used_for": "Candidate Kyle background only, no verified Award Scholar affiliation"
+    }
+  ],
+  "media_download_receipt": "work/client-avatar-demo-v1/awardscholar-reference/provenance.json"
+}

@@ -1,0 +1,2971 @@
+{
+  "version": 2,
+  "mode": "demo",
+  "preparedAt": "2026-10-24T20:25:22.885Z",
+  "activeBrandIds": [
+    "disobedient",
+    "vylin"
+  ],
+  "historyDisclosure": "Actual free Exa calls, verified official garment sources and local artifact history. No invented paid clients, inbound DMs, Genjutsu results or outbound receipts.",
+  "brands": [
+    {
+      "id": "disobedient",
+      "name": "Disobedient",
+      "website": "https://disobedientnyc.com/",
+      "demoKind": "streetwear",
+      "taskId": 10,
+      "founders": [
+        {
+          "name": "Founder not established",
+          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. Friend test recipient has not been supplied.",
+          "status": "Identity unresolved",
+          "url": "https://disobedientnyc.com/"
+        }
+      ],
+      "product": {
+        "summary": "NYC apparel brand with independence and defiance positioning; streetwear interpretation supported by products and brand copy. Demo garment: Low Lives Hoodie.",
+        "features": [
+          "14oz heavy fleece",
+          "98% cotton,2% polyester",
+          "Light heather grey pullover hoodie",
+          "Kangaroo front pocket",
+          "Blank visible front, no visible chest mark or drawcord",
+          "Large blue back lettering with red musical staff and treble clef",
+          "Official on-body rear view provides fit reference"
+        ]
+      },
+      "score": {
+        "total": 64,
+        "max": 100,
+        "confidence": "Editorial creative fit only",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Exact hoodie photographs and product page verified."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 17,
+            "max": 20,
+            "rationale": "Existing fictional UK character can demonstrate an original variation; actual customer fit untested."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 7,
+            "max": 20,
+            "rationale": "Official social/contact route available; founder and friend recipient unknown."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 8,
+            "max": 20,
+            "rationale": "Product pricing visible; revenue, payers, client payment and buying intent unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 12,
+            "max": 20,
+            "rationale": "Real garment references; no verified brand-specific Meta or organic video reference."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Unknown",
+        "summary": "No verified company revenue or customer count. Product price is not revenue.",
+        "scenarios": [],
+        "limitations": [
+          "No payment is mapped to this brand. No sales, conversion or audience performance claim is made."
+        ]
+      },
+      "icp": {
+        "summary": "Proposed creative test: adult UK/London streetwear fans, aged 18-24, who enjoy nostalgic game-style edits and hoodie styling. This is an original demo direction, not measured brand analytics.",
+        "evidence": [
+          "NYC apparel brand with independence and defiance positioning; streetwear interpretation supported by products and brand copy.",
+          "Official Low Lives Hoodie apparel imagery and vendor product description."
+        ],
+        "hypotheses": [
+          "Test whether the existing London character works for a New York brand; UK customer overlap is unverified.",
+          "Compare a short identity-driven opener with a product-led hoodie opener."
+        ],
+        "painPoints": [
+          "Choosing clothing with a recognizable visual identity",
+          "Understanding fit, color, construction and where to shop"
+        ]
+      },
+      "persona": {
+        "name": "Original London game character",
+        "description": "Reuse the existing fictional adult PS2-style London presenter: blond braids, same face, grey trousers and white sneakers. This is a historical owned creative asset, not a newly discovered creator or customer.",
+        "wardrobe": "Light heather grey Low Lives pullover, blank front, no zipper or chest mark. Blue/red rear artwork only on the back.",
+        "imageUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
+        "environment": "Existing Canary Wharf penthouse at dusk, leather armchair, floor lamp and London skyline. Preserve camera, pose, voice and scene through the garment edit.",
+        "rationale": "The current user-selected direction uses an existing character. Exact brand audience fit remains a creative hypothesis. The ImageGen garment concept is a still preview, not a Genjutsu result."
+      },
+      "assets": [
+        {
+          "kind": "logo",
+          "title": "Official Disobedient logo",
+          "imageUrl": "/streetwear-demo-assets/disobedient-official-logo-v1.png",
+          "sourceUrl": "https://disobedientnyc.com/",
+          "note": "Official unedited header logo."
+        },
+        {
+          "kind": "product",
+          "title": "disobedient hoodie front",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-front.jpg",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
+          "note": "Actual official ecommerce photograph. Reference only; not a Meta ad or generated output."
+        },
+        {
+          "kind": "product",
+          "title": "disobedient hoodie back",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-back.jpg",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389",
+          "note": "Actual official ecommerce photograph. Reference only; not a Meta ad or generated output."
+        },
+        {
+          "kind": "product",
+          "title": "disobedient hoodie model",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-model.jpg",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/2B2DEE9F-F368-4F75-B134-4833B9FCEE7F.jpg?v=1770218378",
+          "note": "Actual official ecommerce photograph. Reference only; not a Meta ad or generated output."
+        }
+      ],
+      "references": [
+        {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "title": "Low Lives Hoodie: front",
+          "status": "Official product photo inspected",
+          "observation": "Real garment reference. Match construction and artwork placement. Do not copy the photographed model identity.",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-front.jpg"
+        },
+        {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "title": "Low Lives Hoodie: back",
+          "status": "Official product photo inspected",
+          "observation": "Real garment reference. Match construction and artwork placement. Do not copy the photographed model identity.",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-back.jpg"
+        },
+        {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+          "title": "Low Lives Hoodie: on-body fit",
+          "status": "Official product photo inspected",
+          "observation": "Real garment reference. Match construction and artwork placement. Do not copy the photographed model identity.",
+          "imageUrl": "/streetwear-demo-assets/disobedient-hoodie-model.jpg"
+        }
+      ],
+      "sourceVideo": {
+        "url": "/streetwear-demo-assets/generic-source-6s-v1.mp4",
+        "title": "Existing London character, six-second generic source",
+        "kind": "historical",
+        "posterUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
+        "note": "Earlier generic lettering-cleanup asset. This source is real, but it is not a newly rendered branded garment swap."
+      },
+      "storyboardImageUrl": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+      "storyboardCaption": "Combined ImageGen approval sheet: Disobedient at left, VYLIN at right. Static concepts only. Exact logo fidelity and motion remain unverified.",
+      "script": {
+        "durationSeconds": 8,
+        "hook": "Same London character. Low Lives Hoodie. Shop disobedientnyc.com.",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Existing vertical PS2 penthouse opening.",
+            "action": "Replace only the blue garment with the verified Low Lives Hoodie. Keep the face, scene and original movement.",
+            "line": "Preserve the original source dialogue; no new speech is claimed."
+          },
+          {
+            "start": 3,
+            "end": 6,
+            "camera": "Continue the existing source camera cuts.",
+            "action": "Keep garment construction, graphics and hand occlusion stable. No fake rear design on the front.",
+            "line": "Suggested overlay: Low Lives Hoodie"
+          },
+          {
+            "start": 6,
+            "end": 8,
+            "camera": "Deterministic product end card.",
+            "action": "Show genuine hoodie reference, product name, and brand website https://disobedientnyc.com/. Link destination: https://disobedientnyc.com/products/low-lives-hoodie. No Mint checkout destination.",
+            "line": "Shop Low Lives Hoodie at disobedientnyc.com."
+          }
+        ]
+      },
+      "genjutsuPreparation": {
+        "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+        "request": {
+          "prompt": "Replace only the existing blue hoodie on the original male character with the exact Disobedient Low Lives Hoodie. Use the first supplied image for the front and construction: light heather grey pullover, no zipper, kangaroo pocket, no visible chest logo, no added front lettering and no added drawcord. Use the second supplied image only for the back artwork: preserve the supplied blue lettering and red musical staff/treble-clef placement when the back actually faces camera. Never place back artwork on the chest. Do not invent a Disobedient chest logo. Preserve the same original fictional character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering from the immutable six-second generic master. Copy only garment construction and artwork from the reference photos. Do not copy a real product model face, body, skin, hair, identity or background. Preserve natural occlusion and consistent garment texture during motion. Do not add extra people, accessories, dialogue or lettering.",
+          "resolution": "720p",
+          "image_urls": [
+            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
+            "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389"
+          ]
+        },
+        "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
+        "limitations": [
+          "Preparation only; no new branded video submitted or generated.",
+          "Six-second source is within the first-15-second processing limit.",
+          "Audio is preserved by Genjutsu; any new brand-specific speech requires separate voice/lip-sync work.",
+          "Provider-accessible historical source verified: six seconds at30fps, without audio. Restore original local audio after garment repair.",
+          "Planning estimate: $1.20 per brand at 720p, subject to account quote.",
+          "Append a two-second website/product end card after the six-second garment repair."
+        ]
+      },
+      "outboundDemo": {
+        "channel": "DM",
+        "recipientLabel": "Friend test recipient",
+        "recipientStatus": "Recipient handle and platform not supplied",
+        "status": "draft",
+        "message": "Hey, this is a real outbound test of our creative workflow using Disobedient. The task contains the sourced research, a two-page brief and a hoodie concept around our London game character. The branded motion sample is still awaiting production. Product: https://disobedientnyc.com/products/low-lives-hoodie"
+      },
+      "reportUrl": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
+      "offerPdfUrl": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
+      "offerPreviewUrls": [
+        "/streetwear-demo-assets/disobedient-brief-v1-page-1.png",
+        "/streetwear-demo-assets/disobedient-brief-v1-page-2.png"
+      ],
+      "sources": [
+        {
+          "url": "https://disobedientnyc.com/",
+          "title": "official homepage"
+        },
+        {
+          "url": "https://disobedientnyc.com/collections/sweat-suits",
+          "title": "official collection"
+        },
+        {
+          "url": "https://disobedientnyc.com/collections/sweat-suits/products/low-lives-hoodie",
+          "title": "official product"
+        },
+        {
+          "url": "https://disobedientnyc.com/products/low-lives-hoodie.js",
+          "title": "official Shopify product JSON"
+        }
+      ],
+      "gaps": [
+        "Actual friend DM handles and platform",
+        "No verified paid-client relationship or inbound message",
+        "Brand customer demographics, revenue and founder identity",
+        "No verified target Meta ad or individual organic video",
+        "Human concept approval, production quote approval and actual branded Genjutsu output",
+        "Exact garment/logo motion QA and full audio review"
+      ],
+      "cta": {
+        "label": "Shop Low Lives Hoodie",
+        "websiteUrl": "https://disobedientnyc.com/",
+        "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+        "checkoutUrl": null
+      },
+      "history": [
+        {
+          "id": "exa-brand",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Research brand for Disobedient",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:07.657Z",
+          "completedAt": "2026-10-24T20:19:09.827Z",
+          "durationMs": 2170,
+          "input": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ official products about pricing positioning Instagram X TikTok YouTube",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 4,
+            "officialDomainCandidates": 4,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "disobedient"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/black-thermal",
+              "title": "Black Disobedient Thermal"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/white-disobedient-thermal",
+              "title": "White Disobedient Thermal"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie",
+              "title": "Disobedient Oversized Zip Up Hoodie"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/disobedient-brand-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-audience",
+          "stage": 2,
+          "tool": "Exa.web_search_exa",
+          "title": "Research audience for Disobedient",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:09.830Z",
+          "completedAt": "2026-10-24T20:19:12.170Z",
+          "durationMs": 2340,
+          "input": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 3,
+            "officialDomainCandidates": 3,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "disobedient"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/disobedient-oversized-zip-up-hoodie",
+              "title": "Disobedient Oversized Zip Up Hoodie"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+              "title": "Low Lives Hoodie"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/disobedient-audience-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-creators",
+          "stage": 4,
+          "tool": "Exa.web_search_exa",
+          "title": "Research creators for Disobedient",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:12.174Z",
+          "completedAt": "2026-10-24T20:19:14.563Z",
+          "durationMs": 2388,
+          "input": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 4,
+            "officialDomainCandidates": 1,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "disobedient"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/disobedient-creators-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-formats",
+          "stage": 4,
+          "tool": "Exa.web_search_exa",
+          "title": "Research formats for Disobedient",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:14.565Z",
+          "completedAt": "2026-10-24T20:19:17.565Z",
+          "durationMs": 3001,
+          "input": {
+            "query": "Disobedient streetwear brand https://disobedientnyc.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 5,
+            "officialDomainCandidates": 1,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "Disobedient NYC"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/disobedient-formats-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "source-verification",
+          "stage": 0,
+          "tool": "public_web + view_image",
+          "title": "Verify the real brand and hoodie references",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "website": "https://disobedientnyc.com/",
+            "product": "https://disobedientnyc.com/products/low-lives-hoodie"
+          },
+          "output": {
+            "verified": true,
+            "paidClientVerified": false,
+            "inboundDmVerified": false
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "official homepage"
+            },
+            {
+              "url": "https://disobedientnyc.com/collections/sweat-suits",
+              "title": "official collection"
+            },
+            {
+              "url": "https://disobedientnyc.com/collections/sweat-suits/products/low-lives-hoodie",
+              "title": "official product"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie.js",
+              "title": "official Shopify product JSON"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "production.research_synthesize",
+          "title": "Assemble cited observations and ICP hypotheses",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "dossierId": "4300654b-f4fc-4a85-aabb-3cfa664e3752"
+          },
+          "output": {
+            "method": "Evidence assembly, not a model invocation",
+            "synthesis": {
+              "brand": "Disobedient",
+              "category": "streetwear",
+              "budgetUsd": 0,
+              "method": "Evidence assembly without an LLM. No demographic or audience-fit conclusion is invented.",
+              "icp": {
+                "status": "insufficient_evidence",
+                "audienceEvidence": [],
+                "demographics": "Unknown unless explicit cited evidence establishes them.",
+                "hypotheses": [
+                  {
+                    "section": "audience",
+                    "sourceUrl": "https://disobedientnyc.com/",
+                    "claim": "Creative hypothesis: test adults aged 18-24 in London who like streetwear and nostalgic game-style content. This is a proposed demo target, not measured customer demographics.",
+                    "kind": "hypothesis",
+                    "rights": "unknown",
+                    "id": "956c732c-4f6f-474d-bd2b-3d940228ccd7",
+                    "verification": "Unvalidated hypothesis"
+                  }
+                ],
+                "requiredNext": [
+                  "Validate one customer use case and buying motivation against audience evidence.",
+                  "Confirm creator audience overlap and review at least five dated posts before selection."
+                ]
+              },
+              "creators": [],
+              "characterBrief": {
+                "identity": "Original character; define appearance after ICP review.",
+                "audienceEvidenceIds": [],
+                "wardrobe": "Verified Disobedient product reference required.",
+                "voice": "Original or licensed British delivery reference if the penthouse direction is selected.",
+                "environment": "Choose a customer-relevant setting from cited audience research.",
+                "status": "planning_only"
+              },
+              "scenes": [
+                {
+                  "id": "hook",
+                  "seconds": [
+                    0,
+                    3
+                  ],
+                  "purpose": "Audience-relevant hook grounded in a cited problem or desire.",
+                  "sourceIds": []
+                },
+                {
+                  "id": "demonstration",
+                  "seconds": [
+                    3,
+                    10
+                  ],
+                  "purpose": "Verified product action in the same setting, with character and product references locked.",
+                  "sourceIds": [
+                    "03c30fbe-3b72-4b23-833f-a822cf211bac",
+                    "264b55ac-92ba-4cef-96a2-eb30db203a96"
+                  ]
+                },
+                {
+                  "id": "payoff",
+                  "seconds": [
+                    10,
+                    15
+                  ],
+                  "purpose": "Original punchline or product reveal and verified offer.",
+                  "sourceIds": []
+                }
+              ],
+              "blockers": [
+                "ICP and original script need review.",
+                "No Solari browser verification has run.",
+                "No images, voice or video have been generated."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/",
+              "title": "official homepage"
+            },
+            {
+              "url": "https://disobedientnyc.com/collections/sweat-suits",
+              "title": "official collection"
+            },
+            {
+              "url": "https://disobedientnyc.com/collections/sweat-suits/products/low-lives-hoodie",
+              "title": "official product"
+            },
+            {
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie.js",
+              "title": "official Shopify product JSON"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "imagegen",
+          "stage": 3,
+          "tool": "image_gen.imagegen",
+          "title": "Preview both hoodies on the existing London character",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "prompt": "Edit the existing original PS2 game-style London male character into a two-panel garment approval sheet. Two equal vertical 9:16 panels side by side, NO white gutters, NO text or labels. Reference 1 is the ORIGINAL CHARACTER and exact penthouse camera, sunset London skyline with Shard, leather chair and floor lamp. Preserve his exact original low-poly adult face, blond braids, skin, expression, pose seated with crossed leg, grey jeans, white sneakers, camera, scene and PS2 video game style. Reference 2 is Disobedient's real Low Lives Hoodie FRONT: light heather grey PULLOVER with kangaroo pocket and NO zipper, NO drawcord, NO chest logo. LEFT panel: replace only the source blue hoodie with that exact grey pullover, correct fleece shape and no invented marks. Reference 3 is VYLIN real garment front on a real model: use ONLY the garment, NEVER the model face/body/identity. RIGHT panel: same original London character wearing the black ZIP hoodie with silver zipper and small cream oval globe/stylized leaf logo on character's left chest, as in reference. Do not add the large rear headphones print to the chest. Both panels keep original character identity completely unchanged and the SAME original room geometry. Garment seams, cuffs, collar and natural occlusion by hands must be plausible and match the product source. Front-facing camera cannot show rear garment graphics, so do not invent them. No new persons, no slogans, no UI, no end card, no captions, no white product-photo background. These are original ImageGen preproduction concept STILL images, not actual Genjutsu video results.",
+            "references": [
+              "original-london-character-1s.jpg",
+              "disobedient-hoodie-front.jpg",
+              "vylin-hoodie-front.jpg"
+            ]
+          },
+          "output": {
+            "imageUrl": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+            "itemizedCostUsd": null,
+            "videoGenerated": false
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+              "title": "Actual generated still concepts"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied.",
+          "startedAt": "2026-10-24T20:20:12.636Z",
+          "completedAt": "2026-10-24T20:20:38.925Z"
+        },
+        {
+          "id": "static-review",
+          "stage": 3,
+          "tool": "view_image + independent review",
+          "title": "Review identity and garment direction",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "assets": [
+              "original London frame",
+              "both official garment references",
+              "generated concept sheet"
+            ]
+          },
+          "output": {
+            "review": "Conditional concept pass. Framing changed; exact VYLIN logo linework unverified. Human approval and motion review pending."
+          },
+          "evidence": [],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Create the two-page ICP and creative brief",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "brand": "Disobedient"
+          },
+          "output": {
+            "pdfUrl": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
+            "pages": 2,
+            "source": "Actual generated and rendered PDF"
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-assets/disobedient-brief-v1.pdf",
+              "title": "Two-page brief"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "prepare",
+          "stage": 4,
+          "tool": "Genjutsu request preparation",
+          "title": "Bind the real garment references",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0"
+          },
+          "output": {
+            "request": {
+              "prompt": "Replace only the existing blue hoodie on the original male character with the exact Disobedient Low Lives Hoodie. Use the first supplied image for the front and construction: light heather grey pullover, no zipper, kangaroo pocket, no visible chest logo, no added front lettering and no added drawcord. Use the second supplied image only for the back artwork: preserve the supplied blue lettering and red musical staff/treble-clef placement when the back actually faces camera. Never place back artwork on the chest. Do not invent a Disobedient chest logo. Preserve the same original fictional character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering from the immutable six-second generic master. Copy only garment construction and artwork from the reference photos. Do not copy a real product model face, body, skin, hair, identity or background. Preserve natural occlusion and consistent garment texture during motion. Do not add extra people, accessories, dialogue or lettering.",
+              "resolution": "720p",
+              "image_urls": [
+                "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
+                "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389"
+              ]
+            },
+            "submitted": false,
+            "executable": false,
+            "cta": {
+              "label": "Shop Low Lives Hoodie",
+              "websiteUrl": "https://disobedientnyc.com/",
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+              "checkoutUrl": null
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://disobedientnyc.com/products/low-lives-hoodie",
+              "title": "Exact hoodie"
+            },
+            {
+              "url": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
+              "title": "Official model docs"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "quote",
+          "stage": 4,
+          "tool": "Higgsfield.estimate",
+          "title": "Fetch the real Genjutsu pricing rule",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+            "sourceSeconds": 6,
+            "resolution": "720p",
+            "garmentImages": [
+              "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5815.jpg?v=1768620389",
+              "https://cdn.shopify.com/s/files/1/0780/8676/6822/files/IMG-5816.jpg?v=1768620389"
+            ]
+          },
+          "output": {
+            "quote": {
+              "type": "description",
+              "pricing_description": "Priced per total second by resolution: 480p $0.05, 720p $0.10, or 1080p $0.20. Rates shown are before any applicable customer discount. Billable seconds = output duration + the sum of input reference video durations. Input video durations are measured during preprocessing; without video references, only output duration is billed. Genjutsu Light trims the source to 15 seconds; output duration is rounded up to whole seconds before billing."
+            },
+            "planningEstimateUsd": 1.2,
+            "retries": 0,
+            "submitted": false
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-records/disobedient-genjutsu-estimate-v1.json",
+              "title": "Actual estimate response"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied.",
+          "rawRecordUrl": "/streetwear-demo-records/disobedient-genjutsu-estimate-v1.json"
+        },
+        {
+          "id": "production-approval",
+          "stage": 5,
+          "tool": "production approval",
+          "title": "Actual production approval pending",
+          "mode": "recorded",
+          "kind": "gate",
+          "status": "pending",
+          "input": {
+            "planningEstimateUsd": 1.2
+          },
+          "output": {
+            "approved": false,
+            "submitted": false
+          },
+          "evidence": [],
+          "note": "This is a real unresolved gate. Replay does not approve or run it."
+        }
+      ]
+    },
+    {
+      "id": "vylin",
+      "name": "VYLIN",
+      "website": "https://www.wearvylin.com/",
+      "demoKind": "streetwear",
+      "taskId": 11,
+      "founders": [
+        {
+          "name": "Founder not established",
+          "role": "Official brand verified. Neither payment nor an inbound DM is attributed to this brand. Friend test recipient has not been supplied.",
+          "status": "Identity unresolved",
+          "url": "https://www.wearvylin.com/"
+        }
+      ],
+      "product": {
+        "summary": "NYC streetwear with music and cannabis-culture imagery. Demo garment: Cream Headphones Black Zip Hoodie.",
+        "features": [
+          "10oz3-end fleece",
+          "70/30 cotton/poly,100% cotton face",
+          "Relaxed unisex fit",
+          "Hand-screened in South Brooklyn",
+          "Nickel zipper, rib cuffs and hem",
+          "Black zip hoodie",
+          "Cream globe and stylized leaf mark at left chest",
+          "Large cream headphones surrounding stylized leaf on back",
+          "Official on-model front and rear studio photos"
+        ]
+      },
+      "score": {
+        "total": 69,
+        "max": 100,
+        "confidence": "Editorial creative fit only",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Exact hoodie photographs and product page verified."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 18,
+            "max": 20,
+            "rationale": "Existing fictional UK character can demonstrate an original variation; actual customer fit untested."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 10,
+            "max": 20,
+            "rationale": "Official social/contact route available; founder and friend recipient unknown."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 9,
+            "max": 20,
+            "rationale": "Product pricing visible; revenue, payers, client payment and buying intent unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 12,
+            "max": 20,
+            "rationale": "Real garment references; no verified brand-specific Meta or organic video reference."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Unknown",
+        "summary": "No verified company revenue or customer count. Product price is not revenue.",
+        "scenarios": [],
+        "limitations": [
+          "No payment is mapped to this brand. No sales, conversion or audience performance claim is made."
+        ]
+      },
+      "icp": {
+        "summary": "Proposed creative test: adult UK/London streetwear fans, aged 18-24, who enjoy nostalgic game-style edits and hoodie styling. This is an original demo direction, not measured brand analytics.",
+        "evidence": [
+          "NYC streetwear with music and cannabis-culture imagery.",
+          "Official Cream Headphones Black Zip Hoodie apparel imagery and vendor product description."
+        ],
+        "hypotheses": [
+          "Test whether the existing London character works for a New York brand; UK customer overlap is unverified.",
+          "Compare a short identity-driven opener with a product-led hoodie opener."
+        ],
+        "painPoints": [
+          "Choosing clothing with a recognizable visual identity",
+          "Understanding fit, color, construction and where to shop"
+        ]
+      },
+      "persona": {
+        "name": "Original London game character",
+        "description": "Reuse the existing fictional adult PS2-style London presenter: blond braids, same face, grey trousers and white sneakers. This is a historical owned creative asset, not a newly discovered creator or customer.",
+        "wardrobe": "Black Cream Headphones zip hoodie; small cream globe/leaf at wearer left chest, large cream headphones/leaf on the back only.",
+        "imageUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
+        "environment": "Existing Canary Wharf penthouse at dusk, leather armchair, floor lamp and London skyline. Preserve camera, pose, voice and scene through the garment edit.",
+        "rationale": "The current user-selected direction uses an existing character. Exact brand audience fit remains a creative hypothesis. The ImageGen garment concept is a still preview, not a Genjutsu result."
+      },
+      "assets": [
+        {
+          "kind": "logo",
+          "title": "Official VYLIN logo",
+          "imageUrl": "/streetwear-demo-assets/vylin-official-wordmark-v1.png",
+          "sourceUrl": "https://www.wearvylin.com/",
+          "note": "Official unedited header logo."
+        },
+        {
+          "kind": "product",
+          "title": "vylin hoodie front",
+          "imageUrl": "/streetwear-demo-assets/vylin-hoodie-front.jpg",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Front.jpg?v=1760118047",
+          "note": "Actual official ecommerce photograph. Reference only; not a Meta ad or generated output."
+        },
+        {
+          "kind": "product",
+          "title": "vylin hoodie back",
+          "imageUrl": "/streetwear-demo-assets/vylin-hoodie-back.jpg",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Black.jpg?v=1760118047",
+          "note": "Actual official ecommerce photograph. Reference only; not a Meta ad or generated output."
+        }
+      ],
+      "references": [
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+          "title": "Cream Headphones Black Zip Hoodie: front",
+          "status": "Official product photo inspected",
+          "observation": "Real garment reference. Match construction and artwork placement. Do not copy the photographed model identity.",
+          "imageUrl": "/streetwear-demo-assets/vylin-hoodie-front.jpg"
+        },
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+          "title": "Cream Headphones Black Zip Hoodie: back",
+          "status": "Official product photo inspected",
+          "observation": "Real garment reference. Match construction and artwork placement. Do not copy the photographed model identity.",
+          "imageUrl": "/streetwear-demo-assets/vylin-hoodie-back.jpg"
+        }
+      ],
+      "sourceVideo": {
+        "url": "/streetwear-demo-assets/generic-source-6s-v1.mp4",
+        "title": "Existing London character, six-second generic source",
+        "kind": "historical",
+        "posterUrl": "/streetwear-demo-assets/original-london-character-1s.jpg",
+        "note": "Earlier generic lettering-cleanup asset. This source is real, but it is not a newly rendered branded garment swap."
+      },
+      "storyboardImageUrl": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+      "storyboardCaption": "Combined ImageGen approval sheet: Disobedient at left, VYLIN at right. Static concepts only. Exact logo fidelity and motion remain unverified.",
+      "script": {
+        "durationSeconds": 8,
+        "hook": "Same London character. Cream Headphones Black Zip Hoodie. Shop wearvylin.com.",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Existing vertical PS2 penthouse opening.",
+            "action": "Replace only the blue garment with the verified Cream Headphones Black Zip Hoodie. Keep the face, scene and original movement.",
+            "line": "Preserve the original source dialogue; no new speech is claimed."
+          },
+          {
+            "start": 3,
+            "end": 6,
+            "camera": "Continue the existing source camera cuts.",
+            "action": "Keep garment construction, graphics and hand occlusion stable. No fake rear design on the front.",
+            "line": "Suggested overlay: Cream Headphones Black Zip Hoodie"
+          },
+          {
+            "start": 6,
+            "end": 8,
+            "camera": "Deterministic product end card.",
+            "action": "Show genuine hoodie reference, product name, and brand website https://www.wearvylin.com/. Link destination: https://www.wearvylin.com/products/cream-headphones-on-black-hoodie. No Mint checkout destination.",
+            "line": "Shop Cream Headphones Black Zip Hoodie at wearvylin.com."
+          }
+        ]
+      },
+      "genjutsuPreparation": {
+        "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+        "request": {
+          "prompt": "Replace only the existing blue hoodie on the original male character with the exact VYLIN Cream Headphones Black Zip Hoodie. Use the first supplied image for the front: black zip construction, nickel zipper, small cream globe/stylized-leaf mark at the left chest. Keep the front mark small and on the correct side. Use the second supplied image only for the large cream headphones/stylized-leaf back print when the back actually faces camera. Never move the back print onto the chest or add a large front wordmark. Reference models are garment carriers only and must not replace the original fictional character. Preserve the same original fictional character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering from the immutable six-second generic master. Copy only garment construction and artwork from the reference photos. Do not copy a real product model face, body, skin, hair, identity or background. Preserve natural occlusion and consistent garment texture during motion. Do not add extra people, accessories, dialogue or lettering.",
+          "resolution": "720p",
+          "image_urls": [
+            "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Front.jpg?v=1760118047",
+            "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Black.jpg?v=1760118047"
+          ]
+        },
+        "sourceUrl": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
+        "limitations": [
+          "Preparation only; no new branded video submitted or generated.",
+          "Six-second source is within the first-15-second processing limit.",
+          "Audio is preserved by Genjutsu; any new brand-specific speech requires separate voice/lip-sync work.",
+          "Provider-accessible historical source verified: six seconds at30fps, without audio. Restore original local audio after garment repair.",
+          "Planning estimate: $1.20 per brand at 720p, subject to account quote.",
+          "Append a two-second website/product end card after the six-second garment repair."
+        ]
+      },
+      "outboundDemo": {
+        "channel": "DM",
+        "recipientLabel": "Friend test recipient",
+        "recipientStatus": "Recipient handle and platform not supplied",
+        "status": "draft",
+        "message": "Hey, this is a real outbound test of our creative workflow using VYLIN. The task contains the sourced research, a two-page brief and a hoodie concept around our London game character. The branded motion sample is still awaiting production. Product: https://www.wearvylin.com/products/cream-headphones-on-black-hoodie"
+      },
+      "reportUrl": "/streetwear-demo-assets/vylin-brief-v1.pdf",
+      "offerPdfUrl": "/streetwear-demo-assets/vylin-brief-v1.pdf",
+      "offerPreviewUrls": [
+        "/streetwear-demo-assets/vylin-brief-v1-page-1.png",
+        "/streetwear-demo-assets/vylin-brief-v1-page-2.png"
+      ],
+      "sources": [
+        {
+          "url": "https://www.wearvylin.com/",
+          "title": "official homepage"
+        },
+        {
+          "url": "https://www.wearvylin.com/pages/about",
+          "title": "official about"
+        },
+        {
+          "url": "https://www.wearvylin.com/pages/contact",
+          "title": "official contact"
+        },
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+          "title": "official product"
+        },
+        {
+          "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie.js",
+          "title": "official Shopify product JSON"
+        }
+      ],
+      "gaps": [
+        "Actual friend DM handles and platform",
+        "No verified paid-client relationship or inbound message",
+        "Brand customer demographics, revenue and founder identity",
+        "No verified target Meta ad or individual organic video",
+        "Human concept approval, production quote approval and actual branded Genjutsu output",
+        "Exact garment/logo motion QA and full audio review"
+      ],
+      "cta": {
+        "label": "Shop Cream Headphones Black Zip Hoodie",
+        "websiteUrl": "https://www.wearvylin.com/",
+        "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+        "checkoutUrl": null
+      },
+      "history": [
+        {
+          "id": "exa-brand",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Research brand for VYLIN",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:17.579Z",
+          "completedAt": "2026-10-24T20:19:20.620Z",
+          "durationMs": 3041,
+          "input": {
+            "query": "VYLIN streetwear brand https://www.wearvylin.com/ official products about pricing positioning Instagram X TikTok YouTube",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 2,
+            "officialDomainCandidates": 2,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "VYLIN — Streetwear for the Sonically Lifted | NYC-Born Brand"
+            },
+            {
+              "url": "https://www.wearvylin.com/collections/drop-line",
+              "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/vylin-brand-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-audience",
+          "stage": 2,
+          "tool": "Exa.web_search_exa",
+          "title": "Research audience for VYLIN",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:20.623Z",
+          "completedAt": "2026-10-24T20:19:22.981Z",
+          "durationMs": 2358,
+          "input": {
+            "query": "VYLIN streetwear brand https://www.wearvylin.com/ customer reviews community who buys target audience interests customer interviews. Return evidence and URLs; do not infer age or demographics from appearance.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 3,
+            "officialDomainCandidates": 2,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "VYLIN — Streetwear for the Sonically Lifted | NYC-Born Brand"
+            },
+            {
+              "url": "https://www.wearvylin.com/collections/drop-line",
+              "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/vylin-audience-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-creators",
+          "stage": 4,
+          "tool": "Exa.web_search_exa",
+          "title": "Research creators for VYLIN",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:22.985Z",
+          "completedAt": "2026-10-24T20:19:25.797Z",
+          "durationMs": 2812,
+          "input": {
+            "query": "VYLIN streetwear brand https://www.wearvylin.com/ relevant independent creators Instagram reels TikTok YouTube X public posts views dates product fashion styling reviews. Return profile and individual post URLs.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 3,
+            "officialDomainCandidates": 2,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "VYLIN — Streetwear for the Sonically Lifted | NYC-Born Brand"
+            },
+            {
+              "url": "https://www.wearvylin.com/collections/drop-line",
+              "title": "VYLIN Top Line | Premium Drops & Curated Streetwear"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/vylin-creators-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "exa-formats",
+          "stage": 4,
+          "tool": "Exa.web_search_exa",
+          "title": "Research formats for VYLIN",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "startedAt": "2026-10-24T20:19:25.802Z",
+          "completedAt": "2026-10-24T20:19:28.222Z",
+          "durationMs": 2420,
+          "input": {
+            "query": "VYLIN streetwear brand https://www.wearvylin.com/ high-view creator reels hooks storytelling scripts product demonstration camera shots. Cite individual public posts and visible view counts. Analyze format and original adaptation ideas.",
+            "provider": "Exa free keyless MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "resultCount": 5,
+            "officialDomainCandidates": 1,
+            "costUsd": 0,
+            "qualification": "Returned excerpts are leads only. Similar-name creators and generic format pages do not establish brand relationships, customer analytics or paid ads."
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "VYLIN — Streetwear for the Sonically Lifted | NYC-Born Brand"
+            }
+          ],
+          "rawRecordUrl": "/streetwear-demo-records/vylin-formats-exa-v1.json",
+          "note": "Actual completed Exa call. Full MCP initialize, initialized, tools/list and tools/call history is also available in the raw transport record."
+        },
+        {
+          "id": "source-verification",
+          "stage": 0,
+          "tool": "public_web + view_image",
+          "title": "Verify the real brand and hoodie references",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "website": "https://www.wearvylin.com/",
+            "product": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie"
+          },
+          "output": {
+            "verified": true,
+            "paidClientVerified": false,
+            "inboundDmVerified": false
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "official homepage"
+            },
+            {
+              "url": "https://www.wearvylin.com/pages/about",
+              "title": "official about"
+            },
+            {
+              "url": "https://www.wearvylin.com/pages/contact",
+              "title": "official contact"
+            },
+            {
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+              "title": "official product"
+            },
+            {
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie.js",
+              "title": "official Shopify product JSON"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "production.research_synthesize",
+          "title": "Assemble cited observations and ICP hypotheses",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "dossierId": "ca18edde-05ca-48a9-ac23-d49c0ae0b146"
+          },
+          "output": {
+            "method": "Evidence assembly, not a model invocation",
+            "synthesis": {
+              "brand": "VYLIN",
+              "category": "streetwear",
+              "budgetUsd": 0,
+              "method": "Evidence assembly without an LLM. No demographic or audience-fit conclusion is invented.",
+              "icp": {
+                "status": "insufficient_evidence",
+                "audienceEvidence": [],
+                "demographics": "Unknown unless explicit cited evidence establishes them.",
+                "hypotheses": [
+                  {
+                    "section": "audience",
+                    "sourceUrl": "https://www.wearvylin.com/",
+                    "claim": "Creative hypothesis: test adults aged 18-24 in London who like streetwear and nostalgic game-style content. This is a proposed demo target, not measured customer demographics.",
+                    "kind": "hypothesis",
+                    "rights": "unknown",
+                    "id": "5b274d64-2abb-470d-aa5f-ae490b64fcbc",
+                    "verification": "Unvalidated hypothesis"
+                  }
+                ],
+                "requiredNext": [
+                  "Validate one customer use case and buying motivation against audience evidence.",
+                  "Confirm creator audience overlap and review at least five dated posts before selection."
+                ]
+              },
+              "creators": [],
+              "characterBrief": {
+                "identity": "Original character; define appearance after ICP review.",
+                "audienceEvidenceIds": [],
+                "wardrobe": "Verified VYLIN product reference required.",
+                "voice": "Original or licensed British delivery reference if the penthouse direction is selected.",
+                "environment": "Choose a customer-relevant setting from cited audience research.",
+                "status": "planning_only"
+              },
+              "scenes": [
+                {
+                  "id": "hook",
+                  "seconds": [
+                    0,
+                    3
+                  ],
+                  "purpose": "Audience-relevant hook grounded in a cited problem or desire.",
+                  "sourceIds": []
+                },
+                {
+                  "id": "demonstration",
+                  "seconds": [
+                    3,
+                    10
+                  ],
+                  "purpose": "Verified product action in the same setting, with character and product references locked.",
+                  "sourceIds": [
+                    "d01b4c14-237a-4e5f-973e-b325de4fa213",
+                    "70378c42-f189-4466-9539-24bfc3cb11ad"
+                  ]
+                },
+                {
+                  "id": "payoff",
+                  "seconds": [
+                    10,
+                    15
+                  ],
+                  "purpose": "Original punchline or product reveal and verified offer.",
+                  "sourceIds": []
+                }
+              ],
+              "blockers": [
+                "ICP and original script need review.",
+                "No Solari browser verification has run.",
+                "No images, voice or video have been generated."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/",
+              "title": "official homepage"
+            },
+            {
+              "url": "https://www.wearvylin.com/pages/about",
+              "title": "official about"
+            },
+            {
+              "url": "https://www.wearvylin.com/pages/contact",
+              "title": "official contact"
+            },
+            {
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+              "title": "official product"
+            },
+            {
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie.js",
+              "title": "official Shopify product JSON"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "imagegen",
+          "stage": 3,
+          "tool": "image_gen.imagegen",
+          "title": "Preview both hoodies on the existing London character",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "prompt": "Edit the existing original PS2 game-style London male character into a two-panel garment approval sheet. Two equal vertical 9:16 panels side by side, NO white gutters, NO text or labels. Reference 1 is the ORIGINAL CHARACTER and exact penthouse camera, sunset London skyline with Shard, leather chair and floor lamp. Preserve his exact original low-poly adult face, blond braids, skin, expression, pose seated with crossed leg, grey jeans, white sneakers, camera, scene and PS2 video game style. Reference 2 is Disobedient's real Low Lives Hoodie FRONT: light heather grey PULLOVER with kangaroo pocket and NO zipper, NO drawcord, NO chest logo. LEFT panel: replace only the source blue hoodie with that exact grey pullover, correct fleece shape and no invented marks. Reference 3 is VYLIN real garment front on a real model: use ONLY the garment, NEVER the model face/body/identity. RIGHT panel: same original London character wearing the black ZIP hoodie with silver zipper and small cream oval globe/stylized leaf logo on character's left chest, as in reference. Do not add the large rear headphones print to the chest. Both panels keep original character identity completely unchanged and the SAME original room geometry. Garment seams, cuffs, collar and natural occlusion by hands must be plausible and match the product source. Front-facing camera cannot show rear garment graphics, so do not invent them. No new persons, no slogans, no UI, no end card, no captions, no white product-photo background. These are original ImageGen preproduction concept STILL images, not actual Genjutsu video results.",
+            "references": [
+              "original-london-character-1s.jpg",
+              "disobedient-hoodie-front.jpg",
+              "vylin-hoodie-front.jpg"
+            ]
+          },
+          "output": {
+            "imageUrl": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+            "itemizedCostUsd": null,
+            "videoGenerated": false
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-assets/london-character-hoodie-concepts-v1.png",
+              "title": "Actual generated still concepts"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied.",
+          "startedAt": "2026-10-24T20:20:12.636Z",
+          "completedAt": "2026-10-24T20:20:38.925Z"
+        },
+        {
+          "id": "static-review",
+          "stage": 3,
+          "tool": "view_image + independent review",
+          "title": "Review identity and garment direction",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "assets": [
+              "original London frame",
+              "both official garment references",
+              "generated concept sheet"
+            ]
+          },
+          "output": {
+            "review": "Conditional concept pass. Framing changed; exact VYLIN logo linework unverified. Human approval and motion review pending."
+          },
+          "evidence": [],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Create the two-page ICP and creative brief",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "brand": "VYLIN"
+          },
+          "output": {
+            "pdfUrl": "/streetwear-demo-assets/vylin-brief-v1.pdf",
+            "pages": 2,
+            "source": "Actual generated and rendered PDF"
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-assets/vylin-brief-v1.pdf",
+              "title": "Two-page brief"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "prepare",
+          "stage": 4,
+          "tool": "Genjutsu request preparation",
+          "title": "Bind the real garment references",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0"
+          },
+          "output": {
+            "request": {
+              "prompt": "Replace only the existing blue hoodie on the original male character with the exact VYLIN Cream Headphones Black Zip Hoodie. Use the first supplied image for the front: black zip construction, nickel zipper, small cream globe/stylized-leaf mark at the left chest. Keep the front mark small and on the correct side. Use the second supplied image only for the large cream headphones/stylized-leaf back print when the back actually faces camera. Never move the back print onto the chest or add a large front wordmark. Reference models are garment carriers only and must not replace the original fictional character. Preserve the same original fictional character face, blond braids, body proportions, trousers, hands, pose, camera motion, furniture, penthouse, lighting and early-2000s PS2 cutscene rendering from the immutable six-second generic master. Copy only garment construction and artwork from the reference photos. Do not copy a real product model face, body, skin, hair, identity or background. Preserve natural occlusion and consistent garment texture during motion. Do not add extra people, accessories, dialogue or lettering.",
+              "resolution": "720p",
+              "image_urls": [
+                "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Front.jpg?v=1760118047",
+                "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Black.jpg?v=1760118047"
+              ]
+            },
+            "submitted": false,
+            "executable": false,
+            "cta": {
+              "label": "Shop Cream Headphones Black Zip Hoodie",
+              "websiteUrl": "https://www.wearvylin.com/",
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+              "checkoutUrl": null
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.wearvylin.com/products/cream-headphones-on-black-hoodie",
+              "title": "Exact hoodie"
+            },
+            {
+              "url": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/api-reference",
+              "title": "Official model docs"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied."
+        },
+        {
+          "id": "quote",
+          "stage": 4,
+          "tool": "Higgsfield.estimate",
+          "title": "Fetch the real Genjutsu pricing rule",
+          "mode": "recorded",
+          "kind": "tool",
+          "status": "complete",
+          "input": {
+            "model": "higgsfield/genjutsu-light/object-swap/v1.0",
+            "sourceSeconds": 6,
+            "resolution": "720p",
+            "garmentImages": [
+              "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Front.jpg?v=1760118047",
+              "https://cdn.shopify.com/s/files/1/0683/2999/6357/files/VYLIN_Hoodie_Headphones_CreamOnBlack_Black.jpg?v=1760118047"
+            ]
+          },
+          "output": {
+            "quote": {
+              "type": "description",
+              "pricing_description": "Priced per total second by resolution: 480p $0.05, 720p $0.10, or 1080p $0.20. Rates shown are before any applicable customer discount. Billable seconds = output duration + the sum of input reference video durations. Input video durations are measured during preprocessing; without video references, only output duration is billed. Genjutsu Light trims the source to 15 seconds; output duration is rounded up to whole seconds before billing."
+            },
+            "planningEstimateUsd": 1.2,
+            "retries": 0,
+            "submitted": false
+          },
+          "evidence": [
+            {
+              "url": "/streetwear-demo-records/vylin-genjutsu-estimate-v1.json",
+              "title": "Actual estimate response"
+            }
+          ],
+          "note": "Completed local workflow step. No paid video or outbound execution is implied.",
+          "rawRecordUrl": "/streetwear-demo-records/vylin-genjutsu-estimate-v1.json"
+        },
+        {
+          "id": "production-approval",
+          "stage": 5,
+          "tool": "production approval",
+          "title": "Actual production approval pending",
+          "mode": "recorded",
+          "kind": "gate",
+          "status": "pending",
+          "input": {
+            "planningEstimateUsd": 1.2
+          },
+          "output": {
+            "approved": false,
+            "submitted": false
+          },
+          "evidence": [],
+          "note": "This is a real unresolved gate. Replay does not approve or run it."
+        }
+      ]
+    },
+    {
+      "id": "awardscholar",
+      "name": "Award Scholar",
+      "website": "https://www.awardscholar.com/",
+      "founders": [
+        {
+          "name": "Kyle Fung",
+          "role": "User-supplied founder lead. Candidate Columbia profile and UGC background found through Exa; Award Scholar affiliation remains unverified.",
+          "status": "Affiliation unverified",
+          "url": "https://www.linkedin.com/in/kylefung1"
+        },
+        {
+          "name": "Orchard St, Inc.",
+          "role": "Legal entity named in official website footer; not an identified founder.",
+          "status": "Publisher verified",
+          "url": "https://www.awardscholar.com/"
+        }
+      ],
+      "product": {
+        "summary": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms.",
+        "features": [
+          "Profile-based scholarship matching",
+          "Editable AI application drafts",
+          "User-selected application support on supported forms",
+          "No scholarship award guarantee"
+        ]
+      },
+      "score": {
+        "total": 72,
+        "max": 100,
+        "confidence": "Moderate creative fit; commercial metrics unverified",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Clear consumer workflow with a concise demonstrable product story."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 18,
+            "max": 20,
+            "rationale": "Application overload and discovery support several original hooks."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 7,
+            "max": 20,
+            "rationale": "Kyle is a user-supplied lead; brand affiliation and founder mailbox are unverified."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 11,
+            "max": 20,
+            "rationale": "Subscription description and two actual Meta records; actual company revenue and budget unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 16,
+            "max": 20,
+            "rationale": "Two exact Meta records and inspected video samples; full audio and motion review pending."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Actual revenue unknown",
+        "summary": "No verified subscriber count, numerical checkout price or company revenue. Scholarship awards claimed by the site are not company revenue.",
+        "scenarios": [
+          {
+            "label": "Illustrative arithmetic only",
+            "value": "$2,000 gross monthly billings",
+            "assumptions": "Assume 100 paying accounts at an invented $20/month. Neither input is verified."
+          },
+          {
+            "label": "Illustrative arithmetic only",
+            "value": "$10,000 gross monthly billings",
+            "assumptions": "Assume 500 paying accounts at an invented $20/month. This is not a forecast."
+          }
+        ],
+        "limitations": [
+          "Price, plan mix, payers, refunds, taxes and store/payment fees unknown.",
+          "Do not use these illustrative numbers in outreach as actual performance."
+        ]
+      },
+      "icp": {
+        "summary": "Hypothesis: adult college applicants and enrolled students with repetitive scholarship search and writing work. Buyer hypothesis: a founder or growth operator who needs more creative tests.",
+        "evidence": [
+          "Official product supports student profiles, matching and editable drafts.",
+          "Two historical ads use application-time or tuition/discovery hooks."
+        ],
+        "hypotheses": [
+          "Test adults aged 18-25 in the US or Canada; age/geography are proposed, not measured analytics.",
+          "Test a direct pain point opener followed by genuine product footage."
+        ],
+        "painPoints": [
+          "Time spent finding eligible opportunities",
+          "Repeated application writing",
+          "Unclear next step and eligibility rules"
+        ]
+      },
+      "persona": {
+        "name": "Maya Brooks",
+        "description": "Original fictional adult, age 23, medium-brown skin, short curly dark bob, clear round glasses and silver stud earrings. Practical student-tools presenter, not a customer testimonial.",
+        "wardrobe": "Forest-green crewneck and beige trousers, no university marks.",
+        "imageUrl": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+        "environment": "Modest apartment study corner, oak desk, closed cream notebook, gray laptop and pothos. Lock one room map and soft daylight from camera left.",
+        "rationale": "Adapts candid close-face framing and discovery-to-product structure. Identity, dialogue, styling and scene are original. Existing creator likenesses and voices are not reused."
+      },
+      "references": [
+        {
+          "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+          "title": "Award Scholar Meta ad 1798011228292318",
+          "status": "Ad record + sampled video frames reviewed",
+          "observation": "Informal vertical close-face framing at home with daylight and an application-time discovery hook. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/awardscholar-meta-1798011228292318.png"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+          "title": "Award Scholar Meta ad 2962095170805548",
+          "status": "Ad record + sampled video frames reviewed",
+          "observation": "Expressive surprised face in indoor study-like public setting with tuition/discovery headline. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/awardscholar-meta-2962095170805548.png"
+        }
+      ],
+      "script": {
+        "durationSeconds": 15,
+        "hook": "Scholarship search taking over your weekend?",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Vertical chest-up, same desk and camera axis.",
+            "action": "Eyebrow lift and direct eye contact; avoid a fabricated personal success story.",
+            "line": "Scholarship search taking over your weekend?"
+          },
+          {
+            "start": 3,
+            "end": 7,
+            "camera": "Same scene, medium framing.",
+            "action": "Small open-hand gesture. Later composite a genuine approved matching-screen capture.",
+            "line": "Award Scholar matches opportunities to your profile"
+          },
+          {
+            "start": 7,
+            "end": 11,
+            "camera": "Same camera and wardrobe.",
+            "action": "Indicate space beside presenter for genuine editable-draft footage; no generated UI.",
+            "line": "and helps draft applications you can review."
+          },
+          {
+            "start": 11,
+            "end": 15,
+            "camera": "Return to chest-up.",
+            "action": "Small smile and plain CTA; app name and URL composited later.",
+            "line": "Check your matches, read each provider's rules, and start there."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.awardscholar.com/",
+          "title": "Product description, FAQ, legal entity footer"
+        },
+        {
+          "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+          "title": "Free start and subscription description"
+        },
+        {
+          "url": "https://www.madebyorchard.com/tos/",
+          "title": "Public publisher contact candidate"
+        },
+        {
+          "url": "https://donaldvchu.com/",
+          "title": "Donald maps to Waddle, not verified for Award Scholar"
+        },
+        {
+          "url": "https://www.linkedin.com/in/kylefung1",
+          "title": "Candidate Kyle background only, no verified Award Scholar affiliation"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+          "title": "Award Scholar Meta ad 1798011228292318"
+        },
+        {
+          "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+          "title": "Award Scholar Meta ad 2962095170805548"
+        }
+      ],
+      "gaps": [
+        "Kyle Fung affiliation and intended recipient mailbox",
+        "Actual pricing, revenue, payers, acquisition cost and retention",
+        "Current ad delivery and exact Instagram post verification",
+        "Continuous source playback/audio QA",
+        "Human approval of persona, frames, product claims and current demo offer deadline"
+      ],
+      "outreachDraft": {
+        "status": "Local draft, not sent",
+        "subject": "An original Award Scholar creative concept",
+        "body": "Hi Award Scholar team, we put together an original avatar concept around scholarship-search overload, with a storyboard and the two-page offer attached for review. Would this be a useful angle for your next creative test?"
+      },
+      "storyboardImageUrl": "/client-demo-assets/awardscholar-storyboard-v1.png",
+      "reportUrl": "/client-demo-reports/awardscholar-research-v1.html",
+      "offerPdfUrl": "/client-demo-reports/awardscholar-offer-v1.pdf",
+      "offerPreviewUrls": [
+        "/client-demo-assets/awardscholar-offer-page-1.png",
+        "/client-demo-assets/awardscholar-offer-page-2.png"
+      ],
+      "history": [
+        {
+          "id": "exa-0",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Kyle Fung\" \"Award Scholar\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 3,
+            "verifiedSourceMatches": 1,
+            "otherCandidatesNotEvidence": 2,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [
+            {
+              "url": "https://linkedin.com/in/kylefung1",
+              "title": "Kyle Fung"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-1",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"awardscholar\" site:instagram.com/reel",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 4,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 4,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "verify",
+          "stage": 0,
+          "tool": "web.run / public HTTP",
+          "title": "Verify founder and product sources",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.awardscholar.com/",
+              "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "https://www.madebyorchard.com/tos/"
+            ]
+          },
+          "output": {
+            "people": [
+              {
+                "name": "Kyle Fung",
+                "role": "User-supplied founder lead. Candidate Columbia profile and UGC background found through Exa; Award Scholar affiliation remains unverified.",
+                "status": "Affiliation unverified",
+                "url": "https://www.linkedin.com/in/kylefung1"
+              },
+              {
+                "name": "Orchard St, Inc.",
+                "role": "Legal entity named in official website footer; not an identified founder.",
+                "status": "Publisher verified",
+                "url": "https://www.awardscholar.com/"
+              }
+            ],
+            "product": {
+              "summary": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms.",
+              "features": [
+                "Profile-based scholarship matching",
+                "Editable AI application drafts",
+                "User-selected application support on supported forms",
+                "No scholarship award guarantee"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            },
+            {
+              "url": "https://www.madebyorchard.com/tos/",
+              "title": "Public publisher contact candidate"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "references",
+          "stage": 4,
+          "tool": "ffmpeg + view_image",
+          "title": "Inspect real creative references",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.facebook.com/ads/library/?id=1798011228292318",
+              "https://www.facebook.com/ads/library/?id=2962095170805548"
+            ]
+          },
+          "output": {
+            "references": [
+              {
+                "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+                "title": "Award Scholar Meta ad 1798011228292318",
+                "status": "Ad record + sampled video frames reviewed",
+                "observation": "Informal vertical close-face framing at home with daylight and an application-time discovery hook. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/awardscholar-meta-1798011228292318.png"
+              },
+              {
+                "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+                "title": "Award Scholar Meta ad 2962095170805548",
+                "status": "Ad record + sampled video frames reviewed",
+                "observation": "Expressive surprised face in indoor study-like public setting with tuition/discovery headline. Downloaded source video samples also show a transition to laptop/dashboard, drafting and submission footage. Historical ad UI is not a current feature audit. No continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/awardscholar-meta-2962095170805548.png"
+              }
+            ],
+            "coverage": "Downloaded source media and sampled decoded frames. No continuous playback/audio QA."
+          },
+          "evidence": [
+            {
+              "url": "https://www.facebook.com/ads/library/?id=1798011228292318",
+              "title": "Award Scholar Meta ad 1798011228292318"
+            },
+            {
+              "url": "https://www.facebook.com/ads/library/?id=2962095170805548",
+              "title": "Award Scholar Meta ad 2962095170805548"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "score",
+          "stage": 1,
+          "tool": "agent.research_synthesis",
+          "title": "Build commercial scenarios and score",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "rubric": "five explicit categories, 20 points each"
+          },
+          "output": {
+            "score": {
+              "total": 72,
+              "max": 100,
+              "confidence": "Moderate creative fit; commercial metrics unverified",
+              "components": [
+                {
+                  "name": "Product and sample fit",
+                  "score": 20,
+                  "max": 20,
+                  "rationale": "Clear consumer workflow with a concise demonstrable product story."
+                },
+                {
+                  "name": "Original creative potential",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Application overload and discovery support several original hooks."
+                },
+                {
+                  "name": "Decision maker reachability",
+                  "score": 7,
+                  "max": 20,
+                  "rationale": "Kyle is a user-supplied lead; brand affiliation and founder mailbox are unverified."
+                },
+                {
+                  "name": "Commercial evidence",
+                  "score": 11,
+                  "max": 20,
+                  "rationale": "Subscription description and two actual Meta records; actual company revenue and budget unknown."
+                },
+                {
+                  "name": "Usable content reference",
+                  "score": 16,
+                  "max": 20,
+                  "rationale": "Two exact Meta records and inspected video samples; full audio and motion review pending."
+                }
+              ]
+            },
+            "revenue": {
+              "status": "Actual revenue unknown",
+              "summary": "No verified subscriber count, numerical checkout price or company revenue. Scholarship awards claimed by the site are not company revenue.",
+              "scenarios": [
+                {
+                  "label": "Illustrative arithmetic only",
+                  "value": "$2,000 gross monthly billings",
+                  "assumptions": "Assume 100 paying accounts at an invented $20/month. Neither input is verified."
+                },
+                {
+                  "label": "Illustrative arithmetic only",
+                  "value": "$10,000 gross monthly billings",
+                  "assumptions": "Assume 500 paying accounts at an invented $20/month. This is not a forecast."
+                }
+              ],
+              "limitations": [
+                "Price, plan mix, payers, refunds, taxes and store/payment fees unknown.",
+                "Do not use these illustrative numbers in outreach as actual performance."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            }
+          ],
+          "note": "Editorial synthesis performed during this session, not an analytics model or measured business outcome."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "agent.research_synthesis",
+          "title": "Draft an evidence-backed ICP",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "product": "Vendor describes profile-based scholarship matching, editable drafts and user-chosen application support on supported forms."
+          },
+          "output": {
+            "icp": {
+              "summary": "Hypothesis: adult college applicants and enrolled students with repetitive scholarship search and writing work. Buyer hypothesis: a founder or growth operator who needs more creative tests.",
+              "evidence": [
+                "Official product supports student profiles, matching and editable drafts.",
+                "Two historical ads use application-time or tuition/discovery hooks."
+              ],
+              "hypotheses": [
+                "Test adults aged 18-25 in the US or Canada; age/geography are proposed, not measured analytics.",
+                "Test a direct pain point opener followed by genuine product footage."
+              ],
+              "painPoints": [
+                "Time spent finding eligible opportunities",
+                "Repeated application writing",
+                "Unclear next step and eligibility rules"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.awardscholar.com/",
+              "title": "Product description, FAQ, legal entity footer"
+            },
+            {
+              "url": "https://www.awardscholar.com/blog/ai-that-applies-to-scholarships-for-you-what-actually-works",
+              "title": "Free start and subscription description"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona",
+          "stage": 3,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate an original persona sheet",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "persona": "Original fictional adult, age 23, medium-brown skin, short curly dark bob, clear round glasses and silver stud earrings. Practical student-tools presenter, not a customer testimonial.",
+            "environment": "Modest apartment study corner, oak desk, closed cream notebook, gray laptop and pothos. Lock one room map and soft daylight from camera left."
+          },
+          "output": {
+            "imageUrl": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+            "humanApproved": false,
+            "itemizedImageCostUsd": null
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/awardscholar-maya-persona-v1.png",
+              "title": "Generated original persona"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona-qa",
+          "stage": 3,
+          "tool": "view_image + static review",
+          "title": "Review identity, anatomy and source-format fit",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent inspection and independent agent static image review"
+          },
+          "output": {
+            "findings": "Consistent original identity; lock room geography and strengthen reaction.",
+            "motionReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Static AI review is recorded. A real human has not approved these assets."
+        },
+        {
+          "id": "storyboard",
+          "stage": 4,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate the original four-shot storyboard",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Award Scholar"
+          },
+          "output": {
+            "assetUrl": "/client-demo-assets/awardscholar-storyboard-v1.png",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/awardscholar-storyboard-v1.png",
+              "title": "Generate the original four-shot storyboard"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Assemble the personalized two-page demo offer",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Award Scholar"
+          },
+          "output": {
+            "assetUrl": "/client-demo-reports/awardscholar-offer-v1.pdf",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-reports/awardscholar-offer-v1.pdf",
+              "title": "Assemble the personalized two-page demo offer"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "storyboard-qa",
+          "stage": 4,
+          "tool": "view_image + independent static review",
+          "title": "Check the four storyboard frames",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent and independent agent static image inspection"
+          },
+          "output": {
+            "result": "Suitable for human static review; identity and wardrobe coherent, no obvious blocking anatomy defects. Jamie microphone removed consistently.",
+            "motionAndAudioReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "approval",
+          "stage": 5,
+          "tool": "demo.human_approval",
+          "title": "Human approves storyboard and brief in the simulation",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": true,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "approval": "Simulated only",
+            "realApproval": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "render",
+          "stage": 5,
+          "tool": "demo.video_render",
+          "title": "Simulate generating the approved sample",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "sample": "Fictional placeholder event; no video asset or paid provider call",
+            "providerSubmitted": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "quality",
+          "stage": 5,
+          "tool": "demo.ai_and_human_review",
+          "title": "Simulate AI and human sample checks",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "checks": [
+              "Identity and wardrobe consistency",
+              "Product claims and authentic UI",
+              "Audio, timing and captions"
+            ],
+            "result": "Simulated pass, not actual media QA"
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "outreach",
+          "stage": 5,
+          "tool": "demo.outreach_package",
+          "title": "Preview the personalized message and attachments",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "draft": {
+              "status": "Local draft, not sent",
+              "subject": "An original Award Scholar creative concept",
+              "body": "Hi Award Scholar team, we put together an original avatar concept around scholarship-search overload, with a storyboard and the two-page offer attached for review. Would this be a useful angle for your next creative test?"
+            },
+            "attachments": [
+              "Approved sample placeholder",
+              "/client-demo-reports/awardscholar-offer-v1.pdf"
+            ],
+            "recipient": "recipient@example.invalid",
+            "sent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "send",
+          "stage": 5,
+          "tool": "demo.outreach_send",
+          "title": "Simulate sending the sample and brief",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "mockDelivery": "Sent in simulation",
+            "messageId": "demo-message-001",
+            "realMessageSent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "reply",
+          "stage": 5,
+          "tool": "demo.reply",
+          "title": "Show a fictional interested reply",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "from": "recipient@example.invalid",
+            "text": "This looks interesting. Can we talk through the pilot?",
+            "receivedFromRealPerson": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "crm",
+          "stage": 5,
+          "tool": "demo.crm_and_call",
+          "title": "Simulate a CRM update and call handoff",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "crmStatus": "Interested (simulation)",
+            "call": "Mock scheduling handoff",
+            "crmWritten": false,
+            "calendarEventCreated": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        }
+      ]
+    },
+    {
+      "id": "waddle",
+      "name": "Waddle",
+      "website": "https://www.waddlecouples.com/",
+      "founders": [
+        {
+          "name": "Donald Chu",
+          "role": "Waddle founder and Columbia computer-science student, confirmed on his own portfolio. Public contact published there; deliverability not tested.",
+          "status": "Founder verified",
+          "url": "https://donaldvchu.com/"
+        },
+        {
+          "name": "Xander Wanagel",
+          "role": "User identifies him as cofounder. @xander.wan Waddle promotion is verified; formal role remains user-supplied. His current portfolio links a separate Dovey app.",
+          "status": "Creator verified; role unresolved",
+          "url": "https://www.xanderwanagel.com/"
+        }
+      ],
+      "product": {
+        "summary": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks.",
+        "features": [
+          "3,000+ questions, according to the official site",
+          "Daily check-ins and question decks",
+          "Shared duck, photos and playful activities",
+          "Official site self-reports 6,100+ paired couples; not an audited active-user count"
+        ]
+      },
+      "score": {
+        "total": 85,
+        "max": 100,
+        "confidence": "Moderate creative fit; commercial metrics unverified",
+        "components": [
+          {
+            "name": "Product and sample fit",
+            "score": 20,
+            "max": 20,
+            "rationale": "Clear consumer product, visible duck mascot and sample-friendly daily ritual."
+          },
+          {
+            "name": "Original creative potential",
+            "score": 18,
+            "max": 20,
+            "rationale": "Questions and shared play support original short-form variations."
+          },
+          {
+            "name": "Decision maker reachability",
+            "score": 18,
+            "max": 20,
+            "rationale": "Founder and public personal contact confirmed; mailbox deliverability not tested."
+          },
+          {
+            "name": "Commercial evidence",
+            "score": 12,
+            "max": 20,
+            "rationale": "Usage claims and paid SKUs visible, but revenue, payers and buying budget unknown."
+          },
+          {
+            "name": "Usable content reference",
+            "score": 17,
+            "max": 20,
+            "rationale": "Xander source transcripts and selected video frames now verified; Instagram, Meta delivery and audio QA unresolved."
+          }
+        ]
+      },
+      "revenue": {
+        "status": "Actual revenue unknown",
+        "summary": "App Store lists paid products. There is no verified payer count or revenue. Do not transfer revenue from the separate Dovey app.",
+        "scenarios": [
+          {
+            "label": "Illustrative monthly scenario",
+            "value": "$999 gross monthly billings",
+            "assumptions": "100 hypothetical subscribers x listed $9.99 monthly SKU."
+          },
+          {
+            "label": "Illustrative monthly scenario",
+            "value": "$4,995 gross monthly billings",
+            "assumptions": "500 hypothetical subscribers x listed $9.99 monthly SKU."
+          },
+          {
+            "label": "Illustrative annual scenario",
+            "value": "$3,332.50 monthly equivalent",
+            "assumptions": "1,000 hypothetical annual subscribers x listed $39.99/year divided by 12."
+          }
+        ],
+        "limitations": [
+          "Current checkout offer and plan mix unverified.",
+          "Payer counts are hypothetical; these are arithmetic examples, not actual-revenue estimates.",
+          "Excludes store fees, refunds and taxes."
+        ]
+      },
+      "icp": {
+        "summary": "Hypothesis: adult dating couples who want a lightweight daily connection ritual, especially geographically separated college or early-career couples. Buyer: founder-led consumer-app team testing creative.",
+        "evidence": [
+          "Official site supports couples together or at a distance.",
+          "Daily questions, photos, streaks and shared duck are real product themes.",
+          "Xander posts discuss repetitive remote relationship check-ins."
+        ],
+        "hypotheses": [
+          "Test adults aged 18-29; no audience analytics validate this range.",
+          "Compare repetitive daily-text angle against playful shared-duck angle."
+        ],
+        "painPoints": [
+          "Repetitive small talk",
+          "Feeling distant between visits",
+          "Difficulty starting deeper conversations"
+        ]
+      },
+      "persona": {
+        "name": "Jamie",
+        "description": "Original fictional adult, age 25, olive skin, wavy dark hair, light stubble, round dark glasses and charcoal hoodie. Warm direct-to-camera presenter, with an original voice.",
+        "wardrobe": "Charcoal hoodie and relaxed charcoal trousers, no logos.",
+        "imageUrl": "/client-demo-assets/waddle-jamie-persona-v2.png",
+        "environment": "Modest neighborhood cafe in daylight. One table, dark ceiling beams, soft window light and neutral phone prop. Fix the background and remove the inconsistent clip-on microphone before production.",
+        "rationale": "Original character adapted to the observed candid hoodie/cafe format. The earlier evening-sofa concept is retained as v1, but v2 is the selected demo direction. No Xander or Donald likeness, voice or personal testimony."
+      },
+      "references": [
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-06",
+          "status": "Public organic-format post; paid distribution unknown",
+          "observation": "9:16 close selfie; Dark hoodie, wired earbuds and blue bottle prop; Casual cafe-like background with exposed ceiling and red pipe; Bold top hook at opening and short lower subtitles. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-16",
+          "status": "Public organic-format post; paid distribution unknown",
+          "observation": "9:16 close selfie; Dark hoodie, wired earbud held near mouth; Public waiting-area seats and ceiling panels; Bold upper hook at opening; small lower subtitles; App minigame and duck recording overlaid at 29 seconds. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+          "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg"
+        }
+      ],
+      "script": {
+        "durationSeconds": 15,
+        "hook": "Still asking, \"How was your day?\"",
+        "shots": [
+          {
+            "start": 0,
+            "end": 3,
+            "camera": "Vertical close selfie at cafe table.",
+            "action": "Raised eyebrow, natural candid delivery; no creator identity or voice reuse.",
+            "line": "Still asking, \"How was your day?\""
+          },
+          {
+            "start": 3,
+            "end": 7,
+            "camera": "Same scene, slightly wider medium.",
+            "action": "Small open-hand gesture; genuine approved question-card footage goes in edit.",
+            "line": "Waddle gives you better questions to ask together."
+          },
+          {
+            "start": 7,
+            "end": 12,
+            "camera": "Same camera axis and charcoal hoodie.",
+            "action": "Gesture toward separately composited genuine duck/photo recording. No generated app screen.",
+            "line": "Share a photo, raise a duck, make time for each other."
+          },
+          {
+            "start": 12,
+            "end": 15,
+            "camera": "Return to close selfie.",
+            "action": "Friendly small smile; simple brand/URL end card added in edit.",
+            "line": "Try a daily check-in with Waddle."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.waddlecouples.com/",
+          "title": "waddle site"
+        },
+        {
+          "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+          "title": "waddle apple"
+        },
+        {
+          "url": "https://donaldvchu.com/",
+          "title": "donald portfolio"
+        },
+        {
+          "url": "https://www.xanderwanagel.com/",
+          "title": "xander portfolio"
+        },
+        {
+          "url": "https://apps.apple.com/us/app/dovey-couples-questions/id6759009985",
+          "title": "dovey apple"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-06"
+        },
+        {
+          "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+          "title": "Xander @xander.wan, Snapchat, 2026-08-16"
+        }
+      ],
+      "gaps": [
+        "Formal Xander cofounder role and exact Instagram handles/posts",
+        "No verified Waddle Meta advertiser or ad IDs; this does not prove no ads exist",
+        "Actual revenue, active users, payer count and current checkout offer",
+        "Continuous source playback/audio QA",
+        "Microphone continuity and fixed room/camera map",
+        "Human review of persona, frames, permitted production assets and offer copy"
+      ],
+      "outreachDraft": {
+        "status": "Local draft, not sent",
+        "subject": "An original Waddle creative concept",
+        "body": "Hi Donald, we built an original avatar concept for Waddle around turning routine daily check-ins into better conversations and shared duck play. The storyboard, reference notes and two-page demo offer are attached for review. Would this be a useful angle to test?"
+      },
+      "storyboardImageUrl": "/client-demo-assets/waddle-storyboard-v1.png",
+      "reportUrl": "/client-demo-reports/waddle-research-v1.html",
+      "offerPdfUrl": "/client-demo-reports/waddle-offer-v1.pdf",
+      "offerPreviewUrls": [
+        "/client-demo-assets/waddle-offer-page-1.png",
+        "/client-demo-assets/waddle-offer-page-2.png"
+      ],
+      "history": [
+        {
+          "id": "exa-0",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "Xander Waddle couples app Instagram xander.wan",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-1",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "site:instagram.com/reel \"Waddle\" \"xander\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 2,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 2,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-2",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"xander.wan\" site:instagram.com",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-3",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Waddle\" \"waddlecouples.com\" \"ads\"",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 1,
+            "otherCandidatesNotEvidence": 4,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "Waddle - The relationship app with a duck to raise"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "exa-4",
+          "stage": 0,
+          "tool": "Exa.web_search_exa",
+          "title": "Search public founder and content evidence",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "query": "\"Waddle\" site:facebook.com/ads/library",
+            "provider": "free keyless Exa MCP",
+            "paidFallback": false
+          },
+          "output": {
+            "returnedResults": 5,
+            "verifiedSourceMatches": 0,
+            "otherCandidatesNotEvidence": 5,
+            "qualification": "Candidates require source verification; unrelated Instagram results excluded."
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "verify",
+          "stage": 0,
+          "tool": "web.run / public HTTP",
+          "title": "Verify founder and product sources",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.waddlecouples.com/",
+              "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "https://donaldvchu.com/"
+            ]
+          },
+          "output": {
+            "people": [
+              {
+                "name": "Donald Chu",
+                "role": "Waddle founder and Columbia computer-science student, confirmed on his own portfolio. Public contact published there; deliverability not tested.",
+                "status": "Founder verified",
+                "url": "https://donaldvchu.com/"
+              },
+              {
+                "name": "Xander Wanagel",
+                "role": "User identifies him as cofounder. @xander.wan Waddle promotion is verified; formal role remains user-supplied. His current portfolio links a separate Dovey app.",
+                "status": "Creator verified; role unresolved",
+                "url": "https://www.xanderwanagel.com/"
+              }
+            ],
+            "product": {
+              "summary": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks.",
+              "features": [
+                "3,000+ questions, according to the official site",
+                "Daily check-ins and question decks",
+                "Shared duck, photos and playful activities",
+                "Official site self-reports 6,100+ paired couples; not an audited active-user count"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            },
+            {
+              "url": "https://donaldvchu.com/",
+              "title": "donald portfolio"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "references",
+          "stage": 4,
+          "tool": "ffmpeg + view_image",
+          "title": "Inspect real creative references",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "urls": [
+              "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+              "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ"
+            ]
+          },
+          "output": {
+            "references": [
+              {
+                "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+                "title": "Xander @xander.wan, Snapchat, 2026-08-06",
+                "status": "Public organic-format post; paid distribution unknown",
+                "observation": "9:16 close selfie; Dark hoodie, wired earbuds and blue bottle prop; Casual cafe-like background with exposed ceiling and red pipe; Bold top hook at opening and short lower subtitles. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg"
+              },
+              {
+                "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+                "title": "Xander @xander.wan, Snapchat, 2026-08-16",
+                "status": "Public organic-format post; paid distribution unknown",
+                "observation": "9:16 close selfie; Dark hoodie, wired earbud held near mouth; Public waiting-area seats and ceiling panels; Bold upper hook at opening; small lower subtitles; App minigame and duck recording overlaid at 29 seconds. Platform transcript read and selected frames inspected. Not Instagram; no continuous playback or audio QA.",
+                "imageUrl": "/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg"
+              }
+            ],
+            "coverage": "Downloaded source media and sampled decoded frames. No continuous playback/audio QA."
+          },
+          "evidence": [
+            {
+              "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+              "title": "Xander @xander.wan, Snapchat, 2026-08-06"
+            },
+            {
+              "url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+              "title": "Xander @xander.wan, Snapchat, 2026-08-16"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "score",
+          "stage": 1,
+          "tool": "agent.research_synthesis",
+          "title": "Build commercial scenarios and score",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "rubric": "five explicit categories, 20 points each"
+          },
+          "output": {
+            "score": {
+              "total": 85,
+              "max": 100,
+              "confidence": "Moderate creative fit; commercial metrics unverified",
+              "components": [
+                {
+                  "name": "Product and sample fit",
+                  "score": 20,
+                  "max": 20,
+                  "rationale": "Clear consumer product, visible duck mascot and sample-friendly daily ritual."
+                },
+                {
+                  "name": "Original creative potential",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Questions and shared play support original short-form variations."
+                },
+                {
+                  "name": "Decision maker reachability",
+                  "score": 18,
+                  "max": 20,
+                  "rationale": "Founder and public personal contact confirmed; mailbox deliverability not tested."
+                },
+                {
+                  "name": "Commercial evidence",
+                  "score": 12,
+                  "max": 20,
+                  "rationale": "Usage claims and paid SKUs visible, but revenue, payers and buying budget unknown."
+                },
+                {
+                  "name": "Usable content reference",
+                  "score": 17,
+                  "max": 20,
+                  "rationale": "Xander source transcripts and selected video frames now verified; Instagram, Meta delivery and audio QA unresolved."
+                }
+              ]
+            },
+            "revenue": {
+              "status": "Actual revenue unknown",
+              "summary": "App Store lists paid products. There is no verified payer count or revenue. Do not transfer revenue from the separate Dovey app.",
+              "scenarios": [
+                {
+                  "label": "Illustrative monthly scenario",
+                  "value": "$999 gross monthly billings",
+                  "assumptions": "100 hypothetical subscribers x listed $9.99 monthly SKU."
+                },
+                {
+                  "label": "Illustrative monthly scenario",
+                  "value": "$4,995 gross monthly billings",
+                  "assumptions": "500 hypothetical subscribers x listed $9.99 monthly SKU."
+                },
+                {
+                  "label": "Illustrative annual scenario",
+                  "value": "$3,332.50 monthly equivalent",
+                  "assumptions": "1,000 hypothetical annual subscribers x listed $39.99/year divided by 12."
+                }
+              ],
+              "limitations": [
+                "Current checkout offer and plan mix unverified.",
+                "Payer counts are hypothetical; these are arithmetic examples, not actual-revenue estimates.",
+                "Excludes store fees, refunds and taxes."
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            }
+          ],
+          "note": "Editorial synthesis performed during this session, not an analytics model or measured business outcome."
+        },
+        {
+          "id": "icp",
+          "stage": 2,
+          "tool": "agent.research_synthesis",
+          "title": "Draft an evidence-backed ICP",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "analysis",
+          "input": {
+            "product": "Couples app for daily questions, photos, a shared virtual duck, minigames, quests and streaks."
+          },
+          "output": {
+            "icp": {
+              "summary": "Hypothesis: adult dating couples who want a lightweight daily connection ritual, especially geographically separated college or early-career couples. Buyer: founder-led consumer-app team testing creative.",
+              "evidence": [
+                "Official site supports couples together or at a distance.",
+                "Daily questions, photos, streaks and shared duck are real product themes.",
+                "Xander posts discuss repetitive remote relationship check-ins."
+              ],
+              "hypotheses": [
+                "Test adults aged 18-29; no audience analytics validate this range.",
+                "Compare repetitive daily-text angle against playful shared-duck angle."
+              ],
+              "painPoints": [
+                "Repetitive small talk",
+                "Feeling distant between visits",
+                "Difficulty starting deeper conversations"
+              ]
+            }
+          },
+          "evidence": [
+            {
+              "url": "https://www.waddlecouples.com/",
+              "title": "waddle site"
+            },
+            {
+              "url": "https://apps.apple.com/us/app/waddle-couples-questions/id6753086654",
+              "title": "waddle apple"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona",
+          "stage": 3,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate an original persona sheet",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "persona": "Original fictional adult, age 25, olive skin, wavy dark hair, light stubble, round dark glasses and charcoal hoodie. Warm direct-to-camera presenter, with an original voice.",
+            "environment": "Modest neighborhood cafe in daylight. One table, dark ceiling beams, soft window light and neutral phone prop. Fix the background and remove the inconsistent clip-on microphone before production."
+          },
+          "output": {
+            "imageUrl": "/client-demo-assets/waddle-jamie-persona-v2.png",
+            "humanApproved": false,
+            "itemizedImageCostUsd": null
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/waddle-jamie-persona-v2.png",
+              "title": "Generated original persona"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "persona-qa",
+          "stage": 3,
+          "tool": "view_image + static review",
+          "title": "Review identity, anatomy and source-format fit",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent inspection and independent agent static image review"
+          },
+          "output": {
+            "findings": "V2 improves cafe/hoodie format fit; microphone only visible in first persona panel. Remove it in storyboard.",
+            "motionReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Static AI review is recorded. A real human has not approved these assets."
+        },
+        {
+          "id": "storyboard",
+          "stage": 4,
+          "tool": "ImageGen.imagegen",
+          "title": "Generate the original four-shot storyboard",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Waddle"
+          },
+          "output": {
+            "assetUrl": "/client-demo-assets/waddle-storyboard-v1.png",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-assets/waddle-storyboard-v1.png",
+              "title": "Generate the original four-shot storyboard"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "pdf",
+          "stage": 5,
+          "tool": "local_pdf.build",
+          "title": "Assemble the personalized two-page demo offer",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "brand": "Waddle"
+          },
+          "output": {
+            "assetUrl": "/client-demo-reports/waddle-offer-v1.pdf",
+            "humanApproved": false
+          },
+          "evidence": [
+            {
+              "url": "/client-demo-reports/waddle-offer-v1.pdf",
+              "title": "Assemble the personalized two-page demo offer"
+            }
+          ],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "storyboard-qa",
+          "stage": 4,
+          "tool": "view_image + independent static review",
+          "title": "Check the four storyboard frames",
+          "mode": "recorded",
+          "status": "complete",
+          "kind": "tool_summary",
+          "input": {
+            "review": "Parent and independent agent static image inspection"
+          },
+          "output": {
+            "result": "Suitable for human static review; identity and wardrobe coherent, no obvious blocking anatomy defects. Jamie microphone removed consistently.",
+            "motionAndAudioReviewed": false,
+            "humanApproved": false
+          },
+          "evidence": [],
+          "note": "Recorded step summary from this research session. Inputs and outputs are normalized summaries, not raw provider transcripts. Replay does not rerun the provider."
+        },
+        {
+          "id": "approval",
+          "stage": 5,
+          "tool": "demo.human_approval",
+          "title": "Human approves storyboard and brief in the simulation",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": true,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "approval": "Simulated only",
+            "realApproval": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "render",
+          "stage": 5,
+          "tool": "demo.video_render",
+          "title": "Simulate generating the approved sample",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "sample": "Fictional placeholder event; no video asset or paid provider call",
+            "providerSubmitted": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "quality",
+          "stage": 5,
+          "tool": "demo.ai_and_human_review",
+          "title": "Simulate AI and human sample checks",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "checks": [
+              "Identity and wardrobe consistency",
+              "Product claims and authentic UI",
+              "Audio, timing and captions"
+            ],
+            "result": "Simulated pass, not actual media QA"
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "outreach",
+          "stage": 5,
+          "tool": "demo.outreach_package",
+          "title": "Preview the personalized message and attachments",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "draft": {
+              "status": "Local draft, not sent",
+              "subject": "An original Waddle creative concept",
+              "body": "Hi Donald, we built an original avatar concept for Waddle around turning routine daily check-ins into better conversations and shared duck play. The storyboard, reference notes and two-page demo offer are attached for review. Would this be a useful angle to test?"
+            },
+            "attachments": [
+              "Approved sample placeholder",
+              "/client-demo-reports/waddle-offer-v1.pdf"
+            ],
+            "recipient": "recipient@example.invalid",
+            "sent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "send",
+          "stage": 5,
+          "tool": "demo.outreach_send",
+          "title": "Simulate sending the sample and brief",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "mockDelivery": "Sent in simulation",
+            "messageId": "demo-message-001",
+            "realMessageSent": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "reply",
+          "stage": 5,
+          "tool": "demo.reply",
+          "title": "Show a fictional interested reply",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "from": "recipient@example.invalid",
+            "text": "This looks interesting. Can we talk through the pilot?",
+            "receivedFromRealPerson": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        },
+        {
+          "id": "crm",
+          "stage": 5,
+          "tool": "demo.crm_and_call",
+          "title": "Simulate a CRM update and call handoff",
+          "mode": "simulated",
+          "status": "pending",
+          "requiresApproval": false,
+          "input": {
+            "brand": "selected demo client"
+          },
+          "output": {
+            "crmStatus": "Interested (simulation)",
+            "call": "Mock scheduling handoff",
+            "crmWritten": false,
+            "calendarEventCreated": false
+          },
+          "evidence": [],
+          "note": "Fictional demo event. No external action or real approval is recorded."
+        }
+      ]
+    }
+  ]
+}

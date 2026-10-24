@@ -1,4 +1,5 @@
 import {assertRevisionWorkAllowed} from './revision-harness.mjs';
+import {createClientDemo} from './client-demo.mjs';
 import {createAnalytics} from './analytics.mjs';
 import {spendingPaused,spendingRequestAllowed} from './spending-policy.mjs';
 import http from 'node:http';
@@ -44,13 +45,14 @@ import {createPanels} from './panel.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const pub=path.join(here,'public'),shots=path.join(dataDir,'shots'),renderDir=path.join(dataDir,'renders'),logoDir=path.join(dataDir,'logos'),offerBase=path.join(dataDir,'offer','base-v3.pdf'),offerDir=path.join(dataDir,'offer','leads');
-const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.jpg':'image/jpeg','.gif':'image/gif','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg'};
+const mime={'.pdf':'application/pdf','.json':'application/json; charset=utf-8','.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.jpg':'image/jpeg','.gif':'image/gif','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg'};
 // Chat requests may name a writing model and attached files from /api/uploads.
 const chatModel=b=>{if(b.model==null||b.model==='')return null;if(!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return b.model;};
 const chatFiles=b=>{const ids=Array.isArray(b.attachments)?b.attachments:[];if(ids.length>5)throw Object.assign(Error('Attach up to 5 files.'),{status:400});return ids.map(id=>{const u=getUpload(id);if(!u)throw Object.assign(Error('An attached file is missing. Attach it again.'),{status:400});return u;});};
 class Raw{constructor(type,data,headers={}){this.type=type;this.data=data;this.headers=headers;}}
 export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=defaultCheckVoice,gmailApi=gmailTools,video,logoNet={},autopilot,assistant,requalifier,whopwatch,costs,connections,production,taskStoryboards,analytics,ideation,browserLive=defaultBrowserLive,instagram,panels,panelsWatch=false}={}){
  runner??=createRunner(store);
+ const clientDemo=createClientDemo({store});
  autopilot??=createAutopilot({store,runner});
  whopwatch??=createWhopWatch({store,runner});
  costs??=createCosts({store});
@@ -199,6 +201,8 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   }
  }
  const routes=[
+  ['GET',/^\/api\/client-demo$/,()=>clientDemo.get()],
+  ['POST',/^\/api\/client-demo\/tasks$/,(m,b)=>clientDemo.prepare(b.brandId)],
   ...researchRoutes({store,Raw}),
   ['GET',/^\/api\/analytics$/,(m,b,url)=>analytics.get({range:url.searchParams.get('range')||'today',refresh:url.searchParams.get('refresh')==='1'})],
   ['GET',/^\/api\/storyboard-tasks$/,()=>({workspaces:taskStoryboards.list()})],
@@ -216,13 +220,13 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['GET',/^\/api\/production\/dossiers\/([a-zA-Z0-9-]+)$/,m=>({dossier:production.get(m[1])})],
   ['POST',/^\/api\/production\/call$/,async(m,b)=>({result:await production.call(b.name,b.input||{})})],
   ['GET',/^\/api\/state$/,()=>({config:config(),tasks:store.listTasks()})],
-  ['POST',/^\/api\/chat$/,(m,b)=>{const text=String(b.message||'').trim();if(text.length<3||text.length>2000)throw Object.assign(Error('Write a request between 3 and 2000 characters.'),{status:400});return {task:runner.start(text,{model:chatModel(b),attachments:chatFiles(b)})};}],
+  ['POST',/^\/api\/chat$/,(m,b)=>{const text=String(b.message||'').trim();if(text.length<3||text.length>2000)throw Object.assign(Error('Write a request between 3 and 2000 characters.'),{status:400});const demo=clientDemo.fromPrompt(text);if(demo)return demo;return {task:runner.start(text,{model:chatModel(b),attachments:chatFiles(b)})};}],
   ['POST',/^\/api\/uploads$/,(m,b)=>({upload:saveUpload(b)})],
   ['GET',/^\/api\/tasks\/(\d+)$/,m=>{const id=Number(m[1]);const task=store.getTask(id);if(!task)throw Object.assign(Error('No such task'),{status:404});return {task,running:runner.isRunning(id),events:store.listEvents({taskId:id}),steers:store.listSteers(id),leads:store.listLeads({taskId:id}),drafts:store.listDrafts({taskId:id}).filter(d=>d.status!=='withdrawn').map(withReadiness)};}],
   ['POST',/^\/api\/tasks\/(\d+)\/steer$/,(m,b)=>{const text=String(b.message||'').trim();if(!text)throw Object.assign(Error('Write a steering message.'),{status:400});return runner.steer(Number(m[1]),text);}],
   ['POST',/^\/api\/tasks\/(\d+)\/control$/,(m,b)=>{if(!['pause','resume','stop'].includes(b.action))throw Object.assign(Error('Unknown action'),{status:400});return {ok:runner.control(Number(m[1]),b.action)};}],
   ['GET',/^\/api\/assistant$/,()=>({messages:assistant.history(),enabled:llmEnabled(),mainModels})],
-  ['POST',/^\/api\/assistant$/,async(m,b)=>{if(!llmEnabled())throw Object.assign(Error('Add ANTHROPIC_API_KEY to talk to Mint.'),{status:503});const message=String(b.message??'').trim();if(message.length<1||message.length>4000)throw Object.assign(Error('Write a message between 1 and 4000 characters.'),{status:400});if(b.model!=null&&b.model!==''&&!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return await assistant.reply({message,model:b.model||null});}],
+  ['POST',/^\/api\/assistant$/,async(m,b)=>{const message=String(b.message??'').trim();if(message.length<1||message.length>4000)throw Object.assign(Error('Write a message between 1 and 4000 characters.'),{status:400});const demo=clientDemo.conversation(message);if(demo)return demo;if(!llmEnabled())throw Object.assign(Error('Add ANTHROPIC_API_KEY to talk to Mint.'),{status:503});if(b.model!=null&&b.model!==''&&!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return await assistant.reply({message,model:b.model||null});}],
   ['GET',/^\/api\/autopilot$/,()=>autopilot.get()],
   ['POST',/^\/api\/autopilot$/,(m,b)=>{
    const bad=t=>Object.assign(Error(t),{status:400}),patch={};

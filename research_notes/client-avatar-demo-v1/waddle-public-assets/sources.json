@@ -1,0 +1,37 @@
+[
+  {
+    "url": "https://www.waddlecouples.com/app-home.webp",
+    "path": "/Users/ryancortenbach/Development/ugc-campaign-studio/research_notes/client-avatar-demo-v1/waddle-public-assets/app-home.webp",
+    "http_status": "200",
+    "bytes": 80022,
+    "sha256": "99dd0f827d8821b45d67be54c25de2d285a0961bb49b566dd146e20d654f510d"
+  },
+  {
+    "url": "https://www.waddlecouples.com/app-couple.webp",
+    "path": "/Users/ryancortenbach/Development/ugc-campaign-studio/research_notes/client-avatar-demo-v1/waddle-public-assets/app-couple.webp",
+    "http_status": "200",
+    "bytes": 46274,
+    "sha256": "f1503ee80aa5eb490ea4f7fac7d3c3c09dc045388da200c5f9ba4127db08e81e"
+  },
+  {
+    "url": "https://www.waddlecouples.com/app-decks.webp",
+    "path": "/Users/ryancortenbach/Development/ugc-campaign-studio/research_notes/client-avatar-demo-v1/waddle-public-assets/app-decks.webp",
+    "http_status": "200",
+    "bytes": 64190,
+    "sha256": "2edbd601da21c75b1c6cfb4ebba938fbd4f1c6cb57f47a75d35e3a4204a6121c"
+  },
+  {
+    "url": "https://www.waddlecouples.com/app-shop.webp",
+    "path": "/Users/ryancortenbach/Development/ugc-campaign-studio/research_notes/client-avatar-demo-v1/waddle-public-assets/app-shop.webp",
+    "http_status": "200",
+    "bytes": 45186,
+    "sha256": "3bfb3434d534328165d407cc98791911528a0de1220b49ca63d6d3ff571476d6"
+  },
+  {
+    "url": "https://www.waddlecouples.com/duck-icon.png",
+    "path": "/Users/ryancortenbach/Development/ugc-campaign-studio/research_notes/client-avatar-demo-v1/waddle-public-assets/duck-icon.png",
+    "http_status": "200",
+    "bytes": 74884,
+    "sha256": "c89531449b908ffbcf55dfd0a4ed15b90d94810ae7e4c5cce8fe7ca8028ae5c6"
+  }
+]

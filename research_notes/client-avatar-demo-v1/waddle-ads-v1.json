@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "brand": "Waddle",
+  "researched_at": "2026-10-24",
+  "meta_ads": {
+    "status": "not_verified",
+    "advertiser_page_name": null,
+    "advertiser_page_id": null,
+    "ad_ids": [],
+    "confirmed_ads": [],
+    "candidate_legal_operator": "Dovey LLC",
+    "operator_evidence": "Official website footer and App Store seller, not proof of Meta advertiser identity.",
+    "query_urls": [
+      {
+        "url": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=waddlecouples&search_type=keyword_unordered",
+        "status": "web_tool_fetch_throttled"
+      },
+      {
+        "url": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Waddle%20Couples&search_type=keyword_unordered",
+        "status": "web_tool_fetch_throttled"
+      },
+      {
+        "url": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Dovey%20LLC&search_type=keyword_unordered",
+        "status": "web_tool_fetch_throttled"
+      }
+    ],
+    "gap": "Cannot establish whether Waddle currently runs or previously ran Meta ads. No direct ad record or Meta advertiser identity obtained. Search results or app privacy advertising categories do not establish paid acquisition."
+  },
+  "official_site_public_html": {
+    "url": "https://www.waddlecouples.com/",
+    "http_status": 200,
+    "access": "curl with per-process DNS resolution for environment DNS failure; no system settings changed.",
+    "raw_html_scanned": true,
+    "social_links_found": [
+      "https://discord.gg/ZHDbH6T9UZ",
+      "https://www.reddit.com/r/WaddleCouples/"
+    ],
+    "social_links_not_found_in_home_html": [
+      "Instagram",
+      "TikTok",
+      "Facebook",
+      "Snapchat"
+    ],
+    "qualification": "Absence from homepage HTML does not prove no account exists.",
+    "image_assets": [
+      "https://www.waddlecouples.com/app-home.webp",
+      "https://www.waddlecouples.com/app-couple.webp",
+      "https://www.waddlecouples.com/app-decks.webp",
+      "https://www.waddlecouples.com/app-shop.webp",
+      "https://www.waddlecouples.com/duck-icon.png"
+    ],
+    "image_review": "app-home.webp and app-decks.webp viewed. Home shows yellow duck, daily connection and quests; decks show colored category cards.",
+    "asset_manifest": "research_notes/client-avatar-demo-v1/waddle-public-assets/sources.json"
+  },
+  "creator_posts": [
+    {
+      "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+      "creator_name": "Xander Wanagel",
+      "creator_handle": "xander.wan",
+      "creator_association": "Creator publicly promotes Waddle in platform transcript. Formal Waddle cofounder role remains user-supplied.",
+      "classification": "public_creator_post",
+      "paid_distribution_status": "unknown",
+      "access": "ordinary_public_page_http_200_and_embedded_first_party_metadata",
+      "platform": "Snapchat",
+      "date": "2026-08-16",
+      "metadata": {
+        "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYYWN1cXl1bGFoAaAMzpnFAaAMzTaIAAAAAQ",
+        "metadata_path": "/Users/ryancortenbach/Development/ugc-campaign-studio/work/client-avatar-demo-v1/waddle-reference/xander-snap-20260816-native-metadata.json",
+        "creator": {
+          "$case": "personCreator",
+          "personCreator": {
+            "username": "xander.wan",
+            "url": "https://www.snapchat.com/@xander.wan",
+            "name": "Xander Wanagel",
+            "followerCount": "0",
+            "websiteUrl": ""
+          }
+        },
+        "uploadDateMs": "1786921170568",
+        "uploadDateUTC": "2026-08-16T22:59:30.568000+00:00",
+        "durationMs": "36000",
+        "dimensions": [
+          540,
+          960
+        ],
+        "viewCount": "5550",
+        "platform_transcript_available": true,
+        "platform_transcript_words": 166
+      },
+      "transcript_status": "Platform-provided transcript available in public JSON-LD; read and paraphrased, not independently ASR checked.",
+      "visual_review": {
+        "selected_seconds": [
+          0,
+          8,
+          18,
+          29
+        ],
+        "coverage": "Selected extracted frames only, not continuous playback or audio review.",
+        "observed": [
+          "9:16 close selfie",
+          "Dark hoodie, wired earbud held near mouth",
+          "Public waiting-area seats and ceiling panels",
+          "Bold upper hook at opening; small lower subtitles",
+          "App minigame and duck recording overlaid at 29 seconds"
+        ],
+        "transcript_summary": "Creator explains repetitive remote check-ins, responds to criticism, describes distance, question-card conversations and shared play, then invites product feedback."
+      }
+    },
+    {
+      "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYdnZteHh4YWV4AZ9ioQMjAZ9ioDOsAAAAAQ",
+      "creator_name": "Xander Wanagel",
+      "creator_handle": "xander.wan",
+      "creator_association": "Creator publicly promotes Waddle in platform transcript. Formal Waddle cofounder role remains user-supplied.",
+      "classification": "public_creator_post",
+      "paid_distribution_status": "unknown",
+      "access": "ordinary_public_page_http_200_and_embedded_first_party_metadata",
+      "platform": "Snapchat",
+      "date": "2026-07-14",
+      "metadata": {
+        "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYdnZteHh4YWV4AZ9ioQMjAZ9ioDOsAAAAAQ",
+        "metadata_path": "/Users/ryancortenbach/Development/ugc-campaign-studio/work/client-avatar-demo-v1/waddle-reference/xander-snap-jul14-native-metadata.json",
+        "creator": {
+          "$case": "personCreator",
+          "personCreator": {
+            "username": "xander.wan",
+            "url": "https://www.snapchat.com/@xander.wan",
+            "name": "Xander Wanagel",
+            "followerCount": "0",
+            "websiteUrl": ""
+          }
+        },
+        "uploadDateMs": "1784066093996",
+        "uploadDateUTC": "2026-07-14T21:54:53.996000+00:00",
+        "durationMs": "44930",
+        "dimensions": [
+          540,
+          960
+        ],
+        "viewCount": "9195",
+        "platform_transcript_available": true,
+        "platform_transcript_words": 186
+      },
+      "transcript_status": "Platform-provided transcript available in public JSON-LD; read and paraphrased, not independently ASR checked.",
+      "visual_review": {
+        "selected_seconds": [],
+        "coverage": "Transcript and metadata only; media not downloaded or visually reviewed.",
+        "observed": [],
+        "transcript_summary": "Creator describes repetitive remote relationship updates and offers daily question cards, a deeper question category, minigames and duck care, then asks for app feedback."
+      }
+    },
+    {
+      "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+      "creator_name": "Xander Wanagel",
+      "creator_handle": "xander.wan",
+      "creator_association": "Creator publicly promotes Waddle in platform transcript. Formal Waddle cofounder role remains user-supplied.",
+      "classification": "public_creator_post",
+      "paid_distribution_status": "unknown",
+      "access": "ordinary_public_page_http_200_and_embedded_first_party_metadata",
+      "platform": "Snapchat",
+      "date": "2026-08-06",
+      "metadata": {
+        "source_url": "https://www.snapchat.com/@xander.wan/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYY3JjeGVpZ3ZyAZ_YsQI5AZ_YsFl9AAAAAQ",
+        "metadata_path": "/Users/ryancortenbach/Development/ugc-campaign-studio/work/client-avatar-demo-v1/waddle-reference/xander-snap-aug06-native-metadata.json",
+        "creator": {
+          "$case": "personCreator",
+          "personCreator": {
+            "username": "xander.wan",
+            "url": "https://www.snapchat.com/@xander.wan",
+            "name": "Xander Wanagel",
+            "followerCount": "0",
+            "websiteUrl": ""
+          }
+        },
+        "uploadDateMs": "1786046863741",
+        "uploadDateUTC": "2026-08-06T20:07:43.741000+00:00",
+        "durationMs": "42930",
+        "dimensions": [
+          540,
+          960
+        ],
+        "viewCount": "106269",
+        "platform_transcript_available": true,
+        "platform_transcript_words": 180
+      },
+      "transcript_status": "Platform-provided transcript available in public JSON-LD; read and paraphrased, not independently ASR checked.",
+      "visual_review": {
+        "selected_seconds": [
+          0,
+          13,
+          31
+        ],
+        "coverage": "Selected extracted frames only, not continuous playback or audio review.",
+        "observed": [
+          "9:16 close selfie",
+          "Dark hoodie, wired earbuds and blue bottle prop",
+          "Casual cafe-like background with exposed ceiling and red pipe",
+          "Bold top hook at opening and short lower subtitles"
+        ],
+        "transcript_summary": "Creator describes shallow routine updates in a long-distance relationship and introduces question cards, deeper conversation prompts and shared duck play before the Waddle CTA."
+      }
+    }
+  ],
+  "confirmed_organic_community": [
+    {
+      "url": "https://www.reddit.com/r/WaddleCouples/comments/1uod5r1/welcome_to_rwaddlecouples_introduce_yourself_and/",
+      "classification": "maker_community_post",
+      "confidence": "high",
+      "evidence": "Official Waddle website links this subreddit. Public post text identifies author as one of the makers and declares the community official.",
+      "author": "u/Clear-Broccoli176",
+      "person_identity": "not verified",
+      "content_summary": "Introduces the shared-duck app and invites duck outfits, streaks, feature requests and couple conversation posts.",
+      "access": "Full post text opened live; not a video."
+    },
+    {
+      "url": "https://www.reddit.com/r/WaddleCouples/comments/1xbawqr/this_is_kingston/",
+      "classification": "community_user_post",
+      "confidence": "high_for_post_content; identity_and_customer_status_unverified",
+      "author": "u/Salt-Excitement-3549",
+      "content_summary": "User names a duck, says the questions support connection, and asks for more outfits and backgrounds. Self-reported experience, not audited testimonial evidence.",
+      "access": "Full text opened live; no paid label observed. Not a brand-owned post."
+    }
+  ],
+  "instagram": {
+    "official_brand_account": null,
+    "xander_account": null,
+    "exact_posts": [],
+    "status": "not_verified; public web fetch throttled for candidate profiles"
+  },
+  "tiktok": {
+    "official_brand_account": null,
+    "exact_posts": [],
+    "status": "not_verified; web tool robots restriction"
+  },
+  "reviewed_thumbnails": [
+    {
+      "file": "agent/public/client-demo-assets/waddle-ref-xander-snap-20260806-00s.jpg",
+      "source_frame": "work/client-avatar-demo-v1/waddle-reference/xander-snap-20260806-00s.jpg",
+      "reviewed": true,
+      "sha256": "6a1345e7f9494c460d661db8cef2d002022c26cfbc1f4684d4989f44afd3a70d",
+      "usage": "Internal reference review only; not a generated avatar or finished sample."
+    },
+    {
+      "file": "agent/public/client-demo-assets/waddle-ref-xander-snap-20260816-00s.jpg",
+      "source_frame": "work/client-avatar-demo-v1/waddle-reference/xander-snap-20260816-00s.jpg",
+      "reviewed": true,
+      "sha256": "df5dde21cfff8597ff7a37d9f44d3e97a32428bee0fb162ef363ea1f5cfb47bf",
+      "usage": "Internal reference review only; not a generated avatar or finished sample."
+    },
+    {
+      "file": "agent/public/client-demo-assets/waddle-ref-xander-snap-20260816-29s.jpg",
+      "source_frame": "work/client-avatar-demo-v1/waddle-reference/xander-snap-20260816-29s.jpg",
+      "reviewed": true,
+      "sha256": "ec87f1b89fa6b5d9ab7cbf7e754d9f45c361d84f1f0b33b282e466a16ebcf1f5",
+      "usage": "Internal reference review only; not a generated avatar or finished sample."
+    }
+  ],
+  "raw_reference_directory": "work/client-avatar-demo-v1/waddle-reference",
+  "raw_reference_git_status": "ignored, checked with git check-ignore",
+  "native_metadata_record": "work/client-avatar-demo-v1/waddle-reference/public-source-metadata-summary.json",
+  "recommended_adaptation": {
+    "type": "original_creative_with_observed_structural_reference",
+    "borrow_structure": [
+      "Candid direct-to-camera opener",
+      "Specific everyday relationship pain point",
+      "Short natural subtitles",
+      "Actual permitted app recording as an insert",
+      "Plain CTA"
+    ],
+    "original_elements": [
+      "Fictional Jamie identity",
+      "Original dialogue and voice",
+      "Original couch or cafe environment and composition"
+    ],
+    "avoid": [
+      "Founder likeness or voice cloning",
+      "Copying testimonial claims into fictional persona first-person statements",
+      "Calling the Snapchat creator posts confirmed paid ads",
+      "Claiming exact audiovisual parity from selected frames"
+    ]
+  }
+}
