@@ -157,7 +157,7 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
    ready:list.length>0&&list.every(s=>s.render),
    final,
    delivery:d?.link?{link:d.link,expiresAt:d.link_expires_at,draftUrl:d.draft_url,email:d.email?JSON.parse(d.email):null,preparedAt:d.prepared_at,stale:!final||final.stale||d.prepared_for!==d.final_version}:null,
-   draftRecovery:intentRow(id)?.state==='creating'?{state:'unknown',intentToken:intentRow(id).token,startedAt:intentRow(id).started_at}:null,
+   draftRecovery:intentRow(id)?.state==='creating'?{state:'unknown',intentToken:intentRow(id).token,startedAt:intentRow(id).started_at,recipient:intentRow(id).recipient,subject:intentRow(id).subject}:null,
    setup:{ffmpeg:Boolean(ffmpeg()),storage:Boolean(supabaseUrl(env)&&supabaseKey(env)),gmail:Boolean(gmail.gmailEnabled?.())}
   };
  }
