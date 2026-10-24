@@ -256,6 +256,7 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/delivery$/,m=>delivery.get(m[1])],
   ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/final$/,m=>delivery.finish(m[1])],
   ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/deliver$/,m=>delivery.deliver(m[1])],
+  ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/delivery-draft-reconcile$/,(m,b)=>delivery.reconcileDraft(m[1],b)],
   ['GET',/^\/api\/costs$/,(m,b,url)=>costs.get({refresh:url.searchParams.get('refresh')==='1'})],
   ['GET',/^\/api\/connections$/,async(m,b,url)=>({connections:await connections.get({refresh:url.searchParams.get('refresh')==='1'})})],
   ['GET',/^\/api\/spend$/,()=>store.spendSummary()],
