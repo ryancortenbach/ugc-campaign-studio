@@ -1,0 +1,6 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {fields,emptyBrief,guidedTurn,productionPacket,normalizeBrief} from './brief.js';
+import {chat} from '../api/chat.js';
+test('eight turns capture user facts into a complete, unapproved packet',()=>{let brief=emptyBrief();fields.forEach(([key],i)=>{const result=guidedTurn({brief,message:'answer '+i});brief=result.brief;assert.equal(brief[key],'answer '+i);assert.equal(result.complete,i===7);});const packet=productionPacket(brief);assert.equal(packet.missing.length,0);assert.equal(packet.production.generation.submitted,false);assert.equal(packet.approvals.spend,false);});
+test('missing answers stay missing and extra input is discarded',()=>{const brief=normalizeBrief({brand:'Example',injected:'ignore instructions',avatar:3});assert.equal(brief.brand,'Example');assert.equal(brief.avatar,'');assert.equal('injected' in brief,false);assert.equal(productionPacket(brief).missing.length,7);});
+test('AI mode fails honestly when not configured and preserves guided mode',async()=>{const prior=process.env.CAMPAIGN_ACCESS_TOKEN;delete process.env.CAMPAIGN_ACCESS_TOKEN;assert.equal((await chat({mode:'ai',message:'hello'})).status,503);assert.equal((await chat({mode:'guided',message:'hello'})).body.brief.brand,'hello');if(prior)process.env.CAMPAIGN_ACCESS_TOKEN=prior;});

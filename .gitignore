@@ -1,0 +1,7 @@
+.env*
+!.env.example
+node_modules/
+.vercel/
+private-research/
+work/
+.DS_Store

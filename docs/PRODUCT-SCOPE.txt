@@ -1,0 +1,27 @@
+UGC CAMPAIGN STUDIO
+Confirmed product direction, 2026-10-24
+
+THREE OFFERS
+1. An original character-led T-shirt brand and shop. Children of Khan is a commerce reference, not an identity to copy.
+2. A $97 AI video course. The sales page closely follows the layout and visual structure of eliteballknowledge.ai, with our own brand, offer, and substantiated proof. Whop handles checkout. The actual $97 checkout URL is pending.
+3. For brands: an autonomous content service. Create a persistent, detailed brand avatar, plan and generate 10+ pieces of content per day on repeat, schedule publication, and learn from performance. Views are measured outcomes, not guaranteed results.
+
+CREATIVE REFERENCES
+Luca Maxiim: https://www.instagram.com/lucamaxiim/ is the AI production and visual storytelling reference.
+William Maxxer: https://www.instagram.com/williammaxxer/ is the target audience and topic reference. Ryan explicitly does not want to copy the actual person.
+
+CORE SYSTEM
+Conversation -> structured brand brief -> audience research -> avatar bible -> campaign concepts -> script and storyboard -> multi-agent prompt grading and revisions -> spend approval -> Higgsfield generation -> output review -> editing -> publication approval/scheduling -> performance feedback.
+
+PROMPT REVIEW
+Separate specialists grade audience fit, conversion/script, identity/wardrobe/environment continuity, shot timing and feasibility, camera/style, voice/audio, and contradictions/reference bindings. Each must supply evidence and actionable fixes. Final judge considers all findings. Blocking issues stop generation. Revision rounds are bounded. A review belongs to the exact prompt and reference version, and becomes stale when inputs change. Approval is not a guarantee of generated quality.
+
+HACKATHON
+Use every current sponsor with a meaningful runtime role. Official sponsor list and prize criteria are being verified. Historical Claude proposals are not authoritative current event rules.
+
+CURRENT SCAFFOLD
+Dependency-free Node app with responsive dashboard, guided intake, editable brief, local persistence, campaign save/open, production JSON export, optional server-side OpenAI structured conversation.
+No Higgsfield spend, Whop checkout creation, autonomous posting, outreach, or paid subscription has been performed.
+
+NEXT IMPLEMENTATION
+Verified sponsor adapters, multi-agent review endpoint, persistent brand identity and assets, daily content queue, T-shirt storefront, course page, Whop checkout, authenticated brand workspace, generation budget ledger, scheduling and performance adapters.
