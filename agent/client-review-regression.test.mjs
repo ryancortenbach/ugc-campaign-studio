@@ -47,3 +47,28 @@ test('combined concept sheets retain the supplied brand mapping and limitations'
   assert.ok(view.textContent.includes(brand.storyboardCaption));
  }finally{dom.window.close();}
 });
+test('new video QA findings invalidate an earlier approval without replacing the clip',()=>{
+ const store=openStore(':memory:'),brand=brandFixture();brand.sampleVideo={url:'/clip.mp4',requestId:'mock-request',status:'completed',visualQA:{status:'passed'}};
+ try{
+  const clientDemo=createClientDemo({store,readPacket:()=>({preparedAt:'v1',brands:[brand]})}),{task}=clientDemo.prepare('test'),review=createClientReview({store,clientDemo});
+  const old=review.get(task.id);review.review(task.id,{section:'video',version:old.versions.video,decision:'approved'});
+  brand.sampleVideo.visualQA={status:'needs_revision',findings:['Back artwork appears on the front.']};
+  const current=review.get(task.id);
+  assert.notEqual(current.versions.video,old.versions.video);assert.equal(current.reviews.length,0);
+  assert.throws(()=>review.review(task.id,{section:'video',version:old.versions.video,decision:'approved'}),error=>error.status===409);
+ }finally{store.db.close();}
+});
+test('a known video defect stays visible and the simulated reviewer requests changes',async()=>{
+ const dom=new JSDOM('<main></main>'),view=dom.window.document.querySelector('main'),brand=brandFixture();
+ brand.sampleVideo={url:'/clip.mp4',requestId:'mock-request',status:'needs_revision',visualQA:{status:'needs_revision',findings:['Back artwork appears on the front.']}};
+ const data={task:{id:10},brand,versions:{research:'r1',images:'i1',video:'v1'},videoRenderId:42,reviews:['research','images','video'].map(section=>({section,mode:'local',decision:'approved'})),events:[]};
+ let saved;
+ try{
+  await clientTaskReviewView({view,taskId:10,api:async(path,body)=>{if(body)saved=body;return structuredClone(data);}});
+  assert.match(view.querySelector('.ct-heading').textContent,/Needs revision/);
+  assert.match(view.querySelector('[data-ct-section="video"]').textContent,/Back artwork appears on the front/);
+  assert.equal(view.querySelector('video'),null);assert.equal(view.querySelector('a[href="#/renders/42"]').textContent,'Review video');
+  view.querySelector('[data-ct-terac="video"]').click();await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(saved.mode,'simulated');assert.equal(saved.decision,'changes_requested');assert.equal(saved.note,brand.sampleVideo.visualQA.findings[0]);
+ }finally{dom.window.close();}
+});

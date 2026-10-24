@@ -8,9 +8,10 @@ export function createClientReview({store,clientDemo}){
   const task=store.getTask(taskId);if(task?.plan?.kind!=='client_demo')fail('Client task not found.',404);
   const packet=clientDemo.get(),brand=packet.brands.find(brand=>brand.id===task.plan.clientDemo.brandId)||task.plan.clientDemo.packet;
   if(!brand)fail('Client research not found.',404);
-  const versions={research:digest([packet.preparedAt,brand.product,brand.icp,brand.script?.hook,brand.sources,brand.gaps,brand.reportUrl]),images:brand.persona?.imageUrl||brand.storyboardImageUrl?digest([packet.preparedAt,brand.persona,brand.storyboardImageUrl,brand.storyboardCaption,(brand.assets||[]).filter(asset=>asset.kind==='product')]):null,video:brand.sampleVideo?.url&&brand.sampleVideo.requestId?digest([brand.sampleVideo.url,brand.sampleVideo.requestId,brand.sampleVideo.verification?.final_sha256]):null};
+  const versions={research:digest([packet.preparedAt,brand.product,brand.icp,brand.script?.hook,brand.sources,brand.gaps,brand.reportUrl]),images:brand.persona?.imageUrl||brand.storyboardImageUrl?digest([packet.preparedAt,brand.persona,brand.storyboardImageUrl,brand.storyboardCaption,(brand.assets||[]).filter(asset=>asset.kind==='product')]):null,video:brand.sampleVideo?.url&&brand.sampleVideo.requestId?digest([brand.sampleVideo.url,brand.sampleVideo.requestId,brand.sampleVideo.verification?.final_sha256,brand.sampleVideo.status,brand.sampleVideo.visualQA]):null};
   const reviews=store.db.prepare('select section,version,mode,decision,note,at from client_reviews where task_id=? order by at desc').all(taskId).filter(review=>review.version===versions[review.section]);
-  return {task:{id:task.id,status:task.status},brand,versions,reviews,events:store.listEvents({taskId}).filter(event=>['client.review','terac.review.simulated'].includes(event.tool))};
+  const videoRenderId=versions.video?store.listRenders().find(render=>render.request_id===brand.sampleVideo.requestId)?.id||null:null;
+  return {task:{id:task.id,status:task.status},brand,versions,reviews,videoRenderId,events:store.listEvents({taskId}).filter(event=>['client.review','terac.review.simulated'].includes(event.tool))};
  }
  function review(taskId,{section,version,decision,note='',mode='local'}={}){
   if(!['research','images','video'].includes(section)||!['approved','changes_requested'].includes(decision)||!['local','simulated'].includes(mode))fail('Choose a valid review action.');
