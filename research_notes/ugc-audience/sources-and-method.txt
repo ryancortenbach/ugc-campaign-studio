@@ -1,0 +1,7 @@
+Primary evidence: 800 actor dataset entries, 42 downloaded source videos, 126 inspected source frames, source manifests and machine transcripts. Input-profile counts and source-owner counts differ due to collaborations. Ranking uses lifetime public play/view counts, not unique viewers or conversions. Queries capped at 400/profile.
+Findings: fantasy-RPG social analogies, role-play hierarchy, digital economy/status, nostalgia, everyday observation and impressions recur. Luca's complete-day counts show high cadence. Demographics remain a hypothesis, not measured Instagram analytics.
+Interpretation: combine audience recognition with a stable original world; separate raw viral ranking from brand suitability.
+Sales: storefront prices and merchant social-proof claims are public. Actual order count, conversion, COGS, retention, and profitability are unknown. Contradictory third-party estimates excluded from actuals.
+Current sponsor evidence: https://terac.com/events/hackathon/nyc and https://luma.com/naxtga5l . Older SF list is not NYC's toolkit.
+Technical references: official OpenAI Structured Outputs, Vercel Node functions, Exa Search. APIs are scaffolded, not live model/sponsor evidence.
+No outreach has been sent. No paid video generation or course sale was performed. Original reference files are kept apart from proposed creative concepts.

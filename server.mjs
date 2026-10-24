@@ -3,12 +3,14 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {chat} from './api/chat.js';
+import {configurationStatus} from './api/status.js';
 import reviewHandler from './api/review.js';
 import {findProspects} from './api/prospects.js';
 const root=path.resolve(fileURLToPath(new URL('./public/',import.meta.url)));
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'};
 http.createServer(async(req,res)=>{
   const send=(code,data)=>{res.writeHead(code,{'Content-Type':'application/json'});res.end(JSON.stringify(data));};
+  if(req.url==='/api/status')return send(200,configurationStatus());
   if(req.url==='/api/review'){
     let raw='';try{for await(const chunk of req){raw+=chunk;if(raw.length>64000)return send(413,{error:'Request too large'});}req.body=JSON.parse(raw||'{}');res.status=code=>{res.statusCode=code;return res;};res.json=data=>send(res.statusCode||200,data);return await reviewHandler(req,res);}catch{return send(400,{error:'Invalid review request'});}
   }

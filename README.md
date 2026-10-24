@@ -24,7 +24,7 @@ The browser saves drafts and campaigns locally and exports a production packet a
 - `api/chat.js`: optional model-backed conversation endpoint.
 - `server.mjs`: local static and API server.
 - `docs/PRODUCT-SCOPE.txt`: Ryan's current decisions and build sequence.
-- `docs/HIGGSFIELD-AVATAR-DOSSIER.txt`: recovered avatar production context.
+- `docs/HIGGSFIELD-AVATAR-DOSSIER-v2.txt`: recovered avatar production context.
 - `private-research/`: ignored local source excerpts, excluded from Git and hosting.
 
 ## Integration boundaries
@@ -34,3 +34,9 @@ The optional Exa adapter and model conversation/review adapters require credenti
 ## API reference
 
 The optional AI adapter follows [OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). Model selection is explicit through the environment. No paid model request is made by setup or the tests.
+
+## Research
+
+`/research/` contains the browsable research library, full packet, 42 source-frame cards, an 800-entry source index, and coverage evidence. Full reference videos and analysis audio are local at `/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1`. The private avatar dossier preserves the recovered Air history.
+
+`docs/FINANCIAL-MODEL-NOTES.txt` documents sources, assumptions, formulas, exclusions, and guarantee limits. `docs/financial-scenarios-v1.json` contains the evaluated planning cases. `docs/prospect-seeds-v1.csv` contains eight unsent, source-labeled outreach candidates, with contact suitability distinguished from mere public availability.

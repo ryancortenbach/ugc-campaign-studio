@@ -25,3 +25,10 @@ No Higgsfield spend, Whop checkout creation, autonomous posting, outreach, or pa
 
 NEXT IMPLEMENTATION
 Verified sponsor adapters, multi-agent review endpoint, persistent brand identity and assets, daily content queue, T-shirt storefront, course page, Whop checkout, authenticated brand workspace, generation budget ledger, scheduling and performance adapters.
+
+MORNING DELIVERABLE CLARIFICATIONS
+Dashboard visual direction: dark Cyber/Mekpreme/Velox-like task workspace plus chatbot.
+Orchestrator UI: persistent task tabs, actionable alerts, review history, and explicit runtime connection states. Actual browser-tab execution and autonomous posting are separate adapter work, never implied by a running visual indicator.
+Outreach: Exa identifies DTC prospects and public business email evidence, prepares personalized unsent DM drafts, and plans a five-second sample video for each prospect. No outreach sending has been authorized.
+Financial model: model all three offers against editable metrics, including Khan's public pricing/funnel, actual-vs-assumption separation, and realistic limits on guarantees.
+User explicitly requested a 30-minute continuation loop. It is installed as com.ryan.ugc-campaign-loop-20261024 and must remain scoped to this project.

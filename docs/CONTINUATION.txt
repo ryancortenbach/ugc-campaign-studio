@@ -36,3 +36,13 @@ https://www.childrenofkhan.com/
 https://www.childrenofkhan.com/products/chinese-time-tee
 https://www.instagram.com/williammaxxer/
 https://www.instagram.com/lucamaxiim/
+
+BATCH UPDATE 2026-10-24 02:07 ET
+GitHub initial repo exists and is pushed. Commit 78486ed includes website mocks, dark task UI, finance and seven-reviewer loop. More local changes after that commit need final tests/push.
+Preview v3 READY with target null: https://duolingo-library-phone-v1-lfawrhfvu-ryancortenbachs-projects.vercel.app/ . Anonymous HTTP verified /,course,shop,brands,JS and API. Guided API 200, unconfigured AI/Exa explicitly 503. Normal Chrome opened. Current local source has prompt review lab added after v3 and needs v4 deployment.
+First deployments on a newly created Vercel project unexpectedly targeted production even with target preview. Both were DELETED immediately (IDs dpl_2pjWeTE58eaByDXCKNWL9w67Abq8 and dpl_FnYUsXFvALcnoby1VbWqwqwmcL4o). Do not use that new project deployment route. Existing public review project prj_6lb1b0Kqw7gk9Xq0V8HmFdiGyAKc gives confirmed preview target null. work/deploy-existing-preview.py is current helper. It refuses to repeat an existing deployment state. Make a new version state only for changed staged source; don't retry a POST blindly.
+Metadata scrape SUCCEEDED: 800 rows total, 400 from each input profile. Includes 399 William-owned + 1 collaboration and 398 Luca-owned + 2 collaborations. William sample covers 2025-12-14 to 2026-10-23; Luca 2026-09-25 to 2026-10-24. This is capped coverage, not an exhaustive account claim.
+Media worker PID 61624 completed. 440/442 successful, including all 30 top William videos and 12 top Luca videos. Two William audio fetches failed: DbHUbGBv5D3, DdKhKtQPzqm. Yt-dlp recovery worker was launched; check actual process and recovery logs before duplicating.
+MLX runtime is now installed at ~/.cache/uv/environments-v2/video2text-a2d16272a8065b13/bin/python. Cached medium MLX model is loaded offline. Transcription worker PID 62503 is alive, PTY session 49691. It transcribes 400 William + 12 Luca. Poll research/work/transcribe.log and transcription-status.json; do not duplicate. It waits for missing media up to 900s, so repair missing audio before that if possible.
+All 6 William top-30 contact sheets have been opened and visually inspected by root (3 frames per reel). Need Luca 12 frames contact sheets and actual packet authoring.
+New financial module has 11 passing tests across whole app. No model/Exa/provider keys in process env. AI review adapter exists but no actual paid specialist calls performed. Course URL question pending. Browser jobs are local UI preflight, not an actual remote browser executor. Don't claim that feature complete.
