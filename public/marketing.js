@@ -1,1 +1,26 @@
-const cart=[];document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const product=b.closest('.product');cart.push({name:b.dataset.add,size:product.querySelector('select').value,price:59.99});let box=document.querySelector('.cart-box');if(!box){box=document.createElement('div');box.className='cart-box';document.body.append(box);}box.replaceChildren();const title=document.createElement('strong');title.textContent=cart.length+' item'+(cart.length===1?'':'s')+' in preview cart';const price=document.createElement('div');price.textContent='$'+cart.reduce((sum,x)=>sum+x.price,0).toFixed(2)+' subtotal. Checkout is not connected.';const close=document.createElement('button');close.textContent='Close cart';close.onclick=()=>box.remove();box.append(title,price,close);});document.querySelectorAll('[data-checkout]').forEach(button=>button.onclick=()=>{const message=document.querySelector('#checkout-status');if(message)message.textContent='The $97 Whop checkout URL is pending. This is a review mock, so no payment will be taken.';});
+import {priceCart} from './cart.js';
+const cart=[];
+const money=value=>'$'+value.toFixed(2);
+function renderCart(){
+ let box=document.querySelector('.cart-box');
+ if(!box){box=document.createElement('aside');box.className='cart-box';box.setAttribute('aria-label','Preview shopping cart');document.body.append(box);}
+ box.replaceChildren();
+ const title=document.createElement('strong');title.textContent=cart.length+' item'+(cart.length===1?'':'s')+' in preview cart';box.append(title);
+ cart.forEach((item,index)=>{
+  const row=document.createElement('div');row.className='cart-item';
+  const label=document.createElement('span');label.textContent=item.name+' / '+item.size;
+  const remove=document.createElement('button');remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+item.name+' '+item.size);remove.onclick=()=>{cart.splice(index,1);renderCart();};
+  row.append(label,remove);box.append(row);
+ });
+ const totals=priceCart(cart);
+ for(const text of ['Subtotal '+money(totals.subtotal),'Bundle saving '+money(totals.discount),'Merchandise total '+money(totals.merchandise),totals.freeShipping?'Free shipping threshold reached.':money(totals.shippingGap)+' more merchandise to reach free shipping.',cart.length%4===0&&cart.length>0?'Bundle applied.':(4-cart.length%4)+' more item(s) to unlock the next free tee.','Proposed launch offer. Shipping, tax, inventory and checkout are not connected.']){
+  const line=document.createElement('p');line.textContent=text;box.append(line);
+ }
+ const close=document.createElement('button');close.textContent='Close cart';close.onclick=()=>box.remove();box.append(close);
+}
+document.querySelectorAll('[data-add]').forEach(button=>button.onclick=()=>{
+ const product=button.closest('.product');cart.push({name:button.dataset.add,size:product.querySelector('select').value,price:59.99});renderCart();
+});
+document.querySelectorAll('[data-checkout]').forEach(button=>button.onclick=()=>{
+ const message=document.querySelector('#checkout-status');if(message)message.textContent='The $97 Whop checkout URL is pending. This is a review mock, so no payment will be taken.';
+});
