@@ -1,179 +1,205 @@
-# Call list: Saturday, October 24
+# Call list: D2C e-commerce brands, October 24
 
-84 New York businesses worth calling today for the Mint Labs video packs: 19 call first, 42 call next, 23 if there's time.
+94 D2C brands worth calling for the Mint Labs video ad packs: 24 call first, 29 call next, 41 if there's time. Each one sells its own products through its own online store. Most already run ads or use marketing tools such as Klaviyo, review apps and subscriptions.
 
 **Track every call here:** https://claude.ai/artifact/SbNrLBK1rMd4saE5NnzW3b
-Mark each call there (No answer, Call back, Interested, Link sent, Paid, Not interested) so nobody dials the same place twice. Tensae has to add you in the page's Share menu as Contributor or Editor before you can mark calls. The page also has copy buttons for each business's follow-up text.
+Mark each call there so nobody dials the same brand twice. Tensae has to add you in the page's Share menu as Contributor or Editor before you can mark calls. Each card has copy buttons for the number, the email, the yes text and the follow-up email.
 
-The full list with every field is in [call-list-2026-10-24.csv](call-list-2026-10-24.csv).
+The full list with every field is in [call-list-d2c-2026-10-24.csv](call-list-d2c-2026-10-24.csv).
 
 ## How to work the list
 
-1. Start with **Call first**, and within it the **Call now** rows. Most salons, studios and shops say after 3pm, when the Saturday rush eases.
-2. Read the opener after you introduce yourself. It mentions something real from their website.
-3. On a yes, text the Whop link while you're still on the call: https://whop.com/mint-labs/ai-ugc-videos-bb/
-4. Mark the outcome on the tracker page right away.
+Brand offices are mostly closed on Saturday. Only 7 brands look reachable today.
 
-The offer: **Starter, $500 for 5 videos**, or **Campaign, $1,000 for 12**. Each video is 15 to 30 seconds, vertical, with script, editing and captions, made with AI and labeled as AI. One round of changes is included.
+1. **Today:** call the **Today** brands first. For everyone else, call once, leave the voicemail below, then send the follow-up email right away, from the card or the template below. 86 of the 94 brands publish an email.
+2. **Monday:** call everyone back from 10am ET. Call West Coast brands after 1pm ET.
+3. **Support lines** (marked "support line") reach customer service. Ask who handles marketing or paid social and how to reach them.
+4. On a yes, text or email the Whop link while you're still on the call: https://whop.com/mint-labs/ai-ugc-videos-bb/
+5. Mark the outcome on the tracker page right away.
 
-## Call first (19)
+The offer: **Campaign, $1,000 for 12 videos**, for brands already running paid ads, or **Starter, $500 for 5**. Each video is 15 to 30 seconds, vertical, with hooks, editing and captions, ready to run on Meta and TikTok. Videos are made with AI and labeled as AI, as product demos and explainers, never fake customer reviews. One round of changes is included.
 
-| # | Business | Phone | When | Ask for |
-|---|---|---|---|---|
-| 1 | Land of Barbers (Salon / beauty) | (347) 940-1012 | Call now | Enrico Mariotti, the founder, or the shop owner/manager |
-| 2 | Headchop (Salon / beauty) | (347) 844-9635 | Call now | the owner or whoever manages marketing for the studio |
-| 8 | The Consistency Project (Shop / brand) | (929) 382-6495 | Call now | the owner or founder |
-| 10 | Sugar Wood (Food & coffee) | (917) 409-7360 | Call now | the owner or whoever runs social media |
-| 15 | Tribeca MedSpa (Salon / beauty) | (212) 925-9500 | Call now | Allie Summers, Director of Operations, or whoever handles marketing |
-| 17 | Brooklyn Pawffice (Local service) | (929) 258-8350 | Call now | the owner or manager |
-| 18 | Noordwyck Salon (Salon / beauty) | (347) 987-4189 | Call now | The owner |
-| 7 | The Primary Essentials (Shop / brand) | (718) 522-1804 | After 2pm | the owner or whoever manages marketing |
-| 3 | The Chocolate Room (Food & coffee) | (718) 246-2600 | After 3pm | the owner or manager |
-| 4 | Fringe Pilates (Fitness studio) | (347) 201-3426 | After 3pm | the owner |
-| 5 | Julia Testa Flowers (Florist / events) | (347) 573-1728 | After 3pm | Julia Testa or the owner |
-| 9 | The Good Batch (Food & coffee) | (718) 622-4000 | After 3pm | The owner or whoever handles marketing and social media |
-| 11 | Animal Loving Care (Local service) | (646) 845-7773 | After 3pm | the owner or whoever manages marketing |
-| 13 | Pilates Perfect Studio (Fitness studio) | (917) 868-8976 | After 3pm | Alexia, the owner |
-| 14 | Perfect Posture Pilates (Fitness studio) | (929) 296-9292 | After 3pm | the studio owner or manager |
-| 16 | Rosehip Social Florist (Florist / events) | (718) 306-9280 | After 3pm | the owner or studio manager |
-| 6 | Live By The Sword Salon (Salon / beauty) | (718) 395-1281 | Monday | The owner or salon manager |
-| 12 | Kalā Yoga (Fitness studio) | (718) 676-1644 | Monday | Studio manager or owner |
-| 19 | 3 Suns Barbershop (Salon / beauty) | (718) 942-7597 | Monday | the owner or shop manager |
+## Call first (24)
 
-### Openers and notes
+| # | Brand | Phone | When | Ask for | Email |
+|---|---|---|---|---|---|
+| 1 | Sugar Wood (Food & drink, New York) | (917) 409-7360 | Today | the founder or whoever runs social and marketing | heysugar@sugarwood.co |
+| 2 | Red Land Cotton (Home goods, US) | (205) 564-9332 | Monday morning ET | Molly, or whoever runs paid social and marketing | molly@redlandcotton.com |
+| 3 | Tracie Martyn (Beauty & skincare, New York) | (212) 206-9333 | Monday morning ET | whoever runs paid social or marketing, or the founder's office | customerservice@traciemartyn.com |
+| 4 | Cuddle Sprouts (Baby & kids, US) | (404) 655-4382 | Monday morning ET | the founder or whoever runs paid social | - |
+| 5 | Dr. Idriss (Beauty & skincare, US) | (212) 612-1520 | Monday morning ET | whoever runs paid social or performance marketing | hello@dridriss.com |
+| 6 | Amanda Pearl (Jewelry & accessories, New York) | (646) 666-0653 | Monday morning ET | the founder or whoever runs paid social and marketing | aponline@amandapearl.com |
+| 7 | Lalo (Baby & kids, US) | (646) 863-5225 | Monday morning ET | whoever runs paid social or performance marketing | lalofam@meetlalo.com |
+| 8 | AMYO Jewelry (Jewelry & accessories, New York) | (646) 480-6755 | Monday morning ET | the founder or whoever runs paid social | hello@amyojewelry.com |
+| 9 | Miraco (Jewelry & accessories, US) | (347) 952-7453 | Monday morning ET | the founder or whoever runs paid social | concierge@shopmiraco.com |
+| 10 | Diggs (Pet, US) | (260) 560-2505 | Monday morning ET | whoever runs paid social or the marketing lead | help@diggs.pet |
+| 11 | Ace High Co (Personal care, US) | (248) 238-8027 | Monday morning ET | the founder or whoever runs paid social and marketing | info@acehighco.com |
+| 12 | Heatonist (Food & drink, New York) | (718) 599-0838 | Monday morning ET | whoever runs paid social or marketing | ilovehotsauce@heatonist.com |
+| 13 | Mike's Hot Honey (Food & drink, New York) | (212) 655-0574 | Monday morning ET | whoever runs paid social or marketing | marketing@mikeshothoney.com |
+| 14 | Plaine Products (Personal care, US) | (513) 248-2017 | Monday morning ET | the founder or whoever runs marketing and paid social | orders@plaineproducts.com |
+| 15 | Hyperwear (Fitness gear, US) | (240) 466-9074 | Monday morning ET | the founder or whoever runs paid social and marketing | sales@hyperwear.com |
+| 16 | PRx Performance (Fitness gear, US) | (701) 566-0452 | Monday morning ET | whoever runs paid social or marketing | sales@prxperformance.com |
+| 17 | American Cotton (Home goods, US) | (212) 641-0998 | Monday morning ET | whoever runs paid social or marketing, or the founder | socials@americancotton.com |
+| 18 | Beddy's (Home goods, US) | (801) 753-9050 | Monday afternoon ET | whoever runs paid social or the marketing lead | hello@beddys.com |
+| 19 | Evan Alexander Grooming (Personal care, US) | (424) 272-1580 | Monday afternoon ET | the founder or whoever runs paid social | support@evanalexandergrooming.com |
+| 20 | Tradition Coffee (Food & drink, US) | (808) 207-7022 | Monday afternoon ET | the owner or whoever runs paid social and marketing | info@traditioncoffeeroasters.com |
+| 21 | QuickZip (Home goods, US) | (720) 929-1099 | Monday afternoon ET | whoever runs paid social or marketing, or the founder | info@quickzip.com |
+| 22 | Pour Moi Skincare (Beauty & skincare, US) | (909) 243-1456 | Monday afternoon ET | the founder or whoever runs paid social and marketing | support@pourmoiskincare.com |
+| 23 | FINEX (Home goods, US) | (503) 946-1136 | Monday afternoon ET | the founder or whoever runs paid social and marketing | cookwithus@finexusa.com |
+| 24 | TOWL (Home goods, US) | (323) 596-1811 | Monday afternoon ET | the founder or whoever runs paid social | info@wisetowl.com |
 
-- **Land of Barbers**, (347) 940-1012. Say: "I saw the Daytime Club promo for Tuesday to Thursday chairs; short vertical videos could help fill those weekday slots. Got a minute?" Watch out: Seven barbers and a founder-led story suggest the owner may not be the one answering.
-- **Headchop**, (347) 844-9635. Say: "I saw Headchop's dry-cut studio on South 4th Street takes walk-ins; we make short vertical videos for studios like yours." Watch out: Pricing not shown, so ability to spend $500 is unconfirmed.
-- **The Consistency Project**, (929) 382-6495. Say: "I saw your private pant fitting experience and thought short vertical videos could show how it works. Do you have a minute?" Watch out: No ad pixels detected, so little evidence of marketing spend.
-- **Sugar Wood**, (917) 409-7360. Say: "Hi, I saw Sugar Wood's waffle and cookie decorating kits on your site and wanted to ask about short vertical videos for them." Watch out: No ad pixels detected, so paid marketing spend is unproven.
-- **Tribeca MedSpa**, (212) 925-9500. Say: "I saw Tribeca MedSpa runs both Instagram and TikTok, so I wanted to ask about short vertical videos for your treatments." Watch out: Botox, fillers, laser and injectables mean content must be claim-free with no results promises.
-- **Brooklyn Pawffice**, (929) 258-8350. Say: "I saw your Williamsburg daycare has a huge backyard and live streams, and I make short vertical videos for dog businesses like yours." Watch out: No ad pixels detected, so little proof of existing marketing spend.
-- **Noordwyck Salon**, (347) 987-4189. Say: "I saw Noordwyck is a female-owned Brooklyn salon booking through Square, and we make short AI-labeled vertical videos for salons like yours." Watch out: No ad pixels found, so little evidence of existing marketing spend.
-- **The Primary Essentials**, (718) 522-1804. Say: "I saw your Brooklyn shop's Instagram and the monthly finds list; we make short vertical videos for products like your candles and tabletop pieces." Watch out: No Saturday hours listed, so the shop may not answer.
-- **The Chocolate Room**, (718) 246-2600. Say: "I saw your Paint a Pop event and the bonbon boxes online, and I make short vertical videos for shops like yours." Watch out: Saturday hours not listed, so the shop may be busy with customers.
-- **Fringe Pilates**, (347) 201-3426. Say: "I saw your $60 intro 2-pack for the Flatbush studio and wanted to ask about short Reels for it." Watch out: Saturday hours not listed, so the phone may go unanswered.
-- **Julia Testa Flowers**, (347) 573-1728. Say: "I saw your Shopify shop and your Instagram, jtesta_designs. We make short AI-labeled videos of arrangements and weddings. Could I send you a quick idea?" Watch out: Two locations and 9 employees, so the person answering may not be able to approve spend alone.
-- **The Good Batch**, (718) 622-4000. Say: "I saw you're on Fulton Street with a Meta pixel running; we make short AI-labeled videos for bakeries like yours. Got a minute?" Watch out: Employs about 14 people, so the person answering may not be able to approve spend.
-- **Animal Loving Care**, (646) 845-7773. Say: "I saw your daily Instagram updates from daycare on Court Street and wanted to ask about short vertical videos for the Spaw and boarding." Watch out: Staff of 9 means a manager may answer rather than the owner.
-- **Pilates Perfect Studio**, (917) 868-8976. Say: "I saw your private classical Pilates studio on the Upper East Side and thought short Reels of your sessions could suit you." Watch out: Saturday hours not listed, so the studio may be closed or unstaffed.
-- **Perfect Posture Pilates**, (929) 296-9292. Say: "I saw your two studios on 30th Avenue and the rooftop garden events. Short vertical videos could show those spaces to new clients." Watch out: Saturday hours not listed, so the phone may go unanswered or be busy during classes.
-- **Rosehip Social Florist**, (718) 306-9280. Say: "I saw your Brooklyn studio's garden-style arrangements and your TikTok, and wanted to ask if short vertical videos of your work would help." Watch out: No ad pixels found, so marketing spend is unconfirmed.
-- **Live By The Sword Salon**, (718) 395-1281. Say: "I saw your walk-in salon in Williamsburg is on TikTok and Instagram, and I make short AI videos for beauty businesses." Watch out: Saturday afternoon is likely their busiest time, so the phone may go unanswered.
-- **Kalā Yoga**, (718) 676-1644. Say: "I saw Kalā runs classes in both Bushwick and Williamsburg, and I make short AI-labeled vertical videos for studios like yours." Watch out: Saturday hours not listed, so the phone may go unanswered.
-- **3 Suns Barbershop**, (718) 942-7597. Say: "I saw your Brooklyn shop posts your signature cut and massage service. We make short AI-labeled videos for barbershops. Got a minute?" Watch out: No ad pixels or paid marketing found, so willingness to spend $500 is unproven.
+### Openers and products to mention
 
-## Call next (42)
+- **Sugar Wood**, (917) 409-7360. Mention: WOODY Waffle Decorating Kit. Say: "I saw your WOODY Waffle Decorating Kit and the bachelorette party boxes, and we make short AI video ads for products like that."
+- **Red Land Cotton**, (205) 564-9332. Mention: Hemstitch Essentials sheet set. Say: "I saw your Hemstitch Essentials sheets and the video on your site, and we make short vertical AI video ads for brands like yours."
+- **Tracie Martyn**, (212) 206-9333. Mention: Firming Serum. Say: "I noticed your Firming Serum and Face Resculpting Cream; we make short AI-labeled vertical product videos for brands like yours."
+- **Cuddle Sprouts**, (404) 655-4382. Mention: TENCEL Baby Clothes. Say: "I noticed your TENCEL baby clothes and the new Spring Summer rompers, and wanted to ask about your short video ads on Meta and TikTok."
+- **Dr. Idriss**, (212) 612-1520. Mention: Major Fade. Say: "I saw your Major Fade line for dark spots and wanted to ask who handles your short video ads for TikTok and Instagram."
+- **Amanda Pearl**, (646) 666-0653. Mention: Charm Locks. Say: "I noticed your Charm Locks and Slim Gemstone Necklaces, and we make short AI-labeled vertical video ads for jewelry brands like yours."
+- **Lalo**, (646) 863-5225. Mention: The Chair II. Say: "I saw The Chair II just launched, and we make short AI-labeled vertical video ads for baby product brands like yours."
+- **AMYO Jewelry**, (646) 480-6755. Mention: 14K Tiny Studs. Say: "I noticed your 14K Tiny Studs and the waterproof jewelry collection, and wanted to ask who handles your short video ads."
+- **Miraco**, (347) 952-7453. Mention: Infinity Rumi Diamond Gold Hoop Earrings. Say: "I was looking at your Infinity Rumi Diamond Gold Hoop Earrings and wanted to ask who handles your short-form video ads."
+- **Diggs**, (260) 560-2505. Mention: Evolv dog crate. Say: "I saw the new Evolv Matte Black crate pre-order and wanted to ask who handles your short video ads."
+- **Ace High Co**, (248) 238-8027. Say: "I saw your small-batch, made-in-USA hair styling products and your TikTok, and wanted to ask who handles your short video ads."
+- **Heatonist**, (718) 599-0838. Mention: Hot Ones Challenge. Say: "I saw the Hot Ones Challenge pack on your site and wanted to ask who handles your short video ads."
+- **Mike's Hot Honey**, (212) 655-0574. Mention: Mike's Hot Honey. Say: "I saw your honey infused with chilies and the recipes page, and we make short AI product-demo videos for drizzling ideas."
+- **Plaine Products**, (513) 248-2017. Mention: Refillable haircare. Say: "I saw Plaine's refillable haircare and the bottle-return program, and we make short vertical AI video ads for brands like yours."
+- **Hyperwear**, (240) 466-9074. Mention: Hyper Vest Pro. Say: "I saw the Hyper Vest Pro and the Hyrox sandbag system on your site, and we make short vertical video ads for brands like yours."
+- **PRx Performance**, (701) 566-0452. Mention: Profile PRO Ark Functional Trainer. Say: "I saw the Profile PRO Ark Functional Trainer featured on your homepage and wanted to ask about short vertical video ads for it."
+- **American Cotton**, (212) 641-0998. Mention: Solid Color Sheet Sets. Say: "I saw your Cool Flow Cotton solid color sheet sets and wanted to ask about short video ads for them."
+- **Beddy's**, (801) 753-9050. Mention: Beddy's zipper bedding. Say: "I saw Beddy's zipper bedding sets on your site, and I make short AI-labeled demo videos showing how the zip-up bed works."
+- **Evan Alexander Grooming**, (424) 272-1580. Mention: MY Hair Repair System. Say: "I saw the MY Hair Repair System and the beard kits on your site, and we make short AI video ads for brands like yours."
+- **Tradition Coffee**, (808) 207-7022. Mention: Coffee Club. Say: "I saw your Coffee Club subscription with free monthly shipping and wanted to ask about short vertical video ads for it."
+- **QuickZip**, (720) 929-1099. Mention: Add-on Zip Sheets. Say: "I noticed your Add-on Zip Sheets and the demo video on your site, and we make short AI product-demo ads for brands like yours."
+- **Pour Moi Skincare**, (909) 243-1456. Mention: Marine Day Cream. Say: "I saw your Marine Day Cream for cool, humid weather, and I wanted to ask about short vertical video ads for it."
+- **FINEX**, (503) 946-1136. Mention: FINEX Cast Iron Skillet. Say: "I saw the FINEX Cast Iron Skillet and the octagonal design, which would suit short vertical demo videos for Instagram and TikTok."
+- **TOWL**, (323) 596-1811. Mention: Baby Towels. Say: "I saw your organic cotton and bamboo baby towels and the right-after-bath-time angle, and wanted to ask about short video ads."
 
-| # | Business | Phone | When | Ask for |
-|---|---|---|---|---|
-| 23 | Momentum Fitness (Fitness studio) | (917) 426-3492 | Call now | the owner or gym manager |
-| 44 | Garfield Realty (Local service) | (718) 622-7600 | Call now | The broker/owner or whoever manages marketing |
-| 46 | Fleurs Bella (Florist / events) | (646) 602-7037 | Call now | The owner or whoever manages social media and events |
-| 47 | Brooklyn Blooms (Florist / events) | (347) 378-2114 | Call now | the owner or whoever manages social media |
-| 50 | Session NYC (Fitness studio) | (718) 388-1688 | Call now | the owner or marketing manager |
-| 53 | NYC Fit Club (Fitness studio) | (718) 975-3560 | Call now | the owner or gym manager |
-| 55 | Brooklyn Paw House (Local service) | (347) 240-8207 | Call now | the owner or manager |
-| 58 | The Green Spa (Salon / beauty) | (718) 921-6100 | Call now | Owner or spa manager |
-| 30 | Pilates on Ludlow (Fitness studio) | (646) 902-4978 | After 2pm | the studio owner or manager |
-| 37 | Lunula Nail Salon (Salon / beauty) | (718) 349-6100 | After 2pm | the owner or manager |
-| 21 | The Wayward Hairdresser (Salon / beauty) | (347) 572-7139 | After 3pm | The owner or salon manager |
-| 22 | Brooklyn Beauty Lounge (Salon / beauty) | (718) 419-3232 | After 3pm | the owner or manager |
-| 24 | Bedford 6 Real Estate (Local service) | (347) 276-6081 | After 3pm | Matt Gelfand, principal broker |
-| 25 | Buttermilk Bakeshop (Food & coffee) | (347) 987-3941 | After 3pm | the owner or whoever manages social media and marketing |
-| 27 | Brows and Beauty Lounge (Salon / beauty) | (917) 475-6613 | After 3pm | the owner |
-| 28 | My Emollient (Shop / brand) | (917) 771-7634 | After 3pm | the owner or founder |
-| 32 | Craft Pilates (Fitness studio) | (929) 590-9778 | After 3pm | the owner or studio manager |
-| 33 | YO BK (Fitness studio) | (917) 740-7106 | After 3pm | the owner or marketing manager |
-| 34 | Noir Yoga (Fitness studio) | (347) 365-2448 | After 3pm | the owner or studio manager |
-| 35 | Abena Pilates (Fitness studio) | (212) 362-5310 | After 3pm | the owner or studio manager |
-| 39 | Bars Boxing (Fitness studio) | (718) 810-6555 | After 3pm | Akmaljan Zakirov, the owner and head coach |
-| 43 | Oslo Coffee Roasters (Food & coffee) | (718) 782-0332 | After 3pm | the owner or whoever handles marketing and social media |
-| 52 | NeXa Studios (Fitness studio) | (212) 803-3323 | After 3pm | Anna, the founder or owner |
-| 54 | Michael Hair Salon (Salon / beauty) | (718) 965-3774 | After 3pm | the owner or salon manager |
-| 57 | Mr. Figaro BarberShop (Salon / beauty) | (718) 332-2122 | After 3pm | the owner, or Sal or Uri if the owner is not in |
-| 59 | Wild Oleander (Salon / beauty) | (347) 689-4891 | After 3pm | the owner or manager |
-| 60 | Lash Me NYC (Salon / beauty) | (347) 463-9306 | After 3pm | the owner or salon manager |
-| 61 | Hand of Glory Tattoo (Local service) | (718) 832-5020 | After 3pm | Craig Rodriguez, the owner |
-| 20 | Mouv (Fitness studio) | (929) 791-4613 | Monday | The owner or whoever handles marketing |
-| 26 | Embody Studio (Fitness studio) | (347) 795-6320 | Monday | The owner or studio manager |
-| 29 | The Fleurista (Florist / events) | (917) 909-1717 | Monday | the owner |
-| 31 | Pilates Heights (Fitness studio) | (718) 522-2580 | Monday | the studio owner or manager |
-| 36 | Self Salon (Salon / beauty) | (718) 484-1599 | Monday | the owner or salon manager |
-| 38 | Brooklyn Roasting Company (Food & coffee) | (718) 855-1000 | Monday | Marketing manager or owner |
-| 40 | Venelle (Salon / beauty) | (718) 989-9855 | Monday | The owner or salon manager |
-| 41 | BIOS Apothecary (Shop / brand) | (212) 390-0442 | Monday | The owner or founder |
-| 42 | Gorilla Coffee (Food & coffee) | (347) 987-3765 | Monday | the owner or whoever runs marketing and social |
-| 45 | CG Events (Florist / events) | (718) 484-1952 | Monday | Chani Greenbaum, owner |
-| 48 | Billy's Bakery (Food & coffee) | (212) 647-9406 | Monday | Marketing manager or owner |
-| 49 | Chalk Gyms (Fitness studio) | (718) 486-0630 | Monday | the owner or general manager |
-| 51 | Tension Strength (Fitness studio) | (347) 767-4443 | Monday | The owner or studio manager |
-| 56 | SoVous Med Spa (Salon / beauty) | (212) 575-1457 | Monday | Practice manager or owner/marketing lead |
+## Call next (29)
 
-## If there's time (23)
+| # | Brand | Phone | When | Ask for | Email |
+|---|---|---|---|---|---|
+| 25 | Dapper Yankee (Personal care, US) | (937) 761-2312 | Today | the founder or whoever runs paid social and marketing | - |
+| 26 | Fruitstand (Apparel & shoes, New York) | (347) 306-8055 | Today | the founder or whoever runs social and marketing | info@fruitstandny.com |
+| 27 | The Chocolate Room (Food & drink, New York) | (718) 246-2600 | Today | the owner or whoever runs marketing and online orders | info@thechocolateroombrooklyn.com |
+| 28 | Dosso Beauty (Personal care, US) | (267) 354-5304 | Monday morning ET | the founder or whoever runs paid social and marketing | info@dossobeauty.com |
+| 29 | Smithey (Home goods, US) | (843) 619-0082 | Monday morning ET | whoever runs paid social or marketing | support@smithey.com |
+| 30 | Johnny Slicks (Personal care, US) | (910) 803-2159 | Monday morning ET | the founder or whoever runs paid social and marketing | - |
+| 31 | Mountaineer Brand (Personal care, US) | (304) 551-0250 | Monday morning ET | the founder or whoever runs paid social and marketing | customerservice@mountaineerbrand.com |
+| 32 | Silked (Home goods, US) | (917) 721-8468 | Monday morning ET | the founder, or whoever runs paid social and marketing | phoenix@silked.co |
+| 33 | Bios Apothecary (Beauty & skincare, New York) | (212) 390-0442 | Monday morning ET | the founder, or whoever runs marketing | info@biosapothecary.com |
+| 34 | Stephanie Gottlieb (Jewelry & accessories, New York) | (212) 655-1230 | Monday morning ET | the founder or whoever runs paid social and marketing | - |
+| 35 | Marei New York (Jewelry & accessories, New York) | (347) 460-1072 | Monday morning ET | Angie Marei, the founder, or whoever runs social and marketing | info@mareinewyork.com |
+| 36 | Modkat (Pet, US) | (718) 965-2300 | Monday morning ET | the founder or whoever runs marketing | support@modkat.com |
+| 37 | Lowcountry Littles (Baby & kids, US) | (843) 619-7952 | Monday morning ET | the founder or whoever runs marketing | support@lowcountrylittles.com |
+| 38 | The Bearded Savant (Personal care, US) | (512) 730-1815 | Monday morning ET | the founder or whoever runs paid social | support@thebeardedsavant.com |
+| 39 | Passenger Coffee (Food & drink, US) | (717) 455-3633 | Monday morning ET | whoever runs marketing or paid social, or the owner | help@drinkpassenger.com |
+| 40 | Driftaway Coffee (Food & drink, New York) | (347) 762-8576 | Monday morning ET | the founder or whoever runs marketing and paid social | wholesale@driftaway.coffee |
+| 41 | Naked & Thriving (Beauty & skincare, US) | (855) 943-0521 (support line) | Monday morning ET | whoever runs paid social or performance marketing, or the founder | - |
+| 42 | Mezcla (Food & drink, US) | (844) 944-3566 (support line) | Monday morning ET | whoever runs paid social or the head of marketing | hello@eatmezcla.com |
+| 43 | Walkee Paws (Pet, US) | (833) 727-1994 (support line) | Monday morning ET | the founder or whoever runs paid social and creative | walkeepaws@walkeepaws.com |
+| 44 | Buffy (Home goods, US) | (833) 757-1080 (support line) | Monday morning ET | whoever runs paid social or creative for Buffy | hello@buffy.co |
+| 45 | Milk Bar (Food & drink, New York) | (347) 577-9504 | Monday morning ET | whoever runs paid social or the head of marketing | help@milkbarstore.com |
+| 46 | Estes Paw Company (Pet, US) | (214) 789-7920 | Monday morning ET | the owner or whoever runs marketing | dogs@estespaw.com |
+| 47 | Made In (Home goods, US) | (512) 957-9956 | Monday morning ET | whoever runs paid social or creative | hello@madeincookware.com |
+| 48 | Brooklyn Roasting Company (Food & drink, New York) | (718) 855-1000 | Monday morning ET | whoever runs marketing or e-commerce, or the owner | info@brooklynroasting.com |
+| 49 | Piyoga (Apparel & shoes, US) | (619) 800-1325 | Monday afternoon ET | the founder, or whoever runs paid social | support@piyogapants.com |
+| 50 | Onekind (Beauty & skincare, US) | (323) 275-9380 | Monday afternoon ET | Matt or Madison, the co-founders, or whoever runs paid social | hello@onekind.us |
+| 51 | Tico Coffee Roasters (Food & drink, US) | (408) 256-1004 | Monday afternoon ET | the founder or whoever runs paid social and marketing | support@ticoroasters.com |
+| 52 | RXSG Jump Ropes (Fitness gear, US) | (619) 655-3960 | Monday afternoon ET | the founder or whoever runs paid social and marketing | info@rxsmartgear.com |
+| 53 | Pro Kettlebell (Fitness gear, US) | (206) 280-4941 | Monday afternoon ET | the owner or whoever handles marketing | orders@prokettlebell.com |
 
-| # | Business | Phone | When |
-|---|---|---|---|
-| 63 | Gleason's Gym (Fitness studio) | (718) 797-2872 | Call now |
-| 75 | Vedette Beauty & Skincare (Salon / beauty) | (718) 781-5108 | Call now |
-| 83 | New Prospective Realty (Local service) | (718) 788-0595 | Call now |
-| 68 | Vestige Tattoo (Local service) | (347) 916-1616 | After 2pm |
-| 62 | Gowanus Fitness (Fitness studio) | (917) 793-0688 | After 3pm |
-| 66 | Boxe Studios (Fitness studio) | (929) 324-0660 | After 3pm |
-| 69 | Paws & Rec (Local service) | (718) 954-9117 | After 3pm |
-| 70 | New Love City (Fitness studio) | (347) 201-1743 | After 3pm |
-| 71 | Vessel Studios (Fitness studio) | (917) 214-2603 | After 3pm |
-| 73 | HomeDoggy (Local service) | (718) 576-3918 | After 3pm |
-| 77 | Lumen Pilates (Fitness studio) | (646) 421-7644 | After 3pm |
-| 78 | One Bell Fitness (Fitness studio) | (718) 857-2355 | After 3pm |
-| 79 | Tomahawk Salon (Salon / beauty) | (646) 399-6873 | After 3pm |
-| 81 | Pilates Garage (Fitness studio) | (347) 798-5223 | After 3pm |
-| 82 | Alleyway (Salon / beauty) | (929) 214-0540 | After 3pm |
-| 84 | Baked NYC (Food & coffee) | (718) 222-0345 | After 3pm |
-| 64 | Driftaway Coffee (Food & coffee) | (347) 762-8576 | Monday |
-| 65 | Tin Can Studios (Florist / events) | (646) 580-8745 | Monday |
-| 67 | Long & Short Barber (Salon / beauty) | (347) 335-0588 | Monday |
-| 72 | Ruchki da Nozhki (Salon / beauty) | (917) 909-0481 | Monday |
-| 74 | Throw Me A Bone (Local service) | (212) 287-9769 | Monday |
-| 76 | VisoDent NY (Salon / beauty) | (212) 991-9095 | Monday |
-| 80 | Happy Dogs NYC (Local service) | (917) 512-2828 | Monday |
+## If there's time (41)
 
-Openers for every business are in the CSV and on the tracker page.
+| # | Brand | Phone | When | Ask for | Email |
+|---|---|---|---|---|---|
+| 54 | Lord Jameson (Pet, New York) | (985) 805-6735 | Today | the founder or whoever runs marketing and paid social | hello@lordjameson.com |
+| 55 | Theory Coffee (Food & drink, US) | (530) 395-0104 | Today | the owner or whoever runs marketing and paid social | orders@theorycoffee.com |
+| 56 | Ele Keats (Jewelry & accessories, US) | (310) 804-4611 | Today | the owner or whoever handles marketing | - |
+| 57 | ThomasPaul (Home goods, New York) | (718) 797-8758 | Monday morning ET | the founder or whoever runs marketing and paid social | orders@thomaspaul.com |
+| 58 | Kensui (Fitness gear, US) | (800) 359-7180 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | b2b@kensuifitness.com |
+| 59 | Keap Candles (Home goods, US) | (518) 278-7144 | Monday morning ET | the founder or whoever runs marketing | thelab@keapcandles.com |
+| 60 | The Mane Attraction (Personal care, US) | (601) 586-9935 | Monday morning ET | the founder or whoever runs paid social | support@themaneattraction.com |
+| 61 | Near & Native (Home goods, US) | (207) 550-1335 | Monday morning ET | Hannah, the founder | hannah@shopnearandnative.com |
+| 62 | Dear Perli (Baby & kids, US) | (786) 301-9133 | Monday morning ET | the founder or whoever runs marketing | info@dearperli.com |
+| 63 | Andrew James Hair Co. (Personal care, US) | (908) 216-5830 | Monday morning ET | Andrew, the founder | andrew@andrewjameshair.com |
+| 64 | Jeffrey Burroughs (Jewelry & accessories, New York) | (828) 220-1241 | Monday morning ET | the founder or whoever runs paid social and marketing | concierge@jeffreyburroughs.com |
+| 65 | Tini Lux (Jewelry & accessories, US) | (888) 768-1954 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | info@tinilux.com |
+| 66 | Campo Grande (Food & drink, US) | (877) 728-1455 (support line) | Monday morning ET | whoever runs paid social or marketing | hola@eatcampogrande.com |
+| 67 | Avatara (Beauty & skincare, US) | (888) 883-5507 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | hello@avataraskin.com |
+| 68 | DMoose (Fitness gear, US) | (833) 366-6733 (support line) | Monday morning ET | whoever runs paid social or creative marketing | support@dmoose.com |
+| 69 | Brickell Men's Products (Personal care, US) | (877) 598-0060 (support line) | Monday morning ET | whoever runs paid social or the founder | support@brickellmensproducts.com |
+| 70 | Toma (Food & drink, New York) | (914) 632-4900 | Monday morning ET | the founder or whoever runs marketing | info@drinktoma.com |
+| 71 | 2 Dogs Treats (Pet, US) | (617) 286-4844 | Monday morning ET | the founder or whoever handles marketing | woof@2dogstreats.com |
+| 72 | The Pillow Bar (Home goods, US) | (214) 939-3696 | Monday morning ET | the founder or whoever runs marketing | info@thepillowbar.com |
+| 73 | Flamingo (Personal care, US) | (888) 205-9655 (support line) | Monday morning ET | whoever runs paid social or creative marketing | press@shopflamingo.com |
+| 74 | Jennifer Fisher (Jewelry & accessories, New York) | (888) 660-9572 (support line) | Monday morning ET | whoever runs paid social or performance marketing | support@jenniferfisher.com |
+| 75 | Spascriptions (Beauty & skincare, New York) | (347) 586-0380 | Monday morning ET | whoever runs paid social or marketing, or the founder | help@globalbeautycare.com |
+| 76 | Pawstruck (Pet, US) | (800) 715-4955 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | contact@pawstruck.com |
+| 77 | Material (Home goods, New York) | (888) 706-3302 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | hello@materialkitchen.com |
+| 78 | Miracle Made (Home goods, US) | (888) 683-4875 (support line) | Monday morning ET | whoever runs paid social or marketing, or the founder | help@support.miraclebrand.co |
+| 79 | The New Savant (Home goods, New York) | (855) 749-2311 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | concierge@thenewsavant.com |
+| 80 | T'zikal (Personal care, US) | (844) 489-4525 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | contactus@tzikal.com |
+| 81 | Zoe (Baby & kids, US) | (866) 701-1720 (support line) | Monday morning ET | whoever runs paid social or performance marketing | help@zoebaby.com |
+| 82 | LuvMyJewelry (Jewelry & accessories, US) | (833) 565-4565 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | info@luvmyjewelry.com |
+| 83 | Bondeye Jewelry (Jewelry & accessories, New York) | (800) 555-1234 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | - |
+| 84 | Bean Box (Food & drink, US) | (888) 923-8596 (support line) | Monday morning ET | whoever runs paid social or marketing | delight@beanbox.com |
+| 85 | GroundLuxe (Home goods, US) | (877) 705-6871 (support line) | Monday morning ET | the founder or whoever runs paid social and marketing | support@groundluxe.com |
+| 86 | Smalls (Pet, US) | (503) 487-4303 | Monday afternoon ET | whoever runs paid social or creative marketing | meow@smalls.com |
+| 87 | Anchor Gym (Fitness gear, US) | (310) 902-4060 | Monday afternoon ET | Shawn, the owner, or whoever runs paid social | shawn@coreenergyfitness.com |
+| 88 | Morrow Soft Goods (Home goods, US) | (323) 973-2447 | Monday afternoon ET | the founder, or whoever runs marketing | hello@morrowsoftgoods.com |
+| 89 | Bronwen Jewelry (Jewelry & accessories, US) | (541) 647-4509 | Monday afternoon ET | the owner or whoever runs marketing | info@bronwenjewelry.com |
+| 90 | Jala (Apparel & shoes, US) | (800) 840-4042 (support line) | Monday afternoon ET | whoever runs paid social or marketing | wecare@jalaclothing.com |
+| 91 | Raww Gear (Fitness gear, US) | (424) 242-5244 | Monday afternoon ET | the founder or whoever runs marketing and social | - |
+| 92 | Laura Elizabeth Jewelry (Jewelry & accessories, US) | (805) 669-8645 | Monday afternoon ET | Laura, the founder, or whoever handles marketing | info@lauraelizabethjewelry.com |
+| 93 | Blooming Baby (Baby & kids, US) | (866) 218-7143 (support line) | Monday afternoon ET | whoever runs paid social or performance marketing, or the founder | support@mybloomingbaby.com |
+| 94 | EACH Jewels (Jewelry & accessories, US) | (650) 380-4090 | Monday afternoon ET | Abby, the founder, or whoever runs marketing | abby@eachjewels.com |
+
+Openers and products to mention for every brand are in the CSV and on the tracker page.
 
 ## Call script
 
-**Open:** "Hi, is this the owner? Great. This is [your name] from Mint Labs, a small video studio here in New York. Do you have 30 seconds?" If it's not the owner, ask who handles their Instagram or marketing and when to catch them.
+**Open:** "Hi, is this the founder, or whoever runs your ads? This is [your name] from Mint Labs, a small AI video studio in New York. Do you have 30 seconds?" If you reach support staff, ask who handles marketing or paid social and the best way to reach them.
 
-**Why you're calling:** "We make short videos for businesses to post on Instagram, TikTok and Reels, the kind of creator-style clips that make people stop scrolling. Are you posting videos right now?"
+**Find out how they make ads:** "Are you running ads on Meta or TikTok right now? Where do your video ads come from today?"
 
-**The offer:** "You tell us what you want to promote, and we write, make and edit the videos for you. Each one is 15 to 30 seconds, vertical, with captions, ready to post. They're made with AI, so they're fast and you don't have to film anything. It's $500 for five videos, paid once, and one round of changes is included."
+**The offer:** "We make UGC-style video ads for D2C brands with AI. You send us the product, and we write the hooks, make and edit the videos: 15 to 30 seconds, vertical, captioned, ready to run as ads. No shipping product to creators and no waiting weeks. It's $1,000 for 12 videos, enough to test a dozen hooks, or $500 for 5 to start."
 
-**Close:** "Want me to text you the link? Once it's paid, send us your website and what you want to promote, and you'll have your first video by [delivery time]."
+**Close:** "Want me to send you the link? Once it's paid, send us the product page you want featured, and you'll have your first video by [delivery time]."
 
 | They say | You say |
 |---|---|
-| "Is this AI?" | "Yes, the people and voices are AI-generated, and we label them as AI. It's a presenter talking about your business, never a fake customer review." |
-| "That's a lot." | "It's one payment, no subscription. Most creators charge a couple hundred dollars per video. This is five for $500." |
-| "Just email me." | "Sure. Can I text it instead? It's one link with all the details." |
-| "We have someone for social." | "Great, this gives them more to post alongside what they make." |
+| "We already use UGC creators." | "Great. Use these to test more hooks between creator batches. At $1,000 for 12, each video costs about $83, and creators often charge $150 to $300 each plus product." |
+| "Is this AI?" | "Yes, the people and voices are AI-generated, and we label them as AI. They're product demos and explainers, never fake customer reviews." |
+| "Send me an email." | "Sure, what's the best address?" Then send the follow-up email right away. |
+| "Our agency handles creative." | "These can feed your agency more variations to test. Who should I talk to there?" |
 | "How do I know it'll be good?" | "Every video includes one round of changes. Tell us what's off and we fix it." |
-| "I'm busy." | "No problem. Is later today or Monday better?" Then mark Call back. |
+| "Not a good time." | "No problem. Is Monday morning better?" Then mark Call back. |
 
-**Voicemail:** "Hi, this is [your name] from Mint Labs. We make short videos for businesses to post on Instagram and TikTok, five for $500, done for you. Call or text me back at [your number]. Thanks!"
+**Voicemail:** "Hi, this is [your name] from Mint Labs. We make UGC-style video ads for D2C brands with AI, 12 ready-to-run ads for $1,000. I'm sending you a short email now too. You can reach me at [your number]. Thanks!"
 
-## Follow-up texts
+## Follow-up email (after a voicemail)
 
-**After a yes:**
-
-> Hi, it's [your name] from Mint Labs, thanks for the chat! Here's the link for your 5 videos ($500): https://whop.com/mint-labs/ai-ugc-videos-bb/
-> Once it goes through, just reply with your website and what you want to promote. Your first video will be ready by [delivery time].
-
-**When they ask for more info:**
-
-> Hi, it's [your name] from Mint Labs, as promised. We make short vertical videos for [business] to post on Instagram, TikTok and Reels, with scripts, editing and captions included. 5 videos for $500 or 12 for $1,000: https://whop.com/mint-labs/ai-ugc-videos-bb/
+> **Subject:** Video ads for [brand]
+>
+> Hi [brand] team,
+>
+> I just tried you by phone. I'm [your name] from Mint Labs, a small AI video studio in New York. We make UGC-style video ads for D2C brands: 15 to 30 second vertical videos with hooks, editing and captions, ready to run on Meta and TikTok. We'd start with [product to mention].
+>
+> 12 videos for $1,000, or 5 for $500: https://whop.com/mint-labs/ai-ugc-videos-bb/
+>
 > Happy to answer any questions here.
+>
+> [your name]
+> Mint Labs
+
+## Text after a yes
+
+> Hi, it's [your name] from Mint Labs, thanks for the chat! Here's the link for your 12 videos ($1,000): https://whop.com/mint-labs/ai-ugc-videos-bb/
+> Once it goes through, reply with the product page you want featured, and your first video will be ready by [delivery time].
 
 Agree on a delivery time you can keep before the first call, and fill it in wherever you see [delivery time].
 
 ## How this list was made
 
-Exa search found 188 New York businesses on October 24, 2026, across fitness studios, salons and barbers, cafes and bakeries, shops, florists, real estate and pet services. Each business's own website was checked for a phone number, Instagram and TikTok links, ad-tracking pixels (a sign they already pay for ads) and booking or e-commerce tools. 118 had a New York phone number. Claude Sonnet 5.5 scored each one from 0 to 25 on four things: can you reach a decision maker, do they need short videos, do they already spend on marketing, and can they say yes today. The 84 here scored 60 or more out of 100. Chains, injectable and laser clinics, and places with no social presence were left out. Every phone number comes from the business's own website; none were guessed. Scores are a judgment from public website evidence, not a promise anyone will buy.
+Exa search found 464 D2C brands on October 24, 2026, in beauty, personal care, apparel, home goods, jewelry, food and drink, pet, baby and fitness, New York first and then across the US. Each brand's own website was checked for its store platform, ad pixels, marketing tools (Klaviyo, Attentive, review and subscription apps), social accounts, phone numbers and emails. 430 sell through their own store and 157 list a US phone number. Claude Sonnet 5.5 scored those from 0 to 25 on four things: D2C fit, ad activity, budget to spend $500 to $1,000 on creative, and whether a call can reach someone who decides. The 94 here scored 60 or more out of 100, and toll-free support lines were moved down one priority level. Brands that aren't really D2C, large companies with agencies, and brands with thin evidence were left out. On Shopify, ad pixels often load out of sight, so a missing pixel did not count against a brand. Every phone number and email comes from the brand's own website; none were guessed. Scores are a judgment from public website evidence, not a promise anyone will buy.
