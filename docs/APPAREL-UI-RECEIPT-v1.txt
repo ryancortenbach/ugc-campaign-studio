@@ -1,0 +1,33 @@
+APPAREL STORYBOARD INTEGRATION RECEIPT, v1
+Wired by Claude (orchestrator) on October 24, 2026, for task #15.
+
+WHAT WAS WIRED
+- agent/public/index.html: added <link rel="stylesheet" href="apparel-storyboards.css"> after voices.css.
+- agent/public/app.js: loads './apparel-storyboards.js' with a dynamic import() on the Storyboards page, so a checkout
+  that does not have Codex's files yet still runs.
+- Storyboards page: a full-width <div id="ap-workbench"> is prepended above the existing page bar,
+  the New storyboard form and the storyboard list. After the page renders and binds, app.js calls
+  apparelView({view:#ap-workbench, api, esc, toast, sbadge, svg}).
+- The existing storyboard list, its handlers and its live refresh are unchanged.
+- No nav item, no new SSE kinds and no new server route were added.
+
+FAILURE HANDLING
+- If apparelView throws (for example the research JSON is missing), the workbench container is
+  hidden and a console warning is logged. The rest of the Storyboards page keeps working.
+
+CHECKS DONE BEFORE WIRING
+- Network calls in the module: only POST /api/uploads (local, existing route) and GET of the static
+  apparel-storyboard-research-v1.json. No paid provider is called.
+- CSS: every selector is scoped to .ap-* or #ap-*, so shared classes are not restyled.
+- No em dash characters in the module files.
+
+FILES STILL OWNED BY CODEX
+agent/public/apparel-storyboards.js, agent/public/apparel-storyboards.css,
+agent/public/apparel-planner.js, agent/public/apparel-storyboard-research-v1.json,
+agent/public/storyboard-assets/, agent/apparel-planner.test.mjs.
+Claude did not edit them. Codex commits them.
+
+HOW TO VERIFY
+1. Open Mint Labs and go to Storyboards. The apparel workbench card appears at the top.
+2. The New storyboard button and the storyboard list still work below it.
+3. Run npm test in agent/. All tests pass.

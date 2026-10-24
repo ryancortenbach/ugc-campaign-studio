@@ -1,0 +1,44 @@
+ACTIVITY UI RECEIPT v1 (task #14)
+Tasks page Activity panel and header. Not committed.
+
+FILES
+  agent/store.mjs            metrics() only
+  agent/public/app.js        stats/chart functions and tasks() header only
+  agent/public/style.css     .tile selected state edit, plus a new section at the end
+  agent/metrics.test.mjs     new, 7 tests
+  agent/server.mjs           unchanged (the /api/metrics route passes the new fields through)
+
+CHANGES BY REQUEST ITEM
+1. Crosshair. Hover or touch the chart: vertical crosshair line, a dot on the line, and a tooltip
+   with the bucket time range, the selected metric, Spend, and a per-provider list with logos
+   (Claude, Exa, Solari, Higgsfield, ElevenLabs; zero rows are dimmed). Pointer snaps to the
+   nearest bucket. Keyboard: focus the chart (Tab), then Left, Right, Home, End move it, Escape
+   hides it. A screen reader live region announces the bucket and values.
+2. Event markers. Brand logo markers under the chart in two lanes: round = brand found
+   (leads.created_at), square with green outline = draft (drafts.created_at). Positioned at the
+   real timestamp (interpolated inside its bucket). Click opens the brand (openLead). Crowded
+   spots merge into one marker with a "+N" badge, capped at 12 per lane (6 when narrow). Click a
+   cluster to get a short list of brands (max 8) and open one. Hover a marker for name, kind, time.
+   Two small chips ("Brand found", "Draft") at the top left of the panel are the key.
+3. Metric explanation. One short faint line under the chart, for example
+   "Drafts created per day, Oct 18 to Oct 24" and "Dollars spent per hour today, all providers".
+4. The "N missions in the last 7 days" line is gone.
+5. Tasks header. "Task groups" heading, New mission input and Start button removed. "Always on"
+   is a small switch right-aligned in a .pagebar row, same behavior and tooltip (tooltip is
+   right-anchored so it does not overflow). The empty state now says "No missions yet. Start one
+   from Home." startMission() in app.js is still defined but no longer called on this page.
+6. Calmer selection. .tile.on is now a raised background only (no green border, no inset bar).
+   Tile numbers are weight 600, unselected numbers are muted. Tiles have aria-pressed.
+7. Look unchanged: same tokens, fonts, line and gradient.
+
+NEW METRICS FIELDS (GET /api/metrics?range=today|week|month|year)
+  top level: from, to (ISO range edges), events
+  series[i]: from, to (ISO, contiguous), spendBy {provider: usd}; old fields kept
+  events: [{kind:'lead'|'draft', at, leadId, company, domain, draftId (drafts only)}], oldest
+    first, real rows only, last 400 in the range
+  store.metrics(range, clock) takes an optional clock Date, used by the tests.
+
+HOW TO VERIFY
+  cd agent && npm test        (92 pass: 85 existing + 7 in metrics.test.mjs)
+  Open the Tasks page, hover the chart, Tab to the chart and press arrow keys, click a logo
+  marker, switch Drafts / Brands found / Spend and Today / Week / Month / Year.

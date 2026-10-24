@@ -128,28 +128,126 @@ function groupCard(t,sel){
 }
 function bindGroups(){document.querySelectorAll('[data-gact]').forEach(b=>b.onclick=async e=>{e.stopPropagation();const id=Number(b.dataset.id),a=b.dataset.gact;b.disabled=true;try{if(a==='clone'){const t=state.tasks.find(x=>x.id===id);const {task}=await api('/api/chat',{message:t.prompt});toast('Mission started','ok',`Task ${task.id}, same request as task ${id}`);location.hash=`#/tasks/${task.id}`;}else{await api(`/api/tasks/${id}/control`,{action:a});toast(`${a[0].toUpperCase()}${a.slice(1)} sent`,'info',`Task ${id}`);}}catch(err){toast(err.message,'bad');b.disabled=false;}});}
 
-// Home stats from Cyber 5.0: metric tabs, Today / Week / Month / Year, big number over a line chart.
+// Home stats: metric tiles, Today / Week / Month / Year, a line chart with a crosshair and tooltip, and brand logo markers.
 const metricTabs={drafts:'Drafts',leads:'Brands found',spend:'Spend'};
-const rangeLabel={today:'today',week:'in the last 7 days',month:'in the last 30 days',year:'in the last 12 months'};
-function chart(values,labels,isMoney){
- const W=600,H=120,n=values.length,max=Math.max(...values,isMoney?0.01:1);
+const providerList=[['claude','Claude'],['exa','Exa'],['solari','Solari'],['higgsfield','Higgsfield'],['elevenlabs','ElevenLabs']];
+const CH={W:600,H:120};
+const money4=v=>`$${v.toFixed(4)}`;
+const when=(d,o)=>new Date(d).toLocaleString('en-US',o);
+const unitOf=r=>r==='today'?'hour':r==='year'?'month':'day';
+function bucketTitle(m,b){
+ const f=new Date(b.from),t=new Date(new Date(b.to)-1),o={month:'short',day:'numeric'};
+ if(m.range==='today')return `${when(f,{month:'short',day:'numeric',hour:'numeric'})} to ${when(new Date(b.to),{hour:'numeric'})}`;
+ if(m.range==='year')return `${when(f,o)} to ${when(t,o)}`;
+ return when(f,{weekday:'short',...o});
+}
+// One short line that says what the number is and over which dates.
+function explain(m,k){
+ const what={drafts:'Drafts created',leads:'Brands found',spend:'Dollars spent'}[k],unit=unitOf(m.range),first=m.series[0],last=m.series[m.series.length-1];
+ const span=m.range==='today'?'today':m.range==='year'?`${when(first.from,{month:'short',year:'numeric'})} to ${when(last.from,{month:'short',year:'numeric'})}`:`${when(first.from,{month:'short',day:'numeric'})} to ${when(last.from,{month:'short',day:'numeric'})}`;
+ return `${what} per ${unit}${m.range==='today'?' today':`, ${span}`}${k==='spend'?', all providers':''}`;
+}
+function chart(m,k){
+ const {W,H}=CH,isMoney=k==='spend',values=m.series.map(b=>b[k]),n=values.length,max=Math.max(...values,isMoney?0.01:1);
  const x=i=>n===1?W/2:6+i*(W-12)/(n-1),y=v=>H-4-(v/max)*(H-14);
  const line=`M${values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' L')}`;
- const fmt=v=>isMoney?`$${v.toFixed(4)}`:v;
- return `<div class="chart"><span class="ymax">${fmt(max===0.01&&isMoney?0:max)}</span><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path class="grid" d="M0,${y(max).toFixed(1)} H${W} M0,${y(max/2).toFixed(1)} H${W} M0,${y(0).toFixed(1)} H${W}" vector-effect="non-scaling-stroke"/><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--green);stop-opacity:.32"/><stop offset="1" style="stop-color:var(--green);stop-opacity:0"/></linearGradient></defs><path d="${line} L${W},${H} L0,${H} Z" fill="url(#cg)"/><path class="ln" d="${line}" vector-effect="non-scaling-stroke"/>${values.map((v,i)=>`<rect x="${Math.max(0,x(i)-W/n/2).toFixed(1)}" y="0" width="${(W/n).toFixed(1)}" height="${H}" fill="transparent"><title>${esc(labels[i])}: ${fmt(v)}</title></rect>`).join('')}</svg><div class="axis"><span>${esc(labels[0])}</span><span>${esc(labels[Math.floor(n/2)])}</span><span>${esc(labels[n-1])}</span></div></div>`;
+ const fmt=v=>isMoney?money4(v):v;
+ const labels=m.series.map(b=>b.label);
+ return `<div class="chart"><span class="ymax">${fmt(max===0.01&&isMoney?0:max)}</span><div class="plot" tabindex="0" role="group" aria-label="${esc(metricTabs[k])} chart. Use the left and right arrow keys to read each ${unitOf(m.range)}."><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path class="grid" d="M0,${y(max).toFixed(1)} H${W} M0,${y(max/2).toFixed(1)} H${W} M0,${y(0).toFixed(1)} H${W}" vector-effect="non-scaling-stroke"/><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--green);stop-opacity:.32"/><stop offset="1" style="stop-color:var(--green);stop-opacity:0"/></linearGradient></defs><path d="${line} L${W},${H} L0,${H} Z" fill="url(#cg)"/><path class="ln" d="${line}" vector-effect="non-scaling-stroke"/><line class="xh" x1="0" x2="0" y1="0" y2="${H}" vector-effect="non-scaling-stroke" visibility="hidden"/></svg><i class="xdot" hidden></i><div class="xtip" hidden></div></div><span class="sr-only xlive" aria-live="polite"></span><div class="marks" data-n="${n}"></div><div class="axis"><span>${esc(labels[0])}</span><span>${esc(labels[Math.floor(n/2)])}</span><span>${esc(labels[n-1])}</span></div><div class="faint explain">${esc(explain(m,k))}</div></div>`;
 }
 function statsPanel(m){
- const k=pref.get('metric','drafts'),tot=m.totals;
- return `<div class="stats-head"><span class="faint">${tot.missions} mission${tot.missions===1?'':'s'} ${rangeLabel[m.range]}</span><div class="seg">${Object.keys(rangeLabel).map(r=>`<button type="button" data-range="${r}" class="${r===m.range?'on':''}">${r[0].toUpperCase()}${r.slice(1)}</button>`).join('')}</div></div>
-  <div class="tiles">${Object.entries(metricTabs).map(([key,l])=>`<button type="button" data-metric="${key}" class="tile${key===k?' on':''}"><span>${l}</span><b>${key==='spend'?`$${tot.spend.toFixed(2)}`:tot[key]}</b></button>`).join('')}</div>
-  <div class="faint" style="font-size:11.5px;margin:0 0 6px">${metricTabs[k]} per ${m.range==='today'?'hour':m.range==='year'?'month':'day'}</div>
-  ${chart(m.series.map(b=>b[k]),m.series.map(b=>b.label),k==='spend')}`;
+ const k=pref.get('metric','drafts'),tot=m.totals,ev=m.events||[];
+ const keys=[['lead','Brand found'],['draft','Draft']].filter(([kind])=>ev.some(e=>e.kind===kind));
+ return `<div class="stats-head"><div class="chips mkkey">${keys.map(([kind,l])=>`<span class="chip mk-${kind}"><i></i>${l}</span>`).join('')}</div><div class="seg">${Object.keys({today:1,week:1,month:1,year:1}).map(r=>`<button type="button" data-range="${r}" class="${r===m.range?'on':''}">${r[0].toUpperCase()}${r.slice(1)}</button>`).join('')}</div></div>
+  <div class="tiles">${Object.entries(metricTabs).map(([key,l])=>`<button type="button" data-metric="${key}" aria-pressed="${key===k}" class="tile${key===k?' on':''}"><span>${l}</span><b>${key==='spend'?`$${tot.spend.toFixed(2)}`:tot[key]}</b></button>`).join('')}</div>
+  ${chart(m,k)}`;
 }
+function tipHtml(m,b,k){
+ const by=b.spendBy||{},now=Date.now(),live=now>=Date.parse(b.from)&&now<Date.parse(b.to);
+ const extra=Object.keys(by).filter(p=>!providerList.some(q=>q[0]===p)).map(p=>[p,p[0].toUpperCase()+p.slice(1)]);
+ return `<div class="xt-time">${esc(bucketTitle(m,b))}${live?' <span class="chip">so far</span>':''}</div>
+  <div class="xt-main"><span>${metricTabs[k]}</span><b class="mono">${k==='spend'?money4(b.spend):b[k]}</b></div>
+  ${k==='spend'?'':`<div class="xt-main"><span>Spend</span><b class="mono">${money4(b.spend)}</b></div>`}
+  <div class="xt-by">${[...providerList,...extra].map(([p,l])=>`<div class="${by[p]?'':'zero'}"><img src="/logos/${esc(p)}.png" alt="" onerror="this.remove()"><span>${esc(l)}</span><b class="mono">${money4(by[p]||0)}</b></div>`).join('')}</div>`;
+}
+function bindChart(box,m,k,hold){
+ const plot=box.querySelector('.plot');if(!plot)return;
+ const {W,H}=CH,n=m.series.length,vals=m.series.map(b=>b[k]),max=Math.max(...vals,k==='spend'?0.01:1);
+ const xs=i=>n===1?W/2:6+i*(W-12)/(n-1),ys=v=>H-4-(v/max)*(H-14);
+ const xh=plot.querySelector('.xh'),dot=plot.querySelector('.xdot'),tip=plot.querySelector('.xtip'),live=box.querySelector('.xlive');
+ let cur=-1;
+ const show=(i,speak)=>{
+  cur=i;const b=m.series[i],px=xs(i)/W;
+  xh.setAttribute('x1',xs(i));xh.setAttribute('x2',xs(i));xh.setAttribute('visibility','visible');
+  dot.hidden=false;dot.style.left=`${px*100}%`;dot.style.top=`${ys(vals[i])/H*100}%`;
+  tip.innerHTML=tipHtml(m,b,k);tip.hidden=false;tip.classList.toggle('flip',px>.55);tip.style.left=`${px*100}%`;
+  if(speak)live.textContent=`${bucketTitle(m,b)}: ${metricTabs[k]} ${k==='spend'?money4(b.spend):b[k]}, spend ${money4(b.spend)}`;
+ };
+ const hide=()=>{cur=-1;xh.setAttribute('visibility','hidden');dot.hidden=true;tip.hidden=true;};
+ const idxAt=cx=>{const r=plot.getBoundingClientRect(),vx=(cx-r.left)/r.width*W;return Math.max(0,Math.min(n-1,Math.round((vx-6)*(n-1)/(W-12))));};
+ plot.addEventListener('pointerenter',()=>hold(true));
+ plot.addEventListener('pointermove',e=>show(idxAt(e.clientX)));
+ plot.addEventListener('pointerleave',()=>{if(document.activeElement!==plot){hide();hold(false);}});
+ plot.addEventListener('focus',()=>{hold(true);show(cur<0?n-1:cur,true);});
+ plot.addEventListener('blur',()=>{hide();hold(false);});
+ plot.addEventListener('keydown',e=>{
+  const map={ArrowLeft:cur<0?n-1:cur-1,ArrowRight:cur<0?n-1:cur+1,Home:0,End:n-1};
+  if(e.key==='Escape'){hide();return;}
+  if(!(e.key in map))return;
+  e.preventDefault();show(Math.max(0,Math.min(n-1,map[e.key])),true);
+ });
+ layoutMarks(box,m);
+ if(typeof ResizeObserver==='function'){const ro=new ResizeObserver(()=>layoutMarks(box,m));ro.observe(plot);statsRO=ro;}
+}
+// Brand markers: real lead and draft rows at their real times. Crowded spots collapse into one "+N" marker.
+function layoutMarks(box,m){
+ const plot=box.querySelector('.plot'),host=box.querySelector('.marks');if(!plot||!host)return;
+ const width=plot.clientWidth,n=m.series.length,{W}=CH;if(!width)return;
+ const xs=i=>(n===1?W/2:6+i*(W-12)/(n-1))/W*width;
+ const frac=at=>{const t=Date.parse(at);let i=m.series.findIndex(b=>t<Date.parse(b.to));if(i<0)i=n-1;const b=m.series[i],f=(t-Date.parse(b.from))/(Date.parse(b.to)-Date.parse(b.from));return Math.min(n-1,i+Math.max(0,f));};
+ const place=f=>{const i=Math.floor(f),j=Math.min(n-1,i+1);return xs(i)+(xs(j)-xs(i))*(f-i);};
+ const cap=width<520?6:12,pad=13;
+ const lane=kind=>{
+  const items=(m.events||[]).filter(e=>e.kind===kind).map(e=>({e,px:Math.max(pad,Math.min(width-pad,place(frac(e.at))))})).sort((a,b)=>a.px-b.px);
+  let th=28,groups=[];
+  const build=()=>{groups=[];for(const it of items){const g=groups[groups.length-1];if(g&&it.px-g.px0<th){g.items.push(it);g.px1=it.px;}else groups.push({px0:it.px,px1:it.px,items:[it]});}};
+  build();while(groups.length>cap&&th<width){th*=1.5;build();}
+  return {kind,groups};
+ };
+ const lanes=[lane('lead'),lane('draft')].filter(l=>l.groups.length);
+ const label=e=>`${e.company||e.domain||'Brand'}, ${e.kind==='lead'?'brand found':'draft'} ${when(e.at,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`;
+ const thumb=e=>brandThumb({id:e.leadId,company:e.company,domain:e.domain});
+ const pops=[];
+ host.innerHTML=lanes.map(l=>`<div class="mk-lane mk-${l.kind}">${l.groups.map(g=>{
+  const first=g.items[0].e,left=((g.px0+g.px1)/2).toFixed(1);
+  if(g.items.length===1)return `<button type="button" class="mk" style="left:${left}px" data-mk="${first.leadId}" data-tip="${esc(label(first))}" aria-label="${esc(label(first))}. Open brand.">${thumb(first)}</button>`;
+  pops.push(g);
+  return `<button type="button" class="mk cl" style="left:${left}px" data-cl="${pops.length-1}" data-tip="${g.items.length} ${l.kind==='lead'?'brands found':'drafts'}" aria-label="${g.items.length} ${l.kind==='lead'?'brands found':'drafts'}. Show list." aria-haspopup="true">${thumb(first)}<em>+${g.items.length-1}</em></button>`;
+ }).join('')}</div>`).join('');
+ host.hidden=!lanes.length;
+ host.querySelectorAll('[data-mk]').forEach(b=>b.onclick=()=>openLead(Number(b.dataset.mk)));
+ host.querySelectorAll('[data-cl]').forEach(b=>b.onclick=ev=>{
+  ev.stopPropagation();host.querySelector('.mk-pop')?.remove();
+  const g=pops[Number(b.dataset.cl)],shown=g.items.slice(0,8);
+  const pop=document.createElement('div');pop.className='mk-pop';
+  pop.innerHTML=shown.map(it=>`<button type="button" data-mk="${it.e.leadId}">${thumb(it.e)}<span><b>${esc(it.e.company||it.e.domain)}</b><i>${esc(when(it.e.at,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}))}</i></span></button>`).join('')+(g.items.length>shown.length?`<div class="faint more">+${g.items.length-shown.length} more</div>`:'');
+  const lft=Math.max(0,Math.min(width-220,(g.px0+g.px1)/2-110));pop.style.left=`${lft}px`;
+  host.appendChild(pop);
+  pop.querySelectorAll('[data-mk]').forEach(r=>r.onclick=()=>{pop.remove();openLead(Number(r.dataset.mk));});
+  const away=e2=>{if(!pop.contains(e2.target)){pop.remove();document.removeEventListener('click',away);}};
+  setTimeout(()=>document.addEventListener('click',away),0);
+ });
+}
+let statsHold=false,statsStale=false,statsRO=null;
 async function loadStats(){
  const box=$('#stats');if(!box)return;
- box.innerHTML=statsPanel(await api(`/api/metrics?range=${pref.get('range','week')}`));
- box.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{pref.set('metric',b.dataset.metric);loadStats().catch(()=>{});});
- box.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{pref.set('range',b.dataset.range);loadStats().catch(()=>{});});
+ const data=await api(`/api/metrics?range=${pref.get('range','week')}`);
+ if(statsHold){statsStale=true;return;}
+ statsRO?.disconnect();statsRO=null;statsStale=false;
+ box.innerHTML=statsPanel(data);
+ box.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{pref.set('metric',b.dataset.metric);statsHold=false;loadStats().catch(()=>{});});
+ box.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{pref.set('range',b.dataset.range);statsHold=false;loadStats().catch(()=>{});});
+ bindChart(box,data,pref.get('metric','drafts'),on=>{statsHold=on;if(!on&&statsStale)loadStats().catch(()=>{});});
 }
 
 // Chat box: one composer with attachments, tools, a model picker, dictation and voice, like a chat app.
@@ -319,11 +417,11 @@ async function tasks(id){
  const m=id?await api(`/api/tasks/${id}`):null;state.mission=m;
  if(m)m.events.forEach(noteDraft);
  const ap=await api('/api/autopilot').catch(()=>null);
- $('#view').innerHTML=`<div class="groups-head"><h2>Task groups <span class="count">${state.tasks.length}</span></h2>${ap?`<label class="switch" data-tip="${ap.enabled?`On: starts the next batch when one finishes, up to $${Number(ap.dailyBudgetUsd).toFixed(2)} a day`:'Off: Mint waits for you to start missions'}"><input type="checkbox" id="apswitch" ${ap.enabled?'checked':''}><i></i><span>Always on</span></label>`:''}<form class="newmission" id="newmission"><input type="text" name="message" placeholder="New mission, e.g. find 8 streetwear brands in Brooklyn" required autocomplete="off"><button class="btn go" type="submit">Start</button></form></div>
-  ${state.tasks.length?`<div class="groups">${state.tasks.map(t=>groupCard(t,t.id===id)).join('')}</div>`:'<div class="idle">No missions yet. Start one above.</div>'}
+ $('#view').innerHTML=`${ap?`<div class="pagebar"><label class="switch" data-tip="${ap.enabled?`On: starts the next batch when one finishes, up to $${Number(ap.dailyBudgetUsd).toFixed(2)} a day`:'Off: Mint waits for you to start missions'}"><input type="checkbox" id="apswitch" ${ap.enabled?'checked':''}><i></i><span>Always on</span></label></div>`:''}
+  ${state.tasks.length?`<div class="groups">${state.tasks.map(t=>groupCard(t,t.id===id)).join('')}</div>`:'<div class="idle">No missions yet. Start one from Home.</div>'}
   ${m?missionView(m):''}
   <div class="section-title">Activity</div><div class="stats" id="stats"></div>`;
- startMission($('#newmission'));bindGo();bindGroups();if(m)bindMission(m);loadStats().catch(()=>{});
+ bindGo();bindGroups();if(m)bindMission(m);loadStats().catch(()=>{});
  $('.groups')?.addEventListener('click',e=>{if(!e.target.closest('.gcard')&&m)location.hash='#/tasks';});
  $('#apswitch')?.addEventListener('change',async e=>{try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');tasks(id);}catch(err){e.target.checked=!e.target.checked;toast(err.message,'bad');}});
 }
@@ -441,8 +539,11 @@ function boardCard(s){
 async function storyboards(){
  const {storyboards:list}=await api('/api/storyboards');
  const field=(n,l,ph,area)=>`<label>${l}</label>${area?`<textarea name="${n}" rows="2" placeholder="${esc(ph)}"></textarea>`:`<input type="text" name="${n}" placeholder="${esc(ph)}">`}`;
- $('#view').innerHTML=`<div class="pagebar"><span class="faint">${list.length} storyboard${list.length===1?'':'s'}</span><button class="btn go sm" id="newboardbtn" type="button">${ic('plus')}New storyboard</button></div><form class="card newshot" id="newboard" hidden><div class="head"><h2>Draft a storyboard</h2><button type="button" class="iconbtn" id="newboardx" style="margin-left:auto" aria-label="Close" data-tip="Close">${ic('x')}</button></div><div class="body">${field('product','Product or brand','Mint Labs graphic tee drop')}${field('audience','Audience','Gamers who grew up on PS2 era games')}${field('idea','Video idea or hook','Character reacts to the shirt selling out like a boss fight win',true)}${field('offer','Offer or call to action (optional)','Link in bio')}<label>Length</label><select name="length"><option value="15">15 seconds</option><option value="5">5 seconds</option><option value="30">30 seconds</option></select><details style="margin-top:12px"><summary class="muted">Lock the character (optional)</summary>${field('identity','Identity','Face, age, hair, build',true)}${field('wardrobe','Wardrobe','Exact outfit')}${field('environment','Environment','Location and lighting')}${field('voice','Voice','Tone and delivery')}</details><p><button class="btn go" type="submit">Draft storyboard</button></p><div class="hint">Sonnet 5.5 drafts it, seven Haiku checkers grade it, and you approve it. Approved shots go to Renders, where each shot still needs its own checks and your spend approval.</div></div></form>
+ $('#view').innerHTML=`<div id="ap-workbench"></div><div class="pagebar"><span class="faint">${list.length} storyboard${list.length===1?'':'s'}</span><button class="btn go sm" id="newboardbtn" type="button">${ic('plus')}New storyboard</button></div><form class="card newshot" id="newboard" hidden><div class="head"><h2>Draft a storyboard</h2><button type="button" class="iconbtn" id="newboardx" style="margin-left:auto" aria-label="Close" data-tip="Close">${ic('x')}</button></div><div class="body">${field('product','Product or brand','Mint Labs graphic tee drop')}${field('audience','Audience','Gamers who grew up on PS2 era games')}${field('idea','Video idea or hook','Character reacts to the shirt selling out like a boss fight win',true)}${field('offer','Offer or call to action (optional)','Link in bio')}<label>Length</label><select name="length"><option value="15">15 seconds</option><option value="5">5 seconds</option><option value="30">30 seconds</option></select><details style="margin-top:12px"><summary class="muted">Lock the character (optional)</summary>${field('identity','Identity','Face, age, hair, build',true)}${field('wardrobe','Wardrobe','Exact outfit')}${field('environment','Environment','Location and lighting')}${field('voice','Voice','Tone and delivery')}</details><p><button class="btn go" type="submit">Draft storyboard</button></p><div class="hint">Sonnet 5.5 drafts it, seven Haiku checkers grade it, and you approve it. Approved shots go to Renders, where each shot still needs its own checks and your spend approval.</div></div></form>
  <div class="stack">${list.map(boardCard).join('')||'<div class="idle">No storyboards yet. Press New storyboard, or ask Mint from Home.</div>'}</div>`;
+ // Codex owns the apparel planner above the list (docs/MINT-LABS-UI-CONTRACT-v1.txt); it plans offline and never spends.
+ // Loaded on demand: Codex commits these files separately, so a checkout without them still runs.
+ import('./apparel-storyboards.js').then(m=>m.apparelView({view:$('#ap-workbench'),api,esc,toast,sbadge,svg})).catch(err=>{const w=$('#ap-workbench');if(w)w.hidden=true;console.warn('Apparel planner unavailable',err);});
  $('#newboardbtn').onclick=()=>{$('#newboard').hidden=false;$('#newboard input').focus();};$('#newboardx').onclick=()=>{$('#newboard').hidden=true;};
  $('#newboard').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button[type=submit]');b.disabled=true;b.textContent='Drafting, about 30 seconds';try{await api('/api/storyboards',Object.fromEntries(new FormData(e.target)));toast('Storyboard drafted','ok','Run the checkers next.');storyboards();}catch(err){toast(err.message,'bad');b.disabled=false;b.textContent='Draft storyboard';}};
  document.querySelectorAll('[data-bcheck]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='Checking';try{await api(`/api/storyboards/${b.dataset.bcheck}/check`,{});}catch(err){toast(err.message,'bad');}storyboards();});

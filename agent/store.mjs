@@ -97,20 +97,30 @@ export function openStore(file=path.join(dataDir,'agent.db')){
    return {total:rows.reduce((s,r)=>s+r.total,0),today:rows.reduce((s,r)=>s+r.today,0),providers:rows.map(r=>({provider:r.provider,total:r.total,today:r.today,count:r.n}))};
   },
   // Home chart: totals plus one bucket per hour (today), day (week, month) or month (year), in local time.
-  metrics(range='week'){
-   const start=new Date();start.setHours(0,0,0,0);const buckets=[];
+  // Each bucket carries its own range (from, to), spendBy (usd per provider) and the totals stay as before.
+  // events lists the real leads and drafts created inside the range (oldest first), for timeline markers.
+  // The optional second argument is the clock, so tests can pin "now".
+  metrics(range='week',clock=new Date()){
+   const start=new Date(clock);start.setHours(0,0,0,0);const buckets=[];
    if(range==='today')for(let h=0;h<24;h++){const at=new Date(start);at.setHours(h);buckets.push({at,label:`${String(h).padStart(2,'0')}:00`});}
    else if(range==='year'){start.setDate(1);start.setMonth(start.getMonth()-11);for(let i=0;i<12;i++){const at=new Date(start);at.setMonth(start.getMonth()+i);buckets.push({at,label:at.toLocaleDateString('en-US',{month:'short'})});}}
    else{const days=range==='month'?30:7;start.setDate(start.getDate()-(days-1));for(let i=0;i<days;i++){const at=new Date(start);at.setDate(start.getDate()+i);buckets.push({at,label:at.toLocaleDateString('en-US',{month:'short',day:'numeric'})});}}
-   const since=buckets[0].at.toISOString(),series=buckets.map(b=>({label:b.label,drafts:0,leads:0,missions:0,spend:0}));
+   const edge=new Date(buckets[buckets.length-1].at);
+   if(range==='today')edge.setHours(edge.getHours()+1);else if(range==='year')edge.setMonth(edge.getMonth()+1);else edge.setDate(edge.getDate()+1);
+   const since=buckets[0].at.toISOString();
+   const series=buckets.map((b,i)=>({label:b.label,from:b.at.toISOString(),to:(buckets[i+1]?.at||edge).toISOString(),drafts:0,leads:0,missions:0,spend:0,spendBy:{}}));
    const slot=at=>{const t=new Date(at);for(let i=buckets.length-1;i>=0;i--)if(t>=buckets[i].at)return i;return -1;};
    const tally=(rows,key,value=()=>1)=>{for(const r of rows){const i=slot(r.at);if(i>=0)series[i][key]+=value(r);}};
    tally(db.prepare('select created_at at from drafts where created_at>=?').all(since),'drafts');
    tally(db.prepare('select created_at at from leads where created_at>=?').all(since),'leads');
    tally(db.prepare('select created_at at from tasks where created_at>=?').all(since),'missions');
-   tally(db.prepare('select at,usd from spend where at>=?').all(since),'spend',r=>r.usd);
+   for(const r of db.prepare('select at,provider,usd from spend where at>=?').all(since)){const i=slot(r.at);if(i<0)continue;series[i].spend+=r.usd;series[i].spendBy[r.provider]=(series[i].spendBy[r.provider]||0)+r.usd;}
+   const events=[
+    ...db.prepare('select id leadId,created_at at,company,domain from leads where created_at>=?').all(since).map(r=>({kind:'lead',at:r.at,leadId:r.leadId,company:r.company,domain:r.domain})),
+    ...db.prepare('select d.id draftId,d.lead_id leadId,d.created_at at,l.company,l.domain from drafts d left join leads l on l.id=d.lead_id where d.created_at>=?').all(since).map(r=>({kind:'draft',at:r.at,leadId:r.leadId,draftId:r.draftId,company:r.company,domain:r.domain}))
+   ].sort((a,b)=>a.at<b.at?-1:a.at>b.at?1:0).slice(-400);
    const sum=k=>series.reduce((s,b)=>s+b[k],0);
-   return {range,totals:{drafts:sum('drafts'),leads:sum('leads'),missions:sum('missions'),spend:sum('spend')},series};
+   return {range,from:since,to:edge.toISOString(),totals:{drafts:sum('drafts'),leads:sum('leads'),missions:sum('missions'),spend:sum('spend')},series,events};
   },
   stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(usd),0) n from spend').get().n};}
  };
