@@ -135,7 +135,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
    const sum=k=>series.reduce((s,b)=>s+b[k],0);
    return {range,from:since,to:edge.toISOString(),totals:{drafts:sum('drafts'),leads:sum('leads'),missions:sum('missions'),spend:sum('spend')},series,events};
   },
-  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(usd),0) n from spend').get().n};}
+  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,needsYou:db.prepare("select count(*) n from renders where status='checks_passed' or (status='completed' and review='pending')").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(usd),0) n from spend').get().n};}
  };
  return store;
 }

@@ -63,6 +63,6 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  assert.equal(view.querySelectorAll('[data-lf]').length,5);assert.equal(view.querySelector('.lbar .cchips'),null);assert.ok(view.querySelector('.ct-leads-table #crm .th'));
  const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.tbrand>div>b').textContent)),new Set(['VYLIN','Disobedient']));assert.ok(pinned.every(row=>!row.querySelector('.ct-journey').textContent.includes('Simulation')));
  location.hash='#/renders';await wait(()=>view.querySelector('#render-empty'));assert.equal(view.querySelector('#render-empty').hidden,false);
- for(const k of ['you','work','fix','done']){view.querySelector(`[data-rf="${k}"]`).click();assert.equal(view.querySelector('#render-empty').hidden,false);assert.ok(view.querySelector('#render-empty').textContent.length>8);}
+ for(const k of ['you','work','done','all']){view.querySelector(`[data-tab="${k}"]`).click();assert.equal(view.querySelector('#render-empty').hidden,false);assert.ok(view.querySelector('#render-empty').textContent.length>8);}
  assert.equal(store.spendSummary().total,0);assert.equal(store.listRenders().length,0);assert.ok(!calls.some(c=>c.method==='POST'&&/chat|assistant|research|\/run$|approve|ideation/.test(c.path)));
 });

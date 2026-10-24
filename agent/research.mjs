@@ -96,7 +96,7 @@ export function researchRoutes({store,Raw,spend:spendFor,deps={},dir=productDir,
    const n=Number(m[2]);if(!Array.isArray(lead.products)||!lead.products[n])throw notFound('No such product');
    const hit=cachedProductImage(lead.id,n,dir);if(!hit)throw notFound('No cached image for this product');
    if(!Raw)throw Error('Image route needs the server Raw class');
-   return new Raw(hit.type,readFileSync(hit.file),{'Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; sandbox"});
+   return new Raw(hit.type,readFileSync(hit.file),{'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; sandbox"});
   }]
  ];
 }

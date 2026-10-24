@@ -41,12 +41,14 @@ const instaUrl=l=>l.instagram_handle?`https://www.instagram.com/${encodeURICompo
 const brandSvg=new Set(['instagram','tiktok','youtube','facebook']);
 const igMark=()=>`<img class="si" src="${logoSrc('instagram')}" alt="">`;
 // Who the email goes to: personal email green, Instagram DM neutral, generic inbox yellow (needs Ryan), nothing red.
+// Short tag from a product's source URL. It changes when research re-scrapes, which busts the web view's image cache.
+const photoTag=u=>[...String(u||'')].reduce((h,c)=>(h*31+c.charCodeAt(0))|0,0).toString(36);
 function contactChip(l){
  const k=l.contact_kind;if(!k)return '';
  const who=l.contact_name?`${esc(String(l.contact_name).split(' ')[0])}, `:'';
  if(k==='personal')return `<span class="schip s-ok">${ic('mail')}${who?who:''}${who?'personal email':'Personal email'}</span>`;
  if(k==='role')return `<span class="schip s-you" title="Needs you: a shared inbox">${ic('mail')}Generic inbox</span>`;
- if(k==='instagram'){const u=instaUrl(l),h=l.instagram_handle?` @${esc(String(l.instagram_handle).replace(/^@/,''))}`:'';const inner=`${igMark()}Instagram DM${h}`;return u?`<a class="schip s-ig" href="${esc(u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${inner}</a>`:`<span class="schip s-ig">${inner}</span>`;}
+ if(k==='instagram'){const u=instaUrl(l),h=l.instagram_handle?` @${esc(String(l.instagram_handle).replace(/^@/,''))}`:'';const inner=`${igMark()}${h.trim()||'Instagram DM'}`;return u?`<a class="schip s-ig" title="Instagram DM${h}" href="${esc(u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${inner}</a>`:`<span class="schip s-ig">${inner}</span>`;}
  if(k==='none')return `<span class="schip s-bad">${ic('x')}No contact</span>`;
  return '';
 }
@@ -74,7 +76,7 @@ function renderShell(){
  const c=state.config;if(!c)return;
  $('#pagetitle').textContent=(tab()==='orders'?'Client brief':titles[tab()])||'Home';
  document.querySelectorAll('#tabs a,#tabs-foot a').forEach(a=>a.classList.toggle('on',a.dataset.tab===(tab()==='drafts'?'leads':tab()==='orders'?'tasks':tab())));
- const rt=document.querySelector('#tabs a[data-tab="renders"]');rt.querySelector('.badge')?.remove();if(c.stats.reviews)rt.insertAdjacentHTML('beforeend',`<span class="badge">${c.stats.reviews}</span>`);
+ const rt=document.querySelector('#tabs a[data-tab="renders"]');rt.querySelector('.badge')?.remove();{const n=c.stats.needsYou??c.stats.reviews;if(n)rt.insertAdjacentHTML('beforeend',`<span class="badge" title="Renders waiting for your approval or review">${n}</span>`);}
  const rows=connRows(),bad=rows.filter(r=>r.st[1]==='s-bad'||r.st[1]==='s-you').length,errs=rows.filter(r=>r.st[1]==='s-bad').length;
  $('#intdot').className=`dot ${bad?(errs?'off':'part'):'on'}`;
  $('#intlabel').textContent=bad?`${bad} need${bad===1?'s':''} attention`:rows.every(r=>r.verification==='verified')?'All connected':'Connections ready';
@@ -739,7 +741,7 @@ function leadStatusCell(l){
 function leadRow(l){
  const g=state.gmail.get(l.id),dm=state.dm.get(l.id),why=skipWhy(l);
  const mailText=l.contact_email||(l.contact_kind?'':(l.status==='found'?'Not checked yet':'No public email'));
- return `<div class="trow${state.selectedLead===l.id?' sel':''}" data-id="${l.id}" data-status="${esc(l.status)}"><div class="tbrand">${brandThumb(l)}<div style="min-width:0"><b>${esc(l.company||l.domain)}</b><div class="sub"><em>${esc(l.domain)}</em>${socialLinks(l)}</div></div></div><div class="where">${esc(l.territory||'')}<span>${esc(l.market||'')}</span></div><div class="contact">${contactChip(l)}${mailText?`<div class="mono mail">${esc(mailText)}</div>`:''}</div><div style="min-width:0" title="${esc(why)}">${leadStatusCell(l)}${dm?.status==='dm_ready'?'<div class="why">'+schip(['DM ready','s-ok'],'circle-check')+'</div>':''}${why?`<div class="why">${esc(why)}</div>`:''}</div><div class="tact"><button type="button" title="Details">${svg('eye')}</button>${dm&&dm.handle?`<a class="gmailicon" href="https://instagram.com/${encodeURIComponent(dm.handle)}" target="_blank" rel="noopener" data-tip="Open Instagram profile" aria-label="Open Instagram profile">${igMark()}</a>`:g?`<a class="gmailicon" href="${esc(g)}" target="_blank" rel="noopener" data-tip="Open draft in Gmail" aria-label="Open draft in Gmail"><img src="/logos/gmail.png" alt=""></a>`:`<button type="button" disabled title="No draft for this brand">${svg('mail')}</button>`}<a href="${esc(l.url||`https://${l.domain}`)}" target="_blank" rel="noopener" title="Open the website">${svg('open')}</a></div></div>`;
+ return `<div class="trow${state.selectedLead===l.id?' sel':''}" data-id="${l.id}" data-status="${esc(l.status)}"><div class="tbrand">${brandThumb(l)}<div style="min-width:0"><b>${esc(l.company||l.domain)}</b><div class="sub"><em>${esc(l.domain)}</em>${socialLinks(l)}</div></div></div><div class="where">${esc(l.territory||'')}<span>${esc(l.market||'')}</span></div><div class="contact">${contactChip(l)}${mailText?`<div class="mono mail">${esc(mailText)}</div>`:''}</div><div style="min-width:0" title="${esc(why)}">${leadStatusCell(l)}${dm?.status==='dm_ready'?'<div class="why">'+schip(['DM ready','s-ok'],'circle-check')+'</div>':''}${why?`<div class="why">${esc(why)}</div>`:''}</div><div class="tact">${dm&&dm.handle?`<a class="gmailicon" href="https://instagram.com/${encodeURIComponent(dm.handle)}" target="_blank" rel="noopener" data-tip="Open Instagram profile" aria-label="Open Instagram profile">${igMark()}</a>`:g?`<a class="gmailicon" href="${esc(g)}" target="_blank" rel="noopener" data-tip="Open draft in Gmail" aria-label="Open draft in Gmail"><img src="/logos/gmail.png" alt=""></a>`:`<button type="button" disabled title="No draft for this brand">${svg('mail')}</button>`}<a href="${esc(l.url||`https://${l.domain}`)}" target="_blank" rel="noopener" title="Open the website">${svg('open')}</a></div></div>`;
 }
 $('#drawer').addEventListener('click',async e=>{traceClick(e);const button=e.target.closest('[data-retry-ideation]');if(button){const id=state.selectedLead;button.disabled=true;try{await api(`/api/leads/${id}/ideation`,{});refreshLeadIdeation();}catch(error){toast(error.message,'bad');button.disabled=false;}}});
 const clip=(t,n=96)=>{t=String(t||'');return t.length>n?t.slice(0,t.lastIndexOf(' ',n-1)>40?t.lastIndexOf(' ',n-1):n)+'...':t;};
@@ -780,7 +782,7 @@ async function openLead(id){
   <div class="dactions"><div class="dicons">${dlink(l.url||`https://${l.domain}`,'Website',brandThumb(l,'sm'),'dicon web')}${soc('instagram','Instagram')}${soc('tiktok','TikTok')}${soc('youtube','YouTube')}${gmail?dlink(gmail,'Open draft in Gmail','<img src="/logos/gmail.png" alt="">'):''}</div>${mail?`<span class="dsend" id="sendslot"><button type="button" class="iconbtn go" id="sendbtn" data-tip="${esc(sendTip)}" aria-label="${esc(sendTip)}" ${canSend?'':'disabled'}>${ic('send')}</button></span>`:''}</div>
   <div class="dcontact" ${l.contact_email?`title="${esc(l.contact_email)}"`:''}>${contact}</div>
   ${note?`<div class="dnote">${esc(clip(note,90))}</div>`:''}
-  ${products&&products.length?`<div class="dsec"><span class="dlab">Product photos</span><div class="refs">${products.slice(0,12).map((p,i)=>`<div class="ref" data-tip="${esc(p.title||'')}"><img src="/api/leads/${id}/products/${i}/image" data-u="${esc(p.imageUrl||'')}" alt="${esc(p.title||'Product photo')}" onerror="if(this.dataset.f||!this.dataset.u){this.remove()}else{this.dataset.f=1;this.src=this.dataset.u}"></div>`).join('')}</div></div>`:''}
+  ${products&&products.length?`<div class="dsec"><span class="dlab">Product photos</span><div class="refs">${products.slice(0,12).map((p,i)=>`<div class="ref" data-tip="${esc(p.title||'')}"><img src="/api/leads/${id}/products/${i}/image?v=${photoTag(p.imageUrl)}" data-u="${esc(p.imageUrl||'')}" alt="${esc(p.title||'Product photo')}" onerror="if(this.dataset.f||!this.dataset.u){this.remove()}else{this.dataset.f=1;this.src=this.dataset.u}"></div>`).join('')}</div></div>`:''}
   ${hasPdf?`<div class="dsec"><span class="dlab">Offer</span><div class="offer"><button type="button" class="pg" data-offer="${id}" aria-label="Open the offer PDF, page 1"><img src="/api/leads/${id}/offer/1.png" alt="" loading="lazy"></button><button type="button" class="pg" data-offer="${id}" aria-label="Open the offer PDF, page 2"><img src="/api/leads/${id}/offer/2.png" alt="" loading="lazy"></button></div></div>`:''}
   ${vid?`<div class="vcard">${video(vid)}<div class="vmeta">${schip(vstate,statusIcon[vstate[1]])}<a class="chip" href="#/renders">Open in Renders</a></div></div>`:`<div class="dsec" id="lead-ideation">${ideationPanel(ideation,events,{esc,icon:ic})}</div>`}
   ${old?`<a class="oldmail" href="${esc(old.gmail_url)}" target="_blank" rel="noopener"><img src="/logos/gmail.png" alt="">Old email to ${esc(old.to_email)}, delete by hand</a>`:''}
@@ -833,7 +835,13 @@ const renderStatus={draft:['Needs checks','s-wait'],checking:['Checking','s-run'
 const reviewStatus={pending:['Awaiting your review','s-you'],approved:['Approved','s-ok'],rejected:['Rejected','s-bad']};
 let renderWatcher;
 const renderViewBusy=()=>[...document.querySelectorAll('#view video,#view audio')].some(v=>!v.paused&&!v.ended)||Boolean(document.querySelector('#newshot:not([hidden])'))||[...document.querySelectorAll('#view input[type="text"],#view textarea')].some(el=>el===document.activeElement||el.value);
-async function renders(arg,{isCurrent=()=>tab()==='renders'}={}){
+// New gallery lives in renders-view.js. If it fails to load or mount, the previous list view below takes over.
+async function renders(arg,opts={}){
+ const isCurrent=opts.isCurrent||(()=>tab()==='renders');
+ try{const m=await import('./renders-view.js');await m.rendersView({view:$('#view'),api,toast,arg,isCurrent});}
+ catch(err){console.error('Renders gallery failed, using the list view',err);await rendersList(arg,{isCurrent});}
+}
+async function rendersList(arg,{isCurrent=()=>tab()==='renders'}={}){
  renderWatcher?.stop();
  const payload=await api('/api/renders');if(!isCurrent())return;
  const {renders:list,enabled}=payload;
@@ -1021,5 +1029,5 @@ stream.onmessage=msg=>{
  if(change.kind==='storyboard'&&tab()==='storyboards')softRefresh(route);
  if(change.kind==='assistant'&&tab()==='home'&&!thread.thinking)loadThread();
  if(change.kind==='voice'&&tab()==='voices'&&![...document.querySelectorAll('audio')].some(a=>!a.paused))softRefresh(route);
- if(change.kind==='render'){if(reviewReady(change.render))popReview(change.render);if(tab()==='renders'){if(!renderViewBusy())softRefresh(route);}else if(tab()==='home')softRefresh(route);else loadState().catch(()=>{});}
+ if(change.kind==='render'){if(reviewReady(change.render))popReview(change.render);if(tab()==='renders'){if(window.mintRendersView)window.mintRendersView.patch(change.render);else if(!renderViewBusy())softRefresh(route);}else if(tab()==='home')softRefresh(route);else loadState().catch(()=>{});}
 };
