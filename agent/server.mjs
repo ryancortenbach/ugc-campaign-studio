@@ -27,16 +27,20 @@ export function createApp({store=openStore(),runner,higgsfield=hf}={}){
   ];
  };
  const config=()=>({brain:realTools.brainMode(),models,exa:realTools.exaMode(),sites:realTools.siteMode(),gmail:realTools.gmailEnabled()?realTools.draftAccount():null,higgsfield:higgsfield.higgsfieldEnabled(),checkers:llmEnabled(),integrations:integrations(),profile:realTools.loadProfile(),stats:store.stats()});
+ // Renders whose approve request is still waiting on Higgsfield in this process. A submitting row missing here was cut off by a restart.
+ const inFlight=new Set();
+ // Applies one Higgsfield status answer. Returns true while the render is still running.
+ async function applyStatus(id,s){
+  if(s.status!==store.getRender(id).status)store.updateRender(id,{status:s.status});
+  if(s.status==='completed'){const url=s.video?.url||s.images?.[0]?.url||null;let local=null;if(url){try{local=path.basename(await higgsfield.download(url,renderDir,`render-${id}.mp4`));}catch(e){store.updateRender(id,{error:e.message});}}store.updateRender(id,{result_url:url,local_file:local,review:'pending'});return false;}
+  if(['failed','nsfw','canceled'].includes(s.status)){store.updateRender(id,{error:s.error||s.status});return false;}
+  return true;
+ }
  async function pollRender(id){
   for(let i=0;i<180;i++){
    const r=store.getRender(id);if(!r?.request_id||!['queued','in_progress'].includes(r.status))return;
    await new Promise(res=>setTimeout(res,Math.min(10000,2000+i*1000)));
-   try{
-    const s=await higgsfield.status(r.request_id);
-    if(s.status!==r.status)store.updateRender(id,{status:s.status});
-    if(s.status==='completed'){const url=s.video?.url||s.images?.[0]?.url||null;let local=null;if(url){try{local=path.basename(await higgsfield.download(url,renderDir,`render-${id}.mp4`));}catch(e){store.updateRender(id,{error:e.message});}}store.updateRender(id,{result_url:url,local_file:local,review:'pending'});return;}
-    if(['failed','nsfw','canceled'].includes(s.status)){store.updateRender(id,{error:s.error||s.status});return;}
-   }catch(e){store.updateRender(id,{error:e.message});}
+   try{if(!await applyStatus(id,await higgsfield.status(r.request_id)))return;}catch(e){store.updateRender(id,{error:e.message});}
   }
  }
  const routes=[
@@ -54,7 +58,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf}={}){
   ['GET',/^\/api\/leads\/(\d+)$/,m=>{const lead=store.getLead(Number(m[1]));if(!lead)throw Object.assign(Error('No such lead'),{status:404});return {lead,events:store.listEvents({leadId:lead.id}),drafts:store.listDrafts({leadId:lead.id})};}],
   ['POST',/^\/api\/leads\/(\d+)$/,(m,b)=>{const allowed=['found','drafted','contacted','replied','won','lost','skipped'];const fields={};if(b.status!==undefined){if(!allowed.includes(b.status))throw Object.assign(Error('Unknown status'),{status:400});fields.status=b.status;}if(typeof b.notes==='string')fields.notes=b.notes.slice(0,4000);return {lead:store.updateLead(Number(m[1]),fields)};}],
   ['POST',/^\/api\/profile$/,(m,b)=>({profile:saveProfile(b)})],
-  ['GET',/^\/api\/renders$/,()=>({renders:store.listRenders(),enabled:higgsfield.higgsfieldEnabled()})],
+  ['GET',/^\/api\/renders$/,()=>({renders:store.listRenders().map(r=>r.status==='submitting'&&!inFlight.has(r.id)?{...r,stale:true}:r),enabled:higgsfield.higgsfieldEnabled()})],
   ['POST',/^\/api\/renders$/,(m,b)=>{const prompt=String(b.prompt||'').trim();if(prompt.length<10)throw Object.assign(Error('Write a shot prompt of at least 10 characters.'),{status:400});const input=higgsfield.buildInput({prompt,imageUrl:b.imageUrl||null,duration:b.duration,resolution:b.resolution});return {render:store.createRender({title:String(b.title||'Untitled shot').slice(0,120),endpoint:input.image_url?higgsfield.endpoints['image-to-video']:higgsfield.endpoints['text-to-video'],input})};}],
   ['GET',/^\/api\/storyboards$/,()=>({storyboards:store.listStoryboards()})],
   ['POST',/^\/api\/storyboards$/,async(m,b)=>{const brief=Object.fromEntries(['product','audience','idea','offer','identity','wardrobe','environment','voice','length'].map(k=>[k,String(b[k]??'').slice(0,2000).trim()]).filter(([,v])=>v));if(!brief.product||!brief.idea)throw Object.assign(Error('Describe the product and the video idea.'),{status:400});if(!llmEnabled())throw Object.assign(Error('Storyboards need ANTHROPIC_API_KEY'),{status:503});const out=await boards.draftStoryboard(brief);const sb=store.createStoryboard({title:out.plan.title||brief.product.slice(0,60),brief,plan:out.plan,cost:out.cost});store.addSpend({provider:'claude',usd:out.cost,storyboardId:sb.id,note:'storyboard draft'});return {storyboard:sb};}],
@@ -63,7 +67,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf}={}){
   ['POST',/^\/api\/storyboards\/(\d+)\/approve$/,m=>{const s=store.getStoryboard(Number(m[1]));if(!s)throw Object.assign(Error('No such storyboard'),{status:404});if(s.status!=='checks_passed')throw Object.assign(Error('The checkers have to pass before you can approve it.'),{status:409});const shots=higgsfield.shotsFromStoryboard({brief:{brand:`${s.title} v${s.version}`},storyboard:s.plan});const renders=shots.map(x=>store.createRender({title:x.title,endpoint:higgsfield.endpoints['text-to-video'],input:x.input,group:x.group,shotId:x.shotId}));return {storyboard:store.updateStoryboard(s.id,{status:'approved'}),renders};}],
   ['POST',/^\/api\/renders\/import$/,(m,b)=>{const shots=higgsfield.shotsFromStoryboard(b.packet);return {renders:shots.map(s=>store.createRender({title:s.title,endpoint:s.input.image_url?higgsfield.endpoints['image-to-video']:higgsfield.endpoints['text-to-video'],input:s.input,group:s.group,shotId:s.shotId}))};}],
   ['POST',/^\/api\/renders\/(\d+)\/review$/,(m,b)=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});if(r.status!=='completed')throw Object.assign(Error('Only finished renders can be reviewed.'),{status:409});if(!['approved','rejected'].includes(b.decision))throw Object.assign(Error('Choose approve or reject.'),{status:400});const note=String(b.note||'').slice(0,2000);if(b.decision==='rejected'&&!note.trim())throw Object.assign(Error('Say what to fix so the next render can be better.'),{status:400});return {render:store.updateRender(r.id,{review:b.decision,review_note:note||null,reviewed_at:new Date().toISOString()})};}],
-  ['POST',/^\/api\/renders\/(\d+)\/revise$/,m=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});const prompt=r.review_note?`${r.input.prompt}\n\nFix from review of render ${r.id}: ${r.review_note}`:r.input.prompt;const version=Number(r.title.match(/ \(v(\d+)\)$/)?.[1]||1)+1;return {render:store.createRender({title:`${r.title.replace(/ \(v\d+\)$/,'')} (v${version})`,endpoint:r.endpoint,input:{...r.input,prompt},group:r.group_name,shotId:r.shot_id})};}],
+  ['POST',/^\/api\/renders\/(\d+)\/revise$/,m=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});if(['submitting','submission_unknown'].includes(r.status))throw Object.assign(Error('Reconcile this render with Higgsfield first. A new version now could pay for the same shot twice.'),{status:409});const prompt=r.review_note?`${r.input.prompt}\n\nFix from review of render ${r.id}: ${r.review_note}`:r.input.prompt;const version=Number(r.title.match(/ \(v(\d+)\)$/)?.[1]||1)+1;return {render:store.createRender({title:`${r.title.replace(/ \(v\d+\)$/,'')} (v${version})`,endpoint:r.endpoint,input:{...r.input,prompt},group:r.group_name,shotId:r.shot_id})};}],
   ['POST',/^\/api\/renders\/(\d+)\/check$/,async m=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});if(!['draft','checks_failed','checks_passed'].includes(r.status))throw Object.assign(Error(`Render is ${r.status}`),{status:409});store.updateRender(r.id,{status:'checking'});let checks;try{checks=await higgsfield.runCheckers({title:r.title,input:r.input});}catch(e){store.updateRender(r.id,{status:'draft',error:e.message});throw e;}store.addSpend({provider:'claude',usd:checks.cost,renderId:r.id,note:'shot checkers'});let estimate=null,error=null;if(checks.passed&&higgsfield.higgsfieldEnabled()){try{const e=await higgsfield.estimate(r.endpoint,r.input);estimate=higgsfield.priceFrom(e,r.input);if(!estimate)error='Higgsfield returned no usable price for this resolution';}catch(e){error=e.message;}}return {render:store.updateRender(r.id,{status:checks.passed?'checks_passed':'checks_failed',checks,estimate_usd:estimate,error})};}],
   ['POST',/^\/api\/renders\/(\d+)\/approve$/,async(m,b)=>{
    const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});
@@ -72,11 +76,28 @@ export function createApp({store=openStore(),runner,higgsfield=hf}={}){
    if(String(b.estimate)!==String(r.estimate_usd))throw Object.assign(Error('The estimate changed. Review it and approve again.'),{status:409});
    const key=`render-${r.id}-${randomUUID()}`;
    const claimed=store.claimRenderSubmission(r.id,r.estimate_usd,key);if(!claimed)throw Object.assign(Error('This render was already claimed or its estimate changed. No additional submission started.'),{status:409});
+   inFlight.add(r.id);
    try{const submitted=await higgsfield.approveAndSubmit(r.endpoint,r.input,claimed.submission_key);const requestId=submitted.request_id||submitted.id;
     if(typeof requestId!=='string'||!requestId.trim())throw Error('Provider response did not identify a request.');
     store.addSpend({provider:'higgsfield',usd:Number(r.estimate_usd),renderId:r.id,note:'approved render estimate'});
     const updated=store.updateRender(r.id,{status:submitted.status||'queued',request_id:requestId,error:null});pollRender(r.id);return {render:updated};
    }catch{store.updateRender(r.id,{status:'submission_unknown',error:'Submission outcome is uncertain. Check Higgsfield using the saved submission key before any new render attempt.'});throw Object.assign(Error('Submission outcome is uncertain. No automatic retry is allowed. Reconcile the saved submission key in Higgsfield.'),{status:502});}
+   finally{inFlight.delete(r.id);}
+  }],
+  // The only way out of an uncertain submission. Someone checks Higgsfield, then either pastes the request ID it shows or confirms it never started.
+  ['POST',/^\/api\/renders\/(\d+)\/reconcile$/,async(m,b)=>{
+   const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});
+   if(inFlight.has(r.id))throw Object.assign(Error('Higgsfield has not answered this submission yet. Wait for it to finish.'),{status:409});
+   if(!['submitting','submission_unknown'].includes(r.status)||r.request_id)throw Object.assign(Error('Only a render with an uncertain submission needs reconciling.'),{status:409});
+   if(b.outcome==='not_submitted'){const back=store.reconcileRender(r.id);if(!back)throw Object.assign(Error('This render changed. Reload and try again.'),{status:409});return {render:back};}
+   if(b.outcome!=='submitted')throw Object.assign(Error('Say whether Higgsfield shows this render: submitted or not_submitted.'),{status:400});
+   const requestId=String(b.requestId??'').trim();if(!/^[\w.:-]{1,200}$/.test(requestId))throw Object.assign(Error('Paste the request ID Higgsfield shows for this render.'),{status:400});
+   let s;try{s=await higgsfield.status(requestId);}catch(e){throw Object.assign(Error(`Higgsfield did not confirm that request ID. ${e.message}`),{status:400});}
+   if(typeof s?.status!=='string'||!s.status)throw Object.assign(Error('Higgsfield returned no status for that request ID.'),{status:400});
+   if(!store.reconcileRender(r.id,{requestId}))throw Object.assign(Error('This render changed. Reload and try again.'),{status:409});
+   store.addSpend({provider:'higgsfield',usd:Number(r.estimate_usd),renderId:r.id,note:'reconciled render estimate'});
+   applyStatus(r.id,s).then(running=>{if(running)pollRender(r.id);}).catch(e=>store.updateRender(r.id,{error:e.message}));
+   return {render:store.getRender(r.id)};
   }],
   ['POST',/^\/api\/renders\/(\d+)\/cancel$/,async m=>{const r=store.getRender(Number(m[1]));if(!r?.request_id)throw Object.assign(Error('Nothing submitted'),{status:409});await higgsfield.cancel(r.request_id);return {render:store.updateRender(r.id,{status:'canceled'})};}]
  ];
