@@ -8,6 +8,9 @@ for d in durable-workflow-v1 durable-workflow-v2 durable-dashboard-v3; do
   [ -d "experiments/$d/node_modules" ] || { echo "Missing deps: cd experiments/$d && npm ci --ignore-scripts"; exit 1; }
 done
 
+# Workflow refuses to start over a stale generated build from build:preview.
+rm -rf experiments/durable-dashboard-v3/.nitro-build
+
 pids=()
 trap 'kill "${pids[@]}" 2>/dev/null; wait' EXIT INT TERM
 
