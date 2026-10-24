@@ -50,6 +50,12 @@ The broader feed also includes dating impressions, restaurant interactions, cash
 
 Several of the highest-play examples depend on profanity, ethnic caricature, sexual material, harassment-style encounters, or other context that is a poor default for a DTC brand. Raw popularity should not be the only selection rule. The strongest commercial transfer is the timing, confidence, recognizability, and sharp observation. A brand should choose the subject matter deliberately.
 
+### Other recurring lanes in the wider feed
+
+The wider sample also includes Half-Life, Gears of War, Fortnite and Minecraft references; TV-character reenactments; music and lip-sync trends; AI-assistant roast sketches; appearance-ranking and looksmaxxing vocabulary; creator culture and reaction-GIF jokes; celebrity impressions; public-interaction sketches; and a recurring relationship persona using Filipina/Pinay cultural tropes. Those are descriptions of the content presented, not claims about the creator's private relationships or a recommendation to copy those tropes.
+
+This broader map matters when choosing scenes and clothing. Gaming references support the LAN room, fictional guild office and fantasy market. TV and nostalgic character behavior support a distinctive costume silhouette. AI-assistant sketches suggest a recurring off-screen foil. Consumer wordplay works in a cafe, car, shop or ordinary apartment. Music/trend clips need a visual concept and sound-rights decision rather than a forced spoken script.
+
 ### Audience hypothesis
 
 A practical starting hypothesis is an English-speaking, internet-fluent adult audience with overlapping interests in games, nostalgia, clothes, desk setups, and absurd social observation. An initial 18-30 creative target is a testing choice, not a verified demographic fact from Instagram analytics. Start with this hypothesis, then ask actual target viewers through Terac which concepts feel recognizably theirs.
@@ -201,6 +207,6 @@ A credible demo is one small full loop: a brand brief becomes a concept, reviewe
 
 ## Topic index and coverage checks
 
-The automated topic index matches full machine transcripts and captions against explicit keyword families. Categories overlap. It is a search aid, not a human annotation of every sentence: fantasy-RPG lore/everyday-life matches 181 William entries, sandbox role-play 51, multiplayer status/economies 22, relationship/impression language 55, nostalgia 24, and everyday consumer/social observations 85. Ninety-six entries remain visual/trend-led or unclassified by these rules. Some matches are incidental, so use the source before choosing a concept.
+The automated topic index matches full machine transcripts and captions against explicit keyword families. Categories overlap. It is a search aid, not a human annotation of every sentence. The evidence JSON supplies exact counts for fantasy-RPG lore, role-play servers, digital economies, nostalgia, relationships, other games/TV, music/trends, internet identity/celebrity satire, cultural-persona sketches, and everyday wordplay. A reel can match several families, and incidental word matches still need source review. Short, repetitive, or suspicious ASR output is flagged instead of treated as dependable dialogue. Remaining unmatched entries are labeled explicitly.
 
 The full index contains all 800 source links, ranks, play counts, durations, dates, topic tags, and transcription status. The 30-video William folder includes the entire million-play subset of this collected sample. Audio and video provenance are retained through per-file source records and hashes. The recovered Higgsfield dossier is a separate private project file with the old avatar, prompts, settings, mistakes, and accepted decisions.

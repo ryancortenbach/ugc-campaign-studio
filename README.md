@@ -13,7 +13,7 @@ npm run dev
 
 Open the local address printed by the server. `npm test` validates intake and output behavior. `npm run check` checks JavaScript syntax.
 
-The dark dashboard includes guided intake, saved campaigns, task tabs with actual readiness blockers, a prompt review lab, Exa prospect discovery, and an editable financial model. Three marketing mocks live at `/shop/`, `/course/`, and `/brands/`. The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
+The dark dashboard includes guided intake, saved campaigns, compact task queues with run/pause/stop controls, input-version history, real readiness requests and alerts, a prompt review lab, Exa prospect discovery, and an editable financial model. Three marketing mocks live at `/shop/`, `/course/`, and `/brands/`. The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
 
 The browser saves drafts and campaigns locally and exports a production packet as JSON. This is not shared account storage. The packet leaves unknown facts and unapproved generation settings explicit.
 
@@ -39,4 +39,6 @@ The optional AI adapter follows [OpenAI Structured Outputs](https://developers.o
 
 `/research/` contains the browsable research library, full packet, 42 source-frame cards, an 800-entry source index, and coverage evidence. Full reference videos and analysis audio are local at `/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1`. The private avatar dossier preserves the recovered Air history.
 
-`docs/FINANCIAL-MODEL-NOTES.txt` documents sources, assumptions, formulas, exclusions, and guarantee limits. `docs/financial-scenarios-v1.json` contains the evaluated planning cases. `docs/prospect-seeds-v1.csv` contains eight unsent, source-labeled outreach candidates, with contact suitability distinguished from mere public availability.
+`docs/FINANCIAL-MODEL-NOTES.txt` documents sources, assumptions, formulas, exclusions, and guarantee limits. `docs/financial-scenarios-v2.json` contains the evaluated planning cases. `docs/prospect-seeds-v1.csv` contains eight unsent, source-labeled outreach candidates, with contact suitability distinguished from mere public availability.
+
+The browser task runner uses Web Locks to avoid duplicate readiness requests across open tabs. It runs only while the page is open. It does not claim to execute external browser sessions or publish media. Late results cannot override paused, stopped, or newer runs.

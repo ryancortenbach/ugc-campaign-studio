@@ -242,18 +242,23 @@
     }
   },
   "audio_analysis": {
-    "machine_transcript": 367,
-    "short_or_music_possible": 41,
+    "machine_transcript": 366,
+    "short_or_music_possible": 42,
     "no_audio_in_downloaded_media": 4
   },
   "william_topic_matches_nonexclusive": {
-    "Visual/trend or unclassified": 96,
+    "Visual/trend or unclassified": 31,
     "Dating and relationship impressions": 55,
     "Everyday consumer and social observations": 85,
     "Multiplayer status and digital economies": 22,
+    "Relationship persona and cultural tropes": 46,
     "Fantasy RPG lore and everyday life": 181,
     "Sandbox role-play and server culture": 51,
-    "Nostalgia and growing up online": 24
+    "Nostalgia and growing up online": 24,
+    "Other games and TV character references": 14,
+    "Everyday wordplay and interaction sketches": 22,
+    "Music, lip-sync and trend references": 14,
+    "Internet identity and celebrity satire": 17
   },
   "visual_review": {
     "top_william_reels": 30,
