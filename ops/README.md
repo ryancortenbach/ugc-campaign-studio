@@ -52,3 +52,7 @@ This patch has not been deployed to the existing fulfillment service. It does no
 ## Reconciliation migration in draft review
 
 Migration002adds the atomic reconciliation RPC required by the updated adapter. Do not deploy the adapter without planning that migration, and do not apply it to production under the current schedule. Existing duplicate Higgsfield shot charges make its unique index fail without deleting history. Audit them separately. The transaction fixes duplicate reconciliation ledger entries, not atomic spending caps or the provider-acceptance persistence gap. Details: docs/FULFILLMENT-RECONCILIATION-v2.md at repository root.
+
+## Estimated render reservations in draft review
+
+The adapter now requires migration003as well as002. It reserves estimated render exposure before submission, keeps unknown holds until explicit reconciliation and transfers accepted holds into the ledger atomically. Held reservations block shot deletion; completed reservation rows can be removed with replaced shots while spend history remains. Legacy unaccounted unknowns block new admission. Existing manual approvals remain recorded overrides. In-flight model costs and actual provider billing remain outside this estimated automatic-render check. Keep paid work disabled. Details: docs/FULFILLMENT-RESERVATIONS-v4.md. No production migrations or deployment occurred in this review.
