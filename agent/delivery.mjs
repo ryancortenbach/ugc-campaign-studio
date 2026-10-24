@@ -40,11 +40,15 @@ function run(ffmpeg,args,{timeoutMs=180000}={}){
   child.on('close',code=>{clearTimeout(timer);code===0?resolve():reject(Error(`ffmpeg exited ${code}: ${stderr.trim().split('\n').slice(-3).join(' | ')}`));});
  });
 }
-// ffmpeg -i always exits non-zero without an output file, so read its stream listing instead of the exit code.
-function hasAudio(ffmpeg,file){
+// Reads whether a clip has audio and how long its picture lasts at the 30 fps every part is normalized to. Each part is cut
+// to exactly that length: -shortest overshoots by a few hundred ms on some ffmpeg builds, and audio outlasting the picture
+// freezes the frame between shots after the concat.
+function probe(ffmpeg,file){
  return new Promise(resolve=>{
-  const child=spawn(ffmpeg,['-hide_banner','-i',file],{stdio:['ignore','ignore','pipe']});let out='';
-  child.stderr.on('data',d=>{out+=d;});child.on('close',()=>resolve(/Stream #\d+:\d+.*Audio:/.test(out)));child.on('error',()=>resolve(false));
+  const child=spawn(ffmpeg,['-hide_banner','-i',file,'-map','0:v:0','-vf','fps=30','-f','null','-'],{stdio:['ignore','ignore','pipe']});let out='';
+  child.stderr.on('data',d=>{out+=d;});
+  child.on('close',()=>{const frames=Number([...out.matchAll(/frame=\s*(\d+)/g)].at(-1)?.[1]||0);resolve({audio:/Stream #\d+:\d+.*Audio:/.test(out),seconds:frames?frames/30:null});});
+  child.on('error',()=>resolve({audio:false,seconds:null}));
  });
 }
 
@@ -73,9 +77,11 @@ export async function stitch({clips,captions=[],out,ffmpeg=findFfmpeg(),font=cap
     const textFile=path.join(dir,`caption-${i}-${n}.txt`);await writeFile(textFile,line);
     vf+=`,drawtext=fontfile='${font}':textfile='${textFile}':fontsize=${fontSize}:fontcolor=white:borderw=4:bordercolor=black:x=(w-text_w)/2:y=h*0.70+${n*(fontSize+14)}`;
    }
-   const audio=await hasAudio(ffmpeg,clip),part=path.join(dir,`part-${i}.mp4`);
+   const {audio,seconds}=await probe(ffmpeg,clip),part=path.join(dir,`part-${i}.mp4`);
+   // apad fills a clip whose audio ends early; -t then cuts picture and sound to the same length.
    await run(ffmpeg,['-y','-i',clip,...(audio?[]:['-f','lavfi','-i','anullsrc=channel_layout=stereo:sample_rate=44100']),'-vf',vf,
-    '-map','0:v:0','-map',audio?'0:a:0':'1:a:0','-c:v','libx264','-preset','veryfast','-crf','21','-c:a','aac','-ar','44100','-ac','2','-b:a','128k','-shortest',part]);
+    '-map','0:v:0','-map',audio?'0:a:0':'1:a:0',...(audio?['-af','apad']:[]),'-c:v','libx264','-preset','veryfast','-crf','21','-c:a','aac','-ar','44100','-ac','2','-b:a','128k',
+    ...(seconds?['-t',seconds.toFixed(3)]:['-shortest']),part]);
    parts.push(part);
   }
   const list=path.join(dir,'list.txt'),joined=path.join(dir,'final.mp4');

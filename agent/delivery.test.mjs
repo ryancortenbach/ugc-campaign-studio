@@ -171,18 +171,20 @@ test('routes run the delivery steps, and the no-spend pause still allows them',a
 });
 
 const ffmpeg=findFfmpeg();
-test('real ffmpeg joins mismatched clips into one 720x1280 video',{skip:!ffmpeg&&'ffmpeg is not installed'},async()=>{
+test('real ffmpeg joins mismatched clips into one 720x1280 video as long as their pictures',{skip:!ffmpeg&&'ffmpeg is not installed'},async()=>{
  const dir=mkdtempSync(path.join(tmpdir(),'mint-stitch-test-'));
  try{
-  const clip=(name,size,audio)=>{const out=path.join(dir,name);
-   const r=spawnSync(ffmpeg,['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`testsrc2=size=${size}:rate=24:duration=1`,...(audio?['-f','lavfi','-i','sine=frequency=440:duration=1']:[]),'-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',...(audio?['-c:a','aac','-shortest']:[]),out]);
+  // One second of picture each: matching audio, no audio, and audio that runs on past the picture.
+  const clip=(name,size,audioSeconds)=>{const out=path.join(dir,name);
+   const r=spawnSync(ffmpeg,['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`testsrc2=size=${size}:rate=24:duration=1`,...(audioSeconds?['-f','lavfi','-i',`sine=frequency=440:duration=${audioSeconds}`]:[]),'-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',...(audioSeconds?['-c:a','aac']:[]),out]);
    assert.equal(r.status,0,String(r.stderr));return out;};
   const out=path.join(dir,'finals','order.mp4');
-  await stitch({clips:[clip('a.mp4','720x1280',true),clip('b.mp4','1080x1920',false)],captions:['Shot one caption that wraps onto two lines','Two'],out,ffmpeg});
+  await stitch({clips:[clip('a.mp4','720x1280',1),clip('b.mp4','1080x1920',0),clip('c.mp4','720x1280',1.6)],captions:['Shot one caption that wraps onto two lines','Two','Three'],out,ffmpeg});
   const probe=spawnSync(ffmpeg,['-hide_banner','-i',out],{encoding:'utf8'}).stderr;
   assert.match(probe,/Video: h264.*720x1280/);assert.match(probe,/Audio: aac/);
   const [,h,m,s]=probe.match(/Duration: (\d+):(\d+):([\d.]+)/);
-  assert.ok(Math.abs(Number(h)*3600+Number(m)*60+Number(s)-2)<0.3,`duration ${s}`);
+  // Audio that outlasts a shot would leave a frozen frame before the next one and stretch the final video.
+  assert.ok(Math.abs(Number(h)*3600+Number(m)*60+Number(s)-3)<0.15,`duration ${s}`);
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
 
