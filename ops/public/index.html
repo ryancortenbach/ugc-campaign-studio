@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mint Labs Fulfillment</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--bg:#0b0d0b;--panel:#131713;--panel2:#181d18;--line:#273027;--text:#eef3ea;--muted:#9aa894;--mint:#b5e78f;--mint-ink:#14210c;--warn:#f2c46b;--bad:#ff8a7a}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
+header b{color:var(--mint);font-size:15px}header .sp{flex:1}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 80px;display:grid;gap:18px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+h2{font-size:14px;font-weight:600;margin:0 0 12px;display:flex;gap:8px;align-items:center}
+.count{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:0 8px;font-size:12px;color:var(--muted);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
+.chip.on{border-color:var(--mint);color:var(--mint)}.chip.off{border-color:var(--warn);color:var(--warn)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:500;font-size:12px;border-top:0}
+.muted{color:var(--muted)}.bad{color:var(--bad)}.warn{color:var(--warn)}.ok{color:var(--mint)}
+button,.btn{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:500 13px/1.2 inherit;cursor:pointer;text-decoration:none;display:inline-block}
+button.go,.btn.go{background:var(--mint);color:var(--mint-ink);border-color:var(--mint)}button.stop{border-color:var(--bad);color:var(--bad)}
+button:disabled{opacity:.5;cursor:wait}
+input,select,textarea{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:8px 10px;font:inherit}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:8px}
+video{width:100%;aspect-ratio:9/16;background:#000;border-radius:8px}
+.item{border-top:1px solid var(--line);padding:10px 0;display:grid;gap:6px}.item:first-of-type{border-top:0}
+pre{white-space:pre-wrap;margin:0;font:12px/1.5 ui-monospace,Menlo,monospace;color:var(--muted)}
+#login{max-width:360px;margin:15vh auto;display:grid;gap:12px}
+.toast{position:fixed;right:16px;bottom:16px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;max-width:420px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="app" hidden>
+  <header><b>Mint Labs Fulfillment</b><span class="muted" id="updated"></span><span class="sp"></span>
+    <button id="tickNow">Run a tick now</button><button id="logout">Log out</button></header>
+  <main>
+    <section><h2>Status</h2><div class="chips" id="ready"></div><p class="muted" id="spend" style="margin:10px 0 0"></p></section>
+    <section><h2>Ready for your review <span class="count" id="reviewCount">0</span></h2><div class="cards" id="review"></div></section>
+    <section><h2>Needs you <span class="count" id="attentionCount">0</span></h2><div id="attention"></div></section>
+    <div class="grid2">
+      <section><h2>Emails to send <span class="count" id="outboxCount">0</span></h2><div id="outbox"></div></section>
+      <section><h2>New order by hand</h2>
+        <p class="muted" style="margin-top:0">For a sale that happened before the Whop webhook, or outside Whop. You get a brief link to send.</p>
+        <form id="newOrder" class="row"><select name="package"><option value="starter">Starter, 5 videos</option><option value="campaign">Campaign, 12 videos</option></select>
+          <input name="email" type="email" placeholder="Buyer email"><input name="name" placeholder="Buyer name"><button class="go">Create order</button></form>
+        <p id="newOrderOut" class="muted"></p></section>
+    </div>
+    <section><h2>Orders <span class="count" id="orderCount">0</span></h2><table><thead><tr><th>#</th><th>Package</th><th>Buyer</th><th>Status</th><th>Videos</th><th>Spend</th><th>Links</th></tr></thead><tbody id="orders"></tbody></table></section>
+    <div class="grid2">
+      <section><h2>Settings</h2><form id="settings" style="display:grid;gap:10px">
+        <label class="row"><input type="checkbox" name="autoApproveRenders"> Approve renders automatically within the caps</label>
+        <label class="row">Daily cap $<input name="dailyCapUsd" type="number" min="0" step="1" style="width:90px"></label>
+        <label class="row">Starter budget $<input name="starterBudgetUsd" type="number" min="0" step="1" style="width:90px"> Campaign budget $<input name="campaignBudgetUsd" type="number" min="0" step="1" style="width:90px"></label>
+        <label class="row">Keep finished videos <input name="retentionDays" type="number" min="1" step="1" style="width:70px"> days</label>
+        <label class="row">Storyboard revisions before asking you <input name="maxStoryboardRevisions" type="number" min="0" max="5" step="1" style="width:70px"></label>
+        <label class="row">Digest email <input name="opsEmail" type="email" placeholder="you@example.com" style="min-width:220px"></label>
+        <div><button class="go">Save settings</button> <button type="button" id="digestNow">Preview digest</button></div></form>
+        <pre id="digestOut" style="margin-top:10px"></pre></section>
+      <section><h2>Recent activity</h2><div id="events"></div></section>
+    </div>
+  </main>
+</div>
+<form id="login" hidden><b style="color:var(--mint)">Mint Labs Fulfillment</b><input type="password" name="password" placeholder="Operator password" autocomplete="current-password" required><button class="go">Log in</button><span class="bad" id="loginErr"></span></form>
+<div class="toast" id="toast" hidden></div>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const money = n => '$' + Number(n || 0).toFixed(2);
+const when = t => t ? new Date(t).toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'}) : '';
+let toastTimer;
+const toast = text => { const t = $('toast'); t.textContent = text; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 5000); };
+async function api(path, body) {
+  const res = await fetch(path, body === undefined ? {} : {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify(body)});
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401 && path !== '/api/ops/login') { showLogin(); throw new Error('Log in first'); }
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+function showLogin() { $('app').hidden = true; $('login').hidden = false; }
+async function act(btn, path, body, done) { btn.disabled = true; try { const out = await api(path, body); if (done) toast(done); await load(); return out; } catch (e) { toast(e.message); } finally { btn.disabled = false; } }
+
+async function load() {
+  const s = await api('/api/ops/state');
+  $('login').hidden = true; $('app').hidden = false; $('updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  const r = s.ready;
+  $('ready').innerHTML = [['Claude', r.llm], ['Higgsfield', r.higgsfield], ['Whop webhook', r.whop], ['Heartbeat secret', r.cron], ['Phone alerts', r.alerts], ['Auto-approve renders', s.settings.autoApproveRenders]]
+    .map(([n, on]) => `<span class="chip ${on ? 'on' : 'off'}">${n}: ${on ? 'on' : 'off'}</span>`).join('');
+  $('spend').textContent = `Spend in the last 24 hours ${money(s.spend.last24h)} of a ${money(s.settings.dailyCapUsd)} cap. All time ${money(s.spend.total)}. ${s.rendering} shots in production.`;
+
+  $('reviewCount').textContent = s.review.length;
+  $('review').innerHTML = s.review.length ? s.review.map(v => `<div class="card" data-video="${v.id}"><b>Order ${v.order_id}, video ${v.idx}</b><span class="muted">${esc(v.title || '')}</span>
+    <video controls playsinline preload="none" data-src="${v.id}"></video><button data-load="${v.id}">Load video</button>
+    <textarea placeholder="If sending back, say what to change" rows="2" data-note="${v.id}"></textarea>
+    <div class="row"><button class="go" data-approve="${v.id}">Approve</button><button class="stop" data-changes="${v.id}">Send back</button></div></div>`).join('') : '<span class="muted">Nothing to review.</span>';
+
+  $('attentionCount').textContent = s.attention.length;
+  $('attention').innerHTML = s.attention.length ? s.attention.map(a => `<div class="item"><div><b>${a.table === 'shots' ? `Shot ${a.shot} (video #${a.video_id})` : `Order ${a.order_id}, video ${a.video}`}</b> <span class="muted">was ${esc(a.resume || '')}</span></div>
+    <div class="warn">${esc(a.error || '')}</div><div class="row">${a.resume === 'priced' ? `<button class="go" data-spend="${a.id}">Approve ${money(a.estimate)}</button>` : ''}
+    ${a.resume === 'unknown' ? `<input placeholder="Higgsfield request ID" data-reqid="${a.id}"><button data-reconcile="${a.id}">It went through</button><button data-never="${a.id}">It never started</button>` : `<button data-retry="${a.table}:${a.id}">Retry</button>`}</div></div>`).join('') : '<span class="muted">Nothing needs you.</span>';
+
+  $('outboxCount').textContent = s.outbox.length;
+  $('outbox').innerHTML = s.outbox.length ? s.outbox.map(m => `<div class="item"><div><b>${esc(m.subject)}</b> <span class="muted">to ${esc(m.to_email || 'no email on file')}</span></div>
+    <pre>${esc(m.body)}</pre><div class="row">${m.to_email ? `<a class="btn go" href="mailto:${encodeURIComponent(m.to_email)}?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}">Open in email</a>` : ''}
+    <button data-copy="${m.id}">Copy text</button><button data-sent="${m.id}">Mark sent</button><button data-skip="${m.id}">Skip</button></div></div>`).join('') : '<span class="muted">No emails waiting.</span>';
+  window.outboxRows = Object.fromEntries(s.outbox.map(m => [m.id, m]));
+
+  $('orderCount').textContent = s.orders.length;
+  $('orders').innerHTML = s.orders.map(o => `<tr><td>${o.id}</td><td>${esc(o.package)}</td><td>${esc(o.buyer_email || '')}<div class="muted">${esc(o.buyer_name || '')}</div></td>
+    <td>${esc(o.status)}<div class="muted">${when(o.created_at)}</div></td><td>${Object.entries(o.progress).map(([k, n]) => `${n} ${esc(k)}`).join(', ') || o.videos_total + ' planned'}</td>
+    <td>${money(o.spent)} <span class="muted">of ${money(o.budget_usd)}</span></td><td><a class="btn" href="${esc(o.briefUrl)}" target="_blank" rel="noopener">Brief</a> ${o.deliveryUrl ? `<a class="btn" href="${esc(o.deliveryUrl)}" target="_blank" rel="noopener">Delivery</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="7" class="muted">No orders yet.</td></tr>';
+
+  const f = $('settings');
+  if (!f.dataset.dirty) { for (const [k, v] of Object.entries(s.settings)) { const el = f.elements[k]; if (!el) continue; if (el.type === 'checkbox') el.checked = Boolean(v); else el.value = v; } }
+  $('events').innerHTML = s.events.slice(0, 25).map(e => `<div class="item"><span class="${e.level === 'attention' ? 'warn' : ''}">${esc(e.title)}</span><span class="muted">${when(e.at)}</span></div>`).join('') || '<span class="muted">No activity yet.</span>';
+}
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const d = b.dataset;
+  if (d.load) { const {url} = await api(`/api/ops/videos/${d.load}/url`).catch(err => (toast(err.message), {})); if (url) { const v = document.querySelector(`video[data-src="${d.load}"]`); v.src = url; v.play().catch(() => {}); } }
+  if (d.approve) await act(b, `/api/ops/videos/${d.approve}/review`, {decision: 'approve'}, 'Approved');
+  if (d.changes) { const note = document.querySelector(`[data-note="${d.changes}"]`).value.trim(); if (!note) return toast('Say what to change first.'); await act(b, `/api/ops/videos/${d.changes}/review`, {decision: 'changes', note}, 'Sent back for revision'); }
+  if (d.spend) { if (confirm('Spend this on Higgsfield for this shot?')) await act(b, `/api/ops/shots/${d.spend}/approve-spend`, {}, 'Submitted to Higgsfield'); }
+  if (d.reconcile) { const requestId = document.querySelector(`[data-reqid="${d.reconcile}"]`).value.trim(); if (!requestId) return toast('Paste the request ID from Higgsfield first.'); await act(b, `/api/ops/shots/${d.reconcile}/reconcile`, {requestId}, 'Reconciled'); }
+  if (d.never) { if (confirm('Only continue if Higgsfield has no job for this shot.')) await act(b, `/api/ops/shots/${d.never}/reconcile`, {}, 'Back at the spending gate'); }
+  if (d.retry) { const [table, id] = d.retry.split(':'); await act(b, '/api/ops/retry', {table, id: Number(id)}, 'Retrying'); }
+  if (d.sent) await act(b, `/api/ops/outbox/${d.sent}/sent`, {}, 'Marked sent');
+  if (d.skip) await act(b, `/api/ops/outbox/${d.skip}/skipped`, {}, 'Skipped');
+  if (d.copy) { const m = window.outboxRows[d.copy]; await navigator.clipboard.writeText(`To: ${m.to_email || ''}\nSubject: ${m.subject}\n\n${m.body}`); toast('Copied'); }
+});
+$('tickNow').onclick = async e => { const out = await act(e.target, '/api/ops/tick', {}); if (out) toast('Tick done: ' + Object.entries(out.report).filter(([k, v]) => typeof v === 'number' && v).map(([k, v]) => `${v} ${k}`).join(', ') || 'Tick done, nothing to move.'); };
+$('logout').onclick = async () => { await api('/api/ops/logout', {}); showLogin(); };
+$('digestNow').onclick = async e => { const out = await act(e.target, '/api/ops/digest', {}); if (out) $('digestOut').textContent = out.text; };
+$('settings').addEventListener('input', () => { $('settings').dataset.dirty = '1'; });
+$('settings').onsubmit = async e => {
+  e.preventDefault(); const f = e.target, patch = {};
+  for (const el of f.elements) { if (!el.name) continue; patch[el.name] = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value.trim(); }
+  try { await api('/api/ops/settings', patch); delete f.dataset.dirty; toast('Settings saved'); await load(); } catch (err) { toast(err.message); }
+};
+$('newOrder').onsubmit = async e => {
+  e.preventDefault(); const f = e.target;
+  try { const out = await api('/api/ops/orders', Object.fromEntries(new FormData(f))); $('newOrderOut').innerHTML = `Order ${out.order.id} created. Brief link: <a href="${esc(out.briefUrl)}" target="_blank" rel="noopener">${esc(out.briefUrl)}</a>`; f.reset(); await load(); }
+  catch (err) { toast(err.message); }
+};
+$('login').onsubmit = async e => {
+  e.preventDefault(); $('loginErr').textContent = '';
+  try { await api('/api/ops/login', {password: e.target.password.value}); e.target.reset(); await load(); } catch (err) { $('loginErr').textContent = err.message; }
+};
+load().catch(() => {});
+setInterval(() => { if (!$('app').hidden && document.visibilityState === 'visible') load().catch(() => {}); }, 20000);
+</script>
+</body>
+</html>
