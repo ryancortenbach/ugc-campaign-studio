@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-24T16:58:37.032800+00:00",
+  "status": "saved_evidence_review_not_a_new_model_pass",
+  "evidence": "Read-only snapshot of existing Air agent records. No independent provider replay.",
+  "stored_mission_status": "done",
+  "stored_leads": 6,
+  "stored_Gmail_draft_records": 3,
+  "failed_render_records": 1,
+  "rendered_file_observed": false,
+  "saved_checker_scores": {
+    "audience": 62,
+    "script": 68,
+    "continuity": 72,
+    "feasibility": 88,
+    "camera": 78,
+    "audio": 82,
+    "bindings": 93
+  },
+  "manual_artifacts": {
+    "unsent_revised_drafts": 3,
+    "single_shot_five_second_concept_briefs": 3,
+    "blocked_hook_revision": 1,
+    "originals_preserved": true
+  },
+  "findings": [
+    "An unsupported sell-out claim cannot be repaired with another unsupported scarcity claim.",
+    "A collection containing ten pieces does not establish ten units of stock.",
+    "Current daily production and publishing capability must not be presented as a proven service.",
+    "No branded sample video exists in this reviewed evidence; the deliverables are concept briefs."
+  ],
+  "source_checks": [
+    {
+      "url": "https://www.wearvylin.com/",
+      "status": "Official homepage opened. Tool crawl today."
+    },
+    {
+      "url": "https://giftedelitenewyork.com/",
+      "status": "Official homepage opened. Tool crawl today."
+    },
+    {
+      "url": "https://disobedientnyc.com/",
+      "status": "Homepage accessible with six-day-old tool crawl; contact page failed to open."
+    }
+  ],
+  "new_model_requests": 0,
+  "new_Gmail_writes": 0,
+  "outreach_sent": 0,
+  "generation_submitted": false,
+  "live_Air_records_modified": false,
+  "approval": "Identity, product assets, dialogue and quote remain unresolved. No grade or generation approval granted."
+}

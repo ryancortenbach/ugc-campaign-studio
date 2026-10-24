@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-24T16:57:13.680413+00:00",
+  "status": "manual_research_and_draft_review",
+  "evidence": "Read-only snapshot of saved Air agent mission1. No provider replay or new model request.",
+  "contacts": "Email/source fields are retained from saved public-site records and are not freshly reverified.",
+  "source_checks": {
+    "VYLIN": "Official homepage opened; tool crawl today.",
+    "Gifted Elite New York": "Official homepage opened; tool crawl today.",
+    "Disobedient": "Contact page unavailable; homepage accessible with six-day-old tool crawl."
+  },
+  "records": [
+    {
+      "company": "VYLIN",
+      "source_url": "https://www.wearvylin.com/",
+      "source_observation": "The source presents music-oriented streetwear, a brand playlist and NYC positioning.",
+      "source_limits": "No posting cadence, demand or sales velocity established.",
+      "public_contact_from_saved_record": "info@wearvylin.com",
+      "contact_source_from_saved_record": "https://www.wearvylin.com/",
+      "contact_freshly_reverified": false,
+      "original_saved_draft": {
+        "subject": "A consistent character for VYLIN's sound",
+        "body": "Hi VYLIN team,\n\nYour line about being \"born in NYC, built for everywhere\" stuck with me, especially alongside The VYLIN Sound playlist. The brand already has a clear voice. A recurring face could carry it daily.\n\nI'm Ryan Cortenbach, a Columbia engineering student building Mint Labs, an AI content studio, at the Zero Human Company hackathon in NYC. We create a consistent AI brand character and produce short-form UGC-style videos with it on a daily cadence. Every script and shot passes an automated quality check before anything is published.\n\nOpen to a 15 minute call this week to see a sample built for your brand?\n\nRyan Cortenbach\nMint Labs",
+        "state": "gmail_draft"
+      },
+      "revised_draft": {
+        "subject": "A five-second concept for VYLIN",
+        "body": "Hi VYLIN team,\n\nYour music-led streetwear and brand playlist suggest a clear visual world for a recurring original character.\n\nI'm Ryan, a Columbia engineering student building Mint Labs at the Zero Human Company hackathon. We're prototyping a workflow for a consistent AI brand character, with script and shot review before any generation or publishing approval.\n\nI can share a five-second concept brief for one approved product. Is short-form content production something you're exploring?\n\nRyan\nMint Labs",
+        "state": "unsent_manual_revision",
+        "sent": false,
+        "approval": "pending"
+      },
+      "changes": [
+        "Replaced operational daily-production claims with prototype positioning.",
+        "Removed implication that a branded video already exists.",
+        "No views, sales, stock, availability or output guarantee."
+      ],
+      "sample_brief": {
+        "status": "concept_only_not_a_video",
+        "title": "A quiet listening-room portrait",
+        "durationSeconds": 5,
+        "continuous_shots": 1,
+        "environment": "Fictional apartment listening corner, dusk light, no copied brand set.",
+        "camera": "Locked waist-up eye-level frame. Garment front remains visible without changing framing.",
+        "timing": [
+          {
+            "start": 0,
+            "end": 0.75,
+            "action": "Still opening pose."
+          },
+          {
+            "start": 0.75,
+            "end": 3.5,
+            "action": "The approved original creator stands still, holding the approved garment front flat at chest level. No lifting, walking or headphone interaction."
+          },
+          {
+            "start": 3.5,
+            "end": 5,
+            "action": "Hold the same position with a natural expression."
+          }
+        ],
+        "dialogue": "",
+        "audio": "Low room tone only. No playlist track or unlicensed music.",
+        "required_before_generation": [
+          "Approved original creator identity and exact wardrobe",
+          "Approved product image/artwork and correct physical handling",
+          "Confirmed supported reference or compositing workflow",
+          "Current quote and explicit generation approval"
+        ],
+        "generationSubmitted": false,
+        "spendApproved": false
+      }
+    },
+    {
+      "company": "Gifted Elite New York",
+      "source_url": "https://giftedelitenewyork.com/",
+      "source_observation": "The source presents NYC garment construction, culture-driven graphics and a current collection of ten pieces.",
+      "source_limits": "The ten-piece collection statement does not establish ten units of stock or a ten-unit edition.",
+      "public_contact_from_saved_record": "studio@giftedelitenewyork.com",
+      "contact_source_from_saved_record": "https://giftedelitenewyork.com/",
+      "contact_freshly_reverified": false,
+      "original_saved_draft": {
+        "subject": "Ludlow Street studio, daily short-form video",
+        "body": "Hi Gifted Elite New York team,\n\nYour site says every piece is cut and sewn in New York City, with prints pulled by people you know by name. That kind of hands-on story is hard to keep telling every day when a drop like CONCRETE GRAMMAR is only ten pieces.\n\nI'm Ryan, a Columbia engineering student building Mint Labs, an AI content studio. We create a consistent AI brand character for a brand and produce short-form UGC-style videos with it on a daily cadence. Every script and shot passes an automated quality check before anything is published.\n\nOpen to a 15 minute call this week to see a sample built for your brand?\n\nRyan Cortenbach\nMint Labs",
+        "state": "gmail_draft"
+      },
+      "revised_draft": {
+        "subject": "A five-second concept for Gifted Elite New York",
+        "body": "Hi Gifted Elite New York team,\n\nYour NYC construction story and culture-driven graphics suggest a focused product-detail concept.\n\nI'm Ryan, a Columbia engineering student building Mint Labs at the Zero Human Company hackathon. We're prototyping a workflow for a consistent AI brand character, with script and shot review before any generation or publishing approval.\n\nI can share a five-second concept brief for one approved product. Is short-form content production something you're exploring?\n\nRyan\nMint Labs",
+        "state": "unsent_manual_revision",
+        "sent": false,
+        "approval": "pending"
+      },
+      "changes": [
+        "Replaced operational daily-production claims with prototype positioning.",
+        "Removed implication that a branded video already exists.",
+        "No views, sales, stock, availability or output guarantee."
+      ],
+      "sample_brief": {
+        "status": "concept_only_not_a_video",
+        "title": "One garment detail",
+        "durationSeconds": 5,
+        "continuous_shots": 1,
+        "environment": "Fictional neutral monochrome studio, not a recreation of the brand factory.",
+        "camera": "Locked waist-up eye-level frame. Garment front remains visible without changing framing.",
+        "timing": [
+          {
+            "start": 0,
+            "end": 0.75,
+            "action": "Still opening pose."
+          },
+          {
+            "start": 0.75,
+            "end": 3.5,
+            "action": "The approved original creator holds one approved garment still, front visible to camera. No simulated manufacturing or print changes."
+          },
+          {
+            "start": 3.5,
+            "end": 5,
+            "action": "Hold the same position with a natural expression."
+          }
+        ],
+        "dialogue": "",
+        "audio": "Low studio room tone. No music or machinery implying a real factory.",
+        "required_before_generation": [
+          "Approved original creator identity and exact wardrobe",
+          "Approved product image/artwork and correct physical handling",
+          "Confirmed supported reference or compositing workflow",
+          "Current quote and explicit generation approval"
+        ],
+        "generationSubmitted": false,
+        "spendApproved": false
+      }
+    },
+    {
+      "company": "Disobedient",
+      "source_url": "https://disobedientnyc.com/",
+      "source_observation": "The accessible homepage presents NYC identity, a current collection and thermal, beanie and sweatsuit categories.",
+      "source_limits": "The contact page could not be re-opened by the web tool. Homepage crawl was six days old. Contact email and social posting cadence were not independently reverified.",
+      "public_contact_from_saved_record": "info@disobedientnyc.com",
+      "contact_source_from_saved_record": "https://disobedientnyc.com/pages/contact",
+      "contact_freshly_reverified": false,
+      "original_saved_draft": {
+        "subject": "A recurring character for Disobedient",
+        "body": "Hi Disobedient team,\n\nYour homepage line, \"Rooted in New York City and shaped by defiance,\" gives the brand a clear voice. With the '25-'26 Collection live and Instagram, YouTube and TikTok all linked, that voice could use a steady stream of short videos.\n\nAt Mint Labs, we create a consistent AI brand character for your brand and produce short-form UGC-style videos with it on a daily cadence. Every script and shot passes an automated quality check before anything is published.\n\nI'm a Columbia engineering student building this at the Zero Human Company hackathon in NYC.\n\nOpen to a 15 minute call this week to see a sample built for your brand?\n\nRyan Cortenbach\nMint Labs",
+        "state": "gmail_draft"
+      },
+      "revised_draft": {
+        "subject": "A five-second concept for Disobedient",
+        "body": "Hi Disobedient team,\n\nYour NYC positioning suggests a restrained city-portrait concept around one approved piece.\n\nI'm Ryan, a Columbia engineering student building Mint Labs at the Zero Human Company hackathon. We're prototyping a workflow for a consistent AI brand character, with script and shot review before any generation or publishing approval.\n\nI can share a five-second concept brief for one approved product. Is short-form content production something you're exploring?\n\nRyan\nMint Labs",
+        "state": "unsent_manual_revision",
+        "sent": false,
+        "approval": "pending"
+      },
+      "changes": [
+        "Replaced operational daily-production claims with prototype positioning.",
+        "Removed implication that a branded video already exists.",
+        "No views, sales, stock, availability or output guarantee."
+      ],
+      "sample_brief": {
+        "status": "concept_only_not_a_video",
+        "title": "A still city portrait",
+        "durationSeconds": 5,
+        "continuous_shots": 1,
+        "environment": "Fictional quiet city entrance, neutral background with no identifiable store signage.",
+        "camera": "Locked waist-up eye-level frame. Garment front remains visible without changing framing.",
+        "timing": [
+          {
+            "start": 0,
+            "end": 0.75,
+            "action": "Still opening pose."
+          },
+          {
+            "start": 0.75,
+            "end": 3.5,
+            "action": "The approved original creator holds a static outfit pose. The actual approved garment and identity must be supplied before production."
+          },
+          {
+            "start": 3.5,
+            "end": 5,
+            "action": "Hold the same position with a natural expression."
+          }
+        ],
+        "dialogue": "",
+        "audio": "Soft street ambience only, no branded song.",
+        "required_before_generation": [
+          "Approved original creator identity and exact wardrobe",
+          "Approved product image/artwork and correct physical handling",
+          "Confirmed supported reference or compositing workflow",
+          "Current quote and explicit generation approval"
+        ],
+        "generationSubmitted": false,
+        "spendApproved": false
+      }
+    }
+  ],
+  "outreach_sent_this_review": 0,
+  "videos_created_this_review": 0
+}

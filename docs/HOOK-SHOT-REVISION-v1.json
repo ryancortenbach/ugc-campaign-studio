@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "status": "blocked_pending_identity_product_and_dialogue_approval",
+  "basedOnSavedAirRender": 1,
+  "durationSeconds": 5,
+  "identity": "NOT SUPPLIED. Use the actual approved original creator identity; no replacement identity has been invented.",
+  "wardrobe": "Existing black oversized hoodie, exact approved version still required.",
+  "environment": "Existing Lower East Side sidewalk proposal at golden hour, subject to audience and location approval.",
+  "voice": "NOT APPROVED. Proposed calm conversational adult voice with stable accent and natural pacing.",
+  "references": [],
+  "shots": [
+    {
+      "id": "shot-01",
+      "start": 0,
+      "duration": 5,
+      "camera": "Locked waist-up, eye level, garment front visible at chest height. No handheld shake, push-in or cut.",
+      "action": "Creator is stationary and already holding the approved garment front flat at the start. Maintain the same grip and pose for five seconds.",
+      "dialogue": "Here's the print up close.",
+      "audio": "Street ambience low under the voice. Proposed speech from0.75to3.25seconds, then a quiet tail through5seconds. No music."
+    }
+  ],
+  "originalDialogue": "This shirt sold out in an hour.",
+  "dialogueChangeNeedsApproval": true,
+  "productArtwork": "Do not invent a graphic or lettering. Supply approved artwork and a supported reference/compositing workflow first.",
+  "blockingReasons": [
+    "Identity text lock and actual product/reference assets are missing.",
+    "Claim-free replacement dialogue is a proposal and is not approved.",
+    "Current quote, audio rights and reference/compositing support are unverified."
+  ],
+  "generation": {
+    "estimatedCredits": null,
+    "spendApproved": false,
+    "submitted": false
+  },
+  "newCheckerRun": false
+}
