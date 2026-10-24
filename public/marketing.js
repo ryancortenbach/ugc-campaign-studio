@@ -22,5 +22,6 @@ document.querySelectorAll('[data-add]').forEach(button=>button.onclick=()=>{
  const product=button.closest('.product');cart.push({name:button.dataset.add,size:product.querySelector('select').value,price:59.99});renderCart();
 });
 document.querySelectorAll('[data-checkout]').forEach(button=>button.onclick=()=>{
- const message=document.querySelector('#checkout-status');if(message)message.textContent='The $97 Whop checkout URL is pending. This is a review mock, so no payment will be taken.';
+ const message=document.querySelector('#checkout-status');if(!message)return;
+ const link=document.createElement('a');link.href='/brands/#packages';link.textContent='UGC video packages';message.replaceChildren('The course is not on sale, so there is no checkout. Mint Labs is selling ',link,' right now.');
 });
