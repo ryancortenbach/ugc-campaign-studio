@@ -63,3 +63,5 @@ window.addEventListener('ugc-prospect-campaign',event=>{
 window.addEventListener('ugc-concept-draft',event=>{
  try{const packet=conceptPacket(state.brief,getProductionPlan(state.brief,state.planId),event.detail?.id);if(!importSource(JSON.stringify(packet))){$('#concept-status').textContent=$('#import-status').textContent;return;}$('#plan-status').textContent='Original concept draft opened. Reference assets, script, claims and spend approval are pending. '+$('#import-status').textContent;}catch(error){$('#concept-status').textContent=error.message;}
 });
+
+window.addEventListener('ugc-alert-open',()=>view('operations'));

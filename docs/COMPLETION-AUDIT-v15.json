@@ -1,0 +1,160 @@
+{
+  "version": 15,
+  "date": "2026-10-24",
+  "scope": "UGC hackathon only",
+  "preview": "https://duolingo-library-phone-v1-c0un33xa9-ryancortenbachs-projects.vercel.app/",
+  "completed": [
+    "Private GitHub repository and CI",
+    "Guided chat intake, editable briefs, campaign persistence and JSON export",
+    "Three review website mocks",
+    "Bot-style task table with actual browser-local readiness, events, pause/stop/retry and duplicate-run protection",
+    "800-entry source sample, 42 downloaded references, 408 machine transcripts, four explicit no-audio cases",
+    "Original Higgsfield avatar dossier v2",
+    "Audience packet, source gallery and sales playbook",
+    "Editable three-offer finance scenarios and margin tests",
+    "Eight manual prospect seeds with contact-source evidence and unsent drafts",
+    "Editable three-shot storyboard, 5/15/30 second retiming, identity/wardrobe/environment/voice locks, dialogue and sound cues, persistent drafts, version restore, review-lab transfer and JSON export with saved versions",
+    "Portable JSON packet import, saved storyboard history, separate campaign planning IDs, existing-campaign preservation and approval reset",
+    "Persistent review history, final reviewed-input binding, stale detection, independent JSON export, and preservation of specialist evidence if revision fails",
+    "Live keyless Exa MCP discovery, published source/contact candidates, unsent personalized drafts, sample briefs, and a separately labeled recorded five-source search",
+    "Persistent editable outreach drafts, source merging, version restore, portable JSON history and prospect-to-five-second-campaign handoff",
+    "Financial input validation, blocked invalid exports, no feasible price-floor handling, unclamped low yield and precise unit-cost display",
+    "Morning review hub, exact project links, scoped Lovable handoff, two original text storyboard candidates and draft Terac task",
+    "Separate protected Vercel readiness workflow proof: actual hosted suspension/resume and saved result, unauthorized rejection, zero model calls, and local result persistence across restart. Main dashboard executor remains browser-local.",
+    "Separate private operator console v2 with signed per-job tickets, actual cancellation, terminal-state handling and recovery of existing hosted runs. Twelve local and twelve hosted API checks passed; three ticket tests added. Authenticated browser lifecycle remains untested.",
+    "Optional same-origin hosted readiness panel integrated into Agent operations. Authenticated local browser submit/cancel/reload/recovery verified with fictional credential. Hosted API lifecycle and final cross-deployment recovery verified. Model/media/publishing calls disabled in combined preview. Legacy queue remains browser-local.",
+    "Private cloud execution-metadata list for V3 readiness runs, bounded filtering/pagination, discovery from empty browser history and selection for recovery. Local browser and actual hosted HTTP verified; no jobs created.",
+    "Private Whop offer-check adapter and operator UI, seven fixture tests and actual local/hosted missing-config checks. No live Whop request or verified product.",
+    "Eight original research-linked concept directions, separate editable five-second campaign creation, preserved identity/voice/wardrobe and source provenance in portable packets. Local existing-campaign/version preservation and actual JSON download verified; anonymous hosted creation and mobile width verified.",
+    "Persistent browser-local alert inbox for observed readiness blockers, hosted failures and uncertain submissions; deduplication, acknowledgement, source inspection and JSON history export. Local and hosted anonymous browser readiness alerts verified, and existing local hosted run recovery produced its actual budget alert."
+  ],
+  "implemented_not_live": [
+    "Optional model chat and seven-reviewer bounded loop",
+    "Exact approved-dialogue locks and rejected-revision audit trail",
+    "Optional keyed Exa REST adapter. Free MCP discovery is verified live.",
+    "Read-only Whop Variant offer checker, current API version pinned. Credentials and expected account/product/variant absent; checkout remains disabled."
+  ],
+  "remaining": [
+    {
+      "item": "Live model chat and seven real reviewer responses",
+      "dependency": "Private model configuration and access token. No current configuration supplied."
+    },
+    {
+      "item": "Terac human review",
+      "dependency": "Authorized account/API access, task brief and approved human-review budget."
+    },
+    {
+      "item": "Whop checkout, entitlement and webhook verification",
+      "dependency": "Real $97 product checkout URL and authorized developer setup."
+    },
+    {
+      "item": "Lovable sponsor usage",
+      "dependency": "Actual authorized builder session/export. Local coding is not Lovable usage."
+    },
+    {
+      "item": "Hosted orchestration and posting",
+      "dependency": "Hosted readiness and private execution-metadata discovery work. Durable unified task storage, atomic deduplication, multi-user ownership, push alerts, browser execution and publishing remain."
+    },
+    {
+      "item": "Rendered five-second samples",
+      "dependency": "Approved product/reference assets and generation quote, then explicit spend approval. Current deliverables are sample briefs."
+    }
+  ],
+  "test_count": 76,
+  "live_paid_requests_this_batch": 0,
+  "outreach_sent": 0,
+  "physical_phone_tested": false,
+  "whole_goal_complete": false,
+  "preview_evidence": "work/alerts-final-verification-v1.json",
+  "preservation_limits": [
+    "Original normalized Exa sample v1 retained. Its original raw response was overwritten by an ignored diagnostic. V2 explicitly documents missing raw provenance. See docs/EXA-FREE-MCP-v2.md."
+  ],
+  "review_hub": "https://duolingo-library-phone-v1-c0un33xa9-ryancortenbachs-projects.vercel.app/delivery/",
+  "plugin_discovery": {
+    "Lovable": "Available, not installed. Suggested once October 24; confirmation required before tools become usable.",
+    "Whop": "No plugin found in returned search results. Directory search is not exhaustive.",
+    "Terac": "No plugin found in returned search results. Directory search is not exhaustive."
+  },
+  "durable_proof": {
+    "receipt": "public/durable-proof/receipt-v1.json",
+    "local": "work/workflow-v1-local-verification.json",
+    "hosted": "work/workflow-v1-hosted-verification.json",
+    "deployment": "work/workflow-v1-deployment-verified.json",
+    "dashboard_connected": false,
+    "model_calls": 0,
+    "generation_submitted": false,
+    "production_deployed": false,
+    "public_page": "https://duolingo-library-phone-v1-akcw3r8kw-ryancortenbachs-projects.vercel.app/durable-proof/"
+  },
+  "durable_console": {
+    "url": "https://duolingo-library-phone-v1-6le7imc81-ryancortenbachs-projects.vercel.app/",
+    "deployment": "dpl_6x9rouD2pyqEXEBU4oWhDm7m2toT",
+    "dashboard_connected": false,
+    "server_submission_deduplication": false,
+    "authenticated_browser_lifecycle_tested": false,
+    "actual_api_lifecycle_tested": true,
+    "receipt": "public/durable-proof/receipt-v2.json",
+    "model_calls": 0,
+    "generation_submitted": false,
+    "public_receipt": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/durable-proof/receipt-v2.json"
+  },
+  "hosted_dashboard": {
+    "version": 3,
+    "url": "https://duolingo-library-phone-v1-c0un33xa9-ryancortenbachs-projects.vercel.app/#operations",
+    "deployment": "dpl_9UUizjSjvGXnU7A51nBQrmkP3Vss",
+    "optional_panel_connected": true,
+    "legacy_queue_still_local": true,
+    "authenticated_local_browser_lifecycle_tested": true,
+    "authenticated_hosted_browser_lifecycle_tested": false,
+    "hosted_api_lifecycle_tested": true,
+    "atomic_submission_deduplication": false,
+    "model_calls_enabled": false,
+    "generation_enabled": false,
+    "physical_phone_tested": false,
+    "receipt": "public/durable-proof/receipt-v3.json",
+    "cloud_metadata_registry": true
+  },
+  "air_copy": {
+    "commit": "5ff144c8d14cc8ce720aedcdaa0d7473e0991f20",
+    "files_sha256_verified": 2674,
+    "tests_passed": 59,
+    "latest_source_sync": "pending, SSH unreachable",
+    "credentials_copied": false
+  },
+  "whop_offer_checker": {
+    "implemented": true,
+    "providerRequested": false,
+    "productVerified": false,
+    "paymentsEnabled": false,
+    "api_version": "2026-10-24",
+    "authenticated_local_missing_config_tested": true,
+    "authenticated_hosted_http_missing_config_tested": true
+  },
+  "concept_library": {
+    "concepts": 8,
+    "generation_submitted": false,
+    "original_proposals": true,
+    "source_urls_are_generation_references": false,
+    "existing_campaign_preserved_browser_verified": true,
+    "actual_export_verified": true,
+    "local_evidence": "work/concepts-local-browser-v1.json",
+    "hosted_evidence": "work/concepts-hosted-browser-v2.json"
+  },
+  "alert_inbox": {
+    "browser_local": true,
+    "push_delivery": false,
+    "acknowledgement_resolves_task": false,
+    "max_records": 200,
+    "credentials_prompts_tickets_stored": false,
+    "local_task_browser_tested": true,
+    "local_hosted_recovery_browser_tested": true,
+    "anonymous_hosted_browser_local_task_tested": true,
+    "failed_uncertain_modes": "offline fixtures only",
+    "actual_export_bytes": 883,
+    "evidence": [
+      "work/alerts-local-browser-v1.json",
+      "work/alerts-hosted-local-browser-v1.json",
+      "work/alerts-hosted-browser-v1.json"
+    ]
+  }
+}

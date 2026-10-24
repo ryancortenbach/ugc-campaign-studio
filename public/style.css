@@ -14,3 +14,5 @@
 
 .concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.concept-card{min-width:0}.concept-card p,.concept-card a{overflow-wrap:anywhere}.concept-card p{font-size:12px;line-height:1.7}.concept-card a{font-size:12px}@media(max-width:800px){.concept-grid{grid-template-columns:minmax(0,1fr)}}
 #plan-origin{overflow-wrap:anywhere}
+
+.alert-row{border-top:1px solid #30342c;padding:16px 0;overflow-wrap:anywhere}.alert-row p{margin:8px 0}.alert-row button{margin:6px 8px 0 0}.alert-row.acknowledged{opacity:.7}
