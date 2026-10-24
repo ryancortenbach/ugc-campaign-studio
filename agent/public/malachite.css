@@ -1,0 +1,73 @@
+/* Malachite theme, loaded after every other stylesheet. It brings the logo's material into the app: emerald-black
+   surfaces, the banded green stone (malachite.jpg, from scripts/make-malachite-texture.py) and cut-gem edges that
+   catch the light. Tokens first, then the few spots that hard-code the old blue-gray palette, then gem details. */
+:root{
+ --bg:#06100b;--shell:#030906;--panel:#0a1811;--panel2:#0e1f16;--raise:#12281c;
+ --line:rgba(120,240,175,.08);--line2:rgba(120,240,175,.16);
+ --text:#e8f6ee;--muted:rgba(214,240,226,.66);--faint:rgba(214,240,226,.42);
+ --green:#3ddc8a;--green-bg:rgba(61,220,138,.12);--wait-bg:rgba(214,240,226,.08);
+ --stone:url(malachite.jpg);--glow:rgba(40,200,115,.38);--edge:rgba(190,255,220,.55);
+ /* A cut gem: a bright facet across the top, the stone darkened for legible white text, a deep base. */
+ --gem:linear-gradient(165deg,rgba(255,255,255,.28),rgba(255,255,255,0) 44%),linear-gradient(rgba(2,34,19,.42),rgba(2,34,19,.42)),var(--stone) 30% 40%/260px auto,#12894f;
+ --gem-shadow:inset 0 1px 0 var(--edge),inset 0 -1px 0 rgba(0,0,0,.45),0 0 0 1px rgba(61,220,138,.45),0 6px 18px -8px var(--glow);
+}
+::selection{background:rgba(61,220,138,.32);color:#fff}
+::placeholder{color:rgba(214,240,226,.3)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(120,240,175,.12);border:2px solid transparent;border-radius:10px;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background-color:rgba(120,240,175,.24)}
+
+/* Shell: deep stone light falls from the top of the work area, like the store banner. */
+.center{background:radial-gradient(900px 520px at 50% -8%,rgba(30,170,98,.13),transparent 62%),radial-gradient(720px 480px at 104% 106%,rgba(20,130,75,.1),transparent 60%),var(--bg)}
+.side,.live{border-color:rgba(120,240,175,.07)}
+.topbar,.live-head{border-bottom-color:transparent;background:linear-gradient(90deg,transparent,rgba(61,220,138,.24) 28%,rgba(61,220,138,.08) 72%,transparent) bottom/100% 1px no-repeat}
+.brand::after{content:'Mint Labs';font-size:15px;font-weight:650;letter-spacing:-.015em;background:linear-gradient(180deg,#f2fff7 15%,#7fe8ae 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo{box-shadow:0 0 0 1px rgba(120,240,175,.3),0 0 18px -3px var(--glow)}
+#tabs a:hover{background:rgba(120,240,175,.06)}
+#tabs a.on{background:linear-gradient(90deg,rgba(61,220,138,.17),rgba(61,220,138,.05) 70%,transparent);box-shadow:inset 2px 0 0 var(--green),inset 0 1px 0 rgba(190,255,220,.06)}
+#tabs a.on svg{color:var(--green)}
+/* Every page title carries a small cut gem from the stone. */
+.topbar h1{display:flex;align-items:center;gap:10px}
+.topbar h1::before{content:'';flex:none;width:12px;height:12px;background:conic-gradient(from 210deg at 50% 42%,#c9ffe3,#3ddc8a 18%,#0b6b3c 36%,#1fb466 52%,#8ff5c0 68%,#0f7a43 84%,#c9ffe3);clip-path:polygon(50% 0,100% 38%,81% 100%,19% 100%,0 38%)}
+.fchip.on{background:rgba(61,220,138,.12);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,220,138,.24)}
+.fchip.on .n{color:rgba(61,220,138,.75)}
+
+/* Gem buttons: every primary action is a cut piece of the stone. */
+.btn.go,.btn.go:hover,.iconbtn.go,.iconbtn.go:hover,.csend.go,.csend.go:hover,.rvp-btn.go,body .bp-ctl.on{background:var(--gem);border-color:transparent;color:#f4fff8;box-shadow:var(--gem-shadow);text-shadow:0 1px 1px rgba(0,0,0,.5)}
+.btn.go:hover,.iconbtn.go:hover,.csend.go:hover,.rvp-btn.go:hover{filter:brightness(1.14) saturate(1.06)}
+.btn.go:active,.iconbtn.go:active,.csend.go:active{filter:brightness(.94);box-shadow:inset 0 1px 0 rgba(190,255,220,.3),inset 0 -1px 0 rgba(0,0,0,.45),0 0 0 1px rgba(61,220,138,.45)}
+.switch input:checked+i{background:var(--gem);box-shadow:inset 0 1px 0 var(--edge),0 0 0 1px rgba(61,220,138,.4)}
+.switch input:checked+i::after{background:#f4fff8;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+/* Surfaces: polished edges catch a little light along the top. */
+.card,.gcard,.toast,.trow{box-shadow:inset 0 1px 0 rgba(190,255,220,.045)}
+.intpanel,.popup,.cmenu,.mk-pop,.xtip{box-shadow:inset 0 1px 0 rgba(190,255,220,.05),0 18px 50px rgba(0,0,0,.6)}
+.trow:hover{background:#16301f}.trow.sel{box-shadow:inset 0 0 0 1px var(--green),0 0 22px -10px var(--glow)}
+a.chip:hover{background:#183526}
+.hfbtn:hover,.hfbtn.on{background:#1c3b2a}
+.console{background:#030906}
+.rv-tile,.rv-media img,.rv-media video,.rvp-frame{background:#0c1d14}
+.rv-shade{background:linear-gradient(180deg,rgba(2,10,6,.5) 0,rgba(2,10,6,0) 26%,rgba(2,10,6,0) 52%,rgba(2,10,6,.84) 100%)}
+body .bp-img{background:#030906}
+
+/* Home: the question is set in the stone itself, with one sweep of light when the page opens. */
+.home-center{position:relative;isolation:isolate}
+.home-center::before{content:'';position:absolute;z-index:-1;left:-14%;right:-14%;top:-22%;bottom:-30%;background:var(--stone) 50% 45%/cover;opacity:.12;pointer-events:none;-webkit-mask-image:radial-gradient(closest-side,#000 25%,transparent 100%);mask-image:radial-gradient(closest-side,#000 25%,transparent 100%)}
+.greet{font-size:40px;font-weight:700;letter-spacing:-.045em;line-height:1.08;background:linear-gradient(110deg,transparent 35%,rgba(240,255,247,.8) 47%,transparent 59%) 0 0/250% 100% no-repeat,linear-gradient(180deg,#c9ffe2 0%,#4fe394 30%,#148f4f 66%,#08502c 100%) 0 0/100% 1.08em,var(--stone) 50% 42%/460px auto;background-blend-mode:normal,screen,normal;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:gem-sheen 2.8s cubic-bezier(.3,.1,.2,1) .35s both}
+/* The glow sits behind the title instead of on it: WebKit draws a drop-shadow on clipped text from the whole box. */
+.home-center::after{content:'';position:absolute;z-index:-1;left:50%;top:-9%;width:76%;height:34%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(40,200,115,.15),transparent);pointer-events:none}
+@keyframes gem-sheen{from{background-position:120% 0,0 0,50% 42%}to{background-position:-40% 0,0 0,50% 42%}}
+.composer{border:1px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,linear-gradient(140deg,rgba(120,240,175,.5),rgba(20,110,62,.22) 36%,rgba(120,240,175,.14) 66%,rgba(61,220,138,.42)) border-box;box-shadow:inset 0 1px 0 rgba(190,255,220,.05),0 26px 70px -32px var(--glow)}
+.composer:focus-within{border-color:transparent;box-shadow:0 0 0 4px rgba(61,220,138,.1),0 28px 80px -28px rgba(40,200,115,.6)}
+.composer.listening{background:linear-gradient(var(--panel),var(--panel)) padding-box,linear-gradient(rgba(242,85,90,.55),rgba(242,85,90,.55)) border-box}
+.cmode.on{background:rgba(61,220,138,.12);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,220,138,.24)}
+.cmode.on svg.lu{color:var(--green)}
+.suggest button:hover{border-color:rgba(61,220,138,.32);background:rgba(61,220,138,.06)}
+.home:not(.chatting) .home-center>*{animation:gem-rise .7s cubic-bezier(.2,.75,.2,1) both}
+.home:not(.chatting) .home-center>:nth-child(2){animation-delay:.08s}
+.home:not(.chatting) .home-center>:nth-child(3){animation-delay:.16s}
+.home:not(.chatting) .home-center>:nth-child(4){animation-delay:.24s}
+.home:not(.chatting) .home-center>.greet{animation:gem-rise .7s cubic-bezier(.2,.75,.2,1) both,gem-sheen 2.8s cubic-bezier(.3,.1,.2,1) .35s both}
+@keyframes gem-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.greet,.home:not(.chatting) .home-center>*,.home:not(.chatting) .home-center>.greet{animation:none}}
