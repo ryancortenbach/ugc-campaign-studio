@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
-import {mkdtempSync,mkdirSync,writeFileSync,existsSync,rmSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,existsSync,rmSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
@@ -68,8 +68,8 @@ test('the final video uses the newest finished version of each shot that review 
   const out=await delivery.finish('pay_1');
   assert.deepEqual(f.stitched[0].clips,[path.join(f.renderDir,one.local_file),path.join(f.renderDir,approved.local_file)]);
   assert.deepEqual(f.stitched[0].captions,['I wear this every single day now','Link in bio']);
-  assert.equal(out.ready,true);assert.equal(out.final.stale,false);assert.match(out.final.url,/^\/renders\/finals\/pay_1\.mp4\?v=/);
-  assert.ok(existsSync(path.join(f.renderDir,'finals','pay_1.mp4')));
+  assert.equal(out.ready,true);assert.equal(out.final.stale,false);assert.match(out.final.url,/^\/renders\/finals\/pay_1-[a-f0-9-]+\.mp4\?v=/);
+  assert.ok(existsSync(path.join(f.renderDir,out.final.url.split('?')[0].slice('/renders/'.length))));
   assert.equal(two.id<approved.id,true);
   assert.ok(f.store.listEvents({taskId:f.task.id}).some(e=>/Final video made from 2 shots/.test(e.title)));
   // A newer finished take of shot 1 makes the saved video stale until it is remade.
@@ -184,4 +184,36 @@ test('real ffmpeg joins mismatched clips into one 720x1280 video',{skip:!ffmpeg&
   const [,h,m,s]=probe.match(/Duration: (\d+):(\d+):([\d.]+)/);
   assert.ok(Math.abs(Number(h)*3600+Number(m)*60+Number(s)-2)<0.3,`duration ${s}`);
  }finally{rmSync(dir,{recursive:true,force:true});}
+});
+
+
+test('changed source renders mark both final and existing delivery stale and block a new upload',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await d.deliver('pay_1');const before=sb.calls.length;f.shot(1,{review:'approved'});assert.equal(d.get('pay_1').final.stale,true);assert.equal(d.get('pay_1').delivery.stale,true);await assert.rejects(d.deliver('pay_1'),e=>e.status===409&&/stale/.test(e.message));assert.equal(sb.calls.length,before);assert.equal(gmail.drafts.length,1);}finally{f.done();}
+});
+
+test('a render change during upload blocks draft preparation',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let entered,release;const seen=new Promise(r=>entered=r),hold=new Promise(r=>release=r);
+ try{const fetch=async(url,opts)=>{const result=await sb.fetch(url,opts);if(url.includes('/object/deliveries/')){entered();await hold;}return result;};const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch,gmail});await d.finish('pay_1');const pending=d.deliver('pay_1');await seen;f.shot(1,{review:'approved'});release();await assert.rejects(pending,e=>e.status===409);assert.equal(gmail.drafts.length,0);assert.equal(d.get('pay_1').delivery,null);}finally{release?.();f.done();}
+});
+
+test('finishing blocks concurrent delivery and immutable final files preserve earlier bytes',async()=>{
+ const f=fixture(),sb=fakeSupabase();let entered,release,count=0;const seen=new Promise(r=>entered=r),hold=new Promise(r=>release=r);
+ try{const join=async args=>{if(++count===2){entered();await hold;}return f.fakeStitch(args);};const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:join,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail:fakeGmail()});const first=await d.finish('pay_1'),old=path.join(f.renderDir,first.final.url.split('?')[0].slice('/renders/'.length));const pending=d.finish('pay_1');await seen;try{await assert.rejects(d.deliver('pay_1'),e=>e.status===409&&/running/.test(e.message));}finally{release();await pending;}assert.equal(sb.calls.length,0);assert.notEqual(d.get('pay_1').final.url,first.final.url);assert.equal(readFileSync(old,'utf8'),'final 1');}finally{release?.();f.done();}
+});
+
+test('uncertain Gmail update does not fall back to creating a duplicate draft',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await d.deliver('pay_1');gmail.updateDraft=async()=>{throw Error('accepted update response was lost');};await assert.rejects(d.deliver('pay_1'),/response was lost/);assert.equal(gmail.drafts.length,1);assert.equal(d.get('pay_1').delivery.draftUrl.includes('draft1'),true);}finally{f.done();}
+});
+
+test('confirmed missing Gmail draft can be recreated',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await d.deliver('pay_1');gmail.updateDraft=async()=>{throw Object.assign(Error('not found'),{status:404});};await d.deliver('pay_1');assert.equal(gmail.drafts.length,2);}finally{f.done();}
+});
+
+
+test('a Gmail disconnect preserves known draft identity for reuse after reconnection',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();let connected=true;gmail.gmailEnabled=()=>connected;
+ try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});await d.finish('pay_1');await d.deliver('pay_1');connected=false;const offline=await d.deliver('pay_1');assert.equal(offline.delivery.draftUrl,null);assert.equal(f.store.db.prepare('select draft_id from deliveries where payment_id=?').get('pay_1').draft_id,'draft1');connected=true;await d.deliver('pay_1');assert.deepEqual(gmail.drafts.map(x=>x.action),['create','update']);assert.equal(gmail.drafts[1].draftId,'draft1');}finally{f.done();}
 });

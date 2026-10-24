@@ -2,6 +2,7 @@
 // shots into one captioned vertical video with ffmpeg, uploads it to the private "deliveries" bucket of the team's Supabase
 // project, and drafts the delivery email in Gmail with a signed download link. Nothing is sent: the operator reads the
 // draft and sends it. ffmpeg, Supabase Storage on the free plan and Gmail drafts cost nothing per order.
+import {randomUUID} from 'node:crypto';
 import {spawn,spawnSync} from 'node:child_process';
 import {existsSync,mkdirSync,statSync,readFileSync} from 'node:fs';
 import {mkdtemp,writeFile,copyFile,rm} from 'node:fs/promises';
@@ -139,22 +140,25 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
    shots:list.map(s=>({shotId:s.shotId,title:s.title,renderId:s.render?.id||null,status:s.render?'finished':s.latest?.status||'missing',review:s.render?.review||null})),
    ready:list.length>0&&list.every(s=>s.render),
    final,
-   delivery:d?.link?{link:d.link,expiresAt:d.link_expires_at,draftUrl:d.draft_url,email:d.email?JSON.parse(d.email):null,preparedAt:d.prepared_at,stale:!final||d.prepared_for!==d.final_version}:null,
+   delivery:d?.link?{link:d.link,expiresAt:d.link_expires_at,draftUrl:d.draft_url,email:d.email?JSON.parse(d.email):null,preparedAt:d.prepared_at,stale:!final||final.stale||d.prepared_for!==d.final_version}:null,
    setup:{ffmpeg:Boolean(ffmpeg()),storage:Boolean(supabaseUrl(env)&&supabaseKey(env)),gmail:Boolean(gmail.gmailEnabled?.())}
   };
  }
 
  const busy=new Map();
- const once=(key,fn)=>{if(busy.has(key))return busy.get(key);const p=fn().finally(()=>busy.delete(key));busy.set(key,p);return p;};
+ const once=(id,action,fn)=>{
+  const active=busy.get(id);if(active){if(active.action===action)return active.promise;return Promise.reject(fail(409,'Another delivery step is running for this order. Wait for it to finish.'));}
+  const entry={action,promise:null};entry.promise=Promise.resolve().then(fn).finally(()=>{if(busy.get(id)===entry)busy.delete(id);});busy.set(id,entry);return entry.promise;
+ };
 
- const finish=id=>once(`final:${id}`,async()=>{
+ const finish=id=>once(id,'final',async()=>{
   const o=need(id),list=shots(o);
   if(!list.length)throw fail(409,'This order has no shots yet. They appear once its storyboard is approved.');
   const missing=list.filter(s=>!s.render);
   if(missing.length)throw fail(409,`${missing.length} of ${list.length} shots are not finished: ${missing.map(s=>s.title).join(', ')}.`);
   const plan=o.storyboard_id?store.getStoryboard(o.storyboard_id)?.plan:null;
   const dialogue=new Map((plan?.shots||[]).map((s,i)=>[String(s.id||`shot-${i+1}`),String(s.dialogue||'')]));
-  const file=`finals/${o.payment_id.replace(/[^A-Za-z0-9_-]/g,'_')}.mp4`;
+  const file=`finals/${o.payment_id.replace(/[^A-Za-z0-9_-]/g,'_')}-${randomUUID()}.mp4`;
   const made=await join({clips:list.map(s=>localFile(s.render.local_file)),captions:list.map(s=>dialogue.get(String(s.shotId))||''),out:localFile(file),ffmpeg:ffmpeg(),font:font()});
   save(o.payment_id,{final_file:file,final_render_ids:JSON.stringify(list.map(s=>s.render.id)),final_at:iso(),final_bytes:statSync(localFile(file)).size,final_version:(row(o.payment_id)?.final_version||0)+1,captions:made?.captions?1:0});
   log(o,`Final video made from ${list.length} shots${made?.captions?' with captions':''}. Review it, then prepare the delivery email.`,'ffmpeg');
@@ -168,30 +172,38 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
   try{return text?JSON.parse(text):null;}catch{return null;}
  }
 
- const deliver=id=>once(`deliver:${id}`,async()=>{
+ const deliver=id=>once(id,'deliver',async()=>{
   const o=need(id),d=row(id);
   if(!d?.final_file||!existsSync(localFile(d.final_file)))throw fail(409,'Make the final video first.');
+  const requireCurrent=()=>{
+   const state=get(id),saved=row(id);
+   if(!state.final||state.final.stale||saved.final_version!==d.final_version||saved.final_file!==d.final_file)throw fail(409,'The final video changed or is stale. Remake and review it before preparing delivery.');
+  };
+  requireCurrent();
   if(!o.buyer_email)throw fail(409,'This order has no buyer email on Whop.');
   if(!supabaseUrl(env)||!supabaseKey(env))throw fail(503,'Add SUPABASE_URL and SUPABASE_SECRET_KEY to .env.local, then restart the app.');
   // The bucket stays private: buyers only get time-limited signed links.
   try{await storage('POST','/bucket',{body:JSON.stringify({id:BUCKET,name:BUCKET,public:false})});}
   catch(e){if(!/already exists|duplicate/i.test(e.text||''))throw e;}
+  requireCurrent();
   // A new name per upload, so a remade video never hides behind an older link.
   const name=`${o.payment_id.replace(/[^A-Za-z0-9_-]/g,'_')}/${String(o.brand_domain||'mint-labs').replace(/[^a-z0-9.-]/gi,'-')}-v${d.final_version}.mp4`;
   await storage('POST',`/object/${BUCKET}/${objectPath(name)}`,{body:readFileSync(localFile(d.final_file)),type:'video/mp4',upsert:true});
+  requireCurrent();
   const signed=await storage('POST',`/object/sign/${BUCKET}/${objectPath(name)}`,{body:JSON.stringify({expiresIn:LINK_DAYS*86400})});
   const href=signed?.signedURL||signed?.signedUrl;
   if(!href)throw fail(502,'Supabase did not return a download link.');
   const link=/^https?:/.test(href)?href:`${supabaseUrl(env)}/storage/v1${href.startsWith('/')?'':'/'}${href}`;
+  requireCurrent();
   const expiresAt=new Date(new Date(now()).getTime()+LINK_DAYS*86400000).toISOString();
   const email=deliveryEmail({buyerName:o.buyer_name,brand:o.brand_domain,link,expiresAt,sender:sender()});
   let draft=null;
   if(gmail.gmailEnabled?.()){
    // Rewrite this order's earlier draft when there is one. Never send.
-   if(d.draft_id)try{draft=await gmail.updateDraft({draftId:d.draft_id,to:o.buyer_email,subject:email.subject,body:email.body});}catch{draft=null;}
+   if(d.draft_id)try{draft=await gmail.updateDraft({draftId:d.draft_id,to:o.buyer_email,subject:email.subject,body:email.body});}catch(error){if(error.status!==404)throw error;draft=null;}
    draft??=await gmail.createDraft({to:o.buyer_email,subject:email.subject,body:email.body});
   }
-  save(o.payment_id,{storage_path:name,link,link_expires_at:expiresAt,draft_id:draft?.draftId||null,draft_url:draft?.url||null,email:JSON.stringify(email),prepared_at:iso(),prepared_for:d.final_version});
+  save(o.payment_id,{storage_path:name,link,link_expires_at:expiresAt,draft_id:draft?.draftId||d.draft_id||null,draft_url:draft?.url||null,email:JSON.stringify(email),prepared_at:iso(),prepared_for:d.final_version});
   log(o,draft?`Delivery email drafted in Gmail for ${o.buyer_email} with a ${LINK_DAYS}-day download link. Not sent.`:`Download link ready for ${o.buyer_email}. Gmail is not connected, so copy the email from the order page. Not sent.`,'supabase.storage');
   return get(id);
  });
