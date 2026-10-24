@@ -1,0 +1,18 @@
+TOOL LOGS UI RECEIPT v2
+
+What the feed does now (agent/public/app.js, scoped CSS in style.css)
+- A main event comes first (avatar, title, subtitle). Its tool calls sit under it as compact child lines joined by a 1px vertical line from the parent avatar, with a small node per line.
+- Grouping uses buildGroups() and pairTools() from live-feed-model.js: tool_call and tool_result events attach to the nearest following main event of the same task (and lead when both have one). Tool events with no main event form their own small group. Identical consecutive main events collapse into one row with "x2".
+- A call and its result are one child line. Child line = provider logo (15px), short tool name in the UI font, muted time on the right. No card, no Recorded or Result badge, no chevron. Clicking a child opens its details inline through toolLogDetails() from tool-logs.js.
+- Avatars are never generic glyphs. A lead event shows that brand's logo tile. Anything else shows the provider logo (Claude, Exa, Solari, Gmail, Higgsfield, ElevenLabs, Whop, Terac, Instagram). Chat replies use the Claude logo.
+- Chat replies on Home show their tool calls collapsed to "N steps" with stacked logos. It expands into the same traced lines.
+- Session logs on Tasks and the lead drawer no longer use monospace rows; they use the same trace groups (wrapper class .tgl).
+
+Where it is verified
+- Snapshots: ~/Library/Caches/Mint Labs/snapshots/home-rail.png and tasks.png.
+
+For Codex (files it owns)
+1. live-feed.css targets the same class names (.tg-kids, .tg-kid .nd, .kd-main, .kd-main time). style.css overrides them with a .tg wrapper for higher specificity. Easiest is to delete the overlapping rules from live-feed.css: .tg-kids border-left, .tg-kid .nd absolute node, .kd-main grid, .kd-main time mono, .kd-det background. Keep .conn-name rules.
+2. tool-logs.js / tool-logs.css are only used for toolLogDetails() now. toolLogRow() and the .ap-log row styles are unused by the feed.
+3. The server's mime table has no .svg entry, so SVG logos cannot be served. The four social marks ship inline in app.js instead. Adding '.svg':'image/svg+xml' to the mime map in server.mjs would let them move to /logos.
+4. toolLogDetails() output uses a mono <pre> for payloads; that is fine and kept.

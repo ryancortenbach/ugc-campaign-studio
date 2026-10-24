@@ -1,0 +1,10 @@
+TOOL LOGS UI RECEIPT v1
+
+Wiring in agent/public (Codex owns tool-logs.js and tool-logs.css):
+- index.html links tool-logs.css.
+- app.js loads tool-logs.js with a top-level dynamic import and a no-op fallback, so a checkout without the file still runs (tool rows then use the plain log row).
+- consoleRow() and liveItem() return toolLogRow() when isToolEvent(e) is true. Session logs use the combined events of the open session so a start row finds its result.
+- railTypes includes tool_result.
+- The rail click handler ignores clicks inside .ap-log, so the native <details> opens without the rail toggling.
+- On SSE, a tool_result replaces the matching start row and keeps it open if it was open.
+- The session log (Tasks) is closed by default. The icon button "Show log" opens it.

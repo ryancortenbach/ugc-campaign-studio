@@ -1,6 +1,7 @@
 import {Solari} from '@solarisdk/browser';
 import {writeFileSync,mkdirSync} from 'node:fs';
 import path from 'node:path';
+import {live} from '../browser-live.mjs';
 
 export const siteMode=()=>process.env.SOLARI_API_KEY?'solari':'fetch';
 const blocked=/(^|[._-])(no-?reply|donotreply|privacy|gdpr|legal|careers|jobs|returns|orders|billing|abuse|postmaster|webmaster|security|dpo)@|@(example\.|sentry|wixpress|.*\.png|.*\.jpg)|\.(png|jpe?g|gif|webp|svg)$/i;
@@ -38,12 +39,14 @@ export async function visitSite(url,{shotDir,leadId}={}){
  const pages=[];let screenshot=null;
  try{
   const page=await browser.newPage();
+  // Shows this visit in the Browser tab. A failure here only means no live view, never a failed visit.
+  await live.attach({id:browser.id,purpose:`Visiting ${domain}`,leadId:leadId||null,page,close:()=>browser.close()});
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000});
   const home=await readPage(page);pages.push({url:page.url(),...home});
   if(shotDir){mkdirSync(shotDir,{recursive:true});screenshot=`lead-${leadId||domain}.png`;writeFileSync(path.join(shotDir,screenshot),await page.screenshot({fullPage:false}));}
   const next=contactLink(home.links,url);
   if(next&&next!==page.url()){await page.goto(next,{waitUntil:'domcontentloaded',timeout:30000});pages.push({url:page.url(),...await readPage(page)});}
- }finally{await browser.close().catch(()=>{});await client.close?.().catch?.(()=>{});}
+ }finally{await live.unregister(browser.id).catch(()=>{});await browser.close().catch(()=>{});await client.close?.().catch?.(()=>{});}
  return summarize(pages,domain,{via:'solari.browser',sessionId:browser.id,screenshot});
 }
 

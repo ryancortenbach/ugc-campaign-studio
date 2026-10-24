@@ -15,8 +15,13 @@ const gmailTools=await import('./tools/gmail.mjs');
 const {buildInput,priceFrom,endpoints}=await import('./tools/higgsfield.mjs');
 const {searchBrands,pageImages}=await import('./tools/exa.mjs');
 const logo=await import('./logo.mjs');
-const {conceptInput}=await import('./ugc.mjs');
+const {conceptInput,PASS_SCORE}=await import('./ugc.mjs');
+const {PDFDocument,StandardFonts}=await import('pdf-lib');
 const renderDir=path.join(tmp,'renders');mkdirSync(renderDir,{recursive:true});
+// The real base offer PDF is gitignored, so every test here uses a small stand-in with the same two page layout.
+{const pdf=await PDFDocument.create(),font=await pdf.embedFont(StandardFonts.Helvetica);
+ const p1=pdf.addPage([612,792]);p1.drawText('Hey everyone,',{x:54,y:676,size:11,font});pdf.addPage([612,792]).drawText('We will create 10 ads',{x:54,y:700,size:20,font});
+ mkdirSync(path.join(tmp,'offer'),{recursive:true});writeFileSync(path.join(tmp,'offer','base-v3.pdf'),await pdf.save());}
 
 const page=domain=>({via:'fake',sessionId:null,screenshot:null,domain,socials:{instagram:`https://www.instagram.com/${domain.split('.')[0]}/`},pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals of linen shirts',contactText:'',emails:[{email:`hello@${domain}`,sourceUrl:`https://${domain}/c`,excerpt:'x'}],best:{email:`hello@${domain}`,sourceUrl:`https://${domain}/c`,excerpt:'x'}});
 const pass={passed:true,results:[{id:'a',name:'A',score:95,summary:'ok',issues:[],cost:0.001}],cost:0.003};
@@ -29,6 +34,7 @@ function videoStub({checks=[pass],enabled={ok:true}}={}){
   check:async()=>checks[Math.min(calls.check++,checks.length-1)],
   estimate:async()=>{calls.estimate++;return {pricing_description:'roughly $0.4622 per second of generated video at 720p'};}};
 }
+const offlineNet={fetchImpl:async()=>{throw Error('offline');},exaImages:async()=>null};
 function fakeTools(over={}){
  const calls={drafts:[]};
  return {calls,
@@ -47,15 +53,16 @@ function fakeTools(over={}){
 }
 async function serve(store,over={}){
  const created=[],updated=[];
- const gmailApi={...gmailTools,gmailEnabled:()=>true,MAX_ATTACH_BYTES:5000,
+ const sent=[];
+ const gmailApi={...gmailTools,gmailEnabled:()=>true,MAX_ATTACH_BYTES:5000,sendDraft:async id=>{sent.push(id);return {messageId:`sent-${id}`,threadId:'t1'};},
   createDraft:async d=>{created.push(d);return {draftId:`new${created.length}`,messageId:'mm',url:`https://mail.google.com/new${created.length}`};},
   updateDraft:async d=>{updated.push(d);return {draftId:d.draftId,messageId:'m2',url:'https://mail.google.com/updated'};},...over.gmailApi};
  const hf={...(await import('./tools/higgsfield.mjs')),higgsfieldEnabled:()=>true,approveAndSubmit:async()=>{throw Error('a lead video must never be submitted without a click');},...over.hf};
- const server=http.createServer(createApp({store,runner:{start(){},control(){},steer(){},isRunning:()=>false},gmailApi,higgsfield:hf,video:over.video,logoNet:over.logoNet}));
+ const server=http.createServer(createApp({store,runner:{start(){},control(){},steer(){},isRunning:()=>false},gmailApi,higgsfield:hf,video:over.video,logoNet:over.logoNet||offlineNet}));
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const base=`http://127.0.0.1:${server.address().port}`;
  const call=(method,p,b)=>fetch(base+p,{method,headers:{'Content-Type':'application/json'},body:method==='POST'?JSON.stringify(b||{}):undefined});
- return {created,updated,base,close:()=>new Promise(r=>server.close(r)),
+ return {created,updated,sent,base,close:()=>new Promise(r=>server.close(r)),
   post:(p,b)=>call('POST',p,b).then(async r=>({status:r.status,body:await r.json()})),
   get:p=>call('GET',p).then(async r=>({status:r.status,body:await r.json()})),raw:p=>call('GET',p)};
 }
@@ -86,18 +93,23 @@ test('the runner writes the email, makes a lead render, and parks it at checks_p
  assert.ok(store.listEvents({taskId:t.id}).some(e=>e.type==='draft'&&/held until its video is approved/.test(e.title)&&/Not sent/.test(e.title)));
 });
 
-test('a failing concept is revised up to twice with the checker notes, then left as checks_failed',async()=>{
- const store=openStore(':memory:');
- const video=videoStub({checks:[fail,fail,fail]});
+test('video concepts continue beyond five revisions and reach approval only after passing',async()=>{
+ const store=openStore(':memory:');const video=videoStub({checks:[...Array(8).fill(fail),pass]});
  const tools=fakeTools({video,plan:async()=>({data:{reply:'ok',markets:['x'],territories:['y'],maxDrafts:1,qualify:'q',exclusions:[],searchQueries:[{query:'q1',market:'x',territory:'y'}]},cost:0,model:'fake'})});
  const runner=createRunner(store,tools);await runner.wait(runner.start('go').id);
- assert.equal(video.calls.concept,1);assert.equal(video.calls.revise,2);assert.equal(video.calls.check,3);assert.equal(video.calls.estimate,0);
- const [l]=store.listLeads();const [r]=store.listRenders({leadId:l.id});
- assert.equal(r.status,'checks_failed');assert.equal(r.request_id,null);assert.equal(r.input.prompt,'Revised 2');
- assert.equal(l.status,'awaiting_video');
- const ok=videoStub({checks:[fail,pass]});const store2=openStore(':memory:');const r2=createRunner(store2,fakeTools({video:ok,plan:tools.plan}));
- await r2.wait(r2.start('go').id);
- assert.equal(ok.calls.revise>=1,true);assert.ok(store2.listRenders().every(r=>r.status==='checks_passed'));
+ assert.equal(video.calls.concept,1);assert.equal(video.calls.revise,8);assert.equal(video.calls.check,9);assert.equal(video.calls.estimate,1);
+ const [r]=store.listRenders();assert.equal(r.status,'checks_passed');assert.equal(r.request_id,null);assert.equal(r.input.prompt,'Revised 8');
+ assert.equal(r.approved_at,null);assert.ok(store.listEvents().some(e=>e.title.includes('revising (8)')));
+});
+
+test('a 89 on any one checker is not good enough: the render revises until every checker is at the pass score',async()=>{
+ const store=openStore(':memory:');
+ const at=score=>({passed:true,results:[{id:'a',name:'A',score:95,summary:'ok',issues:[],cost:0},{id:'b',name:'B',score,summary:'ok',issues:[],cost:0}],cost:0.002});
+ const video=videoStub({checks:[at(PASS_SCORE-1),at(PASS_SCORE-1),at(PASS_SCORE)]});
+ const tools=fakeTools({video,plan:async()=>({data:{reply:'ok',markets:['x'],territories:['y'],maxDrafts:1,qualify:'q',exclusions:[],searchQueries:[{query:'q1',market:'x',territory:'y'}]},cost:0,model:'fake'})});
+ const runner=createRunner(store,tools);await runner.wait(runner.start('go').id);
+ assert.equal(video.calls.revise,2);assert.equal(video.calls.check,3);
+ assert.ok(store.listRenders().every(r=>r.status==='checks_passed'));
 });
 
 test('without Higgsfield the lead stays awaiting_video with a clear event and no render',async()=>{
@@ -153,6 +165,49 @@ async function leadWithRender(store,{gmail=false}={}){
  return {lead,draft};
 }
 
+test('approving the video for an Instagram DM lead marks the DM ready and never touches Gmail',async()=>{
+ const store=openStore(':memory:');const s=await serve(store);
+ try{
+  const lead=store.createLead({taskId:null,domain:'beta.com',company:'Beta',url:'https://beta.com/',market:'m',territory:'t'});
+  store.updateLead(lead.id,{status:'awaiting_video',instagram_handle:'betawear',contact_kind:'instagram'});
+  const draft=store.addDraft({leadId:lead.id,taskId:null,to:'@betawear',subject:'Hi Beta',body:'Hey Beta',status:'waiting_video',channel:'instagram_dm'});
+  const r=store.createRender({title:'Beta video',endpoint:endpoints['text-to-video'],input:buildInput({prompt:'p long enough'}),leadId:lead.id});
+  finish(store,r,'MP4DATA');
+  const out=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
+  assert.equal(out.status,200);assert.equal(out.body.attach.status,'dm_ready');
+  assert.equal(s.created.length,0,'no Gmail draft is created for a DM');assert.equal(s.updated.length,0);
+  const d=store.getDraft(draft.id);
+  assert.equal(d.status,'dm_ready');assert.equal(d.render_id,r.id);assert.equal(d.gmail_draft_id,null);
+  assert.equal(store.getLead(lead.id).status,'drafted');
+  assert.ok(store.listEvents({leadId:lead.id}).some(e=>/Instagram DM ready for @betawear/.test(e.title)));
+  const again=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
+  assert.equal(again.body.attach.status,'already_attached');assert.equal(s.created.length,0);
+  assert.ok(d.body.includes(`https://cdn.example/render-${r.id}.mp4`),'a DM carries the clip link in its text');
+  assert.deepEqual(out.body.draft.readiness,{ready:false,missing:['instagram']},'a DM is ready only when Instagram is connected (not here), it has a handle and the clip link is in the text');
+ }finally{await s.close();}
+});
+
+test('approving a video skips the withdrawn email draft and marks the DM ready, with no Gmail call',async()=>{
+ const store=openStore(':memory:');const s=await serve(store);
+ try{
+  const lead=store.createLead({taskId:null,domain:'blan.com',company:'Blan',url:'https://blan.com/',market:'m',territory:'t'});
+  store.updateLead(lead.id,{status:'awaiting_video',instagram_handle:'blanwear',contact_kind:'instagram'});
+  store.addDraft({leadId:lead.id,taskId:null,to:'@blanwear',subject:'Hi Blan',body:'Hey Blan',status:'waiting_video',channel:'instagram_dm'});
+  const old=store.addDraft({leadId:lead.id,taskId:null,to:'info@blan.com',subject:'Old',body:'Old email',gmailDraftId:'gd1',gmailUrl:'https://mail.google.com/gd1',status:'withdrawn'});
+  const dm=store.listDrafts({leadId:lead.id}).find(d=>d.channel==='instagram_dm');
+  const newest=store.addDraft({leadId:lead.id,taskId:null,to:'info@blan.com',subject:'Older',body:'x',status:'withdrawn'});
+  assert.ok(newest.id>dm.id,'the withdrawn email draft is the newest row, so a plain first-unsent pick would choose it');
+  const r=store.createRender({title:'Blan video',endpoint:endpoints['text-to-video'],input:buildInput({prompt:'p long enough'}),leadId:lead.id});
+  finish(store,r,'MP4DATA');
+  const out=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
+  assert.equal(out.status,200);assert.equal(out.body.attach.status,'dm_ready');
+  assert.equal(s.created.length,0);assert.equal(s.updated.length,0);
+  assert.equal(store.getDraft(dm.id).status,'dm_ready');assert.equal(store.getDraft(dm.id).render_id,r.id);
+  assert.equal(store.getDraft(old.id).status,'withdrawn');assert.equal(store.getDraft(old.id).render_id,null);
+  assert.equal(store.getLead(lead.id).status,'drafted');
+ }finally{await s.close();}
+});
+
 test('approving the finished scene creates the Gmail draft with the mp4 attached and finishes the lead',async()=>{
  const store=openStore(':memory:');const s=await serve(store);
  try{
@@ -164,16 +219,44 @@ test('approving the finished scene creates the Gmail draft with the mp4 attached
   assert.equal(out.status,200);assert.equal(out.body.attach.status,'attached');
   assert.equal(s.created.length,1);assert.equal(s.updated.length,0);
   const sent=s.created[0];
-  assert.equal(sent.to,'hello@alpha.com');assert.equal(sent.subject,'Hi Alpha');assert.equal(sent.body,'Hello\n\nRyan');
-  assert.equal(sent.attachment.mime,'video/mp4');assert.equal(sent.attachment.data.toString(),'MP4DATA');
-  const mime=gmailTools.buildMime({from:'me@x.co',to:sent.to,subject:sent.subject,body:sent.body,attachment:sent.attachment});
-  assert.match(mime,/Content-Type: video\/mp4/);
+  assert.equal(sent.to,'hello@alpha.com');assert.equal(sent.subject,'Hi Alpha');
+  assert.equal(sent.body,`Hello\n\nRyan\n\nP.S. A 5 second video made for Alpha: https://cdn.example/render-${r.id}.mp4`,'the clip link is always in the body');
+  assert.deepEqual(sent.attachments.map(a=>a.mime),['application/pdf','video/mp4']);assert.equal(sent.attachments[1].data.toString(),'MP4DATA');
+  assert.equal(sent.attachments[0].data.subarray(0,5).toString(),'%PDF-');assert.equal(sent.attachments[0].filename,'alpha-offer.pdf');
+  const mime=gmailTools.buildMime({from:'me@x.co',to:sent.to,subject:sent.subject,body:sent.body,attachments:sent.attachments});
+  assert.match(mime,/Content-Type: application\/pdf; name="alpha-offer\.pdf"/);assert.match(mime,/Content-Type: video\/mp4/);
+  assert.deepEqual(store.getDraft(draft.id).attachments.map(a=>a.kind),['offer_pdf','video']);
   const d=store.getDraft(draft.id);
   assert.equal(d.status,'gmail_draft');assert.equal(d.gmail_draft_id,'new1');assert.equal(d.gmail_url,'https://mail.google.com/new1');assert.equal(d.render_id,r.id);
   assert.equal(store.getLead(lead.id).status,'drafted');
-  assert.ok(store.listEvents({leadId:lead.id}).some(e=>/with the video attached\. Not sent\./.test(e.title)));
+  assert.ok(store.listEvents({leadId:lead.id}).some(e=>/with the offer PDF and the video attached\. Not sent\./.test(e.title)));
   const again=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
   assert.equal(again.body.attach.status,'already_attached');assert.equal(s.created.length,1,'a second approval never makes a second draft');
+ }finally{await s.close();}
+});
+
+test('approving a video for a personal email lead leaves the draft ready to send, and the app still sends nothing',async()=>{
+ const store=openStore(':memory:');const s=await serve(store);
+ try{
+  const lead=store.createLead({taskId:null,domain:'alpha.com',company:'Alpha',url:'https://alpha.com/',market:'m',territory:'t'});
+  store.updateLead(lead.id,{status:'awaiting_video',contact_kind:'personal',contact_name:'Jane Doe'});
+  const draft=store.addDraft({leadId:lead.id,taskId:null,to:'jane@alpha.com',subject:'Hi Alpha',body:'Hello',status:'waiting_video'});
+  const r=store.createRender({title:'Alpha video',endpoint:endpoints['text-to-video'],input:buildInput({prompt:'p long enough'}),leadId:lead.id});
+  finish(store,r,'MP4DATA');
+  const out=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
+  assert.equal(out.body.attach.status,'attached');
+  assert.deepEqual(out.body.draft.readiness,{ready:true,missing:[]});
+  assert.deepEqual(out.body.draft.attachments.map(a=>a.kind),['offer_pdf','video']);
+  assert.match(s.created[0].body,/P\.S\. A 5 second video made for Alpha: https:\/\/cdn\.example\/render-\d+\.mp4$/);
+  assert.equal(s.sent.length,0,'approval never sends');
+  assert.equal(store.getDraft(draft.id).status,'gmail_draft');
+  // a newer render replaces the old P.S. line instead of stacking a second one
+  const r2=store.createRender({title:'Alpha video (v2)',endpoint:'x',input:buildInput({prompt:'p long enough'}),leadId:lead.id});
+  finish(store,r2,'MP4V2');
+  await s.post(`/api/renders/${r2.id}/review`,{decision:'approved'});
+  const body=store.getDraft(draft.id).body;
+  assert.equal(body.match(/P\.S\./g).length,1);assert.ok(body.includes(`render-${r2.id}.mp4`)&&!body.includes(`render-${r.id}.mp4`));
+  assert.equal(s.updated.length,1);assert.equal(s.sent.length,0);
  }finally{await s.close();}
 });
 
@@ -185,7 +268,7 @@ test('an oversized or missing file puts the video link in the body and says so',
   finish(store,r,Buffer.alloc(6000,1));
   const out=await s.post(`/api/renders/${r.id}/review`,{decision:'approved'});
   assert.equal(out.body.attach.status,'linked');
-  assert.equal(s.created[0].attachment,null);assert.match(s.created[0].body,/https:\/\/cdn\.example\/render-\d+\.mp4/);
+  assert.deepEqual(s.created[0].attachments.map(a=>a.mime),['application/pdf'],'only the PDF fits');assert.match(s.created[0].body,/https:\/\/cdn\.example\/render-\d+\.mp4/);
   assert.match(store.getDraft(draft.id).body,/cdn\.example/);
   assert.ok(store.listEvents({leadId:lead.id}).some(e=>/video link in the body/.test(e.title)&&/over the/.test(e.title)));
   const l2=store.createLead({taskId:null,domain:'beta.com',company:'Beta',url:'https://beta.com/',market:'m',territory:'t'});
@@ -193,7 +276,7 @@ test('an oversized or missing file puts the video link in the body and says so',
   const r2=store.createRender({title:'Beta video',endpoint:'x',input:buildInput({prompt:'p long enough'}),leadId:l2.id});
   store.updateRender(r2.id,{status:'completed',local_file:'nope.mp4',result_url:'https://cdn.example/beta.mp4',review:'pending'});
   assert.equal((await s.post(`/api/renders/${r2.id}/review`,{decision:'approved'})).body.attach.status,'linked');
-  assert.match(s.created[1].body,/beta\.mp4/);assert.ok(store.listEvents({leadId:l2.id}).some(e=>/file is missing/.test(e.title)));
+  assert.match(s.created[1].body,/beta\.mp4/);assert.deepEqual(s.created[1].attachments.map(a=>a.mime),['application/pdf']);assert.ok(store.listEvents({leadId:l2.id}).some(e=>/file is missing/.test(e.title)));
   const l3=store.createLead({taskId:null,domain:'c.com',company:'C',url:'https://c.com/',market:'m',territory:'t'});
   store.addDraft({leadId:l3.id,taskId:null,to:'a@c.com',subject:'Hi',body:'B',status:'waiting_video'});
   const r3=store.createRender({title:'C video',endpoint:'x',input:buildInput({prompt:'p long enough'}),leadId:l3.id});
@@ -235,7 +318,7 @@ test('POST /api/leads/:id/video for a drafted lead makes a held render, then app
   const ok=await s.post(`/api/renders/${made.body.render.id}/review`,{decision:'approved'});
   assert.equal(ok.body.attach.status,'attached');
   assert.equal(s.created.length,0,'the existing draft is updated, not duplicated');assert.equal(s.updated.length,1);
-  assert.equal(s.updated[0].draftId,'gd1');assert.equal(s.updated[0].attachment.data.toString(),'VIDEO');assert.equal(s.updated[0].subject,'Hi Alpha');
+  assert.equal(s.updated[0].draftId,'gd1');assert.equal(s.updated[0].attachments[1].data.toString(),'VIDEO');assert.equal(s.updated[0].subject,'Hi Alpha');
   const d=store.getDraft(draft.id);assert.equal(d.render_id,made.body.render.id);assert.equal(d.gmail_draft_id,'gd1');assert.equal(d.gmail_url,'https://mail.google.com/updated');assert.equal(d.status,'gmail_draft');
   assert.equal((await s.post(`/api/leads/${lead.id}/video`)).status,409,'already has a video');
   assert.equal((await s.post('/api/leads/9999/video')).status,404);
@@ -365,7 +448,38 @@ test('the concept input is a 5 second 720p text-to-video request with no referen
 
 test('no em dash character in the new outreach video code',()=>{
  const dash=String.fromCharCode(0x2014);
- for(const f of ['ugc.mjs','logo.mjs','outreach-video.test.mjs','runner.mjs','brain.mjs','server.mjs','store.mjs','tools/gmail.mjs','tools/exa.mjs','tools/higgsfield.mjs']){
+ for(const f of ['ugc.mjs','logo.mjs','outreach-video.test.mjs','outreach.mjs','outreach.test.mjs','tools/offerpdf.mjs','runner.mjs','brain.mjs','server.mjs','store.mjs','tools/gmail.mjs','tools/exa.mjs','tools/higgsfield.mjs']){
   assert.ok(!readFileSync(path.join(import.meta.dirname,f),'utf8').includes(dash),`${f} has an em dash`);
  }
+});
+
+test('approving a product clip submits the reference photo first, then the video from that photo once it finishes',{timeout:20000},async()=>{
+ const store=openStore(':memory:');const subs=[];
+ const hfOver={
+  approveAndSubmit:async(endpoint,input,key)=>{subs.push({endpoint,input,key});return {request_id:`req${subs.length}`,status:'queued'};},
+  status:async id=>id==='req1'?{status:'completed',images:[{url:'https://cdn.example/still.png'}]}:{status:'completed',video:{url:'https://cdn.example/clip.mp4'}},
+  download:async(url,dir,name)=>{writeFileSync(path.join(dir,name),'x');return path.join(dir,name);}
+ };
+ const s=await serve(store,{hf:hfOver});
+ try{
+  const lead=store.createLead({taskId:null,domain:'gamma.com',company:'Gamma',url:'https://gamma.com/',market:'m',territory:'t'});
+  const plan={type:'product_clip',step:'still',hero:{index:0,title:'Jeans',kind:'bottom',imageUrl:'https://cdn.example/jeans.jpg'},profile:{audience:[],style:[]},
+   still:{endpoint:endpoints['reference-still'],input:{prompt:'creator wearing the jeans',image_urls:['https://cdn.example/jeans.jpg']},estimate_usd:'0.07',status:'draft'},
+   video:{endpoint:endpoints['image-to-video'],input:{prompt:'she turns to the camera',duration:5,resolution:'720p'},estimate_usd:'2.31',status:'draft'}};
+  const r=store.createRender({title:'Gamma video',endpoint:plan.still.endpoint,input:plan.still.input,leadId:lead.id,plan});
+  store.updateRender(r.id,{status:'checks_passed',estimate_usd:'2.38'});
+  const out=await s.post(`/api/renders/${r.id}/approve`,{estimate:'2.38'});
+  assert.equal(out.status,200,JSON.stringify(out.body));
+  assert.equal(subs.length,1,'only the reference photo is submitted at the click');assert.equal(subs[0].endpoint,endpoints['reference-still']);
+  const spent=()=>store.db.prepare("select usd from spend where provider='higgsfield' order by id").all().map(x=>x.usd);
+  assert.deepEqual(spent(),[0.07]);
+  const deadline=Date.now()+15000;
+  while(store.getRender(r.id).status!=='completed'&&Date.now()<deadline)await new Promise(res=>setTimeout(res,200));
+  assert.equal(subs.length,2,'the video is submitted once the photo finishes');
+  assert.equal(subs[1].endpoint,endpoints['image-to-video']);assert.equal(subs[1].input.image_url,'https://cdn.example/still.png');
+  assert.notEqual(subs[0].key,subs[1].key,'each step has its own idempotency key');
+  assert.deepEqual(spent(),[0.07,2.31]);
+  const done=store.getRender(r.id);assert.equal(done.status,'completed');assert.equal(done.plan.step,'video');assert.equal(done.plan.still.result_url,'https://cdn.example/still.png');
+  const again=await s.post(`/api/renders/${r.id}/approve`,{estimate:'2.38'});assert.equal(again.status,409);assert.equal(subs.length,2);
+ }finally{await s.close();}
 });

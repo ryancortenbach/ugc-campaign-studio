@@ -1,0 +1,19 @@
+/* Task-owned storyboard workspaces, using the existing app tokens. */
+.task-board-stages{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.task-board-card{display:block;color:inherit;text-decoration:none}
+.task-board-card:hover{background:var(--panel2)}
+#task-board-lab{margin-bottom:24px}
+#task-board-activity{max-height:320px;overflow:auto}
+.task-ideas-heading{gap:14px;flex-wrap:wrap}
+.task-ideas-heading>div{margin-right:auto}
+.task-ideas-heading h2{margin-bottom:0}
+.task-ideas-report{display:block;width:100%;height:calc(100vh - 230px);min-height:440px;border:0;background:var(--panel);border-radius:10px}
+.task-ideas-report p{padding:24px;color:var(--muted)}
+.task-ideas-activity{margin-top:20px;color:var(--muted)}
+.task-ideas-activity>summary{cursor:pointer;font-size:12px}
+.task-ideas-activity #task-board-activity{padding-top:12px}
+.client-brand-form{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px;font-size:12px}
+.client-brand-form label{margin:0}
+.client-brand-form input{width:180px}
+.ord-open{color:inherit;text-decoration:none}
+.ord-open:hover b{color:var(--green)}

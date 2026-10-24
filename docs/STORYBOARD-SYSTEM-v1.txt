@@ -1,0 +1,40 @@
+MINT LABS: APPAREL STORYBOARD SYSTEM v1
+October 24, 2026. Planning phase. No paid calls authorized or executed by this feature.
+
+Objective
+Plan one reusable original PS2 apparel film for outreach to small e-commerce brands. The character and performance stay fixed. Each brand supplies the exact replacement garment and storefront URL. A different brand variant is not a newly invented creative concept.
+
+Current implementation
+agent/public/apparel-planner.js composes three proposals from six original research-grounded situations, chooses distinct camera positions, locks identity and environment, and checks timing and garment-neutral dialogue. This is an offline, rule-based composer, not a live model call or an independent model review. Tone, apparel category and variation set change the suggestions. The exported agent prompt describes how a later model-assisted planner should invent and critique additional situations.
+
+Each proposal contains an 18-second structure, three six-second source shots, exact draft VO, camera, action, audio, garment visibility, swap review notes, source-rule IDs, base-film prompt and Genjutsu Lite garment-swap prompt. Draft fields and previous versions are retained in the app's local browser storage. This is not cross-device synchronization.
+
+References and stills
+The app has separate character, apparel, setting and pose/angle roles. Existing character presets are the reviewed current hero and an older courier study. The earlier hero study was excluded because its subject was not visibly usable. Add front and side product images to the apparel slot. Images save through the existing local upload API. Reference removal changes the storyboard manifest, not the underlying file. All roles remain explicit in each prepared ImageGen request.
+
+OpenAI ImageGen
+Prepare ImageGen shot stages one reference-guided gpt-image-2 still request (1008x1792, medium quality, one output). The operator can inspect and copy it. No OpenAI image API is called and no account connection is claimed. quoteUsd stays null, spendApproved false, submitted false. A later integration must resolve local image references into provider-supported image inputs and present its current cost before making any paid call. Add finished still attaches an existing image to a shot without generating anything.
+
+Research
+PS2 VIRAL SOP, pages 4-7 and 11-12: reference roles, character continuity, real camera positions, restrained game-camera motion and a clean final payoff.
+PS2 Character Videos report, pages 1, 3 and 5: reusable character-led apparel structure and the distinction between prior observations and unverified outcomes. Historical prices or audience metrics from that report are not treated as current.
+The Mac mini archive research-packet-v1.md was retrieved over authenticated SSH on October 24, 2026 from /Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1. Its visual-grammar, environment and shot-architecture sections informed the planner. No relevant additional PDF was found in the targeted mini reports/archive work directories.
+
+Review order
+1. Pick the character and apparel silhouette.
+2. Suggest three directions locally and inspect all shots.
+3. Edit the draft lines, camera, actions and references. Save a version.
+4. Prepare one ImageGen shot request with explicit reference roles.
+5. Show Ryan the storyboard and current image-generation cost. Do not generate before the review.
+6. After approved stills and a base film exist, quote each separate Genjutsu Lite swap segment. No automatic rerolls.
+7. Review actual output for identity, framing, logos/letters, fit, hands, edges, audio and temporal consistency. A planning pass is not a rendered-product pass.
+8. Only attach accepted brand samples to outreach drafts. Do not send.
+
+Cost basis
+Reference rate checked October 24: Genjutsu Lite Object Swap 720p is $0.10 per total billable second, counting input plus output. A six-second source and six-second result are $1.20 per attempt. Three such shots are $3.60 per brand, $36 for ten brands at one attempt each. Three attempts per shot would be $108 for ten brands. Retry count is a scenario, not a required action. Base film creation, ImageGen, voice, editing and labor are separate. A current account quote is required before spending.
+
+UI ownership
+Claude owns shell, routing, app.js, index.html, style.css and server/store. Codex owns the new apparel files and tests. Integration is requested through the existing local Claude task list, with the received UI contract in docs/MINT-LABS-UI-CONTRACT-v1.txt. Styling uses the same surfaces, type, spacing and status conventions. No paid UI review or other provider test is part of this delivery.
+
+VISUAL REVISION
+The lab uses a three-frame filmstrip, compact direction and shot chips, and four reference-image slots. Existing pilot frames are clearly marked Source frame. They are visual references, not new renders of the proposed scenes or camera angles. Full prompts, editing fields and research are collapsed by default. Imported stills replace source placeholders per shot. No paid call was made.

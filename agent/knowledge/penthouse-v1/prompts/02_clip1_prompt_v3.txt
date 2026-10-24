@@ -1,0 +1,40 @@
+SEEDANCE 2.5: PS2 MULTI-ANGLE VIDEO PROMPT (CLIP 1: CANARY WHARF PENTHOUSE)
+(This is the exact text in Higgsfield. The @character, @hoodie and @Audio 1 tags are real Element tags there: type @ and pick them from the menu, do not paste them as plain text.)
+
+REFERENCE ROLES
+@character = MAIN CHARACTER REFERENCE. Use it as the authoritative reference for his face, hairstyle, skin tone, body proportions and identity.
+@hoodie = CLOTHING REFERENCE: his blue zip hoodie with the white print "i wonder what i look like in your eyes". Use it as the authoritative reference for the garment, colour, print, construction and materials. Recreate it as a PS2-era 3D garment, not a pasted photo.
+@Audio 1 = VOICE REFERENCE: authoritative for his voice identity, accent, pitch, cadence, rhythm, pronunciation and delivery style. Match it closely.
+
+OVERALL VISUAL STYLE
+The entire video must look like authentic early-2000s PlayStation 2 3D game footage, a scripted cutscene from a polished high-quality PS2 title. Polished PS2, not ugly PS2. Low-to-medium polygon geometry, simplified character model and facial geometry, slightly low-resolution textures with visible texture compression, PS2-era texture filtering, simple material response, PS2-era lighting, believable simple shadows, subtle aliasing, mild texture shimmering, early-generation facial animation. Everything visible belongs to the same PS2 game world: the character, his clothes, the furniture, the apartment, the skyline and the lighting.
+
+LOCATION
+A high-rise penthouse apartment in Canary Wharf, London, at dusk. Floor-to-ceiling windows behind him show the Canary Wharf towers, the Thames and city lights coming on under a purple-orange evening sky, all rendered as a PS2 game environment. Inside: a large tan leather wingback armchair with a matching leather footstool in front of it, a low glass-and-marble coffee table beside it, a floor lamp, warm interior lamp light mixed with cool window light. Once established, lock the location, furniture, lighting, time of day and skyline for the whole clip.
+
+CHARACTER AND PERFORMANCE
+The main character from @character, wearing the hoodie from @hoodie, sits kicked back in the armchair: his right foot is up on the leather footstool and his left foot is planted flat on the floor, knees apart, completely relaxed. He keeps this exact pose in every shot. He is mischievous, confident, smug, relaxed and completely comfortable, as if he genuinely believes he is the coolest person in the room. He delivers every line with total seriousness. Subtle performance only: slow head turns, a raised eyebrow, a knowing smirk, a relaxed lean back, restrained hand gestures, direct eye contact on the key lines, small natural pauses. No exaggerated comedy.
+
+DIALOGUE (use exactly, do not change a word)
+"You ever heard the saying, winners focus on winning while losers focus on winners? That's practically the story of my life. All these losers just can't take their eyes off me." Accurate lip-sync throughout.
+
+SHOT-BY-SHOT TIMELINE (about 10 seconds, hard cuts between distinct camera positions)
+SHOT 1 (0 to 2 s), ESTABLISH: the camera starts on the floor-to-ceiling windows and the Canary Wharf towers at dusk, then slowly pans left across the penthouse and settles on him in the armchair. He is looking out the window, then turns his head to camera as the pan lands: "You ever heard the saying,"
+SHOT 2 (2 to 5 s): HARD CUT to a three-quarter medium shot, the camera slowly tracking sideways along the window so the skyline slides past behind him. He leans back and makes a small hand gesture off the armrest: "winners focus on winning while losers focus on winners?"
+SHOT 3 (5 to 7 s): HARD CUT to a low angle from beside the footstool, his raised sneaker big in the foreground and his other foot planted on the floor, the camera slowly rising. He puts his hands behind his head, satisfied: "That's practically the story of my life."
+SHOT 4 (7 to 10 s), PUNCHLINE: HARD CUT to a medium close-up, the camera slowly pushing in toward his face. Direct eye contact, slow smirk, eyebrow raise on the last word: "All these losers just can't take their eyes off me." End immediately after "me."
+
+CAMERA
+Scripted PS2 cutscene camera: distinct camera positions joined by clean hard cuts, with slow, steady in-engine moves inside the shots (the opening pan across the room, the sideways track along the window, the rising low angle, the slow push-in) that reveal more of the penthouse, like a PS2 cutscene camera on a rail. Movement is smooth and mechanical, never handheld. No digital zooms, no crop reframes, no camera shake, no fast whip pans, no dramatic orbiting, no lens flares, no heavy depth of field, no cinematic film effects. The character, his pose and the furniture stay in the same place across every cut.
+
+AUDIO
+Only his voice, matching the voice reference, plus quiet penthouse room tone. No music, no narrator, no background conversations, no random voices, no extra sound effects.
+
+CONTINUITY
+Same character, face, hairstyle, skin tone, body, hoodie and sneakers in every shot, and the same pose in every shot: right foot up on the leather footstool, left foot flat on the floor. No face drift, no outfit changes, no texture changes, no regeneration into a different model.
+
+ABSOLUTE CONSTRAINTS
+NO photorealism. NO live-action appearance. NO modern AAA graphics. NO Unreal Engine 5-style realism. NO Pixar-style rendering. NO anime. NO glossy modern CGI. NO photographic objects inserted into the PS2 world. NO fake camera changes through digital zoom. NO single static camera. MUST USE DISTINCT CAMERA ANGLES WITH CLEAR CUTS. NO character identity drift. NO outfit changes. NO environment or lighting changes. NO extra characters. NO extra dialogue. NO narrator. NO subtitles. NO captions. NO HUD. NO title cards. NO watermarks.
+
+GOLDEN RULE
+The character, hoodie, penthouse, furniture, skyline, lighting, camera, animation and audio must all feel like they came from ONE authentic PS2 game made by the same team with early-2000s technology. The viewer should think "What PS2 game is this?"

@@ -1,0 +1,16 @@
+.pc{display:grid;gap:8px;font-size:12.5px}
+.pc .pc-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pc .pc-logo{width:14px;height:14px;border-radius:3px;object-fit:contain}
+.pc .pc-step{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line2);border-radius:6px;overflow:hidden}
+.pc .pc-step button{height:26px;width:26px;border:0;background:transparent;color:inherit;cursor:pointer;font-size:14px}
+.pc .pc-step button:hover:not(:disabled){background:var(--panel2)}
+.pc .pc-step button:disabled{opacity:.35;cursor:not-allowed}
+.pc .pc-step b{min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.pc .pc-chips{display:flex;gap:6px;flex-wrap:wrap}
+.pc .pc-chip{border:1px solid var(--line2);border-radius:999px;padding:2px 9px;font-size:11px;color:var(--muted)}
+.pc .pc-price{color:var(--muted)}
+.pc .pc-price b{color:var(--text)}
+.pc .pc-confirm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 8px;border:1px solid rgba(245,184,61,.35);border-radius:6px}
+.pc .pc-live{display:flex;align-items:center;gap:10px}
+.pc .pc-err{color:var(--red)}
+.pc a{color:var(--muted)}

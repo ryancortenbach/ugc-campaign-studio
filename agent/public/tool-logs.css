@@ -1,0 +1,26 @@
+/* Compact tool traces, isolated from shared Mint Labs styles. */
+.ap-log{margin:4px 0;border-radius:7px;background:var(--panel2);min-width:0;font-size:11px}
+.ap-log>summary{display:flex;align-items:center;gap:8px;list-style:none;cursor:pointer;padding:9px 10px;min-width:0}
+.ap-log>summary::-webkit-details-marker{display:none}
+.ap-log>summary:focus-visible{outline:1px solid var(--line2);outline-offset:-1px;border-radius:7px}
+.ap-log-icon{width:20px;height:20px;display:grid;place-items:center;flex:none;border-radius:5px;background:var(--bg);color:var(--muted)}
+.ap-log-icon img,.ap-log-icon svg{width:14px;height:14px;object-fit:contain}
+.ap-log-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--sans);color:var(--text);font-size:10.5px;font-weight:400}
+.ap-log-status{font-size:9px;line-height:1.2;padding:3px 5px;border-radius:4px;background:var(--raise);color:var(--muted);flex:none;font-weight:400}
+.ap-log-ok{color:var(--green);background:var(--green-bg)}
+.ap-log-bad{color:var(--red);background:var(--red-bg)}
+.ap-log-run{color:var(--orange);background:var(--orange-bg)}
+.ap-log-metric,.ap-log-time{font-family:var(--mono);font-size:9px;color:var(--faint);white-space:nowrap}
+.ap-log-time{margin-left:auto}
+.ap-log-chevron{font-size:16px;line-height:1;color:var(--faint);transition:transform .15s}
+.ap-log[open]>summary>.ap-log-chevron{transform:rotate(90deg)}
+.ap-log-detail{padding:0 10px 10px 38px;min-width:0}
+.ap-log-detail>p{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 8px;overflow-wrap:anywhere}
+.ap-log-payload{margin-top:5px}
+.ap-log-payload>summary{font-size:10px;color:var(--muted);cursor:pointer}
+.ap-log-payload>pre{margin:6px 0 0;padding:8px;border-radius:5px;background:var(--bg);font-family:var(--mono);font-size:10px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;max-height:240px;overflow:auto;color:var(--muted)}
+.ap-log-muted{font-size:10px;color:var(--faint)}
+
+.ap-log-status{width:5px;height:5px;min-width:5px;padding:0;border-radius:50%;background:var(--faint)}
+.ap-log-status.ap-log-bad{background:var(--red)}
+.ap-log-status.ap-log-run{background:var(--orange)}

@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "preparedAt": "2026-10-24",
+  "sources": [
+    {
+      "id": "ps2-sop",
+      "title": "PS2 Video Master SOP",
+      "localPath": "/Users/ryancortenbach/Downloads/PS2 VIRAL SOP.pdf",
+      "pages": [
+        4,
+        5,
+        6,
+        7,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "character-report",
+      "title": "PS2 Character Videos research report",
+      "localPath": "/Users/ryancortenbach/Downloads/PS2 Character Project/report/PS2_Character_Report_v1.pdf",
+      "pages": [
+        1,
+        3,
+        5
+      ]
+    },
+    {
+      "id": "audience-packet",
+      "title": "Mint Labs audience and shot research packet",
+      "localPath": "/Users/ryancortenbach/Development/ugc-campaign-studio/public/research/research-packet.md",
+      "pages": []
+    },
+    {
+      "id": "mini-archive",
+      "title": "Mac mini audience and production research archive",
+      "localPath": "/Users/ryancortenbach/Outreach/2026-10-24-storyboard-system-v1/mini-research-packet-v1.md",
+      "remotePath": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/research-packet-v1.md",
+      "retrievedAt": "2026-10-24",
+      "sha256": "ad0df35cb12ddbafd59a9010456e6d9d7b771a7ec208f319c538579a3eaf2201",
+      "sections": [
+        "The visual grammar to carry forward",
+        "Eight reusable environments",
+        "Shot and prompt architecture"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "real-angles",
+      "source": "ps2-sop",
+      "pages": [
+        5,
+        6,
+        7
+      ],
+      "lesson": "Establish the premise, cut to a physically different camera position, then finish tighter. A crop or digital zoom is not a new angle.",
+      "adaptation": "Use three distinct front-facing or three-quarter camera positions, keeping the chest readable."
+    },
+    {
+      "id": "reference-roles",
+      "source": "ps2-sop",
+      "pages": [
+        4,
+        5
+      ],
+      "lesson": "Bind character identity, garment construction and props to distinct reference roles. Keep identity and world consistent.",
+      "adaptation": "Character and environment are locked. Only the selected upper-body garment is a brand variable."
+    },
+    {
+      "id": "punchline",
+      "source": "ps2-sop",
+      "pages": [
+        11,
+        12
+      ],
+      "lesson": "Build toward a tighter character-focused punchline and stop after it.",
+      "adaptation": "End on one short category-neutral line. Add brand URL in postproduction without a new spoken read."
+    },
+    {
+      "id": "product-story",
+      "source": "character-report",
+      "pages": [
+        1,
+        3,
+        5
+      ],
+      "lesson": "A recurring game-world character and one comic observation can lead naturally into a worn apparel product.",
+      "adaptation": "Use original lines and an original recurring character. Avoid named creator slogans, performance promises and product-specific speech."
+    },
+    {
+      "id": "recognition",
+      "source": "audience-packet",
+      "sections": [
+        "Games as ordinary social life",
+        "Nostalgia and precise remembered behavior",
+        "Shot and prompt architecture"
+      ],
+      "lesson": "Specific game/social rituals and a simple visible action carry recognition. Keep product actions physically simple.",
+      "adaptation": "Turn a quick errand, default-skin joke or wardrobe menu into an original short setup and payoff."
+    },
+    {
+      "id": "mini-archive",
+      "source": "mini-archive",
+      "lesson": "A specific observation, one escalation and one payoff work inside a consistent original world. Keep the first shot legible and hand actions simple.",
+      "adaptation": "Compose a stable front-facing apparel scene with three real camera angles. Keep the garment readable and bind the same product across shots.",
+      "sections": [
+        "The visual grammar to carry forward",
+        "Shot and prompt architecture"
+      ]
+    }
+  ],
+  "pilot": {
+    "status": "Completed six-second lettering-removal test. Exact branded-product replacement remains untested.",
+    "path": "/Users/ryancortenbach/Downloads/Mint_Labs_Generic_Pilot_v1/Mint_Labs_Generic_Preview_6s_v1.mp4"
+  },
+  "model": {
+    "name": "Genjutsu Lite Object Swap",
+    "endpoint": "higgsfield/genjutsu-light/object-swap/v1.0",
+    "apiMaxSourceSeconds": 15,
+    "resolution": "720p",
+    "usdPerInputPlusOutputSecond": 0.1,
+    "source": "https://open.higgsfield.ai/models/higgsfield/genjutsu-light/object-swap/v1.0/playground",
+    "checkedAt": "2026-10-24",
+    "quoteRequiredBeforeSpend": true
+  },
+  "characters": [
+    {
+      "id": "current-hero",
+      "name": "Current PS2 hero",
+      "url": "/storyboard-assets/current-hero-v1.png",
+      "status": "From the reviewed generic pilot",
+      "identity": "Ryan\u2019s existing original PS2 hero: adult man, blond braids, warm brown skin, broad build and alert eyes. Keep this face, hair and body; wardrobe and setting come from their own slots."
+    },
+    {
+      "id": "courier-study",
+      "name": "Courier study",
+      "url": "/storyboard-assets/courier-study-v1.jpg",
+      "status": "Existing character study, select for review",
+      "identity": "Use the selected original courier character for identity only. Keep the face, hairstyle and silhouette consistent; wardrobe and setting come from their own reference roles."
+    }
+  ],
+  "imagegen": {
+    "provider": "OpenAI ImageGen",
+    "model": "gpt-image-2",
+    "state": "planning_only",
+    "source": "https://developers.openai.com/api/reference/resources/images/methods/edit",
+    "maxReferences": 16,
+    "paidRequestSubmitted": false,
+    "quoteUsd": null
+  },
+  "sourceVisuals": [
+    {
+      "url": "/storyboard-assets/pilot-wide-v1.png",
+      "label": "Existing pilot: wide"
+    },
+    {
+      "url": "/storyboard-assets/pilot-medium-v1.png",
+      "label": "Existing pilot: medium"
+    },
+    {
+      "url": "/storyboard-assets/pilot-close-v1.png",
+      "label": "Existing pilot: close"
+    }
+  ]
+}

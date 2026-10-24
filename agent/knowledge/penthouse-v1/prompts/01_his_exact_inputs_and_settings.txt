@@ -1,0 +1,49 @@
+CYBORG PS2 TUTORIAL: EXACTLY WHAT HE TYPED AND CLICKED
+Source: youtube.com/watch?v=xI51f2FFbpk, read off 1080p frames. SOP = ~/Downloads/PS2 VIRAL SOP.pdf (same text as the live Google Doc, checked word for word).
+
+His Seedance prompts were written by ChatGPT after he pasted the SOP in. He never shows any of them in full on screen, only fragments while scrolling. What IS fully visible is what he typed into ChatGPT and Higgsfield, below.
+
+
+STEP 1. CHARACTER IMAGE (0:59 to 1:20)
+Tool: Higgsfield > Image
+Model: Nano Banana Pro | 9:16 | 1K | 1 image | Unlimited off | cost 2 credits
+References attached: (1) Dante from Tekken 7 / Devil May Cry (Google Images), (2) the jacket product photo
+Prompt, verbatim:
+make a character similar to this style, ps2 graphics, but he is wearing the jacket in the second attached image instead, he has blonde dreads plaited backwards and a fade, he has grey tracksuit bottoms, with white airforce ones, he is at an outdoor cafe in London, sitting down
+
+
+STEP 2. CHATGPT SETUP (2:02 to 2:13)
+Paste the whole SOP into ChatGPT. Then: "ok now the video for this one will be"
+ChatGPT: "Tell me exactly what happens in the video, and I'll turn the idea into the same full PS2 Seedance 2.5 prompt format."
+
+
+STEP 3. CLIP 1 IDEA (2:13 to 2:27), verbatim:
+make a video for this guy to be in Canary Wharf penthouse and he is kicked back, sitting in an arm chair, and says the words 'have u ever heard the saying winners focus on winning while losers focus on winners, well thats the story of my life'
+
+What the finished clip actually says (3:45): "You ever heard the saying, winners focus on winning while losers focus on winners? That's practically the story of my life. All these losers just can't take their eyes off me."
+Visible start of the ChatGPT output: "# SEEDANCE 2.5 - PS2 MULTI-ANGLE VIDEO PROMPT / ## REFERENCE ROLES / **@Image1 = MAIN CHARACTER REFERENCE** / Use @Image1 as the authoritative visual reference for the main male character." Later section: "# OVERALL VISUAL STYLE / The entire video must look like authentic **early-2000s PlayStation 2 3D game footage**."
+
+
+STEP 4. CLIP 2 IDEA (4:37 to 4:50)
+First sentence is scrolled off screen. From his narration it starts roughly: "make a PS2 video, continue directly from the supplied video, the guy is at the table talking about beating his boy on FC26." (NOT verified word for word.)
+Visible rest, verbatim:
+While he's talking, a girl walks into the apartment carrying a Wingstop bag and places it on the table beside him. She stays completely silent. Keep everything authentically PS2, including the girl and Wingstop bag. Use multiple distinct PS2 camera angles and clear cuts. The guy says: "It's like when your boy is too focused on trying to NOT lose against you on FC26, but you're just kicked back beating him with your eyes closed hehe. And I don't focus on who's watching me, I focus on WHY they're watching." End immediately after "watching."
+ChatGPT output title: "SEEDANCE 2.5 - PS2 EXTEND PROMPT: FC26 + WINGSTOP", opening "CONTINUATION REFERENCE. The supplied video is the authoritative continuity reference. Continue the video directly from the exact final frame of the supplied video. Do NOT restart, recreate, reset, re-stage or reinterpret the scene." Ending: "GOLDEN RULE: THE BAG, CHARACTERS, ENVIRONMENT, CAMERA, LIGHTING AND EVERY OTHER ELEMENT MUST LOOK LIKE THEY ALL CAME FROM THE SAME AUTHENTIC PS2 GAME. End immediately after the male character finishes: "WHY they're watching.""
+Extra reference: he Googled a Wingstop bag photo and uploaded it.
+
+
+STEP 5. CLIP 3 (6:27 to 6:43)
+Same extend prompt again with only the dialogue swapped. Spoken: "And clearly they're watching me because of my jacket. You could be a winner too." followed by a short shop call to action ending "link in bio".
+
+
+HIGGSFIELD VIDEO SETTINGS (all three clips, 3:08 to 3:46 and 6:01 to 6:08)
+Create Video > preset GENERAL
+References tab: Image 1 = character, Image 2 = jacket, plus the voice reference audio (his was 0:09 long)
+Clips 2 and 3: Extend Video tab with the previous clip inserted, plus the prop image (Wingstop bag)
+Audio: On | Elements: on
+Model: Seedance 2.5
+Duration: 10s | Aspect: 9:16 | Resolution: 720p | Bitrate: High
+Unlimited mode: he had Seedance Unlimited (30 days), which is why he made 10s clips and extended
+Cost shown: 65 credits per 10s clip (70 crossed out)
+
+Final edit: three clips joined, a nostalgic PS2-style TikTok track added underneath.

@@ -1,6 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
+import {randomUUID} from 'node:crypto';
+import {safeLogValue} from './public/tool-logs.js';
 import {z} from 'zod';
 import {currentMainModel,costOf,llmEnabled,mainModels} from './tools/llm.mjs';
+import {createProductionResearch,productionToolDefinitions} from './production-research.mjs';
 
 const TURNS=40,MAX_STEPS=8,MAX_RESULT=12000;
 const fail=(message,status=400)=>Object.assign(Error(message),{status});
@@ -12,6 +15,7 @@ const SYSTEM=`You are Mint, the assistant inside Ryan's Mint Labs app. The app r
 Ryan talks to you to see what the agent is doing and to steer it. Use the read tools before you answer questions about the app; never guess at state, and say so when you do not know.
 You can start a mission (it costs a few cents of search and model spend), steer a running mission, and pause, resume or stop one. Say what you are about to do and why before you act, then report what happened.
 You cannot approve render spend, submit renders, send email, mark email as sent, or delete anything, and you have no tools for them. If Ryan asks for one of those, tell him where to click: approve a render on the Reviews page after its checks pass, send a draft from Gmail or press Mark sent on the lead, delete from the page that holds the item.
+For brand audience research, ICPs, creator research, original characters, scenes, or recreating the London penthouse ad, use the production workflow tools. These tools have a fixed zero-dollar provider budget. Read workflow_knowledge first for production questions. Use research_plan then research_search_free and cited observations. Search excerpts alone do not prove demographics, account ownership or video views. Keep unsupported reference/Extend Video steps and unverified visual parity explicit. provider_prepare only prepares requests and never executes them. The regular chat model itself costs money, so direct the operator to the Production page for a fully model-free rehearsal.
 Style: brief and plain-spoken. No em dashes, no emojis, exclamation marks only rarely, and never the word "really". Short paragraphs, dollars with two or three decimals.`;
 
 const idArg=z.number().int().positive();
@@ -39,10 +43,11 @@ const defs=[
  {name:'control_mission',description:'Pause, resume or stop a running mission.',input:z.object({id:idArg,action:z.enum(['pause','resume','stop'])}),
   run:({store,runner},{id,action})=>{if(!store.getTask(id))throw fail(`No mission ${id}`,404);const ok=runner.control(id,action);return ok?{done:true,action}:{done:false,reason:'The mission is not running.'};},summary:r=>r.done?r.action:r.reason}
 ];
+for(const tool of productionToolDefinitions)defs.push({name:tool.name,description:tool.description,input:z.unknown(),schema:tool.input_schema,run:({production},args)=>production.call(tool.name,args),summary:r=>`${tool.name}: ${r.mode||r.status||'read'}, $0 provider spend`});
 const jsonSchema=s=>{const {$schema,...rest}=z.toJSONSchema(s);return rest;};
-export const assistantTools=defs.map(d=>({name:d.name,description:d.description,input_schema:jsonSchema(d.input)}));
+export const assistantTools=defs.map(d=>({name:d.name,description:d.description,input_schema:d.schema||jsonSchema(d.input)}));
 
-export function createAssistant({store,runner,client}){
+export function createAssistant({store,runner,client,production=createProductionResearch({store})}){
  store.db.exec('create table if not exists assistant_messages(id integer primary key,at text not null,role text not null,content text not null)');
  let busy=false;
  const row=r=>{let c;try{c=JSON.parse(r.content);}catch{c={text:String(r.content)};}return {id:r.id,at:r.at,role:r.role,text:c.text||'',actions:c.actions||[]};};
@@ -76,11 +81,16 @@ export function createAssistant({store,runner,client}){
     const results=[];
     for(const c of calls){
      const def=byName.get(c.name);let out,is_error=false,summary;
+     const callId=randomUUID(),started=performance.now(),tool=`assistant.${c.name}`;
+     const candidateId=Number.isInteger(c.input?.id)&&c.input.id>0?c.input.id:null;
+     const context=candidateId&&c.name==='get_lead'&&store.getLead(candidateId)?{leadId:candidateId}:candidateId&&['get_mission','steer_mission','control_mission'].includes(c.name)&&store.getTask(candidateId)?{taskId:candidateId}:{};
+     store.addEvent({...context,type:'tool_call',tool,title:`Calling ${c.name}`,data:{callId,status:'running',input:safeLogValue(c.input??{})}});
      try{
       if(!def)throw fail(`Unknown tool ${c.name}`);
       const input=def.input.parse(c.input??{});
-      out=await def.run({store,runner},input);summary=def.summary(out);
+      out=await def.run({store,runner,production},input);summary=def.summary(out);
      }catch(e){is_error=true;out={error:e instanceof z.ZodError?e.issues.map(i=>`${i.path.join('.')||'input'}: ${i.message}`).join('; '):e.message};summary=`error: ${out.error}`;}
+     store.addEvent({...context,type:'tool_result',tool,title:safeLogValue(summary),data:{callId,status:is_error?'error':'success',durationMs:Math.round(performance.now()-started),...(is_error?{error:safeLogValue(out.error)}:{output:clip(JSON.stringify(safeLogValue(out)),MAX_RESULT)})}});
      actions.push({tool:c.name,input:c.input??{},result_summary:summary});
      results.push({type:'tool_result',tool_use_id:c.id,content:clip(JSON.stringify(out),MAX_RESULT),...(is_error?{is_error:true}:{})});
     }

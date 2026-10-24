@@ -1,0 +1,215 @@
+{
+  "id": "canary-wharf-penthouse-v1",
+  "title": "Canary Wharf penthouse hoodie ad",
+  "created": "2026-10-19",
+  "recovered": "2026-10-24",
+  "sessionId": "834cd3d9-d209-4e3a-b993-4a5e3d0f0d4d",
+  "sourceLog": "/Users/ryancortenbach/.claude/projects/-Users-ryancortenbach/834cd3d9-d209-4e3a-b993-4a5e3d0f0d4d.jsonl",
+  "referenceUrl": "https://www.youtube.com/watch?v=xI51f2FFbpk",
+  "files": [
+    {
+      "file": "WORKFLOW.md",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/SKILL.md",
+      "sourceSha256": "0d2f98ab06b567cc961a61106c6022cfc4c4c24c41105ad6241ed35ec7e323b9",
+      "sha256": "1c2529700f1d3d0102d2d81065abf01027e864910fcc73fffdb202f92cb2c45c",
+      "adaptation": "Added current zero-budget policy, preserve previous versions, and no desktop-control overrides. Historical source hash retained."
+    },
+    {
+      "file": "prompts/04_clip3_extend_prompt_v5.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/04_clip3_extend_prompt_v5.txt",
+      "sourceSha256": "068304d5dace2694bb966df8ea3b5fa8d7182619e125179c66b0b54b5b560780",
+      "sha256": "068304d5dace2694bb966df8ea3b5fa8d7182619e125179c66b0b54b5b560780"
+    },
+    {
+      "file": "prompts/03_clip2_extend_prompt_v13.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/03_clip2_extend_prompt_v13.txt",
+      "sourceSha256": "6049bb1b493f34f59842bce31f577a4aad680f583c61d4797f518896d586f203",
+      "sha256": "6049bb1b493f34f59842bce31f577a4aad680f583c61d4797f518896d586f203"
+    },
+    {
+      "file": "prompts/09_girl_image_prompt_v2.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/09_girl_image_prompt_v2.txt",
+      "sourceSha256": "063e00f20191d32e561ee7d17b70b6addb1fef6ab90f1f5ccc7779319ffa5ec5",
+      "sha256": "063e00f20191d32e561ee7d17b70b6addb1fef6ab90f1f5ccc7779319ffa5ec5"
+    },
+    {
+      "file": "prompts/08_clip2_fix_plan.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/08_clip2_fix_plan.txt",
+      "sourceSha256": "47a4345d19123cd8a98ed66fa1a5b1d796a31198c5ae27e888a1e3fede9586f8",
+      "sha256": "47a4345d19123cd8a98ed66fa1a5b1d796a31198c5ae27e888a1e3fede9586f8"
+    },
+    {
+      "file": "prompts/02_clip1_prompt_v3.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/02_clip1_prompt_v3.txt",
+      "sourceSha256": "a5e6a8c94787071c8f13494b6ab6ada9d44be100ea36c888fedd8403a8d4a80e",
+      "sha256": "a5e6a8c94787071c8f13494b6ab6ada9d44be100ea36c888fedd8403a8d4a80e"
+    },
+    {
+      "file": "prompts/01_his_exact_inputs_and_settings.txt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/prompts/01_his_exact_inputs_and_settings.txt",
+      "sourceSha256": "d5ee93b87395e7b0577e1102416469595289cf1be38014676b55a87ce4c37d6a",
+      "sha256": "d5ee93b87395e7b0577e1102416469595289cf1be38014676b55a87ce4c37d6a"
+    },
+    {
+      "file": "scripts/caption_metrics.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/caption_metrics.py",
+      "sourceSha256": "87c8c4b08e908a9632f303a3df69ed88a55f184ab01e030b9b2ea821d134a957",
+      "sha256": "87c8c4b08e908a9632f303a3df69ed88a55f184ab01e030b9b2ea821d134a957"
+    },
+    {
+      "file": "scripts/extract_captions.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/extract_captions.py",
+      "sourceSha256": "bbc5440caca55c488398d180cc504549aa24faf64b017a69e75530735bde519a",
+      "sha256": "bbc5440caca55c488398d180cc504549aa24faf64b017a69e75530735bde519a"
+    },
+    {
+      "file": "scripts/burn_captions.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/burn_captions.py",
+      "sourceSha256": "b80fecb02b7f7637d8f2427e8560216a652b33ec546960ed9b55fa796ad57ee5",
+      "sha256": "b80fecb02b7f7637d8f2427e8560216a652b33ec546960ed9b55fa796ad57ee5"
+    },
+    {
+      "file": "scripts/caps_cyborg.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/caps_cyborg.py",
+      "sourceSha256": "190baffb4289282708254994aa9a77ec7ec106cba8dd9a1602e7795f551e4890",
+      "sha256": "190baffb4289282708254994aa9a77ec7ec106cba8dd9a1602e7795f551e4890"
+    },
+    {
+      "file": "scripts/caps_khan.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/caps_khan.py",
+      "sourceSha256": "a5c37ea86cb081f15985125cfa3f8d9c8978c744921e4a2721fd71ea8fcf752c",
+      "sha256": "a5c37ea86cb081f15985125cfa3f8d9c8978c744921e4a2721fd71ea8fcf752c"
+    },
+    {
+      "file": "scripts/halo_color.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/halo_color.py",
+      "sourceSha256": "cbceb95c87397c51c7e2753dda3ea15601b93fb500d4c3fea50f96bfc9eb635d",
+      "sha256": "cbceb95c87397c51c7e2753dda3ea15601b93fb500d4c3fea50f96bfc9eb635d"
+    },
+    {
+      "file": "scripts/trim_dead_air.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/trim_dead_air.py",
+      "sourceSha256": "34ace95620a4ac7d01c45dc3ec950995f4c38d1dddc7c8890c7a7722c14fdb81",
+      "sha256": "34ace95620a4ac7d01c45dc3ec950995f4c38d1dddc7c8890c7a7722c14fdb81"
+    },
+    {
+      "file": "scripts/mix_music.py",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/scripts/mix_music.py",
+      "sourceSha256": "012c854fd889c635fd210c68794d9d4ece7362c9aeaa3ef5cc729924c959f071",
+      "sha256": "012c854fd889c635fd210c68794d9d4ece7362c9aeaa3ef5cc729924c959f071"
+    },
+    {
+      "file": "references/PS2_VIRAL_SOP.pdf",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/PS2_VIRAL_SOP.pdf",
+      "sourceSha256": "dde8520866ffff88b24aa9af4559d4cd878b0efadd5d351fb9ebbfe0edae5d42",
+      "sha256": "dde8520866ffff88b24aa9af4559d4cd878b0efadd5d351fb9ebbfe0edae5d42"
+    },
+    {
+      "file": "references/examples/PS2_penthouse_captions_KHANstyle_v2.srt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/examples/PS2_penthouse_captions_KHANstyle_v2.srt",
+      "sourceSha256": "9b0a1f5780627e6232a4348a72bac7aea4c865b52e1c2e053f5808ee45425b12",
+      "sha256": "9b0a1f5780627e6232a4348a72bac7aea4c865b52e1c2e053f5808ee45425b12"
+    },
+    {
+      "file": "references/examples/PS2_penthouse_captions_v4.srt",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/examples/PS2_penthouse_captions_v4.srt",
+      "sourceSha256": "bac2cc84c4f8dfb09345f8bb5cc5a4fb2fdc5449cbba906d7c577a48506c763f",
+      "sha256": "bac2cc84c4f8dfb09345f8bb5cc5a4fb2fdc5449cbba906d7c577a48506c763f"
+    },
+    {
+      "file": "references/examples/chunks_cyborg_penthouse.json",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/examples/chunks_cyborg_penthouse.json",
+      "sourceSha256": "ca385c2a540b53bb3ae897c80b236e816cbbeda05e79532e212f48a27bc3f572",
+      "sha256": "ca385c2a540b53bb3ae897c80b236e816cbbeda05e79532e212f48a27bc3f572"
+    },
+    {
+      "file": "references/examples/chunks_khan_penthouse.json",
+      "source": "/Users/ryancortenbach/.agents/skills/ps2-character-video/references/examples/chunks_khan_penthouse.json",
+      "sourceSha256": "1d3db6f9c60d6c78e405c4909a06caaf1229a47a27deb426656f0def5fe83bff",
+      "sha256": "1d3db6f9c60d6c78e405c4909a06caaf1229a47a27deb426656f0def5fe83bff"
+    }
+  ],
+  "media": [
+    {
+      "id": "final",
+      "file": "PS2_penthouse_FINAL_v4.mp4",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/PS2_penthouse_FINAL_v4.mp4",
+      "bytes": 7705699,
+      "sha256": "eb34229fa2448f0655fa94bb576b982477b91b92625763110d0f96abdd6f3880",
+      "provenance": "Historical original. Not newly generated."
+    },
+    {
+      "id": "voice",
+      "file": "our_voice_full_line_b_v2.mp3",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Voice/our_voice_full_line_b_v2.mp3",
+      "bytes": 820080,
+      "sha256": "49423e7c6de096359596e1edb0d46afc4b1b2559cfd5e5fd8c2069aae5186fd6",
+      "provenance": "Historical original. Not newly generated."
+    },
+    {
+      "id": "clip1-voice",
+      "file": "05_voice_ref_clip1.mp3",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/05_voice_ref_clip1.mp3",
+      "bytes": 315185,
+      "sha256": "45c03588bc876e01bd4351efbecbbabd688983f6fe4f5ebf9323349d6245c70a",
+      "provenance": "Historical original. Not newly generated."
+    },
+    {
+      "id": "clip2-voice",
+      "file": "06_voice_ref_clip2.mp3",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/06_voice_ref_clip2.mp3",
+      "bytes": 325216,
+      "sha256": "79b8f213dd6932d334b6aedc89f3b8de8e70cd135a5f5a58ab2b4397f39fe79b",
+      "provenance": "Historical original. Not newly generated."
+    },
+    {
+      "id": "clip3-voice",
+      "file": "07_voice_ref_clip3.mp3",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/07_voice_ref_clip3.mp3",
+      "bytes": 174751,
+      "sha256": "12b78e02d2becd15ead944c68225b9fefd9e196d8c5a0846c3e28377630c600b",
+      "provenance": "Historical original. Not newly generated."
+    },
+    {
+      "id": "bag",
+      "file": "wingstop_bag_ref.jpg",
+      "source": "/Users/ryancortenbach/Downloads/PS2 Penthouse Setup/wingstop_bag_ref.jpg",
+      "bytes": 273536,
+      "sha256": "187a0c7b041a4d0384b303583a8752fd5c70b9d2f586860a8c7867b16577614e",
+      "provenance": "Historical original. Not newly generated."
+    }
+  ],
+  "missing": [
+    "Original character Element image/export and asset ID",
+    "Original hoodie Element image/export and asset ID",
+    "Selected girl reference image/export and asset ID",
+    "Documented public API contract for reference media plus Extend Video"
+  ],
+  "voiceId": "EsBKDmM9f0GZP1raVDSa",
+  "voiceIdStatus": "Historical ID. Account access not verified.",
+  "historicalSettings": {
+    "model": "Seedance 2.5",
+    "aspectRatio": "9:16",
+    "resolution": "720p",
+    "bitrate": "high",
+    "generateAudio": true,
+    "clipDurations": [
+      10,
+      10,
+      7
+    ]
+  },
+  "rules": [
+    "Budget is zero. Never execute paid provider requests in this workspace.",
+    "Show storyboard before generation. Preserve previous versions and unsaved work.",
+    "Use speech-to-speech to retain delivery, rather than a fresh TTS read.",
+    "Keep character, product, furniture, eyes, gaze and lighting consistent across clips.",
+    "Use original or licensed creator references and record provenance.",
+    "Historical playback and prepared requests do not prove new generation or visual parity."
+  ],
+  "sessionExport": {
+    "path": "private-research/penthouse-v1/session-recovery",
+    "files": 14,
+    "description": "Recovered conversation, tool log and child logs. Private reasoning and binary screenshots omitted."
+  }
+}

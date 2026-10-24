@@ -10,6 +10,7 @@ const tmp=mkdtempSync(path.join(tmpdir(),'voices-'));
 process.env.AGENT_DATA_DIR=tmp;process.env.ELEVENLABS_API_KEY='test-key-not-real';process.env.ANTHROPIC_API_KEY='test-key-not-real';
 const {openStore}=await import('./store.mjs');
 const el=await import('./tools/elevenlabs.mjs');
+const {PASS_SCORE}=await import('./tools/higgsfield.mjs');
 const vc=await import('./voicecheck.mjs');
 const {createApp}=await import('./server.mjs');
 
@@ -34,7 +35,7 @@ globalThis.fetch=async(url,init={})=>{
  if(u.pathname==='/v1/speech-to-text')return json({language_code:'eng',text:"Hey, it's Maya from Mint Labs.",audio_duration_secs:1.9,words:[...heard,{text:' ',type:'spacing',start:0.3,end:0.35}]});
  return new Response('{"detail":{"message":"unexpected"}}',{status:404});
 };
-const grade=score=>async({system})=>({data:{score,summary:`graded ${system.slice(0,24)}`,issues:score>=85?[]:[{severity:'major',evidence:'x',fix:'y'}]},cost:0.001,model:'fake'});
+const grade=score=>async({system})=>({data:{score,summary:`graded ${system.slice(0,24)}`,issues:score>=PASS_SCORE?[]:[{severity:'major',evidence:'x',fix:'y'}]},cost:0.001,model:'fake'});
 const post=(base,p,b={})=>real(`${base}${p}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(async r=>({status:r.status,body:await r.json()}));
 async function harness(over={}){
  const store=openStore(':memory:');
@@ -94,7 +95,7 @@ test('elevenlabs module sends the documented requests and never leaks the key',a
  delete process.env.ELEVENLABS_KEY_FILE;process.env.ELEVENLABS_API_KEY=prev;
 });
 
-test('checkVoice grades transcript, pacing and spec, and passes only at 85 or above',async()=>{
+test('checkVoice grades transcript, pacing and spec, and passes only at the shared pass score or above',async()=>{
  const v={line:LINE,description:SPEC,sample_file:'a.mp3'};
  const ok=await vc.checkVoice({voice:v,audio:Buffer.from('x'),spec:SPEC,grade:grade(92)});
  assert.deepEqual(ok.results.map(r=>r.id),['transcript','pacing','voice-spec']);

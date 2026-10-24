@@ -1,0 +1,7 @@
+STORYBOARD REFERENCE PICKER REVISION
+
+Observed reference: normal Chrome, https://higgsfield.ai/ai/video?model=seedance_2_5. Inspected public References and Elements asset picker. No Generate click, login, upload or paid request.
+
+Adaptation in Mint Labs: one References dropdown with selected thumbnails, role tabs, upload control and saved character photos. Character/Apparel/Setting/Pose controls are hidden until opened. No empty dotted plus boxes or Switch text. Escape closes the dropdown. The carousel retains swipe, keyboard and pagination dots, with arrow buttons and all overlay labels removed. Compact Edit reveals camera/action/dialogue. Every shot/ref edit clears stale staged ImageGen requests. Uploads are serialized and binding/version mutation is locked while uploading.
+
+Independent actual-app reviewer passed these visual/interaction behaviors. Legacy failed-board entries are collapsed and older versions nested in History. Two shared shell CSS defects still require the owner's correction: archive .stack class collision and traced log child grids. The reviewer will recheck before final acceptance.

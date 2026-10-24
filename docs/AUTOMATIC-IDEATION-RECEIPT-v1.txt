@@ -1,0 +1,15 @@
+Automatic research and ideation activation
+
+A qualifying pursue decision sets lead status qualified before contact lookup or outreach drafting. The dedicated brand task and the free ideation service observe it immediately. Startup sync resumes queued/in-progress work and upgrades older generated reference bindings. At most two brand jobs run concurrently; completed jobs do not repeat on normal lead edits.
+
+The new service reads public catalogs with optional model classification explicitly disabled, reuses saved products, reads brand positioning, snapshots the selected garment into an immutable upload, and assembles a local research brief and existing storyboard templates. No model inference, provider generation, paid checking, email, or DM is submitted by this service. Audience demographics and performance remain unverified. Unsupported or missing garment photos finish needs_research, not ready.
+
+Each step stores a unique correlated tool_call/tool_result with real input, output or error, measured duration and zero dollars. The lead drawer replaces Make video with actual progress, a report link, expandable tool traces, and a $0 retry only when research needs attention. Active work uses orange loader styling; review gaps use yellow attention; finished ideas use green.
+
+Automatic research preserves manually edited shots and selected references, invalidates staged ImageGen requests when bindings change, and keeps earlier server revisions. The reusable editor accepts researched updates using a three-way merge and current save revision without replacing a focused text field. The current brand task route is the concurrent owner's PDF report view; request sequence guards stop older responses overwriting newer status/logs.
+
+Fresh checks: automatic qualification, deduplication, rejection, missing catalog, unsupported/no-photo products, jacket category, preserved edits, staged-request invalidation, paired outputs, focused editor update, and out-of-order task-view responses passed. Actual native screenshot showed Gifted Elite New York free retry progressing with an orange loader. No Make video action was visible. Four existing brands have usable product references; Gifted still needs a usable garment.
+
+The independently maintained legacy research endpoint and normal Mint model/chat/mission flows have their own paid behavior. Default realTools no longer invokes researchLead automatically. Another controller ran legacy paid brand profiles during this session; that activity is distinct from the new free ideation service. Do not claim all concurrent account activity was free.
+
+Final listener47738 activated after all research tasks were idle. Final API receipt: work/ideation-activation/final-verification-v1.json. Independent reviewed scopes passed.

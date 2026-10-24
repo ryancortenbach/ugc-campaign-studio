@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="voices.css">
 <link rel="stylesheet" href="apparel-storyboards.css">
+<link rel="stylesheet" href="tool-logs.css">
+<link rel="stylesheet" href="live-feed.css">
+<link rel="stylesheet" href="task-storyboards.css">
+<link rel="stylesheet" href="analytics.css">
+<link rel="stylesheet" href="brand-ideation.css">
 <link rel="icon" href="favicon.png">
 </head>
 <body>
@@ -19,10 +24,9 @@
   <a href="#/home" data-tab="home" data-tip="Home" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></a>
   <a href="#/tasks" data-tab="tasks" data-tip="Tasks" aria-label="Tasks"><svg viewBox="0 0 24 24"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg><span>Tasks</span></a>
   <a href="#/leads" data-tab="leads" data-tip="Leads" aria-label="Leads"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Leads</span></a>
-  <a href="#/drafts" data-tab="drafts" data-tip="Drafts" aria-label="Drafts"><svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>Drafts</span></a>
-  <a href="#/storyboards" data-tab="storyboards" data-tip="Storyboards" aria-label="Storyboards"><svg viewBox="0 0 24 24"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><span>Storyboards</span></a>
   <a href="#/renders" data-tab="renders" data-tip="Renders" aria-label="Renders"><svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg><span>Renders</span></a>
   <a href="#/voices" data-tab="voices" data-tip="Voices" aria-label="Voices"><svg viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></svg><span>Voices</span></a>
+  <a href="#/production" data-tab="production" data-tip="Production research" aria-label="Production research"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M8 14h8"/></svg><span>Production</span></a>
  </nav>
  <nav class="side-foot" id="tabs-foot"><a href="#/settings" data-tab="settings" data-tip="Settings" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg><span>Settings</span></a></nav>
 </aside>
@@ -30,16 +34,20 @@
  <header class="topbar">
   <h1 id="pagetitle"></h1>
   <div class="topright">
-   <div class="integr"><button id="intbtn" class="intbtn" type="button" aria-expanded="false"><span class="dot" id="intdot"></span><span id="intlabel">Active</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="intpanel" class="intpanel" hidden></div></div>
-   <div class="integr"><button id="spendbtn" class="intbtn spend" type="button" aria-expanded="false"><span class="lab">Spend</span><span id="spend" class="val">$0.00</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="spendpanel" class="intpanel" hidden></div></div>
+   <button id="intbtn" class="intbtn" type="button" data-tip="Connections" aria-label="Open connections"><span class="dot" id="intdot"></span><span id="intlabel">Checking connections</span></button>
+   <button id="spendbtn" type="button" hidden aria-hidden="true" tabindex="-1"></button>
+   <button id="analyticsbtn" class="railbtn" type="button" data-tip="Analytics" aria-label="Analytics"></button>
    <button id="railbtn" class="railbtn" type="button" data-tip="Hide live feed" aria-label="Hide live feed" aria-pressed="true"></button>
   </div>
  </header>
  <main id="view"></main>
 </div>
 <aside class="live">
- <div class="live-head"><span class="dot on"></span><h2>Live</h2></div>
- <div id="livefeed"></div>
+ <div class="rtabs" id="rtabs" role="tablist"></div>
+ <div id="livefeed" class="rpane"></div>
+ <div id="spendbody" class="rpane" hidden></div>
+ <div id="connbody" class="rpane" hidden></div>
+ <div id="browserbody" class="rpane" hidden></div>
 </aside>
 <aside id="drawer" hidden></aside>
 <script type="module" src="app.js"></script>

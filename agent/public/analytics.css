@@ -1,0 +1,44 @@
+/* Internal operating analytics, using existing Mint Labs surfaces. */
+.ap-an{display:grid;gap:16px;max-width:1100px;margin:0 auto}
+.ap-an-toolbar,.ap-an-tools,.ap-an-tags,.ap-an-caption,.ap-an-metric{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ap-an-toolbar{justify-content:space-between}
+.ap-an-tools{margin-left:auto}
+.ap-an-sync{font-size:10px;font-weight:400;color:var(--muted)}
+.ap-an-refresh svg{width:14px;height:14px}
+.ap-an-money{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ap-an-money-card{padding:20px;min-width:0}
+.ap-an-caption{color:var(--muted);font-size:11px;font-weight:400}
+.ap-an-caption>img{width:20px;height:20px;border-radius:5px;object-fit:contain}
+.ap-an-money-card>strong{display:block;font-size:36px;line-height:1.4;font-weight:500;letter-spacing:-1px;margin:8px 0 12px;overflow-wrap:anywhere}
+.ap-an-tags{gap:6px}
+.ap-an-tags>.chip{font-size:10px;font-weight:400;color:var(--muted)}
+.ap-an-logos{display:flex;gap:4px;margin-left:auto}
+.ap-an-logos>img{width:17px;height:17px;border-radius:4px;object-fit:contain}
+.ap-an-tab{padding:6px 9px;border:0;border-radius:6px;background:transparent;color:var(--faint);font-family:var(--sans);font-size:12px;font-weight:400;cursor:pointer}
+.ap-an-tab[aria-pressed=true]{background:var(--raise);color:var(--text)}
+.ap-an-chart{position:relative;outline:none}
+.ap-an-chart:focus-visible{outline:1px solid var(--line2);outline-offset:5px;border-radius:5px}
+.ap-an-chart-info{font-size:12px;color:var(--muted);min-height:23px;margin-bottom:8px}
+.ap-an-chart>svg{display:block;width:100%;height:200px;overflow:visible}
+.ap-an-grid{stroke:var(--line);stroke-width:1;fill:none}
+.ap-an-area{fill:var(--green-bg);stroke:none}
+.ap-an-line{stroke:var(--green);stroke-width:2;vector-effect:non-scaling-stroke;fill:none}
+.ap-an-cross{stroke:var(--faint);stroke-width:1;stroke-dasharray:3 3}
+.ap-an-axis{display:flex;justify-content:space-between;color:var(--faint);font-size:10px;margin-top:8px}
+.ap-an-lists{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;align-items:start}
+.ap-an-row{display:flex;align-items:center;gap:10px;min-width:0;padding:9px 0}
+.ap-an-row>img{width:24px;height:24px;border-radius:6px;object-fit:contain;background:var(--bg);padding:3px;flex:none}
+.ap-an-row-title{flex:1;min-width:0}
+.ap-an-row-title>span{display:block;color:var(--text);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ap-an-row-title>small{display:block;color:var(--faint);font-size:10px;margin-top:3px}
+.ap-an-amount{font-size:12px;font-weight:400;white-space:nowrap}
+.ap-an-meter{height:3px;background:var(--raise);margin-top:7px;border-radius:2px;overflow:hidden;max-width:180px}
+.ap-an-meter>i{display:block;height:100%;background:var(--muted)}
+.ap-an-empty{padding:18px 0;color:var(--faint);font-size:12px}
+.ap-an-data{font-size:11px;color:var(--muted)}
+.ap-an-data>summary{cursor:pointer;color:var(--faint)}
+.ap-an-data>p{max-width:85ch;line-height:1.6}
+@media(max-width:700px){.ap-an-money-card{padding:14px}.ap-an-money-card>strong{font-size:28px}.ap-an-lists{grid-template-columns:1fr}.ap-an-toolbar{gap:10px}.ap-an-money{gap:10px}.ap-an-logos{margin-left:0}}
+@media(max-width:440px){.ap-an-money{grid-template-columns:1fr}}
+
+.ap-an-reconcile{margin:12px 0}

@@ -1,0 +1,7 @@
+/* Compact composer modes, separate from attachment controls. */
+.ap-composer-modes{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 4px 2px}
+.ap-composer-mode{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--faint);font-family:var(--sans);font-size:11px;font-weight:400;cursor:pointer}
+.ap-composer-mode>.lu{width:13px;height:13px}
+.ap-composer-mode:hover{background:var(--panel2);color:var(--text)}
+.ap-composer-mode[aria-pressed=true]{background:var(--raise);border-color:var(--line2);color:var(--text)}
+.ap-composer-mode:focus-visible{outline:1px solid var(--line2);outline-offset:2px}

@@ -1,0 +1,18 @@
+MINT LABS ANALYTICS
+
+Owned modules: agent/analytics.mjs, analytics.test.mjs, analytics-view.test.mjs, public/analytics.js, public/analytics.css.
+Shell integration owned by the current app worker under task 22.
+
+Home totals move to a top-right Analytics route. The new view uses calendar Today, This week, This month, This year in America/New_York. Week starts Monday. DST hour counts are tested.
+
+Revenue reads all pages from GET https://api.whop.com/api/v1/payments with account_id=biz_Fj9QjiVTYUDda8. Successful USD sales excluding reported tax, adjusted for partial/full refunds, before processing fees. Tax in a partially refunded taxable payment is allocated proportionally and explicitly flagged as an estimate. Refunds adjust the original payment period. This is not profit. Payment time controls attribution; creation time is a disclosed fallback. No customer email or billing address is returned to the view. No watcher processing, purchasing, sending or paid generation is enabled.
+
+Source: https://docs.whop.com/api-reference/payments/list-payments (read October 24, 2026). That API documents account_id, company.id, paid_at, refunded_amount, total and cursor page_info. The existing adapter's Money handling is retained for live object totals.
+
+A complete history is cached for five minutes. Unknown revenue stays null. An API error retains a previous complete cache with stale status. Missing/malformed pagination or a repeated cursor never certifies partial totals. Cross-account records are discarded. Full-refund/auto-refund statuses independently force zero.
+
+Recorded spend and brand/draft counts come from timestamped local ledger rows. Provider starting-credit-minus-current-balance cannot be attributed to a particular calendar period without transaction dates, so unrecorded provider spend is not allocated to Today or Month. Data details disclose the scope.
+
+Read-only live check at 2026-10-24 18:53 UTC: Today/Week/Month each customer payments 1041.25 USD, 2 paid retained orders, recorded spend .615527 USD, 12 brands and 6 drafts. Zero missing date/amount/currency exclusions. A second raw-field check confirmed 41.25 USD sales tax, so sales revenue is 1000.00 USD; the revenue card excludes tax and exposes that basis. The standalone exec process had DNS ENOTFOUND; the normal host process through Desktop Commander succeeded. This is observed data at that time, not a fixed seed or a future guarantee.
+
+Independent review rejected the first implementation for missing pagination validation, full refund flags and a stale frontend mount race. All three were corrected with regression coverage. Source and scoped tests pass. Final actual-app acceptance is pending the shell/backend hook and correction of shared CSS layout regressions found by the reviewer.

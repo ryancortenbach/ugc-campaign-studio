@@ -1,0 +1,28 @@
+BILLING AND SOCIAL ALIGNMENT REVIEW v1
+Status: PASS for reviewed source behavior and current positive-data native UI. Final activation of the latest backend boundary guards remains root's responsibility; native unknown/error replies were not simulated.
+Review scope: provider-usage.mjs, costs.mjs, their tests, Spend rail rendering, ordered social links and alignment CSS. No paid calls or native UI actions performed in this pass.
+
+FAILURES RETURNED AND FIXED
+1. Out-of-month and impossible usage buckets were counted. Current source rejects invalid, out-of-window and future buckets. Focused regressions pass.
+2. Missing ElevenLabs character count became zero and was described as verified. Current source preserves unavailable usage and no longer claims a verified zero. Focused regression passes.
+3. Muted base CSS overrode active orange and attention yellow. The base color override is removed. Native free-research retry now visibly shows orange progress, followed by yellow only when missing research needs review.
+
+SEMANTIC CHECK RESOLVED
+- The user-facing API generation-count claim was removed. The current description is API usage estimate this month. Root reports the official usage documentation confirms bucket pagination; this reviewer did not independently retrieve that subpage, so this report does not certify quantity as a request count.
+
+PASSED SOURCE AND TEST EVIDENCE
+- Independently ran 14 costs/provider-usage tests. All passed, including full pagination, unknown versus verified zero, failed-provider nulls, Terac balance-only behavior and estimate/ledger separation.
+- Final focused costs/provider/view run: 16 tests passed after fixes.
+- Higgsfield account usage is explicitly an estimated current UTC calendar-month value, not an invoice or website-credit spend. The estimate is excluded from Mint's recorded subtotal.
+- Terac current balance no longer implies a historical spending amount.
+- ElevenLabs dollar spend remains null without priced ledger entries; account characters are not turned into a dollar charge.
+- The Spend rail maps missing provider spending to Not synced, Usage only or Balance only rather than a fabricated zero.
+- Total spending is labeled recorded and partial, with an explicit coverage basis.
+- Social links have deterministic Instagram, TikTok, X, YouTube and Facebook order and data attributes. CSS assigns fixed platform columns, 14 px image/SVG sizes, and a 102 px social area.
+
+FINAL NATIVE OBSERVATIONS AND LIMITS
+- Controls recovered. Reloaded the actual Mint Labs app and reviewed all five visible lead rows. Platform icons align consistently and website domains remain readable. The current layout places socials below domains at this viewport. Other viewport widths were not independently exercised.
+- Spend rail visibly shows Higgsfield This month / 9.45 est., Terac 100 credit / Balance only, ElevenLabs 63k of 610k chars / Usage only, and Recorded spend 0.79 / Partial. These unknown account-spend figures are not shown as zero.
+- Expanded the Gifted drawer: full brand title fits, Research tools defaults open, real paired result fields are readable. The reviewer clicked exactly one explicitly free Retry research action. Orange progress appeared and finished with honest needs-review status. Displayed recorded spend remained 0.79 throughout.
+- Exact live account retrieval and final backend activation are root-owned. The displayed successful-data behavior was independently observed; malformed/unknown provider replies were tested locally, not forced against the native app.
+- This is scoped source and native acceptance, not independent rerunning of every repository check.

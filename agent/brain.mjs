@@ -50,12 +50,12 @@ export async function plan(prompt,profile,attachments=[]){
 export async function score({lead,visit,planned}){
  if(!llmEnabled()){
   const reasons=[],risks=[];let s=30;
-  if(visit.best){s+=35;reasons.push(`Public business email on their own site: ${visit.best.email}`);}else risks.push('No public business email found');
+  if(visit.best){s+=35;reasons.push(`Public email on their own site: ${visit.best.email}`);}else if(visit.socials?.instagram){s+=35;reasons.push('Reachable on Instagram');}else risks.push('No public email or Instagram found');
   if(/shop|cart|collection|add to bag|new arrivals/i.test(visit.homeText)){s+=20;reasons.push('Sells direct to consumers on its own site');}
   if(planned.territory&&visit.homeText.toLowerCase().includes(planned.territory.toLowerCase().split(/[ ,]/)[0])){s+=10;reasons.push(`Mentions ${planned.territory}`);}
   return {data:{company:lead.company,fitScore:Math.min(100,s),decision:s>=60?'pursue':'skip',reasons,risks,personalDetail:(visit.homeText.split(/(?<=[.!?])\s+/).find(x=>x.length>30&&x.length<160)||'').trim()},cost:0,model:'rules'};
  }
- return structured({role:'grader',effort:'low',schema:scoreSchema,system:`You grade whether a brand is a good outreach target for this offer: ${planned.offer}. Good fit: ${planned.qualify} Exclusions: ${planned.exclusions.join('; ')||'none'}. Use only the page text given. fitScore is 0 to 100; choose pursue only if fitScore is at least 60 and a contact email exists. reasons and risks are short factual bullets citing what the page says. personalDetail is one specific true detail from their site that an email could mention, copied or closely paraphrased, or empty. company is the brand's proper name.`,prompt:JSON.stringify({market:planned.market,territory:planned.territory,url:lead.url,searchTitle:lead.company,contactEmail:visit.best?.email||null,contactSource:visit.best?.sourceUrl||null,homepageText:visit.homeText,contactPageText:visit.contactText})});
+ return structured({role:'grader',effort:'low',schema:scoreSchema,system:`You grade whether a brand is a good outreach target for this offer: ${planned.offer}. Good fit: ${planned.qualify} Exclusions: ${planned.exclusions.join('; ')||'none'}. Use only the page text given. fitScore is 0 to 100; choose pursue only if fitScore is at least 60. Who to contact is decided separately, so ignore whether an email exists. reasons and risks are short factual bullets citing what the page says. personalDetail is one specific true detail from their site that an email could mention, copied or closely paraphrased, or empty. company is the brand's proper name.`,prompt:JSON.stringify({market:planned.market,territory:planned.territory,url:lead.url,searchTitle:lead.company,contactEmail:visit.best?.email||null,contactSource:visit.best?.sourceUrl||null,homepageText:visit.homeText,contactPageText:visit.contactText})});
 }
 
 // Haiku decides whether a lead is worth any spend: an established DTC brand with real socials and a plausible UGC budget.
@@ -74,14 +74,29 @@ export async function logoCheck({data,type,company,domain}){
  return structured({role:'grader',effort:'low',schema:logoSchema,images:[{data,type}],system:'You check a brand logo image. isRealLogo is true for a real brand mark of an actual company: a wordmark, a monogram, or a pictorial symbol with no text (an object, animal, building or shape on a plain or colored tile counts, since many brands use one). It is false only for something clearly generic: a default globe, an auto-generated letter tile, loading dots, a generic icon, a globe, a platform or theme default (Shopify, Wix, Squarespace, WordPress), a blank or placeholder image, a stock photo, or a product photo with no brand mark. matchesBrand is false ONLY when the image shows readable text naming a different company, or is the well-known mark of a different company. A symbol or picture with no readable text always counts as matching, because you cannot know the symbol of every brand. quality is 0 to 100 for how clean and usable the mark is. reason is one short sentence. No em dashes.',prompt:JSON.stringify({brand:company,domain})});
 }
 
-export async function draft({lead,profile,graded}){
+const greetName=contact=>String(contact?.name||'').trim().split(/\s+/)[0]||null;
+const dmSchema=z.object({body:z.string()});
+
+export async function draft({lead,profile,graded,contact=null}){
+ const who=greetName(contact);
  if(!llmEnabled()){
   const detail=graded.personalDetail?` I saw this on your site: "${graded.personalDetail.split(/\s+/).slice(0,14).join(' ')}".`:'';
-  return {data:{subject:`${graded.company} x ${profile.company}`,body:cleanCopy(`Hi ${graded.company} team,\n\n${profile.senderFact}${detail}\n\n${profile.offer}\n\n${profile.cta}\n\n${profile.senderName}`)},cost:0,model:'rules'};
+  return {data:{subject:`${graded.company} x ${profile.company}`,body:cleanCopy(`Hi ${who||`${graded.company} team`},\n\n${profile.senderFact}${detail}\n\n${profile.offer}\n\n${profile.cta}\n\n${profile.senderName}`)},cost:0,model:'rules'};
  }
- const out=await structured({role:'main',effort:'low',schema:draftSchema,system:`You write a short cold email from ${profile.senderName} at ${profile.company}. True sender fact you may use: ${profile.senderFact} Offer: ${profile.offer} Call to action: ${profile.cta} Rules: ${profile.rules} Address the brand team by brand name. Lead with the specific detail from their site and connect it to the offer honestly. Sign as ${profile.senderName}. Plain text, short paragraphs.`,prompt:JSON.stringify({company:graded.company,url:lead.url,personalDetail:graded.personalDetail,whyTheyFit:graded.reasons})});
+ const out=await structured({role:'main',effort:'low',schema:draftSchema,system:`You write a short cold email from ${profile.senderName} at ${profile.company}. True sender fact you may use: ${profile.senderFact} Offer: ${profile.offer} Call to action: ${profile.cta} Rules: ${profile.rules} Address the recipient by first name when recipientName is given, otherwise the brand team by brand name. Lead with the specific detail from their site and connect it to the offer honestly. Sign as ${profile.senderName}. Plain text, short paragraphs.`,prompt:JSON.stringify({company:graded.company,recipientName:contact?.name||null,url:lead.url,personalDetail:graded.personalDetail,whyTheyFit:graded.reasons})});
  out.data={subject:cleanCopy(out.data.subject),body:cleanCopy(out.data.body)};
  return out;
+}
+
+// A short Instagram DM for a brand with no personal email. Same rules as the email, no subject line: the "subject" is only a label for the CRM.
+export async function draftDm({lead,profile,graded,contact=null}){
+ const handle=contact?.handle||'',label=`Instagram DM to @${handle}`,who=greetName(contact);
+ if(!llmEnabled()){
+  const detail=graded.personalDetail?` Loved this on your site: "${graded.personalDetail.split(/\s+/).slice(0,10).join(' ')}".`:'';
+  return {data:{subject:label,body:cleanCopy(`Hi ${who||`${graded.company} team`}, it is ${profile.senderName} from ${profile.company}.${detail} We make short AI UGC style videos for brands. ${profile.cta}`)},cost:0,model:'rules'};
+ }
+ const out=await structured({role:'main',effort:'low',schema:dmSchema,system:`You write a short Instagram DM from ${profile.senderName} at ${profile.company} to a brand. True sender fact you may use: ${profile.senderFact} Offer: ${profile.offer} Call to action: ${profile.cta} Rules: ${profile.rules} Under 60 words, casual and polite, no subject line, no links, no hashtags. Address the recipient by first name when recipientName is given, otherwise the brand team. Mention one specific true detail from their site. Sign off with ${profile.senderName}.`,prompt:JSON.stringify({company:graded.company,recipientName:contact?.name||null,instagram:handle?`@${handle}`:null,url:lead.url,personalDetail:graded.personalDetail,whyTheyFit:graded.reasons})});
+ return {...out,data:{subject:label,body:cleanCopy(out.data.body)}};
 }
 
 export async function steer({message,currentPlan,progress}){

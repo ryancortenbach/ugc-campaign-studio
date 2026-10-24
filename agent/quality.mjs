@@ -3,6 +3,8 @@ import {createHash} from 'node:crypto';
 import {dataDir} from './store.mjs';
 import {resolveLogo,readLogo} from './logo.mjs';
 import {extractSocials} from './tools/site.mjs';
+import {resolveContact} from './contacts.mjs';
+import * as brain from './brain.mjs';
 
 // Only high-value leads: socials, a real logo and a Haiku brand grader all have to pass before any email or video is written.
 export const VALUE_MIN=70;
@@ -81,9 +83,15 @@ export async function gateLead({lead,socials,site={},exa={},tools,spend=()=>{},l
  return {pass:true,value,model:graded.model};
 }
 
-// POST /api/leads/requalify. Re-grades leads from before the gate existed. Rejects are only marked: nothing is deleted and no Gmail call is made.
-// Drafts of rejected leads are listed so they can be removed by hand.
+// POST /api/leads/requalify. Re-grades leads from before the gate existed and applies the contact rule to every open lead:
+// a personal email already on file, or an Instagram to DM, or the lead is rejected. Rejects are only marked: nothing is deleted
+// and no Gmail call is made. Gmail drafts of rejected leads (and email drafts to a generic inbox on leads that now go by Instagram)
+// are listed so they can be removed by hand.
+// tools: fetchHome, logo, value, and optionally findContact (Exa; at most 3 calls per lead, real cost recorded in the spend ledger).
+// Unsent email drafts of a lead whose contact is Instagram. A withdrawn draft is already handled; a sent one is history.
+const openEmailDrafts=(store,leadId)=>store.listDrafts({leadId}).filter(d=>!['sent','withdrawn'].includes(d.status)&&d.channel!=='instagram_dm');
 const SKIP_STATUSES=new Set(['rejected','visiting','grading','drafting','contacted','replied','won','lost']);
+const contactFields=c=>({contact_kind:c.kind,instagram_handle:c.handle,contact_name:c.name,contact_email:c.email,contact_source:c.sourceUrl,contact_excerpt:c.excerpt});
 export function createRequalifier({store,tools,concurrency=4}){
  let busy=false;
  return {
@@ -92,29 +100,82 @@ export function createRequalifier({store,tools,concurrency=4}){
    if(busy)throw Object.assign(new Error('Requalify is already running.'),{status:409});
    busy=true;
    try{
-    const todo=store.listLeads().filter(l=>!l.value&&!SKIP_STATUSES.has(l.status)).reverse();
-    const out={checked:0,kept:0,rejected:[],unchecked:[],withdrawnDrafts:[]};
-    const one=async lead=>{
-     const spend=(usd,provider,note)=>{if(usd>0){if(lead.task_id)store.addCost(lead.task_id,usd);store.addSpend({provider,usd,taskId:lead.task_id||null,note:`requalify: ${note}`});}};
-     let page;
-     try{page=await tools.fetchHome(lead.url||`https://${lead.domain}/`);}
-     catch(error){out.unchecked.push({id:lead.id,company:lead.company,reason:`Could not load the site: ${error.message}`});return;}
-     if(!page?.links?.length){out.unchecked.push({id:lead.id,company:lead.company,reason:'The page had no links (it may need a browser), so it was not judged'});return;}
-     const socials=page.socials||extractSocials(page.links);
-     const fixed=/[<>]/.test(lead.company||'')?companyFrom(lead.company,lead.domain,{split:false}):null;
-     if(fixed)lead=store.updateLead(lead.id,{company:fixed});
-     let gate;
-     try{gate=await gateLead({lead,socials,site:{homeText:(page.text||'').slice(0,3000),contactText:'',best:null},exa:{title:lead.company,url:lead.url,text:lead.evidence||''},tools,spend});}
-     catch(error){out.unchecked.push({id:lead.id,company:lead.company,reason:`Check failed: ${error.message}`});return;}
-     out.checked++;
-     if(gate.pass){store.updateLead(lead.id,{socials,value:gate.value});out.kept++;return;}
-     store.updateLead(lead.id,{socials,status:'rejected',notes:gate.reason,value:gate.value});
-     store.addEvent({taskId:lead.task_id||null,leadId:lead.id,type:'decision',tool:'requalify',title:gate.title});
-     out.rejected.push({id:lead.id,company:lead.company,reason:gate.reason});
-     for(const d of store.listDrafts({leadId:lead.id}))if(d.status!=='sent'&&d.gmail_url)out.withdrawnDrafts.push({leadId:lead.id,to:d.to_email,gmail_url:d.gmail_url});
+    const open=store.listLeads().filter(l=>!SKIP_STATUSES.has(l.status));
+    const todo=open.filter(l=>!l.value||!l.contact_kind).reverse();
+    // Already resolved to Instagram but still holding an email draft: converted without another contact lookup.
+    const convertOnly=open.filter(l=>l.value&&l.contact_kind==='instagram'&&l.instagram_handle&&openEmailDrafts(store,l.id).length).reverse();
+    const out={checked:0,kept:0,rejected:[],unchecked:[],withdrawnDrafts:[],genericDrafts:[],convertedDrafts:[],conversionErrors:[]};
+    const spendFor=lead=>(usd,provider,note)=>{if(usd>0){if(lead.task_id)store.addCost(lead.task_id,usd);store.addSpend({provider,usd,taskId:lead.task_id||null,note:`requalify: ${note}`});}};
+    // A lead that goes by Instagram gets a DM written with the runner's writer. The old email draft is only marked withdrawn
+    // here and listed in genericDrafts; its Gmail draft is never touched, Ryan deletes it by hand.
+    const convert=async(lead,contact)=>{
+     const old=openEmailDrafts(store,lead.id);
+     if(!old.length)return;
+     const handle=contact.handle;
+     for(const d of old)if(d.gmail_url)out.genericDrafts.push({leadId:lead.id,to:d.to_email,gmail_url:d.gmail_url,instagram:handle});
+     const hasDm=store.listDrafts({leadId:lead.id}).some(d=>d.channel==='instagram_dm'&&d.status!=='withdrawn');
+     let dm=null;
+     if(!hasDm){
+      const events=store.listEvents({leadId:lead.id});
+      const scored=[...events].reverse().find(e=>(e.type==='decision'||String(e.tool||'').startsWith('claude.score'))&&e.data?.personalDetail);
+      const graded={company:lead.company||lead.domain,fitScore:lead.fit_score,reasons:lead.reasons||[],risks:lead.risks||[],personalDetail:scored?.data?.personalDetail||''};
+      let written;
+      try{written=await (tools.draftDm||brain.draftDm)({lead,profile:(tools.loadProfile||brain.loadProfile)(),graded,contact});}
+      catch(error){out.conversionErrors.push({id:lead.id,company:lead.company,reason:`Instagram DM failed: ${error.message}`});return;}
+      spendFor(lead)(written.cost,'claude','instagram dm');
+      const base=old[0],render=base.render_id?store.getRender(base.render_id):null;
+      const ready=render&&(render.review==='approved'||render.status==='completed');
+      dm=store.addDraft({leadId:lead.id,taskId:lead.task_id,to:'@'+handle,subject:written.data.subject,body:written.data.body,channel:'instagram_dm',status:ready?'dm_ready':lead.status==='awaiting_video'?'waiting_video':'crm_only',renderId:ready?base.render_id:null});
+     }
+     for(const d of old)store.updateDraft(d.id,{status:'withdrawn'});
+     if(dm){
+      out.convertedDrafts.push({leadId:lead.id,company:lead.company,handle,draftId:dm.id});
+      store.addEvent({taskId:lead.task_id||null,leadId:lead.id,type:'draft',tool:'instagram',title:`Instagram DM for @${handle} written. The old email to ${old[0].to_email} is withdrawn; delete its Gmail draft by hand.`});
+     }
     };
+    const one=async lead=>{
+     const spend=spendFor(lead);
+     const withdraw=(lead,reason,patch)=>{
+      store.updateLead(lead.id,{status:'rejected',notes:reason,...patch});
+      store.addEvent({taskId:lead.task_id||null,leadId:lead.id,type:'decision',tool:'requalify',title:`Rejected ${lead.company||lead.domain}: ${reason}`});
+      out.rejected.push({id:lead.id,company:lead.company,reason});
+      for(const d of store.listDrafts({leadId:lead.id}))if(d.status!=='sent'&&d.gmail_url)out.withdrawnDrafts.push({leadId:lead.id,to:d.to_email,gmail_url:d.gmail_url});
+     };
+     if(lead.status==='unreachable'){out.checked++;withdraw(lead,`Site unreachable${lead.notes?`: ${lead.notes}`:''}. No public contact`,{contact_kind:'none'});return;}
+     let page=null,socials=lead.socials||{};
+     if(!lead.value){
+      try{page=await tools.fetchHome(lead.url||`https://${lead.domain}/`);}
+      catch(error){out.unchecked.push({id:lead.id,company:lead.company,reason:`Could not load the site: ${error.message}`});return;}
+      if(!page?.links?.length){out.unchecked.push({id:lead.id,company:lead.company,reason:'The page had no links (it may need a browser), so it was not judged'});return;}
+      socials=page.socials||extractSocials(page.links);
+      const fixed=/[<>]/.test(lead.company||'')?companyFrom(lead.company,lead.domain,{split:false}):null;
+      if(fixed)lead=store.updateLead(lead.id,{company:fixed});
+      let gate;
+      try{gate=await gateLead({lead,socials,site:{homeText:(page.text||'').slice(0,3000),contactText:'',best:null},exa:{title:lead.company,url:lead.url,text:lead.evidence||''},tools,spend});}
+      catch(error){out.unchecked.push({id:lead.id,company:lead.company,reason:`Check failed: ${error.message}`});return;}
+      out.checked++;
+      if(!gate.pass){
+       store.updateLead(lead.id,{socials,status:'rejected',notes:gate.reason,value:gate.value});
+       store.addEvent({taskId:lead.task_id||null,leadId:lead.id,type:'decision',tool:'requalify',title:gate.title});
+       out.rejected.push({id:lead.id,company:lead.company,reason:gate.reason});
+       for(const d of store.listDrafts({leadId:lead.id}))if(d.status!=='sent'&&d.gmail_url)out.withdrawnDrafts.push({leadId:lead.id,to:d.to_email,gmail_url:d.gmail_url});
+       return;
+      }
+      lead=store.updateLead(lead.id,{socials,value:gate.value});
+     }else out.checked++;
+     // Contact rule. Emails on file first; Exa only when no personal address is known.
+     const onFile=[...(lead.emails||[]),...(lead.contact_email&&!(lead.emails||[]).some(e=>e.email===lead.contact_email)?[{email:lead.contact_email,sourceUrl:lead.contact_source,excerpt:lead.contact_excerpt}]:[])];
+     let contact;
+     try{contact=await resolveContact({brand:lead.company||lead.domain,domain:lead.domain,homepageText:(page?.text||lead.evidence||'').slice(0,3000),socials,emails:onFile,find:tools.findContact,onSpend:(usd,note)=>spend(usd,'exa',`contact lookup: ${note}`)});}
+     catch(error){out.checked--;out.unchecked.push({id:lead.id,company:lead.company,reason:`Contact check failed: ${error.message}`});return;}
+     if(contact.uncertain){out.checked--;out.unchecked.push({id:lead.id,company:lead.company,reason:contact.reason});return;}
+     if(contact.kind==='role'||contact.kind==='none'){withdraw(lead,contact.reason,contactFields(contact));return;}
+     store.updateLead(lead.id,contactFields(contact));out.kept++;
+     if(contact.kind==='instagram')await convert(store.getLead(lead.id),contact);
+    };
+    const all=[...todo.map(l=>()=>one(l)),...convertOnly.map(l=>()=>convert(l,{kind:'instagram',handle:l.instagram_handle,name:l.contact_name,email:null,sourceUrl:l.contact_source,excerpt:l.contact_excerpt}))];
     let i=0;
-    await Promise.all(Array.from({length:Math.min(concurrency,todo.length)},async()=>{while(i<todo.length)await one(todo[i++]);}));
+    await Promise.all(Array.from({length:Math.min(concurrency,all.length)},async()=>{while(i<all.length)await all[i++]();}));
     out.rejected.sort((a,b)=>a.id-b.id);
     return out;
    }finally{busy=false;}

@@ -1,0 +1,14 @@
+TOOL LOGS, v1
+New renderer: agent/public/tool-logs.js
+New scoped style: agent/public/tool-logs.css
+Exports isToolEvent, toolLogRow(event, {events,esc,logoFor,open}), toolLogDetails(event,{esc}).
+Native details/summary supports keyboard and touch expansion, no event binding required.
+Use toolLogRow for tool_call, tool_result and tool-related errors in Live, mission console and brand Activity.
+Include tool_result in railTypes. Refresh correlated start rows when result arrives, retaining open state.
+Do not send native detail clicks through generic console expansion handlers.
+Only explicitly correlated events resolve a running request. Legacy requests say Recorded, legacy outputs say Result.
+Timing and cost chips appear only when recorded, not inferred from adjacent timestamps or provider totals.
+Inputs and results are collapsed. Known credential fields, bearer values and sensitive URL parameters are redacted.
+Assistant tools now emit persisted start/result lifecycle events. UUID correlation, measured duration, sanitized payloads. Existing model spend ledger is unchanged. No cost invented for local tools.
+Tests: node --test agent/assistant.test.mjs agent/tool-logs.test.mjs (11 passing).
+No paid calls made. Backend activation requires the owner's safe server reload.

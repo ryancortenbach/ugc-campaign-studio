@@ -1,0 +1,36 @@
+SEEDANCE 2.5: PS2 EXTEND PROMPT (CLIP 3: HOODIE PAYOFF)
+Use in Higgsfield > Extend Video with clip 2 (8:19 PM render, hf_20261020_001944) inserted. Settings: 7s, 720p, 9:16 inherited, audio On.
+References: @Video 1 = clip 2, @character, @hoodie, @Image 3 = Wingstop bag (still on the table), @Audio 1 = 07_voice_ref_clip3.mp3 (5.4s). The girl image is removed: she has left and does not return.
+v5 = v4 plus Haiku grade fixes (exact hand shape and tap timing, positive constraints). v4 = two-finger chest tap instead of thumbs, product showcase shot removed, line extended with "Get your jacket today." (Ryan adds his own plug in the edit). v3 = clip 2 lessons: eyes fully open, positive instructions only.
+
+CONTINUATION REFERENCE
+@Video 1 is the supplied video and the authoritative continuity reference. Continue directly from its exact final frame. Do NOT restart, recreate, reset, re-stage or reinterpret the scene.
+Preserve everything already established: the PS2 character model, face, hairstyle, skin tone, body, hoodie, trousers and sneakers, his pose in the same fixed, stationary tan leather wingback armchair (right foot up on the leather footstool, left foot flat on the floor), the Wingstop bag standing on the glass coffee table, the penthouse at dusk, lamp, lighting, shadows, skyline, camera-world scale, visual style and his voice. Only he is in the apartment.
+
+REFERENCE ROLES
+@character = MAIN CHARACTER REFERENCE, the same man as in the supplied video.
+@hoodie = CLOTHING REFERENCE: his blue zip hoodie with the white print "i wonder what i look like in your eyes" across the chest. Keep its colour, print and shape accurate as a PS2-era garment in every shot.
+@Image 3 = PROP REFERENCE: the Wingstop bag already on the coffee table. It stays where it is.
+@Audio 1 = VOICE REFERENCE: authoritative for his voice identity, accent, pitch, cadence, rhythm, pronunciation and delivery style.
+
+DIALOGUE (use exactly)
+"And clearly they're watching me because of my jacket. You could be a winner too. Get your jacket today."
+Accurate lip-sync throughout.
+
+SHOT-BY-SHOT TIMELINE (about 7 seconds)
+SHOT 1 (0 to 2.9 s): continue from the final frame. Medium shot of him in the armchair, eyes fully open and alert, head facing the camera, the camera slowly drifting closer. He raises his right hand to his chest: index and middle fingers extended and pressed together, ring and little fingers curled into the palm, thumb tucked. His fingertips tap the white print on the chest of his hoodie twice while he says "clearly they're watching". His left hand rests on the armrest, fingers together and natural. Confident half smile: "And clearly they're watching me because of my jacket."
+SHOT 2 (2.9 to 4.9 s): HARD CUT to a three-quarter medium close-up from the other side of the armchair, the camera slowly sliding sideways. His hand rests back on the armrest, eyes fully open on the camera, a small knowing nod: "You could be a winner too."
+SHOT 3 (4.9 to 7 s), PUNCHLINE: HARD CUT to a tight frontal close-up of his face, the camera slowly dollying closer on its rail. Both eyes fully open and wide, direct eye contact, a slow confident smile: "Get your jacket today." He holds the smile and eye contact after the line until the clip ends.
+
+CAMERA
+Scripted PS2 cutscene camera: distinct camera positions joined by clean hard cuts, with slow, steady in-engine moves inside the shots (the drift closer, the sideways slide, the slow dolly closer), like a PS2 cutscene camera on a rail. Smooth and mechanical, never handheld. No digital zooms, no crop reframes, no camera shake, no whip pans, no dramatic orbiting, no lens flares, no heavy depth of field, no cinematic film effects.
+
+AUDIO
+Only his voice, matching the voice reference, plus quiet penthouse room tone. No music, no narrator, no extra voices.
+
+ABSOLUTE CONSTRAINTS
+Only one person in frame: him, alone in the penthouse. Clean PS2 cutscene frames with no overlays. Natural, correctly formed hands with five fingers. Audio is his voice plus room tone.
+NO photorealism. NO modern AAA graphics. NO glossy modern CGI. NO photographic objects inserted into the PS2 world. NO identity drift. NO outfit changes. NO furniture changes. NO environment or lighting changes. NO extra characters. NO extra dialogue. NO narrator. NO subtitles. NO captions. NO HUD. NO title cards. NO watermarks.
+
+GOLDEN RULE
+The hoodie, the character, the bag, the penthouse, camera, lighting and every other element must look like they all came from the same authentic PS2 game. End after he holds the smile on "Get your jacket today."

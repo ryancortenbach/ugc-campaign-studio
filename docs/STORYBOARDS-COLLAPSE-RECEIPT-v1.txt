@@ -1,0 +1,14 @@
+STORYBOARDS COLLAPSE RECEIPT v1
+
+Changed (agent/public/app.js boardCard, boardGroups, checkList; style.css .sb rules)
+- Each storyboard in the list is a native <details>, collapsed by default. The summary row shows only the title, a version chip (v2), a status chip with an icon, and the shot count.
+- Character, wardrobe, environment, voice, camera, dialogue, checker notes, the revise input and all action buttons appear only after expanding.
+- Checker scores use the same score rings as Renders (red under 70, yellow 70 to 89, green 90 and up).
+- Boards with the same title are grouped: the newest version is the row, older versions sit under it in a "History (N)" disclosure. Every record is kept. Run checkers, Approve, Fix with checker notes and the revise form use the same handlers as before.
+- Open or closed state survives a live refresh.
+- Codex's workbench (#ap-workbench, apparel-*) and task storyboard views are untouched.
+
+How to verify
+- The list lives at #/storyboards/archive (the default #/storyboards page is Codex's brand storyboards view). It shows "14 storyboards" as 7 collapsed rows.
+- Snapshot taken: ~/Library/Caches/Mint Labs/snapshots/storyboards-bottom.png (taken with the archive list temporarily shown on the default route, then restored).
+- No paid checker calls were made.

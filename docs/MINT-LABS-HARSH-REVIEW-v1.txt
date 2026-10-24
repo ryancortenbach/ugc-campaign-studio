@@ -1,0 +1,42 @@
+MINT LABS HARSH REVIEW v1
+Status: PASS for the reviewed Home, Analytics, reference picker, carousel, legacy collapse and tool-log UI scope. Earlier failures were sent back and fixed. This is not acceptance of later automatic brand-research work or every unrelated repository test.
+Reviewed: 2026-10-24. Independent reviewer, actual Mint Labs native app on port 3200.
+
+FAILURES RETURNED AND RESOLVED
+1. Archive .stack collision produced horizontal overflow. Logo-stack styles are now scoped. Final native expansion and collapse of Final Boss and its History stayed within the center pane.
+2. Conflicting tool-log grid rules reduced names to C... or icon/time only. Reset rules now produce readable names with and without provider logos, with details beneath their call. Final native retest passed.
+3. Missing Analytics backend integration. The running native dashboard now loads genuine Today, week and month data. Each showed revenue 1000, 2 paid orders, recorded spend 0.62, 12 brands and 6 drafts, matching the supplied backend totals. Period axes changed correctly.
+4. Spend rail labeled tax-inclusive customer payments as Earned. Current app.js now labels the amount Collected. Verified in final source after the native semantic issue was reported; this one-word copy change was not separately reloaded in native review.
+
+PASSED NATIVE OBSERVATIONS
+- Standalone drafts remain accessible in the actual Storyboards view. Earlier review also exercised its archive route before the final shell revision.
+- One References dropdown contains the role tabs and saved character thumbnails. Escape closes it. No dotted plus boxes are visible.
+- Source-frame and timing overlays are absent. No left/right arrow controls remain.
+- Dot navigation and the Right key actually change image and dialogue. Scrolling by gesture was not separately exercised.
+- Edit reveals camera, action and dialogue fields without making them initially visible.
+- Final Boss cards start collapsed and expose a nested History (4) disclosure. Opened History and saw older revisions remain individually collapsed.
+- Tool calls are beneath main log events and their Input/Result disclosures open in place. Names remain readable with and without provider logos. No Recorded/Result status badges or generic tool glyphs appeared.
+- Home's obsolete draft/brand/spend strip is absent. Analytics is available in the top-right control.
+- Today, This week and This month switch correctly in native Analytics. Keyboard chart inspection exposed the hour and value. Native Data details displayed Collected 1041.25, Tax 41.25 and Revenue 1000.
+
+DATA AND STATE FIXES RECHECKED
+- Malformed pagination now rejects incomplete history instead of showing a partial total as known revenue.
+- Full-refund indicators force exclusion even when the refund amount is absent.
+- Sales revenue excludes reported sales tax. Partial taxable refunds carry an explicit estimate flag when allocated proportionally.
+- The ex-tax list is named Sales. Native Data details exposes Collected, Tax and Revenue reconciliation chips.
+- Analytics mount identity prevents an earlier Today request from overwriting a newer Month mount after navigation. A persistent regression is in agent/analytics-view.test.mjs.
+- Reference uploads are serialized with capacity checks and relevant controls locked while uploading.
+- Editing a shot invalidates its staged ImageGen request and updates the visible dialogue without rerendering the editor.
+- Latest reconciled save() refreshes all plans' derived prompts and local review before serialization, preventing stale production metadata after an edit. Verified in source after the concurrent controller rewrite.
+
+VALIDATION
+- Independently reran 18 scoped analytics, analytics-view and apparel-planner tests after tax changes: all passed.
+- No paid/provider generation or outreach action was performed during review.
+- Root agent reports 82 root tests and npm run check passing. These were not independently rerun here.
+- Root agent reports full agent suite 176/178, with two active outreach failures: revision count and SVG conversion embedding. Those failures remain outside this review's independently checked scope and must not be described as a clean full-suite pass.
+
+ACCEPTANCE LIMITS
+- Final native retest covered real successful data, not a simulated offline/stale payment state. Unknown versus zero and failed-refresh preservation passed scoped data tests; stale/Unavailable labels were source reviewed.
+- Keyboard chart inspection and carousel dot/keyboard navigation passed. Horizontal gesture input was attempted but no slide transition was established before repeated app-state invalidations. Do not claim an independently verified trackpad gesture pass.
+- Per-brand task persistence and subsequent automatic research are outside this final UI acceptance and need their own review.
+- Unrelated full-suite failures remain owner-reported as above. PASS here is a scoped UI/data review, not a clean full-repository certification.

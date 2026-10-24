@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {openStore} from './store.mjs';
 import {createAssistant,assistantTools} from './assistant.mjs';
+import {productionToolDefinitions} from './production-research.mjs';
 
 const text=t=>({type:'text',text:t});
 const use=(id,name,input)=>({type:'tool_use',id,name,input});
@@ -11,7 +12,7 @@ function fakeRunner(){const log=[];return {log,start:(prompt)=>{log.push(['start
 
 test('tool list has no way to approve, submit, send, mark sent or delete',()=>{
  const names=assistantTools.map(t=>t.name);
- assert.deepEqual(names.sort(),['control_mission','find_leads','get_lead','get_mission','get_overview','start_mission','steer_mission']);
+ assert.deepEqual(names.sort(),['control_mission','find_leads','get_lead','get_mission','get_overview','start_mission','steer_mission',...productionToolDefinitions.map(t=>t.name)].sort());
  for(const n of names)assert.doesNotMatch(n,/approve|submit|render|send|sent|delete|remove|gmail/);
  const control=assistantTools.find(t=>t.name==='control_mission');
  assert.deepEqual(control.input_schema.properties.action.enum,['pause','resume','stop']);
@@ -36,12 +37,13 @@ test('read tools answer from the store and the loop feeds results back',async()=
  const overview=JSON.parse(client.calls[1].messages.at(-1).content[0].content);
  assert.equal(overview.missions[0].status,'running');
  assert.equal(overview.pending_approvals.renders_awaiting_approval[0].id,r.id);
- assert.equal(overview.latest_events.length,1);
+ assert.equal(overview.latest_events.length,2);
+ assert.ok(overview.latest_events.some(e=>e.type==='tool_call'&&e.tool==='assistant.get_overview'));
  const second=client.calls[2].messages.at(-1).content.map(c=>JSON.parse(c.content));
  assert.equal(second[0].leads[0].domain,'hats.com');
  assert.equal(second[1].total,1);
  assert.equal(second[2].lead.company,'Hats Co');
- assert.equal(client.calls[0].tools.length,7);
+ assert.equal(client.calls[0].tools.length,7+productionToolDefinitions.length);
 });
 
 test('act tools route to the runner, errors come back as tool errors',async()=>{
@@ -105,4 +107,20 @@ test('rejects bad input, other models, and failed calls leave no half turn',asyn
  assert.equal(a.history().length,0);
  const prior=process.env.ANTHROPIC_API_KEY;delete process.env.ANTHROPIC_API_KEY;
  try{await assert.rejects(createAssistant({store,runner:fakeRunner()}).reply({message:'hi'}),{status:503});}finally{if(prior!==undefined)process.env.ANTHROPIC_API_KEY=prior;}
+});
+
+
+test('assistant tools emit correlated lifecycle logs including rejected input, without invented tool costs',async()=>{
+ const store=openStore(':memory:');
+ const client=fakeClient([turn([use('a','find_leads',{query:'hats'}),use('b','control_mission',{id:1,action:'delete'})],'tool_use'),turn([text('Reviewed.')],'end_turn')]);
+ await createAssistant({store,runner:fakeRunner(),client}).reply({message:'review'});
+ const events=store.listEvents();
+ assert.deepEqual(events.map(e=>e.type),['tool_call','tool_result','tool_call','tool_result']);
+ assert.equal(events[0].data.callId,events[1].data.callId);
+ assert.equal(events[2].data.callId,events[3].data.callId);
+ assert.notEqual(events[0].data.callId,events[2].data.callId);
+ assert.equal(events[1].data.status,'success');assert.equal(events[3].data.status,'error');
+ assert.ok(events.every(e=>e.data.costUsd===undefined));
+ assert.ok(events[1].data.durationMs>=0);assert.match(events[3].data.error,/Invalid/);
+ assert.equal(JSON.parse(events[1].data.output).total,0);
 });

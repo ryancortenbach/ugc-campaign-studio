@@ -10,7 +10,7 @@ import {buildInput,priceFrom,shotsFromStoryboard} from './tools/higgsfield.mjs';
 import http from 'node:http';
 import {createApp} from './server.mjs';
 
-const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,socials:{instagram:`https://www.instagram.com/${domain.split('.')[0]}/`},pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
+const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,socials:email?{instagram:`https://www.instagram.com/${domain.split('.')[0]}/`}:{tiktok:`https://www.tiktok.com/@${domain.split('.')[0]}`},pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
 function fakeTools(over={}){
  const calls={drafts:[],sends:0};
  const tools={
@@ -19,7 +19,7 @@ function fakeTools(over={}){
   brainMode:()=>'fake',exaMode:()=>'rest',siteMode:()=>'solari',gmailEnabled:()=>true,draftAccount:()=>'rmc2249@columbia.edu',
   plan:async()=>({data:{reply:'ok',markets:['streetwear'],territories:['Brooklyn'],maxDrafts:2,qualify:'sells online',exclusions:[],searchQueries:[{query:'q1',market:'streetwear',territory:'Brooklyn'},{query:'q2',market:'streetwear',territory:'Queens'}]},cost:0.001,model:'fake'}),
   search:async q=>({via:'fake exa',costUsd:0.007,requestId:'r',results:q==='q1'?[{title:'Alpha | Shop',url:'https://alpha.com/x',text:'a'},{title:'Amazon',url:'https://www.amazon.com/y',text:''},{title:'NoMail',url:'https://nomail.com/',text:''},{title:'Beta',url:'https://beta.com/',text:''}]:[{title:'Gamma',url:'https://gamma.com/',text:''}]}),
-  visit:async url=>{const d=new URL(url).hostname;return page(d,d==='nomail.com'?null:`hello@${d}`);},
+  visit:async url=>{const d=new URL(url).hostname;return page(d,d==='nomail.com'?null:`sam.lee@${d}`);},
   logo:async()=>({ok:true,checked:true,cost:0,logo:{checked:true,isRealLogo:true,matchesBrand:true,quality:90,reason:'fake'}}),
   value:async()=>({data:{valueScore:90,verdict:'keep',reason:'established brand'},cost:0.0001,model:'fake'}),
   score:async({lead,visit})=>({data:{company:lead.company,fitScore:80,decision:'pursue',reasons:['good'],risks:[],personalDetail:'detail'},cost:0.0001,model:'fake'}),
@@ -37,10 +37,10 @@ test('runner finds leads, skips marketplaces and no-email sites, drafts up to th
  const task=store.getTask(t.id);
  assert.equal(task.status,'done');
  assert.equal(tools.calls.drafts.length,2);
- assert.deepEqual(tools.calls.drafts.map(d=>d.to),['hello@alpha.com','hello@beta.com']);
+ assert.deepEqual(tools.calls.drafts.map(d=>d.to),['sam.lee@alpha.com','sam.lee@beta.com']);
  const leads=store.listLeads({taskId:t.id});
  assert.ok(!leads.some(l=>l.domain==='amazon.com'));
- assert.equal(leads.find(l=>l.domain==='nomail.com').status,'skipped');
+ assert.equal(leads.find(l=>l.domain==='nomail.com').status,'rejected');assert.equal(leads.find(l=>l.domain==='nomail.com').notes,'No reachable contact');
  assert.equal(leads.filter(l=>l.status==='drafted').length,2);
  assert.ok(task.cost_usd>0);
  const events=store.listEvents({taskId:t.id});
@@ -53,7 +53,7 @@ test('a domain already in the CRM is never contacted twice',async()=>{
  await runner.wait(runner.start('first').id);
  const before=tools.calls.drafts.length;
  const second=runner.start('second');await runner.wait(second.id);
- assert.ok(!tools.calls.drafts.slice(before).some(d=>['hello@alpha.com','hello@beta.com'].includes(d.to)));
+ assert.ok(!tools.calls.drafts.slice(before).some(d=>['sam.lee@alpha.com','sam.lee@beta.com'].includes(d.to)));
  assert.ok(store.listEvents({taskId:second.id}).some(e=>/already in CRM/.test(e.title)));
 });
 
@@ -88,9 +88,11 @@ test('copy cleanup removes em dashes, "really" and extra exclamation marks',()=>
  assert.equal(cleanCopy('We really love it \u2014 truly! Call us!'),'We love it, truly. Call us!');
 });
 
-test('gmail module never sends and blocks header injection',()=>{
+test('gmail module sends only through sendDraft and blocks header injection',()=>{
  const src=readFileSync(new URL('./tools/gmail.mjs',import.meta.url),'utf8');
- assert.ok(!/messages\/send|drafts\/send|\/send\b/.test(src));
+ assert.ok(!/messages\/send|users\/me\/messages/.test(src));
+ assert.equal(src.match(/drafts\/send/g).length,1,'one send endpoint');
+ assert.match(src,/export async function sendDraft[\s\S]*drafts\/send/);
  assert.throws(()=>buildMime({from:'a@b.c',to:'x@y.z\r\nBcc: evil@z.z',subject:'s',body:'b'}),/injection/);
 });
 

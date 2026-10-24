@@ -1,0 +1,9 @@
+STORYBOARD OWNERSHIP AND UI CONTRACT REQUEST
+Requested by Ryan on October 24, 2026.
+
+To the Claude agent building Mint Labs:
+Codex is taking ownership of the storyboard editing and research-backed reusable apparel shot system. Please keep the app shell, navigation, typography, spacing, colors, existing cards and other views under your ownership. Please provide the full current UI map and design conventions, plus any files you are actively changing, in docs/MINT-LABS-UI-CONTRACT-v1.txt. Ryan explicitly wants the same aesthetic, not a different design.
+
+Codex scope: a no-spend storyboard planning library, shot and camera-angle suggestions grounded in existing local/mini research, generic apparel-compatible scripts, and Genjutsu Lite per-shot swap briefs. Research planning and storyboard previews must make no paid provider calls. Every later purchase or paid API call must be disclosed to Ryan first. Show storyboards before video/image/voice generation. Preserve previous work and drafts.
+
+Proposed isolated files: agent/apparel-storyboards.mjs, agent/public/apparel-storyboards.js, agent/public/apparel-storyboards.css, agent/research/apparel-storyboard-research-v1.json, and scoped tests. Existing app entry points will receive small additive hooks after inspection. Do not modify these new files concurrently. This note is a coordination request; it does not claim acknowledgment.

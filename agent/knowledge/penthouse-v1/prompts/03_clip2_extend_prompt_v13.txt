@@ -1,0 +1,42 @@
+SEEDANCE 2.5: PS2 EXTEND PROMPT (CLIP 2: FC 26 + WINGSTOP)
+Use in Higgsfield > Extend Video with clip 1 inserted. v13 = v12 plus the paper bag crunch sound effect, Ryan's girl image as @Image 4. This is the exact text loaded in Higgsfield. v12 = v11 plus Haiku grade fixes (eyes fully open, shot cuts matched to where the voice audio says each line). v11 = bag placed on the table like CYBORG's version (no hand-off), retimed for 10 s. v10 = v9 plus Haiku grade round 3 fixes. v9 = v8 plus Haiku grade round 2 fixes. v8 = v7 plus Haiku grade round 1 fixes. v7 = fixes after the first clip 2 render (sleepy eyes, he looked at her, blocky girl, chair turned into an office chair). Settings: 10s, 720p, 70 credits, 9:16 inherited from clip 1, audio On. References: clip 1 as Video 1, Image 3 = wingstop_bag_ref.jpg, Image 4 = Ryan's girl image hf_20261020_000735 (Downloads), Audio 1 = 06_voice_ref_clip2.mp3.
+The @ tags are Element tags: type @ and pick them from the menu. In Higgsfield the bag is @Image 3, the girl is @Image 4 and the continuity video is @Video 1.
+
+CONTINUATION REFERENCE
+@Video 1 is the supplied video and the authoritative continuity reference. Continue the video directly from the exact final frame of the supplied video. Do NOT restart, recreate, reset, re-stage or reinterpret the scene. The first generated frame must visually connect to the final frame of the supplied video.
+Preserve everything already established: the PS2 character model, face, hairstyle, skin tone, body, hoodie, trousers and sneakers, his pose (right foot up on the leather footstool, left foot flat on the floor), the penthouse at dusk with the same skyline as the supplied video, the same fixed, stationary tan leather wingback armchair standing on four short wooden legs, footstool, coffee table, lamp, lighting, shadows, skyline, camera-world scale, visual style and his voice.
+
+REFERENCE ROLES
+@character = MAIN CHARACTER REFERENCE, the same man as in the supplied video.
+@hoodie = CLOTHING REFERENCE for his blue zip hoodie with the white print "i wonder what i look like in your eyes".
+@Image 3 = PROP REFERENCE: a Wingstop takeaway bag (brown kraft paper bag with the folded-over top and the large green Wingstop wings logo). Use it only to understand the bag's design and recreate it as a PS2-era 3D asset, not a pasted photo.
+@Image 4 = SECONDARY CHARACTER REFERENCE: authoritative for the young woman's face, hair, earrings, outfit and body. Render her at exactly the same quality as the main character.
+@Audio 1 = VOICE REFERENCE: authoritative for his voice identity, accent, pitch, cadence, rhythm, pronunciation and delivery style.
+
+SECONDARY CHARACTER
+The young woman from @Image 4 walks into the apartment carrying the Wingstop bag. She is the same polished PS2 cutscene quality as the main character: smooth shading, a detailed face, body proportions matching his, the same texture detail, lighting, shadows and animation quality as him, no lower and no higher. She remains completely silent and does not add dialogue.
+
+OBJECT PHYSICS
+Her hand holds the bag by its folded top. She carries it across the room to the coffee table in front of his armchair, bends slightly and sets it down: the bag's base makes contact with the table top, her hand lets go, and the bag stays there upright for the rest of the clip. She then steps back out of frame. No floating, teleporting, morphing or disappearing.
+
+DIALOGUE (use exactly)
+"It's like when your boy is too focused on trying to not lose against you on F C twenty six, but you just kick back beating him with your eyes closed. And I don't focus on who's watching me, I focus on why they're watching."
+Accurate lip-sync. He keeps talking straight into the camera while she brings the food in and sets it down, head facing the camera and both eyes fully open on the camera the whole time, which is the joke.
+
+SHOT-BY-SHOT TIMELINE (about 10 seconds)
+SHOT 1 (0 to 3.9 s): continue from the final frame. His eyes are fully open and alert, lids not lowered, looking straight into the camera with a calm, confident look. He eases back into the armchair as the camera slowly drifts back to a medium shot: "It's like when your boy is too focused on trying to not lose against you on F C twenty six,"
+SHOT 2 (3.9 to 6.3 s): HARD CUT to a wide frontal angle from in front of him, across the coffee table, so he is facing the lens. From the doorway at the side of frame the girl walks in carrying the Wingstop bag and comes toward the coffee table, the camera slowly sliding sideways to keep both of them in frame. He keeps talking straight to the camera, head facing the camera, eyes wide open and alert the whole shot: "but you just kick back beating him with your eyes closed."
+SHOT 3 (6.3 to 8.4 s): HARD CUT to a low insert at coffee-table height, looking across the table toward him: her hand comes into frame and sets the Wingstop bag down on the table, the base touches the table top with a crisp crunch of the paper bag, and her hand lets go and leaves frame. He stays in the background behind the bag, sitting back in the armchair, head facing the camera, both eyes fully open and pointed straight at the camera: "And I don't focus on who's watching me,"
+SHOT 4 (8.4 to 10 s), PUNCHLINE: HARD CUT to a medium close-up, the bag on the table in the foreground, the camera slowly dollying closer on its rail. Both eyes fully open and wide, lids not lowered, direct eye contact, a slow knowing smile at the corner of his mouth: "I focus on why they're watching." End immediately after "watching."
+
+CAMERA
+Scripted PS2 cutscene camera: distinct camera positions joined by clean hard cuts, with slow, steady in-engine moves inside the shots (the drift back, the sideways slide as she walks in, the low insert on the bag, the slow dolly closer), like a PS2 cutscene camera on a rail. Smooth and mechanical, never handheld. No digital zooms, no crop reframes, no camera shake, no whip pans, no dramatic orbiting, no lens flares, no heavy depth of field, no cinematic film effects.
+
+AUDIO
+Only his voice, matching the voice reference, plus room tone and her footsteps. Sound effect in shot 3: when the bag is set down, a crisp, crinkly crunch of stiff kraft paper and a soft muffled thud as its base lands on the table, timed exactly to the moment the bag touches the table and mixed under his voice so it never covers a word. No music, no narrator, no extra voices.
+
+ABSOLUTE CONSTRAINTS
+NO photorealism. NO modern AAA graphics. NO glossy modern CGI. NO photographic objects inserted into the PS2 world. NO identity drift. NO furniture changes. NO outfit changes. NO pose reset. NO environment or lighting changes. NO extra dialogue. NO dialogue from the girl. NO narrator. NO subtitles. NO captions. NO HUD. NO watermarks.
+
+GOLDEN RULE
+The bag, both characters, the penthouse, camera, lighting and every other element must look like they all came from the same authentic PS2 game. End immediately after he finishes "why they're watching."

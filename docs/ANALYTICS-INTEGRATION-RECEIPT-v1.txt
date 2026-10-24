@@ -1,0 +1,11 @@
+Analytics integration and actual-app verification
+
+GET /api/analytics is wired to createAnalytics and the top-right Analytics route. Actual native review checked Today, Week and Month, chart keyboard trace, reconciliation disclosure and old Home statistics removal.
+
+Verified two500USD sales:1000USD revenue before fees,1041.25USD collected,41.25USD sales tax excluded. Recorded spend uses timestamped local ledger entries only. Provider balances or undated account estimates do not get allocated to a calendar period. Revenue is not profit.
+
+Complete Whop pagination, cursor progress, full refunds, nullable unknown revenue, retained stale complete cache, New York calendar periods and frontend mount identity passed tests. Spend rail gross receipt label is Collected.
+
+Current server is the normal app on127.0.0.1:3200 using its existing agent/.data/agent.db. Autopilot and Whop watcher remain disabled. Narrow activation checkpoints preserved a database backup under work/ideation-activation. Exact final listener is recorded in the coordination task after activation.
+
+Final listener47738 activated after all research tasks were idle. Final API receipt: work/ideation-activation/final-verification-v1.json. Independent reviewed scopes passed.

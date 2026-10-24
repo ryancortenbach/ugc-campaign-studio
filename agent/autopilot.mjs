@@ -9,11 +9,12 @@ export function createAutopilot({store,runner,now=()=>new Date(),intervalMs=6000
  const read=key=>{const r=db.prepare('select value from settings where key=?').get(key);if(!r)return undefined;try{return JSON.parse(r.value);}catch{return undefined;}};
  const write=(key,value)=>db.prepare('insert into settings(key,value) values(?,?) on conflict(key) do update set value=excluded.value').run(key,JSON.stringify(value));
  const config=()=>Object.fromEntries(Object.entries(DEFAULTS).map(([k,v])=>[k,read(k)??v]));
- const newestGoal=()=>(store.listTasks()[0]?.prompt||'').replace(SUFFIX,'').trim();
+ const missionRows=()=>db.prepare('select prompt,plan from tasks order by id desc').all().filter(t=>{try{return JSON.parse(t.plan||'null')?.kind!=='brand_storyboard'&&!/^whop order:/i.test(t.prompt);}catch{return true;}});
+ const newestGoal=()=>(missionRows()[0]?.prompt||'').replace(SUFFIX,'').trim();
  // Spend since local midnight. Higgsfield renders need Ryan's approval, so they never count against autopilot.
  const spentToday=()=>{const day=new Date(now());day.setHours(0,0,0,0);return db.prepare("select coalesce(sum(usd),0) n from spend where at>=? and provider!='higgsfield'").get(day.toISOString()).n;};
  const activeTask=()=>db.prepare("select id from tasks where status in ('queued','running','paused')").all().some(t=>runner.isRunning(t.id));
- const lastFinished=()=>{const t=db.prepare("select max(updated_at) t from tasks where status in ('done','failed','stopped')").get().t;return t?new Date(t):null;};
+ const lastFinished=()=>{const t=db.prepare("select max(updated_at) t from tasks where status in ('done','failed','stopped') and coalesce(json_extract(plan,'$.kind'),'')!='brand_storyboard' and prompt not like 'Whop order:%'").get().t;return t?new Date(t):null;};
  let timer=null,last='idle';
 
  function tick(){

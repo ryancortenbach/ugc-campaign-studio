@@ -132,6 +132,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         window.title = "Mint Labs"
         window.appearance = NSAppearance(named: .darkAqua)
         window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
         window.backgroundColor = webView.underPageBackgroundColor
         window.contentView = webView
         window.minSize = NSSize(width: 900, height: 600)
@@ -151,7 +152,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         guard let route = parts.first, route.range(of: "^#/[a-z]+(/[0-9]+)?$", options: .regularExpression) != nil else { return }
         let actions = ["spend": "document.querySelector('#spendbtn').click()", "integrations": "document.querySelector('#intbtn').click()",
                        "lead": "document.querySelector('.trow[data-id]')?.click()", "bottom": "document.querySelector('#view').scrollTop=1e6",
-                       "plus": "document.querySelector('#cplus')?.click()", "model": "document.querySelector('#cmodel')?.click()", "rail": "document.querySelector('#railbtn')?.click()"]
+                       "plus": "document.querySelector('#cplus')?.click()", "model": "document.querySelector('#cmodel')?.click()", "rail": "document.querySelector('#railbtn')?.click()",
+                       "browser": "document.querySelector('[data-rtab=browser]')?.click()", "conn": "document.querySelector('[data-rtab=conn]')?.click()"]
         let action = parts.count > 1 ? actions[parts[1]] : nil
         let name = (route.dropFirst(2).replacingOccurrences(of: "/", with: "-")) + (parts.count > 1 && action != nil ? "-" + parts[1] : "")
         webView.evaluateJavaScript("location.hash='\(route)';document.querySelectorAll('.intpanel').forEach(p=>p.hidden=true);1") { _, _ in

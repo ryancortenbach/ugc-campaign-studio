@@ -110,3 +110,15 @@ test('settings persist and bad values are rejected; start/stop timer is idempote
  assert.throws(()=>ap.set({dailyBudgetUsd:'abc'}));
  ap.start();ap.start();ap.stop();ap.stop();
 });
+
+test('brand planning and client projects never become the next outreach goal or reset its pause',()=>{
+ const {store,ap,clock,finish,starts}=setup();
+ const mission=store.createTask('Find apparel brands');finish(mission.id);
+ clock.t+=20*60000;
+ const brand=store.createTask('Storyboard: Example');store.updateTask(brand.id,{status:'failed',plan:{kind:'brand_storyboard'}});
+ const client=store.createTask('Whop order: Client project');store.updateTask(client.id,{status:'done',plan:{kind:'client_project'}});
+ store.db.prepare('update tasks set updated_at=? where id in (?,?)').run(new Date(clock.t).toISOString(),brand.id,client.id);
+ assert.equal(ap.get().goalDefault,'Find apparel brands');
+ ap.set({enabled:true});assert.equal(starts.length,1);assert.equal(starts[0].prompt,'Find apparel brands Find brands that are not already in the CRM.');
+ store.db.close();
+});

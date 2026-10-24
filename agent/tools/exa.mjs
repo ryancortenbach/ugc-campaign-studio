@@ -24,3 +24,16 @@ export async function pageImages(url,{request=fetch}={}){
  const data=await res.json();const r=(data.results||[])[0]||{};
  return {favicon:httpUrl(r.favicon),image:httpUrl(r.image),costUsd:data.costDollars?.total??null};
 }
+
+// Public text of known pages (a brand's about page, an Instagram profile) in one request. The real cost comes from the response.
+// Needs the paid key. Without one it returns {skipped:true} so the caller does not count it as a call.
+export async function pageContents(urls,{request=fetch,maxCharacters=6000}={}){
+ const list=(urls||[]).map(httpUrl).filter(Boolean).slice(0,6);
+ if(!process.env.EXA_API_KEY||!list.length)return {results:[],costUsd:null,skipped:true};
+ const res=await request('https://api.exa.ai/contents',{method:'POST',headers:{'x-api-key':process.env.EXA_API_KEY,'Content-Type':'application/json'},signal:AbortSignal.timeout(30000),body:JSON.stringify({urls:list,text:{maxCharacters}})});
+ if(!res.ok)throw Object.assign(Error(`Exa contents failed with HTTP ${res.status}`),{status:res.status});
+ const data=await res.json();
+ return {via:'api.exa.ai /contents',results:(data.results||[]).filter(r=>typeof r.url==='string').map(r=>({title:(r.title||'').replace(/\s+/g,' ').trim(),url:r.url,text:typeof r.text==='string'?r.text:''})),costUsd:data.costDollars?.total??null,requestId:data.requestId||null};
+}
+// The two Exa calls findPersonalContact may make.
+export const exaFinder={search:query=>searchBrands(query,{numResults:5}),contents:pageContents};

@@ -1,0 +1,62 @@
+CLIP 2 FIX PLAN (after the first clip 2 render, 2026-10-19 7:32 PM)
+
+WHAT WENT WRONG (checked frame by frame, 0.5s to 8.7s)
+1. 0 to 2s: his eyes are half closed, he looks sleepy. Cause: shot 1 literally said "eyes half closed".
+2. 2.5 to 4.5s: the girl is blocky and low-detail (tank top, denim skirt, flat textures), far below his quality. Cause: no reference image for her, and the text said "low-to-medium polygon / simplified model", which the model took literally.
+3. 4.5s: his armchair grows an office-chair base on wheels. Cause: chair was not locked tightly enough.
+4. 5.5 to 6.5s: he turns and looks at her during the hand-off. Cause: "without looking at her" is a negative instruction, which video models follow badly, and a hand-off pulls the eyes.
+What worked: the bag (brown kraft, green Wingstop logo), the hand-off itself, the 7.5 to 9s close-up with eye contact.
+
+STEP 1. GIRL REFERENCE IMAGE (approved, about 2 credits)
+Higgsfield > Image, Nano Banana Pro, 9:16, 1K, 1 image. Style reference = the seated PS2 character image.
+Prompt: 09_girl_image_prompt_v2.txt (early 20s London woman, sleek bun, gold hoops, cropped black puffer, white top, grey joggers, white trainers, same render quality and proportions as him, plain grey backdrop, described positively).
+Check before using: same shading and face detail as him, realistic proportions, one person only, no text.
+
+STEP 2. GRADE (Haiku 5.5)
+A Haiku 5.5 grader reads this plan, 09_girl_image_prompt_v2.txt and 03_clip2_extend_prompt_v13.txt and flags anything questionable (contradictions, negative-only instructions, timing, tag mistakes). Fix anything real before step 3.
+
+STEP 3. LOAD CLIP 2 v10 IN HIGGSFIELD (no generate)
+Extend Video, Video 1 = clip 1 (7:12 PM take).
+References: character, hoodie, Image 3 = bag, Image 4 = the new girl image, Audio 1 = 06_voice_ref_clip2.mp3 (10s).
+Prompt: 03_clip2_extend_prompt_v13.txt, every reference inserted as a real @ tag picked from the menu (typing a name + Enter picks the wrong tag, so click each one), then read back and check all six tags: @Video 1, @character, @hoodie, @Image 3, @Image 4, @Audio 1.
+Settings: 9s (Extend max), 720p, 9:16 inherited, bitrate High, audio On. 63 credits.
+
+FIXES IN v7
+- Shot 1: eyes open and alert, straight into camera, calm smug look.
+- Girl: tagged to @Image 4, "same polished PS2 cutscene quality as @character, no lower and no higher, NOT blocky, NOT low-poly toy, NOT Roblox".
+- Eye line: positive instruction "his head never turns toward her, his eyes stay locked on the camera", shot 3 reframed as a frontal shot of him with her stepping in from the side.
+- Chair: "the same tan leather wingback armchair, no wheels, no swivel base"; skyline locked to the supplied video.
+- Constraints added: NO closed or sleepy eyes, NO looking at the girl, NO furniture changes.
+
+STEP 4. RYAN APPROVES, THEN GENERATE (63 credits)
+
+STEP 5. REVIEW THE NEW RENDER FRAME BY FRAME
+Eyes open in shot 1 | girl at his quality | he never looks at her | chair unchanged | bag correct | full line ends on "watching" | no subtitles or text.
+If one shot fails, change only that shot's line and regenerate.
+
+HAIKU GRADE ROUND 1 (ISSUES, 9 points, all applied in v8 and girl prompt v2)
+1. Leftover negative eye-line wording replaced with positive "head facing the camera, eyes locked on the camera".
+2. Shot 2 now says his eyes stay wide open (the line says "with your eyes closed").
+3. Shots retimed by word count: 0 to 3.6 s, 3.6 to 5.9 s, 5.9 to 7.6 s, 7.6 to 9 s.
+4. Girl prompt: named negatives (Roblox, Minecraft) replaced by a positive target.
+5. Girl prompt: "realistic proportions" replaced by "same body proportions style as the man in the image".
+6. Girl prompt: plain neutral grey backdrop instead of a penthouse.
+7. @Video 1 written into the CONTINUATION REFERENCE line.
+8. "F C twenty six" written directly into the quoted dialogue.
+9. One hand-off motion: his hand comes up off the armrest, face toward the camera.
+
+HAIKU GRADE ROUND 2 (round-1 items all FIXED; 7 new points)
+Girl image prompt v2: clean, generated.
+Clip 2 v9 applies 6 of 7: eyes stay open on "eyes closed"; Roblox clause cut; proportions match @character; failure-naming negatives removed (chair now "four short wooden legs"); shot 2 camera moved in front of him across the coffee table; one-handed hand-off.
+Open (Ryan's call): the 45-word line is tight for 9 s. Option A keep it exact (may sound slightly rushed). Option B trim "And" and "just" (43 words).
+
+HAIKU GRADE ROUND 3 (all round-2 changes PRESENT; tags and 9.0 s timing confirmed; 4 small points, all applied in v10)
+1. Removed the quoted "eyes closed" from the shot 2 eye instruction.
+2. Chair: "fixed, stationary tan leather wingback armchair on four short wooden legs".
+3. Shot 4 push-in reworded as "dollying closer on its rail" so it is not read as a zoom.
+4. Shot 2: she enters "from the doorway at the side of frame", matching shot 3.
+Grading stopped after round 3 (remaining points were minor and are fixed).
+
+GIRL IMAGE RESULT (Nano Banana Pro, 2 credits, in Higgsfield > Image generations)
+Matches the brief: sleek bun, gold hoops, cropped black puffer, white top, grey joggers, white trainers, plain grey backdrop, adult, one person.
+Note: slightly cleaner and more modern-CG than his image (smoother textures, less PS2 grain).

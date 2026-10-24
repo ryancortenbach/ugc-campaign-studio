@@ -1,0 +1,25 @@
+/* Compact traces in the existing Live rail and task logs. */
+.tg{min-width:0;margin:0 8px 8px}
+.tg .li{margin:0;min-width:0;grid-template-columns:28px minmax(0,1fr);padding:10px 8px}
+.tg-av{display:flex;width:28px;height:28px;align-items:center;justify-content:center}
+.tg-av .thumb,.tg-av .ico{width:28px;height:28px;flex:none}
+.tg-av img{max-width:100%;max-height:100%;object-fit:contain}
+.tg-t{min-width:0;overflow:hidden}
+.tg .msg{overflow-wrap:anywhere}
+.tg .sub{font-size:10.5px;color:var(--faint);line-height:1.5;overflow-wrap:anywhere}
+.tg .xn{font:500 10.5px var(--sans);font-style:normal;color:var(--faint)}
+.tg-kids{margin:0 6px 4px 21px;padding:0 0 0 16px;border-left:1px solid var(--line2);min-width:0}
+.tg-kid{position:relative;min-width:0;margin:2px 0}
+.tg-kid .nd{position:absolute;left:-20px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--raise);box-shadow:0 0 0 3px var(--shell)}
+.kd-main{display:grid;grid-template-columns:14px minmax(0,1fr) auto;align-items:start;gap:7px;width:100%;padding:7px 5px;border:0;border-radius:6px;background:transparent;color:var(--muted);text-align:left;cursor:pointer;font:inherit;min-width:0}
+.kd-main:hover,.kd-main:focus-visible{background:var(--panel2);color:var(--text)}
+.kd-logo{width:14px;height:14px;object-fit:contain;margin-top:1px}
+.kd-name{min-width:0;font-size:11px;line-height:1.4;overflow-wrap:anywhere}
+.kd-name i{font-style:normal;color:var(--faint)}
+.kd-main time{font:10px var(--mono);color:var(--faint);padding-top:2px;white-space:nowrap}
+.kd-det{min-width:0;max-height:320px;overflow:auto;margin:2px 0 8px;padding:8px;border-radius:8px;background:var(--panel2)}
+.kd-det pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+#livefeed .tg .more{overflow-wrap:anywhere}
+#livefeed .acts{flex-wrap:wrap}
+.conn-name span{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.4}
+.conn-name small{display:block;font-size:10px;color:var(--faint);margin-top:3px}

@@ -5,16 +5,19 @@ set -euo pipefail
 cd "$(dirname "$0")"
 repo="$(cd .. && pwd)"
 app="build/Mint Labs.app"
-rm -rf build && mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources" build/AppIcon.iconset
+rm -rf build && mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 
 swiftc -O -swift-version 5 MintLabs.swift -o "$app/Contents/MacOS/MintLabs" -framework Cocoa -framework WebKit -framework Speech -framework AVFoundation
 
 python3 make_icon.py build/icon.png
-for s in 16 32 128 256 512; do
-  sips -z $s $s build/icon.png --out "build/AppIcon.iconset/icon_${s}x${s}.png" >/dev/null
-  sips -z $((s*2)) $((s*2)) build/icon.png --out "build/AppIcon.iconset/icon_${s}x${s}@2x.png" >/dev/null
-done
-iconutil -c icns build/AppIcon.iconset -o "$app/Contents/Resources/AppIcon.icns"
+python3 - "$app/Contents/Resources/AppIcon.icns" <<'PY'
+import sys
+from PIL import Image
+
+with Image.open('build/icon.png') as image:
+    image.save(sys.argv[1], format='ICNS')
+PY
+rm build/icon.png
 
 cat > "$app/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>

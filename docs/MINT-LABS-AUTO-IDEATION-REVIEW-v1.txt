@@ -1,0 +1,45 @@
+AUTOMATIC BRAND RESEARCH AND IDEATION REVIEW v1
+Status: PASS for the reviewed automatic research source and final native drawer/report behavior. Broader repository checks, exact billing attribution and final backend activation remain root-owned.
+Scope: brand-ideation service, task research application, runner/server integration, drawer/task progress and tool traces. Read-only implementation review. No provider calls or native actions during this pass.
+
+DEFECTS RETURNED AND SOURCE FIXES RECHECKED
+1. Jacket fell back to T-shirt. Jacket is now a supported planner category, with a regression covering its actual wardrobe.
+2. Footwear-only and photo-less catalogs claimed ready without an apparel reference. Readiness now requires a supported usable snapshotted garment, otherwise records a needs_research gap. Regressions pass.
+3. Tool result payloads were absent from new panels. toolLogRow now merges the paired result/error into its expandable details. The result-marker reproducer now passes.
+4. An open lab retained revision 0 after research saved revision 1. Controller refresh now merges research, preserves the focused input DOM, accepts the newer revision, and invalidates staged requests when references change. The actual jsdom edit/save regression passes.
+5. Default runner still invoked paid legacy research and wrote mutable catalog images. Default realTools no longer includes that hook. Product references are copied to uploads, and compatible legacy automatic references migrate to the stable URL. Existing user-selected references remain preserved.
+6. Late progress responses could overwrite newer Ready state with Research in progress. Demonstrated in the actual jsdom task view. Per-context request sequencing now rejects superseded progress responses. Added agent/task-storyboards-view.test.mjs, covering both status and activity retention; it passes.
+7. Task status SSE refresh could remount an actively edited lab. The shell now refreshes the mounted controller/activity instead of routing again when a task lab is open. Source verified; native acceptance pending.
+
+POSITIVE EVIDENCE
+- Independently ran 30 focused analytics, analytics-view, planner, automatic ideation and task-storyboard tests. All passed, but the cases above are not covered by that green run.
+- After fixes, independently ran 16 brand-ideation, task-storyboard, focused-edit refresh and deferred-response view tests. All passed, including the new edge-case regressions.
+- New automatic module passes enabled:()=>false to catalog classification and makes no direct model, browser-session or generation call.
+- Tool calls receive unique IDs and corresponding success/error result events, with measured duration and zero recorded cost.
+- In-flight rejection is checked before applying research. Current requalification after cancellation was exercised and started a fresh read.
+- Edited shot lists and manually chosen references are preserved by existing in-flight tests.
+- Database rows make queued/in-progress work resumable by startup sync, and same-process active-map deduplication prevents repeated concurrent starts for a lead.
+- Audience demographics and ad performance remain explicitly unverified. The planner describes its method as local templates without model inference.
+
+ACCEPTANCE CRITERIA
+- No manual Make video action in the lead drawer.
+- Qualified brands automatically start research and local ideation.
+- Active research/planning uses orange spinner styling. Yellow attention appears only for an actual review/failure need.
+- Tool traces expose real matching inputs and results/errors, not just progress labels.
+- Research completion updates an already-open pristine task. Edited or recovered local drafts are retained.
+- Product image, title, category and prompt refer to the same item before and after later research/reload.
+- No paid providers, renders or checkers start as a side effect of qualification or startup sync.
+
+FINAL NATIVE ACCEPTANCE
+- After reloading the actual app, Gifted Elite New York's full drawer title is readable and the manual Make video action is absent.
+- Research tools defaults open and remains collapsible. Expanded storyboard.local and its Result disclosure. Real fields included schemaVersion 2, revision 3, productCount 0, usableGarment false and specific missing-photo/audience gaps.
+- Clicked exactly one explicitly free Retry research action. Native screenshot showed an orange rotating loader and Research in progress with a running catalog call. It finished with Research needs review after no usable catalog was found, with three new zero-cost calls/results. No false ready claim appeared.
+- Displayed recorded spend remained 0.79 before, during and after that retry. No paid action was clicked by the reviewer.
+- Earlier passive review confirmed the ready Disobedient PDF renders and distinguishes local templates from model inference. Stable upload references and dirty-edit preservation were source/test verified; the PDF-only task view no longer exposes the earlier per-task editor.
+- Paired error rendering and automatic qualification are covered by focused tests/source. No deliberately failing native provider request or new live brand qualification was forced during final UI acceptance.
+
+PASSIVE NATIVE OBSERVATION AFTER ACTIVATION
+- Current screen was Disobedient task 7. It displayed Ideas ready and rendered its embedded seven-page creative-ideas PDF. The report explicitly described local templates and no model inference.
+- The task view was concurrently replaced by the report design. The deferred-response test was updated to the report status selector and now also protects the PDF URL from older responses. The corrected current view passed that regression.
+- The current screen did not show a lead drawer, active orange state, or lead-row social logos. Those were not visually accepted from this snapshot. No navigation was forced while Ryan was active.
+- Task activity visibly included shopify.products at 15:17:00 and claude.profile at 15:17:04. The Spend rail showed 0.66 total and 0.54 Claude, above earlier 0.62/0.49 values. Attribution is unresolved in this review; this may be a separate user or agent action. Root was alerted to verify it before claiming zero-spend activation. The reviewer performed no such call.

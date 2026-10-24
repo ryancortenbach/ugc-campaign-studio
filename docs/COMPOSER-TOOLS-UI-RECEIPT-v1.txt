@@ -1,0 +1,7 @@
+COMPOSER TOOLS UI RECEIPT v1
+
+- The + menu is attachment-only: photos and files, and a link.
+- Modes (Find brands, Storyboard, Plan a shot) are compact icon chips under the composer (#cmodes, role radiogroup, real buttons so keyboard works). The selected chip is a raised neutral surface. No descriptions.
+- Whop autopilot is removed from the composer. The "Watch new purchases" switch on Tasks covers it.
+- Suggestions stay, but only up to 3 for the selected mode, as quiet text lines under the chips.
+- The earlier in-form mode row (.ap-composer-modes in composer-tools.css) is no longer rendered; its CSS file is unused.

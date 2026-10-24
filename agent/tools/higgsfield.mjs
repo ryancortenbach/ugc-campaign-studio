@@ -8,8 +8,9 @@ import {structured,llmEnabled} from './llm.mjs';
 // calls it only from his approve click on a render whose checks passed and whose estimate he has seen.
 const base='https://api.higgsfield.ai';
 export const higgsfieldEnabled=()=>/^[^:\s]+:[^:\s]+$/.test(process.env.HF_CREDENTIALS||'');
-export const endpoints={'text-to-video':'bytedance/seedance-2.5/text-to-video','image-to-video':'bytedance/seedance-2.5/image-to-video'};
-export const PASS_SCORE=85;
+// 'reference-still' edits a product photo into a creator photo (docs: https://open.higgsfield.ai/models/xai/grok-imagine-image-2.0/api-reference, body: prompt, image_urls[], resolution 1k|2k, aspect_ratio, quality low|medium).
+export const endpoints={'text-to-video':'bytedance/seedance-2.5/text-to-video','image-to-video':'bytedance/seedance-2.5/image-to-video','reference-still':'xai/grok-imagine-image-2.0'};
+export const PASS_SCORE=90;
 // The renderer is text only, so continuity has to live in repeated text locks, not in reference files.
 export const renderMode='Generation mode: Higgsfield Seedance 2.5 text-to-video, one separate call per shot, with no reference images, no voice reference clips, no seeds and no asset IDs. Every shot prompt automatically repeats the identity, wardrobe, environment, voice, creative direction and constraints text, so continuity depends on those descriptions being exact and complete.';
 
@@ -25,6 +26,7 @@ export function buildInput({prompt,imageUrl,duration=5,resolution='720p'}){
  if(imageUrl)input.image_url=imageUrl;
  return input;
 }
+export function buildStillInput({prompt,imageUrl,resolution='1k'}){return {prompt,image_urls:[imageUrl],resolution:['1k','2k'].includes(resolution)?resolution:'1k',aspect_ratio:'9:16',quality:'medium'};}
 export const estimate=(endpoint,input)=>hf(`estimate/${endpoint}`,{method:'POST',body:JSON.stringify(input)});
 // Seedance returns a per-second price sheet instead of a total, so the total is rate at this resolution times seconds.
 export function priceFrom(e,input){
@@ -42,7 +44,7 @@ const gradeSchema=z.object({score:z.number().int(),summary:z.string(),issues:z.a
 export async function runCheckers({title,input,brief=''}){
  if(!llmEnabled())throw Error('Checkers need ANTHROPIC_API_KEY');
  const results=await Promise.all(reviewers.map(async([id,name,focus])=>{
-  try{const out=await structured({role:'grader',effort:'medium',schema:gradeSchema,system:`You are the ${name} checker for a short AI-generated video shot. ${focus} ${input.image_url?'This shot also has one reference image as its first frame.':renderMode} Do not flag the absence of reference files. Score 0 to 100. Use blocking or major only for problems that would visibly ruin or invalidate the render. Cite exact words from the prompt as evidence.`,prompt:JSON.stringify({shotTitle:title,brief,prompt:input.prompt,durationSeconds:input.duration,resolution:input.resolution,hasReferenceImage:Boolean(input.image_url)})});return {id,name,...out.data,cost:out.cost};}
+  try{const out=await structured({role:'grader',effort:'medium',schema:gradeSchema,system:`You are the ${name} checker for a short AI-generated video shot. ${focus} ${input.image_url?'This shot also has one reference image as its first frame.':renderMode} Do not flag the absence of reference files. Score 0 to 100 and make the score agree with the issues you list: 95 to 100 with no issues, 90 to 94 when you list only minor polish notes, 70 to 89 when there is at least one major issue, under 70 when there is a blocking issue. Use blocking or major only for problems that would visibly ruin or invalidate the render; anything a viewer would not notice is minor. Cite exact words from the prompt as evidence.`,prompt:JSON.stringify({shotTitle:title,brief,prompt:input.prompt,durationSeconds:input.duration,resolution:input.resolution,hasReferenceImage:Boolean(input.image_url)})});return {id,name,...out.data,cost:out.cost};}
   catch(error){return {id,name,score:0,summary:`Checker failed: ${error.message}`,issues:[{severity:'blocking',evidence:'checker unavailable',fix:'rerun checks'}],cost:0};}
  }));
  const passed=results.every(r=>r.score>=PASS_SCORE&&!r.issues.some(i=>i.severity!=='minor'));

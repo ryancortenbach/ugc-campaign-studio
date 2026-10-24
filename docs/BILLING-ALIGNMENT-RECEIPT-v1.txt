@@ -1,0 +1,15 @@
+Provider cost semantics and lead logo alignment
+
+Higgsfield: documented GET https://api.higgsfield.ai/models/usage returned HTTP200 with a complete October history through the current read (UTC). Account usage estimate9.4507USD, including1.20 on October24. This is an API account usage estimate, not an invoice and not website plan-credit spending. Source https://docs.higgsfield.ai/docs/enterprise/usage-and-billing.md explicitly labels analytics incomplete/delayed estimates and paginates over buckets. The adapter checks pagination, dates, currency, missing costs and repeated buckets before accepting a total.
+
+ElevenLabs: live subscription reports63,232 of610,000 characters used on pro. That proves usage, not a dollar charge. Missing counts stay unavailable. No priced Mint ledger entry means unknown dollars, not0.
+
+Terac: live context reports100USD current credit. A balance does not establish past spending because credits, top-ups and refunds can change it. Removed the hardcoded100-minus-balance inference. Account spend remains unknown without transaction history. Read-only tool discovery exposed no transaction-history MCP tool.
+
+Mint's total is now explicitly Recorded spend with Partial coverage. Provider-account estimates are not inserted into the local ledger or added again to its subtotal. Individual provider rows expand to their basis and, where known, official billing links. Actual native screenshots verified Higgsfield9.45est/Thismonth, ElevenLabsUsageonly, TeracBalanceonly, and the partial recorded subtotal. Concurrent legacy profiles increased local spend separately; this fix never submits provider generation.
+
+Social links have fixed ordered platform slots, uniform14px images, and a shared alignment column. Narrow brand cells place the entire social strip below the website to keep domains readable. Native screenshot verified consistent alignment across BLAN, Brooklyn Industries, VYLIN, Gifted Elite New York and Disobedient. Drawer header wraps status chips so the brand title retains space.
+
+Checks: root82/82 plus npm run check passed. Full agent220/220 passed after restoring dev dependencies. Subsequent billing/date/null regression set16/16 passed. The former SVG PDF test now passes with Resvg2.6.2 instead of unsupported SVG decoding through sips. No paid API was used for these checks.
+
+Final listener47738 activated after all research tasks were idle. Final API receipt: work/ideation-activation/final-verification-v1.json. Independent reviewed scopes passed.

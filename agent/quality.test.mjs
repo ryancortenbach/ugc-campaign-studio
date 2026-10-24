@@ -115,7 +115,7 @@ function missionTools(over={}){
    {title:'Alpha',url:'https://alpha.com/',text:'real'},
    {title:'Gamma',url:'https://gamma.com/',text:'real'},
    {title:'Delta',url:'https://delta.com/',text:'real'}]}),
-  visit:async url=>{const d=new URL(url).hostname;return {via:'fake',sessionId:null,screenshot:null,domain:d,socials:withSocials.has(d)||d==='beta.com'?{instagram:`https://www.instagram.com/${d}/`}:{},pages:[{url,title:d,chars:1}],homeText:'Shop',contactText:'',emails:[{email:`hi@${d}`,sourceUrl:url,excerpt:'x'}],best:{email:`hi@${d}`,sourceUrl:url,excerpt:'x'}};},
+  visit:async url=>{const d=new URL(url).hostname;return {via:'fake',sessionId:null,screenshot:null,domain:d,socials:withSocials.has(d)||d==='beta.com'?{instagram:`https://www.instagram.com/${d}/`}:{},pages:[{url,title:d,chars:1}],homeText:'Shop',contactText:'',emails:[{email:`sam.lee@${d}`,sourceUrl:url,excerpt:'x'}],best:{email:`sam.lee@${d}`,sourceUrl:url,excerpt:'x'}};},
   logo:goodLogo,
   value:async({lead})=>{valued.push(lead.domain);return lead.domain==='beta.com'?{data:{valueScore:30,verdict:'reject',reason:'print on demand shop'},cost:0.0002,model:'fake'}:keepValue();},
   score:async({lead})=>{graded.push(lead.domain);return {data:{company:lead.company,fitScore:80,decision:'pursue',reasons:['good'],risks:[],personalDetail:'d'},cost:0,model:'fake'};},
@@ -138,7 +138,7 @@ test('runner: rejects need no spend and do not count toward maxDrafts',async()=>
  assert.equal(by['delta.com'],undefined,'maxDrafts 2 reached by the two kept brands, the two rejects did not use it up');
  assert.ok(!tools.valued.includes('awful-cloth-store.com'),'no grader call for a brand without socials');
  assert.deepEqual(tools.graded.sort(),['alpha.com','gamma.com']);
- assert.deepEqual(tools.drafts.map(d=>d.to).sort(),['hi@alpha.com','hi@gamma.com']);
+ assert.deepEqual(tools.drafts.map(d=>d.to).sort(),['sam.lee@alpha.com','sam.lee@gamma.com']);
  const events=store.listEvents({taskId:t.id});
  assert.ok(events.some(e=>e.type==='decision'&&e.title==='Skipped Awful Cloth Store: no Instagram or TikTok'));
  assert.ok(events.some(e=>e.type==='decision'&&/Skipped Beta: low-value brand \(30\/100\)/.test(e.title)));
@@ -162,13 +162,13 @@ async function api(store,requalifier){
  const server=http.createServer(createApp({store,runner:{start(){},control(){},steer(){},isRunning:()=>false},requalifier}));
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const base=`http://127.0.0.1:${server.address().port}`;
- return {close:()=>new Promise(r=>server.close(r)),post:p=>fetch(base+p,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(async r=>({status:r.status,body:await r.json()}))};
+ return {base,close:()=>new Promise(r=>server.close(r)),post:p=>fetch(base+p,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(async r=>({status:r.status,body:await r.json()}))};
 }
 
 test('requalify route marks rejects only, lists their Gmail drafts, never deletes or calls Gmail, and 409s while running',async()=>{
  const store=openStore(':memory:');
  const mk=(domain,status,extra={})=>{const l=store.createLead({taskId:null,domain,company:extra.company||domain,url:`https://${domain}/`,market:'m',territory:'t',status,evidence:'ev'});return extra.fields?store.updateLead(l.id,extra.fields):l;};
- const keep=mk('keep.com','drafted'),bare=mk('bare.com','drafted',{company:'<div class="logo__image'}),nologo=mk('nologo.com','awaiting_video'),done=mk('done.com','skipped',{fields:{value:{score:90,verdict:'keep',reason:'x',checkedAt:'t'}}}),was=mk('was.com','rejected'),sent=mk('sent.com','contacted'),down=mk('down.com','skipped');
+ const keep=mk('keep.com','drafted'),bare=mk('bare.com','drafted',{company:'<div class="logo__image'}),nologo=mk('nologo.com','awaiting_video'),done=mk('done.com','skipped',{fields:{contact_kind:'personal',value:{score:90,verdict:'keep',reason:'x',checkedAt:'t'}}}),was=mk('was.com','rejected'),sent=mk('sent.com','contacted'),down=mk('down.com','skipped');
  const draftFor=(l,fields={})=>store.addDraft({leadId:l.id,taskId:null,to:`hi@${l.domain}`,subject:'s',body:'b',gmailDraftId:'gd'+l.id,gmailUrl:`https://mail.google.com/${l.id}`,status:'gmail_draft',...fields});
  draftFor(keep);const dBare=draftFor(bare);const dNoLogo=draftFor(nologo);const dHeld=draftFor(bare,{status:'waiting_video',gmailDraftId:null,gmailUrl:null});
  const page=(socials,links=[{href:'https://x.test/a',text:'a'}])=>({url:'https://x.test/',text:'Shop our collection',links,socials});
@@ -178,6 +178,7 @@ test('requalify route marks rejects only, lists their Gmail drafts, never delete
   fetchHome:async url=>{const d=new URL(url).hostname;fetched.push(d);await gate;const p=pages[d];if(!p)throw new Error('HTTP 403');return p;},
   logo:async({lead})=>lead.domain==='nologo.com'?{ok:false,reason:'No logo found',cost:0}:goodLogo(),
   value:async({lead,site,socials})=>{valued.push(lead.domain);assert.match(site.homeText,/Shop/);assert.ok(socials.instagram||socials.tiktok);return keepValue();},
+  draftDm:async a=>({data:{subject:`Instagram DM to @${a.contact.handle}`,body:'dm'},cost:0,model:'fake'}),loadProfile:()=>({senderName:'Ryan',company:'Mint Labs',offer:'AI UGC',senderFact:'x',cta:'y',rules:'z'}),
   createDraft(){throw new Error('requalify must never call Gmail');},updateDraft(){throw new Error('no Gmail');},deleteDraft(){throw new Error('no Gmail');}
  };
  const app=await api(store,q.createRequalifier({store,tools}));
@@ -200,9 +201,65 @@ test('requalify route marks rejects only, lists their Gmail drafts, never delete
   assert.equal(get(bare).status,'rejected');assert.equal(get(bare).company,'Bare');assert.equal(get(bare).value.verdict,'reject');
   assert.equal(get(nologo).status,'rejected');assert.equal(get(nologo).notes,'No logo found');
   assert.equal(get(sent).status,'contacted');assert.equal(store.listLeads().length,7,'no lead rows deleted');
-  assert.equal(store.listDrafts().length,4,'no drafts deleted');
+  assert.equal(store.listDrafts().length,5,'no drafts deleted: the 4 originals plus the one Instagram DM written for keep.com');
   assert.equal(store.getDraft(dBare.id).status,'gmail_draft');assert.equal(store.getDraft(dHeld.id).status,'waiting_video');assert.equal(store.getDraft(dNoLogo.id).gmail_draft_id,'gd'+nologo.id);
   assert.equal(store.listEvents({leadId:bare.id}).filter(e=>e.type==='decision').length,1);
   assert.equal((await app.post('/api/leads/requalify')).body.checked,0,'a second run finds nothing new to check');
+ }finally{await app.close();}
+});
+
+test('requalify converts a kept Instagram lead: one DM, the email withdrawn, no Gmail call, and a second run converts nothing',async()=>{
+ const store=openStore(':memory:');
+ const mk=(domain,status,handle)=>{const l=store.createLead({taskId:null,domain,company:domain,url:`https://${domain}/`,market:'m',territory:'t',status,evidence:'ev'});return store.updateLead(l.id,{fit_score:81,reasons:['good fit'],value:{score:90,verdict:'keep',reason:'x',checkedAt:'t'},contact_kind:'instagram',instagram_handle:handle});};
+ const held=mk('held.com','awaiting_video','heldwear'),ready=mk('ready.com','drafted','readywear'),vid=mk('vid.com','drafted','vidwear'),dmAlready=mk('has.com','drafted','haswear'),sentOnly=mk('sentonly.com','contacted','sentwear');
+ const email=(l,fields={})=>store.addDraft({leadId:l.id,taskId:null,to:`info@${l.domain}`,subject:'s',body:'b',gmailDraftId:'gd'+l.id,gmailUrl:`https://mail.google.com/${l.id}`,status:'gmail_draft',...fields});
+ const eHeld=email(held,{status:'waiting_video',gmailDraftId:null,gmailUrl:null}),eReady=email(ready);
+ const render=store.createRender({title:'v',endpoint:'e',input:{},leadId:vid.id});store.updateRender(render.id,{status:'completed',review:'approved'});
+ const eVid=email(vid,{renderId:render.id});
+ const existingDm=store.addDraft({leadId:dmAlready.id,taskId:null,to:'@haswear',subject:'dm',body:'dm',status:'crm_only',channel:'instagram_dm'});const eHas=email(dmAlready);
+ store.addEvent({leadId:ready.id,type:'decision',tool:'claude.score (fake)',title:'Pursuing',data:{personalDetail:'hand-dyed linen'}});
+ const written=[],gmail=[];
+ const tools={
+  loadProfile:()=>({senderName:'Ryan',company:'Mint Labs',offer:'AI UGC',senderFact:'x',cta:'y',rules:'z'}),
+  draftDm:async a=>{written.push(a);return {data:{subject:`Instagram DM to @${a.contact.handle}`,body:`Hi ${a.graded.company}`},cost:0.002,model:'fake'};},
+  fetchHome:async()=>{throw new Error('resolved leads are not fetched again');},
+  createDraft:()=>{gmail.push('create');throw new Error('no Gmail');},updateDraft:()=>{gmail.push('update');throw new Error('no Gmail');},deleteDraft:()=>{gmail.push('delete');throw new Error('no Gmail');}
+ };
+ const rq=q.createRequalifier({store,tools});
+ const out=await rq.run();
+ assert.equal(gmail.length,0,'zero Gmail calls');
+ assert.equal(out.convertedDrafts.length,3);
+ assert.deepEqual(out.convertedDrafts.map(c=>c.handle).sort(),['heldwear','readywear','vidwear']);
+ const dmOf=l=>store.listDrafts({leadId:l.id}).filter(d=>d.channel==='instagram_dm');
+ assert.equal(dmOf(held).length,1);assert.equal(dmOf(held)[0].to_email,'@heldwear');assert.equal(dmOf(held)[0].status,'waiting_video');
+ assert.equal(dmOf(ready)[0].status,'crm_only');assert.equal(dmOf(ready)[0].render_id,null);
+ assert.equal(dmOf(vid)[0].status,'dm_ready');assert.equal(dmOf(vid)[0].render_id,render.id);
+ assert.equal(out.convertedDrafts.find(c=>c.leadId===vid.id).draftId,dmOf(vid)[0].id);
+ for(const d of [eHeld,eReady,eVid,eHas])assert.equal(store.getDraft(d.id).status,'withdrawn');
+ assert.equal(store.getDraft(eReady.id).gmail_draft_id,'gd'+ready.id,'the Gmail draft id is kept for the record');
+ assert.equal(dmOf(dmAlready).length,1,'a lead that already has a DM does not get a second one');assert.equal(store.getDraft(existingDm.id).status,'crm_only');
+ assert.deepEqual(out.genericDrafts.map(d=>d.leadId).sort((a,b)=>a-b),[ready.id,vid.id,dmAlready.id].sort((a,b)=>a-b),'only drafts with a Gmail url are listed for hand deletion');
+ assert.ok(out.genericDrafts.every(d=>d.gmail_url&&d.instagram));
+ assert.equal(dmOf(sentOnly).length,0);
+ assert.equal(written.length,3);assert.equal(written.find(w=>w.lead.id===ready.id).graded.personalDetail,'hand-dyed linen');
+ assert.equal(written.find(w=>w.lead.id===held.id).graded.company,'held.com');assert.equal(written[0].profile.senderName,'Ryan');
+ const ev=store.listEvents({leadId:ready.id}).find(e=>e.type==='draft');
+ assert.equal(ev.tool,'instagram');assert.equal(ev.title,'Instagram DM for @readywear written. The old email to info@ready.com is withdrawn; delete its Gmail draft by hand.');
+ assert.ok(!ev.title.includes(String.fromCharCode(8212)));
+ assert.equal(store.db.prepare("select count(*) n from spend where provider='claude'").get().n,3);
+ const again=await rq.run();
+ assert.deepEqual([again.convertedDrafts.length,again.genericDrafts.length,again.checked],[0,0,0],'a second run converts nothing');
+ assert.equal(written.length,3);assert.equal(store.listDrafts().filter(d=>d.channel==='instagram_dm').length,4);assert.equal(gmail.length,0);
+});
+
+test('a withdrawn draft is never listed as pending and cannot be marked sent',async()=>{
+ const store=openStore(':memory:');
+ const l=store.createLead({taskId:null,domain:'w.com',company:'W',url:'https://w.com/',market:'m',territory:'t',status:'drafted'});
+ const d=store.addDraft({leadId:l.id,taskId:null,to:'info@w.com',subject:'s',body:'b',status:'withdrawn'});
+ const app=await api(store,{});
+ try{
+  const res=await fetch(app.base+'/api/drafts').then(r=>r.json());
+  assert.equal(res.drafts.length,0);
+  assert.equal(store.markDraftSent(d.id).status,'withdrawn');assert.equal(store.getLead(l.id).status,'drafted');
  }finally{await app.close();}
 });
