@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{issueTicket,verifyTicket,equal}from'./access.js';
+const secret='fictional-test-secret-only',run='wrun_01M5TEST000000000000000000';
+test('ticket is bound to one job, one secret and its expiry',()=>{const ticket=issueTicket(secret,run,1000);assert.equal(verifyTicket(secret,ticket,run,1001),true);assert.equal(verifyTicket(secret,ticket,run,86401000),false);assert.equal(verifyTicket(secret,ticket,run+'X',1001),false);assert.equal(verifyTicket('other-secret',ticket,run,1001),false);});
+test('malformed, forged and oversized tickets are rejected',()=>{const ticket=issueTicket(secret,run,1000);for(const bad of['',null,{},'bad',ticket+'.extra','x'.repeat(1001),ticket.slice(0,-1)+'!'])assert.equal(verifyTicket(secret,bad,run,1001),false);});
+test('constant-time comparison rejects different byte lengths and values',()=>{assert.equal(equal('same','same'),true);assert.equal(equal('secret',''),false);assert.equal(equal('secret','secrex'),false);assert.equal(equal('é','e'),false);});

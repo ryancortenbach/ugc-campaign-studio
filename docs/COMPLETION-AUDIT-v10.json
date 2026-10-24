@@ -1,0 +1,95 @@
+{
+  "version": 10,
+  "date": "2026-10-24",
+  "scope": "UGC hackathon only",
+  "preview": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/",
+  "completed": [
+    "Private GitHub repository and CI",
+    "Guided chat intake, editable briefs, campaign persistence and JSON export",
+    "Three review website mocks",
+    "Bot-style task table with actual browser-local readiness, events, pause/stop/retry and duplicate-run protection",
+    "800-entry source sample, 42 downloaded references, 408 machine transcripts, four explicit no-audio cases",
+    "Original Higgsfield avatar dossier v2",
+    "Audience packet, source gallery and sales playbook",
+    "Editable three-offer finance scenarios and margin tests",
+    "Eight manual prospect seeds with contact-source evidence and unsent drafts",
+    "Editable three-shot storyboard, 5/15/30 second retiming, identity/wardrobe/environment/voice locks, dialogue and sound cues, persistent drafts, version restore, review-lab transfer and JSON export with saved versions",
+    "Portable JSON packet import, saved storyboard history, separate campaign planning IDs, existing-campaign preservation and approval reset",
+    "Persistent review history, final reviewed-input binding, stale detection, independent JSON export, and preservation of specialist evidence if revision fails",
+    "Live keyless Exa MCP discovery, published source/contact candidates, unsent personalized drafts, sample briefs, and a separately labeled recorded five-source search",
+    "Persistent editable outreach drafts, source merging, version restore, portable JSON history and prospect-to-five-second-campaign handoff",
+    "Financial input validation, blocked invalid exports, no feasible price-floor handling, unclamped low yield and precise unit-cost display",
+    "Morning review hub, exact project links, scoped Lovable handoff, two original text storyboard candidates and draft Terac task",
+    "Separate protected Vercel readiness workflow proof: actual hosted suspension/resume and saved result, unauthorized rejection, zero model calls, and local result persistence across restart. Main dashboard executor remains browser-local.",
+    "Separate private operator console v2 with signed per-job tickets, actual cancellation, terminal-state handling and recovery of existing hosted runs. Twelve local and twelve hosted API checks passed; three ticket tests added. Authenticated browser lifecycle remains untested."
+  ],
+  "implemented_not_live": [
+    "Optional model chat and seven-reviewer bounded loop",
+    "Exact approved-dialogue locks and rejected-revision audit trail",
+    "Optional keyed Exa REST adapter. Free MCP discovery is verified live."
+  ],
+  "remaining": [
+    {
+      "item": "Live model chat and seven real reviewer responses",
+      "dependency": "Private model configuration and access token. No current configuration supplied."
+    },
+    {
+      "item": "Terac human review",
+      "dependency": "Authorized account/API access, task brief and approved human-review budget."
+    },
+    {
+      "item": "Whop checkout, entitlement and webhook verification",
+      "dependency": "Real $97 product checkout URL and authorized developer setup."
+    },
+    {
+      "item": "Lovable sponsor usage",
+      "dependency": "Actual authorized builder session/export. Local coding is not Lovable usage."
+    },
+    {
+      "item": "Hosted orchestration and posting",
+      "dependency": "Separate private console has verified hosted readiness, scoped job tickets, recovery and cancellation. Main dashboard integration, multi-user ownership, atomic submission deduplication, durable alerts, browser executor and publishing connections remain."
+    },
+    {
+      "item": "Rendered five-second samples",
+      "dependency": "Approved product/reference assets and generation quote, then explicit spend approval. Current deliverables are sample briefs."
+    }
+  ],
+  "test_count": 53,
+  "live_paid_requests_this_batch": 0,
+  "outreach_sent": 0,
+  "physical_phone_tested": false,
+  "whole_goal_complete": false,
+  "preview_evidence": "work/preview-v18-verification.json",
+  "preservation_limits": [
+    "Original normalized Exa sample v1 retained. Its original raw response was overwritten by an ignored diagnostic. V2 explicitly documents missing raw provenance. See docs/EXA-FREE-MCP-v2.md."
+  ],
+  "review_hub": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/delivery/",
+  "plugin_discovery": {
+    "Lovable": "Available, not installed. Suggested once October 24; confirmation required before tools become usable.",
+    "Whop": "No plugin found in returned search results. Directory search is not exhaustive.",
+    "Terac": "No plugin found in returned search results. Directory search is not exhaustive."
+  },
+  "durable_proof": {
+    "receipt": "public/durable-proof/receipt-v1.json",
+    "local": "work/workflow-v1-local-verification.json",
+    "hosted": "work/workflow-v1-hosted-verification.json",
+    "deployment": "work/workflow-v1-deployment-verified.json",
+    "dashboard_connected": false,
+    "model_calls": 0,
+    "generation_submitted": false,
+    "production_deployed": false,
+    "public_page": "https://duolingo-library-phone-v1-akcw3r8kw-ryancortenbachs-projects.vercel.app/durable-proof/"
+  },
+  "durable_console": {
+    "url": "https://duolingo-library-phone-v1-6le7imc81-ryancortenbachs-projects.vercel.app/",
+    "deployment": "dpl_6x9rouD2pyqEXEBU4oWhDm7m2toT",
+    "dashboard_connected": false,
+    "server_submission_deduplication": false,
+    "authenticated_browser_lifecycle_tested": false,
+    "actual_api_lifecycle_tested": true,
+    "receipt": "public/durable-proof/receipt-v2.json",
+    "model_calls": 0,
+    "generation_submitted": false,
+    "public_receipt": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/durable-proof/receipt-v2.json"
+  }
+}

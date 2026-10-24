@@ -9,4 +9,5 @@ jobs:
         with:
           node-version: 22
       - run: npm run check
+      - run: npm run check:durable
       - run: npm test
