@@ -45,3 +45,5 @@ Run `npm test --prefix agent`, `npm test`, `npm run check`, and `bash desktop/bu
 ## Tensae theme integration
 
 Tensae's malachite theme and Home title correction (48d1158 and dab1b7b) are included through the main merge. The saved demo uses the same emerald surfaces, navigation, composer and gem buttons. Demo task/document cards and player surfaces follow the theme. The conversation footer keeps its opaque background. Home entrance transforms were removed after native captures omitted the animated controls, while the title keeps its background sheen. The stone backdrop stays inside the Home width, and provider usage uses two columns to avoid overflowing the Live rail. Native Home and running Tasks were visually checked.
+
+The subsequent 62cfd08 theme pass is also integrated: composer menu stacking, compact-sidebar wordmark, dark untyped fields, Settings and Analytics active styles, and the narrow-window rail correction are retained. The native recording keeps background sheen on the title without an entrance transform.
