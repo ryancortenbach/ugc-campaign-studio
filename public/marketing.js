@@ -3,7 +3,8 @@ const cart=[];
 const money=value=>'$'+value.toFixed(2);
 function renderCart(){
  let box=document.querySelector('.cart-box');
- if(!box){box=document.createElement('aside');box.className='cart-box';box.setAttribute('aria-label','Preview shopping cart');document.body.append(box);}
+ if(!box){box=document.createElement('aside');box.className='cart-box';box.id='preview-cart';box.tabIndex=-1;box.setAttribute('aria-label','Preview shopping cart');document.body.append(box);}
+ document.querySelectorAll('[data-open-cart]').forEach(button=>{button.textContent='Preview cart ('+cart.length+')';button.setAttribute('aria-expanded','true');});
  box.replaceChildren();
  const title=document.createElement('strong');title.textContent=cart.length+' item'+(cart.length===1?'':'s')+' in preview cart';box.append(title);
  cart.forEach((item,index)=>{
@@ -16,8 +17,9 @@ function renderCart(){
  for(const text of ['Subtotal '+money(totals.subtotal),'Bundle saving '+money(totals.discount),'Merchandise total '+money(totals.merchandise),totals.freeShipping?'Free shipping threshold reached.':money(totals.shippingGap)+' more merchandise to reach free shipping.',cart.length%4===0&&cart.length>0?'Bundle applied.':(4-cart.length%4)+' more item(s) to unlock the next free tee.','Proposed launch offer. Shipping, tax, inventory and checkout are not connected.']){
   const line=document.createElement('p');line.textContent=text;box.append(line);
  }
- const close=document.createElement('button');close.textContent='Close cart';close.onclick=()=>box.remove();box.append(close);
+ const close=document.createElement('button');close.textContent='Close cart';close.onclick=()=>{box.remove();document.querySelectorAll('[data-open-cart]').forEach(button=>button.setAttribute('aria-expanded','false'));document.querySelector('[data-open-cart]')?.focus();};box.append(close);box.focus();
 }
+document.querySelectorAll('[data-open-cart]').forEach(button=>button.onclick=renderCart);
 document.querySelectorAll('[data-add]').forEach(button=>button.onclick=()=>{
  const product=button.closest('.product');cart.push({name:button.dataset.add,size:product.querySelector('select').value,price:59.99});renderCart();
 });
