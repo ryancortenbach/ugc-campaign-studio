@@ -7,7 +7,7 @@
     "dev": "node --env-file-if-exists=.env.local server.mjs",
     "start": "node --env-file-if-exists=.env.local server.mjs",
     "test": "node --test",
-    "check": "node --check public/app.js && node --check public/operations.js && node --check api/chat.js && node --check api/prospects.js && node --check api/review.js && node --check src/brief.js && node --check src/finance.js && node --check src/review.js && node --check api/status.js && node --check public/tasks.js && node --check public/task-engine.js && node --check public/marketing.js && node --check public/cart.js"
+    "check": "node --check public/app.js && node --check public/operations.js && node --check api/chat.js && node --check api/prospects.js && node --check api/review.js && node --check src/brief.js && node --check src/finance.js && node --check src/review.js && node --check api/status.js && node --check public/tasks.js && node --check public/task-engine.js && node --check public/marketing.js && node --check public/cart.js && node --check public/planner.js && node --check public/production.js"
   },
   "engines": {
     "node": ">=22"
