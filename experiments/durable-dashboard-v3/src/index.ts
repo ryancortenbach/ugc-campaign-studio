@@ -2,6 +2,7 @@ import express from 'express';
 import {start,getRun} from 'workflow/api';
 import {getWorld} from 'workflow/runtime';
 import {registryOptions,registryPage} from '../../../src/hosted-registry.js';
+import {verifyConfiguredCourse} from '../../../src/course-offer.js';
 import {readinessWorkflowV3} from './readiness.js';
 import {equal,issueTicket,verifyTicket} from '../lib/access.js';
 import chatHandler from '../../../api/chat.js';
@@ -11,10 +12,11 @@ import {configurationStatus} from '../../../api/status.js';
 const app=express();
 app.disable('x-powered-by');
 app.use(express.json({limit:'64kb'}));
-app.get('/health',(_req,res)=>res.json({experiment:'durable-dashboard-v3',dashboard:true,registry:true,modelEnabled:false,mediaEnabled:false,vercelRuntime:Boolean(process.env.VERCEL_DEPLOYMENT_ID)}));
+app.get('/health',(_req,res)=>res.json({experiment:'durable-dashboard-v3',dashboard:true,registry:true,courseOfferCheck:true,modelEnabled:false,mediaEnabled:false,vercelRuntime:Boolean(process.env.VERCEL_DEPLOYMENT_ID)}));
 app.use('/api',(_req,res,next)=>{res.set('Cache-Control','no-store');if(!process.env.DURABLE_DEMO_ACCESS_TOKEN)return res.status(503).json({error:'Operator access is not configured.'});next();});
 const secret=()=>process.env.DURABLE_DEMO_ACCESS_TOKEN!;
 function operator(req:any,res:any,next:any){if(!equal(secret(),(req.headers.authorization||'').replace(/^Bearer /,'')))return res.status(401).json({error:'Private operator access required.'});next();}
+app.post('/api/course-offer/verify',operator,async(_req,res)=>{const result=await verifyConfiguredCourse(process.env);res.status(result.http).json(result.body);});
 function ticket(req:any,res:any,next:any){if(!/^wrun_[0-9A-Z]{26}$/.test(req.params.id)||!verifyTicket(secret(),req.headers['x-job-ticket'],req.params.id))return res.status(401).json({error:'A valid ticket for this job is required.'});next();}
 async function describe(run:any){const status=await run.status;return {runId:run.runId,status,result:status==='completed'?await run.returnValue:null,checkedAt:new Date().toISOString()};}
 app.post('/api/jobs',operator,async(req,res)=>{

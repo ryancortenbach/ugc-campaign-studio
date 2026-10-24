@@ -9,3 +9,5 @@
 #hosted-readiness input:not([type=checkbox]),#hosted-readiness select{background:#10170e;border:1px solid #384732;border-radius:6px;color:#e4efd7;padding:10px;font:inherit}
 
 #hosted-cloud{border-top:1px solid #384732;margin-top:24px;padding-top:16px}.hosted-cloud-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;border-top:1px solid #303a2c;padding:15px 0}.hosted-cloud-row strong,.hosted-cloud-row p{overflow-wrap:anywhere}.hosted-cloud-row strong{font-size:11px}@media(max-width:700px){.hosted-cloud-row{grid-template-columns:minmax(0,1fr)}}
+
+#course-offer-check{border-top:1px solid #384732;margin-top:24px;padding-top:16px}#course-offer-result{white-space:pre-wrap;overflow-wrap:anywhere}
