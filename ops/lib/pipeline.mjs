@@ -249,7 +249,7 @@ async function submitShots(ctx) {
     const video = await ctx.db.get('videos', shot.video_id), order = await orderOf(ctx, video.order_id);
     const budget = await budgetFor(ctx.db, order, ctx.s, Number(shot.estimate_usd), ctx.now());
     if (!budget.ok) return attention(ctx, 'shots', shot, `Waiting for your OK to spend $${Number(shot.estimate_usd).toFixed(2)}: ${budget.reasons.join('; ')}`);
-    await submitShot(ctx.db, ctx.tools, shot, {order, video, report: ctx.report});
+    try { await submitShot(ctx.db,ctx.tools,shot,{order,video,report:ctx.report}); } catch(error) { if(error.code==='budget_wait')return attention(ctx,'shots',shot,error.message);throw error; }
   });
 }
 
@@ -262,16 +262,16 @@ export function staleSubmission(shot, now = Date.now()) {
 }
 
 // The fixed key survives an uncertain outcome. Provider acceptance and ledger state commit together.
-export async function submitShot(db, tools, shot, {order, video, report}) {
+export async function submitShot(db, tools, shot, {order, video, report, manual=false}) {
   requirePaidWork(tools);
   if (!Number.isFinite(Number(shot.estimate_usd)) || Number(shot.estimate_usd) <= 0) throw Object.assign(Error('A finite positive render estimate is required.'), {status:400});
   if (!['priced','attention'].includes(shot.status) || (shot.status === 'attention' && shot.resume_status !== 'priced')) throw Object.assign(Error('This shot is not awaiting submission.'), {status:409});
-  const key = shot.submission_key || `mint-shot-${shot.id}`;
-  const claimed = await db.update('shots', shot.id, {status:'submitting', submission_key:key, lock_until:new Date(Date.now() + SUBMISSION_LEASE_MS).toISOString()}, {status:shot.status, ...(shot.status === 'attention' ? {resume_status:'priced'} : {})});
-  if (!claimed) throw Object.assign(Error('This shot changed. Reload and try again.'), {status:409});
+  const reservation=await db.reserveRenderSubmission(shot.id,manual);
+  if(!reservation.ok)throw Object.assign(Error('Waiting for your OK to spend: '+reservation.reasons.join('; ')),{status:409,code:'budget_wait'});
+  const claimed=reservation.shot,key=claimed.submission_key;
   let requestId;
   try {
-    const res = await tools.submit(shot.endpoint, shot.input, key);
+    const res = await tools.submit(claimed.endpoint, claimed.input, key);
     const candidate = res.request_id || res.id;
     if (typeof candidate !== 'string' || !/^[a-zA-Z0-9_.:-]{1,200}$/.test(candidate)) throw Error('Higgsfield did not return a usable request ID');
     requestId = candidate;
@@ -406,7 +406,7 @@ export async function approveSpend(db, tools, id) {
   const shot = await db.get('shots', id);
   if (!shot || shot.status !== 'attention' || shot.resume_status !== 'priced') throw Object.assign(Error('Only shots waiting for a spending OK can be approved.'), {status: 409});
   const video = await db.get('videos', shot.video_id), order = await db.get('orders', video.order_id);
-  return submitShot(db, tools, shot, {order, video});
+  return submitShot(db, tools, shot, {order, video,manual:true});
 }
 
 // After checking Higgsfield by hand: attach the request ID it shows, or confirm nothing started so the same key is reused.
@@ -415,7 +415,7 @@ export async function reconcileShot(db, tools, id, {requestId = null} = {}) {
   const unknown = shot?.status === 'attention' && shot.resume_status === 'unknown';
   if (!shot || (!unknown && !staleSubmission(shot))) throw Object.assign(Error('Only unknown or stale submissions can be reconciled.'), {status:409});
   if (!requestId && shot.request_id) throw Object.assign(Error('This shot has a saved provider request ID. Verify that request instead of resetting it.'), {status:409});
-  if (!requestId) return db.update('shots', id, {status:'priced', resume_status:null, error:null, lock_until:null}, {status:shot.status, ...(unknown ? {resume_status:'unknown'} : {lock_until:shot.lock_until ?? null})});
+  if (!requestId) return db.resetUnsubmittedRender(id);
   if (!/^[\w.:-]{1,200}$/.test(requestId)) throw Object.assign(Error('That does not look like a Higgsfield request ID.'), {status: 400});
   const s = await tools.status(requestId);
   if (typeof s?.status !== 'string') throw Object.assign(Error('Higgsfield did not confirm that request ID.'), {status: 400});

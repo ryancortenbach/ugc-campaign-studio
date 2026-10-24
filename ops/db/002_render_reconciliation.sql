@@ -11,6 +11,7 @@ declare
   v public.videos%rowtype;
   charged public.spend%rowtype;
 begin
+  perform pg_catalog.pg_advisory_xact_lock(1296647252,1);
   if p_request_id is null or p_request_id !~ '^[a-zA-Z0-9_.:-]{1,200}$' then
     raise exception 'Invalid provider request ID';
   end if;

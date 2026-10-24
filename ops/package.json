@@ -5,11 +5,12 @@
   "description": "Mint Labs fulfillment: Whop orders become delivered UGC videos. Runs on Vercel with Supabase.",
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "check": "node --check lib/db.mjs && node --check lib/pipeline.mjs && node --check lib/whop.mjs && node --check lib/stitch.mjs && node --check lib/tools.mjs && node --check lib/http.mjs && node --check api/index.mjs && node --check lib/spending-policy.mjs",
+    "check": "node --check lib/db.mjs && node --check lib/pipeline.mjs && node --check lib/whop.mjs && node --check lib/stitch.mjs && node --check lib/tools.mjs && node --check lib/http.mjs && node --check api/index.mjs && node --check lib/spending-policy.mjs && node --check test/sql/reservations-parallel.mjs",
     "migrate": "node scripts/migrate.mjs",
     "dev": "node --env-file-if-exists=.env.local scripts/dev.mjs",
-    "test:sql": "node test/sql/reconciliation.mjs",
-    "test:offline": "node --test test/pipeline.test.mjs test/whop.test.mjs test/spending-policy.test.mjs test/reconciliation.test.mjs test/submission-recovery.test.mjs"
+    "test:sql": "node test/sql/reconciliation.mjs && node test/sql/reservations.mjs",
+    "test:offline": "node --test test/pipeline.test.mjs test/whop.test.mjs test/spending-policy.test.mjs test/reconciliation.test.mjs test/submission-recovery.test.mjs test/reservations.test.mjs",
+    "test:postgres": "node test/sql/reservations-parallel.mjs"
   },
   "engines": {
     "node": ">=22.13"
