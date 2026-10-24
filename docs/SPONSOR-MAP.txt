@@ -12,3 +12,8 @@ NYC's published toolkit is Terac, Whop, Lovable and Exa. Stripe, Render, Linq, S
 
 STATUS
 This is an implementation map. These integrations are not represented as live until credentials, requests, and responses are verified. Devpost rules require browser verification because the ordinary web fetch was inaccessible. Historical chat says Terac and Whop MCP are mandatory, but that rule has not yet been independently reverified in this run.
+
+IMPLEMENTATION CHECK OCTOBER 24, 2026
+Exa request shape was checked against https://exa.ai/docs/reference/search . Current adapter retains provider request ID and returned cost metadata. Every email candidate carries the precise source URL, a surrounding published-text excerpt, and a domain comparison. Domain matching does not establish partnership suitability or official ownership. Draft personalization quotes up to twelve words from returned evidence and remains unsent. No live Exa request has been made in this batch. Unit fixtures test source attribution, excluded inboxes, unsafe URLs and missing configuration.
+
+Model prompt review now supports explicit exact-dialogue locks. The lock is part of the input fingerprint. If a proposed revision changes a locked utterance or breaks readiness, that revision is retained as rejected and the last valid prompt remains current. No next review round is launched for that rejected candidate. A malformed severity from a grader also blocks the gate. These are tested software behaviors, not evidence that any actual creative prompt has passed independent model review.
