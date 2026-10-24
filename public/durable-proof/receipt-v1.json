@@ -1,0 +1,47 @@
+{
+  "verifiedAt": "2026-10-24T11:00:29.333Z",
+  "deployment": {
+    "id": "dpl_ErZCbAoK4VaMX2GRwQRncJBtHEnR",
+    "url": "duolingo-library-phone-v1-jjmdr6dco-ryancortenbachs-projects.vercel.app",
+    "readyState": "READY",
+    "target": null
+  },
+  "anonymousHealth": {
+    "experiment": "durable-readiness",
+    "paidCalls": false,
+    "mediaGeneration": false,
+    "vercelRuntime": true
+  },
+  "unauthorizedStatus": 401,
+  "submissionStatus": 202,
+  "runId": "wrun_41M5PS38DW0GJMQRS42KG0ZC9C",
+  "observedStatuses": [
+    "running",
+    "running",
+    "running",
+    "running",
+    "completed"
+  ],
+  "result": {
+    "status": "needs_attention",
+    "issues": [
+      {
+        "severity": "blocking",
+        "category": "budget",
+        "evidence": "No current positive cost estimate.",
+        "fix": "Obtain a current Higgsfield quote before requesting spend approval."
+      }
+    ],
+    "fingerprint": "80d87bb75940240bd73d95c584e7f11e091adeee837bfc0fc15d5aa1cd29ffdf",
+    "modelCalls": 0,
+    "started": "2026-10-24T11:00:23.701Z",
+    "completed": "2026-10-24T11:00:28.644Z",
+    "spendApproved": false,
+    "generationSubmitted": false
+  },
+  "localRestart": {
+    "identicalResult": true,
+    "status": "completed"
+  },
+  "scope": "Fictional deterministic readiness proof only. No model, media generation, outreach or posting. The dashboard runner is still browser-local."
+}

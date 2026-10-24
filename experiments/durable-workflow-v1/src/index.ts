@@ -1,0 +1,10 @@
+import express from 'express';
+import {timingSafeEqual} from 'node:crypto';
+import {start,getRun} from 'workflow/api';
+import {readinessWorkflow} from './readiness.js';
+const app=express();app.use(express.json({limit:'64kb'}));
+app.get('/health',(_req,res)=>res.json({experiment:'durable-readiness',paidCalls:false,mediaGeneration:false,vercelRuntime:Boolean(process.env.VERCEL_DEPLOYMENT_ID)}));
+app.use('/api', (req,res,next)=>{const expected=process.env.DURABLE_DEMO_ACCESS_TOKEN,provided=(req.headers.authorization||'').replace(/^Bearer /,'');if(!expected)return res.status(503).json({error:'Private experiment token is not configured.'});const left=Buffer.from(expected),right=Buffer.from(provided);if(left.length!==right.length||!timingSafeEqual(left,right))return res.status(401).json({error:'Experiment access required.'});next();});
+app.post('/api/jobs',async(req,res)=>{if(typeof req.body?.prompt!=='string'||req.body.prompt.length>30000)return res.status(400).json({error:'Supply a draft prompt up to 30000 characters.'});try{const run=await start(readinessWorkflow,[req.body]);res.status(202).json({runId:run.runId,status:'accepted'});}catch{res.status(502).json({error:'Workflow could not start. No paid action was requested.'});}});
+app.get('/api/jobs/:id',async(req,res)=>{try{const run=getRun(req.params.id);const status=await run.status;const result=status==='completed'?await run.returnValue:null;res.json({runId:req.params.id,status,result});}catch{res.status(404).json({error:'Workflow is unavailable.'});}});
+export default app;
