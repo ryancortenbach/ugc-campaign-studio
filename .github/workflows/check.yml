@@ -11,3 +11,5 @@ jobs:
       - run: npm run check
       - run: npm run check:durable
       - run: npm test
+      - run: npm ci --prefix agent
+      - run: npm test --prefix agent

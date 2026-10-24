@@ -1,0 +1,104 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {openStore} from './store.mjs';
+import {createRunner} from './runner.mjs';
+import {rulesPlan,cleanCopy} from './brain.mjs';
+import {extractEmails,bestEmail} from './tools/site.mjs';
+import {buildMime} from './tools/gmail.mjs';
+import {buildInput,priceFrom} from './tools/higgsfield.mjs';
+
+const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
+function fakeTools(over={}){
+ const calls={drafts:[],sends:0};
+ const tools={
+  calls,
+  loadProfile:()=>({senderName:'Ryan',company:'Mint Labs',offer:'AI UGC',senderFact:'x',cta:'y',rules:'z'}),
+  brainMode:()=>'fake',exaMode:()=>'rest',siteMode:()=>'solari',gmailEnabled:()=>true,draftAccount:()=>'rmc2249@columbia.edu',
+  plan:async()=>({data:{reply:'ok',markets:['streetwear'],territories:['Brooklyn'],maxDrafts:2,qualify:'sells online',exclusions:[],searchQueries:[{query:'q1',market:'streetwear',territory:'Brooklyn'},{query:'q2',market:'streetwear',territory:'Queens'}]},cost:0.001,model:'fake'}),
+  search:async q=>({via:'fake exa',costUsd:0.007,requestId:'r',results:q==='q1'?[{title:'Alpha | Shop',url:'https://alpha.com/x',text:'a'},{title:'Amazon',url:'https://www.amazon.com/y',text:''},{title:'NoMail',url:'https://nomail.com/',text:''},{title:'Beta',url:'https://beta.com/',text:''}]:[{title:'Gamma',url:'https://gamma.com/',text:''}]}),
+  visit:async url=>{const d=new URL(url).hostname;return page(d,d==='nomail.com'?null:`hello@${d}`);},
+  score:async({lead,visit})=>({data:{company:lead.company,fitScore:80,decision:'pursue',reasons:['good'],risks:[],personalDetail:'detail'},cost:0.0001,model:'fake'}),
+  draft:async({graded})=>({data:{subject:`Hi ${graded.company}`,body:'Body'},cost:0.001,model:'fake'}),
+  createDraft:async d=>{calls.drafts.push(d);return {draftId:'d1',messageId:'m1',url:'https://mail.google.com/x'};},
+  steer:async({currentPlan})=>({data:{reply:'stopping',action:'stop',plan:currentPlan,skipDomains:[]},cost:0,model:'fake'}),
+  ...over
+ };
+ return tools;
+}
+
+test('runner finds leads, skips marketplaces and no-email sites, drafts up to the limit',async()=>{
+ const store=openStore(':memory:');const tools=fakeTools();const runner=createRunner(store,tools);
+ const t=runner.start('find streetwear brands in Brooklyn');await runner.wait(t.id);
+ const task=store.getTask(t.id);
+ assert.equal(task.status,'done');
+ assert.equal(tools.calls.drafts.length,2);
+ assert.deepEqual(tools.calls.drafts.map(d=>d.to),['hello@alpha.com','hello@beta.com']);
+ const leads=store.listLeads({taskId:t.id});
+ assert.ok(!leads.some(l=>l.domain==='amazon.com'));
+ assert.equal(leads.find(l=>l.domain==='nomail.com').status,'skipped');
+ assert.equal(leads.filter(l=>l.status==='drafted').length,2);
+ assert.ok(task.cost_usd>0);
+ const events=store.listEvents({taskId:t.id});
+ assert.ok(events.some(e=>e.type==='decision'&&/marketplace/.test(e.title)));
+ assert.ok(events.some(e=>e.type==='draft'&&/Not sent/.test(e.title)));
+});
+
+test('a domain already in the CRM is never contacted twice',async()=>{
+ const store=openStore(':memory:');const tools=fakeTools();const runner=createRunner(store,tools);
+ await runner.wait(runner.start('first').id);
+ const before=tools.calls.drafts.length;
+ const second=runner.start('second');await runner.wait(second.id);
+ assert.ok(!tools.calls.drafts.slice(before).some(d=>['hello@alpha.com','hello@beta.com'].includes(d.to)));
+ assert.ok(store.listEvents({taskId:second.id}).some(e=>/already in CRM/.test(e.title)));
+});
+
+test('a stop steer halts the mission before the next lead',async()=>{
+ const store=openStore(':memory:');
+ let gate;const hold=new Promise(r=>{gate=r;});
+ const tools=fakeTools({search:async()=>{await hold;return {via:'fake',costUsd:0,requestId:null,results:[{title:'Alpha',url:'https://alpha.com/',text:''},{title:'Beta',url:'https://beta.com/',text:''}]};}});
+ const runner=createRunner(store,tools);
+ const t=runner.start('find brands');
+ await new Promise(r=>setTimeout(r,20));
+ runner.steer(t.id,'stop now');gate();
+ await runner.wait(t.id);
+ assert.equal(store.getTask(t.id).status,'stopped');
+ assert.equal(tools.calls.drafts.length,0);
+ assert.equal(store.listSteers(t.id)[0].reply,'stopping');
+});
+
+test('rules planner reads count and territories',()=>{
+ const p=rulesPlan('find 8 skincare brands in Brooklyn and Los Angeles');
+ assert.equal(p.maxDrafts,8);
+ assert.deepEqual(p.territories,['Brooklyn','Los Angeles']);
+ assert.equal(p.searchQueries.length,2);
+});
+
+test('email extraction drops noreply and picks the brand inbox',()=>{
+ const emails=extractEmails('Write to partnerships@brand.co or noreply@brand.co or privacy@brand.co',['mailto:hello@brand.co?subject=hi']);
+ assert.deepEqual(emails.sort(),['hello@brand.co','partnerships@brand.co']);
+ assert.equal(bestEmail(['hello@brand.co','partnerships@brand.co','x@gmail.com'],'brand.co'),'partnerships@brand.co');
+});
+
+test('copy cleanup removes em dashes, "really" and extra exclamation marks',()=>{
+ assert.equal(cleanCopy('We really love it — truly! Call us!'),'We love it, truly. Call us!');
+});
+
+test('gmail module never sends and blocks header injection',()=>{
+ const src=readFileSync(new URL('./tools/gmail.mjs',import.meta.url),'utf8');
+ assert.ok(!/messages\/send|drafts\/send|\/send\b/.test(src));
+ assert.throws(()=>buildMime({from:'a@b.c',to:'x@y.z\r\nBcc: evil@z.z',subject:'s',body:'b'}),/injection/);
+});
+
+test('higgsfield input clamps duration and resolution',()=>{
+ assert.deepEqual(buildInput({prompt:'p',duration:99,resolution:'4k'}),{prompt:'p',duration:30,resolution:'720p'});
+ assert.equal(buildInput({prompt:'p',imageUrl:'https://x/y.png'}).image_url,'https://x/y.png');
+});
+
+test('higgsfield price sheet becomes a total for the chosen resolution and length',()=>{
+ const sheet={type:'description',pricing_description:'your request costs roughly $0.2056 per second of generated video at 480p, $0.4622 at 720p, and $1.1372 at 1080p.'};
+ assert.equal(priceFrom(sheet,{resolution:'720p',duration:5}),'2.31');
+ assert.equal(priceFrom(sheet,{resolution:'1080p',duration:10}),'11.37');
+ assert.equal(priceFrom({usd:'0.094'},{resolution:'720p',duration:5}),'0.09');
+ assert.equal(priceFrom({},{resolution:'720p',duration:5}),null);
+});

@@ -20,11 +20,27 @@ for d in durable-workflow-v1 durable-workflow-v2 durable-dashboard-v3; do (cd ex
 npm run dev:all
 ```
 
-`npm run dev:all` starts the studio on 3000 and the experiments on 3101, 3102 and 3103, bound to 127.0.0.1. Ctrl-C stops all four. Stop it before `npm run build:preview`, because both write `experiments/durable-dashboard-v3/.nitro-build`. Each command clears that generated folder before it starts.
+`npm run dev:all` starts the studio on 3000, the experiments on 3101, 3102 and 3103, and the agent app on 3200, all bound to 127.0.0.1. Ctrl-C stops all of them. Install the agent first with `npm ci --prefix agent`. Stop it before `npm run build:preview`, because both write `experiments/durable-dashboard-v3/.nitro-build`. Each command clears that generated folder before it starts.
 
 The dark dashboard includes guided intake, saved campaigns, compact task queues with run/pause/stop controls, input-version history, real readiness requests and alerts, a prompt review lab, Exa prospect discovery, and an editable financial model. Three marketing mocks live at `/shop/`, `/course/`, and `/brands/`. The guided intake works without an API key. AI conversation uses a server-side OpenAI Responses API adapter with a structured brief schema. Set `OPENAI_API_KEY`, `OPENAI_MODEL`, and `CAMPAIGN_ACCESS_TOKEN` to enable it. Enter only the project access token in the browser. Never place API keys in public files.
 
 The browser saves drafts and campaigns locally and exports a production packet as JSON. This is not shared account storage. The packet leaves unknown facts and unapproved generation settings explicit.
+
+## Agent app (Mint Labs mission control)
+
+`agent/` is the autonomous outreach and render console at http://127.0.0.1:3200. Type a mission ("find 8 independent streetwear brands in Brooklyn that sell online") and it runs as a task:
+
+1. Claude Sonnet 5.5 turns the mission into Exa search queries.
+2. Exa finds official brand sites (paid REST when `EXA_API_KEY` is set, otherwise the free MCP).
+3. A Solari cloud browser opens each site and its contact page, collects published business emails with the exact page and excerpt, and screenshots the homepage (plain fetch when `SOLARI_API_KEY` is missing).
+4. Claude Haiku 5.5 grades the fit with reasons and risks. Marketplaces, duplicates already in the CRM and sites without a public email are skipped with a logged reason.
+5. Sonnet writes a short email from the sender profile in Settings, and it is saved as a Gmail draft in the configured account. Nothing is ever sent; the Gmail module has no send call and a test enforces it.
+
+Every step is a live log line naming the tool or MCP it called. Pause, resume, stop, or type a steering message into a running task ("skip anyone outside NYC", "max 3"); steering applies before the next step. Leads, evidence, screenshots and drafts live in a local SQLite CRM at `agent/.data/` (ignored).
+
+The Renders tab queues Higgsfield Seedance 2.5 shots. Each shot runs the seven scene checkers on Haiku; only a passing shot gets a price from Higgsfield, and it is submitted only when you press Approve on that shot.
+
+Keys in the root `.env.local`: `ANTHROPIC_API_KEY`, `EXA_API_KEY`, `SOLARI_API_KEY`, `HF_CREDENTIALS` (Higgsfield `id:secret`), optional `GMAIL_TOKEN_PATH` (Google OAuth token JSON with refresh token) and `GMAIL_DRAFT_ACCOUNT`. Run it alone with `npm start --prefix agent`; test with `npm test --prefix agent`.
 
 ## Sponsor connections
 

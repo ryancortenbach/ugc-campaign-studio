@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mint Labs Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><span class="logo">M</span><span>Mint Labs</span></div>
+ <nav id="tabs">
+  <a href="#/home" data-tab="home">Home</a>
+  <a href="#/tasks" data-tab="tasks">Tasks</a>
+  <a href="#/leads" data-tab="leads">Leads</a>
+  <a href="#/drafts" data-tab="drafts">Drafts</a>
+  <a href="#/renders" data-tab="renders">Renders</a>
+  <a href="#/settings" data-tab="settings">Settings</a>
+ </nav>
+ <div class="topright"><span id="integrations"></span><span id="clock" class="chip mono"></span></div>
+</header>
+<main id="view"></main>
+<aside id="drawer" hidden></aside>
+<script type="module" src="app.js"></script>
+</body>
+</html>

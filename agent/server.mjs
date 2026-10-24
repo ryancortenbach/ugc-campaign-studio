@@ -1,0 +1,76 @@
+import http from 'node:http';
+import {readFile} from 'node:fs/promises';
+import {randomUUID} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+import {openStore,dataDir} from './store.mjs';
+import {createRunner,realTools} from './runner.mjs';
+import {saveProfile} from './brain.mjs';
+import {models,llmEnabled} from './tools/llm.mjs';
+import * as hf from './tools/higgsfield.mjs';
+
+const here=path.dirname(fileURLToPath(import.meta.url));
+const pub=path.join(here,'public'),shots=path.join(dataDir,'shots'),renderDir=path.join(dataDir,'renders');
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.mp4':'video/mp4'};
+export function createApp({store=openStore(),runner}={}){
+ runner??=createRunner(store);
+ const config=()=>({brain:realTools.brainMode(),models,exa:realTools.exaMode(),sites:realTools.siteMode(),gmail:realTools.gmailEnabled()?realTools.draftAccount():null,higgsfield:hf.higgsfieldEnabled(),checkers:llmEnabled(),profile:realTools.loadProfile(),stats:store.stats()});
+ async function pollRender(id){
+  for(let i=0;i<180;i++){
+   const r=store.getRender(id);if(!r?.request_id||!['queued','in_progress'].includes(r.status))return;
+   await new Promise(res=>setTimeout(res,Math.min(10000,2000+i*1000)));
+   try{
+    const s=await hf.status(r.request_id);
+    if(s.status!==r.status)store.updateRender(id,{status:s.status});
+    if(s.status==='completed'){const url=s.video?.url||s.images?.[0]?.url||null;let local=null;if(url){try{local=path.basename(await hf.download(url,renderDir,`render-${id}.mp4`));}catch(e){store.updateRender(id,{error:e.message});}}store.updateRender(id,{result_url:url,local_file:local});return;}
+    if(['failed','nsfw','canceled'].includes(s.status)){store.updateRender(id,{error:s.error||s.status});return;}
+   }catch(e){store.updateRender(id,{error:e.message});}
+  }
+ }
+ const routes=[
+  ['GET',/^\/api\/state$/,()=>({config:config(),tasks:store.listTasks()})],
+  ['POST',/^\/api\/chat$/,(m,b)=>{const text=String(b.message||'').trim();if(text.length<3||text.length>2000)throw Object.assign(Error('Write a request between 3 and 2000 characters.'),{status:400});return {task:runner.start(text)};}],
+  ['GET',/^\/api\/tasks\/(\d+)$/,m=>{const id=Number(m[1]);const task=store.getTask(id);if(!task)throw Object.assign(Error('No such task'),{status:404});return {task,running:runner.isRunning(id),events:store.listEvents({taskId:id}),steers:store.listSteers(id),leads:store.listLeads({taskId:id}),drafts:store.listDrafts({taskId:id})};}],
+  ['POST',/^\/api\/tasks\/(\d+)\/steer$/,(m,b)=>{const text=String(b.message||'').trim();if(!text)throw Object.assign(Error('Write a steering message.'),{status:400});return runner.steer(Number(m[1]),text);}],
+  ['POST',/^\/api\/tasks\/(\d+)\/control$/,(m,b)=>{if(!['pause','resume','stop'].includes(b.action))throw Object.assign(Error('Unknown action'),{status:400});return {ok:runner.control(Number(m[1]),b.action)};}],
+  ['GET',/^\/api\/leads$/,()=>({leads:store.listLeads()})],
+  ['GET',/^\/api\/drafts$/,()=>({drafts:store.listDrafts().map(d=>{const l=store.getLead(d.lead_id)||{};return {...d,company:l.company,domain:l.domain,screenshot:l.screenshot};})})],
+  ['GET',/^\/api\/leads\/(\d+)$/,m=>{const lead=store.getLead(Number(m[1]));if(!lead)throw Object.assign(Error('No such lead'),{status:404});return {lead,events:store.listEvents({leadId:lead.id}),drafts:store.listDrafts({leadId:lead.id})};}],
+  ['POST',/^\/api\/leads\/(\d+)$/,(m,b)=>{const allowed=['found','drafted','contacted','replied','won','lost','skipped'];const fields={};if(b.status!==undefined){if(!allowed.includes(b.status))throw Object.assign(Error('Unknown status'),{status:400});fields.status=b.status;}if(typeof b.notes==='string')fields.notes=b.notes.slice(0,4000);return {lead:store.updateLead(Number(m[1]),fields)};}],
+  ['POST',/^\/api\/profile$/,(m,b)=>({profile:saveProfile(b)})],
+  ['GET',/^\/api\/renders$/,()=>({renders:store.listRenders(),enabled:hf.higgsfieldEnabled()})],
+  ['POST',/^\/api\/renders$/,(m,b)=>{const prompt=String(b.prompt||'').trim();if(prompt.length<10)throw Object.assign(Error('Write a shot prompt of at least 10 characters.'),{status:400});const input=hf.buildInput({prompt,imageUrl:b.imageUrl||null,duration:b.duration,resolution:b.resolution});return {render:store.createRender({title:String(b.title||'Untitled shot').slice(0,120),endpoint:input.image_url?hf.endpoints['image-to-video']:hf.endpoints['text-to-video'],input})};}],
+  ['POST',/^\/api\/renders\/(\d+)\/check$/,async m=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});if(!['draft','checks_failed','checks_passed'].includes(r.status))throw Object.assign(Error(`Render is ${r.status}`),{status:409});store.updateRender(r.id,{status:'checking'});let checks;try{checks=await hf.runCheckers({title:r.title,input:r.input});}catch(e){store.updateRender(r.id,{status:'draft',error:e.message});throw e;}let estimate=null,error=null;if(checks.passed&&hf.higgsfieldEnabled()){try{const e=await hf.estimate(r.endpoint,r.input);estimate=hf.priceFrom(e,r.input);if(!estimate)error='Higgsfield returned no usable price for this resolution';}catch(e){error=e.message;}}return {render:store.updateRender(r.id,{status:checks.passed?'checks_passed':'checks_failed',checks,estimate_usd:estimate,error})};}],
+  ['POST',/^\/api\/renders\/(\d+)\/approve$/,async(m,b)=>{const r=store.getRender(Number(m[1]));if(!r)throw Object.assign(Error('No such render'),{status:404});if(r.status!=='checks_passed')throw Object.assign(Error('Run the checkers and pass them before approving.'),{status:409});if(!r.estimate_usd)throw Object.assign(Error('No price estimate yet. Rerun checks to fetch one.'),{status:409});if(String(b.estimate)!==String(r.estimate_usd))throw Object.assign(Error('The estimate changed. Review it and approve again.'),{status:409});const submitted=await hf.approveAndSubmit(r.endpoint,r.input,`render-${r.id}-${randomUUID()}`);const updated=store.updateRender(r.id,{status:submitted.status||'queued',request_id:submitted.request_id||submitted.id||null,approved_at:new Date().toISOString(),error:null});pollRender(r.id);return {render:updated};}],
+  ['POST',/^\/api\/renders\/(\d+)\/cancel$/,async m=>{const r=store.getRender(Number(m[1]));if(!r?.request_id)throw Object.assign(Error('Nothing submitted'),{status:409});await hf.cancel(r.request_id);return {render:store.updateRender(r.id,{status:'canceled'})};}]
+ ];
+ return async function handle(req,res){
+  const url=new URL(req.url,'http://localhost');
+  const send=(code,data)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));};
+  if(url.pathname==='/api/stream'){
+   res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-store',Connection:'keep-alive'});
+   const push=change=>res.write(`data: ${JSON.stringify(change)}\n\n`);
+   store.bus.on('change',push);const ping=setInterval(()=>res.write(': ping\n\n'),20000);
+   req.on('close',()=>{store.bus.off('change',push);clearInterval(ping);});return;
+  }
+  for(const [method,pattern,fn] of routes){
+   const m=url.pathname.match(pattern);if(!m||req.method!==method)continue;
+   try{
+    let body={};
+    if(method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>64000)return send(413,{error:'Request too large'});}body=raw?JSON.parse(raw):{};}
+    return send(200,await fn(m,body));
+   }catch(error){return send(error.status||(error instanceof SyntaxError?400:500),{error:error.message});}
+  }
+  try{
+   const [root,rel]=url.pathname.startsWith('/shots/')?[shots,url.pathname.slice(7)]:url.pathname.startsWith('/renders/')?[renderDir,url.pathname.slice(9)]:[pub,url.pathname==='/'?'index.html':url.pathname.slice(1)];
+   const file=path.resolve(root,decodeURIComponent(rel));
+   if(!file.startsWith(root+path.sep))return send(403,{error:'Forbidden'});
+   const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','X-Content-Type-Options':'nosniff'});res.end(data);
+  }catch{send(404,{error:'Not found'});}
+ };
+}
+
+if(process.argv[1]===fileURLToPath(import.meta.url)){
+ const port=Number(process.env.AGENT_PORT||3200);
+ http.createServer(createApp()).listen(port,'127.0.0.1',()=>console.log(`Mint Labs agent ready at http://127.0.0.1:${port}`));
+}
