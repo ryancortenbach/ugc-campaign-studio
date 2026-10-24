@@ -46,4 +46,14 @@ export async function runCheckers({title,input,brief=''}){
  const passed=results.every(r=>r.score>=PASS_SCORE&&!r.issues.some(i=>i.severity!=='minor'));
  return {passed,results,cost:results.reduce((s,r)=>s+r.cost,0),checkedAt:new Date().toISOString()};
 }
+// Accepts a studio production packet, its storyboard, or a bare plan, and returns one render request per shot.
+export function shotsFromStoryboard(packet){
+ const seen=new Set();
+ const find=o=>{if(!o||typeof o!=='object'||seen.has(o))return null;seen.add(o);if(Array.isArray(o.shots)&&o.shots.some(s=>s&&typeof s==='object'))return o;for(const v of Object.values(o)){const hit=find(v);if(hit)return hit;}return null;};
+ const plan=find(packet);
+ if(!plan)throw Error('No storyboard shots found in that JSON.');
+ const lock=(label,v)=>v&&String(v).trim()?`${label}: ${String(v).trim()}`:null;
+ const group=String(packet?.brief?.brand||packet?.brand||plan.offer||'Storyboard').slice(0,60);
+ return plan.shots.filter(s=>s&&(s.action||s.camera)).slice(0,12).map((s,i)=>({group,shotId:String(s.id||`shot-${i+1}`),title:`${s.id||`shot-${i+1}`}: ${String(s.camera||'').slice(0,60)}`,input:buildInput({duration:Math.max(4,Number(s.duration)||5),prompt:['Vertical 9:16 video, one continuous shot.',lock('Character',plan.identity),lock('Wardrobe',plan.wardrobe),lock('Environment',plan.environment),lock('Camera',s.camera),lock('Action',s.action),s.dialogue&&s.dialogue.trim()?`Dialogue, spoken exactly: "${s.dialogue.trim()}"`:'No dialogue.',lock('Voice',plan.voice),lock('Audio',s.audio),lock('Creative direction',plan.creativeDirection),lock('Constraints',plan.constraints)].filter(Boolean).join('\n')})}));
+}
 export async function download(url,dir,name){mkdirSync(dir,{recursive:true});const res=await fetch(url,{signal:AbortSignal.timeout(120000)});if(!res.ok)throw Error(`Download failed with HTTP ${res.status}`);const file=path.join(dir,name);writeFileSync(file,Buffer.from(await res.arrayBuffer()));return file;}

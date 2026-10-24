@@ -6,7 +6,9 @@ import {createRunner} from './runner.mjs';
 import {rulesPlan,cleanCopy} from './brain.mjs';
 import {extractEmails,bestEmail} from './tools/site.mjs';
 import {buildMime} from './tools/gmail.mjs';
-import {buildInput,priceFrom} from './tools/higgsfield.mjs';
+import {buildInput,priceFrom,shotsFromStoryboard} from './tools/higgsfield.mjs';
+import http from 'node:http';
+import {createApp} from './server.mjs';
 
 const page=(domain,email)=>({via:'fake',sessionId:null,screenshot:null,domain,pages:[{url:`https://${domain}/`,title:domain,chars:100}],homeText:'Shop new arrivals',contactText:'',emails:email?[{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}]:[],best:email?{email,sourceUrl:`https://${domain}/contact`,excerpt:`write to ${email}`}:null});
 function fakeTools(over={}){
@@ -93,6 +95,39 @@ test('gmail module never sends and blocks header injection',()=>{
 test('higgsfield input clamps duration and resolution',()=>{
  assert.deepEqual(buildInput({prompt:'p',duration:99,resolution:'4k'}),{prompt:'p',duration:30,resolution:'720p'});
  assert.equal(buildInput({prompt:'p',imageUrl:'https://x/y.png'}).image_url,'https://x/y.png');
+});
+
+test('a studio storyboard becomes one render per shot with locks and exact dialogue',()=>{
+ const packet={brief:{brand:'Mint Tees'},storyboard:{identity:'Original PS2-era character, silver jacket',wardrobe:'Silver jacket',environment:'Penthouse at night',voice:'Calm',shots:[{id:'shot-01',duration:3,camera:'Medium shot',action:'Turns to camera',dialogue:'You are early.',audio:'Room tone'},{id:'shot-02',duration:9,camera:'Close-up',action:'Holds up shirt',dialogue:'',audio:''}]}};
+ const shots=shotsFromStoryboard(packet);
+ assert.equal(shots.length,2);
+ assert.equal(shots[0].group,'Mint Tees');
+ assert.equal(shots[0].input.duration,4);
+ assert.match(shots[0].input.prompt,/Wardrobe: Silver jacket/);
+ assert.match(shots[0].input.prompt,/spoken exactly: "You are early\."/);
+ assert.match(shots[1].input.prompt,/No dialogue\./);
+ assert.throws(()=>shotsFromStoryboard({nothing:true}),/No storyboard shots/);
+});
+
+test('finished renders need a review, and a rejection needs a reason',async()=>{
+ const store=openStore(':memory:');
+ const server=http.createServer(createApp({store,runner:{start(){},control(){},steer(){},isRunning:()=>false}}));
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const base=`http://127.0.0.1:${server.address().port}`;
+ const post=(p,b)=>fetch(base+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(async r=>({status:r.status,body:await r.json()}));
+ try{
+  const r=store.createRender({title:'shot-01: Medium',endpoint:'x',input:buildInput({prompt:'a test prompt here'})});
+  assert.equal((await post(`/api/renders/${r.id}/review`,{decision:'approved'})).status,409);
+  store.updateRender(r.id,{status:'completed',review:'pending'});
+  assert.equal((await post(`/api/renders/${r.id}/review`,{decision:'rejected'})).status,400);
+  const rej=await post(`/api/renders/${r.id}/review`,{decision:'rejected',note:'Jacket turned blue'});
+  assert.equal(rej.body.render.review,'rejected');
+  const v2=await post(`/api/renders/${r.id}/revise`,{});
+  assert.equal(v2.body.render.title,'shot-01: Medium (v2)');
+  assert.match(v2.body.render.input.prompt,/Jacket turned blue/);
+  assert.equal(v2.body.render.status,'draft');
+  assert.equal((await post(`/api/renders/${v2.body.render.id}/approve`,{estimate:'1'})).status,409);
+ }finally{server.close();}
 });
 
 test('higgsfield price sheet becomes a total for the chosen resolution and length',()=>{

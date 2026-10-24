@@ -25,6 +25,7 @@ export function openStore(file=path.join(dataDir,'agent.db')){
  const db=new DatabaseSync(file);
  if(file!==':memory:')db.exec('pragma journal_mode=wal');
  db.exec(schema);
+ for(const col of ['group_name text','shot_id text','review text','review_note text','reviewed_at text'])try{db.exec(`alter table renders add column ${col}`);}catch{}
  const bus=new EventEmitter();bus.setMaxListeners(100);
  const task=row=>row&&{...row,plan:parse(row.plan)};
  const event=row=>row&&{...row,data:parse(row.data)};
@@ -49,11 +50,11 @@ export function openStore(file=path.join(dataDir,'agent.db')){
   updateLead(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update leads set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['reasons','risks','emails'].includes(c)?json(fields[c]):fields[c]),at,id);const l=store.getLead(id);bus.emit('change',{kind:'lead',lead:l});return l;},
   addDraft(fields){const id=Number(db.prepare('insert into drafts(lead_id,task_id,to_email,subject,body,gmail_draft_id,gmail_url,status,created_at) values(?,?,?,?,?,?,?,?,?)').run(fields.leadId,fields.taskId,fields.to,fields.subject,fields.body,fields.gmailDraftId||null,fields.gmailUrl||null,fields.status,now()).lastInsertRowid);return db.prepare('select * from drafts where id=?').get(id);},
   listDrafts({leadId,taskId}={}){if(leadId)return db.prepare('select * from drafts where lead_id=? order by id desc').all(leadId);if(taskId)return db.prepare('select * from drafts where task_id=? order by id desc').all(taskId);return db.prepare('select * from drafts order by id desc limit 500').all();},
-  createRender({title,endpoint,input}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,created_at,updated_at) values(?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
+  createRender({title,endpoint,input,group=null,shotId=null}){const at=now();const id=Number(db.prepare('insert into renders(title,endpoint,input,status,group_name,shot_id,created_at,updated_at) values(?,?,?,?,?,?,?,?)').run(title,endpoint,json(input),'draft',group,shotId,at,at).lastInsertRowid);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
   getRender(id){return render(db.prepare('select * from renders where id=?').get(id));},
   listRenders(){return db.prepare('select * from renders order by id desc').all().map(render);},
   updateRender(id,fields){const at=now();const cols=Object.keys(fields);db.prepare(`update renders set ${cols.map(c=>`${c}=?`).join(',')},updated_at=? where id=?`).run(...cols.map(c=>['input','checks'].includes(c)?json(fields[c]):fields[c]),at,id);const r=store.getRender(id);bus.emit('change',{kind:'render',render:r});return r;},
-  stats(){return {tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(cost_usd),0) n from tasks').get().n};}
+  stats(){return {reviews:db.prepare("select count(*) n from renders where review='pending'").get().n,tasks:db.prepare("select count(*) n from tasks where status in ('running','paused','queued')").get().n,leads:db.prepare('select count(*) n from leads').get().n,drafts:db.prepare("select count(*) n from drafts where status='gmail_draft'").get().n,spend:db.prepare('select coalesce(sum(cost_usd),0) n from tasks').get().n};}
  };
  return store;
 }
