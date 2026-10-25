@@ -1,0 +1,81 @@
+{
+  "version": 2,
+  "checked_at": "2026-10-25T08:15:29.842383+00:00",
+  "url": "https://duolingo-library-phone-v1-dpbd36ffw-ryancortenbachs-projects.vercel.app/",
+  "deployment_id": "dpl_72K9ez7qh5cPc64Psis1Fk6x8j1n",
+  "deployment_target": "preview",
+  "ready_state": "READY",
+  "production_deployment": false,
+  "source_directory": "experiments/morning-review-hub-v2",
+  "baseline_source": "3212262",
+  "anonymous_public_destinations": 14,
+  "all_destination_http200": true,
+  "initial_transient_tls_timeouts": 3,
+  "initial_failures_preserved": true,
+  "destination_check_scope": "Anonymous availability only. Fragment routes share an HTML resource; this is not fourteen independently tested applications.",
+  "hosted_files": {
+    "checked_at": "2026-10-25T08:13:45.437706+00:00",
+    "files": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "bytes": 15571,
+        "sha256": "36f60454ceae3c32007e1b8fa58f87440c2157f96ffced7390dd70df49b42c28",
+        "matches_source": true
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "bytes": 6956,
+        "sha256": "90e6709a65112ee3660074e36ee2603b173c0deb47b2847db7e03513f790737b",
+        "matches_source": true
+      },
+      {
+        "file": "review-manifest.json",
+        "status": 200,
+        "bytes": 9980,
+        "sha256": "295feb88a83d792a7e52102eaee16a0739aa6bf2f04b7fb4304edcb103e0f5b8",
+        "matches_source": true
+      }
+    ]
+  },
+  "independent_review": {
+    "agent": "ugc_current_hub_review",
+    "verdict": "PASS within read-only hub scope",
+    "claims_checked_against": [
+      "COMPLETION-AUDIT-v48.json",
+      "MORNING-DELIVERABLE-MATRIX-v2.json",
+      "EPOMAKER-QUALIFICATION-REVIEW-v1.json",
+      "RESEARCH-REVIEW-COVERAGE-v1.json",
+      "CONTINUATION.txt"
+    ],
+    "desktop_width": 1920,
+    "mobile_width": 390,
+    "no_horizontal_overflow": true,
+    "actual_anchor_clicks": [
+      "Website mocks",
+      "Connection states",
+      "Next decisions"
+    ],
+    "all_six_anchor_targets_exist": true,
+    "economics_destination_opens_both_models": true,
+    "viewport_restored": true,
+    "condition": "Audit49 and matrixv3 must be published before delivery."
+  },
+  "root_final_browser_observed": true,
+  "screenshot_captured_in_chat": true,
+  "tab_marked_deliverable": true,
+  "private_github_links": "Require repository access. Anonymous access not verified. Targets included with this batch commit.",
+  "physical_device_testing": false,
+  "live_provider_rechecks": false,
+  "new_model_grades": 0,
+  "new_generated_samples": 0,
+  "messages_sent": 0,
+  "paid_actions": 0,
+  "app_activated": false,
+  "Air_modified": false,
+  "runtime_database_modified": false,
+  "existing_node_pid_37755_untouched": true,
+  "agent_port3200_listener_observed": false,
+  "whole_goal_complete": false
+}
