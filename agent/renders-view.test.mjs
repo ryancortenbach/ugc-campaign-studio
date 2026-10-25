@@ -219,3 +219,5 @@ test('dialogue and prompt extraction', ()=>{
 test('no em dash characters in the new view files', ()=>{
  for(const f of ['public/renders-view.js','public/renders-view.css','renders-view.test.mjs'])assert.equal(readFileSync(new URL('./'+f,import.meta.url),'utf8').includes(String.fromCharCode(0x2014)),false,f);
 });
+
+test('known source lineage links to the comparison route without recording or spending',async()=>{const {view,dom,calls}=await mount({renders:[R(11,{storyboard_id:7})],arg:11});try{const link=view.querySelector('a[href="#/source-review/11"]');assert.ok(link);assert.match(link.textContent,/Compare storyboard source/);assert.ok(!calls.some(([,body])=>body!==undefined));}finally{dom.window.close();}});

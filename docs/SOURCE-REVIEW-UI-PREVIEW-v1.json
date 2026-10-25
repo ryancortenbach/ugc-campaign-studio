@@ -1,0 +1,31 @@
+{
+  "url": "https://duolingo-library-phone-v1-drirbv0ps-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_HJzYQDUy5PMpyLDcSscDZpe8zBmG",
+  "target": "preview",
+  "ready": true,
+  "anonymous_http": 200,
+  "asset_sha256": {
+    "source-review.js": "14a96386ef8a3ec270b978f3a9f8b458f501cd6b4105a35ddd6db1e4a2647982",
+    "source-review.css": "c88e100caeb02f9604b1d5aa7072916b27ba7f802de019f12fcaef88147e21b4"
+  },
+  "fictional_fixture": true,
+  "primary_normal_chrome_interactions": [
+    "record",
+    "already_recorded",
+    "conflict",
+    "lost_response",
+    "unknown_lineage"
+  ],
+  "desktop_and_390x844_screenshots_in_chat": true,
+  "mobile_document_width": 390,
+  "viewport_width": 390,
+  "viewport_restored": true,
+  "independent_code_and_hosted_bytes_review": true,
+  "independent_screenshot_review": true,
+  "independent_browser_interaction": false,
+  "native_app_tested": false,
+  "physical_phone_tested": false,
+  "live_account_actions": false,
+  "source": "548b754",
+  "intermediate_preview": true
+}

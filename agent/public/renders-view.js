@@ -194,6 +194,7 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   out.push(`<div class="rvp-actions">${actionsHTML(r)}</div>`);
   if(t.versions.length>1)out.push(`<section class="rvp-sec"><h4>Versions</h4><div class="rvp-vers">${t.versions.slice().reverse().map(v=>{const n=t.versions.indexOf(v)+1,c=mediaCandidates(v).find(x=>x.kind!=='video'),vs=stateOf(v);return `<button type="button" class="rvp-v${v.id===r.id?' on':''}" data-a="ver" data-rid="${v.id}" title="v${n}: ${esc(vs.label)}"><span class="rvp-vt">${c?`<img src="${esc(c.src)}" alt="" loading="lazy" data-hide>`:''}<b>${n}</b><i class="dot ${vs.cls}"></i></span><span>v${n}</span></button>`;}).join('')}</div></section>`);
   out.push(stuckHTML(r));
+  if(r.storyboard_id)out.push(`<section class="rvp-sec"><a class="rvp-btn" href="#/source-review/${r.id}">Compare storyboard source</a><p class="rvp-note">Review local intent association. Quality checks and spending approval stay separate.</p></section>`);
   const notes=[];
   if(r.review_note)notes.push(['Your note',r.review_note]);
   if(p.visualQA?.status==='needs_revision'&&p.visualQA.findings?.length)notes.push(['AI review',p.visualQA.findings.join(' ')]);

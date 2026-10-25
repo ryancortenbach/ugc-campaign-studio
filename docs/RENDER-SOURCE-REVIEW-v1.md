@@ -1,0 +1,19 @@
+# Explicit source review for revised intent
+
+PR4 targets post-judging. This backend adds a local operator-attestation path for revised render intent. It is not a model grade, visual review, provider verification, spend approval or buyer delivery. No live review was recorded by this worker.
+
+The render revision route now retains its original saved storyboard ID for both plain renders and two-step product clips, but uses sourceConfirmed:false so the new input does not automatically inherit a matched plan hash. Older/imported renders without saved lineage remain unknown. The endpoint cannot associate an arbitrary board using the order, title or group name.
+
+GET /api/renders/:id/source-review returns source lineage, whether exactly one current storyboard shot matches, the current input/plan hashes and last review ID, the latest saved record and whether it still matches. Inspect the render input and storyboard through their existing views/API before attesting. Hashes identify snapshots; they are not the review content or evidence of pixel quality.
+
+POST to the same route requires storyboardId, expectedRenderHash, expectedPlanHash, expectedReviewId, confirmMatches:true and a nonempty note up to 2000 characters. The board must match the render's saved lineage and contain exactly one matching shot ID. The confirmation must be a strict boolean. Changed input, plan or last-review ID returns409, so a retry after an uncertain response must reload the saved state rather than blindly append a second record.
+
+A SQLite immediate transaction saves an immutable review record and restores only the matching storyboard_plan_hash. It does not change input, status, checks, review, estimate, request ID, approvals or provider work. Failure rolls back the history row and association together. GET /api/renders/:id/source-review/history returns all saved records in order. The table render_source_reviews initializes when the module receives a store; actual app data was not opened or migrated by this worker.
+
+Genuine later intent or board changes invalidate the association again. Historical review records remain. A metadata review can restore the exact local association needed for a source-bound final, but it does not rewrite a previous final. The operator must remake it, and all other source/shot/current-state checks still apply. The final preserves the existing pending/approved/rejected selection behavior; this feature never turns a failed checker into a pass.
+
+Tests cover strict confirmation, unknown lineage, wrong/ambiguous boards, stale input/plan/review snapshots, duplicate retries, rollback after injected database failure, reopening/history retention, both revision routes, and a loopback POST while spendingPaused. A separate synthetic delivery test verifies reassociation can restore final binding without grader or provider work and that the next intent edit stales it again. The independent reviewer passed52focused source-review/coverage/plan/delivery tests, including cross-instance stale-review checks, with no concrete defect found in scope. Initial testing found a missing history-query parameter, which was corrected before review.
+
+No frontend or hosted preview changed. No sending, paid generation, live accounts, actual app database, Air writes, app build or deployment. This is a backend operator workflow; native UI integration, per-slot rendering/finals/storage/recovery and buyer delivery remain unfinished. The existing fictional recovery preview is separate and does not run this endpoint. Exact-source CI results are recorded in the continuation audit.
+
+Both exact-source 2f44474 CI runs 40149833658 and 40149830702 passed 90 root and 441 agent tests, zero failures/skips. Logs: work/render-source-review-v4-tests.log and work/render-source-review-ci-v1.log.
