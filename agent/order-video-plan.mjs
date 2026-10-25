@@ -1,3 +1,4 @@
+import {storyboardRoot} from './order-storyboard-family.mjs';
 import {packageScope} from './order-coverage.mjs';
 const fail=(status,message)=>Object.assign(Error(message),{status});
 export function createOrderVideoPlan({store,now=()=>new Date()}={}){
@@ -11,15 +12,7 @@ export function createOrderVideoPlan({store,now=()=>new Date()}={}){
   if(!o)throw fail(404,'No such Whop order.');return o;
  };
  const row=id=>db.prepare('select * from order_video_plans where payment_id=?').get(id);
- const rootOf=(id,strict=true)=>{
-  let current=id;const seen=new Set();
-  for(let i=0;i<100;i++){
-   if(seen.has(current)){if(!strict)return null;throw fail(409,'This storyboard has a cyclic version history.');}seen.add(current);
-   const board=store.getStoryboard(current);if(!board){if(!strict)return null;throw fail(409,'A referenced storyboard or its version ancestor is missing.');}
-   if(!board.parent_id)return current;current=board.parent_id;
-  }
-  if(!strict)return null;throw fail(409,'This storyboard version history is too deep.');
- };
+ const rootOf=(id,strict=true)=>storyboardRoot(store,id,{strict});
  const wrap=(id,r)=>{
   const o=need(id);let payment=null;try{payment=JSON.parse(o.payment);}catch{}
   return {paymentId:id,revision:r?.revision||0,updatedAt:r?.updated_at||null,

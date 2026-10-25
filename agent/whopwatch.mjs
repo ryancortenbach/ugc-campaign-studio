@@ -192,7 +192,7 @@ export function createWhopWatch({store,runner,tools={},whop=whopApi,now=()=>new 
   // 4. Approve the storyboard exactly like the approve route: its shots become renders, still unsubmitted.
   ensure();
   const shots=T.shots({brief:{brand:`${sb.title} v${sb.version}`},storyboard:sb.plan});
-  const renders=shots.map(x=>store.createRender({title:x.title,endpoint:T.endpoint,input:x.input,group:x.group,shotId:x.shotId}));
+  const renders=shots.map(x=>store.createRender({title:x.title,endpoint:T.endpoint,input:x.input,group:x.group,shotId:x.shotId,storyboardId:sb.id}));
   store.updateStoryboard(sb.id,{status:'approved'});
   upd(pid,{render_ids:renders.map(r=>r.id),shots:renders.length});
   log('decision',`Storyboard v${sb.version} passed. Approved it: ${renders.length} shot(s) added to Renders.`,{tool:'whop.storyboard'});

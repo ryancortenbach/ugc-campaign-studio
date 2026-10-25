@@ -19,7 +19,7 @@ function fixture({email='buyer@brand.example'}={}){
  const task=store.createTask('Whop order: UGC Starter from Brand');
  const board=store.createStoryboard({title:'Brand UGC video',brief:{},plan:{shots:[{id:'s1',dialogue:'I wear this every single day now'},{id:'s2',dialogue:'Link in bio'}]}});
  const shot=(n,{status='completed',review='pending',file=true}={})=>{
-  const r=store.createRender({title:`Shot ${n}`,endpoint:'text-to-video',input:{prompt:`shot ${n}`},group:'Brand UGC video v1',shotId:`s${n}`});
+  const r=store.createRender({title:`Shot ${n}`,endpoint:'text-to-video',input:{prompt:`shot ${n}`},group:'Brand UGC video v1',shotId:`s${n}`,storyboardId:board.id});
   const local=file?`render-${r.id}.mp4`:null;if(local)writeFileSync(path.join(renderDir,local),`clip ${r.id}`);
   return store.updateRender(r.id,{status,local_file:local,review});
  };
@@ -258,3 +258,14 @@ test('draft reconciliation route works while paused and never creates or sends a
  const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});let server;
  try{await d.finish('pay_1');await assert.rejects(d.deliver('pay_1'));const intentToken=d.get('pay_1').draftRecovery.intentToken;const app=createApp({store:f.store,delivery:d,gmailApi:gmail});f.store.db.prepare("insert into settings(key,value) values('spendingPaused','true') on conflict(key) do update set value='true'").run();server=http.createServer(app);await new Promise(r=>server.listen(0,'127.0.0.1',r));const res=await fetch(`http://127.0.0.1:${server.address().port}/api/whop/orders/pay_1/delivery-draft-reconcile`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intentToken})});assert.equal(res.status,200);assert.equal((await res.json()).draftRecovery,null);assert.equal(creates,1);assert.equal(f.store.spendSummary().total,0);}finally{if(server)await new Promise(r=>server.close(r));f.done();}
 });
+
+test('new final binds its storyboard and changing that storyboard invalidates unchanged render IDs',async()=>{
+ const f=fixture(),sb=fakeSupabase(),gmail=fakeGmail();try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg',fetch:sb.fetch,gmail});const original=f.store.db.prepare('select storyboard_id from whop_orders where payment_id=?').get('pay_1').storyboard_id;await d.finish('pay_1');assert.equal(d.get('pay_1').final.storyboardId,original);f.store.db.prepare('update whop_orders set storyboard_id=? where payment_id=?').run(original+1000,'pay_1');assert.equal(d.get('pay_1').final.stale,true);await assert.rejects(d.deliver('pay_1'),e=>e.status===409);assert.equal(gmail.drafts.length,0);}finally{f.done();}
+});
+test('legacy final binding migration preserves prior final bytes and leaves ownership unbound',async()=>{
+ const f=fixture();try{const options={store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg'};let d=createDelivery(options);await d.finish('pay_1');const file=f.store.db.prepare('select final_file from deliveries').get().final_file,bytes=readFileSync(path.join(f.renderDir,file));f.store.db.exec('alter table deliveries drop column final_storyboard_id');d=createDelivery(options);assert.equal(d.get('pay_1').final.storyboardId,null);assert.deepEqual(readFileSync(path.join(f.renderDir,file)),bytes);}finally{f.done();}
+});
+
+test('remaking from unrelated or legacy unproven clips never binds a different storyboard',async()=>{const f=fixture();try{const opts={store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg'},d=createDelivery(opts);const b=f.store.createStoryboard({title:'Different',brief:{},plan:{shots:[{id:'other-1'},{id:'other-2'}]}});f.store.db.prepare('update whop_orders set storyboard_id=?').run(b.id);await d.finish('pay_1');assert.equal(d.get('pay_1').final.storyboardId,null);assert.equal(d.get('pay_1').final.stale,true);f.store.db.prepare('update renders set storyboard_id=null').run();await d.finish('pay_1');assert.equal(d.get('pay_1').final.storyboardId,null);}finally{f.done();}});
+
+test('in-place storyboard changes invalidate bound finals and cannot rebind old render snapshots',async()=>{const f=fixture();try{const d=createDelivery({store:f.store,env:ENV,renderDir:f.renderDir,stitch:f.fakeStitch,ffmpeg:()=>'ffmpeg'});await d.finish('pay_1');const id=d.get('pay_1').final.storyboardId,b=f.store.getStoryboard(id);f.store.updateStoryboard(id,{plan:{...b.plan,voice:'Changed voice'}});assert.equal(d.get('pay_1').final.stale,true);await d.finish('pay_1');assert.equal(d.get('pay_1').final.storyboardId,null);}finally{f.done();}});

@@ -1,3 +1,4 @@
+import {storyboardPlanHash} from './order-storyboard-family.mjs';
 // The last step of a Whop order, done in the Mac app now that nothing is hosted on Vercel. It joins the order's finished
 // shots into one captioned vertical video with ffmpeg, uploads it to the private "deliveries" bucket of the team's Supabase
 // project, and drafts the delivery email in Gmail with a signed download link. Nothing is sent: the operator reads the
@@ -111,7 +112,9 @@ export function deliveryEmail({buyerName,brand,link,expiresAt,sender='Mint Labs'
 export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=globalThis.fetch,renderDir=path.join(dataDir,'renders'),stitch:join=stitch,ffmpeg=()=>findFfmpeg(env),font=()=>captionFont(env),sender=()=>'Mint Labs',now=()=>new Date()}={}){
  const db=store.db;
  // final_version counts remakes; prepared_for names the version the current link and draft deliver.
- db.exec('create table if not exists deliveries(payment_id text primary key,final_file text,final_render_ids text,final_at text,final_bytes integer,final_version integer,captions integer,storage_path text,link text,link_expires_at text,draft_id text,draft_url text,email text,prepared_at text,prepared_for integer,updated_at text not null)');
+ db.exec('create table if not exists deliveries(payment_id text primary key,final_file text,final_render_ids text,final_at text,final_bytes integer,final_version integer,final_storyboard_id integer,final_storyboard_hash text,captions integer,storage_path text,link text,link_expires_at text,draft_id text,draft_url text,email text,prepared_at text,prepared_for integer,updated_at text not null)');
+ if(!db.prepare('pragma table_info(deliveries)').all().some(c=>c.name==='final_storyboard_id'))db.exec('alter table deliveries add column final_storyboard_id integer');
+ if(!db.prepare('pragma table_info(deliveries)').all().some(c=>c.name==='final_storyboard_hash'))db.exec('alter table deliveries add column final_storyboard_hash text');
  db.exec("create table if not exists delivery_draft_intents(payment_id text primary key,token text not null,state text not null,recipient text not null,subject text not null,draft_id text,draft_url text,started_at text not null)");
  const iso=()=>new Date(now()).toISOString();
  const row=id=>db.prepare('select * from deliveries where payment_id=?').get(id);
@@ -156,7 +159,7 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
  function get(id){
   const o=need(id),list=shots(o),d=row(id);
   const current=JSON.stringify(list.map(s=>s.render?.id||null));
-  const final=d?.final_file&&existsSync(localFile(d.final_file))?{url:`/renders/${d.final_file}?v=${encodeURIComponent(d.final_at)}`,at:d.final_at,bytes:d.final_bytes,captions:Boolean(d.captions),stale:d.final_render_ids!==current}:null;
+  const final=d?.final_file&&existsSync(localFile(d.final_file))?{url:`/renders/${d.final_file}?v=${encodeURIComponent(d.final_at)}`,at:d.final_at,bytes:d.final_bytes,captions:Boolean(d.captions),storyboardId:d.final_storyboard_id&&d.final_storyboard_hash?d.final_storyboard_id:null,stale:d.final_render_ids!==current||Boolean(o.storyboard_id&&(!d.final_storyboard_id||!d.final_storyboard_hash||d.final_storyboard_id!==o.storyboard_id||d.final_storyboard_hash!==storyboardPlanHash(store.getStoryboard(o.storyboard_id)?.plan)))}:null;
   return {
    order:{paymentId:o.payment_id,product:o.product,buyerName:o.buyer_name,buyerEmail:o.buyer_email,brand:o.brand_domain},
    shots:list.map(s=>({shotId:s.shotId,title:s.title,renderId:s.render?.id||null,status:s.render?'finished':s.latest?.status||'missing',review:s.render?.review||null})),
@@ -180,10 +183,12 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
   const missing=list.filter(s=>!s.render);
   if(missing.length)throw fail(409,`${missing.length} of ${list.length} shots are not finished: ${missing.map(s=>s.title).join(', ')}.`);
   const plan=o.storyboard_id?store.getStoryboard(o.storyboard_id)?.plan:null;
+  const planShots=plan?.shots||[],planHash=storyboardPlanHash(plan);
+  const sourceVerified=Boolean(o.storyboard_id&&planShots.length===list.length&&list.every((s,i)=>s.render.storyboard_id===o.storyboard_id&&s.render.storyboard_plan_hash===planHash&&String(s.shotId)===String(planShots[i].id||`shot-${i+1}`)));
   const dialogue=new Map((plan?.shots||[]).map((s,i)=>[String(s.id||`shot-${i+1}`),String(s.dialogue||'')]));
   const file=`finals/${o.payment_id.replace(/[^A-Za-z0-9_-]/g,'_')}-${randomUUID()}.mp4`;
   const made=await join({clips:list.map(s=>localFile(s.render.local_file)),captions:list.map(s=>dialogue.get(String(s.shotId))||''),out:localFile(file),ffmpeg:ffmpeg(),font:font()});
-  save(o.payment_id,{final_file:file,final_render_ids:JSON.stringify(list.map(s=>s.render.id)),final_at:iso(),final_bytes:statSync(localFile(file)).size,final_version:(row(o.payment_id)?.final_version||0)+1,captions:made?.captions?1:0});
+  save(o.payment_id,{final_file:file,final_render_ids:JSON.stringify(list.map(s=>s.render.id)),final_at:iso(),final_storyboard_id:sourceVerified?o.storyboard_id:null,final_storyboard_hash:sourceVerified?planHash:null,final_bytes:statSync(localFile(file)).size,final_version:(row(o.payment_id)?.final_version||0)+1,captions:made?.captions?1:0});
   log(o,`Final video made from ${list.length} shots${made?.captions?' with captions':''}. Review it, then prepare the delivery email.`,'ffmpeg');
   return get(id);
  });
