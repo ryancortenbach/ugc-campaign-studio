@@ -1,3 +1,4 @@
+import {createOrderVideoFinals} from './order-video-finals.mjs';
 import {createRenderSourceReview} from './render-source-review.mjs';
 import './network-dns.mjs';
 import {assertRevisionWorkAllowed} from './revision-harness.mjs';
@@ -57,7 +58,7 @@ const mime={'.pdf':'application/pdf','.json':'application/json; charset=utf-8','
 const chatModel=b=>{if(b.model==null||b.model==='')return null;if(!mainModels.includes(b.model))throw Object.assign(Error('Pick Sonnet 5.5 or Haiku 5.5.'),{status:400});return b.model;};
 const chatFiles=b=>{const ids=Array.isArray(b.attachments)?b.attachments:[];if(ids.length>5)throw Object.assign(Error('Attach up to 5 files.'),{status:400});return ids.map(id=>{const u=getUpload(id);if(!u)throw Object.assign(Error('An attached file is missing. Attach it again.'),{status:400});return u;});};
 class Raw{constructor(type,data,headers={}){this.type=type;this.data=data;this.headers=headers;}}
-export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=defaultCheckVoice,gmailApi=gmailTools,video,logoNet={},autopilot,assistant,requalifier,whopwatch,delivery,costs,connections,production,taskStoryboards,analytics,ideation,browserLive=defaultBrowserLive,instagram,panels,panelsWatch=false}={}){
+export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=defaultCheckVoice,gmailApi=gmailTools,video,logoNet={},autopilot,assistant,requalifier,whopwatch,delivery,videoFinals,costs,connections,production,taskStoryboards,analytics,ideation,browserLive=defaultBrowserLive,instagram,panels,panelsWatch=false}={}){
  runner??=createRunner(store);
  const clientDemo=createClientDemo({store});
  const clientReview=createClientReview({store,clientDemo});
@@ -68,6 +69,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=def
  const orderCoverage=createOrderCoverage({store,delivery});
  const orderVideoPlan=createOrderVideoPlan({store});
  const renderSourceReview=createRenderSourceReview({store});
+ videoFinals??=createOrderVideoFinals({store,coverage:orderCoverage,plans:orderVideoPlan});
  costs??=createCosts({store});
  analytics??=createAnalytics({store});
  connections??=createConnections();
@@ -259,6 +261,9 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['POST',/^\/api\/whop\/orders\/([\w-]+)\/brand$/,(m,b)=>({order:whopwatch.setBrand(m[1],b.domain)})],
   ['POST',/^\/api\/whop\/orders\/([\w-]+)\/run$/,m=>({order:whopwatch.runOrder(m[1])})],
   // Delivery: join the finished shots into the final video, then upload it to Supabase and draft the buyer's email. Never sends.
+  ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final$/,m=>videoFinals.get(m[1],Number(m[2]))],
+  ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final$/,(m,b)=>videoFinals.finish(m[1],Number(m[2]),b)],
+  ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final\/history$/,m=>({versions:videoFinals.history(m[1],Number(m[2]))})],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan$/,m=>orderVideoPlan.get(m[1])],
   ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan$/,(m,b)=>orderVideoPlan.save(m[1],b)],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan\/versions\/(\d+)$/,m=>orderVideoPlan.version(m[1],Number(m[2]))],
