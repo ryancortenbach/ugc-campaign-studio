@@ -15,6 +15,7 @@ export function spendingRequestAllowed(method,pathname,body={}){
  if(pathname==='/api/client-demo/tasks'||pathname==='/api/campaign-demo/start')return true;
  if(/^\/api\/tasks\/\d+\/client-review$/.test(pathname))return true;
  if(['/api/chat','/api/assistant'].includes(pathname)&&(clientDemoPromptBrands(body.message).length||campaignDemoTrigger(body.message)))return true;
+ if(/^\/api\/renders\/\d+\/source-review$/.test(pathname))return true;
  if(pathname==='/api/production/call'||pathname==='/api/uploads'||pathname==='/api/profile')return true;
  if(/^\/api\/tasks\/\d+\/storyboard$/.test(pathname)||/^\/api\/leads\/\d+(?:\/storyboard)?$/.test(pathname))return true;
  if(/^\/api\/whop\/orders\/[A-Za-z0-9_-]+\/context$/.test(pathname))return true;
