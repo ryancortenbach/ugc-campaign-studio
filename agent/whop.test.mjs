@@ -68,7 +68,7 @@ test('a new paid payment becomes a task and a storyboard, auto-approves, and sto
  assert.equal(sb.status,'approved');assert.equal(sb.brief.source,'whop');
  const renders=store.listRenders();
  assert.equal(renders.length,2);
- for(const r of renders){assert.equal(r.status,'checks_passed');assert.equal(r.estimate_usd,'1.50');assert.equal(r.request_id,null);assert.equal(r.approved_at,null);}
+ for(const r of renders){assert.equal(r.storyboard_id,sb.id);assert.match(r.storyboard_plan_hash,/^[a-f0-9]{64}$/);assert.equal(r.status,'checks_passed');assert.equal(r.estimate_usd,'1.50');assert.equal(r.request_id,null);assert.equal(r.approved_at,null);}
  assert.deepEqual(o.render_ids.sort(),renders.map(r=>r.id).sort());
  assert.ok(titles(store,t.id).some(x=>x.startsWith('Ready for your approval: 2 shots, about $3.00 total')));
  const sp=store.spendSummary();
