@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T04:51:47.270667+00:00",
+  "source_queue": "docs/RESEARCH-MANUAL-REVIEW-QUEUE-v1.json",
+  "review_type": "Assistant review of existing saved frames and public captions, not human review or full-media playback.",
+  "source_media_unchanged": true,
+  "original_index_unchanged": true,
+  "reviewed_no_audio_cases": 4,
+  "full_video_reviews": 0,
+  "audio_reviews": 0,
+  "transcript_corrections": 0,
+  "pending_source_queue_rows_without_frame_review": 56,
+  "independent_review": {
+    "scope": "Seven actual source images, saved captions, every note and source-copy/hash integrity",
+    "result": "no concrete mismatches or blocking overclaims found",
+    "human_review": false,
+    "full_video_or_audio_review": false,
+    "browser_layout_review": false
+  },
+  "sources": [
+    {
+      "creator": "williammaxxer",
+      "id": "DZj01J7O58q",
+      "title": "A screen becomes the joke",
+      "topic_proposal": "Game fandom and cultural-reference juxtaposition",
+      "topic_status": "Refines the existing games-reference tag; not a complete video interpretation.",
+      "observations": [
+        "A television displays game title artwork above a dark dresser. The photographed room and everyday objects remain visible.",
+        "Large point-of-view text occupies the top of the frame and supplies the premise. No person is visible in this sample.",
+        "The saved caption names the game franchise. It supports a fandom context, not demographic claims."
+      ],
+      "unknowns": [
+        "Only one saved frame inspected. Camera movement, cuts, payoff timing, speech and soundtrack are unverified.",
+        "No inference about the creator\u2019s own cultural identity or the full trailer."
+      ],
+      "original_mechanism": "Place an original fictional game objective on a monitor in an ordinary desk scene. Let an original overlay connect it to a mundane task. Use licensed or original screen artwork.",
+      "wardrobe_environment": "No wardrobe evidence. Bedroom or desk-like domestic furniture is visible, but the exact room function is unknown.",
+      "url": "https://www.instagram.com/p/DZj01J7O58q/",
+      "source_frame": "assets/DZj01J7O58q.jpg",
+      "frame_sha256": "a0b1aec9e73bf91f1afcf2f4da2ede65a608023e9471cb20d9265107cb4724d4",
+      "review_status": "assistant_frame_and_saved_caption_review",
+      "audio_status": "no_audio_in_downloaded_media",
+      "transcript_correction": null,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZj01J7O58q/visual-review.jpg",
+          "sha256": "a0b1aec9e73bf91f1afcf2f4da2ede65a608023e9471cb20d9265107cb4724d4"
+        },
+        {
+          "file": "williammaxxer/metadata/DZj01J7O58q.json",
+          "sha256": "daf39d9538b69200fd85be4aa3c79776666affd259c70b20c71e6cbf5cf31786"
+        }
+      ]
+    },
+    {
+      "creator": "williammaxxer",
+      "id": "DStkwJNEVYJ",
+      "title": "The gift and the reaction",
+      "topic_proposal": "Gift-giving vignette with reaction contrast",
+      "topic_status": "Visible setup supported. Existing cultural-persona labels describe source copy, not verified identities.",
+      "observations": [
+        "Two adults are framed indoors near a table, bright curtains and a chandelier.",
+        "The left person smiles toward the camera in a plaid shirt. The right person holds clothing and looks to the side.",
+        "Overlaid text and the saved caption frame a holiday clothing-gift scenario."
+      ],
+      "unknowns": [
+        "A still cannot establish the recipient\u2019s real feelings or the relationship between people.",
+        "Speech, music, edit sequence and whether the scene is staged are unverified."
+      ],
+      "original_mechanism": "Use a fictional brand parcel and an understated visual reaction to an unexpected garment. Write a new premise without copying the source\u2019s identity-based framing.",
+      "wardrobe_environment": "Plaid shirt on one person, light sleeveless top on the other, clothing held up at a dining-like table.",
+      "url": "https://www.instagram.com/p/DStkwJNEVYJ/",
+      "source_frame": "assets/DStkwJNEVYJ.jpg",
+      "frame_sha256": "3d3e67e96ba34249527a4d82c50b932bc7517fdce315ab84cf1c9bda12aae0a6",
+      "review_status": "assistant_frame_and_saved_caption_review",
+      "audio_status": "no_audio_in_downloaded_media",
+      "transcript_correction": null,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DStkwJNEVYJ/visual-review.jpg",
+          "sha256": "3d3e67e96ba34249527a4d82c50b932bc7517fdce315ab84cf1c9bda12aae0a6"
+        },
+        {
+          "file": "williammaxxer/metadata/DStkwJNEVYJ.json",
+          "sha256": "8349919041e56ed52bba3917418727574661530088bdcf090cfe596ea37df3d4"
+        }
+      ]
+    },
+    {
+      "creator": "williammaxxer",
+      "id": "DSRYHyBkQFA",
+      "title": "A close-up with celebratory text",
+      "topic_proposal": "Affectionate domestic vignette with celebratory text",
+      "topic_status": "Tentative refinement of Visual/trend or unclassified. Grounded in one frame and saved caption only.",
+      "observations": [
+        "Tight selfie composition shows a foreground adult with glasses and a chain against a pillow-like background.",
+        "Another partially visible face touches the foreground person\u2019s cheek or temple.",
+        "Upper-left text uses a celebratory refrain, while the saved caption expresses feeling happy. No lyric transcription added."
+      ],
+      "unknowns": [
+        "Do not infer relationship, private circumstances, identities or ethnicity.",
+        "The text could be used sincerely or ironically. One still does not establish that intent, a song, or any audible performance."
+      ],
+      "original_mechanism": "For an original avatar, pair a small everyday accomplishment with celebratory original copy and a close reaction shot. An intimate scene or real-person likeness is unnecessary.",
+      "wardrobe_environment": "Glasses, chain and a close crop. Background appears soft and domestic; no broader setting is established.",
+      "url": "https://www.instagram.com/p/DSRYHyBkQFA/",
+      "source_frame": "assets/DSRYHyBkQFA.jpg",
+      "frame_sha256": "75b110f21260e881389aa68443b4c147e5a339613fd5134870bb4a5819f79d24",
+      "review_status": "assistant_frame_and_saved_caption_review",
+      "audio_status": "no_audio_in_downloaded_media",
+      "transcript_correction": null,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSRYHyBkQFA/visual-review.jpg",
+          "sha256": "75b110f21260e881389aa68443b4c147e5a339613fd5134870bb4a5819f79d24"
+        },
+        {
+          "file": "williammaxxer/metadata/DSRYHyBkQFA.json",
+          "sha256": "bcece9ea26f674ae4a047326d2265148e2ddba68634768fe12445664f58bcc40"
+        }
+      ]
+    },
+    {
+      "creator": "lucamaxiim",
+      "id": "DeDIZ9UoGSm",
+      "title": "The garment moves into view",
+      "topic_proposal": "Apparel display through a character beat",
+      "topic_status": "Supported apparel presentation sequence across three sampled frames. Production method remains unknown.",
+      "observations": [
+        "A person wears a red long-sleeve graphic top and black trousers with a contrasting white design. A metal-and-glass stair rail forms diagonal lines behind them.",
+        "Three saved frames show seated phone handling, a seated forward gaze, and a standing view that makes the front graphic more prominent.",
+        "The saved caption refers to a shirt and tags an account. That is not evidence of a sponsorship or sales result."
+      ],
+      "unknowns": [
+        "Sample order does not establish continuous motion, exact cuts, shot lengths or total pacing.",
+        "No sound, spoken dialogue, camera movement or generation method is verified. Do not infer ethnicity from source text."
+      ],
+      "original_mechanism": "Keep an original avatar and original garment in a consistent lobby-like set. Plan a seated activity beat, a glance, and a standing product view. Test logo legibility and continuity before spending.",
+      "wardrobe_environment": "Red long-sleeve top, dark trousers, chair, tile floor, red-brown door, diagonal stair rail and small flowers. The garment and source text are references, not assets to copy.",
+      "url": "https://www.instagram.com/p/DeDIZ9UoGSm/",
+      "source_frame": "assets/DeDIZ9UoGSm.jpg",
+      "frame_sha256": "8f5be4793e8061efef0e53aa695df89b51568049c13593ea6300c5b377dd4015",
+      "review_status": "assistant_frame_and_saved_caption_review",
+      "audio_status": "no_audio_in_downloaded_media",
+      "transcript_correction": null,
+      "source_evidence": [
+        {
+          "file": "lucamaxiim/transcripts/DeDIZ9UoGSm/visual-review.jpg",
+          "sha256": "8f5be4793e8061efef0e53aa695df89b51568049c13593ea6300c5b377dd4015"
+        },
+        {
+          "file": "lucamaxiim/metadata/DeDIZ9UoGSm.json",
+          "sha256": "792ddfefba64e8c1da142b30e807c75ce60cdda8ff457b052d854185ab26c939"
+        },
+        {
+          "file": "lucamaxiim/best-videos/011-DeDIZ9UoGSm/frame-0.jpg",
+          "sha256": "c80fe74a24dd8e17492b67776eea4ceb4e32f215b86bb332d69b9cc744a29448"
+        },
+        {
+          "file": "lucamaxiim/best-videos/011-DeDIZ9UoGSm/frame-1.jpg",
+          "sha256": "3161b3bfcf582d2323c04fc26d9801bb153377a410bc39aad1aecda02a7e60ab"
+        },
+        {
+          "file": "lucamaxiim/best-videos/011-DeDIZ9UoGSm/frame-2.jpg",
+          "sha256": "21a1a7ebb697a4c0ec9a05306bfe4bac5e71640a0fbe1c3c4884b2f091e895d4"
+        }
+      ],
+      "sampled_sequence": [
+        "assets/DeDIZ9UoGSm-0.jpg",
+        "assets/DeDIZ9UoGSm-1.jpg",
+        "assets/DeDIZ9UoGSm-2.jpg"
+      ]
+    }
+  ],
+  "tentative_unclassified_topic_proposals": 1
+}
