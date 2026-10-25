@@ -66,7 +66,7 @@ export function createApp({store=openStore(),runner,higgsfield=hf,checkVoice=def
  autopilot??=createAutopilot({store,runner});
  whopwatch??=createWhopWatch({store,runner});
  delivery??=createDelivery({store,gmail:gmailApi,sender:()=>realTools.loadProfile()?.company||'Mint Labs'});
- const orderCoverage=createOrderCoverage({store,delivery});
+ const orderCoverage=createOrderCoverage({store,delivery,readSlotFinal:(id,slot)=>videoFinals.get(id,slot)});
  const orderVideoPlan=createOrderVideoPlan({store});
  const renderSourceReview=createRenderSourceReview({store});
  videoFinals??=createOrderVideoFinals({store,coverage:orderCoverage,plans:orderVideoPlan});

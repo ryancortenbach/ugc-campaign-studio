@@ -21,7 +21,7 @@ export function createOrderVideoFinals({store,coverage,plans,renderDir=path.join
  const source=(id,slot)=>{
   if(!Number.isSafeInteger(slot)||slot<1||slot>50)throw fail(400,'Invalid video slot.');
   const p=plans.get(id);if(p.revision<1)throw fail(409,'Save an explicit video plan first.');
-  const c=coverage.get(id),v=c.videos?.find(v=>v.slot===slot);
+  const c=typeof coverage.base==='function'?coverage.base(id):coverage.get(id),v=c.videos?.find(v=>v.slot===slot);
   if(c.planInvalid||!v?.mapped)throw fail(409,'This slot has no valid, uniquely owned storyboard assignment.');
   const board=store.getStoryboard(v.storyboardId),shots=board?.plan?.shots,planHash=storyboardPlanHash(board?.plan);
   if(!Array.isArray(shots)||!shots.length||shots.length>12||shots.some(s=>!s||typeof s!=='object'||Array.isArray(s)))throw fail(409,'This storyboard needs one to twelve valid shots.');

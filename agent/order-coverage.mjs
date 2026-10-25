@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {storyboardRoot} from './order-storyboard-family.mjs';
 // Read-only coverage of the current one-storyboard order flow. No provider, storage or message mutations.
 // Offer identifiers come from docs/WHOP-UGC-OFFERS-v1.md, observed October 24, 2026.
@@ -69,8 +70,8 @@ function plannedCoverage(base,{store,id,row,delivery}){
   counts:{expectedVideos:plan.videoCount,mappedVideos:mapped,currentFinals:finals,unmappedVideos:plan.videoCount-mapped},videos,blockers,
   note:'Counts use the saved operator plan, not a verified buyer contract. Only a current final explicitly bound to the exact assigned storyboard is credited. Per-video delivery is not implemented; nothing here confirms buyer delivery.'};
 }
-export function createOrderCoverage({store,delivery}={}){
- return {get(id){
+export function createOrderCoverage({store,delivery,readSlotFinal}={}){
+ const base=id=>{
   const db=store.db;
   const table=db.prepare("select name from sqlite_master where type='table' and name='whop_orders'").get();
   const order=table&&db.prepare('select payment,storyboard_id from whop_orders where payment_id=?').get(id);
@@ -80,5 +81,25 @@ export function createOrderCoverage({store,delivery}={}){
   const hasPlans=db.prepare("select name from sqlite_master where type='table' and name='order_video_plans'").get();
   const saved=hasPlans&&db.prepare('select revision,plan from order_video_plans where payment_id=?').get(id);
   return saved?plannedCoverage(base,{store,id,row:saved,delivery:state}):base;
+ };
+ return {base,get(id){
+  const report=base(id);
+  if(typeof readSlotFinal!=='function'||report.workflow!=='saved_video_plan'||report.planInvalid)return report;
+  const videos=report.videos.map(v=>{
+   const result={...v,legacyFinalAvailable:v.finalCurrent,finalCurrent:false,finalEvidence:{kind:'none',issue:v.mapped?'slot_final_not_prepared':'assignment_invalid'}};
+   if(!v.mapped)return result;
+   let state;try{state=readSlotFinal(id,v.slot);}catch{return {...result,finalEvidence:{kind:'none',issue:'slot_final_state_unavailable'}};}
+   if(state?.paymentId!==id||state?.slot!==v.slot)return {...result,finalEvidence:{kind:'none',issue:'slot_final_scope_mismatch'}};
+   const f=state.final;if(f===null)return result;
+   const valid=f&&f.stale===false&&Number.isSafeInteger(f.version)&&f.version>0&&state.expectedFinalVersion===f.version&&Number.isSafeInteger(f.bytes)&&f.bytes>0&&/^[a-f0-9]{64}$/.test(f.sha256||'')&&f.manifest?.slot===v.slot&&f.manifest.storyboardId===v.storyboardId&&f.manifest.planRevision===report.planRevision&&typeof state.sourceToken==='string'&&createHash('sha256').update(JSON.stringify(f.manifest)).digest('hex')===state.sourceToken;
+   return {...result,finalCurrent:Boolean(valid),finalEvidence:{kind:'attached_slot_final',version:f?.version||null,sha256:f?.sha256||null,issue:valid?null:'slot_final_stale_or_unverified'}};
+  });
+  const count=videos.filter(v=>v.finalCurrent).length,expected=report.counts.expectedVideos;
+  const complete=Number.isSafeInteger(expected)&&expected>0&&report.counts.mappedVideos===expected&&count===expected;
+  const blockers=report.blockers.filter(b=>!['per_video_finals_incomplete','legacy_final_storyboard_unbound'].includes(b));
+  if(!complete)blockers.push('per_video_finals_incomplete');
+  if(videos.some(v=>v.finalEvidence.issue==='slot_final_state_unavailable'||v.finalEvidence.issue==='slot_final_scope_mismatch'))blockers.push('slot_final_state_unavailable');
+  return {...report,videos,counts:{...report.counts,currentFinals:count},localFinalsComplete:complete,finalCoverageMode:'attached_slot_history_only',blockers,
+   note:'Final counts use current attached per-slot history and byte/source checks. Legacy finals are separate context and are not counted. Local preparation completeness is not visual, provider, payment, contract or buyer-delivery verification.'};
  }};
 }
