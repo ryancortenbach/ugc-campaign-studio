@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "intake_incomplete",
+  "brief": {
+    "brand": "",
+    "audience": "Proposed audience hypothesis: gaming and internet-culture viewers who recognize an exaggerated everyday situation. Based on the defined research sample, not a verified brand ICP.",
+    "offer": "",
+    "objective": "One original five-second vertical planning draft. Test visual clarity and product legibility after the actual brand and assets are approved. No view or sales guarantee.",
+    "avatar": "",
+    "voice": "",
+    "creative": "Original concept: The tiny package with enormous instructions. The unusually large prop creates a contrast with everyday commuting. It may resemble a fantasy-game artifact, but the exact object, source scene, camera movement and dialogue remain unverified. Research context only: https://www.instagram.com/p/DbgOU1uuSbA/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+    "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: unfolding geometry, hand contact and product readability need review. Do not imply easy setup or any product benefit without evidence. Approved product and packaging references; Evidence for any ease-of-use claim; Original set, artwork and avatar assets; Feasibility review, provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval."
+  },
+  "missing": [
+    "brand",
+    "offer",
+    "avatar",
+    "voice"
+  ],
+  "avatarBible": {
+    "identity": "",
+    "voice": "",
+    "consistency": [
+      "Use the same approved face reference across shots.",
+      "Lock wardrobe, proportions, hair, and distinguishing features.",
+      "Keep the voice ID and reference performance stable."
+    ],
+    "references": [],
+    "approval": "pending"
+  },
+  "campaign": {
+    "brand": "",
+    "audience": "Proposed audience hypothesis: gaming and internet-culture viewers who recognize an exaggerated everyday situation. Based on the defined research sample, not a verified brand ICP.",
+    "offer": "",
+    "objective": "One original five-second vertical planning draft. Test visual clarity and product legibility after the actual brand and assets are approved. No view or sales guarantee.",
+    "creativeDirection": "Original concept: The tiny package with enormous instructions. The unusually large prop creates a contrast with everyday commuting. It may resemble a fantasy-game artifact, but the exact object, source scene, camera movement and dialogue remain unverified. Research context only: https://www.instagram.com/p/DbgOU1uuSbA/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+    "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: unfolding geometry, hand contact and product readability need review. Do not imply easy setup or any product benefit without evidence. Approved product and packaging references; Evidence for any ease-of-use claim; Original set, artwork and avatar assets; Feasibility review, provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval."
+  },
+  "production": {
+    "workflow": [
+      "Review brand facts and approved claims",
+      "Approve avatar reference and voice",
+      "Write and approve script variants",
+      "Build per-shot prompts and reference tags",
+      "Estimate cost and approve generation",
+      "Generate, review, and version clips",
+      "Assemble, caption, and mix",
+      "Approve final deliverables"
+    ],
+    "shotTemplate": {
+      "id": "shot-01",
+      "durationSeconds": null,
+      "camera": "",
+      "action": "",
+      "dialogue": "",
+      "referenceTags": [],
+      "audio": "",
+      "negativeConstraints": [],
+      "status": "needs_storyboard"
+    },
+    "generation": {
+      "provider": "Higgsfield",
+      "model": null,
+      "aspectRatio": "9:16",
+      "resolution": null,
+      "durationSeconds": null,
+      "audio": null,
+      "budgetApproved": false,
+      "submitted": false
+    },
+    "storyboard": {
+      "schemaVersion": "1.0",
+      "status": "draft_for_review",
+      "durationSeconds": 5,
+      "identity": "",
+      "wardrobe": "",
+      "environment": "Proposed fictional private waiting area, not approved. No bystander likenesses.",
+      "voice": "",
+      "creativeDirection": "Original concept: The tiny package with enormous instructions. The unusually large prop creates a contrast with everyday commuting. It may resemble a fantasy-game artifact, but the exact object, source scene, camera movement and dialogue remain unverified. Research context only: https://www.instagram.com/p/DbgOU1uuSbA/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+      "offer": "",
+      "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: unfolding geometry, hand contact and product readability need review. Do not imply easy setup or any product benefit without evidence. Approved product and packaging references; Evidence for any ease-of-use claim; Original set, artwork and avatar assets; Feasibility review, provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval. Timings adjusted to exact quarter-second edit beats for this importer; original research brief timings are preserved separately.",
+      "references": [],
+      "shots": [
+        {
+          "id": "shot-01",
+          "start": 0,
+          "duration": 1.25,
+          "camera": "Locked medium shot with package clearly in view.",
+          "action": "Original avatar sits in a fictional private waiting area and opens an approved product package.",
+          "dialogue": "",
+          "audio": "Planned original paper rustle and a small pause. No copied game audio, dialogue or bystander likenesses."
+        },
+        {
+          "id": "shot-02",
+          "start": 1.25,
+          "duration": 2.25,
+          "camera": "Keep the instruction-sheet reveal readable in the same composition.",
+          "action": "A comically long original instruction sheet unfolds from the small box.",
+          "dialogue": "",
+          "audio": "Planned original paper rustle and a small pause. No copied game audio, dialogue or bystander likenesses."
+        },
+        {
+          "id": "shot-03",
+          "start": 3.5,
+          "duration": 1.5,
+          "camera": "Product detail only after its exact use and claim are approved.",
+          "action": "Avatar sets the instructions aside and demonstrates the product only if that action is factual and approved.",
+          "dialogue": "",
+          "audio": "Planned original paper rustle and a small pause. No copied game audio, dialogue or bystander likenesses."
+        }
+      ],
+      "generation": {
+        "model": null,
+        "estimatedCredits": null,
+        "spendApproved": false,
+        "submitted": false
+      },
+      "conceptSource": {
+        "id": "research-5s-instructions-v1",
+        "title": "The tiny package with enormous instructions",
+        "reportUrl": "/research/report.html",
+        "sourceUrls": [
+          "https://www.instagram.com/p/DbgOU1uuSbA/"
+        ],
+        "sourceStatus": "research_context_only"
+      }
+    },
+    "storyboardVersions": []
+  },
+  "integrations": {
+    "research": "Exa, not connected",
+    "humanReview": "Terac, not connected",
+    "checkout": "Whop, not connected",
+    "generation": "Higgsfield, not connected"
+  },
+  "approvals": {
+    "script": false,
+    "likeness": false,
+    "claims": false,
+    "spend": false,
+    "finalDelivery": false
+  },
+  "handoff": {
+    "id": "instructions",
+    "title": "The tiny package with enormous instructions",
+    "readiness": "blocked_missing_brand_assets_quote_and_approvals",
+    "risk": "Medium: unfolding geometry, hand contact and product readability need review. Do not imply easy setup or any product benefit without evidence.",
+    "required": [
+      "Approved product and packaging references",
+      "Evidence for any ease-of-use claim",
+      "Original set, artwork and avatar assets",
+      "Feasibility review, provider quote and explicit spend approval"
+    ],
+    "assetBindings": [],
+    "outreachRecipient": null,
+    "renderedVideo": null
+  }
+}
