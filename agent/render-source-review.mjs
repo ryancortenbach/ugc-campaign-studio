@@ -11,10 +11,11 @@ export function createRenderSourceReview({store,now=()=>new Date()}={}){
   const board=render.storyboard_id?store.getStoryboard(render.storyboard_id):null;
   const shots=Array.isArray(board?.plan?.shots)?board.plan.shots:[];
   const matchingShots=shots.filter((s,i)=>s&&typeof s==='object'&&!Array.isArray(s)&&String(s.id||`shot-${i+1}`)===String(render.shot_id));
-  return {render,board,canReview:Boolean(board&&render.shot_id&&matchingShots.length===1),renderHash:renderIntentHash(render),planHash:board?storyboardPlanHash(board.plan):null};
+  return {render,board,matchingShot:matchingShots.length===1?matchingShots[0]:null,canReview:Boolean(board&&render.shot_id&&matchingShots.length===1),renderHash:renderIntentHash(render),planHash:board?storyboardPlanHash(board.plan):null};
  };
  return {
   get(id){const c=context(id),record=latest(id);return {renderId:id,storyboardId:c.render.storyboard_id||null,canReview:c.canReview,expectedRenderHash:c.renderHash,expectedPlanHash:c.planHash,expectedReviewId:record?.id||0,
+   snapshot:{renderTitle:c.render.title,endpoint:c.render.endpoint,input:c.render.input,shotId:c.render.shot_id,storyboardTitle:c.board?.title||null,storyboardPlan:c.board?.plan||null,matchingShot:c.matchingShot},
    associated:Boolean(c.canReview&&c.render.storyboard_plan_hash===c.planHash),
    record,recordMatchesCurrent:Boolean(record&&record.render_hash===c.renderHash&&record.plan_hash===c.planHash),
    evidence:'Local input-to-plan producer metadata or operator attestation only. Not pixel, provider, checker or delivery verification.'};},
