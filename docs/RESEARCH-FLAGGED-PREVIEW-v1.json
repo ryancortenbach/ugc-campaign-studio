@@ -1,0 +1,64 @@
+{
+  "url": "https://duolingo-library-phone-v1-fz6qh2td4-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_D1BwMYB66kej9WoJs5XJ8UZjguhi",
+  "target": "preview",
+  "ready": true,
+  "source": "experiments/research-flagged-v2",
+  "preserved_initial_version": {
+    "source": "experiments/research-flagged-v1",
+    "url": "https://duolingo-library-phone-v1-dxlrejqe3-ryancortenbachs-projects.vercel.app/"
+  },
+  "v2_changes": "Display spacing and above/below cross-reference only. Notes and source images unchanged.",
+  "anonymous_http200_exact_source_matches": 5,
+  "browser_render_verified": true,
+  "desktop_width": 1920,
+  "desktop_document_width": 1920,
+  "mobile_width": 390,
+  "mobile_document_width": 390,
+  "source_images_loaded": 3,
+  "dependency_controls_opened": 3,
+  "table_internal_horizontal_scroll": true,
+  "viewport_restored": true,
+  "screenshots_captured_in_chat": true,
+  "independent_source_note_review": true,
+  "independent_browser_layout_review": false,
+  "physical_devices_tested": false,
+  "raw_asr_full_video_private_avatar_credentials_uploaded": false,
+  "records": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "sha256": "a18f4cc31a0f1397565dbab1e27328a253f0877e984a2f0df02ef35f1eb65493",
+      "bytes": 22454,
+      "matches_source": true
+    },
+    {
+      "file": "notes.json",
+      "status": 200,
+      "sha256": "5d415c3185ac432ac68b3da066965e07cd218a72a96222b43ac051dc54cccca6",
+      "bytes": 55716,
+      "matches_source": true
+    },
+    {
+      "file": "assets/DWeggVhjiNM.jpg",
+      "status": 200,
+      "sha256": "216299bc958b0181f0ae1729fc643743b780e337fca822adcb075999a2b58175",
+      "bytes": 31114,
+      "matches_source": true
+    },
+    {
+      "file": "assets/DXi7logDjKG.jpg",
+      "status": 200,
+      "sha256": "267606a87df92f05f9f097da40c25291f1a8062f73320990fd951e319e2a8379",
+      "bytes": 22657,
+      "matches_source": true
+    },
+    {
+      "file": "assets/DbgOU1uuSbA.jpg",
+      "status": 200,
+      "sha256": "89dbd8d5bf2f7d00bda816f0d5b218a06b70d264fa728cd2273e3cb2935b3b53",
+      "bytes": 27517,
+      "matches_source": true
+    }
+  ]
+}

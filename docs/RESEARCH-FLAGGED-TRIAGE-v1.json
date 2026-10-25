@@ -1,0 +1,1355 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T05:56:33.158219+00:00",
+  "scope": "42flagged saved-text/caption triage records and3high-ranked cases with9saved-frame observations. No audio/video playback, ASR rerun or human review.",
+  "source_queue_sha256": "0747848f628591ed3425cbc374d9fd7aed8892642355477d3e9ca83df11e8baa",
+  "source_index_sha256": "fbcab014322edadd6ea4f069622c5bbeb1644093f84a90c6a21674186e3d4ad3",
+  "triage_counts": {
+    "empty_saved_text": 13,
+    "generic_signoff_only": 16,
+    "residual_fragment": 10,
+    "repetitive_saved_output": 3
+  },
+  "caption_counts": {
+    "other_caption_text": 13,
+    "hashtag_only": 24,
+    "empty": 5
+  },
+  "rules": [
+    "Collapse whitespace. Empty text first.",
+    "Generic: exact case-insensitive variants of ordinary thank-you/sign-off text only.",
+    "Repetitive: one unique token AND (at least5tokens OR over50characters).",
+    "All other cases are residual fragments, not dependable transcript evidence."
+  ],
+  "records": [
+    {
+      "id": "DXi7logDjKG",
+      "creator": "williammaxxer",
+      "rank": 14,
+      "url": "https://www.instagram.com/p/DXi7logDjKG/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "other_caption_text",
+      "caption_context": "Budget-store mirror premise. Saved frames provide additional context below.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DXi7logDjKG/transcript.json",
+          "sha256": "054b83190e8247f98074fed4b62a70b8de9d65724c3a14505e2842c06147ba70"
+        },
+        {
+          "file": "williammaxxer/metadata/DXi7logDjKG.json",
+          "sha256": "57d8f0e66177e8f68f4b7d4fbfd5b9ad941c8ace6cde6c9c32c796eccf231358"
+        }
+      ]
+    },
+    {
+      "id": "DbgOU1uuSbA",
+      "creator": "williammaxxer",
+      "rank": 23,
+      "url": "https://www.instagram.com/p/DbgOU1uuSbA/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "other_caption_text",
+      "caption_context": "A fantasy-game city reference. Saved frames provide additional context below.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DbgOU1uuSbA/transcript.json",
+          "sha256": "507ebaf6d0189a19019054316cd08ac6821bbe8eed1767f785251dee432ea210"
+        },
+        {
+          "file": "williammaxxer/metadata/DbgOU1uuSbA.json",
+          "sha256": "f0e2ca9572321e4abfdd04e9d6999d052aa8607fd210641682e20413173e1b19"
+        }
+      ]
+    },
+    {
+      "id": "DWeggVhjiNM",
+      "creator": "williammaxxer",
+      "rank": 24,
+      "url": "https://www.instagram.com/p/DWeggVhjiNM/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "other_caption_text",
+      "caption_context": "A television-character reference and memorial-style tag. Saved frames provide additional context below.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DWeggVhjiNM/transcript.json",
+          "sha256": "8ed006bd1773d7426fa4c39efe82f01680fad3db957cbe08ec12c682e3f06146"
+        },
+        {
+          "file": "williammaxxer/metadata/DWeggVhjiNM.json",
+          "sha256": "ac98161958219f982142b27199ae7c0049ff981cb0cd041401c03c3b3bfc32ff"
+        }
+      ]
+    },
+    {
+      "id": "DZY2eFAOISx",
+      "creator": "williammaxxer",
+      "rank": 36,
+      "url": "https://www.instagram.com/p/DZY2eFAOISx/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 2,
+      "caption_category": "hashtag_only",
+      "caption_context": "Game-franchise tag only. No specific scene or dialogue established.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZY2eFAOISx/transcript.json",
+          "sha256": "80b411bb1374c59102db239e141662e1164970cfe2d459c85db3744455a885ff"
+        },
+        {
+          "file": "williammaxxer/metadata/DZY2eFAOISx.json",
+          "sha256": "7b1a5920b9beb2b1c19d0c5bf89e039355ef500ec924f0b5a4877b310961af77"
+        }
+      ]
+    },
+    {
+      "id": "DSQw8D9kuHq",
+      "creator": "williammaxxer",
+      "rank": 46,
+      "url": "https://www.instagram.com/p/DSQw8D9kuHq/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "repetitive_saved_output",
+      "normalized_saved_text_characters": 889,
+      "caption_category": "other_caption_text",
+      "caption_context": "Anticipation of someone moving to the United States. This is source caption framing, not a verified relationship or migration event.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSQw8D9kuHq/transcript.json",
+          "sha256": "0031c0f299344be7d2700df8627f069210201b919ab458e9eac432df1c828aa2"
+        },
+        {
+          "file": "williammaxxer/metadata/DSQw8D9kuHq.json",
+          "sha256": "531310dd2765dea22665fe620c50041c9007d9b5a4ecac34313398deda089e3b"
+        }
+      ]
+    },
+    {
+      "id": "DXQ4EvXjlmM",
+      "creator": "williammaxxer",
+      "rank": 49,
+      "url": "https://www.instagram.com/p/DXQ4EvXjlmM/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Sandbox-game tags only. Specific action or joke unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DXQ4EvXjlmM/transcript.json",
+          "sha256": "4b7ac74086c5d13089f0f514cddc9bdc6765e88da9da63a72868763808567237"
+        },
+        {
+          "file": "williammaxxer/metadata/DXQ4EvXjlmM.json",
+          "sha256": "65f57fa7a84f902650a758fd63091820ca72a043421d47603f31f36135abebdf"
+        }
+      ]
+    },
+    {
+      "id": "DUHVcodAZlk",
+      "creator": "williammaxxer",
+      "rank": 57,
+      "url": "https://www.instagram.com/p/DUHVcodAZlk/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "American-football event, athlete and entertainment tags. Specific claims unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DUHVcodAZlk/transcript.json",
+          "sha256": "1b04e96555c4c5b25fcf8ba2ec6e6cf356fb063d8db4776c0c4e4c3627db49fd"
+        },
+        {
+          "file": "williammaxxer/metadata/DUHVcodAZlk.json",
+          "sha256": "0cd987c8c2379dbc0128894dc912377142789980fa1741a53e4960c200155581"
+        }
+      ]
+    },
+    {
+      "id": "DS08WYZASve",
+      "creator": "williammaxxer",
+      "rank": 76,
+      "url": "https://www.instagram.com/p/DS08WYZASve/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 26,
+      "caption_category": "other_caption_text",
+      "caption_context": "Caption describes a comparison edit and mixes cultural, avatar-related and political tags. No identity or political-belief inference.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DS08WYZASve/transcript.json",
+          "sha256": "17e90a66abe85cbaec069cd5da095a2167845fd2d4979958b657256fe9c11d31"
+        },
+        {
+          "file": "williammaxxer/metadata/DS08WYZASve.json",
+          "sha256": "4beee92a1289cda834a5ef2b00de04e6417986a920b8718f011850372e9fb1e1"
+        }
+      ]
+    },
+    {
+      "id": "Dbi8IMYuYlc",
+      "creator": "williammaxxer",
+      "rank": 83,
+      "url": "https://www.instagram.com/p/Dbi8IMYuYlc/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 29,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fantasy-game tag only. The short text does not establish an event.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/Dbi8IMYuYlc/transcript.json",
+          "sha256": "b23db5a75702f871a659f0939f820cf9f8e97b749888fe9d1b06a26b83510336"
+        },
+        {
+          "file": "williammaxxer/metadata/Dbi8IMYuYlc.json",
+          "sha256": "f8032845cfc26c5224644da23e7d6566089e38932c46ab6b4ca23ee34ca15b27"
+        }
+      ]
+    },
+    {
+      "id": "DU2UQUOEaxV",
+      "creator": "williammaxxer",
+      "rank": 93,
+      "url": "https://www.instagram.com/p/DU2UQUOEaxV/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 26,
+      "caption_category": "other_caption_text",
+      "caption_context": "Geographic and nightlife-related tags. Location, events and soundtrack unverified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DU2UQUOEaxV/transcript.json",
+          "sha256": "58529988ff211464acc91e7c5a25b6b3490799d57976441bfb5ba3a84c61285f"
+        },
+        {
+          "file": "williammaxxer/metadata/DU2UQUOEaxV.json",
+          "sha256": "cea456a376bef26669caa9d492da947e81c7c7cc37cc00d18f04a4b5045a20aa"
+        }
+      ]
+    },
+    {
+      "id": "Da6UsC2hI4T",
+      "creator": "williammaxxer",
+      "rank": 110,
+      "url": "https://www.instagram.com/p/Da6UsC2hI4T/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 19,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fantasy-game tag only. The stored fragment does not support a literal interpretation.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/Da6UsC2hI4T/transcript.json",
+          "sha256": "aa6ed92a8859bc2ddb5ec56f593653637aba13bec03386aa5f969b3417bf360a"
+        },
+        {
+          "file": "williammaxxer/metadata/Da6UsC2hI4T.json",
+          "sha256": "4d748524aea1e2c6183063a3f999ee3f694af3bc38a5ef3c795987759b6e7778"
+        }
+      ]
+    },
+    {
+      "id": "DVFMF7-j5VR",
+      "creator": "williammaxxer",
+      "rank": 129,
+      "url": "https://www.instagram.com/p/DVFMF7-j5VR/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "other_caption_text",
+      "caption_context": "Relationship-addressed apology and an intelligence-agency tag. Do not infer espionage, beliefs or actual relationships.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DVFMF7-j5VR/transcript.json",
+          "sha256": "64a77c55b1ca7369f5210196f408a350f4517d7c1f0a390ec1867af80e0bee49"
+        },
+        {
+          "file": "williammaxxer/metadata/DVFMF7-j5VR.json",
+          "sha256": "bdb865170e60808d239036d85a8463c48de0ac08f28b7ad5abb1a5bf697a0927"
+        }
+      ]
+    },
+    {
+      "id": "DcwM0OTuiYk",
+      "creator": "williammaxxer",
+      "rank": 156,
+      "url": "https://www.instagram.com/p/DcwM0OTuiYk/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fantasy-game tag only. Specific scene unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DcwM0OTuiYk/transcript.json",
+          "sha256": "23eaa42b2eab2ea65e65be82e8356ad0fac5066008698dbbeb3a40788fe1f42b"
+        },
+        {
+          "file": "williammaxxer/metadata/DcwM0OTuiYk.json",
+          "sha256": "9a5635c131249a88c5e6aeee6abdd9c93144f5dcd53602f4050529aa486683e3"
+        }
+      ]
+    },
+    {
+      "id": "DXC2AEkkpwV",
+      "creator": "williammaxxer",
+      "rank": 159,
+      "url": "https://www.instagram.com/p/DXC2AEkkpwV/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Sandbox-game tag only. Specific scene unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DXC2AEkkpwV/transcript.json",
+          "sha256": "92b3a071b9b187c4b037a254ddcd2f3dc27cbe205e0beae7744cb63540330caf"
+        },
+        {
+          "file": "williammaxxer/metadata/DXC2AEkkpwV.json",
+          "sha256": "dcbcda0d0f301f83796c1c5a33d4396684035955ade519a1a1021f0ac366204b"
+        }
+      ]
+    },
+    {
+      "id": "DSsksJ_kg7G",
+      "creator": "williammaxxer",
+      "rank": 219,
+      "url": "https://www.instagram.com/p/DSsksJ_kg7G/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "repetitive_saved_output",
+      "normalized_saved_text_characters": 17,
+      "caption_category": "other_caption_text",
+      "caption_context": "Holiday greeting with cultural-persona tags. Do not infer identities or relationships of people referenced in the caption.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSsksJ_kg7G/transcript.json",
+          "sha256": "b0664998efd8f61aa0f03bc9bc20f5eed2ab5f6e2a0fb37672805007209f82ee"
+        },
+        {
+          "file": "williammaxxer/metadata/DSsksJ_kg7G.json",
+          "sha256": "5a4832a3e18d3f2fa3aa67faf1baf5ae376053a5196824fef243ee0025ef845f"
+        }
+      ]
+    },
+    {
+      "id": "DblUIFNul05",
+      "creator": "williammaxxer",
+      "rank": 260,
+      "url": "https://www.instagram.com/p/DblUIFNul05/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "other_caption_text",
+      "caption_context": "Named fantasy-game entity and franchise tag. Context is a game reference, not evidence about real groups.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DblUIFNul05/transcript.json",
+          "sha256": "b30fd95d2dff4bbe26e2cb24c2c7391b043da473540bc1657984df5cca777fbc"
+        },
+        {
+          "file": "williammaxxer/metadata/DblUIFNul05.json",
+          "sha256": "50e14f0f512f33006d926eee45339a35aaea6b3531ddfaa542cfbd36cb23567d"
+        }
+      ]
+    },
+    {
+      "id": "DbizcGcO0Ai",
+      "creator": "williammaxxer",
+      "rank": 270,
+      "url": "https://www.instagram.com/p/DbizcGcO0Ai/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fantasy-game tag only. Specific scene unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DbizcGcO0Ai/transcript.json",
+          "sha256": "5c7a4e9055a181d2148884e6c76dfb8ce2e614b48877bad2432654bec371d2dc"
+        },
+        {
+          "file": "williammaxxer/metadata/DbizcGcO0Ai.json",
+          "sha256": "4d16449730c3526dd6f0f5e884ae6240215250b84096ea749f434ad34058322d"
+        }
+      ]
+    },
+    {
+      "id": "DVEX3XWj9pd",
+      "creator": "williammaxxer",
+      "rank": 281,
+      "url": "https://www.instagram.com/p/DVEX3XWj9pd/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Punch and animal-related tags. Actual action and intent unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DVEX3XWj9pd/transcript.json",
+          "sha256": "fc07b874f7b1bc0e2e91a16945737581fad64d58fcc2fba003d6d1a459e527c3"
+        },
+        {
+          "file": "williammaxxer/metadata/DVEX3XWj9pd.json",
+          "sha256": "ff6064226abb9f9eabb6d7c8e4920a8a6b5c81f6a68f45dce4e897645bbc3ae4"
+        }
+      ]
+    },
+    {
+      "id": "DSbyr1Zjsna",
+      "creator": "williammaxxer",
+      "rank": 284,
+      "url": "https://www.instagram.com/p/DSbyr1Zjsna/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "other_caption_text",
+      "caption_context": "Fitness framing and gym tags. No exercise technique or health claim verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSbyr1Zjsna/transcript.json",
+          "sha256": "8715b9dd7c7bf77e3015fc84841ef9d95d6e9fc54531d0f6511654ebd99d4561"
+        },
+        {
+          "file": "williammaxxer/metadata/DSbyr1Zjsna.json",
+          "sha256": "3ecf2937960bcd1443e02903f17fe8b6fcc3e46335cc0963c9688dbeb3842240"
+        }
+      ]
+    },
+    {
+      "id": "DZMgPpROybI",
+      "creator": "williammaxxer",
+      "rank": 289,
+      "url": "https://www.instagram.com/p/DZMgPpROybI/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "empty",
+      "caption_context": "No caption context. Source-media review required.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZMgPpROybI/transcript.json",
+          "sha256": "27c2eab7a5614b24615cf67b5df1cfe78b56267c67da403bb85d28392f06089c"
+        },
+        {
+          "file": "williammaxxer/metadata/DZMgPpROybI.json",
+          "sha256": "7c879f9a274f84d11a57e35d7b8b93e6eab0b35707ccb548168b31e54a7e724f"
+        }
+      ]
+    },
+    {
+      "id": "DSwDqdIEdOo",
+      "creator": "williammaxxer",
+      "rank": 293,
+      "url": "https://www.instagram.com/p/DSwDqdIEdOo/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 35,
+      "caption_category": "hashtag_only",
+      "caption_context": "Cultural-persona tags only. No demographic inference or song identification.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSwDqdIEdOo/transcript.json",
+          "sha256": "d77f7f5e9641de1ea581d4cbb66270d49ee81f8211e9135bd7415dec6f05491a"
+        },
+        {
+          "file": "williammaxxer/metadata/DSwDqdIEdOo.json",
+          "sha256": "2bc31262a95718134c1358ed648facb98731a11828b03fa07d41219bbacd7741"
+        }
+      ]
+    },
+    {
+      "id": "DZL_TqVOL0I",
+      "creator": "williammaxxer",
+      "rank": 310,
+      "url": "https://www.instagram.com/p/DZL_TqVOL0I/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "other_caption_text",
+      "caption_context": "Breaking-news-style framing about a retail sighting. Do not treat the sighting or location as independently verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZL_TqVOL0I/transcript.json",
+          "sha256": "34a163cfe939ddc28b325e24516c670f230b851ef998d91c917c66e3754d89a1"
+        },
+        {
+          "file": "williammaxxer/metadata/DZL_TqVOL0I.json",
+          "sha256": "12890513ffc79949ff6c6e4a9b8c62f5ecd81544702843e7e5f319e2338afdcf"
+        }
+      ]
+    },
+    {
+      "id": "DTEBAEdkoyg",
+      "creator": "williammaxxer",
+      "rank": 315,
+      "url": "https://www.instagram.com/p/DTEBAEdkoyg/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 10,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fantasy-game world and character tags. Specific scene unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DTEBAEdkoyg/transcript.json",
+          "sha256": "4291a73ac3f1a1400fa5477410c1f852e37ba0c8efe53376bd7b9dae39e3b359"
+        },
+        {
+          "file": "williammaxxer/metadata/DTEBAEdkoyg.json",
+          "sha256": "0469808b3154130425ca943b4c51105d258e52c4df1fe8ec4927820cfbf23c7e"
+        }
+      ]
+    },
+    {
+      "id": "DSjh-muEbWQ",
+      "creator": "williammaxxer",
+      "rank": 317,
+      "url": "https://www.instagram.com/p/DSjh-muEbWQ/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "empty",
+      "caption_context": "No caption context. Source-media review required.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSjh-muEbWQ/transcript.json",
+          "sha256": "d55d90d72934bfb9311aac53a56908f94edc3d155eb0e9d06781ad77443438a1"
+        },
+        {
+          "file": "williammaxxer/metadata/DSjh-muEbWQ.json",
+          "sha256": "74c9760616d6da0928c738692dd0df6ea66129b3c9cbd1f4f7c0c16ed8dbc49f"
+        }
+      ]
+    },
+    {
+      "id": "DSd5uACEXde",
+      "creator": "williammaxxer",
+      "rank": 318,
+      "url": "https://www.instagram.com/p/DSd5uACEXde/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 3,
+      "caption_category": "empty",
+      "caption_context": "No caption context. A brief interjection does not establish a premise.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSd5uACEXde/transcript.json",
+          "sha256": "8e26da17834dd70e9ada0f334cf7eee8ddba2e43ce20d501c7bc61e773f2776c"
+        },
+        {
+          "file": "williammaxxer/metadata/DSd5uACEXde.json",
+          "sha256": "d1079dc499a660884a96e7e5caf42c9a985fbc796ccb4e3bcbe81572ce30837e"
+        }
+      ]
+    },
+    {
+      "id": "DUvGZJgk9j6",
+      "creator": "williammaxxer",
+      "rank": 319,
+      "url": "https://www.instagram.com/p/DUvGZJgk9j6/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Cultural tag only. No identity inference or narrative established.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DUvGZJgk9j6/transcript.json",
+          "sha256": "65954a278c439ba6d25d4e341ce4d972e627f260e83b1c15cd49e5a4d9d34814"
+        },
+        {
+          "file": "williammaxxer/metadata/DUvGZJgk9j6.json",
+          "sha256": "fd119fc8208f1913d0e2554481a7be8ceee90d8ff9361045faa29194b0b92446"
+        }
+      ]
+    },
+    {
+      "id": "DWZUkSQDmWe",
+      "creator": "williammaxxer",
+      "rank": 322,
+      "url": "https://www.instagram.com/p/DWZUkSQDmWe/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "empty",
+      "caption_context": "No caption context. Source-media review required.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DWZUkSQDmWe/transcript.json",
+          "sha256": "5363daed80912971fbd81631312c813989756717786f31070c4cb84c5fb12b23"
+        },
+        {
+          "file": "williammaxxer/metadata/DWZUkSQDmWe.json",
+          "sha256": "31645a91e66e79a4a60706a42ddb6e2ff69611b044ee652dfe17145f7f6af715"
+        }
+      ]
+    },
+    {
+      "id": "DSott-xjn7j",
+      "creator": "williammaxxer",
+      "rank": 328,
+      "url": "https://www.instagram.com/p/DSott-xjn7j/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "empty",
+      "caption_context": "No caption context. Source-media review required.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSott-xjn7j/transcript.json",
+          "sha256": "d8fafdd4cfd266e43f2254f6f6a5ae1057d47fc7d0f415731acefb9ea7eed776"
+        },
+        {
+          "file": "williammaxxer/metadata/DSott-xjn7j.json",
+          "sha256": "6d6ca4f565d0b905d88da1864b5551a5beaf889ca0bc0dcd03dea6e59410acb3"
+        }
+      ]
+    },
+    {
+      "id": "DT4nb-ZDnrd",
+      "creator": "williammaxxer",
+      "rank": 332,
+      "url": "https://www.instagram.com/p/DT4nb-ZDnrd/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Military-branch tag only. No service history or scene inferred.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DT4nb-ZDnrd/transcript.json",
+          "sha256": "6c8da8f35356fbeab11112f683e682912cc3a1a5fe5225da139633e81799ff23"
+        },
+        {
+          "file": "williammaxxer/metadata/DT4nb-ZDnrd.json",
+          "sha256": "615c8d536ce8e69029728b3f72a3ab72cccdcb823f540132867244f59cc4012a"
+        }
+      ]
+    },
+    {
+      "id": "DTtuD1qj_lo",
+      "creator": "williammaxxer",
+      "rank": 333,
+      "url": "https://www.instagram.com/p/DTtuD1qj_lo/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Reading, literature and book-community tags. No book content or reading claim verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DTtuD1qj_lo/transcript.json",
+          "sha256": "c4e2e526df5353a3a0bcba50e88f0e6f4f379ed2c6bd59258ab117837e21cbfd"
+        },
+        {
+          "file": "williammaxxer/metadata/DTtuD1qj_lo.json",
+          "sha256": "b7933cb72624e95cfb6021e2f3066afb1b9c1d83b33f96f31f2e46d90bc029ca"
+        }
+      ]
+    },
+    {
+      "id": "DVmDrPKj4y0",
+      "creator": "williammaxxer",
+      "rank": 342,
+      "url": "https://www.instagram.com/p/DVmDrPKj4y0/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Trauma tag only. No diagnosis, personal experience or narrative inferred.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DVmDrPKj4y0/transcript.json",
+          "sha256": "7ed7d07b7bca00a067a747b7abfef47bca344aa955c048607f2f5af949ae5829"
+        },
+        {
+          "file": "williammaxxer/metadata/DVmDrPKj4y0.json",
+          "sha256": "022d83dc1bbccfdb7082bc85fcacf96b4db2a697c5799c07c88fd235a499cafc"
+        }
+      ]
+    },
+    {
+      "id": "DU2uZWhES9C",
+      "creator": "williammaxxer",
+      "rank": 343,
+      "url": "https://www.instagram.com/p/DU2uZWhES9C/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "empty_saved_text",
+      "normalized_saved_text_characters": 0,
+      "caption_category": "hashtag_only",
+      "caption_context": "Mixed persona, artist and disease-related tags. No coherent narrative or health claim verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DU2uZWhES9C/transcript.json",
+          "sha256": "3e70531ed8a5093e90356b8bcd0a53101f1fdeefd2771baf470df890dc2a145f"
+        },
+        {
+          "file": "williammaxxer/metadata/DU2uZWhES9C.json",
+          "sha256": "f8aae63d79b2492c9a1642c900277edb02a787aa4754aaa486e10b232fbf69ce"
+        }
+      ]
+    },
+    {
+      "id": "DUD79OqD80f",
+      "creator": "williammaxxer",
+      "rank": 351,
+      "url": "https://www.instagram.com/p/DUD79OqD80f/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Fruit, nutrition and fitness tags. No nutritional or medical claim verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DUD79OqD80f/transcript.json",
+          "sha256": "c72f6205adb4b9ceb17714a44efb6002cf0a3d7642815120616d5100760b5cb1"
+        },
+        {
+          "file": "williammaxxer/metadata/DUD79OqD80f.json",
+          "sha256": "28550f42bba7832dd5181fc659b5e3d69b88b67502770293b0401e129eae242a"
+        }
+      ]
+    },
+    {
+      "id": "DSxxXyhkt4s",
+      "creator": "williammaxxer",
+      "rank": 353,
+      "url": "https://www.instagram.com/p/DSxxXyhkt4s/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 28,
+      "caption_category": "hashtag_only",
+      "caption_context": "Gym and music-related tags. Stored fragment is not dependable dialogue or a song identification.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSxxXyhkt4s/transcript.json",
+          "sha256": "c97aca1254c91dc68108f77c297510bcd45d4072d90c32d69d1fc80e0cf08556"
+        },
+        {
+          "file": "williammaxxer/metadata/DSxxXyhkt4s.json",
+          "sha256": "86aa27c1921f6c83ae88695cd8d6a31396b18072bbfd83605c3036091aa7056c"
+        }
+      ]
+    },
+    {
+      "id": "DVDDEVXDnCL",
+      "creator": "williammaxxer",
+      "rank": 355,
+      "url": "https://www.instagram.com/p/DVDDEVXDnCL/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 17,
+      "caption_category": "hashtag_only",
+      "caption_context": "Social-night and discovery tags. Fragment does not establish a specific scene.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DVDDEVXDnCL/transcript.json",
+          "sha256": "8eeeb91523da00fb932a3e691d34d1acdf6d2cdc3bb99c674678238aeee3f69e"
+        },
+        {
+          "file": "williammaxxer/metadata/DVDDEVXDnCL.json",
+          "sha256": "92a05631fd64fc57516185df192726f4d57a20ecbd0e410cd2d7ab6bd1ba5853"
+        }
+      ]
+    },
+    {
+      "id": "DWpUen-khcV",
+      "creator": "williammaxxer",
+      "rank": 356,
+      "url": "https://www.instagram.com/p/DWpUen-khcV/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "other_caption_text",
+      "caption_context": "Named television-character styling reference. No specific scene or performance verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DWpUen-khcV/transcript.json",
+          "sha256": "2d4c827d01856426dbfa6398d20c39ba91ddc38949594e45748cec0dd36e41d5"
+        },
+        {
+          "file": "williammaxxer/metadata/DWpUen-khcV.json",
+          "sha256": "c2a4bb087b925f869adbab5f3041d38c5a7bbc82aa4c64e0f6874b3e44ca6360"
+        }
+      ]
+    },
+    {
+      "id": "DWw8hdkkrwP",
+      "creator": "williammaxxer",
+      "rank": 357,
+      "url": "https://www.instagram.com/p/DWw8hdkkrwP/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "City and zombie tags. No real event or literal threat inferred.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DWw8hdkkrwP/transcript.json",
+          "sha256": "04766987698b80c57a7d0efb5fc0c35d98e96210b89f58c2bed0b3ea97c4a991"
+        },
+        {
+          "file": "williammaxxer/metadata/DWw8hdkkrwP.json",
+          "sha256": "d32fb8543fe6b52571710a8d5ff9fce146821168773453a10ddb9d893a653faf"
+        }
+      ]
+    },
+    {
+      "id": "DW5EV2PDlPJ",
+      "creator": "williammaxxer",
+      "rank": 360,
+      "url": "https://www.instagram.com/p/DW5EV2PDlPJ/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 10,
+      "caption_category": "other_caption_text",
+      "caption_context": "Caption refers to an exaggerated negative reaction. Situation and target unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DW5EV2PDlPJ/transcript.json",
+          "sha256": "c495259108bf51e12aa30a301d1e4a3b1d289bcb60505b335f83a683387d5cd6"
+        },
+        {
+          "file": "williammaxxer/metadata/DW5EV2PDlPJ.json",
+          "sha256": "b8611787772bab9d278ca9da4e13f5e74ffcfb6e458821dda16844ae0903f3e7"
+        }
+      ]
+    },
+    {
+      "id": "DWFDZi5kpsS",
+      "creator": "williammaxxer",
+      "rank": 362,
+      "url": "https://www.instagram.com/p/DWFDZi5kpsS/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "residual_fragment",
+      "normalized_saved_text_characters": 19,
+      "caption_category": "hashtag_only",
+      "caption_context": "Television, financial-struggle and relatability tags. Do not adopt or attribute the abusive stored fragment.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DWFDZi5kpsS/transcript.json",
+          "sha256": "0f133be95689b2edcd806a00b3e7ff7473ca0b3a650e345ec9d2677928f6fb4d"
+        },
+        {
+          "file": "williammaxxer/metadata/DWFDZi5kpsS.json",
+          "sha256": "20034ec72e34b8326a1c2f631870f46e6687db322bed1c82afb91c64532b01e1"
+        }
+      ]
+    },
+    {
+      "id": "DVsb8ZbjgNl",
+      "creator": "williammaxxer",
+      "rank": 364,
+      "url": "https://www.instagram.com/p/DVsb8ZbjgNl/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "Technology, ideology and esoteric tags mixed together. Beliefs and narrative unresolved.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DVsb8ZbjgNl/transcript.json",
+          "sha256": "4e6dedcaa3488a651c19088e337401098ecd0f336de8afa621304dd4d544a07a"
+        },
+        {
+          "file": "williammaxxer/metadata/DVsb8ZbjgNl.json",
+          "sha256": "3b40dafd944772820097d7b2a0fa93f919fede913b1db529181352f19ec3cae6"
+        }
+      ]
+    },
+    {
+      "id": "DbYrQmlOySn",
+      "creator": "williammaxxer",
+      "rank": 386,
+      "url": "https://www.instagram.com/p/DbYrQmlOySn/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "repetitive_saved_output",
+      "normalized_saved_text_characters": 147,
+      "caption_category": "hashtag_only",
+      "caption_context": "Food-selectivity tag only. No diagnosis or eating behavior established.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DbYrQmlOySn/transcript.json",
+          "sha256": "5c417241ea34bad2a10fa70dd7d5d668a98c11d5f00c9aac5b999af51373fd2e"
+        },
+        {
+          "file": "williammaxxer/metadata/DbYrQmlOySn.json",
+          "sha256": "fe8bf544a6ad51ab35f94d60af10165e41fe23f9ea36708d044614ef25582d82"
+        }
+      ]
+    },
+    {
+      "id": "DZI-YFUh2sA",
+      "creator": "williammaxxer",
+      "rank": 394,
+      "url": "https://www.instagram.com/p/DZI-YFUh2sA/",
+      "original_status": "short_or_music_possible",
+      "review_status": "assistant_saved_text_and_caption_triage",
+      "triage_category": "generic_signoff_only",
+      "normalized_saved_text_characters": 20,
+      "caption_category": "hashtag_only",
+      "caption_context": "City tag only. Specific place or event not verified.",
+      "speech_confidence_resolved": false,
+      "audio_verified": false,
+      "proof_of_silence": false,
+      "corrected_transcript": null,
+      "requires_source_media_review": true,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZI-YFUh2sA/transcript.json",
+          "sha256": "be7dd26c2800d9cb996f5f7f382b1953b12f2004d39f44bfe49b1343f089b592"
+        },
+        {
+          "file": "williammaxxer/metadata/DZI-YFUh2sA.json",
+          "sha256": "a93c759067ad882efa138facb8b08287ada1a274852d45da8ff806c1c06623d9"
+        }
+      ]
+    }
+  ],
+  "visual_cases": [
+    {
+      "id": "DXi7logDjKG",
+      "rank": 14,
+      "folder": "014-DXi7logDjKG",
+      "title": "A reflection that seems wrong",
+      "observations": [
+        "Three saved frames show a person beside a tall wall mirror in a domestic room, wearing a dark graphic sweatshirt and green-grey trousers.",
+        "The sampled poses move from facing one direction to a back-facing pose. The mirror appears inconsistent with an ordinary reflection across those samples.",
+        "The middle sample is washed out compared with the others. Caption and overlay supply a budget-mirror complaint premise."
+      ],
+      "interpretation": "A reflection-mismatch effect is plausible. Exact editing method, timing and continuous synchronization were not verified. This is not a factual product-quality finding.",
+      "original_brief": {
+        "title": "The reflection is one beat behind",
+        "duration_seconds": 5,
+        "shots": [
+          {
+            "start": 0,
+            "end": 1.4,
+            "description": "Original avatar approaches an original mirror set, holding an approved product."
+          },
+          {
+            "start": 1.4,
+            "end": 3.2,
+            "description": "Reflection holds its previous pose as the avatar turns. Keep accepted face and garment geometry fixed."
+          },
+          {
+            "start": 3.2,
+            "end": 5,
+            "description": "Avatar notices, then turns the approved product toward camera. End on a legible original brand mark."
+          }
+        ],
+        "sound": "Planned original soft movement and one light timing cue. No borrowed soundtrack or source dialogue.",
+        "required_before_generation": [
+          "Approved avatar and product references",
+          "Approved original logo and claims",
+          "Continuity and mirror-compositing feasibility review",
+          "Provider quote and explicit spend approval"
+        ],
+        "generation_status": "not_generated",
+        "prompt_grade": "not_run"
+      },
+      "url": "https://www.instagram.com/p/DXi7logDjKG/",
+      "review_status": "assistant_three_saved_frame_and_caption_review",
+      "audio_verified": false,
+      "full_video_review": false,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/best-videos/014-DXi7logDjKG/frame-0.jpg",
+          "sha256": "267606a87df92f05f9f097da40c25291f1a8062f73320990fd951e319e2a8379"
+        },
+        {
+          "file": "williammaxxer/best-videos/014-DXi7logDjKG/frame-1.jpg",
+          "sha256": "1d7377fdc0705eeafead6c306ce4f0592dd1bcaa317a6af4a01fdfd3ddc19faf"
+        },
+        {
+          "file": "williammaxxer/best-videos/014-DXi7logDjKG/frame-2.jpg",
+          "sha256": "92ff435b7579507827256106d17f99979f5359da5d9a283fa4b8289d0e449f9a"
+        }
+      ]
+    },
+    {
+      "id": "DbgOU1uuSbA",
+      "rank": 23,
+      "folder": "023-DbgOU1uuSbA",
+      "title": "An oversized prop in an ordinary commute",
+      "observations": [
+        "Three saved frames show seated people in a rail-car interior. One person holds a long tan scroll-like object; another looks at a phone.",
+        "The object is partly raised or rolled in the first sample and extends vertically through much of the later frames.",
+        "The central person wears a dark graphic top, dark shorts, light socks and light shoes. Overlay and saved caption connect the setup to a fantasy-game reference."
+      ],
+      "interpretation": "The unusually large prop creates a contrast with everyday commuting. It may resemble a fantasy-game artifact, but the exact object, source scene, camera movement and dialogue remain unverified.",
+      "original_brief": {
+        "title": "The tiny package with enormous instructions",
+        "duration_seconds": 5,
+        "shots": [
+          {
+            "start": 0,
+            "end": 1.2,
+            "description": "Original avatar sits in a fictional private waiting area and opens an approved product package."
+          },
+          {
+            "start": 1.2,
+            "end": 3.4,
+            "description": "A comically long original instruction sheet unfolds from the small box."
+          },
+          {
+            "start": 3.4,
+            "end": 5,
+            "description": "Avatar sets the instructions aside and demonstrates the product only if that action is factual and approved."
+          }
+        ],
+        "sound": "Planned original paper rustle and a small pause. No copied game audio, dialogue or bystander likenesses.",
+        "required_before_generation": [
+          "Approved product and packaging references",
+          "Evidence for any ease-of-use claim",
+          "Original set, artwork and avatar assets",
+          "Feasibility review, provider quote and explicit spend approval"
+        ],
+        "generation_status": "not_generated",
+        "prompt_grade": "not_run"
+      },
+      "url": "https://www.instagram.com/p/DbgOU1uuSbA/",
+      "review_status": "assistant_three_saved_frame_and_caption_review",
+      "audio_verified": false,
+      "full_video_review": false,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/best-videos/023-DbgOU1uuSbA/frame-0.jpg",
+          "sha256": "89dbd8d5bf2f7d00bda816f0d5b218a06b70d264fa728cd2273e3cb2935b3b53"
+        },
+        {
+          "file": "williammaxxer/best-videos/023-DbgOU1uuSbA/frame-1.jpg",
+          "sha256": "98b8be94abc105d6149087f407342f4c3a93c40e1f6c655f6d6fc38593b9ada6"
+        },
+        {
+          "file": "williammaxxer/best-videos/023-DbgOU1uuSbA/frame-2.jpg",
+          "sha256": "95f6e8b2ae64152a0c05f1b135d939107e189cc51a157ef34d750f1807b279ae"
+        }
+      ]
+    },
+    {
+      "id": "DWeggVhjiNM",
+      "rank": 24,
+      "folder": "024-DWeggVhjiNM",
+      "title": "Wardrobe and prop as a character-reference cue",
+      "observations": [
+        "The first saved frame shows a person in a dark knit cap, light long-sleeve top and muted trousers, holding a claw hammer indoors.",
+        "Two later samples are letterboxed footage in an outdoor wooded setting, with dark-clothed figures and motion blur.",
+        "The overlay and saved caption identify a television-character reference. A shift from a domestic portrait to different footage is visible, but cut timing and action details are not established."
+      ],
+      "interpretation": "A wardrobe/prop resemblance appears to set up a character-reference edit. The inspected frames do not establish the full scene, stunt or any actual intent.",
+      "original_brief": {
+        "title": "Dressed for a small everyday quest",
+        "duration_seconds": 5,
+        "shots": [
+          {
+            "start": 0,
+            "end": 1.4,
+            "description": "Original avatar adjusts an approved original cap and utility layer in its established room."
+          },
+          {
+            "start": 1.4,
+            "end": 3.2,
+            "description": "Reveal that the serious preparation is for a harmless household task, using a safe non-weapon prop."
+          },
+          {
+            "start": 3.2,
+            "end": 5,
+            "description": "Avatar completes one small beat and presents the approved garment or product clearly."
+          }
+        ],
+        "sound": "Planned original fabric movement and a restrained success cue. No television footage, character likeness, franchise wording or soundtrack.",
+        "required_before_generation": [
+          "Approved original outfit and avatar",
+          "Safe task/prop and product-specific factual basis",
+          "Continuity review and rights-cleared assets",
+          "Provider quote and explicit spend approval"
+        ],
+        "generation_status": "not_generated",
+        "prompt_grade": "not_run"
+      },
+      "url": "https://www.instagram.com/p/DWeggVhjiNM/",
+      "review_status": "assistant_three_saved_frame_and_caption_review",
+      "audio_verified": false,
+      "full_video_review": false,
+      "source_evidence": [
+        {
+          "file": "williammaxxer/best-videos/024-DWeggVhjiNM/frame-0.jpg",
+          "sha256": "216299bc958b0181f0ae1729fc643743b780e337fca822adcb075999a2b58175"
+        },
+        {
+          "file": "williammaxxer/best-videos/024-DWeggVhjiNM/frame-1.jpg",
+          "sha256": "72c1a56c31a386d388a078be61e336ac5a21952b331bcf50cb7d83df235504fd"
+        },
+        {
+          "file": "williammaxxer/best-videos/024-DWeggVhjiNM/frame-2.jpg",
+          "sha256": "821641c877d581c32eedd2744cf191474e8450baf55e8b52f27c2f68ce515ec3"
+        }
+      ]
+    }
+  ],
+  "all60queue_entries_have_limited_overlay_notes": true,
+  "all60full_media_or_human_verified": false,
+  "original_index_queue_transcripts_modified": false,
+  "transcript_corrections": 0,
+  "new_generated_samples": 0,
+  "independent_review": {
+    "result": "accepted after four wording fixes; no blocking source-note mismatches",
+    "scope": "42mappings,93source hashes,index/queue integrity,9actual source frames,3brief timelines and board/JSON consistency",
+    "audio_full_video_correctness": false,
+    "human_review": false,
+    "browser_layout": false,
+    "production_prompt_approval": false
+  }
+}
