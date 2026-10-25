@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T06:25:42.721168+00:00",
+  "reference_url": "https://www.eliteballknowledge.ai/",
+  "reference_inspection": "Live official page text, normal Chrome accessibility, computed styles and two desktop screenshots. No checkout clicked.",
+  "reference_observed": {
+    "background": "rgb(9,9,9)",
+    "desktop_hero_px": 64,
+    "section_heading_px": [
+      44,
+      42,
+      40
+    ],
+    "media_width_px": 872,
+    "media_height_px": 480,
+    "font": "Satoshi on reference; system sans-serif on our concept",
+    "advertised_course_price_usd": 197,
+    "claims": "Reference self-published outcome figures and student story were observed, not independently verified or adopted."
+  },
+  "user_concept_price_usd": 97,
+  "course_checkout_retired_preserved": true,
+  "baseline": {
+    "file": "public/course/index.html",
+    "sha256": "aad0d9587e0e7dc4ffe637eb0d09b0e860e6f2a1ac67917bf18333ca316c3ad6",
+    "changed": false
+  },
+  "candidate_source": "experiments/course-layout-v2",
+  "scope": "Standalone layout refinement, no root runtime restoration, merge, checkout or app activation.",
+  "mapping": [
+    {
+      "area": "Hero",
+      "baseline": "Centered headline and CTA, with shared top navigation and review banner.",
+      "v2": "Centered concept badge, two-line desktop hero, purple pill CTA and wide planning illustration.",
+      "intentional_difference": "Original copy and no borrowed creator media."
+    },
+    {
+      "area": "Creator/proof region",
+      "baseline": "No creator card or broad three-part band.",
+      "v2": "Original Studio identity card and light creative-foundation band.",
+      "intentional_difference": "No verified-person badge, view/customer metrics or claimed student outcomes."
+    },
+    {
+      "area": "Method",
+      "baseline": "Three planned process cards already present.",
+      "v2": "Matched card grouping, centered heading and repeated in-page CTA.",
+      "intentional_difference": "Original planned curriculum, not copied lesson claims."
+    },
+    {
+      "area": "Demonstration/testimonial",
+      "baseline": "Hero placement only; no later dedicated demonstration/principle area.",
+      "v2": "Reserved demonstration area and original course-principle text.",
+      "intentional_difference": "Missing original footage labeled. No testimonial fabricated."
+    },
+    {
+      "area": "Offer/FAQ",
+      "baseline": "Proposed97price, unavailable checkout and four FAQs.",
+      "v2": "Reference-like hierarchy with same97concept, disabled purchase control and four native FAQs.",
+      "intentional_difference": "No urgency, active payment, lifetime-access promise or outcome guarantee."
+    }
+  ],
+  "pixel_identical": false,
+  "missing_assets": [
+    "Original course demonstration footage",
+    "Final curriculum and scope",
+    "Real authorized customer evidence if ever used"
+  ],
+  "independent_review": {
+    "result": "passed affected re-review after two mobile fixes",
+    "fixes": [
+      "Mobile illustration labels,heading and footnote increased to10px",
+      "Mobile panels increased to205px to separate title and decorative art"
+    ],
+    "desktop_document_width": 1920,
+    "mobile_document_width": 390,
+    "mobile_title_art_gaps_px": [
+      25.2,
+      17.6,
+      40.9
+    ],
+    "anchor_reached_plan": true,
+    "faq_opened": true,
+    "purchase_disabled": true,
+    "forms": 0,
+    "payment_links": 0,
+    "viewport_restored": true,
+    "pixel_parity": false,
+    "physical_device_tested": false
+  },
+  "preview": "https://duolingo-library-phone-v1-45mlhd8f4-ryancortenbachs-projects.vercel.app/"
+}

@@ -1,0 +1,432 @@
+{
+  "version": 1,
+  "queue_records": 60,
+  "records_with_limited_notes": 60,
+  "unannotated_records": 0,
+  "audio_accuracy_verdicts": 0,
+  "human_reviews": 0,
+  "source_index_queue_modified": false,
+  "records": [
+    {
+      "id": "DZj01J7O58q",
+      "notes": "docs/RESEARCH-NOAUDIO-RESULTS-v1.json",
+      "scope": "assistant_frame_and_saved_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DStkwJNEVYJ",
+      "notes": "docs/RESEARCH-NOAUDIO-RESULTS-v1.json",
+      "scope": "assistant_frame_and_saved_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSRYHyBkQFA",
+      "notes": "docs/RESEARCH-NOAUDIO-RESULTS-v1.json",
+      "scope": "assistant_frame_and_saved_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DeDIZ9UoGSm",
+      "notes": "docs/RESEARCH-NOAUDIO-RESULTS-v1.json",
+      "scope": "assistant_frame_and_saved_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DY55fRguKWP",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DXDd-aMjr3E",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZOMIGShFnb",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DYV0MsAuGQ-",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DX0UlxDOxqB",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSgiM7sEW7a",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZBzR3kOII7",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSgjROSERj1",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSqaHppEg1b",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZV_vHUvEqQ",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZA0MamOH3J",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DedBnycPEbm",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DcEzwW2Sew4",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "De2TD1eBmSY",
+      "notes": "docs/RESEARCH-TEXT-TOPICS-v1.json",
+      "scope": "assistant_saved_text_and_caption_review",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DXi7logDjKG",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DbgOU1uuSbA",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DWeggVhjiNM",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZY2eFAOISx",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSQw8D9kuHq",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DXQ4EvXjlmM",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DUHVcodAZlk",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DS08WYZASve",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "Dbi8IMYuYlc",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DU2UQUOEaxV",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "Da6UsC2hI4T",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DVFMF7-j5VR",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DcwM0OTuiYk",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DXC2AEkkpwV",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSsksJ_kg7G",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DblUIFNul05",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DbizcGcO0Ai",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DVEX3XWj9pd",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSbyr1Zjsna",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZMgPpROybI",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSwDqdIEdOo",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZL_TqVOL0I",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DTEBAEdkoyg",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSjh-muEbWQ",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSd5uACEXde",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DUvGZJgk9j6",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DWZUkSQDmWe",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSott-xjn7j",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DT4nb-ZDnrd",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DTtuD1qj_lo",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DVmDrPKj4y0",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DU2uZWhES9C",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DUD79OqD80f",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DSxxXyhkt4s",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DVDDEVXDnCL",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DWpUen-khcV",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DWw8hdkkrwP",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DW5EV2PDlPJ",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DWFDZi5kpsS",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DVsb8ZbjgNl",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DbYrQmlOySn",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    },
+    {
+      "id": "DZI-YFUh2sA",
+      "notes": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+      "scope": "assistant_saved_text_and_caption_triage",
+      "audio_accuracy_verified": false,
+      "human_verified": false
+    }
+  ],
+  "limit": "Notes complete only within declared frame/text/caption scope. Full-media and audio verification remain open."
+}

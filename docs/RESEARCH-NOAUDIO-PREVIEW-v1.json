@@ -1,0 +1,83 @@
+{
+  "url": "https://duolingo-library-phone-v1-2xd9tnyvx-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_9xaUtQdjvs7FmKhhmTeT7XGA4cgh",
+  "target": "preview",
+  "target_evidence": "CLI inspect reports target preview; deploy JSON target null, productionUrl null",
+  "ready": true,
+  "anonymous_http200_exact_source_bytes": 9,
+  "assets": "7unchanged source JPEGs plus HTML and notes JSON",
+  "independent_source_note_review": "no mismatches or blocking overclaims within saved frame/caption scope",
+  "browser_render_verified": false,
+  "browser_reason": "Native Chrome interaction stopped when user changed browser; latest state showed a different existing page. No further navigation attempted.",
+  "physical_devices_tested": false,
+  "mobile_layout_tested": false,
+  "app_runtime_connected": false,
+  "production_deployment": false,
+  "full_videos_or_raw_asr_uploaded": false,
+  "raw_avatar_uploaded": false,
+  "verification_records": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 9851,
+      "matches_source": true,
+      "sha256": "78b9a0a84b775614250dcd66f90d220b557eefd0a6743f41f898403604c28b05"
+    },
+    {
+      "path": "notes.json",
+      "status": 200,
+      "bytes": 9808,
+      "matches_source": true,
+      "sha256": "f4ffbe60c8a6cad66d2294ed50ab528e61665f584b30f2f7c3301b45e3ec6dad"
+    },
+    {
+      "path": "assets/DSRYHyBkQFA.jpg",
+      "status": 200,
+      "bytes": 13075,
+      "matches_source": true,
+      "sha256": "75b110f21260e881389aa68443b4c147e5a339613fd5134870bb4a5819f79d24"
+    },
+    {
+      "path": "assets/DStkwJNEVYJ.jpg",
+      "status": 200,
+      "bytes": 24136,
+      "matches_source": true,
+      "sha256": "3d3e67e96ba34249527a4d82c50b932bc7517fdce315ab84cf1c9bda12aae0a6"
+    },
+    {
+      "path": "assets/DZj01J7O58q.jpg",
+      "status": 200,
+      "bytes": 18440,
+      "matches_source": true,
+      "sha256": "a0b1aec9e73bf91f1afcf2f4da2ede65a608023e9471cb20d9265107cb4724d4"
+    },
+    {
+      "path": "assets/DeDIZ9UoGSm-0.jpg",
+      "status": 200,
+      "bytes": 28537,
+      "matches_source": true,
+      "sha256": "c80fe74a24dd8e17492b67776eea4ceb4e32f215b86bb332d69b9cc744a29448"
+    },
+    {
+      "path": "assets/DeDIZ9UoGSm-1.jpg",
+      "status": 200,
+      "bytes": 29059,
+      "matches_source": true,
+      "sha256": "3161b3bfcf582d2323c04fc26d9801bb153377a410bc39aad1aecda02a7e60ab"
+    },
+    {
+      "path": "assets/DeDIZ9UoGSm-2.jpg",
+      "status": 200,
+      "bytes": 26841,
+      "matches_source": true,
+      "sha256": "21a1a7ebb697a4c0ec9a05306bfe4bac5e71640a0fbe1c3c4884b2f091e895d4"
+    },
+    {
+      "path": "assets/DeDIZ9UoGSm.jpg",
+      "status": 200,
+      "bytes": 20191,
+      "matches_source": true,
+      "sha256": "8f5be4793e8061efef0e53aa695df89b51568049c13593ea6300c5b377dd4015"
+    }
+  ]
+}

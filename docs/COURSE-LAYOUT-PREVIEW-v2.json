@@ -1,0 +1,61 @@
+{
+  "url": "https://duolingo-library-phone-v1-45mlhd8f4-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_3HeJGqkiBjd5gXPCmUydoWk8ZiPn",
+  "target": "preview",
+  "ready": true,
+  "source": "experiments/course-layout-v2",
+  "anonymous_http200_exact_byte_matches": 3,
+  "records": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 5896,
+      "sha256": "f0e5339ebe3065144af6e3e5e40f09fd20543ea9b322d369679b9c3639b51c52",
+      "matches_source": true
+    },
+    {
+      "file": "style.css",
+      "status": 200,
+      "bytes": 7989,
+      "sha256": "74d391e2143cb727d54ad669ef6b5f69b59ce54735220015243ca68e907e747f",
+      "matches_source": true
+    },
+    {
+      "file": "comparison.html",
+      "status": 200,
+      "bytes": 2341,
+      "sha256": "18922b0c2c4e202b1a706bce31a876ffe2d73983938c47416e9aff8998a20a3b",
+      "matches_source": true
+    }
+  ],
+  "independent_rendered_reference_and_candidate_review": true,
+  "independent_final_mobile_recheck": true,
+  "root_final_desktop_observed": true,
+  "desktop_document_width": 1920,
+  "mobile_document_width": 390,
+  "mobile_labels_px": 10,
+  "mobile_panel_height_px": 205,
+  "mobile_title_art_gaps_px": [
+    25.2,
+    17.6,
+    40.9
+  ],
+  "anchor_faq_disabled_purchase_verified": true,
+  "viewport_restored": true,
+  "screenshots_captured_in_chat": true,
+  "physical_devices_tested": false,
+  "pixel_identical": false,
+  "root_course_changed": false,
+  "course_checkout_created": false,
+  "app_activation": false,
+  "production_deployed": false,
+  "preserved_candidates": [
+    "https://duolingo-library-phone-v1-5iojr9zyi-ryancortenbachs-projects.vercel.app/",
+    "https://duolingo-library-phone-v1-8rdvdoakr-ryancortenbachs-projects.vercel.app/"
+  ],
+  "unresolved": [
+    "Original demonstration footage",
+    "Final course curriculum/offer",
+    "No reference outcome/creator/student proof transferred"
+  ]
+}

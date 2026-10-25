@@ -1,0 +1,1238 @@
+{
+  "version": 1,
+  "created_at": "2026-10-25T04:23:14.514958+00:00",
+  "source_index": "public/research/reel-index.json",
+  "source_sha256": "fbcab014322edadd6ea4f069622c5bbeb1644093f84a90c6a21674186e3d4ad3",
+  "purpose": "Manual review queue from existing metadata only. No new collection, downloads, transcription or human review performed. Original index and media preserved.",
+  "count": 60,
+  "counts_by_source_status": {
+    "machine_transcript": 14,
+    "short_or_music_possible": 42,
+    "no_audio_in_downloaded_media": 4
+  },
+  "overlapping_reasons": {
+    "short_or_music_possible": 42,
+    "no_audio": 4,
+    "william_visual_or_unclassified": 31
+  },
+  "rows": [
+    {
+      "creator": "williammaxxer",
+      "rank": 1,
+      "id": "DY55fRguKWP",
+      "url": "https://www.instagram.com/p/DY55fRguKWP/",
+      "title": "Remembered classroom behavior",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DY55fRguKWP"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 14,
+      "id": "DXi7logDjKG",
+      "url": "https://www.instagram.com/p/DXi7logDjKG/",
+      "title": "Mirror effect and outfit reveal",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DXi7logDjKG"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 23,
+      "id": "DbgOU1uuSbA",
+      "url": "https://www.instagram.com/p/DbgOU1uuSbA/",
+      "title": "A fantasy-sized scroll on public transit",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DbgOU1uuSbA"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 24,
+      "id": "DWeggVhjiNM",
+      "url": "https://www.instagram.com/p/DWeggVhjiNM/",
+      "title": "TV-character outfit and prop joke",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Other games and TV character references"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DWeggVhjiNM"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 36,
+      "id": "DZY2eFAOISx",
+      "url": "https://www.instagram.com/p/DZY2eFAOISx/",
+      "title": "Other games and TV character references",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Other games and TV character references"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZY2eFAOISx"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 46,
+      "id": "DSQw8D9kuHq",
+      "url": "https://www.instagram.com/p/DSQw8D9kuHq/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSQw8D9kuHq"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 49,
+      "id": "DXQ4EvXjlmM",
+      "url": "https://www.instagram.com/p/DXQ4EvXjlmM/",
+      "title": "Sandbox role-play and server culture",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Sandbox role-play and server culture"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DXQ4EvXjlmM"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 57,
+      "id": "DUHVcodAZlk",
+      "url": "https://www.instagram.com/p/DUHVcodAZlk/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DUHVcodAZlk"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 76,
+      "id": "DS08WYZASve",
+      "url": "https://www.instagram.com/p/DS08WYZASve/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DS08WYZASve"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 83,
+      "id": "Dbi8IMYuYlc",
+      "url": "https://www.instagram.com/p/Dbi8IMYuYlc/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/Dbi8IMYuYlc"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 93,
+      "id": "DU2UQUOEaxV",
+      "url": "https://www.instagram.com/p/DU2UQUOEaxV/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DU2UQUOEaxV"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 110,
+      "id": "Da6UsC2hI4T",
+      "url": "https://www.instagram.com/p/Da6UsC2hI4T/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/Da6UsC2hI4T"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 129,
+      "id": "DVFMF7-j5VR",
+      "url": "https://www.instagram.com/p/DVFMF7-j5VR/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DVFMF7-j5VR"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 156,
+      "id": "DcwM0OTuiYk",
+      "url": "https://www.instagram.com/p/DcwM0OTuiYk/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DcwM0OTuiYk"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 159,
+      "id": "DXC2AEkkpwV",
+      "url": "https://www.instagram.com/p/DXC2AEkkpwV/",
+      "title": "Sandbox role-play and server culture",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Sandbox role-play and server culture"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DXC2AEkkpwV"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 193,
+      "id": "DZj01J7O58q",
+      "url": "https://www.instagram.com/p/DZj01J7O58q/",
+      "title": "Other games and TV character references",
+      "transcription_status": "no_audio_in_downloaded_media",
+      "topics": [
+        "Other games and TV character references"
+      ],
+      "reasons": [
+        "Inspect existing visual frames, on-screen text and caption. Do not invent dialogue or rerun ASR."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZj01J7O58q"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 219,
+      "id": "DSsksJ_kg7G",
+      "url": "https://www.instagram.com/p/DSsksJ_kg7G/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSsksJ_kg7G"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 220,
+      "id": "DStkwJNEVYJ",
+      "url": "https://www.instagram.com/p/DStkwJNEVYJ/",
+      "title": "Internet identity and celebrity satire / Relationship persona and cultural tropes",
+      "transcription_status": "no_audio_in_downloaded_media",
+      "topics": [
+        "Internet identity and celebrity satire",
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Inspect existing visual frames, on-screen text and caption. Do not invent dialogue or rerun ASR."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DStkwJNEVYJ"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 223,
+      "id": "DXDd-aMjr3E",
+      "url": "https://www.instagram.com/p/DXDd-aMjr3E/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DXDd-aMjr3E"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 229,
+      "id": "DZOMIGShFnb",
+      "url": "https://www.instagram.com/p/DZOMIGShFnb/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZOMIGShFnb"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 250,
+      "id": "DYV0MsAuGQ-",
+      "url": "https://www.instagram.com/p/DYV0MsAuGQ-/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DYV0MsAuGQ-"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 260,
+      "id": "DblUIFNul05",
+      "url": "https://www.instagram.com/p/DblUIFNul05/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DblUIFNul05"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 267,
+      "id": "DX0UlxDOxqB",
+      "url": "https://www.instagram.com/p/DX0UlxDOxqB/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DX0UlxDOxqB"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 270,
+      "id": "DbizcGcO0Ai",
+      "url": "https://www.instagram.com/p/DbizcGcO0Ai/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DbizcGcO0Ai"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 271,
+      "id": "DSRYHyBkQFA",
+      "url": "https://www.instagram.com/p/DSRYHyBkQFA/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "no_audio_in_downloaded_media",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Inspect existing visual frames, on-screen text and caption. Do not invent dialogue or rerun ASR.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSRYHyBkQFA"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 281,
+      "id": "DVEX3XWj9pd",
+      "url": "https://www.instagram.com/p/DVEX3XWj9pd/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DVEX3XWj9pd"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 284,
+      "id": "DSbyr1Zjsna",
+      "url": "https://www.instagram.com/p/DSbyr1Zjsna/",
+      "title": "Everyday consumer and social observations",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Everyday consumer and social observations"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSbyr1Zjsna"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 289,
+      "id": "DZMgPpROybI",
+      "url": "https://www.instagram.com/p/DZMgPpROybI/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZMgPpROybI"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 293,
+      "id": "DSwDqdIEdOo",
+      "url": "https://www.instagram.com/p/DSwDqdIEdOo/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSwDqdIEdOo"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 295,
+      "id": "DSgiM7sEW7a",
+      "url": "https://www.instagram.com/p/DSgiM7sEW7a/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSgiM7sEW7a"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 296,
+      "id": "DZBzR3kOII7",
+      "url": "https://www.instagram.com/p/DZBzR3kOII7/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZBzR3kOII7"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 297,
+      "id": "DSgjROSERj1",
+      "url": "https://www.instagram.com/p/DSgjROSERj1/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSgjROSERj1"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 310,
+      "id": "DZL_TqVOL0I",
+      "url": "https://www.instagram.com/p/DZL_TqVOL0I/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZL_TqVOL0I"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 315,
+      "id": "DTEBAEdkoyg",
+      "url": "https://www.instagram.com/p/DTEBAEdkoyg/",
+      "title": "Fantasy RPG lore and everyday life",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Fantasy RPG lore and everyday life"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DTEBAEdkoyg"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 316,
+      "id": "DSqaHppEg1b",
+      "url": "https://www.instagram.com/p/DSqaHppEg1b/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSqaHppEg1b"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 317,
+      "id": "DSjh-muEbWQ",
+      "url": "https://www.instagram.com/p/DSjh-muEbWQ/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSjh-muEbWQ"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 318,
+      "id": "DSd5uACEXde",
+      "url": "https://www.instagram.com/p/DSd5uACEXde/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSd5uACEXde"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 319,
+      "id": "DUvGZJgk9j6",
+      "url": "https://www.instagram.com/p/DUvGZJgk9j6/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DUvGZJgk9j6"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 322,
+      "id": "DWZUkSQDmWe",
+      "url": "https://www.instagram.com/p/DWZUkSQDmWe/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DWZUkSQDmWe"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 326,
+      "id": "DZV_vHUvEqQ",
+      "url": "https://www.instagram.com/p/DZV_vHUvEqQ/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZV_vHUvEqQ"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 328,
+      "id": "DSott-xjn7j",
+      "url": "https://www.instagram.com/p/DSott-xjn7j/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSott-xjn7j"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 332,
+      "id": "DT4nb-ZDnrd",
+      "url": "https://www.instagram.com/p/DT4nb-ZDnrd/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DT4nb-ZDnrd"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 333,
+      "id": "DTtuD1qj_lo",
+      "url": "https://www.instagram.com/p/DTtuD1qj_lo/",
+      "title": "Everyday wordplay and interaction sketches",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Everyday wordplay and interaction sketches"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DTtuD1qj_lo"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 342,
+      "id": "DVmDrPKj4y0",
+      "url": "https://www.instagram.com/p/DVmDrPKj4y0/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DVmDrPKj4y0"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 343,
+      "id": "DU2uZWhES9C",
+      "url": "https://www.instagram.com/p/DU2uZWhES9C/",
+      "title": "Relationship persona and cultural tropes",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Relationship persona and cultural tropes"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DU2uZWhES9C"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 351,
+      "id": "DUD79OqD80f",
+      "url": "https://www.instagram.com/p/DUD79OqD80f/",
+      "title": "Everyday consumer and social observations",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Everyday consumer and social observations"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DUD79OqD80f"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 353,
+      "id": "DSxxXyhkt4s",
+      "url": "https://www.instagram.com/p/DSxxXyhkt4s/",
+      "title": "Everyday consumer and social observations",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Everyday consumer and social observations"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DSxxXyhkt4s"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 355,
+      "id": "DVDDEVXDnCL",
+      "url": "https://www.instagram.com/p/DVDDEVXDnCL/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DVDDEVXDnCL"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 356,
+      "id": "DWpUen-khcV",
+      "url": "https://www.instagram.com/p/DWpUen-khcV/",
+      "title": "Other games and TV character references",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Other games and TV character references"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DWpUen-khcV"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 357,
+      "id": "DWw8hdkkrwP",
+      "url": "https://www.instagram.com/p/DWw8hdkkrwP/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DWw8hdkkrwP"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 360,
+      "id": "DW5EV2PDlPJ",
+      "url": "https://www.instagram.com/p/DW5EV2PDlPJ/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DW5EV2PDlPJ"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 362,
+      "id": "DWFDZi5kpsS",
+      "url": "https://www.instagram.com/p/DWFDZi5kpsS/",
+      "title": "Other games and TV character references",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Other games and TV character references"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DWFDZi5kpsS"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 364,
+      "id": "DVsb8ZbjgNl",
+      "url": "https://www.instagram.com/p/DVsb8ZbjgNl/",
+      "title": "Internet identity and celebrity satire",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Internet identity and celebrity satire"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DVsb8ZbjgNl"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 367,
+      "id": "DZA0MamOH3J",
+      "url": "https://www.instagram.com/p/DZA0MamOH3J/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZA0MamOH3J"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 379,
+      "id": "DedBnycPEbm",
+      "url": "https://www.instagram.com/p/DedBnycPEbm/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DedBnycPEbm"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 386,
+      "id": "DbYrQmlOySn",
+      "url": "https://www.instagram.com/p/DbYrQmlOySn/",
+      "title": "Everyday wordplay and interaction sketches",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Everyday wordplay and interaction sketches"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DbYrQmlOySn"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 389,
+      "id": "DcEzwW2Sew4",
+      "url": "https://www.instagram.com/p/DcEzwW2Sew4/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DcEzwW2Sew4"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 394,
+      "id": "DZI-YFUh2sA",
+      "url": "https://www.instagram.com/p/DZI-YFUh2sA/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "short_or_music_possible",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Check speech against audio, music and silence; correct ASR only from source evidence.",
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/DZI-YFUh2sA"
+    },
+    {
+      "creator": "williammaxxer",
+      "rank": 400,
+      "id": "De2TD1eBmSY",
+      "url": "https://www.instagram.com/p/De2TD1eBmSY/",
+      "title": "Visual/trend or unclassified",
+      "transcription_status": "machine_transcript",
+      "topics": [
+        "Visual/trend or unclassified"
+      ],
+      "reasons": [
+        "Review existing source context and assign a specific topic only when supported."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/williammaxxer/transcripts/De2TD1eBmSY"
+    },
+    {
+      "creator": "lucamaxiim",
+      "rank": 11,
+      "id": "DeDIZ9UoGSm",
+      "url": "https://www.instagram.com/p/DeDIZ9UoGSm/",
+      "title": "Live-action apparel reference",
+      "transcription_status": "no_audio_in_downloaded_media",
+      "topics": [
+        "Creator production reference"
+      ],
+      "reasons": [
+        "Inspect existing visual frames, on-screen text and caption. Do not invent dialogue or rerun ASR."
+      ],
+      "review_status": "not_reviewed",
+      "corrected_text": null,
+      "supported_topics": null,
+      "reviewer_evidence": null,
+      "existing_transcript_directory_present": true,
+      "local_transcript_directory": "/Volumes/Projects/UGC-Campaign-Research/2026-10-24-v1/lucamaxiim/transcripts/DeDIZ9UoGSm"
+    }
+  ]
+}

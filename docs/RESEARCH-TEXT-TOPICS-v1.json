@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T05:25:21.931456+00:00",
+  "scope": "Assistant semantic review of14existing machine-text/caption entries, not audio validation or human review. No fresh source playback or generation.",
+  "source_index_sha256": "fbcab014322edadd6ea4f069622c5bbeb1644093f84a90c6a21674186e3d4ad3",
+  "source_queue_sha256": "0747848f628591ed3425cbc374d9fd7aed8892642355477d3e9ca83df11e8baa",
+  "records": 14,
+  "source_index_modified": false,
+  "source_queue_modified": false,
+  "transcript_corrections": 0,
+  "music_or_asr_caution_proposals": 3,
+  "independent_review": {
+    "result": "accepted after wording fixes; no blocking overclaims",
+    "scope": "14records,28source-file hashes,14saved-text hashes,index and queue integrity,paraphrase and uncertainty",
+    "audio_correctness_verified": false,
+    "full_media_verified": false,
+    "human_review": false
+  },
+  "rows": [
+    {
+      "id": "DY55fRguKWP",
+      "creator": "williammaxxer",
+      "rank": 1,
+      "url": "https://www.instagram.com/p/DY55fRguKWP/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Classroom repetition and childhood nostalgia",
+      "saved_text_observation": "The saved text repeats short classroom and playground requests, suggesting a recognizable childhood interaction pattern.",
+      "topic_proposal": "Nostalgia / repeated social rituals",
+      "uncertainty": "The caption gives little context. Visual roles, delivery and whether the repetition imitates a particular group remain unverified. Repetition could also reflect an ASR error; its performance mechanism is not verified.",
+      "original_mechanism": "Give a fictional avatar a repeated, harmless request in three familiar situations. Let the repetition carry the joke, using original wording.",
+      "flags": [],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "26be068756ff0ba533c82672ebd715819bd37fd2ebe0349ef6ba8ea7d2273f59",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DY55fRguKWP/transcript.json",
+          "sha256": "161685548727c346cd39e59042bb5e4446bfc4c83c6aa3dd091f7f584c665c61"
+        },
+        {
+          "file": "williammaxxer/metadata/DY55fRguKWP.json",
+          "sha256": "649b1e6889e02f2ffe63817a2897951392d8d265c3b4204bc62f3774bd1c7c05"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DXDd-aMjr3E",
+      "creator": "williammaxxer",
+      "rank": 223,
+      "url": "https://www.instagram.com/p/DXDd-aMjr3E/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Name stereotypes involving disability",
+      "saved_text_observation": "The machine text associates a list of personal names with autism. This is a description of a stigmatizing source premise, not evidence that the association is true.",
+      "topic_proposal": "Disability-related name stereotype",
+      "uncertainty": "Do not diagnose people, infer the creator\u2019s beliefs or adopt the premise as a factual claim. Audio, delivery and context are unverified.",
+      "original_mechanism": "Transfer only the list-and-reveal structure to neutral fictional categories, such as character names that sound like software tools. Avoid disability stereotypes.",
+      "flags": [
+        "stigmatizing_premise_do_not_adopt"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "3d95f191079e43585b8dfbda1adc2e44afbe3e4d33de2dafb3e7da43cb2b8fb5",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DXDd-aMjr3E/transcript.json",
+          "sha256": "ed7aab5437c7673d53ef23d2b67d1c7b7f173ac42a0799956e9e96850ca33110"
+        },
+        {
+          "file": "williammaxxer/metadata/DXDd-aMjr3E.json",
+          "sha256": "96a20a6d0c596572762ac2b92ec33ac9a73d6eeefd3cf7bc617ead40fcd56fc2"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DZOMIGShFnb",
+      "creator": "williammaxxer",
+      "rank": 229,
+      "url": "https://www.instagram.com/p/DZOMIGShFnb/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Inclusive narration with a conflicting reaction",
+      "saved_text_observation": "The saved text begins with broad praise for cultural tolerance and includes an incongruous reaction before returning to praise.",
+      "topic_proposal": "Reaction commentary / tonal contradiction",
+      "uncertainty": "Visual subjects and speaker roles are unknown. The text alone cannot establish what is being reacted to, satire intent or the creator\u2019s beliefs.",
+      "original_mechanism": "Use a harmless workplace or game-menu scene with overly enthusiastic narration and one practical interruption. Make the target a situation, not a demographic group.",
+      "flags": [
+        "requires_visual_context"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "f7df520cc7b459ce8c78922a78554ad80f89c07cfe6ea5e855d9ec5172d7178a",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZOMIGShFnb/transcript.json",
+          "sha256": "a11972c7caefbbd3278888eaf1747483026de3849e0398f72520bf9912659114"
+        },
+        {
+          "file": "williammaxxer/metadata/DZOMIGShFnb.json",
+          "sha256": "1c208f00ff4c222547fde52d41979042696a7fc3a915747e27f7de53810a0e73"
+        }
+      ],
+      "exact_saved_text_matches": [
+        "DZA0MamOH3J"
+      ]
+    },
+    {
+      "id": "DYV0MsAuGQ-",
+      "creator": "williammaxxer",
+      "rank": 250,
+      "url": "https://www.instagram.com/p/DYV0MsAuGQ-/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Accidental upload and privacy embarrassment",
+      "saved_text_observation": "The machine text describes surprise that a platform feature uploaded content automatically and an embarrassing exposure.",
+      "topic_proposal": "Platform privacy mishap / technology awkwardness",
+      "uncertainty": "Exact feature name, factual product behavior and what was actually posted are unverified. Do not turn the source into platform security advice.",
+      "original_mechanism": "Write an original accidental-upload scene involving a silly draft costume or unfinished logo, with no nudity or private data.",
+      "flags": [
+        "product_behavior_unverified"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "ee5da878d6d6e185176799b4d283e2ca5b278dcf776a3a674e8ef8806212b853",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DYV0MsAuGQ-/transcript.json",
+          "sha256": "93a905cd91cb30488039e91d1500d51dbae4073769267a3c4dee212159b9dc89"
+        },
+        {
+          "file": "williammaxxer/metadata/DYV0MsAuGQ-.json",
+          "sha256": "12446bd51555b7b8af8c2b55aa7b06851cdcf858bcb3be213ef4599f7f8ba3c3"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DX0UlxDOxqB",
+      "creator": "williammaxxer",
+      "rank": 267,
+      "url": "https://www.instagram.com/p/DX0UlxDOxqB/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Self-consciousness about changing clothing habits",
+      "saved_text_observation": "The text describes a habitual trouser wearer feeling conspicuous when switching to shorts and anticipating comments.",
+      "topic_proposal": "Wardrobe change / everyday social self-consciousness",
+      "uncertainty": "No visible garment, body appearance or real audience reaction was inspected in this pass.",
+      "original_mechanism": "Give the brand avatar a small wardrobe change that feels like a major public announcement. Let the garment remain an original design.",
+      "flags": [],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "9e87520c198a69f84ebac47896bd16cdbd6e939951bf2ece3f32ee7e844d1016",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DX0UlxDOxqB/transcript.json",
+          "sha256": "53a02aeed7e9611b91be6b185cb3085376922438cff58092f07f0ac1b0fb3692"
+        },
+        {
+          "file": "williammaxxer/metadata/DX0UlxDOxqB.json",
+          "sha256": "d42434013dcc8428023bcc139748d063610decf052ab854bf83e631dfbb1ddc4"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DSgiM7sEW7a",
+      "creator": "williammaxxer",
+      "rank": 295,
+      "url": "https://www.instagram.com/p/DSgiM7sEW7a/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Insufficient text with a possible music fragment",
+      "saved_text_observation": "A very short machine result and generic caption provide too little dependable context for a specific narrative topic.",
+      "topic_proposal": "Unresolved: possible music, trend or unreliable ASR",
+      "uncertainty": "Do not parse the fragment into a literal event or identify a song. Requires source-media listening or visual context.",
+      "original_mechanism": "No source-specific campaign premise proposed until context is checked.",
+      "flags": [
+        "possible_music_or_asr_error",
+        "insufficient_context"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "8113e4610726f38576dfb0584a2643f28180f5fff8f1b9038ffab89d7502b920",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSgiM7sEW7a/transcript.json",
+          "sha256": "c9b721821380280daaa8b3d0414fe9c6d40661a8e743ee795bd6d0feb0749a26"
+        },
+        {
+          "file": "williammaxxer/metadata/DSgiM7sEW7a.json",
+          "sha256": "77812280aa6d5ab69d23e319d5fbc5c106e1d3d6fda326c7ad3c03bbd39ca716"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DZBzR3kOII7",
+      "creator": "williammaxxer",
+      "rank": 296,
+      "url": "https://www.instagram.com/p/DZBzR3kOII7/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Escalating excuses for declining an invitation",
+      "saved_text_observation": "The saved dialogue cycles through objections to joining someone in water, with each practical objection answered and another refusal following.",
+      "topic_proposal": "Social avoidance / escalating refusal",
+      "uncertainty": "Speaker identities, relationships, physical appearances and the intended subtext are unknown. A size-related line does not establish anyone\u2019s body characteristics.",
+      "original_mechanism": "Use an invitation to a harmless team activity. Three increasingly impractical excuses reveal that the avatar simply prefers a different task.",
+      "flags": [],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "2314ae85130d22e0ed0c291a4f31fd63e3dbdcf5c4456ab3ed6a73f5fc10de35",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZBzR3kOII7/transcript.json",
+          "sha256": "b7a0968660f66c584ea30e4a39c618edcb4bd9ea4f05d7614d176394f9eb4026"
+        },
+        {
+          "file": "williammaxxer/metadata/DZBzR3kOII7.json",
+          "sha256": "19c81be867a106c3eec4d4e1df2b4d87a56ca45b9d52ab885a840806086cbfa3"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DSgjROSERj1",
+      "creator": "williammaxxer",
+      "rank": 297,
+      "url": "https://www.instagram.com/p/DSgjROSERj1/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Music-like machine text with unreliable semantics",
+      "saved_text_observation": "The saved result has rhythmic, disconnected lines and no explanatory caption. It may be music-related or poorly recognized speech.",
+      "topic_proposal": "Unresolved: possible music or unreliable ASR",
+      "uncertainty": "Language, lyric accuracy, song and scene cannot be established from this text. Do not copy lyrics or infer a storyline.",
+      "original_mechanism": "No source-specific adaptation until sound and visuals are checked.",
+      "flags": [
+        "possible_music_or_asr_error",
+        "insufficient_context"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "b5defec1a8dcca567f911772078d0a1594be23ac9eba16b6ca9ba1dbe2cd8f01",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSgjROSERj1/transcript.json",
+          "sha256": "6aa06948c522a47df755d64c632e508f8a6cf8a159e1bb104b7253f6b47675a2"
+        },
+        {
+          "file": "williammaxxer/metadata/DSgjROSERj1.json",
+          "sha256": "b069f98bc1899146def359d4c68945ae7a55c9929365289f9b349dc1ed84d279"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DSqaHppEg1b",
+      "creator": "williammaxxer",
+      "rank": 316,
+      "url": "https://www.instagram.com/p/DSqaHppEg1b/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Productivity rhetoric built on relabeling time",
+      "saved_text_observation": "The text divides a conventional day into several named days and extrapolates the supposed advantage. Entrepreneur-related caption tags provide context.",
+      "topic_proposal": "Productivity rhetoric / arithmetic reframing",
+      "uncertainty": "Likely comedic exaggeration is a hypothesis; tone and original intent were not verified. This is not financial or productivity advice.",
+      "original_mechanism": "Have an original avatar count tiny tasks as grand achievements, then reveal the unchanged workload through an object or timer.",
+      "flags": [
+        "satire_intent_unverified"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "afd455cc85207e6058410d8afa3b52b302c08c6bc594282d171b5da668980d94",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DSqaHppEg1b/transcript.json",
+          "sha256": "58d7d51b25836fe716c42a6069b6a4bfb83b86b4f574b136d4a7b57ed9d719bd"
+        },
+        {
+          "file": "williammaxxer/metadata/DSqaHppEg1b.json",
+          "sha256": "1a221c113641337347519983569121360781ac64e4bfa72c4a3c421e3e3798aa"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DZV_vHUvEqQ",
+      "creator": "williammaxxer",
+      "rank": 326,
+      "url": "https://www.instagram.com/p/DZV_vHUvEqQ/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Caption context and a possible multilingual performance",
+      "saved_text_observation": "The caption uses a persona-like name, while the machine result contains mixed-language or phonetic, rhythm-like phrases.",
+      "topic_proposal": "Unresolved: possible multilingual music or performance",
+      "uncertainty": "Language, translation, lyrics, identity and any cultural persona are unverified. A confident topic based on the transcript would exceed the evidence.",
+      "original_mechanism": "Do not create dialogue or cultural characterization from the ASR. Wait for an authorized fluent source review.",
+      "flags": [
+        "possible_music_or_asr_error",
+        "language_verification_needed"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "17e1f79ef7884ff0884d607cf67a18179fcab599e1022c55f9e3379d69385499",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZV_vHUvEqQ/transcript.json",
+          "sha256": "3996e2ffd9b7417c1a3382b74427735c0c11417bc401ba432274ac939b3c9701"
+        },
+        {
+          "file": "williammaxxer/metadata/DZV_vHUvEqQ.json",
+          "sha256": "f32b4d6941686820e88bc221197f6a30de8d8a74dff393e39d4fe5a168167516"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DZA0MamOH3J",
+      "creator": "williammaxxer",
+      "rank": 367,
+      "url": "https://www.instagram.com/p/DZA0MamOH3J/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Repeated tolerance-and-reaction text pattern",
+      "saved_text_observation": "The saved text exactly matches another queue entry\u2019s transcript and repeats the praise, interruption and praise pattern.",
+      "topic_proposal": "Reaction commentary / tonal contradiction",
+      "uncertainty": "Identical saved text does not prove duplicate videos, deliberate audio reuse or identical visual meaning. Both original post records remain separate.",
+      "original_mechanism": "Use a new benign scene with a structured contrast between promotional narration and ordinary reality. Do not reuse source wording or demographic framing.",
+      "flags": [
+        "requires_visual_context",
+        "exact_saved_text_match"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "f7df520cc7b459ce8c78922a78554ad80f89c07cfe6ea5e855d9ec5172d7178a",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DZA0MamOH3J/transcript.json",
+          "sha256": "c88d994232c6e4ab8c04ea89c2af4d66ad19e14979f4c37e5dbe1aa662f87b54"
+        },
+        {
+          "file": "williammaxxer/metadata/DZA0MamOH3J.json",
+          "sha256": "88eb297d89f5a27be5b64b62cfcfd32b3eee90e451c0bbcf039a00558bf843a4"
+        }
+      ],
+      "exact_saved_text_matches": [
+        "DZOMIGShFnb"
+      ]
+    },
+    {
+      "id": "DedBnycPEbm",
+      "creator": "williammaxxer",
+      "rank": 379,
+      "url": "https://www.instagram.com/p/DedBnycPEbm/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Relationship advice framed through an apparel brand",
+      "saved_text_observation": "The saved text uses a clothing-brand reference as a criterion in dismissive dating advice.",
+      "topic_proposal": "Brand-coded relationship judgment",
+      "uncertainty": "No factual claim about the brand\u2019s sizing, customers, eligibility or any individual is established. Do not endorse body-based or gendered disparagement.",
+      "original_mechanism": "Shift the joke to a fictional garment\u2019s absurd technical feature or the avatar\u2019s own indecision. Keep other people\u2019s bodies and worth out of the premise.",
+      "flags": [
+        "demeaning_premise_do_not_adopt"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "5ccc5ce5aef06c90cb3e9c626e13976f2ba45b8b7418294e1c0fcf5eabd990aa",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DedBnycPEbm/transcript.json",
+          "sha256": "8edc6687099d405baf032db0cefb5194eada5fb6138bec9a5a81cc8ee888eeeb"
+        },
+        {
+          "file": "williammaxxer/metadata/DedBnycPEbm.json",
+          "sha256": "2af6c2771d44fdd9251f27482862af06f86e035bb99750b7b20f7c6bd6ee997a"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "DcEzwW2Sew4",
+      "creator": "williammaxxer",
+      "rank": 389,
+      "url": "https://www.instagram.com/p/DcEzwW2Sew4/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "Acronym ambiguity in a news-brand joke",
+      "saved_text_observation": "The machine text questions taking a national audience seriously and emphatically dwells on a broadcaster acronym. Acronym wordplay is a hypothesis rather than a verified interpretation.",
+      "topic_proposal": "Wordplay / acronym ambiguity",
+      "uncertainty": "The transcript does not establish audience sentiment, national traits or factual criticism of the broadcaster. Tone and visuals remain unchecked.",
+      "original_mechanism": "Use an original fictional app acronym with an innocent second meaning. Make the joke about naming, not nationality.",
+      "flags": [
+        "nationality_stereotype_do_not_adopt"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "f552e894475e5b62d3ed8c315c7e169d7644bf226f78f6d5ffd81610f3bf6912",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/DcEzwW2Sew4/transcript.json",
+          "sha256": "df690686f2573a5e7571c82d55a896b56e24113c6189e546cb494611e314fb0c"
+        },
+        {
+          "file": "williammaxxer/metadata/DcEzwW2Sew4.json",
+          "sha256": "19218b1be386741fb82c8100115a8187058c2809df0d03b4af0bcc6f23898903"
+        }
+      ],
+      "exact_saved_text_matches": []
+    },
+    {
+      "id": "De2TD1eBmSY",
+      "creator": "williammaxxer",
+      "rank": 400,
+      "url": "https://www.instagram.com/p/De2TD1eBmSY/",
+      "review_status": "assistant_saved_text_and_caption_review",
+      "original_transcription_status": "machine_transcript",
+      "title": "A repeated name-and-disability association premise",
+      "saved_text_observation": "The machine text again links children\u2019s names with autism, then ends with a brief team-directed remark.",
+      "topic_proposal": "Disability-related name stereotype",
+      "uncertainty": "No diagnostic relationship is supported. The ending may imply a different scene context, but its nature is unknown without visuals or audio.",
+      "original_mechanism": "Adapt only a neutral naming-pattern structure for fictional product tiers. Do not reproduce disability stereotypes.",
+      "flags": [
+        "stigmatizing_premise_do_not_adopt",
+        "scene_context_unknown"
+      ],
+      "audio_verified": false,
+      "visuals_reviewed_this_pass": false,
+      "human_reviewed": false,
+      "corrected_transcript": null,
+      "saved_text_sha256": "bd601ed66ec19b32c8892b4e61018bf3ea921f408fdccd2b0af7a2f217b91eed",
+      "source_evidence": [
+        {
+          "file": "williammaxxer/transcripts/De2TD1eBmSY/transcript.json",
+          "sha256": "33405bdcee301a2c4a08b707a306862a4e631eddf8960949ab71f7a8c26dc9ff"
+        },
+        {
+          "file": "williammaxxer/metadata/De2TD1eBmSY.json",
+          "sha256": "f1ec2af3d9a37fb39a5dbd4a166450c34f06dfff9e5948adfea61e3d1b5dd339"
+        }
+      ],
+      "exact_saved_text_matches": []
+    }
+  ]
+}

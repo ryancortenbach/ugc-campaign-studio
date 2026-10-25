@@ -1,0 +1,24 @@
+# Disconnected Supabase slot transport
+
+The adapter in agent/slot-storage-supabase.mjs is source-only, disabled by default and not imported by the app/server/API. It does not load environment variables, read credentials or fall back to global fetch. Activation requires a boolean true, explicit hosted project origin, modern secret key, existing bucket name and injected fetch function. All validation used synthetic bytes and fake HTTP responses. No actual account request, bucket write, signing, email, app database change or provider verification occurred.
+
+The configured origin must be HTTPS with a direct project-ref.supabase.co hostname and no path, port, credentials, query or fragment. Custom domains, self-hosted instances and legacy JWT keys are deliberately unsupported in this first adapter. Secrets stay in request headers, never returned or logged. Redirects are rejected. Provider request, response-stream and cancellation failures become generic errors. Requests have bounded abort signals and no automatic retries.
+
+The immutable path must have the exact order-hash, slot, final-version and output-hash shape used by the generic contract. Put accepts only nonempty matching Buffer bytes and strict private/createOnly flags. It copies the buffer before asynchronous calls. A bucket detail read must confirm the exact bucket ID and public:false before upload. POST uses x-upsert:false, then the adapter downloads the authenticated object, hashes actual returned bytes and checks bucket privacy again before returning a normalized receipt. Upload JSON and caller metadata are not accepted as stored-byte evidence. No bucket creation or privacy mutation is attempted.
+
+Find performs the same bucket checks and bounded authenticated download, with no upload. A missing or ambiguous object is an error, never an instruction to retry upload. Integrated durable-contract testing stored an upload before losing its response, then reconstructed and reconciled the intent with exactly one POST. providerVerified and deliveryReady remain false. It does not establish exactly-once effects, permanent privacy, policy correctness or buyer entitlement. Another operator can change a bucket after the last check. A real integration still needs account authorization, storage cost and privacy-policy verification and controlled provider testing.
+
+This first standard-upload transport caps bytes at 6 MiB and permits a lower explicit limit. Bucket JSON is capped at16KiB, and object reads enforce the configured byte cap on streamed data. Larger existing finals, including the recovered original avatar video, are rejected. They need a separately reviewed resumable-upload design; no truncation or recompression is performed. Reads also consume egress if a future caller explicitly connects a real fetch transport. This batch did not do that.
+
+Independent review initially found truthy string activation and unsanitized upload-body cancellation errors. Both were fixed with regression coverage. Other tests cover exact private receipt/readback, unsafe origins/keys/flags/sizes, public/unknown buckets, conflicts without retries, missing objects, redirects, malformed bucket JSON, wrong/oversized downloaded bytes, privacy changing during the read and durable lost-response recovery. Final reviewer and exact-source CI evidence are in the continuation audit.
+
+## Primary references checked October24,2026
+
+- [Supabase standard uploads](https://supabase.com/docs/guides/storage/uploads/standard-uploads): standard uploads and the recommendation for resumable uploads above6MB. The small-file cap here is an implementation boundary, not a provider maximum.
+- [Storage bucket access](https://supabase.com/docs/guides/storage/buckets/fundamentals): private bucket access control and authenticated/signed downloads.
+- [API keys](https://supabase.com/docs/guides/getting-started/api-keys): server secret key handling. This source-only adapter accepts modern sb_secret_ keys and never exposes them to frontend code.
+- [Official upload implementation](https://github.com/supabase/storage-js/blob/master/src/packages/StorageFileApi.ts): POST object route and x-upsert:false, authenticated download route.
+- [Official bucket implementation](https://github.com/supabase/storage-js/blob/master/src/packages/StorageBucketApi.ts): bucket detail GET route.
+- [Current TLS deprecation notice](https://supabase.com/changelog/cbc-tls-ciphers-deprecated): relevant changelog item affects old TLS clients starting no earlier than November10. No TLS downgrades or custom ciphers were introduced.
+
+The skill's changelog index was fetched with curl after the browsing tool rejected its Markdown content type. No Supabase connector was available, so primary documentation and the project's existing fetch pattern informed this offline-only adapter. No package or account was installed or linked.

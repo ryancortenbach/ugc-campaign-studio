@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "status": "draft_handoff_not_production_ready",
+  "source": "docs/RESEARCH-FLAGGED-TRIAGE-v1.json",
+  "sourceSha256": "5d415c3185ac432ac68b3da066965e07cd218a72a96222b43ac051dc54cccca6",
+  "scope": "Three original research-derived planning packets. No brand qualification, asset approval, specialist model grading, generation, human study or outreach.",
+  "historicalAvatar": "Recovered penthouse workflow remains historical. No new identity or voice binding inferred. Existing personalized-character proposal remains separate and unmodified.",
+  "packets": [
+    {
+      "id": "mirror",
+      "title": "The reflection is one beat behind",
+      "file": "packets/mirror-v1.json",
+      "sha256": "bce34da4a2ad3119bc7e7737a67c30dd492f37b98dbbbbacc9f1c70821b1ec4e",
+      "bytes": 9227,
+      "sourceId": "DXi7logDjKG",
+      "sourceUrl": "https://www.instagram.com/p/DXi7logDjKG/",
+      "missingIntake": [
+        "brand",
+        "offer",
+        "avatar",
+        "voice"
+      ],
+      "plannerFindings": [
+        "Specify identity.",
+        "Specify wardrobe.",
+        "Specify voice.",
+        "Attach actual versioned references before specialist review.",
+        "Script, claims, references, voice and generation quote still require approval."
+      ],
+      "preflightIssues": [
+        {
+          "severity": "blocking",
+          "category": "references",
+          "evidence": "No reference manifest supplied.",
+          "fix": "Attach an approved reference manifest with tag, role, asset ID and version."
+        },
+        {
+          "severity": "blocking",
+          "category": "budget",
+          "evidence": "No finite positive cost estimate.",
+          "fix": "Obtain a current finite positive Higgsfield quote before requesting spend approval."
+        }
+      ],
+      "parseApprovalsReset": true,
+      "conceptSourceStatus": "unverified_import",
+      "risk": "High: reflection/pose mismatch needs a controlled compositing or editing plan. Preserve accepted character geometry. No model capability or continuous motion proof exists.",
+      "timingAdjustment": {
+        "reason": "Quarter-second planning beats avoid existing exact floating-point cursor comparison; original notes unchanged.",
+        "originalDurations": [
+          1.4,
+          1.8,
+          1.8
+        ],
+        "draftDurations": [
+          1.5,
+          1.75,
+          1.75
+        ]
+      },
+      "readiness": "blocked",
+      "generationSubmitted": false
+    },
+    {
+      "id": "instructions",
+      "title": "The tiny package with enormous instructions",
+      "file": "packets/instructions-v1.json",
+      "sha256": "8ad5b258ce5d51f8e49563653e518500a04bb440f6ebc1b88aec5391392574f9",
+      "bytes": 9331,
+      "sourceId": "DbgOU1uuSbA",
+      "sourceUrl": "https://www.instagram.com/p/DbgOU1uuSbA/",
+      "missingIntake": [
+        "brand",
+        "offer",
+        "avatar",
+        "voice"
+      ],
+      "plannerFindings": [
+        "Specify identity.",
+        "Specify wardrobe.",
+        "Specify voice.",
+        "Attach actual versioned references before specialist review.",
+        "Script, claims, references, voice and generation quote still require approval."
+      ],
+      "preflightIssues": [
+        {
+          "severity": "blocking",
+          "category": "references",
+          "evidence": "No reference manifest supplied.",
+          "fix": "Attach an approved reference manifest with tag, role, asset ID and version."
+        },
+        {
+          "severity": "blocking",
+          "category": "budget",
+          "evidence": "No finite positive cost estimate.",
+          "fix": "Obtain a current finite positive Higgsfield quote before requesting spend approval."
+        }
+      ],
+      "parseApprovalsReset": true,
+      "conceptSourceStatus": "unverified_import",
+      "risk": "Medium: unfolding geometry, hand contact and product readability need review. Do not imply easy setup or any product benefit without evidence.",
+      "timingAdjustment": {
+        "reason": "Quarter-second planning beats avoid existing exact floating-point cursor comparison; original notes unchanged.",
+        "originalDurations": [
+          1.2,
+          2.2,
+          1.6
+        ],
+        "draftDurations": [
+          1.25,
+          2.25,
+          1.5
+        ]
+      },
+      "readiness": "blocked",
+      "generationSubmitted": false
+    },
+    {
+      "id": "wardrobe",
+      "title": "Dressed for a small everyday quest",
+      "file": "packets/wardrobe-v1.json",
+      "sha256": "62e32083d3b7d8f5acd8558a011ecf5c5e6090c1f55b50c6a10fa0b6365a3a66",
+      "bytes": 9220,
+      "sourceId": "DWeggVhjiNM",
+      "sourceUrl": "https://www.instagram.com/p/DWeggVhjiNM/",
+      "missingIntake": [
+        "brand",
+        "offer",
+        "avatar",
+        "voice"
+      ],
+      "plannerFindings": [
+        "Specify identity.",
+        "Specify wardrobe.",
+        "Specify voice.",
+        "Attach actual versioned references before specialist review.",
+        "Script, claims, references, voice and generation quote still require approval."
+      ],
+      "preflightIssues": [
+        {
+          "severity": "blocking",
+          "category": "references",
+          "evidence": "No reference manifest supplied.",
+          "fix": "Attach an approved reference manifest with tag, role, asset ID and version."
+        },
+        {
+          "severity": "blocking",
+          "category": "budget",
+          "evidence": "No finite positive cost estimate.",
+          "fix": "Obtain a current finite positive Higgsfield quote before requesting spend approval."
+        }
+      ],
+      "parseApprovalsReset": true,
+      "conceptSourceStatus": "unverified_import",
+      "risk": "Medium: dressing gestures, garment consistency and prop contact need review. Do not substitute a third-party character outfit or source likeness.",
+      "timingAdjustment": {
+        "reason": "Quarter-second planning beats avoid existing exact floating-point cursor comparison; original notes unchanged.",
+        "originalDurations": [
+          1.4,
+          1.8,
+          1.8
+        ],
+        "draftDurations": [
+          1.5,
+          1.75,
+          1.75
+        ]
+      },
+      "readiness": "blocked",
+      "generationSubmitted": false
+    }
+  ],
+  "runtimeCopies": {
+    "brief.js": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+    "planner.js": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+    "import-packet.js": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638"
+  }
+}

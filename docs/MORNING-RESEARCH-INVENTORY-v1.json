@@ -1,0 +1,35 @@
+{
+  "williammaxxer": {
+    "files": 2158,
+    "extensions": {
+      ".csv": 1,
+      ".json": 1230,
+      ".jpg": 93,
+      ".mp4": 30,
+      ".m4a": 402,
+      ".log": 2,
+      ".txt": 400
+    },
+    "subdirectories": [
+      "transcripts",
+      "audio",
+      "best-videos",
+      "metadata"
+    ]
+  },
+  "lucamaxiim": {
+    "files": 486,
+    "extensions": {
+      ".csv": 1,
+      ".json": 424,
+      ".jpg": 37,
+      ".mp4": 12,
+      ".txt": 12
+    },
+    "subdirectories": [
+      "transcripts",
+      "best-videos",
+      "metadata"
+    ]
+  }
+}

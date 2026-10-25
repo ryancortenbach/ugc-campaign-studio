@@ -1,0 +1,206 @@
+{
+  "version": 2,
+  "created_at": "2026-10-25T08:55:27.597902+00:00",
+  "scope": "Assistant visual study of twelve already saved frames from four downloaded references, plus four original text-only scene proposals. Not full-video/audio review, demographic evidence, new identity approval, generated artwork or executed campaigns.",
+  "ranking_scope": "Highest ranked downloaded sample entries selected here: William ranks1/2/3 and Luca rank1. Sample capped400/profile. Views are stored collection snapshots, not current counts or guaranteed outcomes.",
+  "frame_timing": "Existing frame-0/1/2 filenames retained. Exact capture times are not recorded here and are not inferred.",
+  "identity": "Preserve the historical avatar and authoritative reference. These proposals bind no identity, voice or commercial asset.",
+  "source_media_modified": false,
+  "audio_verified": false,
+  "new_transcriptions": 0,
+  "new_downloads": 0,
+  "proposals": [
+    {
+      "creator": "williammaxxer",
+      "dir": "001-DY55fRguKWP",
+      "title": "Car cabin, close conversational framing",
+      "observed": "All three saved frames show a real person in a car cabin, teal knit beanie, blue T-shirt and chain. Daylight enters through the side window. The face sits low enough to leave substantial headroom for a caption; framing and gaze differ across the frames.",
+      "unknown": "These stills do not establish camera motion, parked status, dialogue accuracy or full-shot continuity. No driving behavior is inferred.",
+      "proposal": "A fictional stationary car cabin",
+      "set": "Simple early-2000s game-style cabin, two front seats with an empty adjacent seat and soft side-window light. No visible road movement, logos or other occupants.",
+      "wardrobe": "Keep the eventual approved avatar reference and canonical hoodie unchanged. The source beanie and chain are observations, not additions to our identity.",
+      "beat": "0-1.5s: avatar notices a small blank parcel on the adjacent seat. 1.5-3.5s: glances between parcel and camera. 3.5-5s: a restrained amused reaction. Product insert and end text remain unspecified.",
+      "risk": "Seated body proportions, seat/arm contact, head turns and readable product placement need feasibility review.",
+      "id": "DY55fRguKWP",
+      "source_url": "https://www.instagram.com/p/DY55fRguKWP/",
+      "views_at_collection": 10496678,
+      "source_video_sha256": "51c521aa905b850f283e62067cc930d93f6485e423f0753357fd832ed1baeead",
+      "source_video_hash_rechecked": true,
+      "frames": [
+        {
+          "file": "assets/DY55fRguKWP-frame-0.jpg",
+          "stored_frame_index": 0,
+          "sha256": "3ca5e9502e0d95089161534f09710e4d08cdb70190a442ad46c62b5615455211",
+          "bytes": 21789,
+          "source": "williammaxxer/best-videos/001-DY55fRguKWP/frame-0.jpg"
+        },
+        {
+          "file": "assets/DY55fRguKWP-frame-1.jpg",
+          "stored_frame_index": 1,
+          "sha256": "05dc93b00acdd906a8e3a1da5aec727becd68a4604d8a3b428fea5ecf314be15",
+          "bytes": 20174,
+          "source": "williammaxxer/best-videos/001-DY55fRguKWP/frame-1.jpg"
+        },
+        {
+          "file": "assets/DY55fRguKWP-frame-2.jpg",
+          "stored_frame_index": 2,
+          "sha256": "2d997888e01cfcc137455ce5be09858755b80bc87ed58e028e977cff136f975f",
+          "bytes": 22905,
+          "source": "williammaxxer/best-videos/001-DY55fRguKWP/frame-2.jpg"
+        }
+      ],
+      "generation_prompt": "PROPOSAL ONLY, not a provider request. Use an actual separately approved identity and wardrobe reference without changing canonical geometry. Simple early-2000s game-style cabin, two front seats with an empty adjacent seat and soft side-window light. No visible road movement, logos or other occupants. 0-1.5s: avatar notices a small blank parcel on the adjacent seat. 1.5-3.5s: glances between parcel and camera. 3.5-5s: a restrained amused reaction. Product insert and end text remain unspecified. No generated dialogue, brand claims, source likeness or source music. Product/identity/voice/reference permissions and model feasibility remain unapproved; no quote or spend authority.",
+      "approvals": {
+        "identity": false,
+        "references": false,
+        "product": false,
+        "voice": false,
+        "generation": false
+      }
+    },
+    {
+      "creator": "williammaxxer",
+      "dir": "002-DYTKpmzORx4",
+      "title": "Sleeve gesture as a readable reaction",
+      "observed": "The saved frames show a car interior and a person wearing a dark brown long-sleeve top and chain. One frame has an unobstructed face; the later two show a sleeve covering the mouth while the gaze turns to the side.",
+      "unknown": "The stills do not prove gesture timing, speech or a causal audience response. The visible caption uses an ethnic premise; that premise is not a proposed brand script.",
+      "proposal": "One original reaction at a studio desk",
+      "set": "Plain desk and neutral room with one blank instruction card. Single locked medium shot with space above the avatar for original edit text.",
+      "wardrobe": "Use the actual approved long-sleeve garment only after binding its reference. Keep face, hair, hands and garment geometry fixed. Do not copy the source person or outfit.",
+      "beat": "0-1.5s: avatar reads a blank-faced card. 1.5-3.5s: brief surprised glance to camera. 3.5-5s: card lowers to reveal the intended prop area. Prefer a clear face and simple hand motion for the first test.",
+      "risk": "Face-covering sleeve motion is a reference mechanism, not required. Occlusion, fingers and sleeve deformation increase error risk; omit them in the first feasibility test.",
+      "id": "DYTKpmzORx4",
+      "source_url": "https://www.instagram.com/p/DYTKpmzORx4/",
+      "views_at_collection": 7803684,
+      "source_video_sha256": "e5866f829736fefcc7ff48f01fc89478217bbc0192894a09da3af8b3ac92287e",
+      "source_video_hash_rechecked": true,
+      "frames": [
+        {
+          "file": "assets/DYTKpmzORx4-frame-0.jpg",
+          "stored_frame_index": 0,
+          "sha256": "b77d436b66a03b1d4ff602b02122ef2d556040149f4bcb374b6eddad7703fb44",
+          "bytes": 19963,
+          "source": "williammaxxer/best-videos/002-DYTKpmzORx4/frame-0.jpg"
+        },
+        {
+          "file": "assets/DYTKpmzORx4-frame-1.jpg",
+          "stored_frame_index": 1,
+          "sha256": "9f510fcf9461e11c16c9fc36043feb633df735ba6e1edadffd9f3fd2fcbd9c79",
+          "bytes": 20179,
+          "source": "williammaxxer/best-videos/002-DYTKpmzORx4/frame-1.jpg"
+        },
+        {
+          "file": "assets/DYTKpmzORx4-frame-2.jpg",
+          "stored_frame_index": 2,
+          "sha256": "0c1be68abbfbf559d21669e6af3d1286ff364e664a6da9211aa11022106a5bc5",
+          "bytes": 21294,
+          "source": "williammaxxer/best-videos/002-DYTKpmzORx4/frame-2.jpg"
+        }
+      ],
+      "generation_prompt": "PROPOSAL ONLY, not a provider request. Use an actual separately approved identity and wardrobe reference without changing canonical geometry. Plain desk and neutral room with one blank instruction card. Single locked medium shot with space above the avatar for original edit text. 0-1.5s: avatar reads a blank-faced card. 1.5-3.5s: brief surprised glance to camera. 3.5-5s: card lowers to reveal the intended prop area. Prefer a clear face and simple hand motion for the first test. No generated dialogue, brand claims, source likeness or source music. Product/identity/voice/reference permissions and model feasibility remain unapproved; no quote or spend authority.",
+      "approvals": {
+        "identity": false,
+        "references": false,
+        "product": false,
+        "voice": false,
+        "generation": false
+      }
+    },
+    {
+      "creator": "williammaxxer",
+      "dir": "003-DYxn54jSziq",
+      "title": "Exterior context can explain the situation",
+      "observed": "Three saved frames show a real person in a gray hoodie outdoors under a blue sky with bright sunlight. One includes a street; later frames include restaurant storefronts and parked cars. In the latter frames a sleeve covers the mouth.",
+      "unknown": "The frames show different backgrounds but do not establish how the transitions were edited or recorded. Visible business signs are source context, not brand partnerships.",
+      "proposal": "An original miniature storefront exterior",
+      "set": "A fictional unbranded storefront in the same game-style world as our eventual approved avatar. Neutral blank sign and one window; no real restaurant names or bystanders.",
+      "wardrobe": "Retain the actual approved hoodie, hairstyle and proportions. A new environment does not authorize a new character or a source-creator likeness.",
+      "beat": "0-1.5s: avatar holds a blank shopping list outside one storefront. 1.5-3.5s: looks at the list, then the sign. 3.5-5s: small nod to camera. Insert the real product only once its use and exact variant are approved.",
+      "risk": "Outdoor lighting/skin consistency, sign lettering and location continuity need review. Avoid storefront-to-storefront generation or invented business endorsements.",
+      "id": "DYxn54jSziq",
+      "source_url": "https://www.instagram.com/p/DYxn54jSziq/",
+      "views_at_collection": 5042599,
+      "source_video_sha256": "b15698d0f907c34b6d8f4734c0eab72d9ecb2610b3d722d6f5507c2797560430",
+      "source_video_hash_rechecked": true,
+      "frames": [
+        {
+          "file": "assets/DYxn54jSziq-frame-0.jpg",
+          "stored_frame_index": 0,
+          "sha256": "c6355fe1f68ab6af1e471536e40ffa7fe2446e8e8e1aba546d047f22d936480d",
+          "bytes": 25518,
+          "source": "williammaxxer/best-videos/003-DYxn54jSziq/frame-0.jpg"
+        },
+        {
+          "file": "assets/DYxn54jSziq-frame-1.jpg",
+          "stored_frame_index": 1,
+          "sha256": "95161ab44909f74d80750de79fd22129bcfc45cc3955a4ea386b971e4336c2dd",
+          "bytes": 23670,
+          "source": "williammaxxer/best-videos/003-DYxn54jSziq/frame-1.jpg"
+        },
+        {
+          "file": "assets/DYxn54jSziq-frame-2.jpg",
+          "stored_frame_index": 2,
+          "sha256": "dfab7e4fff762b40c1c4a9a62d5c01a913a2debb8a1be561ca4645384142eb0c",
+          "bytes": 25491,
+          "source": "williammaxxer/best-videos/003-DYxn54jSziq/frame-2.jpg"
+        }
+      ],
+      "generation_prompt": "PROPOSAL ONLY, not a provider request. Use an actual separately approved identity and wardrobe reference without changing canonical geometry. A fictional unbranded storefront in the same game-style world as our eventual approved avatar. Neutral blank sign and one window; no real restaurant names or bystanders. 0-1.5s: avatar holds a blank shopping list outside one storefront. 1.5-3.5s: looks at the list, then the sign. 3.5-5s: small nod to camera. Insert the real product only once its use and exact variant are approved. No generated dialogue, brand claims, source likeness or source music. Product/identity/voice/reference permissions and model feasibility remain unapproved; no quote or spend authority.",
+      "approvals": {
+        "identity": false,
+        "references": false,
+        "product": false,
+        "voice": false,
+        "generation": false
+      }
+    },
+    {
+      "creator": "lucamaxiim",
+      "dir": "001-DeAxuD7kpRo",
+      "title": "Stylized world with a consistent visual language",
+      "observed": "All three saved frames are visibly stylized, low-poly game-like imagery at a beach with palm trees, turquoise water and striped loungers. A white-haired character wears sunglasses on the head and a red graphic top. The first two frames also include a dark-haired character in a gray-blue top; the last is closer on the red-shirt character.",
+      "unknown": "The source is associated with an AI production reference, but these frames do not establish the generator, exact workflow, animation continuity or lip-sync quality. Two-character staging is observed, not a verified capability for our stack.",
+      "proposal": "A game-style terrace reaction",
+      "set": "An original terrace at dusk with one simple chair, blank side table and distant fictional skyline. Keep all assets in the eventual approved early-2000s game-style world. No beach asset, source character, printed shirt or source dialogue is reused.",
+      "wardrobe": "The original penthouse dossier remains historical. If Ryan approves that actual identity for a campaign, bind its authoritative reference; do not substitute the white-haired source character or red top.",
+      "beat": "0-1.5s: avatar rests beside a blank package. 1.5-3.5s: notices one small object out of place on the table. 3.5-5s: turns eyes toward camera with a restrained reaction. One avatar and one locked camera for the first feasibility pass.",
+      "risk": "Chair/hand contact, stylized lighting, intentional low-poly detail and eye direction need review. A second speaker adds identity, lip-sync and interaction risks and stays outside the initial test.",
+      "id": "DeAxuD7kpRo",
+      "source_url": "https://www.instagram.com/p/DeAxuD7kpRo/",
+      "views_at_collection": 1922683,
+      "source_video_sha256": "91c10b1450669bcba50ced9896d0a61ac21f7ffc5a53ce0dec3899c09d3439b4",
+      "source_video_hash_rechecked": true,
+      "frames": [
+        {
+          "file": "assets/DeAxuD7kpRo-frame-0.jpg",
+          "stored_frame_index": 0,
+          "sha256": "7f0b9a86c2908b4a056d06d52a3ddae9088d709ddfdf807db0b56779e902f463",
+          "bytes": 16058,
+          "source": "lucamaxiim/best-videos/001-DeAxuD7kpRo/frame-0.jpg"
+        },
+        {
+          "file": "assets/DeAxuD7kpRo-frame-1.jpg",
+          "stored_frame_index": 1,
+          "sha256": "02e7608228ad26b567d92e5a1d8b408b955082bd2ce1f6bc4f866cfeb88f68d1",
+          "bytes": 16030,
+          "source": "lucamaxiim/best-videos/001-DeAxuD7kpRo/frame-1.jpg"
+        },
+        {
+          "file": "assets/DeAxuD7kpRo-frame-2.jpg",
+          "stored_frame_index": 2,
+          "sha256": "aa24ec96881eab6d909e1b1c00d76c54c6e8dc22924b8e8a2df86cce73a92ebd",
+          "bytes": 17861,
+          "source": "lucamaxiim/best-videos/001-DeAxuD7kpRo/frame-2.jpg"
+        }
+      ],
+      "generation_prompt": "PROPOSAL ONLY, not a provider request. Use an actual separately approved identity and wardrobe reference without changing canonical geometry. An original terrace at dusk with one simple chair, blank side table and distant fictional skyline. Keep all assets in the eventual approved early-2000s game-style world. No beach asset, source character, printed shirt or source dialogue is reused. 0-1.5s: avatar rests beside a blank package. 1.5-3.5s: notices one small object out of place on the table. 3.5-5s: turns eyes toward camera with a restrained reaction. One avatar and one locked camera for the first feasibility pass. No generated dialogue, brand claims, source likeness or source music. Product/identity/voice/reference permissions and model feasibility remain unapproved; no quote or spend authority.",
+      "approvals": {
+        "identity": false,
+        "references": false,
+        "product": false,
+        "voice": false,
+        "generation": false
+      }
+    }
+  ]
+}

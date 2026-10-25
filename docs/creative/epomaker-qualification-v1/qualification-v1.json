@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25T07:24:47.928Z",
+  "status": "research_candidate_not_contacted",
+  "provenance": "Manual read-only primary-source follow-up to docs/prospect-seeds-v1.json. Not a new Exa result or recovered missing Exa raw response.",
+  "brand": "EPOMAKER",
+  "fitHypothesis": "Keyboard/desk rituals may fit gaming and internet-culture viewers. No verified demand, reach or sales fit.",
+  "sources": [
+    {
+      "id": "contact",
+      "url": "https://epomaker.com/pages/contact-us",
+      "observed": "Creator/collaboration section publishes marketing@epomaker.com. Other creator/affiliate sections publish community@epomaker.com. Both routes retained; no inbox checked or contacted."
+    },
+    {
+      "id": "home",
+      "url": "https://epomaker.com/",
+      "observed": "Site navigation groups products by sound and by gaming, coding and desk-setup use. This supports a provisional creative context only."
+    },
+    {
+      "id": "product",
+      "url": "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+      "observed": "Official model page for Galaxy100 QMK/VIA. Default labels show Black and Feker Marble White Switch; exact commercial SKU and final variant remain unapproved."
+    },
+    {
+      "id": "series",
+      "url": "https://epomaker.com/pages/galaxy-series",
+      "observed": "Collection-level starting price and default product-page price differ. No price used in the proposed message, concept or financial model."
+    }
+  ],
+  "publicContact": {
+    "preferredCandidate": "marketing@epomaker.com",
+    "alternative": "community@epomaker.com",
+    "evidenceHeading": "KOL, affiliate, collabs",
+    "sourceUrl": "https://epomaker.com/pages/contact-us",
+    "contextParaphrase": "Creator partnerships and sound-test loaner inquiries appear in this section. Affiliate/community routing also appears elsewhere on the page.",
+    "routeAmbiguity": true,
+    "deliverabilityVerified": false,
+    "recipientApproval": false,
+    "contacted": false
+  },
+  "product": {
+    "name": "Galaxy100 QMK/VIA",
+    "url": "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+    "variantStatus": "candidate_only",
+    "colorCandidate": "Black",
+    "switchCandidate": "Feker Marble White Switch (observed default only)",
+    "exactSku": null,
+    "physicalProductInspected": false,
+    "sourceImage": {
+      "url": "https://epomaker.com/cdn/shop/files/IMG_1742.png?v=1773627520&width=1400",
+      "sha256": "b8d3fbdd1cbf4d7a055623d9f6c118af7fc289b33f7cff906a6de76fa83fcf6c",
+      "bytes": 949416,
+      "visible": "Dark top-down keyboard with RGB lighting, separate numpad and upper-right round knob.",
+      "usage": "Attributed research reference only. Not a generated result, client approval or licensed generation attachment."
+    },
+    "approvedGenerationReferences": []
+  },
+  "claimBoundaries": {
+    "usableForResearch": [
+      "Product model name and public product-page link",
+      "Visible keyboard layout in the referenced photo",
+      "Published creator-contact routes with ambiguity disclosed"
+    ],
+    "notApprovedForAd": [
+      "Any price or discount",
+      "Sound quality, latency or performance claim",
+      "Authentic product sound without exact approved recording",
+      "Views, sales, delivery volume or partnership claims",
+      "Brand logo/product-image use or actor identity without permission"
+    ]
+  },
+  "requiredAssets": [
+    {
+      "asset": "Exact product/color/switch/SKU confirmation",
+      "state": "missing"
+    },
+    {
+      "asset": "Approved high-resolution product angles and legends/knob details",
+      "state": "candidate_photo_only_not_approved"
+    },
+    {
+      "asset": "Permission for product images, logo and commercial depiction",
+      "state": "missing"
+    },
+    {
+      "asset": "Authentic selected-switch sound recording and permission, or approved silent plan",
+      "state": "missing"
+    },
+    {
+      "asset": "Approved original avatar/outfit and voice or no-voice decision",
+      "state": "missing"
+    },
+    {
+      "asset": "Approved offer, end text and CTA",
+      "state": "missing"
+    },
+    {
+      "asset": "Current generation/editing quote and explicit spend approval",
+      "state": "missing"
+    },
+    {
+      "asset": "Recipient/channel/message approval before any contact",
+      "state": "missing"
+    }
+  ],
+  "concept": {
+    "title": "One keystroke, a very serious inspection",
+    "durationSeconds": 5,
+    "feasibility": "Medium-high: precise key legends and hand/key contact are fragile. Prefer an approved real product plate/composite if generated hardware drifts. No capability test performed.",
+    "generated": false,
+    "specialistGrade": "not_run"
+  },
+  "draft": {
+    "channel": "Unsent outreach text; no mailto or send action",
+    "subject": "A five-second desk-inspection concept for EPOMAKER",
+    "body": "Hi EPOMAKER team, your sound-led keyboard categories and creator collaboration route stood out. I am developing an original five-second concept in which a fictional desk clerk treats one keystroke like an important inspection. For Galaxy100 QMK/VIA, I would keep the exact layout visible and use only an approved recording for the selected switch. Is this the right team to ask about product-reference approval? This is a concept brief, not a finished video.",
+    "sent": false,
+    "attachments": [],
+    "approved": false
+  },
+  "packet": {
+    "file": "epomaker-galaxy100-v1.json",
+    "sha256": "fd093815e758a9b55bc6f06f7dcacca0142edd9179d9df756f7a0ee742eece08",
+    "missingIntake": [
+      "offer",
+      "avatar",
+      "voice"
+    ],
+    "plannerFindings": [
+      "Specify identity.",
+      "Specify wardrobe.",
+      "Specify voice.",
+      "Attach actual versioned references before specialist review.",
+      "Script, claims, references, voice and generation quote still require approval."
+    ],
+    "structuralPreflight": [
+      {
+        "severity": "blocking",
+        "category": "references",
+        "evidence": "No reference manifest supplied.",
+        "fix": "Attach an approved reference manifest with tag, role, asset ID and version."
+      },
+      {
+        "severity": "blocking",
+        "category": "budget",
+        "evidence": "No finite positive cost estimate.",
+        "fix": "Obtain a current finite positive Higgsfield quote before requesting spend approval."
+      }
+    ],
+    "approvalsReset": true,
+    "referenceSourceStatus": "unverified_import",
+    "installedInMainApp": false
+  },
+  "independentReview": "pending"
+}

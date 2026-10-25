@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T08:37:11.633918+00:00",
+  "scope": "Source-only decimal packet importer correction and isolated browser regression. No native activation.",
+  "source_files": [
+    "public/import-packet.js",
+    "src/import-packet.test.js"
+  ],
+  "baseline": "c69a124",
+  "reproduction": {
+    "baseline": "c69a124",
+    "baselineError": "Shot timings must be positive and contiguous.",
+    "candidateAccepted": true,
+    "preservedThirdStart": 3.4,
+    "accumulatedDecimal": 3.4000000000000004,
+    "runtimeHashes": {
+      "brief.js": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+      "planner.js": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+      "import-packet.js": "e877b9c7258845e218abfccb89a61b41a8d1b455bf58cf0047bed69c1b70fb1c"
+    },
+    "initialIncorrectExampleCorrected": true
+  },
+  "change": "Require finite nonnegative start values; compare contiguous starts with Number.EPSILON * allowed duration * 8. Preserve authored values, reference validation, historical plan validation and approval reset.",
+  "total_duration_tolerance_unchanged_seconds": 0.001,
+  "full_studio_tests": 92,
+  "studio_failures": 0,
+  "syntax_checks_passed": true,
+  "test_log": "work/decimal-import-tests-v2.log",
+  "independent_review": {
+    "agent": "ugc_current_hub_review",
+    "verdict": "PASS within source-only scope",
+    "invalid_timing_cases_rejected": 180,
+    "gap_overlap_cases_rejected": 60,
+    "decimal_round_trips_checked": 5997,
+    "history_gap_rejected": true,
+    "approval_resets_verified": true,
+    "baseline_candidate_comparison_verified": true,
+    "reviewer_browser_test": false
+  },
+  "preview": "https://duolingo-library-phone-v1-f96nakb4e-ryancortenbachs-projects.vercel.app/",
+  "deployment": {
+    "id": "dpl_32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+    "url": "https://duolingo-library-phone-v1-f96nakb4e-ryancortenbachs-projects.vercel.app",
+    "productionUrl": null,
+    "inspectorUrl": "https://vercel.com/ryancortenbachs-projects/duolingo-library-phone-v1/32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+    "readyState": "READY",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": []
+  },
+  "cli_target_verified": "preview",
+  "anonymous_files": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 1286,
+      "sha256": "4dc716acb6aeead171707adbbf53a5535ca40ecbcfa9db9ec76629dc9b591ac7",
+      "matches_source": true
+    },
+    {
+      "file": "style.css",
+      "status": 200,
+      "bytes": 588,
+      "sha256": "b2963849f4489f0d4572ade3f3840ec14db85bd2fe7d91f96d28921928c5ef97",
+      "matches_source": true
+    },
+    {
+      "file": "check.js",
+      "status": 200,
+      "bytes": 2473,
+      "sha256": "cb28da76450c66d70c418e24767dbf43f1669cd33730cedbc62241e4bce2fb48",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/brief.js",
+      "status": 200,
+      "bytes": 3397,
+      "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/planner.js",
+      "status": 200,
+      "bytes": 3465,
+      "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/import-packet.js",
+      "status": 200,
+      "bytes": 4575,
+      "sha256": "e877b9c7258845e218abfccb89a61b41a8d1b455bf58cf0047bed69c1b70fb1c",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/baseline-import-packet.js",
+      "status": 200,
+      "bytes": 4363,
+      "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+      "matches_source": true
+    }
+  ],
+  "root_browser_check": {
+    "seven_of_seven_passed": true,
+    "default_desktop_screenshot": true,
+    "mobile_width": 390,
+    "mobile_document_width": 390,
+    "viewport_restored": true,
+    "physical_devices_tested": false
+  },
+  "preservation": "Previous packet previews and all original packets unchanged. Current active runtime unchanged. Incorrect initial example preserved under ignored work/packet-timing-incorrect-example-v1; corrected v2 is final.",
+  "initial_example_correction": "Initial1.4+1.8example does not reproduce the defect. Explicit baseline experiment corrected final fixture to1.2+2.2 versus3.4 before final verification.",
+  "deployment_attempts": "First draft and first corrected upload returned fetch failed without deployment ID. Remote list showed no jobs newer than previous hub; corrected retry from stage directory succeeded. No duplicate live work observed.",
+  "app_activated": false,
+  "database_or_Air_modified": false,
+  "provider_calls": 0,
+  "paid_actions": 0,
+  "messages_sent": 0,
+  "whole_goal_complete": false
+}

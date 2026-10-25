@@ -1,0 +1,197 @@
+{
+  "version": 2,
+  "createdAt": "2026-10-25T07:54:20.014511+00:00",
+  "scope": "Dated read-only review hub. Link availability is distinct from live service or production readiness.",
+  "wholeGoalComplete": false,
+  "noNewSpendSendOrProduction": true,
+  "links": [
+    {
+      "id": "dashboard",
+      "title": "Browser dashboard snapshot",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+      "scope": "Dashboard planning UI. Browser-local state and optional prior readiness controls; not the native agent.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+        "bytes": 20966,
+        "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20",
+        "initialAttempt": {
+          "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>"
+        }
+      }
+    },
+    {
+      "id": "shop",
+      "title": "T-shirt shop mock",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/shop/",
+      "scope": "Original print concepts and preview cart. Inventory, garment samples and fulfillment are unconnected.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/shop/",
+        "bytes": 2998,
+        "sha256": "7dd70705718eb38c3bbcbc3982bd31660a5fd44c26f8614223db32dae0e7f499"
+      }
+    },
+    {
+      "id": "course",
+      "title": "Refined $97 course concept",
+      "url": "https://duolingo-library-phone-v1-45mlhd8f4-ryancortenbachs-projects.vercel.app/",
+      "scope": "Reference-derived hierarchy with original copy. Not on sale; no checkout. Original lesson footage and final curriculum missing.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-45mlhd8f4-ryancortenbachs-projects.vercel.app/",
+        "bytes": 5896,
+        "sha256": "f0e5339ebe3065144af6e3e5e40f09fd20543ea9b322d369679b9c3639b51c52",
+        "initialAttempt": {
+          "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>"
+        }
+      }
+    },
+    {
+      "id": "brands",
+      "title": "For Brands mock",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/brands/",
+      "scope": "Separates one-time package links from the planned autonomous service. No purchase, delivery or daily-posting capacity proof.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/brands/",
+        "bytes": 4033,
+        "sha256": "0fcc28ee0ddc98085d3106d824f647b00a16ba62e05c1d622a5f50a61d358f16",
+        "initialAttempt": {
+          "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>"
+        }
+      }
+    },
+    {
+      "id": "economics",
+      "title": "Editable economics snapshot",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#economics",
+      "scope": "Legacy three-offer and one-time package scenarios. Assumptions, not observed Khan sales or profit guarantees.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+        "bytes": 20966,
+        "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20"
+      }
+    },
+    {
+      "id": "production",
+      "title": "Storyboard planning snapshot",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#production",
+      "scope": "Browser-local drafts and portable packet import. Importing does not approve generation or attach real provider references.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+        "bytes": 20966,
+        "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20"
+      }
+    },
+    {
+      "id": "operations",
+      "title": "Prompt-review planning snapshot",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#operations",
+      "scope": "Review/history/alerts UI. No new seven-specialist model grade or approved campaign is established by this hub.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+        "bytes": 20966,
+        "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20"
+      }
+    },
+    {
+      "id": "outreach",
+      "title": "Outreach planning snapshot",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#outreach",
+      "scope": "Prior free Exa evidence and editable unsent drafts. No current quota or provider connection recheck; no outreach sent.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+        "bytes": 20966,
+        "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20"
+      }
+    },
+    {
+      "id": "packets",
+      "title": "Four editable campaign drafts",
+      "url": "https://duolingo-library-phone-v1-nhl12ibr7-ryancortenbachs-projects.vercel.app/",
+      "scope": "Three generic ideas plus EPOMAKER primary-source research. Missing offer, identity, voice, references and quote remain visible.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-nhl12ibr7-ryancortenbachs-projects.vercel.app/",
+        "bytes": 7502,
+        "sha256": "e081d3f6b081ab936a9dbd35b7ee023e6584f9bfd7216e3a253b4d600c3d6152"
+      }
+    },
+    {
+      "id": "gallery",
+      "title": "Creator source gallery",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/",
+      "scope": "800-entry capped sample and links to public posts. Original full videos and ASR remain private.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/",
+        "bytes": 24191,
+        "sha256": "20ac0f442e6a41266579a82a52060fa999cee553098a7d8ca0baa03ac9bb9da9"
+      }
+    },
+    {
+      "id": "report",
+      "title": "William and Luca research packet",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/report.html",
+      "scope": "Audience/topic and production-reference synthesis. Not exhaustive accounts or human-verified transcripts.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/report.html",
+        "bytes": 36130,
+        "sha256": "151a26ea97b88f5fdb8786f736c69adfb750a3597e50aa81eafb204e54e31c3b"
+      }
+    },
+    {
+      "id": "playbook",
+      "title": "Sales and offer playbook",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/sales-playbook.html",
+      "scope": "Public funnel observations and proposed original offers. No private sales or conversion data obtained.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/sales-playbook.html",
+        "bytes": 7655,
+        "sha256": "671bbec7ff36c732a65c5552848cd47628115ae5596df15239e7d9d5a28a76bb"
+      }
+    },
+    {
+      "id": "review",
+      "title": "Research confidence and three briefs",
+      "url": "https://duolingo-library-phone-v1-fz6qh2td4-ryancortenbachs-projects.vercel.app/",
+      "scope": "All 60 research-review queue entries have limited notes across passes. No audio/full-media correctness pass or generated sample.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-fz6qh2td4-ryancortenbachs-projects.vercel.app/",
+        "bytes": 22454,
+        "sha256": "a18f4cc31a0f1397565dbab1e27328a253f0877e984a2f0df02ef35f1eb65493"
+      }
+    },
+    {
+      "id": "avatarReceipt",
+      "title": "Original-avatar recovery receipt",
+      "url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/agent-proof/avatar-recovery-v1.json",
+      "scope": "Historical recovered V4 checksum/decode evidence, not fresh identity approval or a new campaign sample.",
+      "anonymousHttp": {
+        "status": 200,
+        "finalUrl": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/agent-proof/avatar-recovery-v1.json",
+        "bytes": 865,
+        "sha256": "7c7724b00026f90c4beb89e02c56ee542c3ba28e85f8eddc6c34ce45a0ee7ee3"
+      }
+    }
+  ],
+  "privateLinks": {
+    "repository": "https://github.com/ryancortenbach/ugc-campaign-studio",
+    "avatarDossier": "https://github.com/ryancortenbach/ugc-campaign-studio/blob/review/slot-storage-contract-v1/docs/HIGGSFIELD-AVATAR-DOSSIER-v3.txt",
+    "currentAudit": "https://github.com/ryancortenbach/ugc-campaign-studio/blob/review/slot-storage-contract-v1/docs/COMPLETION-AUDIT-v49.json",
+    "draftPR": "https://github.com/ryancortenbach/ugc-campaign-studio/pull/5",
+    "matrix": "https://github.com/ryancortenbach/ugc-campaign-studio/blob/review/slot-storage-contract-v1/docs/MORNING-DELIVERABLE-MATRIX-v3.json"
+  },
+  "privateAccess": "GitHub sign-in and repository access required. Private links not anonymously verified.",
+  "verifiedElsewhere": "Current course,packet and research receipts retain actual scoped source/browser checks. This manifest only checks anonymous HTTP availability of destinations.",
+  "physicalDeviceTesting": false,
+  "baselineSource": "3212262"
+}

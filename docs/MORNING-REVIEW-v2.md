@@ -1,0 +1,17 @@
+# Current morning review, October25,2026
+
+[Open the review hub](https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/delivery/). All11checked routes returned anonymous HTTP200 and exactly matched local files. The hub rendered in normal Chrome using native accessibility after two browser-connector focus timeouts. This batch did not test app interactions, mobile layout, physical devices or current backend integrations. No deployment occurred. The hosted snapshot remains separate from the Mac agent and PR5 backend changes.
+
+The full original morning checklist is mapped in MORNING-DELIVERABLE-MATRIX-v1.json with exact local artifact hashes, tested scope, limits and next actions. MORNING-PREVIEW-ROUTES-v1.json and MORNING-RESEARCH-INVENTORY-v1.json retain this batch's observations. An independent reviewer checked file hashes, inventory and claim accuracy. This is a scoped record review, not whole-app approval.
+
+The shop, course concept and For Brands mocks exist. Course checkout was retired by the team; the current package pages are distinct from the planned autonomous posting service. Lovable was skipped and Terac human work remains unassigned, so the original every-sponsor runtime requirement is unmet. Views, sales, profitability and ten-plus daily posting are unverified. No checkout purchase or provider action was performed.
+
+The mounted reference library contains30William and12Luca MP4s. The800metadata entries are capped at400per query profile, not exhaustive account history. The public index contains366ordinary machine transcripts,42short/music-possible results,4no-audio sources and388not selected for transcription. These are machine statuses, not human-verified dialogue. RESEARCH-MANUAL-REVIEW-QUEUE-v1.json deduplicates flagged audio/no-audio and31William visual/unclassified entries into a pending manual queue. No new source-media review, download or transcription was done. Original media and index are unchanged.
+
+The original avatar dossier is now version3, with earlier private V4 media recovery recorded. The old morning v1 statement that the historical final was not copied is superseded. This is original recovery evidence, not a newly generated prospect sample or identity approval.
+
+Both financial models are editable scenarios. Private Khan sales and conversion figures were never obtained. Package presets have zero acquisition/overhead defaults and exclude taxes, disputes, working capital and unallocated expenses. Enter dated actual costs before relying on contribution. No performance guarantee follows from the models.
+
+Initial Gmail draft ambiguity already has durable intent/reconciliation and guarded recovery UI. Do not duplicate that implementation. Real Gmail Message-ID preservation/indexing and account identity behavior, operator-attestation safety and actual native/device validation remain incomplete. PR5 storage transport stays disabled, unwired and fake-tested. Real storage, signing, per-slot delivery and package entitlement remain unverified.
+
+Prior PRODUCT-SCOPE.txt, SPONSOR-MAP.txt, MORNING-REVIEW-v1.md and older runbooks remain preserved as historical decisions. This dated record supersedes their stale course checkout, Lovable and original-avatar copy statements. It does not authorize restoring retired services or taking any paid, send or production action. The full goal is unfinished and the existing single30-minute timer remains active with no DONE.

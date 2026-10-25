@@ -1,0 +1,298 @@
+{
+  "version": 2,
+  "checked_at": "2026-10-25T04:21:46.030359+00:00",
+  "source": "e7964ffcd5b6ac53ca3bf98e77d81d5da4051114",
+  "whole_goal_complete": false,
+  "preview_base": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app",
+  "anonymous_http_routes_checked": 11,
+  "all_http200_and_local_byte_matches": true,
+  "browser_access": "normal Chrome native accessibility shows morning hub rendered; extension CDP focus calls timed out twice; no browser restart",
+  "physical_devices_tested": false,
+  "deployment_this_batch": false,
+  "scope": "Original morning checklist, not whole-app or reference pixel-parity signoff",
+  "items": [
+    {
+      "id": "tshirt_shop",
+      "status": "review_mock",
+      "evidence": [
+        {
+          "file": "public/shop/index.html",
+          "bytes": 2998,
+          "sha256": "7dd70705718eb38c3bbcbc3982bd31660a5fd44c26f8614223db32dae0e7f499"
+        },
+        {
+          "file": "public/cart.js",
+          "bytes": 508,
+          "sha256": "deadbb1586241c39f1c8ef8684a65a62da84e5e319bec24bb398c90d33518128"
+        },
+        {
+          "file": "docs/STOREFRONT-REVIEW-v1.md",
+          "bytes": 2037,
+          "sha256": "a4936d403325ebc2da7aaccc074dbef603dcf4328d1f12a70ed7f9c9dbd22a6a"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/shop/",
+      "verified": "Current anonymous HTTP200 and exact local HTML byte match. Prior cart/size/removal browser review is documented.",
+      "limits": "No fresh cart interaction or reference pixel-parity test this batch. Inventory, garments, policies, fulfillment and orders are unconnected.",
+      "next_action": "Select garment/fulfillment/terms before real commerce. Preserve original print concepts."
+    },
+    {
+      "id": "course_97",
+      "status": "refined_non_purchasable_concept",
+      "evidence": [
+        {
+          "file": "public/course/index.html",
+          "bytes": 3748,
+          "sha256": "aad0d9587e0e7dc4ffe637eb0d09b0e860e6f2a1ac67917bf18333ca316c3ad6"
+        },
+        {
+          "file": "docs/WHOP-UGC-OFFERS-v1.md",
+          "bytes": 2006,
+          "sha256": "6ec666679a9482b2c7714ad9fd5e89af181b7b1e35ae5885e5507c71bf331bbc"
+        },
+        {
+          "file": "experiments/course-layout-v2/index.html",
+          "bytes": 5896,
+          "sha256": "f0e5339ebe3065144af6e3e5e40f09fd20543ea9b322d369679b9c3639b51c52"
+        },
+        {
+          "file": "experiments/course-layout-v2/style.css",
+          "bytes": 7989,
+          "sha256": "74d391e2143cb727d54ad669ef6b5f69b59ce54735220015243ca68e907e747f"
+        },
+        {
+          "file": "experiments/course-layout-v2/comparison.html",
+          "bytes": 2341,
+          "sha256": "18922b0c2c4e202b1a706bce31a876ffe2d73983938c47416e9aff8998a20a3b"
+        },
+        {
+          "file": "docs/COURSE-LAYOUT-PREVIEW-v2.json",
+          "bytes": 1901,
+          "sha256": "623a30008f290d61b01fc005064ef2f3fb31bfe511566fb2bff6d5fa4fc43a37"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-45mlhd8f4-ryancortenbachs-projects.vercel.app/",
+      "verified": "Standalone v2 follows observed reference hierarchy. Independent desktop/390px review, plan anchor, FAQ and disabled purchase checks passed after mobile text/art fixes. Three final anonymous HTTP200 exact file matches. Root course unchanged.",
+      "limits": "Not pixel-identical. Uses system type and original CSS planning studies. Original course footage, final curriculum and real proof are missing. Team-retired checkout remains absent; no physical-device or sale readiness claim.",
+      "next_action": "Preserve concept-only status. Obtain original lesson/demo assets and final course scope before any real sale. Do not copy reference customer metrics, testimonials or media."
+    },
+    {
+      "id": "for_brands",
+      "status": "review_mock_with_external_package_links",
+      "evidence": [
+        {
+          "file": "public/brands/index.html",
+          "bytes": 4033,
+          "sha256": "0fcc28ee0ddc98085d3106d824f647b00a16ba62e05c1d622a5f50a61d358f16"
+        },
+        {
+          "file": "docs/WHOP-UGC-OFFERS-v1.md",
+          "bytes": 2006,
+          "sha256": "6ec666679a9482b2c7714ad9fd5e89af181b7b1e35ae5885e5507c71bf331bbc"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/brands/",
+      "verified": "Current anonymous HTTP200 and exact HTML match. Source distinguishes one-time packages from planned autonomous service.",
+      "limits": "Historical observed Starter5/$500 and Campaign12/$1000 listings are not fresh price/account checks. Ten-plus daily posting, views and fulfillment are unverified. No purchase made.",
+      "next_action": "Finish buyer-scoped production and delivery with explicit account/asset/spend authority; do not guarantee views."
+    },
+    {
+      "id": "chat_tasks_orchestration",
+      "status": "working_review_snapshot_partial_runtime",
+      "evidence": [
+        {
+          "file": "public/index.html",
+          "bytes": 20966,
+          "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20"
+        },
+        {
+          "file": "public/task-engine.js",
+          "bytes": 2314,
+          "sha256": "f0f185d9893dff7651a95911a6b3d018e914ba1dc838a76e34e20584ea9e1376"
+        },
+        {
+          "file": "public/alerts-model.js",
+          "bytes": 2194,
+          "sha256": "43c82bba2e6c5f25cbf332f1d9ff2bc7a4717a22c3d9833be63f0724bdb840df"
+        },
+        {
+          "file": "docs/HOSTED-DASHBOARD-v3.md",
+          "bytes": 2629,
+          "sha256": "28c49f35eebe6b7ccc1b51bd52ae91c8aafb2c7ecf57e1f5548e857e1d34aa4a"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+      "verified": "Current anonymous HTTP200 and exact HTML match. Morning hub rendered in normal Chrome this batch. Prior persistence, alerts and hosted readiness evidence retained.",
+      "limits": "No current end-to-end chat/task interaction or native/physical-device validation. Browser-local state is distinct from the Mac SQLite agent. Autonomous tab management, publishing, unified ownership and durable task execution remain incomplete.",
+      "next_action": "Audit one saved brief through real agent routing with no paid tools when runtime owner is available. Keep planning indicators separate from execution."
+    },
+    {
+      "id": "prompt_specialists",
+      "status": "implemented_no_live_pass",
+      "evidence": [
+        {
+          "file": "src/review.js",
+          "bytes": 6824,
+          "sha256": "3ed991d4606fec085621c2ca2530d4a266025f69d0a1afb17f7aebaeaf7477a8"
+        },
+        {
+          "file": "docs/REVIEW-HISTORY-v1.md",
+          "bytes": 1931,
+          "sha256": "bd9985384a3d401f878cfb8c1aa5f467cb027a4904b4224ab7a0668f367b3957"
+        },
+        {
+          "file": "docs/HOOK-SHOT-REVIEW-v1.md",
+          "bytes": 1781,
+          "sha256": "e04c153e924b8a84b0ee05c11dc6e006d4034ec33125a797f3cb01f0bdfc40b2"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#operations",
+      "verified": "Existing code and prior tests bind reports to input versions, block stale reviews and preserve rejected revisions.",
+      "limits": "No newly executed seven-specialist model run or passing real prompt this batch. Existing failed-shot reports are failures, not passes. Paid model/generation requests excluded.",
+      "next_action": "Use owned/approved identity, product, dialogue and quote evidence before requesting a real grading/generation run."
+    },
+    {
+      "id": "exa_outreach_samples",
+      "status": "source_research_and_unsent_briefs",
+      "evidence": [
+        {
+          "file": "docs/EXA-FREE-MCP-v2.md",
+          "bytes": 1687,
+          "sha256": "37db045df57530000134bf69da8561b0828be477231d3ff41b4bbffab600d076"
+        },
+        {
+          "file": "docs/OUTREACH-REVISED-DRAFTS-v1.json",
+          "bytes": 12000,
+          "sha256": "94b0b8e16dcde9073a2ff58849891a0ee1a915d71d23393e0802dd6d38e49763"
+        },
+        {
+          "file": "public/prospect-seeds.json",
+          "bytes": 10429,
+          "sha256": "520cef2abcba26771d28b5d1dd5aafde08d12245bc156fa15adbe720782a555a"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#outreach",
+      "verified": "Historical free-MCP search and sourced candidates exist. Unsent revised outreach and five-second briefs retain originals.",
+      "limits": "No fresh Exa request or contact revalidation. Initial raw response was lost, with correction preserved. No sent outreach or new rendered five-second sample.",
+      "next_action": "Use exact published email evidence and approved claims; render only with separately approved assets/quote/spend. Do not send under this schedule."
+    },
+    {
+      "id": "william_luca_research",
+      "status": "defined_capped_sample",
+      "evidence": [
+        {
+          "file": "public/research/evidence.json",
+          "bytes": 7501,
+          "sha256": "dc7a0fb7436f1a263ef68385c3415637277e7063890682b65bb8616eea496f5c"
+        },
+        {
+          "file": "public/research/reel-index.json",
+          "bytes": 370545,
+          "sha256": "fbcab014322edadd6ea4f069622c5bbeb1644093f84a90c6a21674186e3d4ad3"
+        },
+        {
+          "file": "public/research/research-packet.md",
+          "bytes": 28096,
+          "sha256": "6822c5e9c94bc3f47b636046530a5e364578cdee785b6e257acffa7683b7187b"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/report.html",
+      "verified": "Mounted research directory observed. File inventory finds30William MP4s and12Luca MP4s. Public index has800entries. Current report/gallery/packet/index HTTP200 and exact local matches.",
+      "limits": "400entries/profile cap, not exhaustive history.408machine transcripts and4no-audio cases are prior evidence, not fresh ASR quality verification.31William entries remain visual/trend or unclassified. Full media bytes were not rehashed this batch. Exact public index split:366ordinary machine transcripts,42short/music-possible,4no-audio,388not selected for transcription. No new transcript correctness verdict.",
+      "next_action": "Use existing source IDs and transcript confidence for focused creative research. Never rerun completed scraping/transcription or claim everything was human-verified."
+    },
+    {
+      "id": "original_higgsfield_avatar",
+      "status": "consolidated_private_recovery",
+      "evidence": [
+        {
+          "file": "docs/HIGGSFIELD-AVATAR-DOSSIER-v3.txt",
+          "bytes": 76270,
+          "sha256": "18904f57be05caf03eb604b05a9a991cb68d8c1c090949815b88a1c3fccadf38"
+        },
+        {
+          "file": "public/agent-proof/avatar-recovery-v1.json",
+          "bytes": 865,
+          "sha256": "7c7724b00026f90c4beb89e02c56ee542c3ba28e85f8eddc6c34ce45a0ee7ee3"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/delivery/",
+      "verified": "Version3dossier and prior recovery receipt retain the original accepted workflow and private V4 file hash/metadata.",
+      "limits": "Not a newly generated branded sample or fresh identity approval. No private raw media exposed. This batch did not rehash/decode original media or verify Air access.",
+      "next_action": "Preserve canonical original/reference distinction. Use private originals only within authorized production."
+    },
+    {
+      "id": "finance_all_offers",
+      "status": "editable_scenario_models",
+      "evidence": [
+        {
+          "file": "src/finance.js",
+          "bytes": 7493,
+          "sha256": "44c45a7155569a00a70a95e373d1eb7b41be648e6ae9184f80c5f10a8fa4be4c"
+        },
+        {
+          "file": "public/package-model.js",
+          "bytes": 3111,
+          "sha256": "2a3b8d1ecb7c32ca8ed1d94156b03a7cd8269c160c0f9ccfd9226c25504e0a90"
+        },
+        {
+          "file": "docs/FINANCIAL-MODEL-NOTES.txt",
+          "bytes": 5035,
+          "sha256": "f7346f1c6426e4fc4d4f0d91b69418fdf36e826bddcbf23a472401bafc1eac51"
+        },
+        {
+          "file": "docs/PACKAGE-FINANCE-REVIEW-v1.md",
+          "bytes": 2370,
+          "sha256": "d0a4a852b50b0820f687dc698677b2fbe689dcba9e87c2aa05a323c7d98f4080"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/#economics",
+      "verified": "Legacy three-offer and one-time package models remain. Current package JS returns HTTP200 and exact bytes. Prior input/export and break-even tests retained.",
+      "limits": "Private Khan sales/conversion evidence absent. Scenarios, cost inputs and revenue are assumptions; no profitability/views/sales guarantee. No fresh model UI interaction this batch. Package presets default acquisition and overhead to zero; taxes, disputes, working capital and unallocated expenses are excluded.",
+      "next_action": "Update observed provider/payment/fulfillment costs only from dated evidence; retain hypothetical presets separately."
+    },
+    {
+      "id": "sponsor_roles",
+      "status": "partial_with_team_scope_changes",
+      "evidence": [
+        {
+          "file": "docs/SPONSOR-EXECUTION-HANDOFF-v1.md",
+          "bytes": 7457,
+          "sha256": "08293ce45936461e778a09231824c5931a784fb3780c448dd51e743ce4fd4cf4"
+        },
+        {
+          "file": "docs/SPONSOR-MAP.txt",
+          "bytes": 3648,
+          "sha256": "58da5f748a291c6aa1f4b6bb441f287880eb4a4c2065a18d0be2034bc1b3f30d"
+        },
+        {
+          "file": "docs/EXA-FREE-MCP-v2.md",
+          "bytes": 1687,
+          "sha256": "37db045df57530000134bf69da8561b0828be477231d3ff41b4bbffab600d076"
+        }
+      ],
+      "review_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/delivery/",
+      "verified": "Exa historical live search; Whop historical read-only listings; Terac draft task; Lovable skipped per later handoff.",
+      "limits": "Every-sponsor runtime requirement remains unmet. No human task submitted, no Lovable session/export. Older map describes retired course/recurring billing and must be read historically. No live sponsor action this batch.",
+      "next_action": "Execute only authorized feasible sponsor actions. Account/scope/budget or team decision is needed for blocked roles; do not repeatedly request secrets or claim planned usage."
+    }
+  ],
+  "storage_work_note": "PR5 disconnected storage contract and disabled adapter have prior independent review and exact-source CI90root/488agent. No live storage/signing/email or app activation. Recovery scaffolds do not substitute for original morning deliverables.",
+  "fresh_browser_observations": [
+    "morning_hub_render_only"
+  ],
+  "independent_review": {
+    "scope": "local file hash/count integrity, internal route receipt consistency and matrix claim accuracy",
+    "blocking_findings": 0,
+    "wording_findings_fixed": [
+      "no-live-pass status",
+      "rendering labeled observation",
+      "transcript quality split",
+      "finance exclusions"
+    ],
+    "reviewer_repeated_network_requests": false,
+    "whole_app_signoff": false
+  },
+  "updated_at": "2026-10-25T06:34:14.429882+00:00",
+  "update_scope": "Course-layout row only. Other rows retain earlier audit observations, not fresh whole-app checks."
+}

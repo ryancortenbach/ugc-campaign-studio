@@ -1,0 +1,117 @@
+{
+  "url": "https://duolingo-library-phone-v1-8fpoq4576-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_8rc9J92yq2fSxzaRiUUG9E8PuBGT",
+  "target": "preview",
+  "ready": true,
+  "source": "experiments/concept-packet-handoff-v1",
+  "anonymous_http200_exact_byte_matches": 10,
+  "hosted_files": [
+    {
+      "file": "handoff.js",
+      "status": 200,
+      "sha256": "151003679ed2c2c3b89b953e66d92ba5df70a2a65a2d8ea780881a49909b6b64",
+      "bytes": 2358,
+      "matches_source": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "sha256": "ddec54981fb6ee9848fdf66928ff557817c4e7b6b8cb441e6bf8aa1434dda6cb",
+      "bytes": 3800,
+      "matches_source": true
+    },
+    {
+      "file": "style.css",
+      "status": 200,
+      "sha256": "4605deecadfe7ad27d97db0a511deffb0844b43e093cdd4c0b395f63cf200522",
+      "bytes": 1961,
+      "matches_source": true
+    },
+    {
+      "file": "manifest.json",
+      "status": 200,
+      "sha256": "517a20eb2261a4541baa7555fecd2d307b12438c4de0582b8d53d04242767750",
+      "bytes": 6591,
+      "matches_source": true
+    },
+    {
+      "file": "runtime/brief.js",
+      "status": 200,
+      "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+      "bytes": 3397,
+      "matches_source": true
+    },
+    {
+      "file": "runtime/planner.js",
+      "status": 200,
+      "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+      "bytes": 3465,
+      "matches_source": true
+    },
+    {
+      "file": "runtime/import-packet.js",
+      "status": 200,
+      "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+      "bytes": 4363,
+      "matches_source": true
+    },
+    {
+      "file": "packets/mirror-v1.json",
+      "status": 200,
+      "sha256": "bce34da4a2ad3119bc7e7737a67c30dd492f37b98dbbbbacc9f1c70821b1ec4e",
+      "bytes": 9227,
+      "matches_source": true
+    },
+    {
+      "file": "packets/instructions-v1.json",
+      "status": 200,
+      "sha256": "8ad5b258ce5d51f8e49563653e518500a04bb440f6ebc1b88aec5391392574f9",
+      "bytes": 9331,
+      "matches_source": true
+    },
+    {
+      "file": "packets/wardrobe-v1.json",
+      "status": 200,
+      "sha256": "62e32083d3b7d8f5acd8558a011ecf5c5e6090c1f55b50c6a10fa0b6365a3a66",
+      "bytes": 9220,
+      "matches_source": true
+    }
+  ],
+  "independent_review": "No blocking issue found in packet provenance,blank intake,approval resets,timings,gate evidence,runtime copies,preservation guard and actual inspector UI.",
+  "packets_checked": 3,
+  "four_missing_intake_fields": [
+    "brand",
+    "offer",
+    "avatar",
+    "voice"
+  ],
+  "remaining_preflight_categories": [
+    "references",
+    "budget"
+  ],
+  "forged_approval_reset_verified": true,
+  "normalized_roundtrip_verified": true,
+  "generator_preserves_changed_outputs": true,
+  "preservation_fixture": "work/concept-packet-preservation-check-v1.log",
+  "runtime_copies_match_originals": true,
+  "desktop_document_width": 1920,
+  "mobile_document_width": 390,
+  "all_three_inspect_controls_verified": true,
+  "real_json_download_verified": {
+    "file": "mirror-v1.json",
+    "bytes": 9227,
+    "source_match": true,
+    "event_waiter_timed_out": true,
+    "file_verified_separately": true
+  },
+  "viewport_restored": true,
+  "root_final_inspect_verified": true,
+  "screenshots_captured_in_chat": true,
+  "physical_devices_tested": false,
+  "main_studio_import_or_campaign_installation": false,
+  "app_database_modified": false,
+  "provider_calls": 0,
+  "paid_actions": 0,
+  "production_deployed": false,
+  "known_importer_limit": "Original parser compares fractional starts to the exact JS accumulation. New drafts use quarter-second edit beats; originals and parser unchanged. This is a workaround, not a parser fix."
+}
