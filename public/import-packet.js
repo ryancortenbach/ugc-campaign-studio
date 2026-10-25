@@ -9,7 +9,9 @@ function normalizePlan(input,brief){
  const plan=makePlan(brief,input.durationSeconds);
  for(const key of ['identity','wardrobe','environment','voice','creativeDirection','offer','constraints'])plan[key]=text(input[key],key);
  let cursor=0;
- plan.shots=input.shots.map((shot,index)=>{if(!object(shot)||shot.start!==cursor||!Number.isFinite(shot.duration)||shot.duration<=0)throw Error('Shot timings must be positive and contiguous.');cursor+=shot.duration;return {id:'shot-0'+(index+1),start:shot.start,duration:shot.duration,camera:text(shot.camera,'Camera'),action:text(shot.action,'Action'),dialogue:text(shot.dialogue,'Dialogue'),audio:text(shot.audio,'Audio')};});
+ // Allow only floating-point roundoff, not an editing-frame or millisecond gap.
+ const timingTolerance=Number.EPSILON*input.durationSeconds*8;
+ plan.shots=input.shots.map((shot,index)=>{if(!object(shot)||!Number.isFinite(shot.start)||shot.start<0||Math.abs(shot.start-cursor)>timingTolerance||!Number.isFinite(shot.duration)||shot.duration<=0)throw Error('Shot timings must be positive and contiguous.');cursor+=shot.duration;return {id:'shot-0'+(index+1),start:shot.start,duration:shot.duration,camera:text(shot.camera,'Camera'),action:text(shot.action,'Action'),dialogue:text(shot.dialogue,'Dialogue'),audio:text(shot.audio,'Audio')};});
  if(Math.abs(cursor-input.durationSeconds)>.001)throw Error('Shot durations must add up to the storyboard duration.');
  if(!Array.isArray(input.references)||input.references.length>100)throw Error('References must be an array of up to 100 records.');
  plan.references=input.references.map(ref=>{if(!object(ref)||!Number.isInteger(ref.version)||ref.version<1)throw Error('Each reference needs a positive integer version.');const result={tag:text(ref.tag,'Reference tag',200),role:text(ref.role,'Reference role',200),assetId:text(ref.assetId,'Reference asset ID',1000),version:ref.version};if(!result.tag||!result.role||!result.assetId)throw Error('Each reference needs a tag, role and asset ID.');return result;});
