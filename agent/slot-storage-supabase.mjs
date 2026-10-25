@@ -31,7 +31,7 @@ export function createSupabaseSlotTransport({enabled=false,url,secret,bucket,fet
  async function privateBucket(){
   const res=await call('GET',`/bucket/${bucket}`);
   let data;try{data=JSON.parse((await bounded(res,16384)).toString('utf8'));}catch{throw fail(409,'Private bucket configuration could not be confirmed.');}
-  if(data.id!==bucket||data.public!==false)throw fail(409,'Expected private bucket configuration was not confirmed.');
+  if(data?.id!==bucket||data?.public!==false)throw fail(409,'Expected private bucket configuration was not confirmed.');
  }
  async function find({key}={}){
   ready();const expected=keyHash(key);
