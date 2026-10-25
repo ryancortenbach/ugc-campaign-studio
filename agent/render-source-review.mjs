@@ -10,7 +10,7 @@ export function createRenderSourceReview({store,now=()=>new Date()}={}){
   const render=store.getRender(id);if(!render)throw fail(404,'No such render.');
   const board=render.storyboard_id?store.getStoryboard(render.storyboard_id):null;
   const shots=Array.isArray(board?.plan?.shots)?board.plan.shots:[];
-  const matchingShots=shots.filter((s,i)=>String(s?.id||`shot-${i+1}`)===String(render.shot_id));
+  const matchingShots=shots.filter((s,i)=>s&&typeof s==='object'&&!Array.isArray(s)&&String(s.id||`shot-${i+1}`)===String(render.shot_id));
   return {render,board,canReview:Boolean(board&&render.shot_id&&matchingShots.length===1),renderHash:renderIntentHash(render),planHash:board?storyboardPlanHash(board.plan):null};
  };
  return {

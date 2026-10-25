@@ -158,7 +158,7 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
 
  const sourceMatches=(o,list)=>{
   const p=o.storyboard_id?store.getStoryboard(o.storyboard_id)?.plan:null,expected=p?.shots||[],hash=storyboardPlanHash(p);
-  return Boolean(o.storyboard_id&&expected.length===list.length&&list.length&&list.every((s,i)=>s.render?.storyboard_id===o.storyboard_id&&s.render.storyboard_plan_hash===hash&&String(s.shotId)===String(expected[i].id||`shot-${i+1}`)));
+  return Boolean(o.storyboard_id&&expected.length===list.length&&list.length&&list.every((s,i)=>expected[i]&&typeof expected[i]==='object'&&!Array.isArray(expected[i])&&s.render?.storyboard_id===o.storyboard_id&&s.render.storyboard_plan_hash===hash&&String(s.shotId)===String(expected[i].id||`shot-${i+1}`)));
  };
  function get(id){
   const o=need(id),list=shots(o),d=row(id);
