@@ -1,0 +1,734 @@
+{
+  "version": 51,
+  "date": "2026-10-25",
+  "scope": "UGC hackathon only",
+  "preview": "https://duolingo-library-phone-v1-dpbd36ffw-ryancortenbachs-projects.vercel.app/",
+  "completed": [
+    "Private GitHub repository and CI",
+    "Guided chat intake, editable briefs, campaign persistence and JSON export",
+    "Three review website mocks",
+    "Bot-style task table with actual browser-local readiness, events, pause/stop/retry and duplicate-run protection",
+    "800-entry source sample, 42 downloaded references, 408 machine transcripts, four explicit no-audio cases",
+    "Original Higgsfield avatar dossier v2",
+    "Audience packet, source gallery and sales playbook",
+    "Editable three-offer finance scenarios and margin tests",
+    "Eight manual prospect seeds with contact-source evidence and unsent drafts",
+    "Editable three-shot storyboard, 5/15/30 second retiming, identity/wardrobe/environment/voice locks, dialogue and sound cues, persistent drafts, version restore, review-lab transfer and JSON export with saved versions",
+    "Portable JSON packet import, saved storyboard history, separate campaign planning IDs, existing-campaign preservation and approval reset",
+    "Persistent review history, final reviewed-input binding, stale detection, independent JSON export, and preservation of specialist evidence if revision fails",
+    "Live keyless Exa MCP discovery, published source/contact candidates, unsent personalized drafts, sample briefs, and a separately labeled recorded five-source search",
+    "Persistent editable outreach drafts, source merging, version restore, portable JSON history and prospect-to-five-second-campaign handoff",
+    "Financial input validation, blocked invalid exports, no feasible price-floor handling, unclamped low yield and precise unit-cost display",
+    "Morning review hub, exact project links, scoped Lovable handoff, two original text storyboard candidates and draft Terac task",
+    "Separate protected Vercel readiness workflow proof: actual hosted suspension/resume and saved result, unauthorized rejection, zero model calls, and local result persistence across restart. Main dashboard executor remains browser-local.",
+    "Separate private operator console v2 with signed per-job tickets, actual cancellation, terminal-state handling and recovery of existing hosted runs. Twelve local and twelve hosted API checks passed; three ticket tests added. Authenticated browser lifecycle remains untested.",
+    "Optional same-origin hosted readiness panel integrated into Agent operations. Authenticated local browser submit/cancel/reload/recovery verified with fictional credential. Hosted API lifecycle and final cross-deployment recovery verified. Model/media/publishing calls disabled in combined preview. Legacy queue remains browser-local.",
+    "Private cloud execution-metadata list for V3 readiness runs, bounded filtering/pagination, discovery from empty browser history and selection for recovery. Local browser and actual hosted HTTP verified; no jobs created.",
+    "Private Whop offer-check adapter and operator UI, seven fixture tests and actual local/hosted missing-config checks. No live Whop request or verified product.",
+    "Eight original research-linked concept directions, separate editable five-second campaign creation, preserved identity/voice/wardrobe and source provenance in portable packets. Local existing-campaign/version preservation and actual JSON download verified; anonymous hosted creation and mobile width verified.",
+    "Persistent browser-local alert inbox for observed readiness blockers, hosted failures and uncertain submissions; deduplication, acknowledgement, source inspection and JSON history export. Local and hosted anonymous browser readiness alerts verified, and existing local hosted run recovery produced its actual budget alert.",
+    "Strict shared readiness validation for finite numeric settings, positive integer reference versions and nonempty fields. Fixed shared dependency symlink routing the compiled step to V1 validation. Isolated V3 generated build directory and compiled-bundle ownership guard. Actual hosted malformed-input workflow now returns both blockers with zero model calls.",
+    "Hosted run selection detaches prior ticket/polling; response epochs reject late status responses after selection, recovery or cancellation. Actual delayed-response browser test preserved selected run and verified cloud selection detaches controls. Workflow scanner excludes generated output; two consecutive builds pass.",
+    "Imported committed Mint Labs local agent from Air without touching its live workers. Added atomic SQLite per-render submission claim, stable saved key, unknown-outcome blocking and finite positive quote checks. Sixteen agent tests pass using fixtures or fake provider. Public read-only receipt distinguishes these from live generation.",
+    "Read-only review of existing Air mission and failed render records. Preserved original three drafts; created three claim-limited unsent revisions, three single-shot five-second concept briefs, and a blocked hook revision. Official-site source checks recorded; no live records or Gmail drafts changed.",
+    "Recovered the documented original PS2_penthouse_FINAL_v4.mp4 from its exact Air path into ignored Mini private archive. Source/destination SHA256 identical;23.157seconds/720x1280/24fps/H264/AAC and full decode verified. Version3 consolidated dossier preserves V2 and original decisions. Raw media remains private.",
+    "Live read-only UI review through a write-blocking proxy: Home/Tasks/Drafts/failed-render gate observed,760/390pxTasks checked, two quality findings handed off and transient script boot failure recovered. Current Whop package prices observed without purchase, course mock remains not on sale, obsolete course checker retired from runtime/UI.",
+    "One-time Starter/Campaign package financial planner, eight focused tests and90studio tests, independent findings fixed and re-reviewed. Real local downloaded JSON/edited-fee disclosure, hosted invalid-input/persistence and390pxlayout verified. Earlier three-offer planning model preserved.",
+    "Storefront independent source review and fixes: reopenable local cart; current one-time versus planned autonomous service/sponsor scope clarified. Anonymous hosted cart/size/removal, course no-checkout and390pxthree-page layout verified.",
+    "Earlier three-offer financial UI now rejects blank numeric inputs, clears invalid metrics, disables export and preserves last valid assumptions. Independent scoped review, real hosted recovery/explicit-zero and downloaded percentage conversion verified.",
+    "Imported team fulfillment/agent/creative source and independently audited fulfillment with fake providers. Prepared default no-spend mitigation in draft PR1; no production deployment.22offline fulfillment tests and90studio tests pass.",
+    "Local atomic render reconciliation with unique ledger, ownership validation, service-role RPC and rollback; independently reviewed,27offline tests and six local PostgreSQL checks pass. Not migrated or deployed.",
+    "Prepared local interrupted-submission recovery: atomic accepted ID/ledger/queue commit, manual stale-intent recovery, saved-ID protection, no automatic resubmission and retry counter reset. Independently reviewed;34offline tests, nine local PostgreSQL checks and90studio tests pass. Not migrated/deployed.",
+    "Estimated automatic render reservations, unknown exposure retention, atomic hold-to-ledger transfer, protected held-row lifecycle and legacy unknown admission block, independently reviewed.41fake/19localSQL/90studio tests pass. Isolated CI PostgreSQL17validated actual RPC lock waits and20multi-connection race iterations. Not deployed to user database.",
+    "Reviewed current Mac delivery, fixed stale-final gates, mixed-version operation/file races, broad Gmail update fallback and disconnect identity loss. Independent scoped review14tests; CI90root/388agent tests pass. Source-only draftPR2, no live deployment."
+  ],
+  "implemented_not_live": [
+    "Optional model chat and seven-reviewer bounded loop",
+    "Exact approved-dialogue locks and rejected-revision audit trail",
+    "Optional keyed Exa REST adapter. Free MCP discovery is verified live.",
+    "Read-only Whop Variant offer checker, current API version pinned. Credentials and expected account/product/variant absent; checkout remains disabled."
+  ],
+  "remaining": [
+    {
+      "item": "Real specialist review and rendered prospect samples",
+      "dependency": "No paid requests authorized. Need approved identity/product/dialogue/reference evidence and quote/spend authority. Existing failed-shot records and sample briefs are not new passes or rendered samples."
+    },
+    {
+      "item": "Original every-sponsor runtime requirement",
+      "dependency": "Exa historical live evidence retained; Terac task unassigned and requires authorized scope/account/budget. Lovable skipped by team, not completed. Whop listing checks do not prove purchase/delivery/entitlement."
+    },
+    {
+      "item": "Autonomous orchestration, posting and feedback",
+      "dependency": "Browser-local task queue plus separate hosted readiness does not establish tab execution, unified durable ownership, production/generation or posting. No live app/provider activation under schedule."
+    },
+    {
+      "item": "Research completeness and manual confidence review",
+      "dependency": "All60queue entries now have limited, independently checked overlay notes, not full source verification. Capped400/profile sample remains.42flagged speech-confidence issues and3additional ordinary-status music/ASR cautions remain;4saved no-audio variants do not prove original posts are silent. No human/audio/full-media accuracy pass, private sales evidence or exhaustive account-history claim."
+    },
+    {
+      "item": "Reference-layout parity and actual commercial readiness",
+      "dependency": "Standalone course v2 now has independently reviewed reference hierarchy and390pxcontrol/layout checks. No pixel-identical claim. Original course footage, final curriculum/proof and commerce readiness remain. Root checkout retired. Shop garments/fulfillment and autonomous service/package fulfillment still unverified."
+    },
+    {
+      "item": "Evidence-based financial calibration and guarantees",
+      "dependency": "Models are assumptions, not observed Khan sales. Package zero acquisition/overhead defaults and taxes/disputes/working-capital exclusions require explicit actual-cost inputs. No views/sales/profit guarantee."
+    },
+    {
+      "item": "Real Gmail and native operator recovery validation",
+      "dependency": "Durable initial draft intents/reconciliation and guarded UI already implemented. Actual Message-ID indexing/preservation/account identity and operator absence/stopped-worker assertions remain unverified. Do not duplicate completed recovery scaffolds."
+    },
+    {
+      "item": "Per-slot storage/delivery and large media",
+      "dependency": "Default-disabled/unwired adapter fake-tested; no real bucket/account privacy, signing/expiry, larger resumable uploads, per-slot email or delivery/entitlement validation."
+    }
+  ],
+  "test_count": 92,
+  "live_paid_requests_this_batch": 0,
+  "outreach_sent": 0,
+  "physical_phone_tested": false,
+  "whole_goal_complete": false,
+  "preview_evidence": "docs/MORNING-REVIEW-HUB-v2.json",
+  "preservation_limits": [
+    "Original normalized Exa sample v1 retained. Its original raw response was overwritten by an ignored diagnostic. V2 explicitly documents missing raw provenance. See docs/EXA-FREE-MCP-v2.md."
+  ],
+  "review_hub": {
+    "version": 2,
+    "checked_at": "2026-10-25T08:15:29.842383+00:00",
+    "url": "https://duolingo-library-phone-v1-dpbd36ffw-ryancortenbachs-projects.vercel.app/",
+    "deployment_id": "dpl_72K9ez7qh5cPc64Psis1Fk6x8j1n",
+    "deployment_target": "preview",
+    "ready_state": "READY",
+    "production_deployment": false,
+    "source_directory": "experiments/morning-review-hub-v2",
+    "baseline_source": "3212262",
+    "anonymous_public_destinations": 14,
+    "all_destination_http200": true,
+    "initial_transient_tls_timeouts": 3,
+    "initial_failures_preserved": true,
+    "destination_check_scope": "Anonymous availability only. Fragment routes share an HTML resource; this is not fourteen independently tested applications.",
+    "hosted_files": {
+      "checked_at": "2026-10-25T08:13:45.437706+00:00",
+      "files": [
+        {
+          "file": "index.html",
+          "status": 200,
+          "bytes": 15571,
+          "sha256": "36f60454ceae3c32007e1b8fa58f87440c2157f96ffced7390dd70df49b42c28",
+          "matches_source": true
+        },
+        {
+          "file": "style.css",
+          "status": 200,
+          "bytes": 6956,
+          "sha256": "90e6709a65112ee3660074e36ee2603b173c0deb47b2847db7e03513f790737b",
+          "matches_source": true
+        },
+        {
+          "file": "review-manifest.json",
+          "status": 200,
+          "bytes": 9980,
+          "sha256": "295feb88a83d792a7e52102eaee16a0739aa6bf2f04b7fb4304edcb103e0f5b8",
+          "matches_source": true
+        }
+      ]
+    },
+    "independent_review": {
+      "agent": "ugc_current_hub_review",
+      "verdict": "PASS within read-only hub scope",
+      "claims_checked_against": [
+        "COMPLETION-AUDIT-v48.json",
+        "MORNING-DELIVERABLE-MATRIX-v2.json",
+        "EPOMAKER-QUALIFICATION-REVIEW-v1.json",
+        "RESEARCH-REVIEW-COVERAGE-v1.json",
+        "CONTINUATION.txt"
+      ],
+      "desktop_width": 1920,
+      "mobile_width": 390,
+      "no_horizontal_overflow": true,
+      "actual_anchor_clicks": [
+        "Website mocks",
+        "Connection states",
+        "Next decisions"
+      ],
+      "all_six_anchor_targets_exist": true,
+      "economics_destination_opens_both_models": true,
+      "viewport_restored": true,
+      "condition": "Audit49 and matrixv3 must be published before delivery."
+    },
+    "root_final_browser_observed": true,
+    "screenshot_captured_in_chat": true,
+    "tab_marked_deliverable": true,
+    "private_github_links": "Require repository access. Anonymous access not verified. Targets included with this batch commit.",
+    "physical_device_testing": false,
+    "live_provider_rechecks": false,
+    "new_model_grades": 0,
+    "new_generated_samples": 0,
+    "messages_sent": 0,
+    "paid_actions": 0,
+    "app_activated": false,
+    "Air_modified": false,
+    "runtime_database_modified": false,
+    "existing_node_pid_37755_untouched": true,
+    "agent_port3200_listener_observed": false,
+    "whole_goal_complete": false
+  },
+  "plugin_discovery": {
+    "Lovable": "Skipped per Air handoff. No builder session claimed.",
+    "Whop": "No plugin found in returned search results. Directory search is not exhaustive.",
+    "Terac": "No plugin found in returned search results. Directory search is not exhaustive."
+  },
+  "durable_proof": {
+    "receipt": "public/durable-proof/receipt-v1.json",
+    "local": "work/workflow-v1-local-verification.json",
+    "hosted": "work/workflow-v1-hosted-verification.json",
+    "deployment": "work/workflow-v1-deployment-verified.json",
+    "dashboard_connected": false,
+    "model_calls": 0,
+    "generation_submitted": false,
+    "production_deployed": false,
+    "public_page": "https://duolingo-library-phone-v1-akcw3r8kw-ryancortenbachs-projects.vercel.app/durable-proof/"
+  },
+  "durable_console": {
+    "url": "https://duolingo-library-phone-v1-6le7imc81-ryancortenbachs-projects.vercel.app/",
+    "deployment": "dpl_6x9rouD2pyqEXEBU4oWhDm7m2toT",
+    "dashboard_connected": false,
+    "server_submission_deduplication": false,
+    "authenticated_browser_lifecycle_tested": false,
+    "actual_api_lifecycle_tested": true,
+    "receipt": "public/durable-proof/receipt-v2.json",
+    "model_calls": 0,
+    "generation_submitted": false,
+    "public_receipt": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/durable-proof/receipt-v2.json"
+  },
+  "hosted_dashboard": {
+    "version": 3,
+    "url": "https://duolingo-library-phone-v1-aiaun0gnn-ryancortenbachs-projects.vercel.app/#operations",
+    "deployment": "dpl_73Sub89WwryaJu85nvpUsYRzSUxJ",
+    "optional_panel_connected": true,
+    "legacy_queue_still_local": true,
+    "authenticated_local_browser_lifecycle_tested": true,
+    "authenticated_hosted_browser_lifecycle_tested": false,
+    "hosted_api_lifecycle_tested": true,
+    "atomic_submission_deduplication": false,
+    "model_calls_enabled": false,
+    "generation_enabled": false,
+    "physical_phone_tested": false,
+    "receipt": "public/durable-proof/receipt-v3.json",
+    "cloud_metadata_registry": true
+  },
+  "air_copy": {
+    "commit": "5ff144c8d14cc8ce720aedcdaa0d7473e0991f20",
+    "files_sha256_verified": 2674,
+    "tests_passed": 59,
+    "latest_source_sync": "Air at56251a1 with live dev:all and local agent; Mini imported Air commits, but did not update or restart Air workers.",
+    "credentials_copied": false,
+    "latest_preview_shortcut": "/Users/ryancortenbach/Desktop/UGC Campaign Studio-v2.webloc",
+    "shortcut_url": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/delivery/",
+    "shortcut_readback_verified": true
+  },
+  "whop_offer_checker": {
+    "status": "retired_from_current_runtime_and_UI",
+    "legacy_endpoint_authenticated_http": 410,
+    "providerRequested": false,
+    "paymentsEnabled": false
+  },
+  "concept_library": {
+    "concepts": 8,
+    "generation_submitted": false,
+    "original_proposals": true,
+    "source_urls_are_generation_references": false,
+    "existing_campaign_preserved_browser_verified": true,
+    "actual_export_verified": true,
+    "local_evidence": "work/concepts-local-browser-v1.json",
+    "hosted_evidence": "work/concepts-hosted-browser-v2.json"
+  },
+  "alert_inbox": {
+    "browser_local": true,
+    "push_delivery": false,
+    "acknowledgement_resolves_task": false,
+    "max_records": 200,
+    "credentials_prompts_tickets_stored": false,
+    "local_task_browser_tested": true,
+    "local_hosted_recovery_browser_tested": true,
+    "anonymous_hosted_browser_local_task_tested": true,
+    "failed_uncertain_modes": "offline fixtures only",
+    "actual_export_bytes": 883,
+    "evidence": [
+      "work/alerts-local-browser-v1.json",
+      "work/alerts-hosted-local-browser-v1.json",
+      "work/alerts-hosted-browser-v1.json"
+    ]
+  },
+  "readiness_gate": {
+    "canonical_module": "src/readiness.js",
+    "local_hosted_share_validator": true,
+    "workflow_build_isolated": true,
+    "compiled_guard": "scripts/check-workflow-build.mjs",
+    "local_api_checks": 6,
+    "hosted_api_checks": 6,
+    "actual_final_workflow": "work/readiness-gate-hosted-workflow-v2.json",
+    "intermediate_failed_check_preserved": "work/readiness-gate-hosted-workflow-v1.json",
+    "new_readiness_workflow_jobs": 2,
+    "modelCalls": 0,
+    "generationSubmitted": false
+  },
+  "hosted_selection": {
+    "response_scope_guard": true,
+    "old_ticket_detached_on_selection": true,
+    "real_local_delayed_response_test": true,
+    "response_payload_modified": false,
+    "new_workflow_jobs": 0,
+    "local_evidence": "work/hosted-selection-local-browser-v1.json",
+    "hosted_anonymous_evidence": "work/hosted-selection-hosted-browser-v1.json",
+    "repeated_builds_verified": 2
+  },
+  "air_handoff": {
+    "merged_commits": [
+      "e7b8641",
+      "ed8a2c5",
+      "9861a27"
+    ],
+    "mcp_servers_registered_in_project_config": true,
+    "account_connections_independently_verified": false,
+    "Lovable": "skipped per Air handoff",
+    "paid_actions_authorized": false
+  },
+  "agent_test_count": 19,
+  "local_agent": {
+    "source_imported_from": "56251a11a9b365b22123fefbe1504b55e8930653",
+    "local_only": true,
+    "production_deployed": false,
+    "Air_running_version_updated": false,
+    "Mini_live_provider_requests": 0,
+    "fake_provider_tests": true,
+    "atomic_per_render_claim_tested": true,
+    "database_reopen_tested": true,
+    "provider_idempotency_guarantee_verified": false,
+    "unknown_outcome_requires_manual_reconciliation": true,
+    "public_receipt": "https://duolingo-library-phone-v1-6ejq55g17-ryancortenbachs-projects.vercel.app/agent-proof/submission-v1.json"
+  },
+  "saved_mission_review": {
+    "mission_status": "done in saved record",
+    "leads": 6,
+    "Gmail_draft_records": 3,
+    "saved_checker_reports": 7,
+    "failed_render": 1,
+    "rendered_file_observed": false,
+    "new_model_requests": 0,
+    "new_Gmail_writes": 0,
+    "outreach_sent_this_review": 0,
+    "new_generation": false,
+    "outreach_packet": "docs/OUTREACH-REVISED-DRAFTS-v1.json",
+    "hook_revision": "docs/HOOK-SHOT-REVISION-v1.json",
+    "new_pass_issued": false,
+    "originals_preserved": true
+  },
+  "original_avatar_recovery": {
+    "dossier": "docs/HIGGSFIELD-AVATAR-DOSSIER-v3.txt",
+    "documented_file": "PS2_penthouse_FINAL_v4.mp4",
+    "bytes": 7705699,
+    "sha256": "eb34229fa2448f0655fa94bb576b982477b91b92625763110d0f96abdd6f3880",
+    "source_and_destination_match": true,
+    "full_decode_passed": true,
+    "raw_media_publicly_uploaded": false,
+    "historical_approved_media_hash_available": false,
+    "fresh_visual_approval": false,
+    "new_campaign_identity_approval": false,
+    "receipt": "public/agent-proof/avatar-recovery-v1.json"
+  },
+  "latest_source_review": {
+    "commit": "99e089e",
+    "ci": "https://github.com/ryancortenbach/ugc-campaign-studio/actions/runs/40116672655",
+    "studio_tests": 82,
+    "agent_tests": 19,
+    "atomic_claim_retained": true,
+    "fresh_visual_review": false,
+    "historical_snapshot": true
+  },
+  "sales_archive": {
+    "current": "sales/call-list-d2c-2026-10-24.csv",
+    "legacy_files_removed_by_team_commit": "f000384",
+    "historical_versions": "Git history only, do not restore legacy lists",
+    "calls_placed": 0
+  },
+  "ui_review": {
+    "status": "partial_with_findings",
+    "write_requests_forwarded": 0,
+    "blocked_boundary_test": 1,
+    "Air_source_changed": false,
+    "Air_workers_changed": false,
+    "physical_phone_tested": false,
+    "independent_visual_signoff": false,
+    "evidence": "public/agent-proof/ui-review-v1.json"
+  },
+  "current_whop_offers": {
+    "course_checkout_retired": true,
+    "starter_price_usd": 500,
+    "campaign_price_usd": 1000,
+    "one_time_prices_browser_verified": true,
+    "counts_5_12_from_team_handoff": true,
+    "purchase_or_delivery_verified": false,
+    "evidence": "work/whop-package-browser-verification-v1.json"
+  },
+  "latest_batch": {
+    "type": "Source-frame scene and wardrobe production design study",
+    "receipt": "docs/SCENE-WARDROBE-REVIEW-v1.json",
+    "preview": "https://duolingo-library-phone-v1-gsad4dnjt-ryancortenbachs-projects.vercel.app/",
+    "source_frames": 12,
+    "source_video_hashes_checked": 4,
+    "original_text_scene_proposals": 4,
+    "independent_still_and_browser_review": "PASS after one seat-consistency fix",
+    "generated_artwork_or_samples": 0,
+    "new_audio_or_fullvideo_validation": false,
+    "whole_goal_complete": false
+  },
+  "retired_fulfillment_review": {
+    "component": "ops Vercel service",
+    "retired_main_commit": "12330d6",
+    "closed_pr": "https://github.com/ryancortenbach/ugc-campaign-studio/pull/1",
+    "preserved_branch": "review/fulfillment-spending-pause-v1",
+    "merged": false,
+    "production_deployed_by_this_worker": false,
+    "prior_audits_historical": true
+  },
+  "previous_latest_batch": {
+    "type": "Decimal packet import correction, source-only",
+    "receipt": "docs/DECIMAL-PACKET-IMPORT-FIX-v1.json",
+    "regression_preview": "https://duolingo-library-phone-v1-f96nakb4e-ryancortenbachs-projects.vercel.app/",
+    "full_studio_tests": 92,
+    "syntax_checks": true,
+    "independent_source_review": "PASS",
+    "browser_checks": 7,
+    "active_app_modified": false,
+    "existing_previews_unchanged": true,
+    "whole_goal_complete": false
+  },
+  "current_branch_context": {
+    "PR4_merged_by_other_session": true,
+    "main_source": "cfbcc8293b6306357c1481c3b6f77592d404534b",
+    "post_judging_remote_removed": true,
+    "preview_fixture_source_removed_by_other_session": true,
+    "merge_by_this_worker": false
+  },
+  "source_comparison_preview": {
+    "url": "https://duolingo-library-phone-v1-lbsb3dv3g-ryancortenbachs-projects.vercel.app/",
+    "source": "5e8c44c",
+    "historical_fictional_fixture": true,
+    "fresh_access_test_this_batch": false,
+    "storage_connected": false,
+    "physical_device_verified": false
+  },
+  "test_counts_scope": "Historical92rootStudio and prior agent counts retained. Static scene-study batch changed no application code; no application suites rerun.",
+  "decimal_packet_import_fix": {
+    "version": 1,
+    "checked_at": "2026-10-25T08:37:11.633918+00:00",
+    "scope": "Source-only decimal packet importer correction and isolated browser regression. No native activation.",
+    "source_files": [
+      "public/import-packet.js",
+      "src/import-packet.test.js"
+    ],
+    "baseline": "c69a124",
+    "reproduction": {
+      "baseline": "c69a124",
+      "baselineError": "Shot timings must be positive and contiguous.",
+      "candidateAccepted": true,
+      "preservedThirdStart": 3.4,
+      "accumulatedDecimal": 3.4000000000000004,
+      "runtimeHashes": {
+        "brief.js": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+        "planner.js": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+        "import-packet.js": "e877b9c7258845e218abfccb89a61b41a8d1b455bf58cf0047bed69c1b70fb1c"
+      },
+      "initialIncorrectExampleCorrected": true
+    },
+    "change": "Require finite nonnegative start values; compare contiguous starts with Number.EPSILON * allowed duration * 8. Preserve authored values, reference validation, historical plan validation and approval reset.",
+    "total_duration_tolerance_unchanged_seconds": 0.001,
+    "full_studio_tests": 92,
+    "studio_failures": 0,
+    "syntax_checks_passed": true,
+    "test_log": "work/decimal-import-tests-v2.log",
+    "independent_review": {
+      "agent": "ugc_current_hub_review",
+      "verdict": "PASS within source-only scope",
+      "invalid_timing_cases_rejected": 180,
+      "gap_overlap_cases_rejected": 60,
+      "decimal_round_trips_checked": 5997,
+      "history_gap_rejected": true,
+      "approval_resets_verified": true,
+      "baseline_candidate_comparison_verified": true,
+      "reviewer_browser_test": false
+    },
+    "preview": "https://duolingo-library-phone-v1-f96nakb4e-ryancortenbachs-projects.vercel.app/",
+    "deployment": {
+      "id": "dpl_32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+      "url": "https://duolingo-library-phone-v1-f96nakb4e-ryancortenbachs-projects.vercel.app",
+      "productionUrl": null,
+      "inspectorUrl": "https://vercel.com/ryancortenbachs-projects/duolingo-library-phone-v1/32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+      "readyState": "READY",
+      "target": null,
+      "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_32RUkS4VTrXZRXvyEWKtxdNJ7AuG",
+      "buildMachine": {
+        "cores": 2,
+        "memory": 8192,
+        "machine": "basic",
+        "selectionType": "fixed",
+        "selectionSource": "plan-default"
+      },
+      "deploymentProtection": []
+    },
+    "cli_target_verified": "preview",
+    "anonymous_files": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "bytes": 1286,
+        "sha256": "4dc716acb6aeead171707adbbf53a5535ca40ecbcfa9db9ec76629dc9b591ac7",
+        "matches_source": true
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "bytes": 588,
+        "sha256": "b2963849f4489f0d4572ade3f3840ec14db85bd2fe7d91f96d28921928c5ef97",
+        "matches_source": true
+      },
+      {
+        "file": "check.js",
+        "status": 200,
+        "bytes": 2473,
+        "sha256": "cb28da76450c66d70c418e24767dbf43f1669cd33730cedbc62241e4bce2fb48",
+        "matches_source": true
+      },
+      {
+        "file": "runtime/brief.js",
+        "status": 200,
+        "bytes": 3397,
+        "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+        "matches_source": true
+      },
+      {
+        "file": "runtime/planner.js",
+        "status": 200,
+        "bytes": 3465,
+        "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+        "matches_source": true
+      },
+      {
+        "file": "runtime/import-packet.js",
+        "status": 200,
+        "bytes": 4575,
+        "sha256": "e877b9c7258845e218abfccb89a61b41a8d1b455bf58cf0047bed69c1b70fb1c",
+        "matches_source": true
+      },
+      {
+        "file": "runtime/baseline-import-packet.js",
+        "status": 200,
+        "bytes": 4363,
+        "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+        "matches_source": true
+      }
+    ],
+    "root_browser_check": {
+      "seven_of_seven_passed": true,
+      "default_desktop_screenshot": true,
+      "mobile_width": 390,
+      "mobile_document_width": 390,
+      "viewport_restored": true,
+      "physical_devices_tested": false
+    },
+    "preservation": "Previous packet previews and all original packets unchanged. Current active runtime unchanged. Incorrect initial example preserved under ignored work/packet-timing-incorrect-example-v1; corrected v2 is final.",
+    "initial_example_correction": "Initial1.4+1.8example does not reproduce the defect. Explicit baseline experiment corrected final fixture to1.2+2.2 versus3.4 before final verification.",
+    "deployment_attempts": "First draft and first corrected upload returned fetch failed without deployment ID. Remote list showed no jobs newer than previous hub; corrected retry from stage directory succeeded. No duplicate live work observed.",
+    "app_activated": false,
+    "database_or_Air_modified": false,
+    "provider_calls": 0,
+    "paid_actions": 0,
+    "messages_sent": 0,
+    "whole_goal_complete": false
+  },
+  "scene_wardrobe_study": {
+    "version": 1,
+    "checked_at": "2026-10-25T08:58:18.513768+00:00",
+    "scope": "Assistant still-image production design study, not full-video/audio validation or generated artwork.",
+    "source": "experiments/scene-wardrobe-board-v2",
+    "canonical_json": "docs/creative/scene-wardrobe-board-v2/scene-wardrobe-board-v2.json",
+    "selected_references": {
+      "williammaxxer_sample_ranks": [
+        1,
+        2,
+        3
+      ],
+      "lucamaxiim_sample_ranks": [
+        1
+      ],
+      "sample_cap_per_profile": 400,
+      "views": "Stored at collection, not fresh counts, sales or outcome guarantees"
+    },
+    "existing_frames_visually_reviewed": 12,
+    "frame_bytes_match_saved_sources": true,
+    "original_videos_hash_rechecked": 4,
+    "full_source_videos_uploaded": false,
+    "original_source_media_modified": false,
+    "new_downloads": 0,
+    "new_transcriptions": 0,
+    "original_ungenerated_scene_proposals": 4,
+    "identity_voice_and_reference_approval": false,
+    "url": "https://duolingo-library-phone-v1-gsad4dnjt-ryancortenbachs-projects.vercel.app/",
+    "deployment": {
+      "id": "dpl_ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+      "url": "https://duolingo-library-phone-v1-gsad4dnjt-ryancortenbachs-projects.vercel.app",
+      "productionUrl": null,
+      "inspectorUrl": "https://vercel.com/ryancortenbachs-projects/duolingo-library-phone-v1/ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+      "readyState": "READY",
+      "target": null,
+      "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+      "buildMachine": {
+        "cores": 2,
+        "memory": 8192,
+        "machine": "basic",
+        "selectionType": "fixed",
+        "selectionSource": "plan-default"
+      },
+      "deploymentProtection": []
+    },
+    "cli_target_verified": "preview",
+    "anonymous_hosted_files": {
+      "checked_at": "2026-10-25T08:55:55.811170+00:00",
+      "files": [
+        {
+          "file": "index.html",
+          "status": 200,
+          "bytes": 15522,
+          "sha256": "7bedd188783d764bb6206765ed476b714d2ba44c63afc4898b7d0e1855d6de92",
+          "matches_source": true
+        },
+        {
+          "file": "style.css",
+          "status": 200,
+          "bytes": 1883,
+          "sha256": "a7bd6b3b8340858957ab9f049b681b578eae2db64cbb19f5b567bdc18bc2a551",
+          "matches_source": true
+        },
+        {
+          "file": "board.json",
+          "status": 200,
+          "bytes": 15209,
+          "sha256": "562a4674e26f83829aa7717d659c7258c04d3d2d20f8e2e493bd32b8d5e073df",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYxn54jSziq-frame-2.jpg",
+          "status": 200,
+          "bytes": 25491,
+          "sha256": "dfab7e4fff762b40c1c4a9a62d5c01a913a2debb8a1be561ca4645384142eb0c",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYxn54jSziq-frame-0.jpg",
+          "status": 200,
+          "bytes": 25518,
+          "sha256": "c6355fe1f68ab6af1e471536e40ffa7fe2446e8e8e1aba546d047f22d936480d",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYxn54jSziq-frame-1.jpg",
+          "status": 200,
+          "bytes": 23670,
+          "sha256": "95161ab44909f74d80750de79fd22129bcfc45cc3955a4ea386b971e4336c2dd",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DeAxuD7kpRo-frame-1.jpg",
+          "status": 200,
+          "bytes": 16030,
+          "sha256": "02e7608228ad26b567d92e5a1d8b408b955082bd2ce1f6bc4f866cfeb88f68d1",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DeAxuD7kpRo-frame-0.jpg",
+          "status": 200,
+          "bytes": 16058,
+          "sha256": "7f0b9a86c2908b4a056d06d52a3ddae9088d709ddfdf807db0b56779e902f463",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DeAxuD7kpRo-frame-2.jpg",
+          "status": 200,
+          "bytes": 17861,
+          "sha256": "aa24ec96881eab6d909e1b1c00d76c54c6e8dc22924b8e8a2df86cce73a92ebd",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DY55fRguKWP-frame-0.jpg",
+          "status": 200,
+          "bytes": 21789,
+          "sha256": "3ca5e9502e0d95089161534f09710e4d08cdb70190a442ad46c62b5615455211",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYTKpmzORx4-frame-1.jpg",
+          "status": 200,
+          "bytes": 20179,
+          "sha256": "9f510fcf9461e11c16c9fc36043feb633df735ba6e1edadffd9f3fd2fcbd9c79",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYTKpmzORx4-frame-0.jpg",
+          "status": 200,
+          "bytes": 19963,
+          "sha256": "b77d436b66a03b1d4ff602b02122ef2d556040149f4bcb374b6eddad7703fb44",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DY55fRguKWP-frame-1.jpg",
+          "status": 200,
+          "bytes": 20174,
+          "sha256": "05dc93b00acdd906a8e3a1da5aec727becd68a4604d8a3b428fea5ecf314be15",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DYTKpmzORx4-frame-2.jpg",
+          "status": 200,
+          "bytes": 21294,
+          "sha256": "0c1be68abbfbf559d21669e6af3d1286ff364e664a6da9211aa11022106a5bc5",
+          "matches_source": true
+        },
+        {
+          "file": "assets/DY55fRguKWP-frame-2.jpg",
+          "status": 200,
+          "bytes": 22905,
+          "sha256": "2d997888e01cfcc137455ce5be09858755b80bc87ed58e028e977cff136f975f",
+          "matches_source": true
+        }
+      ]
+    },
+    "independent_review": {
+      "agent": "ugc_current_hub_review",
+      "verdict": "PASS within stated still-study and browser scope",
+      "all_twelve_actual_images_opened": true,
+      "metadata_and_four_video_hashes_checked": true,
+      "finding": "Scene1 one-seat environment contradicted adjacent-seat parcel beat. Fixed to two front seats with empty adjacent seat in v2 HTML,JSON and prompt;v1 preserved.",
+      "desktop_document_width": 1920,
+      "mobile_document_width": 390,
+      "mobile_overflow": false,
+      "all_twelve_images_loaded_and_contained": true,
+      "all_four_disclosures_expanded": true,
+      "all_four_anchors_clicked": true,
+      "full_landscape_source_jpeg_opened": true,
+      "viewport_restored": true
+    },
+    "root_final_browser_observed": true,
+    "source_and_proposal_screenshot_in_chat": true,
+    "physical_devices_tested": false,
+    "audio_full_video_and_human_review": false,
+    "app_database_Air_settings_modified": false,
+    "paid_actions": 0,
+    "provider_calls": 0,
+    "messages_sent": 0,
+    "whole_goal_complete": false,
+    "versions_preserved": [
+      "experiments/scene-wardrobe-board-v1",
+      "docs/creative/scene-wardrobe-board-v1"
+    ]
+  }
+}

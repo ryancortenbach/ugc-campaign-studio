@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-25T08:58:18.513768+00:00",
+  "scope": "Assistant still-image production design study, not full-video/audio validation or generated artwork.",
+  "source": "experiments/scene-wardrobe-board-v2",
+  "canonical_json": "docs/creative/scene-wardrobe-board-v2/scene-wardrobe-board-v2.json",
+  "selected_references": {
+    "williammaxxer_sample_ranks": [
+      1,
+      2,
+      3
+    ],
+    "lucamaxiim_sample_ranks": [
+      1
+    ],
+    "sample_cap_per_profile": 400,
+    "views": "Stored at collection, not fresh counts, sales or outcome guarantees"
+  },
+  "existing_frames_visually_reviewed": 12,
+  "frame_bytes_match_saved_sources": true,
+  "original_videos_hash_rechecked": 4,
+  "full_source_videos_uploaded": false,
+  "original_source_media_modified": false,
+  "new_downloads": 0,
+  "new_transcriptions": 0,
+  "original_ungenerated_scene_proposals": 4,
+  "identity_voice_and_reference_approval": false,
+  "url": "https://duolingo-library-phone-v1-gsad4dnjt-ryancortenbachs-projects.vercel.app/",
+  "deployment": {
+    "id": "dpl_ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+    "url": "https://duolingo-library-phone-v1-gsad4dnjt-ryancortenbachs-projects.vercel.app",
+    "productionUrl": null,
+    "inspectorUrl": "https://vercel.com/ryancortenbachs-projects/duolingo-library-phone-v1/ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+    "readyState": "READY",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_ArC1Pxfe8UMh6wFfDS7cF4J619bb",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": []
+  },
+  "cli_target_verified": "preview",
+  "anonymous_hosted_files": {
+    "checked_at": "2026-10-25T08:55:55.811170+00:00",
+    "files": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "bytes": 15522,
+        "sha256": "7bedd188783d764bb6206765ed476b714d2ba44c63afc4898b7d0e1855d6de92",
+        "matches_source": true
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "bytes": 1883,
+        "sha256": "a7bd6b3b8340858957ab9f049b681b578eae2db64cbb19f5b567bdc18bc2a551",
+        "matches_source": true
+      },
+      {
+        "file": "board.json",
+        "status": 200,
+        "bytes": 15209,
+        "sha256": "562a4674e26f83829aa7717d659c7258c04d3d2d20f8e2e493bd32b8d5e073df",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYxn54jSziq-frame-2.jpg",
+        "status": 200,
+        "bytes": 25491,
+        "sha256": "dfab7e4fff762b40c1c4a9a62d5c01a913a2debb8a1be561ca4645384142eb0c",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYxn54jSziq-frame-0.jpg",
+        "status": 200,
+        "bytes": 25518,
+        "sha256": "c6355fe1f68ab6af1e471536e40ffa7fe2446e8e8e1aba546d047f22d936480d",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYxn54jSziq-frame-1.jpg",
+        "status": 200,
+        "bytes": 23670,
+        "sha256": "95161ab44909f74d80750de79fd22129bcfc45cc3955a4ea386b971e4336c2dd",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DeAxuD7kpRo-frame-1.jpg",
+        "status": 200,
+        "bytes": 16030,
+        "sha256": "02e7608228ad26b567d92e5a1d8b408b955082bd2ce1f6bc4f866cfeb88f68d1",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DeAxuD7kpRo-frame-0.jpg",
+        "status": 200,
+        "bytes": 16058,
+        "sha256": "7f0b9a86c2908b4a056d06d52a3ddae9088d709ddfdf807db0b56779e902f463",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DeAxuD7kpRo-frame-2.jpg",
+        "status": 200,
+        "bytes": 17861,
+        "sha256": "aa24ec96881eab6d909e1b1c00d76c54c6e8dc22924b8e8a2df86cce73a92ebd",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DY55fRguKWP-frame-0.jpg",
+        "status": 200,
+        "bytes": 21789,
+        "sha256": "3ca5e9502e0d95089161534f09710e4d08cdb70190a442ad46c62b5615455211",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYTKpmzORx4-frame-1.jpg",
+        "status": 200,
+        "bytes": 20179,
+        "sha256": "9f510fcf9461e11c16c9fc36043feb633df735ba6e1edadffd9f3fd2fcbd9c79",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYTKpmzORx4-frame-0.jpg",
+        "status": 200,
+        "bytes": 19963,
+        "sha256": "b77d436b66a03b1d4ff602b02122ef2d556040149f4bcb374b6eddad7703fb44",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DY55fRguKWP-frame-1.jpg",
+        "status": 200,
+        "bytes": 20174,
+        "sha256": "05dc93b00acdd906a8e3a1da5aec727becd68a4604d8a3b428fea5ecf314be15",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DYTKpmzORx4-frame-2.jpg",
+        "status": 200,
+        "bytes": 21294,
+        "sha256": "0c1be68abbfbf559d21669e6af3d1286ff364e664a6da9211aa11022106a5bc5",
+        "matches_source": true
+      },
+      {
+        "file": "assets/DY55fRguKWP-frame-2.jpg",
+        "status": 200,
+        "bytes": 22905,
+        "sha256": "2d997888e01cfcc137455ce5be09858755b80bc87ed58e028e977cff136f975f",
+        "matches_source": true
+      }
+    ]
+  },
+  "independent_review": {
+    "agent": "ugc_current_hub_review",
+    "verdict": "PASS within stated still-study and browser scope",
+    "all_twelve_actual_images_opened": true,
+    "metadata_and_four_video_hashes_checked": true,
+    "finding": "Scene1 one-seat environment contradicted adjacent-seat parcel beat. Fixed to two front seats with empty adjacent seat in v2 HTML,JSON and prompt;v1 preserved.",
+    "desktop_document_width": 1920,
+    "mobile_document_width": 390,
+    "mobile_overflow": false,
+    "all_twelve_images_loaded_and_contained": true,
+    "all_four_disclosures_expanded": true,
+    "all_four_anchors_clicked": true,
+    "full_landscape_source_jpeg_opened": true,
+    "viewport_restored": true
+  },
+  "root_final_browser_observed": true,
+  "source_and_proposal_screenshot_in_chat": true,
+  "physical_devices_tested": false,
+  "audio_full_video_and_human_review": false,
+  "app_database_Air_settings_modified": false,
+  "paid_actions": 0,
+  "provider_calls": 0,
+  "messages_sent": 0,
+  "whole_goal_complete": false,
+  "versions_preserved": [
+    "experiments/scene-wardrobe-board-v1",
+    "docs/creative/scene-wardrobe-board-v1"
+  ]
+}
