@@ -262,6 +262,8 @@ const claudeSpend=lead=>(usd,note,renderId)=>{if(usd){if(lead.task_id)store.addC
   ['POST',/^\/api\/whop\/orders\/([\w-]+)\/run$/,m=>({order:whopwatch.runOrder(m[1])})],
   // Delivery: join the finished shots into the final video, then upload it to Supabase and draft the buyer's email. Never sends.
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final$/,m=>videoFinals.get(m[1],Number(m[2]))],
+  ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final\/attempts$/,m=>({attempts:videoFinals.attempts(m[1],Number(m[2]))})],
+  ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final\/reconcile$/,(m,b)=>videoFinals.reconcile(m[1],Number(m[2]),b)],
   ['POST',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final$/,(m,b)=>videoFinals.finish(m[1],Number(m[2]),b)],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/videos\/(\d+)\/final\/history$/,m=>({versions:videoFinals.history(m[1],Number(m[2]))})],
   ['GET',/^\/api\/whop\/orders\/([A-Za-z0-9_-]+)\/video-plan$/,m=>orderVideoPlan.get(m[1])],
