@@ -1,0 +1,19 @@
+# Indexed local final preparation and recovery
+
+Draft PR4 remains against post-judging. Before per-slot stitching starts, SQLite now records an attempt with source token, manifest, base final version and unique candidate filename. A partial unique index allows one preparing/candidate_ready attempt per order/slot. Identical calls in the same instance still coalesce; another instance is blocked before starting its join. A reconstructed module preserves uncertain active claims rather than assuming the old worker stopped.
+
+States are preparing, candidate_ready, attached, failed and abandoned. A successful stitch first persists byte count, digest and caption metadata as candidate_ready. Attaching the final and updating the attempt to attached share one transaction. Failures preserve candidate files and failure records. A failure after completed metadata is saved can be recovered without another join. A partial output with no saved completion metadata cannot be attached just because a file exists.
+
+GET /api/whop/orders/:id/videos/:slot/final now includes activeAttempt and disables canPrepare while it is unresolved. GET /final/attempts returns scoped records and expectedAttemptToken. POST /final/reconcile requires attemptId, current expectedAttemptToken, confirmWorkerStopped:true and action attach or abandon. The confirmation must be a strict boolean. No timer, lease or restart automatically clears a claim.
+
+Attach rechecks record state, absence of another active attempt, exact source/plan/clip token, current base version, candidate path containment, bytes and digest. The final insert and attached state update roll back together. Abandon preserves files and releases only that attempt. Already attached/abandoned or stale snapshot requests reject rather than rewrite history. No recovery action runs a join, calls providers, uploads or sends.
+
+Stopped-worker confirmation is operator attestation, not process verification. An incorrect assertion can release a still-running attempt and permit duplicate local work. Recovery never kills or stops a process. There is no actual recovery UI yet. Operators must independently establish that the worker stopped before using the endpoint. This scheduled worker did not inspect, abandon or recover any actual app attempt.
+
+The new order_video_final_attempts table and partial index initialize on future module construction. Actual app data was not opened/migrated by this worker. Tests use memory SQLite and synthetic clip bytes. Initial testing required updating the prior cross-instance test: the new claim now blocks the second join instead of merely rejecting its later publication.
+
+Independent review passed46focused slot/coverage/plan/source/policy tests, zero failures/skips, with no concrete defect found. It independently injected a failure updating recovery state and verified that final insertion rolled back while retaining recoverability, with one join and one attached version. New tests cover reconstruction, incomplete candidates, strict/stale recovery assertions, tampered/stale bytes, competing active work/newer versions and loopback HTTP while spendingPaused. Exact-source CI is recorded in the continuation audit.
+
+Current limits: pre-registry orphan files are not automatically indexed or inferred; staging copies left by an abruptly killed process are not automatically deleted. Failed or abandoned candidates remain preserved. Physical media quality, native UI, actual process liveness, storage/email recovery and live accounts remain unverified. Whole package/delivery readiness stays false. No frontend, hosted preview, app build/activation, Air change, live campaign-provider action, paid generation or send occurred. Existing Studio server remains untouched.
+
+Both exact-source657ac36CI runs40157176293and40157173487passed90root and471agent tests with zero failures/skips. Logs: work/slot-attempts-v3-tests.log and work/slot-attempts-ci-v1.log.
