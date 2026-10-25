@@ -1,0 +1,32 @@
+{
+  "url": "https://duolingo-library-phone-v1-fiurqz0s6-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_HXosHmyHpqokLRakcwifG4y6spG6",
+  "target": "preview",
+  "ready": true,
+  "anonymous_http200_exact_source_matches": 2,
+  "source": "experiments/research-topics-v1",
+  "cards": 14,
+  "original_source_links": 14,
+  "independent_semantic_note_review": true,
+  "browser_render_verified": false,
+  "browser_limitation": "Current connected Chrome profile inspected; unsupported visibility option rejected, supported new-tab request timed out and computer session reset. No fresh screenshot or responsive validation. No separate browser launched or existing browser restarted.",
+  "physical_devices_tested": false,
+  "mobile_layout_tested": false,
+  "full_transcripts_lyrics_media_credentials_published": false,
+  "records": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 16570,
+      "matches_source": true,
+      "sha256": "29434a7893bc37b58315f3b0651b429ceee668fbe0dafa1d1a5bca2660021825"
+    },
+    {
+      "file": "notes.json",
+      "status": 200,
+      "bytes": 23834,
+      "matches_source": true,
+      "sha256": "27c849ae585090095bffa7397e162dd2f0df53d4d21aa5a57835c85a1c0c38d9"
+    }
+  ]
+}
