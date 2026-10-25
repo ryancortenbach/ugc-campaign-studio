@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "intake_incomplete",
+  "brief": {
+    "brand": "",
+    "audience": "Proposed audience hypothesis: gaming and internet-culture viewers who recognize an exaggerated everyday situation. Based on the defined research sample, not a verified brand ICP.",
+    "offer": "",
+    "objective": "One original five-second vertical planning draft. Test visual clarity and product legibility after the actual brand and assets are approved. No view or sales guarantee.",
+    "avatar": "",
+    "voice": "",
+    "creative": "Original concept: Dressed for a small everyday quest. A wardrobe/prop resemblance appears to set up a character-reference edit. The inspected frames do not establish the full scene, stunt or any actual intent. Research context only: https://www.instagram.com/p/DWeggVhjiNM/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+    "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: dressing gestures, garment consistency and prop contact need review. Do not substitute a third-party character outfit or source likeness. Approved original outfit and avatar; Safe task/prop and product-specific factual basis; Continuity review and rights-cleared assets; Provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval."
+  },
+  "missing": [
+    "brand",
+    "offer",
+    "avatar",
+    "voice"
+  ],
+  "avatarBible": {
+    "identity": "",
+    "voice": "",
+    "consistency": [
+      "Use the same approved face reference across shots.",
+      "Lock wardrobe, proportions, hair, and distinguishing features.",
+      "Keep the voice ID and reference performance stable."
+    ],
+    "references": [],
+    "approval": "pending"
+  },
+  "campaign": {
+    "brand": "",
+    "audience": "Proposed audience hypothesis: gaming and internet-culture viewers who recognize an exaggerated everyday situation. Based on the defined research sample, not a verified brand ICP.",
+    "offer": "",
+    "objective": "One original five-second vertical planning draft. Test visual clarity and product legibility after the actual brand and assets are approved. No view or sales guarantee.",
+    "creativeDirection": "Original concept: Dressed for a small everyday quest. A wardrobe/prop resemblance appears to set up a character-reference edit. The inspected frames do not establish the full scene, stunt or any actual intent. Research context only: https://www.instagram.com/p/DWeggVhjiNM/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+    "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: dressing gestures, garment consistency and prop contact need review. Do not substitute a third-party character outfit or source likeness. Approved original outfit and avatar; Safe task/prop and product-specific factual basis; Continuity review and rights-cleared assets; Provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval."
+  },
+  "production": {
+    "workflow": [
+      "Review brand facts and approved claims",
+      "Approve avatar reference and voice",
+      "Write and approve script variants",
+      "Build per-shot prompts and reference tags",
+      "Estimate cost and approve generation",
+      "Generate, review, and version clips",
+      "Assemble, caption, and mix",
+      "Approve final deliverables"
+    ],
+    "shotTemplate": {
+      "id": "shot-01",
+      "durationSeconds": null,
+      "camera": "",
+      "action": "",
+      "dialogue": "",
+      "referenceTags": [],
+      "audio": "",
+      "negativeConstraints": [],
+      "status": "needs_storyboard"
+    },
+    "generation": {
+      "provider": "Higgsfield",
+      "model": null,
+      "aspectRatio": "9:16",
+      "resolution": null,
+      "durationSeconds": null,
+      "audio": null,
+      "budgetApproved": false,
+      "submitted": false
+    },
+    "storyboard": {
+      "schemaVersion": "1.0",
+      "status": "draft_for_review",
+      "durationSeconds": 5,
+      "identity": "",
+      "wardrobe": "",
+      "environment": "Proposed original avatar room, not approved. No television or game footage.",
+      "voice": "",
+      "creativeDirection": "Original concept: Dressed for a small everyday quest. A wardrobe/prop resemblance appears to set up a character-reference edit. The inspected frames do not establish the full scene, stunt or any actual intent. Research context only: https://www.instagram.com/p/DWeggVhjiNM/. Do not copy the source identity, dialogue, music, franchise footage or artwork.",
+      "offer": "",
+      "constraints": "DRAFT ONLY. Brand, offer, commercial avatar and voice are unknown. No spending, model submission, outreach or publishing. No current quote. Source URLs are research provenance, not attached generation references. The old penthouse avatar and existing personalized-character proposal are not new commercial approval. Medium: dressing gestures, garment consistency and prop contact need review. Do not substitute a third-party character outfit or source likeness. Approved original outfit and avatar; Safe task/prop and product-specific factual basis; Continuity review and rights-cleared assets; Provider quote and explicit spend approval. Timings are proposed edit beats, not provider-supported clip durations. No new dialogue. Silent scene and sound design are proposals requiring approval. Timings adjusted to exact quarter-second edit beats for this importer; original research brief timings are preserved separately.",
+      "references": [],
+      "shots": [
+        {
+          "id": "shot-01",
+          "start": 0,
+          "duration": 1.5,
+          "camera": "Locked medium shot showing the original outfit.",
+          "action": "Original avatar adjusts an approved original cap and utility layer in its established room.",
+          "dialogue": "",
+          "audio": "Planned original fabric movement and a restrained success cue. No television footage, character likeness, franchise wording or soundtrack."
+        },
+        {
+          "id": "shot-02",
+          "start": 1.5,
+          "duration": 1.75,
+          "camera": "Widen only enough to reveal a harmless task and safe prop.",
+          "action": "Reveal that the serious preparation is for a harmless household task, using a safe non-weapon prop.",
+          "dialogue": "",
+          "audio": "Planned original fabric movement and a restrained success cue. No television footage, character likeness, franchise wording or soundtrack."
+        },
+        {
+          "id": "shot-03",
+          "start": 3.25,
+          "duration": 1.75,
+          "camera": "Hold a simple garment or product presentation.",
+          "action": "Avatar completes one small beat and presents the approved garment or product clearly.",
+          "dialogue": "",
+          "audio": "Planned original fabric movement and a restrained success cue. No television footage, character likeness, franchise wording or soundtrack."
+        }
+      ],
+      "generation": {
+        "model": null,
+        "estimatedCredits": null,
+        "spendApproved": false,
+        "submitted": false
+      },
+      "conceptSource": {
+        "id": "research-5s-wardrobe-v1",
+        "title": "Dressed for a small everyday quest",
+        "reportUrl": "/research/report.html",
+        "sourceUrls": [
+          "https://www.instagram.com/p/DWeggVhjiNM/"
+        ],
+        "sourceStatus": "research_context_only"
+      }
+    },
+    "storyboardVersions": []
+  },
+  "integrations": {
+    "research": "Exa, not connected",
+    "humanReview": "Terac, not connected",
+    "checkout": "Whop, not connected",
+    "generation": "Higgsfield, not connected"
+  },
+  "approvals": {
+    "script": false,
+    "likeness": false,
+    "claims": false,
+    "spend": false,
+    "finalDelivery": false
+  },
+  "handoff": {
+    "id": "wardrobe",
+    "title": "Dressed for a small everyday quest",
+    "readiness": "blocked_missing_brand_assets_quote_and_approvals",
+    "risk": "Medium: dressing gestures, garment consistency and prop contact need review. Do not substitute a third-party character outfit or source likeness.",
+    "required": [
+      "Approved original outfit and avatar",
+      "Safe task/prop and product-specific factual basis",
+      "Continuity review and rights-cleared assets",
+      "Provider quote and explicit spend approval"
+    ],
+    "assetBindings": [],
+    "outreachRecipient": null,
+    "renderedVideo": null
+  }
+}

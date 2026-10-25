@@ -1,0 +1,152 @@
+{
+  "url": "https://duolingo-library-phone-v1-nhl12ibr7-ryancortenbachs-projects.vercel.app/",
+  "deployment": "dpl_5wTb3ajiCyVpRm42YefG1gHMsb8s",
+  "target": "preview",
+  "ready": true,
+  "source": "experiments/concept-packet-handoff-v2",
+  "anonymous_http200_exact_source_matches": 13,
+  "records": [
+    {
+      "file": "epomaker-qualification-v1.json",
+      "status": 200,
+      "bytes": 6537,
+      "sha256": "7edc4b0873e14de916ad9c6ee6c3393b5de4a8a24caa65408eeb12b715924a3d",
+      "matches_source": true
+    },
+    {
+      "file": "handoff.js",
+      "status": 200,
+      "bytes": 2358,
+      "sha256": "151003679ed2c2c3b89b953e66d92ba5df70a2a65a2d8ea780881a49909b6b64",
+      "matches_source": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 7502,
+      "sha256": "e081d3f6b081ab936a9dbd35b7ee023e6584f9bfd7216e3a253b4d600c3d6152",
+      "matches_source": true
+    },
+    {
+      "file": "style.css",
+      "status": 200,
+      "bytes": 2494,
+      "sha256": "0b8f259ed80a9505fe64304a5910c2d0dcb1ecc9922bed1cc19919f86b3cd875",
+      "matches_source": true
+    },
+    {
+      "file": "manifest.json",
+      "status": 200,
+      "bytes": 8298,
+      "sha256": "89fe8bb0d691589e4a8ee283429e2099b5f5f2dcbe6504a1af1571c93062f05e",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/brief.js",
+      "status": 200,
+      "bytes": 3397,
+      "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/planner.js",
+      "status": 200,
+      "bytes": 3465,
+      "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+      "matches_source": true
+    },
+    {
+      "file": "runtime/import-packet.js",
+      "status": 200,
+      "bytes": 4363,
+      "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+      "matches_source": true
+    },
+    {
+      "file": "packets/mirror-v1.json",
+      "status": 200,
+      "bytes": 9227,
+      "sha256": "bce34da4a2ad3119bc7e7737a67c30dd492f37b98dbbbbacc9f1c70821b1ec4e",
+      "matches_source": true
+    },
+    {
+      "file": "packets/instructions-v1.json",
+      "status": 200,
+      "bytes": 9331,
+      "sha256": "8ad5b258ce5d51f8e49563653e518500a04bb440f6ebc1b88aec5391392574f9",
+      "matches_source": true
+    },
+    {
+      "file": "packets/wardrobe-v1.json",
+      "status": 200,
+      "bytes": 9220,
+      "sha256": "62e32083d3b7d8f5acd8558a011ecf5c5e6090c1f55b50c6a10fa0b6365a3a66",
+      "matches_source": true
+    },
+    {
+      "file": "packets/epomaker-galaxy100-v1.json",
+      "status": 200,
+      "bytes": 9071,
+      "sha256": "fd093815e758a9b55bc6f06f7dcacca0142edd9179d9df756f7a0ee742eece08",
+      "matches_source": true
+    },
+    {
+      "file": "assets/epomaker-galaxy100.png",
+      "status": 200,
+      "bytes": 949416,
+      "sha256": "b8d3fbdd1cbf4d7a055623d9f6c118af7fc289b33f7cff906a6de76fa83fcf6c",
+      "matches_source": true
+    }
+  ],
+  "independent_scoped_review": "Passed primary-source contact/variant/price-context checks,actual product image/copy,packet provenance,gates,all4controls,disclosures,desktop/mobile rendering and real JSON download. Not production/rights approval.",
+  "primary_sources": [
+    "https://epomaker.com/pages/contact-us",
+    "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+    "https://epomaker.com/pages/galaxy-series"
+  ],
+  "research_provider": "Manual primary-source follow-up, not Exa",
+  "contacted": false,
+  "contact_deliverability_verified": false,
+  "public_route_ambiguity_retained": true,
+  "exact_sku_approved": false,
+  "source_image_hash": "b8d3fbdd1cbf4d7a055623d9f6c118af7fc289b33f7cff906a6de76fa83fcf6c",
+  "source_image_bytes_unchanged": true,
+  "source_image_production_rights_approved": false,
+  "packet_missing": [
+    "offer",
+    "avatar",
+    "voice"
+  ],
+  "references_empty": true,
+  "quote_missing": true,
+  "approvals_reset": true,
+  "new_specialist_model_grade": false,
+  "desktop_document_width": 1920,
+  "mobile_document_width": 390,
+  "all4inspect_controls_verified": true,
+  "source_disclosures_expand": true,
+  "full_keyboard_visible_in_mobile_reference": true,
+  "image_natural_size": [
+    1400,
+    1400
+  ],
+  "real_packet_download": {
+    "file": "epomaker-galaxy100-v1.json",
+    "sha256": "fd093815e758a9b55bc6f06f7dcacca0142edd9179d9df756f7a0ee742eece08",
+    "matches_source": true,
+    "event_waiter_timed_out": true,
+    "file_verified_separately": true
+  },
+  "viewport_restored": true,
+  "root_final_inspection": true,
+  "screenshots_captured_in_chat": true,
+  "physical_devices_tested": false,
+  "original3packets_preserved_byte_exact": true,
+  "existing_seed_or_crm_records_modified": false,
+  "main_app_import_or_database_write": false,
+  "generated_sample": false,
+  "outreach_sent": false,
+  "production_deployed": false,
+  "deployment_recovery": "First upload failed fetch before a deployment URL was returned. Remote list showed only prior jobs and no new live job. Safe explicit-preview retry succeeded. No live deployment was duplicated.",
+  "source_record_review_marker": "qualification-v1.json retains its research-creation pending marker. This later receipt records scoped research/UI review, not production approval."
+}

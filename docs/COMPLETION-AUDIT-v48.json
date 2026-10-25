@@ -1,0 +1,607 @@
+{
+  "version": 48,
+  "date": "2026-10-25",
+  "scope": "UGC hackathon only",
+  "preview": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+  "completed": [
+    "Private GitHub repository and CI",
+    "Guided chat intake, editable briefs, campaign persistence and JSON export",
+    "Three review website mocks",
+    "Bot-style task table with actual browser-local readiness, events, pause/stop/retry and duplicate-run protection",
+    "800-entry source sample, 42 downloaded references, 408 machine transcripts, four explicit no-audio cases",
+    "Original Higgsfield avatar dossier v2",
+    "Audience packet, source gallery and sales playbook",
+    "Editable three-offer finance scenarios and margin tests",
+    "Eight manual prospect seeds with contact-source evidence and unsent drafts",
+    "Editable three-shot storyboard, 5/15/30 second retiming, identity/wardrobe/environment/voice locks, dialogue and sound cues, persistent drafts, version restore, review-lab transfer and JSON export with saved versions",
+    "Portable JSON packet import, saved storyboard history, separate campaign planning IDs, existing-campaign preservation and approval reset",
+    "Persistent review history, final reviewed-input binding, stale detection, independent JSON export, and preservation of specialist evidence if revision fails",
+    "Live keyless Exa MCP discovery, published source/contact candidates, unsent personalized drafts, sample briefs, and a separately labeled recorded five-source search",
+    "Persistent editable outreach drafts, source merging, version restore, portable JSON history and prospect-to-five-second-campaign handoff",
+    "Financial input validation, blocked invalid exports, no feasible price-floor handling, unclamped low yield and precise unit-cost display",
+    "Morning review hub, exact project links, scoped Lovable handoff, two original text storyboard candidates and draft Terac task",
+    "Separate protected Vercel readiness workflow proof: actual hosted suspension/resume and saved result, unauthorized rejection, zero model calls, and local result persistence across restart. Main dashboard executor remains browser-local.",
+    "Separate private operator console v2 with signed per-job tickets, actual cancellation, terminal-state handling and recovery of existing hosted runs. Twelve local and twelve hosted API checks passed; three ticket tests added. Authenticated browser lifecycle remains untested.",
+    "Optional same-origin hosted readiness panel integrated into Agent operations. Authenticated local browser submit/cancel/reload/recovery verified with fictional credential. Hosted API lifecycle and final cross-deployment recovery verified. Model/media/publishing calls disabled in combined preview. Legacy queue remains browser-local.",
+    "Private cloud execution-metadata list for V3 readiness runs, bounded filtering/pagination, discovery from empty browser history and selection for recovery. Local browser and actual hosted HTTP verified; no jobs created.",
+    "Private Whop offer-check adapter and operator UI, seven fixture tests and actual local/hosted missing-config checks. No live Whop request or verified product.",
+    "Eight original research-linked concept directions, separate editable five-second campaign creation, preserved identity/voice/wardrobe and source provenance in portable packets. Local existing-campaign/version preservation and actual JSON download verified; anonymous hosted creation and mobile width verified.",
+    "Persistent browser-local alert inbox for observed readiness blockers, hosted failures and uncertain submissions; deduplication, acknowledgement, source inspection and JSON history export. Local and hosted anonymous browser readiness alerts verified, and existing local hosted run recovery produced its actual budget alert.",
+    "Strict shared readiness validation for finite numeric settings, positive integer reference versions and nonempty fields. Fixed shared dependency symlink routing the compiled step to V1 validation. Isolated V3 generated build directory and compiled-bundle ownership guard. Actual hosted malformed-input workflow now returns both blockers with zero model calls.",
+    "Hosted run selection detaches prior ticket/polling; response epochs reject late status responses after selection, recovery or cancellation. Actual delayed-response browser test preserved selected run and verified cloud selection detaches controls. Workflow scanner excludes generated output; two consecutive builds pass.",
+    "Imported committed Mint Labs local agent from Air without touching its live workers. Added atomic SQLite per-render submission claim, stable saved key, unknown-outcome blocking and finite positive quote checks. Sixteen agent tests pass using fixtures or fake provider. Public read-only receipt distinguishes these from live generation.",
+    "Read-only review of existing Air mission and failed render records. Preserved original three drafts; created three claim-limited unsent revisions, three single-shot five-second concept briefs, and a blocked hook revision. Official-site source checks recorded; no live records or Gmail drafts changed.",
+    "Recovered the documented original PS2_penthouse_FINAL_v4.mp4 from its exact Air path into ignored Mini private archive. Source/destination SHA256 identical;23.157seconds/720x1280/24fps/H264/AAC and full decode verified. Version3 consolidated dossier preserves V2 and original decisions. Raw media remains private.",
+    "Live read-only UI review through a write-blocking proxy: Home/Tasks/Drafts/failed-render gate observed,760/390pxTasks checked, two quality findings handed off and transient script boot failure recovered. Current Whop package prices observed without purchase, course mock remains not on sale, obsolete course checker retired from runtime/UI.",
+    "One-time Starter/Campaign package financial planner, eight focused tests and90studio tests, independent findings fixed and re-reviewed. Real local downloaded JSON/edited-fee disclosure, hosted invalid-input/persistence and390pxlayout verified. Earlier three-offer planning model preserved.",
+    "Storefront independent source review and fixes: reopenable local cart; current one-time versus planned autonomous service/sponsor scope clarified. Anonymous hosted cart/size/removal, course no-checkout and390pxthree-page layout verified.",
+    "Earlier three-offer financial UI now rejects blank numeric inputs, clears invalid metrics, disables export and preserves last valid assumptions. Independent scoped review, real hosted recovery/explicit-zero and downloaded percentage conversion verified.",
+    "Imported team fulfillment/agent/creative source and independently audited fulfillment with fake providers. Prepared default no-spend mitigation in draft PR1; no production deployment.22offline fulfillment tests and90studio tests pass.",
+    "Local atomic render reconciliation with unique ledger, ownership validation, service-role RPC and rollback; independently reviewed,27offline tests and six local PostgreSQL checks pass. Not migrated or deployed.",
+    "Prepared local interrupted-submission recovery: atomic accepted ID/ledger/queue commit, manual stale-intent recovery, saved-ID protection, no automatic resubmission and retry counter reset. Independently reviewed;34offline tests, nine local PostgreSQL checks and90studio tests pass. Not migrated/deployed.",
+    "Estimated automatic render reservations, unknown exposure retention, atomic hold-to-ledger transfer, protected held-row lifecycle and legacy unknown admission block, independently reviewed.41fake/19localSQL/90studio tests pass. Isolated CI PostgreSQL17validated actual RPC lock waits and20multi-connection race iterations. Not deployed to user database.",
+    "Reviewed current Mac delivery, fixed stale-final gates, mixed-version operation/file races, broad Gmail update fallback and disconnect identity loss. Independent scoped review14tests; CI90root/388agent tests pass. Source-only draftPR2, no live deployment."
+  ],
+  "implemented_not_live": [
+    "Optional model chat and seven-reviewer bounded loop",
+    "Exact approved-dialogue locks and rejected-revision audit trail",
+    "Optional keyed Exa REST adapter. Free MCP discovery is verified live.",
+    "Read-only Whop Variant offer checker, current API version pinned. Credentials and expected account/product/variant absent; checkout remains disabled."
+  ],
+  "remaining": [
+    {
+      "item": "Real specialist review and rendered prospect samples",
+      "dependency": "No paid requests authorized. Need approved identity/product/dialogue/reference evidence and quote/spend authority. Existing failed-shot records and sample briefs are not new passes or rendered samples."
+    },
+    {
+      "item": "Original every-sponsor runtime requirement",
+      "dependency": "Exa historical live evidence retained; Terac task unassigned and requires authorized scope/account/budget. Lovable skipped by team, not completed. Whop listing checks do not prove purchase/delivery/entitlement."
+    },
+    {
+      "item": "Autonomous orchestration, posting and feedback",
+      "dependency": "Browser-local task queue plus separate hosted readiness does not establish tab execution, unified durable ownership, production/generation or posting. No live app/provider activation under schedule."
+    },
+    {
+      "item": "Research completeness and manual confidence review",
+      "dependency": "All60queue entries now have limited, independently checked overlay notes, not full source verification. Capped400/profile sample remains.42flagged speech-confidence issues and3additional ordinary-status music/ASR cautions remain;4saved no-audio variants do not prove original posts are silent. No human/audio/full-media accuracy pass, private sales evidence or exhaustive account-history claim."
+    },
+    {
+      "item": "Reference-layout parity and actual commercial readiness",
+      "dependency": "Standalone course v2 now has independently reviewed reference hierarchy and390pxcontrol/layout checks. No pixel-identical claim. Original course footage, final curriculum/proof and commerce readiness remain. Root checkout retired. Shop garments/fulfillment and autonomous service/package fulfillment still unverified."
+    },
+    {
+      "item": "Evidence-based financial calibration and guarantees",
+      "dependency": "Models are assumptions, not observed Khan sales. Package zero acquisition/overhead defaults and taxes/disputes/working-capital exclusions require explicit actual-cost inputs. No views/sales/profit guarantee."
+    },
+    {
+      "item": "Real Gmail and native operator recovery validation",
+      "dependency": "Durable initial draft intents/reconciliation and guarded UI already implemented. Actual Message-ID indexing/preservation/account identity and operator absence/stopped-worker assertions remain unverified. Do not duplicate completed recovery scaffolds."
+    },
+    {
+      "item": "Per-slot storage/delivery and large media",
+      "dependency": "Default-disabled/unwired adapter fake-tested; no real bucket/account privacy, signing/expiry, larger resumable uploads, per-slot email or delivery/entitlement validation."
+    }
+  ],
+  "test_count": 90,
+  "live_paid_requests_this_batch": 0,
+  "outreach_sent": 0,
+  "physical_phone_tested": false,
+  "whole_goal_complete": false,
+  "preview_evidence": "work/live-ui-review-final-verification-v2.json",
+  "preservation_limits": [
+    "Original normalized Exa sample v1 retained. Its original raw response was overwritten by an ignored diagnostic. V2 explicitly documents missing raw provenance. See docs/EXA-FREE-MCP-v2.md."
+  ],
+  "review_hub": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/delivery/",
+  "plugin_discovery": {
+    "Lovable": "Skipped per Air handoff. No builder session claimed.",
+    "Whop": "No plugin found in returned search results. Directory search is not exhaustive.",
+    "Terac": "No plugin found in returned search results. Directory search is not exhaustive."
+  },
+  "durable_proof": {
+    "receipt": "public/durable-proof/receipt-v1.json",
+    "local": "work/workflow-v1-local-verification.json",
+    "hosted": "work/workflow-v1-hosted-verification.json",
+    "deployment": "work/workflow-v1-deployment-verified.json",
+    "dashboard_connected": false,
+    "model_calls": 0,
+    "generation_submitted": false,
+    "production_deployed": false,
+    "public_page": "https://duolingo-library-phone-v1-akcw3r8kw-ryancortenbachs-projects.vercel.app/durable-proof/"
+  },
+  "durable_console": {
+    "url": "https://duolingo-library-phone-v1-6le7imc81-ryancortenbachs-projects.vercel.app/",
+    "deployment": "dpl_6x9rouD2pyqEXEBU4oWhDm7m2toT",
+    "dashboard_connected": false,
+    "server_submission_deduplication": false,
+    "authenticated_browser_lifecycle_tested": false,
+    "actual_api_lifecycle_tested": true,
+    "receipt": "public/durable-proof/receipt-v2.json",
+    "model_calls": 0,
+    "generation_submitted": false,
+    "public_receipt": "https://duolingo-library-phone-v1-8o4go97yu-ryancortenbachs-projects.vercel.app/durable-proof/receipt-v2.json"
+  },
+  "hosted_dashboard": {
+    "version": 3,
+    "url": "https://duolingo-library-phone-v1-aiaun0gnn-ryancortenbachs-projects.vercel.app/#operations",
+    "deployment": "dpl_73Sub89WwryaJu85nvpUsYRzSUxJ",
+    "optional_panel_connected": true,
+    "legacy_queue_still_local": true,
+    "authenticated_local_browser_lifecycle_tested": true,
+    "authenticated_hosted_browser_lifecycle_tested": false,
+    "hosted_api_lifecycle_tested": true,
+    "atomic_submission_deduplication": false,
+    "model_calls_enabled": false,
+    "generation_enabled": false,
+    "physical_phone_tested": false,
+    "receipt": "public/durable-proof/receipt-v3.json",
+    "cloud_metadata_registry": true
+  },
+  "air_copy": {
+    "commit": "5ff144c8d14cc8ce720aedcdaa0d7473e0991f20",
+    "files_sha256_verified": 2674,
+    "tests_passed": 59,
+    "latest_source_sync": "Air at56251a1 with live dev:all and local agent; Mini imported Air commits, but did not update or restart Air workers.",
+    "credentials_copied": false,
+    "latest_preview_shortcut": "/Users/ryancortenbach/Desktop/UGC Campaign Studio-v2.webloc",
+    "shortcut_url": "https://duolingo-library-phone-v1-gtdsnkgjw-ryancortenbachs-projects.vercel.app/delivery/",
+    "shortcut_readback_verified": true
+  },
+  "whop_offer_checker": {
+    "status": "retired_from_current_runtime_and_UI",
+    "legacy_endpoint_authenticated_http": 410,
+    "providerRequested": false,
+    "paymentsEnabled": false
+  },
+  "concept_library": {
+    "concepts": 8,
+    "generation_submitted": false,
+    "original_proposals": true,
+    "source_urls_are_generation_references": false,
+    "existing_campaign_preserved_browser_verified": true,
+    "actual_export_verified": true,
+    "local_evidence": "work/concepts-local-browser-v1.json",
+    "hosted_evidence": "work/concepts-hosted-browser-v2.json"
+  },
+  "alert_inbox": {
+    "browser_local": true,
+    "push_delivery": false,
+    "acknowledgement_resolves_task": false,
+    "max_records": 200,
+    "credentials_prompts_tickets_stored": false,
+    "local_task_browser_tested": true,
+    "local_hosted_recovery_browser_tested": true,
+    "anonymous_hosted_browser_local_task_tested": true,
+    "failed_uncertain_modes": "offline fixtures only",
+    "actual_export_bytes": 883,
+    "evidence": [
+      "work/alerts-local-browser-v1.json",
+      "work/alerts-hosted-local-browser-v1.json",
+      "work/alerts-hosted-browser-v1.json"
+    ]
+  },
+  "readiness_gate": {
+    "canonical_module": "src/readiness.js",
+    "local_hosted_share_validator": true,
+    "workflow_build_isolated": true,
+    "compiled_guard": "scripts/check-workflow-build.mjs",
+    "local_api_checks": 6,
+    "hosted_api_checks": 6,
+    "actual_final_workflow": "work/readiness-gate-hosted-workflow-v2.json",
+    "intermediate_failed_check_preserved": "work/readiness-gate-hosted-workflow-v1.json",
+    "new_readiness_workflow_jobs": 2,
+    "modelCalls": 0,
+    "generationSubmitted": false
+  },
+  "hosted_selection": {
+    "response_scope_guard": true,
+    "old_ticket_detached_on_selection": true,
+    "real_local_delayed_response_test": true,
+    "response_payload_modified": false,
+    "new_workflow_jobs": 0,
+    "local_evidence": "work/hosted-selection-local-browser-v1.json",
+    "hosted_anonymous_evidence": "work/hosted-selection-hosted-browser-v1.json",
+    "repeated_builds_verified": 2
+  },
+  "air_handoff": {
+    "merged_commits": [
+      "e7b8641",
+      "ed8a2c5",
+      "9861a27"
+    ],
+    "mcp_servers_registered_in_project_config": true,
+    "account_connections_independently_verified": false,
+    "Lovable": "skipped per Air handoff",
+    "paid_actions_authorized": false
+  },
+  "agent_test_count": 19,
+  "local_agent": {
+    "source_imported_from": "56251a11a9b365b22123fefbe1504b55e8930653",
+    "local_only": true,
+    "production_deployed": false,
+    "Air_running_version_updated": false,
+    "Mini_live_provider_requests": 0,
+    "fake_provider_tests": true,
+    "atomic_per_render_claim_tested": true,
+    "database_reopen_tested": true,
+    "provider_idempotency_guarantee_verified": false,
+    "unknown_outcome_requires_manual_reconciliation": true,
+    "public_receipt": "https://duolingo-library-phone-v1-6ejq55g17-ryancortenbachs-projects.vercel.app/agent-proof/submission-v1.json"
+  },
+  "saved_mission_review": {
+    "mission_status": "done in saved record",
+    "leads": 6,
+    "Gmail_draft_records": 3,
+    "saved_checker_reports": 7,
+    "failed_render": 1,
+    "rendered_file_observed": false,
+    "new_model_requests": 0,
+    "new_Gmail_writes": 0,
+    "outreach_sent_this_review": 0,
+    "new_generation": false,
+    "outreach_packet": "docs/OUTREACH-REVISED-DRAFTS-v1.json",
+    "hook_revision": "docs/HOOK-SHOT-REVISION-v1.json",
+    "new_pass_issued": false,
+    "originals_preserved": true
+  },
+  "original_avatar_recovery": {
+    "dossier": "docs/HIGGSFIELD-AVATAR-DOSSIER-v3.txt",
+    "documented_file": "PS2_penthouse_FINAL_v4.mp4",
+    "bytes": 7705699,
+    "sha256": "eb34229fa2448f0655fa94bb576b982477b91b92625763110d0f96abdd6f3880",
+    "source_and_destination_match": true,
+    "full_decode_passed": true,
+    "raw_media_publicly_uploaded": false,
+    "historical_approved_media_hash_available": false,
+    "fresh_visual_approval": false,
+    "new_campaign_identity_approval": false,
+    "receipt": "public/agent-proof/avatar-recovery-v1.json"
+  },
+  "latest_source_review": {
+    "commit": "99e089e",
+    "ci": "https://github.com/ryancortenbach/ugc-campaign-studio/actions/runs/40116672655",
+    "studio_tests": 82,
+    "agent_tests": 19,
+    "atomic_claim_retained": true,
+    "fresh_visual_review": false,
+    "historical_snapshot": true
+  },
+  "sales_archive": {
+    "current": "sales/call-list-d2c-2026-10-24.csv",
+    "legacy_files_removed_by_team_commit": "f000384",
+    "historical_versions": "Git history only, do not restore legacy lists",
+    "calls_placed": 0
+  },
+  "ui_review": {
+    "status": "partial_with_findings",
+    "write_requests_forwarded": 0,
+    "blocked_boundary_test": 1,
+    "Air_source_changed": false,
+    "Air_workers_changed": false,
+    "physical_phone_tested": false,
+    "independent_visual_signoff": false,
+    "evidence": "public/agent-proof/ui-review-v1.json"
+  },
+  "current_whop_offers": {
+    "course_checkout_retired": true,
+    "starter_price_usd": 500,
+    "campaign_price_usd": 1000,
+    "one_time_prices_browser_verified": true,
+    "counts_5_12_from_team_handoff": true,
+    "purchase_or_delivery_verified": false,
+    "evidence": "work/whop-package-browser-verification-v1.json"
+  },
+  "latest_batch": {
+    "type": "one_dtc_candidate_primary_source_qualification",
+    "source_directory": "docs/creative/epomaker-qualification-v1",
+    "receipt": {
+      "url": "https://duolingo-library-phone-v1-nhl12ibr7-ryancortenbachs-projects.vercel.app/",
+      "deployment": "dpl_5wTb3ajiCyVpRm42YefG1gHMsb8s",
+      "target": "preview",
+      "ready": true,
+      "source": "experiments/concept-packet-handoff-v2",
+      "anonymous_http200_exact_source_matches": 13,
+      "records": [
+        {
+          "file": "epomaker-qualification-v1.json",
+          "status": 200,
+          "bytes": 6537,
+          "sha256": "7edc4b0873e14de916ad9c6ee6c3393b5de4a8a24caa65408eeb12b715924a3d",
+          "matches_source": true
+        },
+        {
+          "file": "handoff.js",
+          "status": 200,
+          "bytes": 2358,
+          "sha256": "151003679ed2c2c3b89b953e66d92ba5df70a2a65a2d8ea780881a49909b6b64",
+          "matches_source": true
+        },
+        {
+          "file": "index.html",
+          "status": 200,
+          "bytes": 7502,
+          "sha256": "e081d3f6b081ab936a9dbd35b7ee023e6584f9bfd7216e3a253b4d600c3d6152",
+          "matches_source": true
+        },
+        {
+          "file": "style.css",
+          "status": 200,
+          "bytes": 2494,
+          "sha256": "0b8f259ed80a9505fe64304a5910c2d0dcb1ecc9922bed1cc19919f86b3cd875",
+          "matches_source": true
+        },
+        {
+          "file": "manifest.json",
+          "status": 200,
+          "bytes": 8298,
+          "sha256": "89fe8bb0d691589e4a8ee283429e2099b5f5f2dcbe6504a1af1571c93062f05e",
+          "matches_source": true
+        },
+        {
+          "file": "runtime/brief.js",
+          "status": 200,
+          "bytes": 3397,
+          "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+          "matches_source": true
+        },
+        {
+          "file": "runtime/planner.js",
+          "status": 200,
+          "bytes": 3465,
+          "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+          "matches_source": true
+        },
+        {
+          "file": "runtime/import-packet.js",
+          "status": 200,
+          "bytes": 4363,
+          "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+          "matches_source": true
+        },
+        {
+          "file": "packets/mirror-v1.json",
+          "status": 200,
+          "bytes": 9227,
+          "sha256": "bce34da4a2ad3119bc7e7737a67c30dd492f37b98dbbbbacc9f1c70821b1ec4e",
+          "matches_source": true
+        },
+        {
+          "file": "packets/instructions-v1.json",
+          "status": 200,
+          "bytes": 9331,
+          "sha256": "8ad5b258ce5d51f8e49563653e518500a04bb440f6ebc1b88aec5391392574f9",
+          "matches_source": true
+        },
+        {
+          "file": "packets/wardrobe-v1.json",
+          "status": 200,
+          "bytes": 9220,
+          "sha256": "62e32083d3b7d8f5acd8558a011ecf5c5e6090c1f55b50c6a10fa0b6365a3a66",
+          "matches_source": true
+        },
+        {
+          "file": "packets/epomaker-galaxy100-v1.json",
+          "status": 200,
+          "bytes": 9071,
+          "sha256": "fd093815e758a9b55bc6f06f7dcacca0142edd9179d9df756f7a0ee742eece08",
+          "matches_source": true
+        },
+        {
+          "file": "assets/epomaker-galaxy100.png",
+          "status": 200,
+          "bytes": 949416,
+          "sha256": "b8d3fbdd1cbf4d7a055623d9f6c118af7fc289b33f7cff906a6de76fa83fcf6c",
+          "matches_source": true
+        }
+      ],
+      "independent_scoped_review": "Passed primary-source contact/variant/price-context checks,actual product image/copy,packet provenance,gates,all4controls,disclosures,desktop/mobile rendering and real JSON download. Not production/rights approval.",
+      "primary_sources": [
+        "https://epomaker.com/pages/contact-us",
+        "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+        "https://epomaker.com/pages/galaxy-series"
+      ],
+      "research_provider": "Manual primary-source follow-up, not Exa",
+      "contacted": false,
+      "contact_deliverability_verified": false,
+      "public_route_ambiguity_retained": true,
+      "exact_sku_approved": false,
+      "source_image_hash": "b8d3fbdd1cbf4d7a055623d9f6c118af7fc289b33f7cff906a6de76fa83fcf6c",
+      "source_image_bytes_unchanged": true,
+      "source_image_production_rights_approved": false,
+      "packet_missing": [
+        "offer",
+        "avatar",
+        "voice"
+      ],
+      "references_empty": true,
+      "quote_missing": true,
+      "approvals_reset": true,
+      "new_specialist_model_grade": false,
+      "desktop_document_width": 1920,
+      "mobile_document_width": 390,
+      "all4inspect_controls_verified": true,
+      "source_disclosures_expand": true,
+      "full_keyboard_visible_in_mobile_reference": true,
+      "image_natural_size": [
+        1400,
+        1400
+      ],
+      "real_packet_download": {
+        "file": "epomaker-galaxy100-v1.json",
+        "sha256": "fd093815e758a9b55bc6f06f7dcacca0142edd9179d9df756f7a0ee742eece08",
+        "matches_source": true,
+        "event_waiter_timed_out": true,
+        "file_verified_separately": true
+      },
+      "viewport_restored": true,
+      "root_final_inspection": true,
+      "screenshots_captured_in_chat": true,
+      "physical_devices_tested": false,
+      "original3packets_preserved_byte_exact": true,
+      "existing_seed_or_crm_records_modified": false,
+      "main_app_import_or_database_write": false,
+      "generated_sample": false,
+      "outreach_sent": false,
+      "production_deployed": false,
+      "deployment_recovery": "First upload failed fetch before a deployment URL was returned. Remote list showed only prior jobs and no new live job. Safe explicit-preview retry succeeded. No live deployment was duplicated.",
+      "source_record_review_marker": "qualification-v1.json retains its research-creation pending marker. This later receipt records scoped research/UI review, not production approval."
+    },
+    "generated_samples": 0,
+    "new_exa_results": 0,
+    "contacted": false,
+    "original_sources_and_records_preserved": true,
+    "Air_modified": false,
+    "whole_goal_complete": false
+  },
+  "retired_fulfillment_review": {
+    "component": "ops Vercel service",
+    "retired_main_commit": "12330d6",
+    "closed_pr": "https://github.com/ryancortenbach/ugc-campaign-studio/pull/1",
+    "preserved_branch": "review/fulfillment-spending-pause-v1",
+    "merged": false,
+    "production_deployed_by_this_worker": false,
+    "prior_audits_historical": true
+  },
+  "previous_latest_batch": {
+    "type": "three_research_draft_packet_handoff",
+    "packet_directory": "docs/creative/research-concept-packets-v1",
+    "generator": "scripts/build-research-concept-packets-v1.mjs",
+    "receipt": {
+      "url": "https://duolingo-library-phone-v1-8fpoq4576-ryancortenbachs-projects.vercel.app/",
+      "deployment": "dpl_8rc9J92yq2fSxzaRiUUG9E8PuBGT",
+      "target": "preview",
+      "ready": true,
+      "source": "experiments/concept-packet-handoff-v1",
+      "anonymous_http200_exact_byte_matches": 10,
+      "hosted_files": [
+        {
+          "file": "handoff.js",
+          "status": 200,
+          "sha256": "151003679ed2c2c3b89b953e66d92ba5df70a2a65a2d8ea780881a49909b6b64",
+          "bytes": 2358,
+          "matches_source": true
+        },
+        {
+          "file": "index.html",
+          "status": 200,
+          "sha256": "ddec54981fb6ee9848fdf66928ff557817c4e7b6b8cb441e6bf8aa1434dda6cb",
+          "bytes": 3800,
+          "matches_source": true
+        },
+        {
+          "file": "style.css",
+          "status": 200,
+          "sha256": "4605deecadfe7ad27d97db0a511deffb0844b43e093cdd4c0b395f63cf200522",
+          "bytes": 1961,
+          "matches_source": true
+        },
+        {
+          "file": "manifest.json",
+          "status": 200,
+          "sha256": "517a20eb2261a4541baa7555fecd2d307b12438c4de0582b8d53d04242767750",
+          "bytes": 6591,
+          "matches_source": true
+        },
+        {
+          "file": "runtime/brief.js",
+          "status": 200,
+          "sha256": "54197820fb2a0c23107ae94a9709b9c5fc76b52c00b3d24c32dcb9d14c2b4a22",
+          "bytes": 3397,
+          "matches_source": true
+        },
+        {
+          "file": "runtime/planner.js",
+          "status": 200,
+          "sha256": "6747c41e2c79ced0b90c48d2ae1e93ffa7a192879827be52e5beeac64a92a3da",
+          "bytes": 3465,
+          "matches_source": true
+        },
+        {
+          "file": "runtime/import-packet.js",
+          "status": 200,
+          "sha256": "d17bcafb8f8192d49789011d49c0fb01bd048072838a0880481f083bc46b6638",
+          "bytes": 4363,
+          "matches_source": true
+        },
+        {
+          "file": "packets/mirror-v1.json",
+          "status": 200,
+          "sha256": "bce34da4a2ad3119bc7e7737a67c30dd492f37b98dbbbbacc9f1c70821b1ec4e",
+          "bytes": 9227,
+          "matches_source": true
+        },
+        {
+          "file": "packets/instructions-v1.json",
+          "status": 200,
+          "sha256": "8ad5b258ce5d51f8e49563653e518500a04bb440f6ebc1b88aec5391392574f9",
+          "bytes": 9331,
+          "matches_source": true
+        },
+        {
+          "file": "packets/wardrobe-v1.json",
+          "status": 200,
+          "sha256": "62e32083d3b7d8f5acd8558a011ecf5c5e6090c1f55b50c6a10fa0b6365a3a66",
+          "bytes": 9220,
+          "matches_source": true
+        }
+      ],
+      "independent_review": "No blocking issue found in packet provenance,blank intake,approval resets,timings,gate evidence,runtime copies,preservation guard and actual inspector UI.",
+      "packets_checked": 3,
+      "four_missing_intake_fields": [
+        "brand",
+        "offer",
+        "avatar",
+        "voice"
+      ],
+      "remaining_preflight_categories": [
+        "references",
+        "budget"
+      ],
+      "forged_approval_reset_verified": true,
+      "normalized_roundtrip_verified": true,
+      "generator_preserves_changed_outputs": true,
+      "preservation_fixture": "work/concept-packet-preservation-check-v1.log",
+      "runtime_copies_match_originals": true,
+      "desktop_document_width": 1920,
+      "mobile_document_width": 390,
+      "all_three_inspect_controls_verified": true,
+      "real_json_download_verified": {
+        "file": "mirror-v1.json",
+        "bytes": 9227,
+        "source_match": true,
+        "event_waiter_timed_out": true,
+        "file_verified_separately": true
+      },
+      "viewport_restored": true,
+      "root_final_inspect_verified": true,
+      "screenshots_captured_in_chat": true,
+      "physical_devices_tested": false,
+      "main_studio_import_or_campaign_installation": false,
+      "app_database_modified": false,
+      "provider_calls": 0,
+      "paid_actions": 0,
+      "production_deployed": false,
+      "known_importer_limit": "Original parser compares fractional starts to the exact JS accumulation. New drafts use quarter-second edit beats; originals and parser unchanged. This is a workaround, not a parser fix."
+    },
+    "independent_review_passed": true,
+    "main_app_activated": false,
+    "Air_modified": false,
+    "new_specialist_grades": 0,
+    "generated_samples": 0,
+    "whole_goal_complete": false
+  },
+  "current_branch_context": {
+    "PR4_merged_by_other_session": true,
+    "main_source": "cfbcc8293b6306357c1481c3b6f77592d404534b",
+    "post_judging_remote_removed": true,
+    "preview_fixture_source_removed_by_other_session": true,
+    "merge_by_this_worker": false
+  },
+  "source_comparison_preview": {
+    "url": "https://duolingo-library-phone-v1-lbsb3dv3g-ryancortenbachs-projects.vercel.app/",
+    "source": "5e8c44c",
+    "historical_fictional_fixture": true,
+    "fresh_access_test_this_batch": false,
+    "storage_connected": false,
+    "physical_device_verified": false
+  }
+}

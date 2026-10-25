@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "intake_incomplete",
+  "brief": {
+    "brand": "EPOMAKER. Public-site research candidate, not a client or approved partnership. Candidate product: Galaxy100 QMK/VIA. Exact SKU, switch and permissions pending.",
+    "audience": "Proposed hypothesis: keyboard enthusiasts, gaming/internet-culture viewers and desk-setup audiences. Fit is inferred from saved audience research and the brand’s public gaming/coding/desk categories, not verified buyer analytics.",
+    "offer": "",
+    "objective": "One original five-second vertical concept for review. No generated sample, views, sales or campaign outcome promised.",
+    "avatar": "",
+    "voice": "",
+    "creative": "An original fictional desk clerk treats a single keyboard press like an important inspection. Use original character, set and wording. Hold the exact approved product layout clearly. No game franchise assets or copied creator likeness.",
+    "constraints": "Draft only. No quote, spend approval, generation, posting or outreach. No approved commercial identity/voice. Candidate product photograph is source research, not an attached or approved generation asset. Confirm exact product/color/switch/SKU and usage permission. Preserve key legends, knob and numpad layout. Do not invent performance, latency, sound-quality, price or endorsement claims. A key sound must be a permitted recording of the exact selected switch/setup, not generated audio represented as authentic. If no approved sound exists, keep the concept audio unresolved. No branded sample is attached. Three edit beats are not asserted provider-supported clip lengths."
+  },
+  "missing": [
+    "offer",
+    "avatar",
+    "voice"
+  ],
+  "avatarBible": {
+    "identity": "",
+    "voice": "",
+    "consistency": [
+      "Use the same approved face reference across shots.",
+      "Lock wardrobe, proportions, hair, and distinguishing features.",
+      "Keep the voice ID and reference performance stable."
+    ],
+    "references": [],
+    "approval": "pending"
+  },
+  "campaign": {
+    "brand": "EPOMAKER. Public-site research candidate, not a client or approved partnership. Candidate product: Galaxy100 QMK/VIA. Exact SKU, switch and permissions pending.",
+    "audience": "Proposed hypothesis: keyboard enthusiasts, gaming/internet-culture viewers and desk-setup audiences. Fit is inferred from saved audience research and the brand’s public gaming/coding/desk categories, not verified buyer analytics.",
+    "offer": "",
+    "objective": "One original five-second vertical concept for review. No generated sample, views, sales or campaign outcome promised.",
+    "creativeDirection": "An original fictional desk clerk treats a single keyboard press like an important inspection. Use original character, set and wording. Hold the exact approved product layout clearly. No game franchise assets or copied creator likeness.",
+    "constraints": "Draft only. No quote, spend approval, generation, posting or outreach. No approved commercial identity/voice. Candidate product photograph is source research, not an attached or approved generation asset. Confirm exact product/color/switch/SKU and usage permission. Preserve key legends, knob and numpad layout. Do not invent performance, latency, sound-quality, price or endorsement claims. A key sound must be a permitted recording of the exact selected switch/setup, not generated audio represented as authentic. If no approved sound exists, keep the concept audio unresolved. No branded sample is attached. Three edit beats are not asserted provider-supported clip lengths."
+  },
+  "production": {
+    "workflow": [
+      "Review brand facts and approved claims",
+      "Approve avatar reference and voice",
+      "Write and approve script variants",
+      "Build per-shot prompts and reference tags",
+      "Estimate cost and approve generation",
+      "Generate, review, and version clips",
+      "Assemble, caption, and mix",
+      "Approve final deliverables"
+    ],
+    "shotTemplate": {
+      "id": "shot-01",
+      "durationSeconds": null,
+      "camera": "",
+      "action": "",
+      "dialogue": "",
+      "referenceTags": [],
+      "audio": "",
+      "negativeConstraints": [],
+      "status": "needs_storyboard"
+    },
+    "generation": {
+      "provider": "Higgsfield",
+      "model": null,
+      "aspectRatio": "9:16",
+      "resolution": null,
+      "durationSeconds": null,
+      "audio": null,
+      "budgetApproved": false,
+      "submitted": false
+    },
+    "storyboard": {
+      "schemaVersion": "1.0",
+      "status": "draft_for_review",
+      "durationSeconds": 5,
+      "identity": "",
+      "wardrobe": "",
+      "environment": "Proposed original desk-inspection set. Not the recovered penthouse and not a copied game environment. Set approval pending.",
+      "voice": "",
+      "creativeDirection": "An original fictional desk clerk treats a single keyboard press like an important inspection. Use original character, set and wording. Hold the exact approved product layout clearly. No game franchise assets or copied creator likeness.",
+      "offer": "",
+      "constraints": "Draft only. No quote, spend approval, generation, posting or outreach. No approved commercial identity/voice. Candidate product photograph is source research, not an attached or approved generation asset. Confirm exact product/color/switch/SKU and usage permission. Preserve key legends, knob and numpad layout. Do not invent performance, latency, sound-quality, price or endorsement claims. A key sound must be a permitted recording of the exact selected switch/setup, not generated audio represented as authentic. If no approved sound exists, keep the concept audio unresolved. No branded sample is attached. Three edit beats are not asserted provider-supported clip lengths.",
+      "references": [],
+      "shots": [
+        {
+          "id": "shot-01",
+          "start": 0,
+          "duration": 1.25,
+          "camera": "Locked medium-wide composition with product in lower foreground.",
+          "action": "Proposed original clerk studies the approved keyboard as though a simple inspection is unusually important. Keep identity and outfit unchanged.",
+          "dialogue": "",
+          "audio": "No spoken line proposed. Sound decision unapproved."
+        },
+        {
+          "id": "shot-02",
+          "start": 1.25,
+          "duration": 2,
+          "camera": "Controlled key/hand detail or approved product plate composite.",
+          "action": "One deliberate key press. Preserve real key legends, numpad and knob. Hand contact and key travel need feasibility review; do not morph the hardware.",
+          "dialogue": "",
+          "audio": "Use only approved authentic audio of the selected switch/setup. No synthetic sound presented as the product."
+        },
+        {
+          "id": "shot-03",
+          "start": 3.25,
+          "duration": 1.75,
+          "camera": "Stable product-facing finish.",
+          "action": "Clerk gives a restrained reaction while the approved product remains readable. End text and any CTA require brand approval; none supplied.",
+          "dialogue": "",
+          "audio": "Allow a clean ending. Final mix and any silence choice require approval."
+        }
+      ],
+      "generation": {
+        "model": null,
+        "estimatedCredits": null,
+        "spendApproved": false,
+        "submitted": false
+      },
+      "conceptSource": {
+        "id": "epomaker-galaxy100-inspection-v1",
+        "title": "One keystroke, a very serious inspection",
+        "reportUrl": "/research/report.html",
+        "sourceUrls": [
+          "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+          "https://epomaker.com/pages/contact-us"
+        ],
+        "sourceStatus": "public_brand_research_only"
+      }
+    },
+    "storyboardVersions": []
+  },
+  "integrations": {
+    "research": "Exa, not connected",
+    "humanReview": "Terac, not connected",
+    "checkout": "Whop, not connected",
+    "generation": "Higgsfield, not connected"
+  },
+  "approvals": {
+    "script": false,
+    "likeness": false,
+    "claims": false,
+    "spend": false,
+    "finalDelivery": false
+  },
+  "handoff": {
+    "status": "brand_research_only_not_ready",
+    "productCandidate": {
+      "name": "Galaxy100 QMK/VIA",
+      "url": "https://epomaker.com/products/epomaker-galaxy100-qmk-via",
+      "colorCandidate": "Black, as displayed by the observed default product page and photo. Not selected or approved.",
+      "switchCandidate": "Feker Marble White Switch, observed default label only. Exact SKU unverified.",
+      "sku": null,
+      "productImageUrl": "https://epomaker.com/cdn/shop/files/IMG_1742.png?v=1773627520&width=1400",
+      "productImageApproved": false
+    },
+    "contactResearchOnly": {
+      "email": "marketing@epomaker.com",
+      "sourceUrl": "https://epomaker.com/pages/contact-us",
+      "alternative": "community@epomaker.com",
+      "deliverabilityVerified": false,
+      "contactAuthorized": false
+    },
+    "sampleGenerated": false,
+    "sent": false
+  }
+}
