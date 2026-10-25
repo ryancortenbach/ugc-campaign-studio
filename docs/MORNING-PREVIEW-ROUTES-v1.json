@@ -1,0 +1,101 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/",
+    "bytes": 20966,
+    "sha256": "80e7ba48ef03ae0c05599e3e58ae1e52c2a1bb82031552b99dcee578e9119e20",
+    "local_file": "public/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/delivery/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/delivery/",
+    "bytes": 14445,
+    "sha256": "6d5e86e6e272b06b1c565015f653d6068a6281fbbb9d08918a072a15382575ca",
+    "local_file": "public/delivery/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/shop/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/shop/",
+    "bytes": 2998,
+    "sha256": "7dd70705718eb38c3bbcbc3982bd31660a5fd44c26f8614223db32dae0e7f499",
+    "local_file": "public/shop/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/course/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/course/",
+    "bytes": 3748,
+    "sha256": "aad0d9587e0e7dc4ffe637eb0d09b0e860e6f2a1ac67917bf18333ca316c3ad6",
+    "local_file": "public/course/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/brands/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/brands/",
+    "bytes": 4033,
+    "sha256": "0fcc28ee0ddc98085d3106d824f647b00a16ba62e05c1d622a5f50a61d358f16",
+    "local_file": "public/brands/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/research/",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/",
+    "bytes": 24191,
+    "sha256": "20ac0f442e6a41266579a82a52060fa999cee553098a7d8ca0baa03ac9bb9da9",
+    "local_file": "public/research/index.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/research/report.html",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/report.html",
+    "bytes": 36130,
+    "sha256": "151a26ea97b88f5fdb8786f736c69adfb750a3597e50aa81eafb204e54e31c3b",
+    "local_file": "public/research/report.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/research/research-packet.md",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/research-packet.md",
+    "bytes": 28096,
+    "sha256": "6822c5e9c94bc3f47b636046530a5e364578cdee785b6e257acffa7683b7187b",
+    "local_file": "public/research/research-packet.md",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/research/sales-playbook.html",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/sales-playbook.html",
+    "bytes": 7655,
+    "sha256": "671bbec7ff36c732a65c5552848cd47628115ae5596df15239e7d9d5a28a76bb",
+    "local_file": "public/research/sales-playbook.html",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/research/reel-index.json",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/research/reel-index.json",
+    "bytes": 370545,
+    "sha256": "fbcab014322edadd6ea4f069622c5bbeb1644093f84a90c6a21674186e3d4ad3",
+    "local_file": "public/research/reel-index.json",
+    "matches_local_bytes": true
+  },
+  {
+    "route": "/package-finance.js",
+    "status": 200,
+    "final_url": "https://duolingo-library-phone-v1-lf1l7sjd8-ryancortenbachs-projects.vercel.app/package-finance.js",
+    "bytes": 5547,
+    "sha256": "a7ea3c7d0f20386be60103270702bc4527dc2b63ed67e156174bfd8ae15564f7",
+    "local_file": "public/package-finance.js",
+    "matches_local_bytes": true
+  }
+]
