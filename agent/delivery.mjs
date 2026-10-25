@@ -156,10 +156,14 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
   });
  }
 
+ const sourceMatches=(o,list)=>{
+  const p=o.storyboard_id?store.getStoryboard(o.storyboard_id)?.plan:null,expected=p?.shots||[],hash=storyboardPlanHash(p);
+  return Boolean(o.storyboard_id&&expected.length===list.length&&list.length&&list.every((s,i)=>s.render?.storyboard_id===o.storyboard_id&&s.render.storyboard_plan_hash===hash&&String(s.shotId)===String(expected[i].id||`shot-${i+1}`)));
+ };
  function get(id){
   const o=need(id),list=shots(o),d=row(id);
   const current=JSON.stringify(list.map(s=>s.render?.id||null));
-  const final=d?.final_file&&existsSync(localFile(d.final_file))?{url:`/renders/${d.final_file}?v=${encodeURIComponent(d.final_at)}`,at:d.final_at,bytes:d.final_bytes,captions:Boolean(d.captions),storyboardId:d.final_storyboard_id&&d.final_storyboard_hash?d.final_storyboard_id:null,stale:d.final_render_ids!==current||Boolean(o.storyboard_id&&(!d.final_storyboard_id||!d.final_storyboard_hash||d.final_storyboard_id!==o.storyboard_id||d.final_storyboard_hash!==storyboardPlanHash(store.getStoryboard(o.storyboard_id)?.plan)))}:null;
+  const final=d?.final_file&&existsSync(localFile(d.final_file))?{url:`/renders/${d.final_file}?v=${encodeURIComponent(d.final_at)}`,at:d.final_at,bytes:d.final_bytes,captions:Boolean(d.captions),storyboardId:d.final_storyboard_id&&d.final_storyboard_hash?d.final_storyboard_id:null,stale:d.final_render_ids!==current||Boolean(o.storyboard_id&&(!d.final_storyboard_id||!d.final_storyboard_hash||d.final_storyboard_id!==o.storyboard_id||d.final_storyboard_hash!==storyboardPlanHash(store.getStoryboard(o.storyboard_id)?.plan)||!sourceMatches(o,list)))}:null;
   return {
    order:{paymentId:o.payment_id,product:o.product,buyerName:o.buyer_name,buyerEmail:o.buyer_email,brand:o.brand_domain},
    shots:list.map(s=>({shotId:s.shotId,title:s.title,renderId:s.render?.id||null,status:s.render?'finished':s.latest?.status||'missing',review:s.render?.review||null})),
@@ -183,8 +187,8 @@ export function createDelivery({store,env=process.env,gmail=gmailTools,fetch=glo
   const missing=list.filter(s=>!s.render);
   if(missing.length)throw fail(409,`${missing.length} of ${list.length} shots are not finished: ${missing.map(s=>s.title).join(', ')}.`);
   const plan=o.storyboard_id?store.getStoryboard(o.storyboard_id)?.plan:null;
-  const planShots=plan?.shots||[],planHash=storyboardPlanHash(plan);
-  const sourceVerified=Boolean(o.storyboard_id&&planShots.length===list.length&&list.every((s,i)=>s.render.storyboard_id===o.storyboard_id&&s.render.storyboard_plan_hash===planHash&&String(s.shotId)===String(planShots[i].id||`shot-${i+1}`)));
+  const planHash=storyboardPlanHash(plan);
+  const sourceVerified=sourceMatches(o,list);
   const dialogue=new Map((plan?.shots||[]).map((s,i)=>[String(s.id||`shot-${i+1}`),String(s.dialogue||'')]));
   const file=`finals/${o.payment_id.replace(/[^A-Za-z0-9_-]/g,'_')}-${randomUUID()}.mp4`;
   const made=await join({clips:list.map(s=>localFile(s.render.local_file)),captions:list.map(s=>dialogue.get(String(s.shotId))||''),out:localFile(file),ffmpeg:ffmpeg(),font:font()});
