@@ -41,3 +41,17 @@ Validation: 29 focused tests passed. The full suite passed 352 agent tests and 9
 Integration must retain main's newer Renders gallery, row-click details and product-image cache tags. Other sessions' uncommitted delivery tests and client media metadata remain outside this change.
 
 Integrated with main through 8f992cb in an isolated worktree. The newer gallery, Campaign route, product-image cache tags and row-click detail interaction remain intact. Integration interaction/Renders suite: 42 passed. Final full integrated agent suite: 382 passed after retaining main's hermetic delivery test. Native desktop build with --no-install and root syntax checks passed. Independent integration source review: PASS. The existing app can load the updated static UI on reload; the backend process and its running work were not restarted.
+
+## 2026-10-26: storyboard local storage failure and retry
+
+Expected: Save version reports success only after local storage accepts a standalone storyboard. A failed local save retains the current edits and lets the user retry. A full local cache must not prevent a task-owned storyboard from saving to its server.
+
+Reproduced: with localStorage.setItem throwing a quota error, Save version displayed Storyboard version saved locally. The new mocked DOM regression failed on this false success before the fix.
+
+Changed: standalone persistence returns its actual cache result. Save version reports a storage failure instead of success, retains the edited text in memory and clears the failure after a successful retry. Task-owned boards still attempt server saving after a local cache failure. Existing controls, successful-save copy and layout are unchanged.
+
+Verification: 14 focused planner, refresh, persistence and failure/retry tests passed, including the mocked server path with a full local cache. The neighboring Tasks/Leads DOM workflow and root/module syntax checks passed. Tests used in-memory stores and mocked fetch only. No paid requests, sends, live mutations, desktop control, restart, merge to main or deployment. Native visual acceptance is not asserted.
+
+Independent review: scoped PASS, with the 14 tests rerun independently.
+
+Next area: settings request failures and asynchronous navigation.

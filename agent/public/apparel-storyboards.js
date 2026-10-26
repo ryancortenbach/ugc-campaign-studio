@@ -11,8 +11,9 @@ let research,state,root,storageError='',referenceRole='character',pickerOpen=fal
 const save=()=>{
  for(const p of state.plans||[]){p.localReview=reviewLocalPlan(p);p.basePrompt=basePrompt(p);p.swapPrompt=swapPrompt(p);}
  const payload=structuredClone(state),context=workspaceContext,host=root;
- try{localStorage.setItem(key,JSON.stringify(context?{lab:payload,baseRevision:context.revision,dirty:true}:payload));}catch{storageError='Could not cache this draft locally. Server saving will still be attempted.';}
- if(!context)return Promise.resolve();
+ let cached=true;
+ try{localStorage.setItem(key,JSON.stringify(context?{lab:payload,baseRevision:context.revision,dirty:true}:payload));if(!context)storageError='';}catch{cached=false;storageError=context?'Could not cache this draft locally. Server saving will still be attempted.':'Could not save this draft locally. Keep this page open and retry.';}
+ if(!context)return Promise.resolve(cached);
  context.pendingSaves=(context.pendingSaves||0)+1;
  context.recoveredDirty=false;
  context.queue=context.queue.then(async()=>{
@@ -105,7 +106,7 @@ function bind(){
  root.querySelectorAll('[data-ap-image]').forEach(b=>b.onclick=()=>{try{const p=current(),s=p.shots[Number(b.dataset.apImage)];p.imageRequests??={};if(p.imageRequests[s.id]){delete p.imageRequests[s.id];b.textContent='ImageGen draft';b.setAttribute('aria-pressed','false');}else{p.imageRequests[s.id]=imageShotRequest(p,s,state.refs);b.textContent='Draft staged';b.setAttribute('aria-pressed','true');}save();}catch(e){say(e.message,true);}});
  root.querySelectorAll('[data-ap-still]').forEach(b=>b.onclick=()=>root.querySelector(`[data-ap-still-file="${b.dataset.apStill}"]`).click());
  root.querySelectorAll('[data-ap-still-file]').forEach(input=>input.onchange=async()=>{const file=input.files[0];if(!file)return;try{const p=current(),s=p.shots[Number(input.dataset.apStillFile)];snapshot();p.stills??={};p.stills[s.id]=await upload(file);save();render();say('Finished still imported and linked to this shot.');}catch(e){say(e.message,true);}});
- root.querySelector('[data-ap-save]').onclick=async()=>{snapshot();const pending=save();render();say('Saving storyboard version...');await pending;if(!workspaceContext)say('Storyboard version saved locally.');};
+ root.querySelector('[data-ap-save]').onclick=async()=>{snapshot();const pending=save();render();say('Saving storyboard version...');const saved=await pending;if(!workspaceContext)say(saved?'Storyboard version saved locally.':storageError,!saved);};
  root.querySelector('[data-ap-history]').onchange=e=>{if(uploading||e.target.value==='')return;const old=structuredClone(state.history[Number(e.target.value)]);snapshot();state.plans[state.selected]=old.plan;state.refs=old.refs;save();render();say('Restored the selected version. Previous work retained.');};
  const system=root.querySelector('[data-ap-system]');if(system)system.onclick=()=>showOutput('Storyboard agent prompt',planningSystemPrompt(research),'Research-grounded instructions for a future model-assisted planner. Viewing this prompt makes no paid call.');
  const packet=root.querySelector('[data-ap-packet]');if(packet)packet.onclick=()=>{const p=current();p.localReview=reviewLocalPlan(p);p.basePrompt=basePrompt(p);p.swapPrompt=swapPrompt(p);showOutput('Planning packet',JSON.stringify({storyboard:p,references:state.refs,imageRequests:p.shots.map(s=>{try{return imageShotRequest(p,s,state.refs);}catch(e){return {shot:s.id,status:'missing_reference',error:e.message};}}),researchRuleIds:p.sourceRuleIds,spendApproved:false,submitted:false},null,2),'Includes the base-film prompt, reference roles, per-shot ImageGen requests and apparel-swap prompt. Select and copy to keep a portable packet.');};
