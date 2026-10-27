@@ -83,3 +83,17 @@ Verification: 19 focused and neighboring planner/persistence tests passed, inclu
 Independent review: scoped PASS, with all 19 focused tests rerun independently.
 
 Next area: render pause/stop and pending action controls.
+
+## 2026-10-27: stale render polls after cancellation or live progress
+
+Expected: a successful cancellation remains canceled when an earlier polling request finishes. Newer stream progress also takes precedence over an outstanding older read. Only a current polling failure should show Offline.
+
+Reproduced: holding a mocked poll until after cancellation and its fresh read restored a canceled render to Queued. A pending old poll similarly replaced streamed Rendering progress with Queued, and a stale failed poll showed Offline after newer stream progress. Three regressions failed before the fix.
+
+Changed: each render refresh carries a read version. New reads and valid stream patches invalidate older reads. Stale successes and errors, and results delivered after the view stops, cannot update the render state. Current failures still show Offline and recover on the next successful poll. Controls, copy, appearance and cancellation behavior are unchanged.
+
+Verification: 22 render refresh, gallery and monitor tests passed, covering cancellation, streamed progress, stale errors, current failure/retry, stopped views and existing mocked gallery actions. Root/module syntax and diff checks passed. All requests used mock APIs and local DOM fixtures. Native visual acceptance remains unverified. No actual render approval, provider request, send, live mutation, desktop action, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 22 render tests rerun independently.
+
+Next area: lead filtering and keyboard interactions.

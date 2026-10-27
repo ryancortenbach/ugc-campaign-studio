@@ -125,7 +125,7 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
  const reuse=current&&current.root.isConnected&&current.view===view;
  const memo=reuse?current.memo:{tab:null,key:null,rid:null};
  current?.stop();
- const S={list:[],names:{},paused:false,tiles:[],byId:new Map(),busy:new Set(),ui:ui0(),offline:false,stopped:false,lastRaw:'',mi:new Map(),timer:null,ticks:0};
+ const S={list:[],names:{},paused:false,tiles:[],byId:new Map(),busy:new Set(),ui:ui0(),offline:false,stopped:false,lastRaw:'',readVersion:0,mi:new Map(),timer:null,ticks:0};
  if(reuse)S.ui=current.ui;
  const TABS=[['you','Needs you','circle-alert'],['work','Rendering','loader'],['done','Done','circle-check'],['all','All','layers']];
 
@@ -252,7 +252,9 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   patchTabs();patchGrid();patchPanel();
  }
  async function refresh(){
-  const d=await api('/api/renders');
+  const version=++S.readVersion;let d;
+  try{d=await api('/api/renders');}catch(error){if(version!==S.readVersion||!alive())return;throw error;}
+  if(version!==S.readVersion||!alive())return;
   S.offline=false;
   const raw=JSON.stringify(d.renders);
   if(raw!==S.lastRaw){S.lastRaw=raw;apply(d.renders);}else patchTabs();
@@ -340,7 +342,7 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
  const stop=()=>{S.stopped=true;clearTimeout(S.timer);doc.removeEventListener('keydown',onKey);if(win.mintRendersView&&win.mintRendersView.root===root)delete win.mintRendersView;};
  current={view,root,memo,ui:S.ui,stop};
  // The app's render stream calls this with each changed render so tiles patch in place.
- win.mintRendersView={root,patch(render){if(!alive()||!render||!Number.isInteger(render.id))return;const i=S.list.findIndex(x=>x.id===render.id);const next=i<0?[...S.list,render]:S.list.map(x=>x.id===render.id?{...x,...render}:x);S.lastRaw='';apply(next);}};
+ win.mintRendersView={root,patch(render){if(!alive()||!render||!Number.isInteger(render.id))return;S.readVersion++;const i=S.list.findIndex(x=>x.id===render.id);const next=i<0?[...S.list,render]:S.list.map(x=>x.id===render.id?{...x,...render}:x);S.lastRaw='';apply(next);}};
 
  S.paused=Boolean(pre[0]?.config?.spendingPaused);
  {const ls=Array.isArray(pre[1])?pre[1]:pre[1]?.leads||[];S.names=Object.fromEntries(ls.map(l=>[l.id,l.company||l.domain]).filter(([,n])=>n));}
