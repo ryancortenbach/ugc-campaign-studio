@@ -933,8 +933,8 @@ async function storyboards(arg,{isCurrent=()=>true}={}){
 }
 
 const autosize=ta=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+2+'px';};
-async function settings(){
- await loadState();const c=state.config,p=c.profile;
+async function settings(arg,{isCurrent=()=>true}={}){
+ await loadState();if(!isCurrent())return;const c=state.config,p=c.profile;
  const fields=[['senderName','Name','text'],['company','Company','text'],['senderFact','A true fact about you','area'],['offer','What you offer','area'],['cta','Call to action','area'],['rules','Writing rules','area']];
  $('#view').innerHTML=`<div class="settings">
   <div class="card"><div class="head"><h2>Connections</h2></div><div class="conns">${connRows().map(i=>`<div class="introw"><img src="/logos/${i.id}.png" alt=""><div><b>${esc(i.name)}</b><span>${esc(i.detail)}</span></div><span class="state ${i.st[1]}">${esc(i.st[0])}</span></div>`).join('')}</div></div>

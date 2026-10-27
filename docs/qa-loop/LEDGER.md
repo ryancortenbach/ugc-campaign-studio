@@ -55,3 +55,17 @@ Verification: 14 focused planner, refresh, persistence and failure/retry tests p
 Independent review: scoped PASS, with the 14 tests rerun independently.
 
 Next area: settings request failures and asynchronous navigation.
+
+## 2026-10-27: delayed Settings navigation
+
+Expected: leaving Settings while its data is loading keeps the newly opened task visible. A late response from the abandoned route must not replace that task.
+
+Reproduced: the actual Settings function, executed with a held mocked loadState request, replaced a newly opened task with the Settings form after that request resolved. The new regression failed before the fix.
+
+Changed: Settings accepts the router's existing isCurrent callback and checks it after its asynchronous load, before painting or attaching form handlers. Active Settings rendering, controls and copy are unchanged.
+
+Verification: four tests passed across the new Settings navigation and mocked profile failure/retry cases, Analytics stale-response coverage and the neighboring Tasks/Leads DOM workflow. Root and changed-module syntax checks and diff checks passed. All requests were mocked or local temporary fixtures. Native visual acceptance is unverified. No paid requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, including both new Settings tests and the router callback handoff.
+
+Next area: reference uploads and interrupted file selection.
