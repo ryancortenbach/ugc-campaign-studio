@@ -32,9 +32,12 @@
 .tbrand>.thumb{display:grid;place-items:center;flex:none}.tbrand>.thumb>b{display:block;font-size:13px;line-height:1;text-align:center}
 .ct-leads-table #crm .tbrand>.thumb{width:36px;height:36px}
 .ct-leads-table #crm .ct-brand-copy{min-width:0;flex:1}
-.ct-leads-table #crm .ct-brand-copy>b{white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+.ct-leads-table #crm .ct-brand-copy>.ct-brand-open>b{white-space:normal;overflow-wrap:anywhere;line-height:1.35}
 .ct-leads-table #crm .tbrand .sub{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 18px;gap:4px;margin-top:3px}
 .ct-leads-table #crm .tbrand .sub em{white-space:normal;overflow-wrap:anywhere;line-height:1.4}
 .ct-leads-table #crm .tbrand .socs{display:flex;align-items:center;justify-content:flex-start;gap:8px;width:auto;height:18px;overflow:visible}
 .ct-leads-table #crm .tbrand .socs [data-social]{grid-column:auto;flex:none}
 @media(max-width:650px){.ct-heading{flex-wrap:wrap}.ct-creative{grid-template-columns:minmax(0,1fr)}.ct-products{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-products img{height:190px}.ct-board img,.ct-character img{height:280px}}
+
+.ct-brand-open{appearance:none;display:block;max-width:100%;border:0;border-radius:3px;background:transparent;padding:0;margin:0;color:inherit;font:inherit;line-height:inherit;text-align:left;cursor:pointer}
+.ct-brand-open:focus-visible{outline:2px solid var(--green);outline-offset:3px}

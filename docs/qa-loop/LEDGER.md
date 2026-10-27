@@ -97,3 +97,19 @@ Verification: 22 render refresh, gallery and monitor tests passed, covering canc
 Independent review: scoped PASS, with all 22 render tests rerun independently.
 
 Next area: lead filtering and keyboard interactions.
+
+## 2026-10-27: keyboard access to lead details
+
+Resumed the pass interrupted by ENOSPC after scoped writes became available again. No files outside this QA worktree were changed or removed.
+
+Expected: a keyboard user can reach and open the same lead details drawer available by clicking a row. Existing external links retain their destinations.
+
+Reproduced: the actual lead-row markup had a nonfocusable row, no enabled in-app action button and only external links. The new DOM assertion for a focusable details control failed before the fix.
+
+Changed: brand names are native buttons with descriptive accessible labels. They use the existing delegated row action. Button styling inherits the existing brand typography, wraps long names and shows a keyboard focus outline. Visible copy, row-click behavior and external links are preserved.
+
+Verification: five focused and neighboring tests passed, including actual button focus and activation, drawer close with Escape, external link isolation, row-click opening, and existing lead/contact workflows. Root/module syntax and diff checks passed. Tests used temporary local HTTP/DOM fixtures and in-memory records. Native keyboard and pixel/layout acceptance remain unverified. No provider requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS for native control semantics, escaped labels, wrapping/focus styling and five independently rerun tests.
+
+Next area: analytics range selection and empty data.

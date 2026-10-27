@@ -73,9 +73,15 @@ test('tasks open useful reports, paid clients retain context, and empty filters 
  view.querySelector('[data-ct-approve="research"]').click();await wait(()=>view.querySelector('[data-ct-approve="research"]')?.textContent==='Approved');
  holdDemo=true;location.hash='#/leads';await wait(()=>releaseDemo);view.innerHTML='';location.hash=`#/tasks/${client.task.id}`;await wait(()=>view.querySelector('#client-task-review'));releaseDemo();await delay(100);
  assert.ok(view.querySelector('#client-task-review'),'A late Leads packet must not replace the client task opened afterwards');
- location.hash='#/leads';await wait(()=>view.querySelector('#crm'));view.querySelector(`.trow[data-id="${a.id}"]`).click();await wait(()=>document.querySelector('#drawer .refs img'));assert.match(document.querySelector('#drawer').textContent,/Product photos/);assert.equal(document.querySelectorAll('#drawer .kind').length,0);
+ location.hash='#/leads';await wait(()=>view.querySelector('#crm'));
+ const leadRow=view.querySelector(`.trow[data-id="${a.id}"]`),openDetails=leadRow.querySelector('button[aria-label="Open details for Alpha Apparel"]');
+ assert.ok(openDetails,'Lead details need a native keyboard-accessible control');assert.equal(openDetails.type,'button');assert.equal(openDetails.tabIndex,0);
+ openDetails.focus();assert.equal(document.activeElement,openDetails);openDetails.click();await wait(()=>document.querySelector('#drawer .refs img'));assert.match(document.querySelector('#drawer').textContent,/Product photos/);assert.equal(document.querySelectorAll('#drawer .kind').length,0);
+ document.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(document.querySelector('#drawer').hidden,true);
+ const website=leadRow.querySelector('.tact a[title="Open the website"]');website.addEventListener('click',e=>e.preventDefault());website.click();await delay(20);assert.equal(document.querySelector('#drawer').hidden,true,'External links must not open lead details');
+ leadRow.querySelector('.sub em').click();await wait(()=>!document.querySelector('#drawer').hidden);assert.match(document.querySelector('#drawer .dtitle').textContent,/Alpha Apparel/);
  assert.equal(view.querySelectorAll('[data-lf]').length,5);assert.equal(view.querySelector('.lbar .cchips'),null);assert.ok(view.querySelector('.ct-leads-table #crm .th'));
- const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.tbrand>div>b').textContent)),new Set(['VYLIN','Disobedient']));
+ const pinned=[...view.querySelectorAll('#crm .trow[data-id]')].slice(0,2);assert.deepEqual(new Set(pinned.map(row=>row.querySelector('.ct-brand-open>b').textContent)),new Set(['VYLIN','Disobedient']));
  for(const row of view.querySelectorAll('#crm .trow[data-id]'))assert.equal(row.querySelectorAll('.ct-status [data-primary-status]').length,1);
  assert.ok(pinned.every(row=>/Whop checkout.*simulated/.test(row.querySelector('[data-primary-status]').textContent)));assert.ok(pinned.every(row=>!row.querySelector('[data-primary-status]').textContent.includes('Outreach sent')));
  assert.equal(view.querySelector(`[data-id="${a.id}"] [data-contact-summary]`).textContent,'Email found');assert.equal(view.querySelector(`[data-id="${b.id}"] [data-contact-summary]`).textContent,'Shared inbox');
