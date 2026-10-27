@@ -3,6 +3,7 @@ import {mergeStoryboardResearch} from './storyboard-merge.js';
 
 function createController(){
 const pendingUploads=new Set();
+const stillSelections=new WeakMap();
 let esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const baseKey='mintlabs.apparel-storyboards.v1';
 let key=baseKey,loadedKey=null,workspaceContext=null;
@@ -105,7 +106,13 @@ function bind(){
  root.querySelectorAll('[data-ap-shot]').forEach(input=>input.oninput=()=>{current().shots[Number(input.dataset.apShot)][input.dataset.apField]=input.value.replaceAll('\u2014',',');delete current().imageRequests?.[current().shots[Number(input.dataset.apShot)].id];const button=root.querySelector(`[data-ap-image="${input.dataset.apShot}"]`);if(button){button.textContent='ImageGen draft';button.setAttribute('aria-pressed','false');}if(input.dataset.apField==='dialogue')input.closest('.ap-shot-body').querySelector('.ap-line').textContent='“'+input.value+'”';save();});
  root.querySelectorAll('[data-ap-image]').forEach(b=>b.onclick=()=>{try{const p=current(),s=p.shots[Number(b.dataset.apImage)];p.imageRequests??={};if(p.imageRequests[s.id]){delete p.imageRequests[s.id];b.textContent='ImageGen draft';b.setAttribute('aria-pressed','false');}else{p.imageRequests[s.id]=imageShotRequest(p,s,state.refs);b.textContent='Draft staged';b.setAttribute('aria-pressed','true');}save();}catch(e){say(e.message,true);}});
  root.querySelectorAll('[data-ap-still]').forEach(b=>b.onclick=()=>root.querySelector(`[data-ap-still-file="${b.dataset.apStill}"]`).click());
- root.querySelectorAll('[data-ap-still-file]').forEach(input=>input.onchange=async()=>{const file=input.files[0];if(!file)return;try{const p=current(),s=p.shots[Number(input.dataset.apStillFile)];snapshot();p.stills??={};p.stills[s.id]=await upload(file);save();render();say('Finished still imported and linked to this shot.');}catch(e){say(e.message,true);}});
+ root.querySelectorAll('[data-ap-still-file]').forEach(input=>input.onchange=async()=>{
+  const file=input.files[0];if(!file)return;
+  const p=current(),s=p.shots[Number(input.dataset.apStillFile)],selection={};stillSelections.set(s,selection);
+  const selected=()=>stillSelections.get(s)===selection&&state.plans.includes(p)&&p.shots.includes(s);
+  try{snapshot();const asset=await upload(file);if(!selected())return;p.stills??={};p.stills[s.id]=asset;save();render();say('Finished still imported and linked to this shot.');}
+  catch(e){if(selected())say(e.message,true);}
+ });
  root.querySelector('[data-ap-save]').onclick=async()=>{snapshot();const pending=save();render();say('Saving storyboard version...');const saved=await pending;if(!workspaceContext)say(saved?'Storyboard version saved locally.':storageError,!saved);};
  root.querySelector('[data-ap-history]').onchange=e=>{if(uploading||e.target.value==='')return;const old=structuredClone(state.history[Number(e.target.value)]);snapshot();state.plans[state.selected]=old.plan;state.refs=old.refs;save();render();say('Restored the selected version. Previous work retained.');};
  const system=root.querySelector('[data-ap-system]');if(system)system.onclick=()=>showOutput('Storyboard agent prompt',planningSystemPrompt(research),'Research-grounded instructions for a future model-assisted planner. Viewing this prompt makes no paid call.');

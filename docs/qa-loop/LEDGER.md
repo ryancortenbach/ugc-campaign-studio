@@ -69,3 +69,17 @@ Verification: four tests passed across the new Settings navigation and mocked pr
 Independent review: scoped PASS, including both new Settings tests and the router callback handoff.
 
 Next area: reference uploads and interrupted file selection.
+
+## 2026-10-27: overlapping storyboard still selections
+
+Expected: when a user selects a replacement still while an earlier upload for the same shot is pending, the latest selection controls that shot. Uploads for different shots remain independent. Restoring a saved plan must not allow an abandoned upload to repaint it.
+
+Reproduced: mocked reverse-order upload responses caused an older image to overwrite the newer selected still. A stale failed upload also replaced the newer success message with an unrelated error. Both regressions failed before the fix.
+
+Changed: track the latest selection per shot and verify that its plan and shot still belong to the current state before attaching the upload or reporting its failure. Late superseded uploads cannot overwrite newer media or status messages. Existing upload controls, successful-import copy and layout are unchanged.
+
+Verification: 19 focused and neighboring planner/persistence tests passed, including reverse completion, stale failure, independent shots, version restore during upload, and current failure/retry preserving the accepted still. The neighboring Tasks/Leads DOM workflow and root/module syntax checks passed. Tests use mocked file readers/uploads and local or in-memory fixtures. Native visual acceptance remains unverified. No provider requests, sends, live data mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 19 focused tests rerun independently.
+
+Next area: render pause/stop and pending action controls.
