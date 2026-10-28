@@ -702,7 +702,7 @@ async function tasks(arg,{isCurrent=()=>true}={}){
  if(target?.plan?.kind==='brand_storyboard'){const {taskStoryboardView}=await import('./task-storyboards.js');if(isCurrent())await taskStoryboardView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(target&&(target.plan?.kind==='client_project'||isWhopTask(target))){const {clientProjectView}=await import('./task-storyboards.js');if(isCurrent())await clientProjectView({view:$('#view'),api,esc,toast,taskId:id,isCurrent});return;}
  if(id&&state.hashOpened!==id){const t=state.tasks.find(x=>x.id===id);if(t){state.openSess.add(skey(t.prompt));state.hashOpened=id;state.scrollTo=skey(t.prompt);}}
- const [ap,whop]=await Promise.all([api('/api/autopilot').catch(()=>null),tryGet('/api/whop'),loadDraftMaps()]);
+ const [ap,whop]=await Promise.all([api('/api/autopilot').catch(()=>null),tryGet('/api/whop'),loadDraftMaps({isCurrent})]);
  state.whop=whop;
  const linkedOrderTasks=new Set(paidTaskOrders(whop?.orders).map(order=>order.task_id).filter(Boolean));
  const groups=sessionGroups().filter(group=>!group.whop||!group.runs.some(task=>linkedOrderTasks.has(task.id)));
@@ -716,7 +716,7 @@ async function tasks(arg,{isCurrent=()=>true}={}){
  const reviewHost=$('[data-ap-review-queue]');if(reviewHost)mountTaskReviewQueue(reviewHost);
  if(state.scrollTo){document.querySelector(`.sess[data-sess="${state.scrollTo}"]`)?.scrollIntoView({block:'start'});state.scrollTo=null;}
  for(const el of document.querySelectorAll('.console:not([hidden])'))el.scrollTop=el.scrollHeight;
- $('#apswitch')?.addEventListener('change',async e=>{const input=e.target;input.disabled=true;try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');tasks(id);}catch(err){input.checked=!input.checked;toast(err.message,'bad');}finally{input.disabled=false;}});
+ $('#apswitch')?.addEventListener('change',async e=>{const input=e.target;input.disabled=true;try{const r=await api('/api/autopilot',{enabled:e.target.checked});toast(r.enabled?'Always on':'Always on is off','ok',r.enabled?`Mint keeps finding brands, up to $${Number(r.dailyBudgetUsd).toFixed(2)} a day. Renders still wait for you.`:'Mint waits for you to start missions.');if(isCurrent())tasks(id,{isCurrent});}catch(err){input.checked=!input.checked;toast(err.message,'bad');}finally{input.disabled=false;}});
  $('#whopswitch')?.addEventListener('change',async e=>{try{const r=await api('/api/whop',{enabled:e.target.checked});toast(r.enabled?'Watching purchases':'Not watching purchases','ok',r.enabled?'A new Whop purchase starts work on its own.':'Purchases wait for you.');await refreshWhop();}catch(err){e.target.checked=!e.target.checked;toast(err.message,'bad');}});
 }
 // Counter chips: drafts (check) and failed (X) only.
@@ -727,8 +727,11 @@ function counterChips(leads){
 // The contact column already says when there is no email, so only explain skips it cannot.
 const skipWhy=l=>l.status==='skipped'&&l.contact_email?(l.risks[0]||'Not a fit for this mission'):l.status==='unreachable'?'The site would not load':'';
 // The primary (newest, not withdrawn) draft per brand. Withdrawn drafts never count anywhere except one line in the drawer.
-async function loadDraftMaps(){
+async function loadDraftMaps({isCurrent=()=>true}={}){
+ if(!isCurrent())return [];
+ const request=++draftMapsRequest;
  const r=await tryGet('/api/drafts'),list=(r?.drafts||[]).filter(d=>d.status!=='withdrawn');
+ if(request!==draftMapsRequest||!isCurrent())return list;
  state.gmail.clear();state.dm.clear();state.dr.clear();
  for(const d of list){
   if(!state.dr.has(d.lead_id))state.dr.set(d.lead_id,d);
@@ -737,6 +740,7 @@ async function loadDraftMaps(){
  }
  return list;
 }
+let draftMapsRequest=0;
 const lstat=([label,cls])=>`<span class="lstat ${cls}">${ic(statusIcon[cls]||'circle-alert')}<span>${esc(label)}</span></span>`;
 // One primary update: latest reached milestone, or the next required action.
 function leadStatusCell(l){
@@ -812,8 +816,9 @@ const leadSorts=[['newest','Newest'],['name','Name'],['status','Status']];
 const statusRank=['drafted','awaiting_video','contacted','replied','won','drafting','grading','visiting','found','skipped','unreachable','error','lost','rejected'];
 async function leads(arg,{isCurrent=()=>true}={}){
  if(!isCurrent())return;
- const [{leads:found},dr,packet]=await Promise.all([api('/api/leads'),loadDraftMaps(),tryGet('/api/client-demo')]);
- if(!isCurrent())return;
+ const request=++leadsRequest,isActive=()=>request===leadsRequest&&isCurrent();
+ const [{leads:found},dr,packet]=await Promise.all([api('/api/leads'),loadDraftMaps({isCurrent:isActive}),tryGet('/api/client-demo')]);
+ if(!isActive())return;
  const simulatedBrands=packet?.mode==='demo'?(packet.brands||[]).filter(brand=>['disobedient','vylin'].includes(brand.id)):[];
  const domain=value=>{try{return new URL(value.includes('://')?value:`https://${value}`).hostname.replace(/^www\./,'').toLowerCase();}catch{return '';}};
  const all=found.map(lead=>({...lead,simulatedJourney:simulatedBrands.some(brand=>domain(brand.website)===domain(lead.domain||lead.url||''))}));
@@ -836,6 +841,7 @@ async function leads(arg,{isCurrent=()=>true}={}){
  sm.querySelectorAll('[data-ls]').forEach(b=>b.onclick=()=>{pref.set('lsort',b.dataset.ls);leads(undefined,{isCurrent});});
  $('#requalify').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.lastChild.textContent='Checking brands';try{const r=await api('/api/leads/requalify',{});toast(`Checked ${r.checked} brands`,'ok',`${r.rejected.length} not a fit${r.withdrawnDrafts?.length?`. ${r.withdrawnDrafts.length} Gmail draft${r.withdrawnDrafts.length===1?'':'s'} to delete yourself`:''}`);leads(undefined,{isCurrent});}catch(err){toast(err.message,'bad');b.disabled=false;b.lastChild.textContent='Re-check brands';}};
 }
+let leadsRequest=0;
 // Drafts live inside Leads now. The old route and any old link land on the Drafts filter.
 async function drafts(){location.replace('#/leads/drafts');}
 

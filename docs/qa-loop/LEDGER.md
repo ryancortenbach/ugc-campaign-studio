@@ -267,3 +267,17 @@ Verification: 22 connection-refresh, sidebar, mocked provider-cost/health and ne
 Independent review: scoped PASS, with all 22 tests independently rerun.
 
 Next area: lead filters under rapid sorting and refresh.
+
+## 2026-10-27: stale lead refreshes preserve current rows and draft links
+
+Expected: overlapping Leads refreshes preserve the newest active list, selected sorting and associated draft links. A departed route must not mutate shared draft maps or remount its old page.
+
+Reproduced: older same-route responses replaced newer rows and Gmail maps. Departed-route draft reads still mutated the maps despite the list route guard, and a delayed lead list repainted after its older draft read had finished. Three regressions failed before the fix. Independent review also returned a Tasks control callback that discarded its route guard; two additional regressions failed before correcting it.
+
+Changed: sequence Leads loads and shared draft-map reads, and check caller currency before applying either result. Tasks passes its existing route guard into draft loading. Its asynchronous Always on callback refreshes Tasks only while current and forwards that guard. Existing filter/sort controls, labels, copy and layout are unchanged.
+
+Verification: 10 lead-refresh, lead-badge and neighboring Tasks/Leads DOM tests passed. Coverage includes response ordering, departed routes, independent shared-map reads, sorting/filter counts, withdrawn drafts and late/current Tasks control callbacks. Root/module syntax and diff checks passed. Every request was mocked or used temporary local fixtures; control callbacks received simulated disabled responses. Native visual acceptance remains unverified. No actual autopilot changes, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 10 tests independently rerun after the Tasks callback correction.
+
+Next area: voice page navigation and load failures.
