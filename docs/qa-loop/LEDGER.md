@@ -183,3 +183,17 @@ Verification: 21 render creation, gallery and refresh tests passed, covering rep
 Independent review: scoped PASS, with all 21 render tests independently rerun.
 
 Next area: client review note editing and refresh.
+
+## 2026-10-27: unchanged client feedback submits its displayed note
+
+Expected: opening Changes on saved feedback and saving without typing submits the note displayed in the editor. Explicit edits, including clearing text, take precedence over saved feedback.
+
+Reproduced: the editor displayed the existing saved review note, but save read only the input-event cache and submitted an empty string when no typing occurred. The new regression failed before the fix.
+
+Changed: the feedback editor and local changes-requested submission use the same note lookup. Nullish fallback retains existing saved feedback only when the user has not edited it, and respects an intentional empty draft. Approval and simulated-review note behavior, copy and layout are unchanged.
+
+Verification: 16 client review view, regression and backend tests passed. Coverage includes unchanged feedback resave, intentional clearing and its existing validation error, typed feedback retained after failure and refresh, retry against the new artifact version, approval note behavior and prior simulation/version checks. Root/module syntax and diff checks passed. All data and APIs were mocked or local in-memory fixtures. Native visual acceptance remains unverified. No provider requests, actual approvals, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 16 client-review tests independently rerun.
+
+Next area: provider notifications and replay handling.

@@ -11,6 +11,7 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
  const current=()=>active===context&&isCurrent()&&view.isConnected;
  let data=await api(`/api/tasks/${taskId}/client-review`);if(!current())return;
  let busy=false,error='',editing=null;const notes={};
+ const feedbackNote=section=>notes[section]??data.reviews.find(review=>review.section===section&&review.mode==='local')?.note??'';
  const render=()=>{
   if(!current())return;
   const historyOpen=view.querySelector('.ct-history')?.open,evidenceOpen=view.querySelector('.ct-evidence')?.open;
@@ -22,7 +23,7 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
    const review=approval(section),approved=review?.decision==='approved';
    return `<div class="ct-actions">${review?`<span class="schip ${approved?'s-ok':'s-you'}">${approved?'Approved':'Changes requested'}</span>`:''}<button class="btn sm${approved?'':' go'}" data-ct-approve="${section}" ${busy||!versions[section]||approved?'disabled':''}>${approved?'Approved':'Approve'}</button><button class="btn sm" data-ct-edit="${section}" ${busy?'disabled':''}>Changes</button></div>`;
   };
-  const noteForm=section=>editing===section?`<form data-ct-note="${section}" class="ct-note"><label for="ct-note-${section}">What should change?</label><textarea id="ct-note-${section}" maxlength="1000" required ${busy?'disabled':''}>${esc(notes[section]??approval(section)?.note??'')}</textarea><button class="btn sm" ${busy?'disabled':''}>Save feedback</button></form>`:'';
+  const noteForm=section=>editing===section?`<form data-ct-note="${section}" class="ct-note"><label for="ct-note-${section}">What should change?</label><textarea id="ct-note-${section}" maxlength="1000" required ${busy?'disabled':''}>${esc(feedbackNote(section))}</textarea><button class="btn sm" ${busy?'disabled':''}>Save feedback</button></form>`:'';
   const products=list(brand.assets).filter(asset=>asset.kind==='product');
   const productLabel=asset=>/front/i.test(asset.title)?'Front':/back|rear/i.test(asset.title)?'Back':/model|body|fit/i.test(asset.title)?'On-body':asset.title||'Product';
   const logo=list(brand.assets).find(asset=>asset.kind==='logo');
@@ -48,7 +49,7 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
  const save=async(section,decision,mode='local')=>{
   if(busy||!data.versions[section])return;
   busy=true;error='';render();
-  const note=mode==='local'?notes[section]||'':decision==='changes_requested'?data.brand.sampleVideo?.visualQA?.findings?.[0]||'The generated video needs a revision.':'';
+  const note=mode==='local'?(decision==='changes_requested'?feedbackNote(section):notes[section]||''):decision==='changes_requested'?data.brand.sampleVideo?.visualQA?.findings?.[0]||'The generated video needs a revision.':'';
   try{const fresh=await api(`/api/tasks/${taskId}/client-review`,{section,version:data.versions[section],decision,note,mode});if(current()){data=fresh;editing=null;}}
   catch(caught){if(current())error=caught.message;}
   finally{busy=false;render();}
