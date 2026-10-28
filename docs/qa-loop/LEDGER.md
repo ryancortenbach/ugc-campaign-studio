@@ -169,3 +169,17 @@ Verification: 11 voice UI and mocked backend/provider tests passed. Coverage inc
 Independent review: scoped PASS, with all 11 mocked tests rerun and server-limit parity checked.
 
 Next area: render new-shot draft retention and retry.
+
+## 2026-10-27: new-shot draft saves preserve newer edits
+
+Expected: repeated submit while a shot draft is saving creates only one request. If the user changes the title or prompt while saving, completion retains that newer draft for the next explicit submission. Failed requests retain text and allow retry.
+
+Reproduced: two submit events created two pending draft POSTs, and completion of the first draft request reset newer title/prompt edits to blank. Both new regressions failed before the fix.
+
+Changed: keep one creation request active per mounted form, disable its submit button while pending and compare current fields to the submitted snapshot before resetting or hiding. Newer edits remain in the form. Success after leaving the view cannot repaint it. The button recovers after completion or failure. Existing copy and appearance are unchanged.
+
+Verification: 21 render creation, gallery and refresh tests passed, covering repeated submission, newer draft retention, normal reset, failed-request retry and the prior cancellation/stream race fixes. Root/module syntax and diff checks passed. Requests were mocked and created no live records. Native visual acceptance remains unverified. No actual render approval, provider requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 21 render tests independently rerun.
+
+Next area: client review note editing and refresh.

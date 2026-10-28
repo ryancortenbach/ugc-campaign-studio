@@ -302,12 +302,16 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   if(a==='never'){S.ui.confirm='never';patchPanel(true);return;}
   if(actions[a])actions[a](r);
  });
+ let creating=false;
+ const shotInput=()=>({title:form.title.value,prompt:form.prompt.value,duration:Number(form.duration.value),resolution:form.resolution.value});
  root.addEventListener('submit',async e=>{
   e.preventDefault();
   if(e.target===form){
-   const f=form;
-   try{const out=await api('/api/renders',{title:f.title.value,prompt:f.prompt.value,duration:Number(f.duration.value),resolution:f.resolution.value});toast('Shot added','ok','Run checks on it next.');f.reset();f.hidden=true;S.ui.newOpen=false;await refresh();memo.tab='you';patchTabs();patchGrid();}
+   if(creating)return;
+   const f=form,payload=shotInput(),button=f.querySelector('button[type="submit"]');creating=true;button.disabled=true;
+   try{await api('/api/renders',payload);toast('Shot added','ok','Run checks on it next.');if(!alive())return;if(JSON.stringify(shotInput())===JSON.stringify(payload)){f.reset();f.hidden=true;S.ui.newOpen=false;}await refresh();if(!alive())return;memo.tab='you';patchTabs();patchGrid();}
    catch(err){toast(err.message,'bad');}
+   finally{creating=false;button.disabled=false;}
    return;
   }
   const rf=e.target.closest('[data-a="recon"]');if(!rf)return;
