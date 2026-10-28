@@ -141,3 +141,17 @@ Verification: 15 tool-log, sidebar pairing and task-view/DOM tests passed. New i
 Independent final review: scoped PASS, with 14 tool-log, task-activity and sidebar tests independently rerun plus explicit-ID/context checks.
 
 Next area: sender profile editing during pending saves.
+
+## 2026-10-27: sender profile edits during a pending save
+
+Expected: a successful profile save marks only its submitted values as saved. Newer edits remain dirty and available to save, and repeated submits do not overlap within a form. A detached form cannot alter a newly mounted form's state.
+
+Reproduced: a second submit while the first request waited sent a duplicate request, and an old response used global selectors to mark a newer form All changes saved. The pending-save and remounted-form regressions failed before the fix. Source inspection also showed completion clearing dirty state without checking the current values.
+
+Changed: track each form's last successful payload and pending request. Compare current fields to that snapshot, keep Save disabled while its request waits, and retain newer edits as Unsaved changes afterward. All dirty-state updates use that form's controls. Failed saves retain the previous snapshot, and returning fields to the saved values disables unnecessary resubmission. Copy and layout are unchanged.
+
+Verification: five Settings and neighboring Tasks/Leads DOM tests passed, including failure/retry, overlapping submit suppression, edits during save, remount isolation, unchanged snapshots and stale navigation. Root/module syntax and diff checks passed. Requests and records were mocked or temporary local fixtures. Native visual acceptance remains unverified. No provider requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all five tests independently rerun.
+
+Next area: voice form validation and retry.

@@ -40,3 +40,33 @@ test('the active Settings form retains edits after a failed save and supports re
   assert.equal(f.document.querySelector('#pfsave').disabled,true);assert.equal(f.notices.at(-1)[0],'Profile saved');
  }finally{f.dom.window.close();}
 });
+
+test('editing a profile during a pending save keeps newer edits dirty and prevents duplicate saves',async()=>{
+ const requests=[],f=fixture({api:(path,body)=>new Promise(resolve=>requests.push({path,body,resolve}))});
+ try{
+  await f.mount();const form=f.document.querySelector('#profile'),input=form.querySelector('[name="senderName"]');
+  const edit=value=>{input.value=value;input.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));};
+  edit('First update');const pending=form.onsubmit({preventDefault(){}});
+  edit('Second update');const duplicate=form.onsubmit({preventDefault(){}});
+  assert.equal(requests.length,1,'Only one profile save may be in flight');assert.equal(f.document.querySelector('#pfsave').disabled,true);
+  requests[0].resolve({});await pending;await duplicate;
+  assert.equal(input.value,'Second update');assert.equal(f.document.querySelector('#pfstate').textContent,'Unsaved changes');assert.equal(f.document.querySelector('#pfsave').disabled,false);
+  assert.equal(requests[0].body.senderName,'First update');
+  const retry=form.onsubmit({preventDefault(){}});assert.equal(requests[1].body.senderName,'Second update');requests[1].resolve({});await retry;
+  assert.equal(f.document.querySelector('#pfstate').textContent,'All changes saved');assert.equal(f.document.querySelector('#pfsave').disabled,true);
+  edit('Temporary edit');assert.equal(f.document.querySelector('#pfsave').disabled,false);
+  edit('Second update');assert.equal(f.document.querySelector('#pfsave').disabled,true);
+  await form.onsubmit({preventDefault(){}});assert.equal(requests.length,2,'An unchanged snapshot must not be saved again');
+ }finally{f.dom.window.close();}
+});
+
+test('an old profile save cannot change the dirty state of a remounted form',async()=>{
+ let resolve;const f=fixture({api:()=>new Promise(done=>resolve=done)});
+ try{
+  await f.mount();const old=f.document.querySelector('#profile'),oldInput=old.querySelector('[name="senderName"]');
+  oldInput.value='Old update';oldInput.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));const pending=old.onsubmit({preventDefault(){}});
+  await f.mount();const input=f.document.querySelector('[name="senderName"]');input.value='New unsaved update';input.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));
+  resolve({});await pending;
+  assert.equal(input.value,'New unsaved update');assert.equal(f.document.querySelector('#pfstate').textContent,'Unsaved changes');assert.equal(f.document.querySelector('#pfsave').disabled,false);
+ }finally{f.dom.window.close();}
+});

@@ -940,10 +940,11 @@ async function settings(arg,{isCurrent=()=>true}={}){
   <div class="card"><div class="head"><h2>Connections</h2></div><div class="conns">${connRows().map(i=>`<div class="introw"><img src="/logos/${i.id}.png" alt=""><div><b>${esc(i.name)}</b><span>${esc(i.detail)}</span></div><span class="state ${i.st[1]}">${esc(i.st[0])}</span></div>`).join('')}</div></div>
   <form class="card" id="profile"><div class="head"><h2>Sender profile</h2><span class="faint" style="margin-left:auto">Every email is written from this</span></div><div class="body">${fields.map(([k,l,t])=>`<label for="pf-${k}">${l}</label>${t==='text'?`<input id="pf-${k}" type="text" name="${k}" value="${esc(p[k])}">`:`<textarea id="pf-${k}" name="${k}" rows="2">${esc(p[k])}</textarea>`}`).join('')}</div><div class="foot"><span class="faint" id="pfstate">All changes saved</span><button class="btn go" type="submit" id="pfsave" disabled>Save</button></div></form>
  </div>`;
- const f=$('#profile'),mark=dirty=>{$('#pfsave').disabled=!dirty;$('#pfstate').textContent=dirty?'Unsaved changes':'All changes saved';};
+ const f=$('#profile'),values=()=>Object.fromEntries(new FormData(f));let saved=JSON.stringify(values()),saving=false;
+ const mark=()=>{const dirty=JSON.stringify(values())!==saved;f.querySelector('#pfsave').disabled=saving||!dirty;f.querySelector('#pfstate').textContent=dirty?'Unsaved changes':'All changes saved';};
  f.querySelectorAll('textarea').forEach(ta=>{autosize(ta);ta.addEventListener('input',()=>autosize(ta));});
- f.addEventListener('input',()=>mark(true));
- f.onsubmit=async e=>{e.preventDefault();try{await api('/api/profile',Object.fromEntries(new FormData(f)));mark(false);toast('Profile saved','ok');}catch(err){toast(err.message,'bad');}};
+ f.addEventListener('input',mark);
+ f.onsubmit=async e=>{e.preventDefault();if(saving)return;const payload=values();if(JSON.stringify(payload)===saved)return;saving=true;mark();try{await api('/api/profile',payload);saved=JSON.stringify(payload);toast('Profile saved','ok');}catch(err){toast(err.message,'bad');}finally{saving=false;mark();}};
 }
 
 async function voices(){await voicesView({view:$('#view'),api,esc,toast,sbadge,svg});}
