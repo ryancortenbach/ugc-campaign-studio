@@ -225,3 +225,17 @@ Verification: seven focused and neighboring DOM tests passed, including opening,
 Independent review: scoped PASS, with all seven tests independently rerun.
 
 Next area: task steering and composer draft retention.
+
+## 2026-10-27: steering submissions preserve newer directions across refreshes
+
+Expected: a pending steering submission queues one direction for its session. Newer text remains unsent and visible after success, failure or a session repaint. A detached form's completion must not repaint its replacement.
+
+Reproduced: repeated submit events queued two directions, success reset newer input, and completion repainted a replacement form. Three new regressions failed before the fix. A separate repaint regression exposed a remaining duplicate path in the initial per-form guard; the independent reviewer also returned that case before final acceptance.
+
+Changed: track pending steering requests by session key and reflect that state in the rendered Send button. Clear only the displayed input that still matches the submitted raw text. Retain newer input through session refresh, skip repainting from a detached form, and re-enable the current session control after success or failure. API text remains trimmed. Copy and layout are unchanged.
+
+Verification: eight focused and neighboring DOM tests passed. Coverage includes repeated submit, edits during the POST and refresh, failure/retry, detached forms, actual session repainting during a request, unchanged remounted snapshots and remounted failure/retry. Root/module syntax and diff checks passed. All requests were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No actual steering of live tasks, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all eight tests independently rerun after the session repaint correction.
+
+Next area: composer attachments and upload removal.

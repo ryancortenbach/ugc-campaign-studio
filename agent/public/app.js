@@ -321,7 +321,7 @@ function sessBody(g){
  return `${children.length?`<div class="task-board-stages">${children.map(t=>`<a class="btn sm" href="#/tasks/${t.id}">${esc(t.plan.brand)} ideas</a>`).join('')}</div>`:''}<div class="sess-tools"><button type="button" class="iconbtn" data-showlog="${g.key}" data-tip="${logOpen?'Hide log':'Show log'}" aria-label="${logOpen?'Hide log':'Show log'}" aria-pressed="${logOpen}">${ic('scroll-text')}</button></div>
   <div class="trows bare" data-leads="${g.key}">${leadsHTML(g)}</div>
   <div class="schat"><div class="thread2" data-thread="${g.key}">${threadHTML2(g)}</div>
-   <form class="steer2" data-steer="${g.key}" autocomplete="off"><input type="text" name="message" placeholder="Talk to this session, e.g. skip anyone outside NYC" aria-label="Message this session"><button class="iconbtn go" type="submit" data-tip="Send" aria-label="Send">${ic('arrow-up')}</button></form></div>
+   <form class="steer2" data-steer="${g.key}" autocomplete="off"><input type="text" name="message" placeholder="Talk to this session, e.g. skip anyone outside NYC" aria-label="Message this session"><button class="iconbtn go" type="submit" data-tip="Send" aria-label="Send"${steeringSubmissions.has(g.key)?' disabled':''}>${ic('arrow-up')}</button></form></div>
   <div class="console tgl" data-console="${g.key}"${logOpen?'':' hidden'}>${logOpen?consoleHTML(g):''}</div>`;
 }
 const bodyEl=k=>document.querySelector(`.sess[data-sess="${k}"] .sess-b`);
@@ -353,15 +353,16 @@ $('#view').addEventListener('click',async e=>{
 $('#view').addEventListener('keydown',e=>{const sh=e.target.closest?.('[data-sh]');if(sh&&e.target===sh&&(e.key==='Enter'||e.key===' ')){e.preventDefault();sh.click();}});
 $('#view').addEventListener('submit',async e=>{
  const f=e.target.closest('[data-steer]');
- if(f){e.preventDefault();const g=groupByKey(f.dataset.steer),text=f.message.value.trim();if(!g||!text)return;
-  const run=g.live[0]||g.runs[0],b=f.querySelector('button');b.disabled=true;
-  try{const s=await api(`/api/tasks/${run.id}/steer`,{message:text});f.reset();toast(s.live?'Sent':'Saved',s.live?'ok':'info',s.live?'It applies before the next step.':'This session is not running.');await loadSession(g);paintBody(g);}
-  catch(err){toast(err.message,'bad');}finally{b.disabled=false;}return;}
+ if(f){e.preventDefault();const g=groupByKey(f.dataset.steer),raw=f.message.value,text=raw.trim();if(!g||!text||steeringSubmissions.has(g.key))return;
+  const run=g.live[0]||g.runs[0],b=f.querySelector('button');steeringSubmissions.add(g.key);b.disabled=true;
+  try{const s=await api(`/api/tasks/${run.id}/steer`,{message:text});const current=bodyEl(g.key)?.querySelector('[data-steer]');if(current?.message.value===raw)current.reset();toast(s.live?'Sent':'Saved',s.live?'ok':'info',s.live?'It applies before the next step.':'This session is not running.');await loadSession(g);if(f.isConnected)paintBody(g);}
+  catch(err){toast(err.message,'bad');}finally{steeringSubmissions.delete(g.key);b.disabled=false;const current=bodyEl(g.key)?.querySelector('[data-steer] button');if(current)current.disabled=false;}return;}
  const bf=e.target.closest('[data-wbrand]');
  if(bf){e.preventDefault();const domain=bf.domain.value.trim();if(!domain)return;const b=bf.querySelector('button');b.disabled=true;
   try{await api(`/api/whop/orders/${encodeURIComponent(bf.dataset.wbrand)}/brand`,{domain});toast('Brand saved','ok','Work starts on this order.');await refreshWhop();}
   catch(err){toast(err.message,'bad');b.disabled=false;}}
 });
+const steeringSubmissions=new Set();
 
 // Whop orders: each purchase becomes a task. This strip shows the order, its state and the one thing it needs from you.
 const whopState={working:['Working','s-run'],needs_brand:['Needs brand','s-you'],ready:['Ready','s-ok'],review:['In review','s-you'],checks_failed:['Checks failed','s-bad'],failed:['Failed','s-bad'],historical:['Earlier order','s-idle']};
