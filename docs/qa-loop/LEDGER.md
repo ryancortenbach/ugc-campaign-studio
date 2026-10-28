@@ -113,3 +113,17 @@ Verification: five focused and neighboring tests passed, including actual button
 Independent review: scoped PASS for native control semantics, escaped labels, wrapping/focus styling and five independently rerun tests.
 
 Next area: analytics range selection and empty data.
+
+## 2026-10-27: analytics range failure preserves data labels
+
+Expected: the selected range and saved range preference identify the figures actually displayed. A pending or failed request for another range must not relabel the previous totals and chart.
+
+Reproduced: selecting This week immediately selected and persisted week while the displayed data still belonged to Today. A failed range request retained those old figures under the wrong selection. The new held-request DOM regression failed before the fix.
+
+Changed: range selection passes a candidate to the loader. The visible range and saved preference commit only after a successful response from the active mount. Failed requests keep the existing period and figures, with the existing error toast. Refresh then requests that same displayed period. Copy and layout are unchanged.
+
+Verification: 14 analytics view, model and route tests passed. Coverage includes pending/failed range changes, disabled repeated selection, refresh of the retained range, successful retry, verified zero totals and keyboard chart inspection, unavailable payment history, and stale mounts. Root/module syntax and diff checks passed. All data and APIs were mocked or temporary fixtures. Native visual acceptance remains unverified. No provider requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 14 analytics tests rerun independently.
+
+Next area: task activity details and filtering.
