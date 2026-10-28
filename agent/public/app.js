@@ -594,7 +594,7 @@ async function addFiles(list){
   if(comp.files.length>=5){toast('Attach up to 5 files','bad');break;}
   if(file.size>5*1024*1024){toast(`${file.name} is over 5 MB`,'bad');continue;}
   const item={key:Math.random().toString(36).slice(2),name:file.name,uploading:true,preview:file.type.startsWith('image/')?URL.createObjectURL(file):null};
-  comp.files.push(item);$('#cfiles').innerHTML=attachHTML();bindAttach();
+  comp.files.push(item);if($('#cfiles')){$('#cfiles').innerHTML=attachHTML();bindAttach();}
   try{
    const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=()=>rej(Error(`Could not read ${file.name}`));r.readAsDataURL(file);});
    const {upload}=await api('/api/uploads',{name:file.name,type:file.type,data});item.id=upload.id;item.uploading=false;

@@ -239,3 +239,17 @@ Verification: eight focused and neighboring DOM tests passed. Coverage includes 
 Independent final review: scoped PASS, with all eight tests independently rerun after the session repaint correction.
 
 Next area: composer attachments and upload removal.
+
+## 2026-10-27: selected uploads continue after leaving Home
+
+Expected: navigating away during a selected multi-file upload does not crash the batch or leave a file permanently uploading. Returning to Home displays the remaining attachment state.
+
+Reproduced: after the first awaited upload finished, the next iteration tried to render into the removed composer host and threw before uploading the second file. The same crash followed a failed first upload. Both new regressions failed before the fix.
+
+Changed: guard the initial attachment-chip render with the same host-availability check already used after upload completion. Local attachment state and upload progression continue while the composer is absent. Existing copy and layout are unchanged.
+
+Verification: six focused and neighboring DOM tests passed, covering navigation after success/failure, rendering into a newly mounted composer host, removal during upload, existing size/count limits and the Tasks/Leads workflows. Root/module syntax and diff checks passed. All uploads were mocked; other records were temporary local fixtures. Native file picking, keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all six tests independently rerun.
+
+Next area: connection refresh failures and status accuracy.
