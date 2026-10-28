@@ -197,3 +197,17 @@ Verification: 16 client review view, regression and backend tests passed. Covera
 Independent review: scoped PASS, with all 16 client-review tests independently rerun.
 
 Next area: provider notifications and replay handling.
+
+## 2026-10-27: delayed Gmail checks preserve newer draft state
+
+Expected: a pending sent-mail check reconciles only the local draft snapshot it inspected. Replacing, editing, withdrawing or sending that draft while Gmail reads wait must invalidate the old result.
+
+Reproduced: a delayed sent check marked a replacement Gmail draft sent and its lead contacted. The same race also emitted another sent event after a concurrent confirmed send, or a false deletion notice after replacement. Three focused regressions failed before the fix.
+
+Changed: compare the current stored draft to the inspected snapshot after the final awaited Gmail read, before either sent-state reconciliation or deletion notification. Changed or removed records skip the stale result; an unchanged draft still reconciles normally. Existing copy and UI are unchanged.
+
+Verification: 21 sent-watcher, notification and contact regression tests passed. Coverage includes replacement, in-place body/recipient/subject/attachment edits, withdrawn/local-only/deleted records, concurrent sends, unchanged reconciliation, old-message rejection, failed reads and notification identity. Root/module syntax and diff checks passed. All records were in-memory and every Gmail response was mocked. Native visual acceptance and live Gmail attribution remain unverified. Existing recipient/time message matching is unchanged. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 21 tests independently rerun.
+
+Next area: draft editing and keyboard focus.
