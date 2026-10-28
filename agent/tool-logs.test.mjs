@@ -18,3 +18,31 @@ test('untrusted payloads are escaped and credential fields are redacted',()=>{
 test('tool failures retain an expandable error and measured duration',()=>{
  const html=toolLogRow({...e,type:'tool_result',data:{status:'error',durationMs:0,error:'Not found'}});assert.match(html,/aria-label="Failed"/);assert.match(html,/>0ms</);assert.match(html,/Not found/);
 });
+test('legacy catalog calls keep request and result payloads without a call ID',()=>{
+ const call={id:10,type:'tool_call',tool:'shopify.products',task_id:2,lead_id:3,data:{domain:'brand.example'}};
+ const result={id:11,type:'tool_result',tool:'shopify.products',task_id:2,lead_id:3,data:{count:2,products:[{title:'Catalog jacket'}]}};
+ const html=toolLogRow(call,{events:[call,result]});
+ assert.match(html,/Catalog jacket/);assert.match(html,/<summary>Input<\/summary>/);assert.match(html,/<summary>Result<\/summary>/);assert.match(html,/brand.example/);
+});
+test('legacy result pairing respects lead context and consecutive calls of the same tool',()=>{
+ const call={id:10,type:'tool_call',tool:'shopify.products',task_id:2,lead_id:3};
+ const other={id:11,type:'tool_result',tool:'shopify.products',task_id:2,lead_id:9,data:{output:'Unrelated brand'}};
+ assert.doesNotMatch(toolLogRow(call,{events:[call,other]}),/Unrelated brand/);
+ const events=[call,{id:12,type:'tool_result',tool:'shopify.products',task_id:2,lead_id:3,data:{output:'First catalog'}},{...call,id:13},{id:14,type:'tool_result',tool:'shopify.products',task_id:2,lead_id:3,data:{output:'Second catalog'}}];
+ assert.match(toolLogRow(call,{events}),/First catalog/);assert.doesNotMatch(toolLogRow(call,{events}),/Second catalog/);
+ assert.match(toolLogRow(events[2],{events}),/Second catalog/);assert.doesNotMatch(toolLogRow(events[2],{events}),/First catalog/);
+});
+test('an intervening catalog error does not steal its fallback result',()=>{
+ const call={id:10,type:'tool_call',tool:'shopify.products',task_id:2,lead_id:3};
+ const events=[call,{...call,id:11,type:'error',title:'Could not read products'},{...call,id:12,type:'tool_result',data:{source:'none',count:0,products:[]}}];
+ const html=toolLogRow(call,{events});assert.match(html,/<summary>Result<\/summary>/);assert.match(html,/&quot;source&quot;: &quot;none&quot;/);
+});
+test('legacy profile results with known model suffixes stay paired',()=>{
+ const call={id:10,type:'tool_call',tool:'claude.profile',task_id:2,lead_id:3};
+ for(const model of ['sonnet','claude-sonnet-5-5','claude-opus-4-1']){
+  const result={...call,id:11,type:'tool_result',tool:`claude.profile (${model})`,data:{audience:['Streetwear shoppers']}};
+  assert.match(toolLogRow(call,{events:[call,result]}),/Streetwear shoppers/,model);
+ }
+ const unrelated={...call,id:11,type:'tool_result',tool:'claude.profile (different operation)',data:{output:'Unrelated operation'}};
+ assert.doesNotMatch(toolLogRow(call,{events:[call,unrelated]}),/Unrelated operation/);
+});

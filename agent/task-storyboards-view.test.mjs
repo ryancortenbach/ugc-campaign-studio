@@ -6,6 +6,21 @@ import {openStore} from './store.mjs';
 import {createTaskStoryboards} from './task-storyboards.mjs';
 import {taskStoryboardView,refreshTaskStoryboardActivity} from './public/task-storyboards.js';
 
+test('task activity shows a legacy catalog result beside its request',async()=>{
+ const dom=new JSDOM('<main></main>'),original=Object.getOwnPropertyDescriptor(globalThis,'document');
+ try{
+  globalThis.document=dom.window.document;
+  const workspace={revision:1,task:{id:2,status:'researching'},lead:{company:'Test'},events:[{id:10,type:'tool_call',tool:'shopify.products',task_id:2,lead_id:3,data:{domain:'brand.example'}}]};
+  const view=document.querySelector('main');await taskStoryboardView({view,api:async()=>({workspace}),esc:String,taskId:2});
+  workspace.events.push({id:11,type:'tool_result',tool:'shopify.products',task_id:2,lead_id:3,data:{count:1,products:[{title:'Legacy catalog jacket'}]}});
+  await refreshTaskStoryboardActivity();
+  assert.equal(view.querySelectorAll('[data-ap-log]').length,1);
+  const details=[...view.querySelectorAll('.ap-log-payload')];
+  assert.equal(details.find(item=>item.querySelector('summary').textContent==='Input').querySelector('pre').textContent.includes('brand.example'),true);
+  assert.equal(details.find(item=>item.querySelector('summary').textContent==='Result').querySelector('pre').textContent.includes('Legacy catalog jacket'),true);
+ }finally{if(original)Object.defineProperty(globalThis,'document',original);else delete globalThis.document;dom.window.close();}
+});
+
 test('live activity keeps expanded tool details and keyboard focus while showing new results',async()=>{
  const dom=new JSDOM('<div id="view"></div>');
  const original=Object.getOwnPropertyDescriptor(globalThis,'document');

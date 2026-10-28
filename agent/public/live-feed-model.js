@@ -2,7 +2,7 @@ const context=e=>`${e.task_id??'none'}:${e.lead_id??'none'}`;
 const sequence=e=>Number(e.id)||Date.parse(e.at)||0;
 const trace=e=>e.type==='tool_call'||e.type==='tool_result';
 const operation=e=>{
- const tool=String(e.tool||'');
+ const tool=String(e.tool||'').replace(/^(claude\.[\w.]+)\s+\((?:claude-)?(?:sonnet|haiku|opus)(?:-[\w.-]+)?\)$/,'$1');
  if(/exa\.search \(REST\)|api\.exa\.ai \/search/.test(tool))return 'exa.search.rest';
  if(/exa\.web_search_exa \(MCP\)|mcp\.exa\.ai web_search_exa/.test(tool))return 'exa.search.mcp';
  return tool;

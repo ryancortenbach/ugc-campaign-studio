@@ -127,3 +127,17 @@ Verification: 14 analytics view, model and route tests passed. Coverage includes
 Independent review: scoped PASS, with all 14 analytics tests rerun independently.
 
 Next area: task activity details and filtering.
+
+## 2026-10-27: legacy tool results in task activity
+
+Expected: a catalog-read result stays inspectable beside its tool request even when older records do not carry call IDs. Repeated calls and other leads must not share results.
+
+Reproduced: researchLead still emits shopify.products requests and results without callId, but toolLogRow matched results only by callId. Task activity filters to request rows, so the catalog result was absent. Two new tool-log regressions failed before the fix.
+
+Changed: reuse the existing context-aware sequential tool pairing for both metadata and details, restricted to request/result events so intermediate errors cannot consume the match. Known Claude model suffixes on legacy operation names normalize for matching. Legacy request data appears under Input and its paired result under Result. Exact call IDs remain authoritative when present, and task/lead context and call order isolate repeated operations. Existing disclosures, summary copy and layout are unchanged.
+
+Verification: 15 tool-log, sidebar pairing and task-view/DOM tests passed. New integration coverage checks the actual mounted task activity after a legacy catalog result arrives; existing focus retention, stale updates and lead workflows remain covered. Independent review first returned the intervening-error and model-suffix cases; both failed in added regressions before correction. Root/module syntax and diff checks passed. All fixtures were mocked or temporary local data. Native visual acceptance remains unverified. No provider requests, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with 14 tool-log, task-activity and sidebar tests independently rerun plus explicit-ID/context checks.
+
+Next area: sender profile editing during pending saves.
