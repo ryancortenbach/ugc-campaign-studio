@@ -253,3 +253,17 @@ Verification: six focused and neighboring DOM tests passed, covering navigation 
 Independent review: scoped PASS, with all six tests independently rerun.
 
 Next area: connection refresh failures and status accuracy.
+
+## 2026-10-27: connection refresh failures retain results and retry
+
+Expected: failed connection refreshes retain the last checked results with their original timestamps and allow retry. A delayed older check must not overwrite a newer completed check. The missing-endpoint fallback remains available for older backends.
+
+Reproduced: a failed manual or background request replaced saved results with the unchecked config fallback and removed the manual retry button. A delayed older response also overwrote a newer check. Four focused regressions failed before the fix.
+
+Changed: only the latest issued connection request can update state. Failed refreshes preserve existing API results and repaint the retry control. Manual failure shows a concise error notification; background failures remain quiet. The existing status labels, timestamps, layout and initial legacy fallback are unchanged.
+
+Verification: 22 connection-refresh, sidebar, mocked provider-cost/health and neighboring Tasks/Leads DOM tests passed. Coverage includes HTTP/network failure, retained retry controls, successful retry, out-of-order responses, quiet background failure, legacy fallback and existing connection verification levels. Root/module syntax and diff checks passed. All provider responses were mocked and app records were temporary local fixtures. Native visual acceptance and actual provider health remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 22 tests independently rerun.
+
+Next area: lead filters under rapid sorting and refresh.

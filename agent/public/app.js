@@ -119,10 +119,14 @@ function paintSpend(){
 }
 // Connections tab: logo, name, one status word, and when it was last checked.
 async function loadConns(refresh){
+ const request=++connsRequest;
  const r=await tryGet('/api/connections'+(refresh?'?refresh=1':''));
+ if(request!==connsRequest)return;
  const list=Array.isArray(r)?r:Array.isArray(r?.connections)?r.connections:null;
+ if(!list){if(refresh)toast('Could not check connections','bad');if(state.connsApi){renderShell();return;}}
  state.conns=list;state.connsApi=Boolean(list);renderShell();
 }
+let connsRequest=0;
 function paintConns(){
  const rows=connRows();
  $('#connbody').innerHTML=`<div class="conn-head"><span class="faint">${rows.filter(r=>r.verification==='verified').length} verified · ${rows.filter(r=>['configured','reachable'].includes(r.verification)).length} ready</span>${state.connsApi?`<button type="button" class="iconbtn" id="connrefresh" data-tip="Check again" aria-label="Check again">${ic('refresh-cw')}</button>`:''}</div>
