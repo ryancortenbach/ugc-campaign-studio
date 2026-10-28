@@ -749,12 +749,15 @@ const clip=(t,n=96)=>{t=String(t||'');return t.length>n?t.slice(0,t.lastIndexOf(
 const productKind={top:'Top',bottom:'Bottom',outerwear:'Outerwear',footwear:'Footwear',headwear:'Headwear',accessory:'Accessory'};
 const needText={email:'a contact email',clip:'an approved clip',pdf:'the offer PDF',gmail:'a Gmail draft',instagram:'Instagram connected (Browser tab)',handle:'an Instagram handle'};
 function openPdf(id){
+ const trigger=$('#pdfview')?.contains(document.activeElement)?pdfReturnFocus:document.activeElement;
  closePdf();
+ pdfReturnFocus=trigger;
  const el=document.createElement('div');el.className='pdfview';el.id='pdfview';
  el.innerHTML=`<div class="pv-bar"><b>Offer PDF</b><button type="button" class="iconbtn" id="pdfclose" data-tip="Close" aria-label="Close">${ic('x')}</button></div><iframe src="/api/leads/${id}/offer.pdf" title="Offer PDF"></iframe>`;
- document.querySelector('.center').append(el);$('#pdfclose').onclick=closePdf;
+ document.querySelector('.center').append(el);$('#pdfclose').onclick=closePdf;$('#pdfclose').focus();
 }
-const closePdf=()=>$('#pdfview')?.remove();
+let pdfReturnFocus;
+const closePdf=()=>{const el=$('#pdfview');if(!el)return;el.remove();const trigger=pdfReturnFocus;pdfReturnFocus=null;if(trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#pdfview')){closePdf();e.stopPropagation();}},true);
 async function openLead(id){
  state.selectedLead=id;

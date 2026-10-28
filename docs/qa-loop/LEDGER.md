@@ -211,3 +211,17 @@ Verification: 21 sent-watcher, notification and contact regression tests passed.
 Independent review: scoped PASS, with all 21 tests independently rerun.
 
 Next area: draft editing and keyboard focus.
+
+## 2026-10-27: offer PDF viewer preserves keyboard focus
+
+Expected: opening an offer PDF moves focus into its viewer. Closing with the button or Escape returns focus to the originating offer control without closing the underlying lead drawer.
+
+Reproduced: opening left focus behind the viewer, while close and Escape left focus on the page body after removing the focused close button. All three focused DOM regressions failed before the fix. Drafts are edited through the existing external Gmail link; this pass exercises the offer viewer beside that link.
+
+Changed: capture the originating focus target and focus the viewer close button on opening. Restore a connected, visible target on closing. Switching from another offer control updates the return target, while replacing a PDF from inside its viewer retains the original target. Removed and hidden controls are not refocused. Copy, layout and existing Escape propagation are unchanged.
+
+Verification: seven focused and neighboring DOM tests passed, including opening, close-button return, Escape preserving the drawer, switching/replacing PDFs, removed/hidden targets and the existing Tasks/Leads workflows. Root/module syntax and diff checks passed. Tests used temporary local fixtures and mocked providers. Native keyboard, embedded PDF behavior and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all seven tests independently rerun.
+
+Next area: task steering and composer draft retention.
