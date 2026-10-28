@@ -64,6 +64,8 @@ export async function voicesView({view,api,esc,toast,sbadge,svg}){
  form.onsubmit=async e=>{
   e.preventDefault();
   const body={description:form.description.value.trim(),line:form.line.value.trim(),storyboardId:form.storyboardId?.value||null};
+  if(body.description.length<20||body.description.length>1000){toast('Describe the voice in 20 to 1000 characters: age, gender, accent, tone and pace.','bad');form.description.focus();return;}
+  if(body.line.length<100||body.line.length>1000){toast('Write a sample line of 100 to 1000 characters. ElevenLabs needs at least 100 to design a voice.','bad');form.line.focus();return;}
   if(!window.confirm(`Design voices uses about ${body.line.length} ElevenLabs characters. Continue?`))return;
   const b=form.querySelector('button[type=submit]');b.disabled=true;b.textContent='Designing, about 20 seconds';
   try{const r=await api('/api/voices/design',body);toast('Voices designed','ok',`${r.voices.length} previews. Listen, then run checks.`);}

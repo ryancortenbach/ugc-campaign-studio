@@ -155,3 +155,17 @@ Verification: five Settings and neighboring Tasks/Leads DOM tests passed, includ
 Independent review: scoped PASS, with all five tests independently rerun.
 
 Next area: voice form validation and retry.
+
+## 2026-10-27: voice validation before credit confirmation
+
+Expected: invalid voice descriptions and sample lines fail validation before asking the user to confirm credit use. Valid inputs retain the confirmation and can retry after a failed request without losing text.
+
+Reproduced: a short description reached the credit confirmation and mocked design request. The existing backend rejects invalid lengths before provider work, but the client still presented an unnecessary paid-action confirmation. The new DOM regression failed before the fix.
+
+Changed: validate trimmed description and sample lengths before confirmation, using the existing server limits and error copy. Focus the invalid field. Existing valid confirmation, design, failure/retry controls and layout are unchanged.
+
+Verification: 11 voice UI and mocked backend/provider tests passed. Coverage includes short, long and whitespace-only inputs, trimmed valid values, canceled credit confirmation, retained text and retry after request failure, and existing voice/check routes. Root/module syntax and diff checks passed. No actual credits were spent, and no provider requests, live mutations, desktop actions, restart, main integration or deployment occurred. Native visual acceptance remains unverified.
+
+Independent review: scoped PASS, with all 11 mocked tests rerun and server-limit parity checked.
+
+Next area: render new-shot draft retention and retry.
