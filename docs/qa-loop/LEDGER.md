@@ -813,3 +813,17 @@ Verification: 17 autosave-warning, explicit local-save, reference-removal-focus 
 Independent final review: scoped PASS for standalone autosave warnings, with all 17 tests independently rerun.
 
 Next area: Analytics provider breakdown with incomplete usage metadata.
+
+## 2026-10-29: Analytics badges recognize only supported provider names
+
+Expected: unfamiliar ledger providers contribute their priced amounts but do not fabricate supported-provider badges or consume the five-logo display limit.
+
+Reproduced: independent review found inherited object names such as constructor passing the logo-name lookup. This rendered broken image paths and function strings as labels. Four new permanent regressions failed before the fix for constructor, toString, __proto__ and valid badges displaced by these unknown names.
+
+Changed: check the provider-name map's own properties before selecting the existing five badges. Totals, range behavior, copy and styling remain intact.
+
+Verification: 30 provider-logo, provider-coverage, accounting, small-spend and range-failure tests passed. Eight ignored probes also exercise zero-dollar usage notes, aggregate provider ordering, unknown priced providers, refresh replacement, date boundaries, markup identifiers and unavailable revenue beside recorded expenses. The first chart fixture inspected an empty latest hour; it was corrected to inspect the prior expense hour, without a product change. Root/module/test syntax and diff checks passed. Provider calls were mocked, and new ledger probes used only in-memory SQLite. Native layout/SVG, real balances, invoices and account-spending completeness remain unverified. No actual provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: initial send-back for inherited provider names, then scoped PASS with all 30 tests independently rerun.
+
+Next area: Render stop/pause controls during failed requests and route changes.
