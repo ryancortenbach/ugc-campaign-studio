@@ -99,7 +99,12 @@ function bind(){
  root.querySelectorAll('[data-ap-upload]').forEach(b=>b.onclick=()=>root.querySelector(`[data-ap-file="${b.dataset.apUpload}"]`).click());
  root.querySelectorAll('[data-ap-file]').forEach(input=>input.onchange=()=>addFiles(input.dataset.apFile,[...input.files]));
  root.querySelectorAll('[data-ap-drop]').forEach(drop=>{drop.ondragover=e=>e.preventDefault();drop.ondrop=e=>{e.preventDefault();addFiles(drop.dataset.apDrop,[...e.dataTransfer.files]);};});
- root.querySelectorAll('[data-ap-remove]').forEach(b=>b.onclick=()=>{if(uploading)return;state.refs=state.refs.filter(r=>String(r.id)!==b.dataset.apRemove);invalidateImageRequests();save();render();});
+ root.querySelectorAll('[data-ap-remove]').forEach(b=>b.onclick=()=>{
+  if(uploading)return;
+  const focused=b.contains(document.activeElement),index=[...root.querySelectorAll('[data-ap-remove]')].indexOf(b);
+  state.refs=state.refs.filter(r=>String(r.id)!==b.dataset.apRemove);invalidateImageRequests();save();render();
+  if(focused){const remaining=[...root.querySelectorAll('[data-ap-remove]')];(remaining[Math.min(index,remaining.length-1)]||root.querySelector('[data-ap-upload]'))?.focus({preventScroll:true});}
+ });
  const picker=root.querySelector('[data-ap-assets]');picker.ontoggle=()=>{pickerOpen=picker.open;};picker.onkeydown=e=>{if(e.key==='Escape'){picker.open=false;pickerOpen=false;picker.querySelector('summary').focus();}};
  root.querySelectorAll('[data-ap-role]').forEach(b=>b.onclick=()=>{referenceRole=b.dataset.apRole;pickerOpen=true;render();root.querySelector(`[data-ap-role="${referenceRole}"]`)?.focus();});
  root.querySelectorAll('[data-ap-character]').forEach(b=>b.onclick=()=>{if(uploading)return;const c=research.characters.find(c=>c.id===b.dataset.apCharacter);if(!c)return;snapshot();state.refs=[...state.refs.filter(r=>r.role!=='character'),{...c,role:'character',origin:'existing_character'}];state.options.identity=c.identity;state.plans.forEach(p=>p.identity=c.identity);invalidateImageRequests();save();render();});

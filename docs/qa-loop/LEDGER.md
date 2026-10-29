@@ -575,3 +575,17 @@ Verification: 25 draft-failure, lead-refresh, drawer-refresh, badge, sort-menu a
 Independent final review: scoped PASS, with all 25 tests independently rerun.
 
 Next area: Reference selector keyboard focus and dismissal.
+
+## 2026-10-29: reference removal retains focus inside the picker
+
+Expected: removing a focused reference keeps keyboard focus in the current reference panel and leaves Escape dismissal available. A removal that does not own focus preserves focus elsewhere.
+
+Reproduced: rebuilding the lab after reference removal discarded the focused removal button and left focus on the document body. Escape then failed to reach the picker. Four focused regressions failed before the fix.
+
+Changed: when the removal button owns focus, focus the next remaining removal control, the previous one at the end, or the current role's Upload image control when empty. Use preventScroll and retain existing copy, styling and role selection.
+
+Verification: 21 reference-removal, upload-race, local-save, research-refresh and planner tests passed. Coverage includes first/last/only removal, external focus retention, Escape dismissal and apparel-role isolation. Root/module/test syntax and diff checks passed. Upload and research requests were mocked. Native keyboard and visual acceptance remain unverified. No provider calls, actual uploads, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 21 tests independently rerun.
+
+Next area: Render group filtering after status changes.
