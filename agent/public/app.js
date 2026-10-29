@@ -989,7 +989,7 @@ async function route(){
  const scroll=document.querySelector('.console:not([hidden])')?.scrollTop;
  try{await loadState();if(!isCurrent())return;await (views[name]||home)(arg?(/^\d+$/.test(arg)?Number(arg):arg):undefined,{isCurrent});}catch(err){if(isCurrent())$('#view').innerHTML=`<div class="card"><div class="empty">${esc(err.message)}</div></div>`;}
  if(!isCurrent())return;
- for(const [form,field,value] of typed){const el=document.querySelector(`#${form} [name="${field}"]`);if(el&&!el.value)el.value=value;}
+ for(const [form,field,value] of typed){const el=document.querySelector(`#${form} [name="${field}"]`);if(el&&!el.value){el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));}}
  if(focus)document.querySelector(`#${focus[0]} [name="${focus[1]}"]`)?.focus();
  const c=document.querySelector('.console:not([hidden])');if(c&&scroll!==undefined&&scroll<c.scrollHeight-c.clientHeight-30)c.scrollTop=scroll;
  renderShell();

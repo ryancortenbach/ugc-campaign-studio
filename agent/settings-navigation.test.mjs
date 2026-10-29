@@ -6,13 +6,36 @@ import {JSDOM} from 'jsdom';
 
 const source=readFileSync(new URL('./public/app.js',import.meta.url),'utf8');
 const settingsSource=source.slice(source.indexOf('async function settings('),source.indexOf('\nasync function voices('));
+const routeSource=source.slice(source.indexOf('let lastView,routeVersion=0;'),source.indexOf("window.addEventListener('hashchange',route);"));
 function fixture({loadState=async()=>{},api=async()=>({})}={}){
- const dom=new JSDOM('<main id="view"></main>'),{document,FormData}=dom.window,notices=[];
+ const dom=new JSDOM('<main id="view"></main><aside id="drawer" hidden></aside>',{url:'http://localhost/#/settings'}),{document,FormData}=dom.window,notices=[];
  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const context=vm.createContext({document,FormData,$:selector=>document.querySelector(selector),loadState,api,esc,connRows:()=>[],autosize:()=>{},toast:(...args)=>notices.push(args),state:{config:{profile:{senderName:'Original sender',company:'Mint'}}}});
- vm.runInContext(settingsSource+'\nthis.mountSettings=settings;',context);
- return {dom,document,view:document.querySelector('#view'),mount:context.mountSettings,notices};
+ Object.assign(context,{location:dom.window.location,URLSearchParams:dom.window.URLSearchParams,Event:dom.window.Event,renderWatcher:null,renderShell:()=>{},openRail:()=>{},home:()=>{}});
+ vm.runInContext(settingsSource+'\nconst views={settings};\n'+routeSource+'\nthis.mountSettings=settings;this.routeSettings=route;',context);
+ return {dom,document,view:document.querySelector('#view'),mount:context.mountSettings,route:context.routeSettings,notices};
 }
+
+test('route-restored profile text remains unsaved and can be submitted',async()=>{
+ const requests=[],f=fixture({api:async(path,body)=>{requests.push({path,body});return {};}});
+ try{
+  await f.route();const input=f.document.querySelector('[name="rules"]');input.value='Unsaved writing rules';input.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));input.focus();
+  await f.route();const restored=f.document.querySelector('[name="rules"]');
+  assert.equal(restored.value,'Unsaved writing rules');assert.equal(f.document.activeElement,restored);
+  assert.equal(f.document.querySelector('#pfstate').textContent,'Unsaved changes');assert.equal(f.document.querySelector('#pfsave').disabled,false);
+  await f.document.querySelector('#profile').onsubmit({preventDefault(){}});
+  assert.equal(requests.length,1);assert.equal(requests[0].body.rules,'Unsaved writing rules');assert.equal(f.document.querySelector('#pfstate').textContent,'All changes saved');
+ }finally{f.dom.window.close();}
+});
+
+test('routing unchanged profile fields does not mark them dirty',async()=>{
+ const f=fixture();
+ try{
+  await f.route();await f.route();
+  assert.equal(f.document.querySelector('[name="senderName"]').value,'Original sender');
+  assert.equal(f.document.querySelector('#pfstate').textContent,'All changes saved');assert.equal(f.document.querySelector('#pfsave').disabled,true);
+ }finally{f.dom.window.close();}
+});
 
 test('a delayed Settings load cannot replace the page opened after it',async()=>{
  let resolve,current=true;

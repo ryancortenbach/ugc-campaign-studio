@@ -379,3 +379,17 @@ Verification: 19 availability, review-view, regression and in-memory backend tes
 Independent review: scoped PASS, with all 19 tests independently rerun.
 
 Next area: Settings keyboard editing and dirty-state recovery.
+
+## 2026-10-29: restored Settings text retains its unsaved state
+
+Expected: when routing restores unsaved text into a newly mounted Settings form, that text remains visibly unsaved and Save is enabled until the current value is saved.
+
+Reproduced: a same-route remount restored writing rules into a previously empty field after Settings captured its saved fingerprint. The page displayed the unsaved text with All changes saved and a disabled Save button. The integrated route and Settings regression failed before the fix. Independent review identified this gap after initial input-only probes passed.
+
+Changed: dispatch the normal bubbling input event only when routing actually restores a field value. Existing dirty-state, textarea sizing and composer handlers can reconcile restored values. Existing nonempty authoritative field handling, copy and layout are unchanged.
+
+Verification: 23 Settings, composer upload/reply and neighboring Tasks/Leads DOM checks passed. Coverage includes restored text remaining saveable, unchanged fields staying saved, focus restoration, cleared values, multiline Unicode payloads, failed-save retries, pending-save edits and detached forms. Root/module syntax and diff checks passed. Payload and input retention checks used mocked responses, not backend persistence. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 23 tests independently rerun.
+
+Next area: Leads filtering and selected-row recovery after refresh.
