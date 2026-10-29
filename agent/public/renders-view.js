@@ -280,7 +280,13 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
  const actions={
   async check(r){await run('check',r.id,()=>api(`/api/renders/${r.id}/check`,{}),{ok:'Checks finished'});},
   async revise(r){const out=await run('revise',r.id,()=>api(`/api/renders/${r.id}/revise`,{}),{ok:'Revision queued',sub:'Your notes are in the new draft. Run checks on it.'});if(out&&out.render){await refresh().catch(()=>{});const t=S.tiles.find(x=>x.versions.some(v=>v.id===out.render.id));if(t)openPanel(t.key,out.render.id);}},
-  async cancel(r){await run('cancel',r.id,()=>api(`/api/renders/${r.id}/cancel`,{}),{ok:'Render canceled'});},
+  async cancel(r){
+   const out=await run('cancel',r.id,()=>api(`/api/renders/${r.id}/cancel`,{}),{ok:'Render canceled'});
+   if(out?.render?.id===r.id&&out.render.status==='canceled'&&alive()&&S.byId.get(r.id)===r){
+    S.readVersion++;S.lastRaw='';
+    apply(S.list.map(row=>row.id===r.id?{...row,...out.render}:row));
+   }
+  },
   async 'approve-go'(r){const est=r.estimate_usd;S.ui.confirm=null;const out=await run('approve',r.id,()=>api(`/api/renders/${r.id}/approve`,{estimate:est}),{ok:'Submitted to Higgsfield',sub:'It pops up for review when done.'});return out;},
   async 'rev-ok'(r){await run('review',r.id,()=>api(`/api/renders/${r.id}/review`,{decision:'approved',note:''}),{ok:'Scene approved'});},
   async 'rev-send'(r){const note=S.ui.note.trim();if(!note){toast('Say what to fix so the next render can be better.','bad');return;}const out=await run('review',r.id,()=>api(`/api/renders/${r.id}/review`,{decision:'rejected',note}),{ok:'Scene rejected',sub:'Use Revise to queue a fixed version.'});if(out){S.ui.confirm=null;S.ui.note='';patchPanel(true);}},

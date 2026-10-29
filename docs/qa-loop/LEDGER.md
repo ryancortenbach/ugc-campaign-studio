@@ -827,3 +827,17 @@ Verification: 30 provider-logo, provider-coverage, accounting, small-spend and r
 Independent final review: initial send-back for inherited provider names, then scoped PASS with all 30 tests independently rerun.
 
 Next area: Render stop/pause controls during failed requests and route changes.
+
+## 2026-10-29: Confirmed render cancellation survives a failed list refresh
+
+Expected: a confirmed canceled render must not return to queued or offer Cancel again merely because the follow-up list read failed. Newer stream records and departed views retain ownership.
+
+Reproduced: independent review found that cancel success followed by a failed list read left the queued tile and enabled Cancel. The action ignored its confirmed render DTO. One of four new permanent regressions failed before the fix. The earlier ignored cancellation fixture now includes a request ID to match the server contract.
+
+Changed: after the existing cancellation workflow, merge its matching canceled render response only if the view is active and the target row is still the original record. Invalidate older reads before applying this fallback. Successful newer list or stream replacements remain authoritative, and other rows stay intact. Copy and styling remain unchanged.
+
+Verification: 24 cancellation-confirmation, recovery, refresh-race, tab-focus and media-refresh tests passed. Four new permanent checks cover successful cancel with failed read, newer stream ownership, unconfirmed failure and departure. Seven ignored recovery probes cover duplicate suppression, retry, spending-paused cancellation availability, closed panels and replacement mounts. Root/module/test syntax and diff checks passed. Requests were mocked; no actual provider cancellation, paid actions, approvals, panel launches, sends, live mutations, spending-pause changes, desktop actions, restart, main integration or deployment. Native media/layout and provider persistence remain unverified.
+
+Independent final review: initial send-back for successful cancel with failed refresh, then scoped PASS with all 24 tests independently rerun.
+
+Next area: Lead drawer close and keyboard focus after asynchronous reads.
