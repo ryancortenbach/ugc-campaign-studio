@@ -771,3 +771,17 @@ Verification: 40 lifecycle, upload, removal-focus, reply-draft, model-draft and 
 Independent final review: scoped PASS for cleanup ownership, with all 40 tests independently rerun. Existing submission clearing semantics are unchanged.
 
 Next area: Home composer submission snapshot ownership during newer edits.
+
+## 2026-10-29: Invalid connection rows cannot poison shared UI state
+
+Expected: malformed provider rows follow the existing failed-read path, preserving the last checked results and retry controls. Valid empty lists and unfamiliar provider objects remain supported.
+
+Reproduced: loadConns accepted any JSON array. A null row then threw while reading row.on in connectionStatus after the invalid list had replaced shared state, breaking later shell paints. Primitive or nested-array rows also replaced valid provider records. Six focused regressions failed before the fix.
+
+Changed: require non-null, non-array row objects before accepting the complete response list. Invalid rows reuse the existing manual alert or quiet background failure, cached-result retention and initial unchecked fallback. Existing provider fields, copy and styling remain intact.
+
+Verification: 24 invalid-row, refresh-race, metadata and sidebar tests passed, including seven ignored metadata probes. Seven new permanent checks cover null/primitive/array/mixed data, initial fallback, valid retry, quiet background failure and unfamiliar valid providers. Root/module/test syntax and diff checks passed. All connection reads were mocked. This is row-shape validation, not a complete provider-field schema audit or live credential check. Native layout and keyboard behavior remain unverified. No actual provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS for JSON row-shape handling, with all 24 tests independently rerun.
+
+Next area: Composer request completion and newer draft ownership.

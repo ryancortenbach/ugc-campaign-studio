@@ -126,7 +126,8 @@ async function loadConns(refresh){
  const r=await tryGet('/api/connections'+(refresh?'?refresh=1':''));
  if(request!==connsRequest)return;
  connsLoading=false;
- const list=Array.isArray(r)?r:Array.isArray(r?.connections)?r.connections:null;
+ const candidate=Array.isArray(r)?r:Array.isArray(r?.connections)?r.connections:null;
+ const list=candidate?.every(row=>row!==null&&typeof row==='object'&&!Array.isArray(row))?candidate:null;
  if(!list){if(refresh)toast('Could not check connections','bad');if(state.connsApi){renderShell();return;}}
  state.conns=list;state.connsApi=Boolean(list);renderShell();
 }
