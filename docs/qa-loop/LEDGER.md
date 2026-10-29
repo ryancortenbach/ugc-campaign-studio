@@ -477,3 +477,17 @@ Verification: 24 connection-refresh, sidebar, mocked cost/provider and neighbori
 Independent final review: scoped PASS, with all 24 tests independently rerun.
 
 Next area: Task activity disclosure state after empty or failed updates.
+
+## 2026-10-29: removed activity rows retain a keyboard return point
+
+Expected: when a focused tool row falls outside the compact activity limit or an update empties the log, keyboard focus returns to Task activity. Failed reads preserve the current details, and activity updates never take focus from another control.
+
+Reproduced: pruning the focused oldest row from the latest 12 entries, or replacing its activity with an empty list, removed its focused disclosure and left focus on the document body. Both focused regressions failed before the fix.
+
+Changed: after existing row and payload focus restoration, focus the outer activity summary only when focus had been inside the replaced activity and no target inside it retained focus. Existing compact bounds, disclosure states, copy and styling are unchanged.
+
+Verification: 19 pruning, error-activity, task-view, tool-log and neighboring Tasks/Leads DOM tests passed. Coverage includes a pruned focused row, empty activity, failed-read preservation and recovery, external focus retention, expanded details, result pairing and stale reads. Root/module syntax and diff checks passed. Requests were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 19 tests independently rerun.
+
+Next area: Client review feedback cancellation and stale versions.

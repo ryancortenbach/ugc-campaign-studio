@@ -27,6 +27,7 @@ function paintActivity(context,workspace){
    target?.focus({preventScroll:true});
   }
  }
+ if(focused&&!container.contains(document.activeElement))container.closest('.task-ideas-activity')?.querySelector(':scope > summary')?.focus({preventScroll:true});
 }
 function paintProgress(context,workspace){
  if(active!==context||!context.isCurrent()||!context.view.isConnected||!context.view.querySelector('#task-ideas-report'))return;
