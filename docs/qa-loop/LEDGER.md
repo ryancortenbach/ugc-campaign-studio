@@ -603,3 +603,17 @@ Verification: 15 order-list, task-list-model, lead-refresh and neighboring Tasks
 Independent final review: scoped PASS, with all 15 tests independently rerun.
 
 Next area: Connection status unavailable metadata and retries.
+
+## 2026-10-29: stale Home history cannot erase newer chat turns
+
+Expected: history reloads preserve newer messages and replies, including optimistic user turns. Older failed reads must not disable a healthy conversation. Fresh history remains available after a reply finishes.
+
+Reproduced: an older history response replaced newer history or erased pending/completed chat turns. An old failure set thread.ok=false after newer success. If history replaced an optimistic user turn before the reply failed, the failure handler popped an older saved turn. Six focused regressions failed before the fix using isolated cloned response fixtures.
+
+Changed: version history reads and invalidate them when an assistant message starts. Apply only the current read's success or failure, and avoid starting history reads while a reply is pending. Existing message copy, layout, retry text and composer behavior remain intact.
+
+Verification: 27 history-race, composer-reply, model-draft, upload and neighboring Tasks/Leads DOM tests passed. Coverage includes both pending and completed replies, competing read success/failure, failed-reply cleanup, retry after a current history failure and fresh post-reply history. Root/module/test syntax and diff checks passed. All assistant/history/upload calls were mocked or used temporary local fixtures. Native keyboard, visual behavior and live assistant persistence remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 27 tests independently rerun.
+
+Next area: Live tool trace duplicate results and collapse persistence.

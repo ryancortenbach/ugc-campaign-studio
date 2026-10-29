@@ -633,7 +633,7 @@ async function sendComposer(){
   if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');location.hash='#/storyboards';}
   else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});done();toast('Shot added','ok','Run checks on it in Renders.');location.hash='#/renders';}
   else if(!attachments.length&&thread.ok&&tab()==='home'){
-   thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
+   thread.readVersion=(thread.readVersion||0)+1;thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
    try{const r=await api('/api/assistant',{message:text,model});thread.messages.push({role:'assistant',text:r.reply,actions:r.actions});if(r.mode==='rehearsal'&&r.url)location.hash=r.url;if(spoken)voice.speak(r.reply);}
    catch(err){thread.messages.pop();const input=$('#composer')?.message;if(input&&!input.value&&comp.tool===tool&&!comp.files.length&&!comp.links.length)input.value=text;toast(err.message,'bad');}
    finally{thread.thinking=false;paintThread();}
@@ -671,7 +671,7 @@ window.mintVoice=e=>{
 };
 document.addEventListener('click',e=>{if(!e.target.closest('.cwrap'))closeMenus();});
 
-const thread={messages:[],thinking:false,ok:true};
+const thread={messages:[],thinking:false,ok:true,readVersion:0};
 const actionLabel=a=>({prepare_client_demo:'Prepared a client demo',start_mission:'Started a mission',steer_mission:'Steered a mission',control_mission:`Mission ${a.input?.action||'updated'}`,get_overview:'Checked the overview',get_mission:'Read a mission',find_leads:'Looked up brands',get_lead:'Read a brand'})[a.tool]||a.tool;
 const claudeAv=()=>logoTile('claude');
 function threadHTML2(g){
@@ -696,7 +696,14 @@ function paintChatActivity(){
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-steps]');if(!b)return;const k=b.dataset.steps;openSteps.has(k)?openSteps.delete(k):openSteps.add(k);const t=$('#thread');if(t&&t.contains(b))paintThread();else{const g=b.closest('.thread2');if(g){const key=g.dataset.thread,grp=groupByKey(key);if(grp)g.innerHTML=threadHTML2(grp);}}});
 function paintThread(){const t=$('#thread');if(!t)return;t.innerHTML=threadHTML();paintChatActivity();t.hidden=!thread.messages.length&&!thread.thinking;$('.home')?.classList.toggle('chatting',!t.hidden);t.lastElementChild?.scrollIntoView({block:'end'});}
-async function loadThread(){try{const r=await api('/api/assistant');thread.messages=r.messages||[];thread.ok=true;}catch{thread.ok=false;}paintThread();}
+async function loadThread(){
+ if(thread.thinking)return;
+ const version=thread.readVersion=(thread.readVersion||0)+1;
+ const current=()=>version===thread.readVersion&&!thread.thinking;
+ try{const r=await api('/api/assistant');if(!current())return;thread.messages=r.messages||[];thread.ok=true;}
+ catch{if(!current())return;thread.ok=false;}
+ paintThread();
+}
 async function home(){
  const live=sessionGroups().filter(g=>g.live.length);
  document.querySelectorAll('.popup').forEach(el=>el.remove());
