@@ -844,7 +844,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidde
 // Leads: filter chips with counts, a sort menu, and one list. Drafts is a filter here (the old Drafts page redirects to it).
 const leadFilters=[['all','All'],['drafts','Drafts'],['awaiting_video','Needs video'],['rejected','Not a fit'],['issues','Other']];
 const leadSorts=[['newest','Newest'],['name','Name'],['status','Status']];
-const statusRank=['drafted','awaiting_video','contacted','replied','won','drafting','grading','visiting','found','skipped','unreachable','error','lost','rejected'];
+const statusRank=['drafted','awaiting_video','contacted','replied','won','drafting','qualified','grading','visiting','found','skipped','unreachable','error','lost','rejected'];
 async function leads(arg,{isCurrent=()=>true}={}){
  if(!isCurrent())return;
  const request=++leadsRequest,isActive=()=>request===leadsRequest&&isCurrent();

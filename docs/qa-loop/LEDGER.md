@@ -743,3 +743,17 @@ Verification: 25 reason, notification, queue-read, availability and client-revie
 Independent final review: initial send-back for the invented artwork reason, then scoped PASS after the fix with all 25 tests independently rerun.
 
 Next area: Settings profile field normalization and empty values.
+
+## 2026-10-29: Status sorting includes qualified research leads
+
+Expected: the existing status priority places Research in progress between drafting and grading, consistent with the production sequence grading, qualified, drafting. Ready drafts retain their earlier position.
+
+Reproduced: the runner emits qualified and the UI labels it Research in progress, but statusRank omitted it. Its index was -1, so it sorted before drafted and awaiting-video leads. One focused regression failed before the fix. A separate simulated-priority fixture initially omitted URL from its VM; that fixture was corrected before the valid baseline run and did not require a product change.
+
+Changed: include qualified between drafting and grading in the existing rank list. Other sorting rules, filters, copy and styling remain intact.
+
+Verification: 27 sorting, refresh-race, drawer, lead-badge and draft-availability tests passed. Seven new permanent checks cover the qualified position, newest-first ties, missing company-name fallback, empty-filter recovery, count/withdrawn exclusions, invalid saved preferences and simulated purchase priority. Root/module/test syntax and diff checks passed. Requests were mocked and list row output was simplified for ordering assertions. Native keyboard, visual alignment and live filtering remain unverified. No provider calls, requalification, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS against the runner workflow, with all 27 tests independently rerun. Unknown future statuses are outside this fix.
+
+Next area: Render form validation and retained values after failure.
