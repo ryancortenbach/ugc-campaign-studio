@@ -701,3 +701,17 @@ Verification: 27 draft-availability, drawer-refresh, draft-map-failure, lead-bad
 Independent final review: sent back unrealistic readiness data in one fixture. Corrected fixtures derive readiness from required dependencies, reproduce the same three baseline failures and pass all 27 tests independently rerun by the reviewer. Scoped PASS.
 
 Next area: Home attachment removal and failed upload recovery.
+
+## 2026-10-29: Home attachment removal preserves focus
+
+Expected: removing the focused file or reference link keeps keyboard focus at the next attachment, the preceding attachment when removing the last, or the message when none remain. Removal must not steal focus from an active message.
+
+Reproduced: replacing the attachment markup removed the focused button and left the document body focused. Six permanent DOM regressions failed for first/middle/final/sole removal and returning to an unsent message.
+
+Changed: capture whether the removal button owns focus and its position. After removing and redrawing, restore focus at that position or the last remaining attachment, falling back to the message. Existing copy, layout and upload behavior remain intact.
+
+Verification: 32 removal-focus, upload, model-draft, link and reply-draft tests passed. Nine new permanent checks include read/upload failure retries, retained references, and unsent text/selection preservation. Existing checks retain in-flight removal, batch limits and navigation coverage. Root/module/test syntax and diff checks passed. Requests were mocked. Focus assertions are DOM evidence, not native keyboard or visual acceptance. Later unrelated upload redraws are outside this removal-specific fix. No provider calls, actual uploads, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 32 tests independently rerun.
+
+Next area: Analytics tooltip and metric selection after range changes.

@@ -604,8 +604,13 @@ function rerenderComposer(){
  const m=$('#cmodes');if(m)m.outerHTML=modesHTML();const sg=$('#csuggest');if(sg){sg.innerHTML=suggestHTML();bindSuggest();}bindComposer();syncComposer();$('#composer textarea').focus();
 }
 function bindAttach(){
- document.querySelectorAll('[data-unfile]').forEach(b=>b.onclick=()=>{comp.files=comp.files.filter(x=>x.key!==b.dataset.unfile);$('#cfiles').innerHTML=attachHTML();bindAttach();});
- document.querySelectorAll('[data-unlink]').forEach(b=>b.onclick=()=>{comp.links.splice(Number(b.dataset.unlink),1);$('#cfiles').innerHTML=attachHTML();bindAttach();});
+ const remove=(button,update)=>{
+  const focused=document.activeElement===button,index=[...$('#cfiles').querySelectorAll('button')].indexOf(button);
+  update();$('#cfiles').innerHTML=attachHTML();bindAttach();
+  if(focused){const buttons=$('#cfiles').querySelectorAll('button');(buttons[Math.min(index,buttons.length-1)]||$('#composer textarea'))?.focus({preventScroll:true});}
+ };
+ document.querySelectorAll('[data-unfile]').forEach(b=>b.onclick=()=>remove(b,()=>{comp.files=comp.files.filter(x=>x.key!==b.dataset.unfile);}));
+ document.querySelectorAll('[data-unlink]').forEach(b=>b.onclick=()=>remove(b,()=>{comp.links.splice(Number(b.dataset.unlink),1);}));
 }
 async function addFiles(list){
  for(const file of [...list]){
