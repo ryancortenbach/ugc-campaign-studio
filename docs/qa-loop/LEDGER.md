@@ -631,3 +631,17 @@ Verification: 24 replay, sidebar, tool-log, task-activity and neighboring Tasks/
 Independent final review: scoped PASS, with all 24 tests independently rerun.
 
 Next area: Voices preview selection during list refresh.
+
+## 2026-10-29: delayed voice refresh rechecks playback before routing
+
+Expected: a voice update scheduled while previews are paused must not rebuild the route if listening starts or the user leaves Voices during the refresh delay.
+
+Reproduced: the voice-event guard checked audio only before scheduling softRefresh(route). Starting playback during its 400 ms delay still called route, as did leaving Voices. Three focused regressions failed before the fix.
+
+Changed: recheck the current Voices route and paused audio when the deferred callback runs. Existing initial admission and shared timer replacement behavior remain intact. Copy and styling are unchanged.
+
+Verification: 31 playback-refresh, preview-list, navigation, storyboard-selection, form and design-draft tests passed, including seven ignored preview probes. Coverage uses actual softRefresh with controlled timers and mocked paused flags, plus option order, distinct sample sources, escaped names, missing-audio controls, normal paused refresh and recovery on a later event. Root/module/test syntax and diff checks passed. Provider actions were mocked. This checks state when the timer fires, not throughout later asynchronous route reads, and does not automatically retry when playback ends. Native playback, keyboard and visual acceptance remain unverified. No actual audio playback, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 31 tests independently rerun.
+
+Next area: Lead website and social link routing.

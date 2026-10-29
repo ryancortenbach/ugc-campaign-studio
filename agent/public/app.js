@@ -1071,6 +1071,6 @@ stream.onmessage=msg=>{
  if(change.kind==='whop'&&change.order){const w=state.whop;if(w){const i=(w.orders||[]).findIndex(o=>o.payment_id===change.order.payment_id);if(i<0)(w.orders=w.orders||[]).unshift(change.order);else w.orders[i]=change.order;if(tab()==='tasks')paintOrders();}else if(tab()==='tasks')refreshWhop();}
  if(change.kind==='storyboard'&&tab()==='storyboards')softRefresh(route);
  if(change.kind==='assistant'&&tab()==='home'&&!thread.thinking)loadThread();
- if(change.kind==='voice'&&tab()==='voices'&&![...document.querySelectorAll('audio')].some(a=>!a.paused))softRefresh(route);
+ if(change.kind==='voice'&&tab()==='voices'&&![...document.querySelectorAll('audio')].some(a=>!a.paused))softRefresh(()=>{if(tab()==='voices'&&![...document.querySelectorAll('audio')].some(a=>!a.paused))route();});
  if(change.kind==='render'){if(reviewReady(change.render))popReview(change.render);if(tab()==='renders'){if(window.mintRendersView)window.mintRendersView.patch(change.render);else if(!renderViewBusy())softRefresh(route);}else if(tab()==='home')softRefresh(route);else loadState().catch(()=>{});}
 };
