@@ -305,7 +305,7 @@ function sessionGroups(){
 const groupByKey=k=>sessionGroups().find(g=>g.key===k);
 function sessControls(g){
  if(!g.live.length||g.whop)return '';
- const run=g.live.find(t=>t.status==='running')||g.live[0];
+ const run=g.live.find(t=>t.status==='running')||g.live.find(t=>t.status==='paused')||g.live[0];
  const btn=(a,i,tip)=>`<button type="button" class="iconbtn" data-gact="${a}" data-id="${run.id}" data-tip="${tip}" aria-label="${tip}">${ic(i)}</button>`;
  return (run.status==='running'?btn('pause','pause','Pause'):run.status==='paused'?btn('resume','play','Resume'):'')+btn('stop','square','Stop');
 }

@@ -1009,3 +1009,17 @@ Verification: 24 creation-recovery, create-draft, refresh-race, cancellation-con
 Independent final review: scoped PASS with all 24 tests independently rerun.
 
 Next area: Settings profile controls and retry state after interrupted navigation.
+
+## 2026-10-29: Grouped paused missions retain their Resume control
+
+Expected: session controls target the same live run that determines the grouped status. A newer queued repeat must not hide Resume for an older paused run.
+
+Reproduced: one of six new permanent regressions failed. The grouped status preferred the paused run, but its controls preferred the newest queued run, showing only Stop for that queued task.
+
+Changed: give paused runs the same priority in control selection as in grouped status, after running runs and before queued runs. Existing labels, layout, newest-run ordering and Whop suppression remain unchanged.
+
+Verification: 23 session-control, task-list-model, session-refresh-race and sidebar tests passed. Six new checks cover paused-plus-queued repeats, running priority, newest paused and queued ownership, finished groups and Whop suppression. Root/app/test syntax and diff checks passed. Tests extract actual grouping/control functions and inspect rendered button attributes in JSDOM. No execution controls were activated. Native layout, actual control execution and real stream delivery remain unverified. No provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 23 tests independently rerun and actual store/runner producers inspected.
+
+Next area: Settings connection refresh retry and navigation ownership.
