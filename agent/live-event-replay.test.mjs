@@ -12,7 +12,7 @@ function fixture(t){
  const dom=new JSDOM('<main id="livefeed"></main>');t.after(()=>dom.window.close());
  const state={live:[],lastStep:new Map(),sdata:new Map(),openSess:new Set(),logOpen:new Set(),openKids:new Set()},notices=[];let paints=0;
  const context=vm.createContext({document:dom.window.document,state,thread:{thinking:false},comp:{},railTypes:new Set(['tool_call','tool_result','decision']),
-  tab:()=> 'home',noteDraft:()=>{},noteLead:()=>{},isTraceEv:e=>['tool_call','tool_result'].includes(e.type),scheduleLive:()=>paints++,
+  tab:()=> 'home',noteDraft:()=>{},noteLead:()=>{},invalidateSession:()=>{},isTraceEv:e=>['tool_call','tool_result'].includes(e.type),scheduleLive:()=>paints++,
   eventNotification:()=>null,toast:(...a)=>notices.push(a),tidy:String});
  vm.runInContext(`this.deliver=event=>{const change={kind:'event',event};${eventBranch}};`,context);
  return {state,deliver:e=>context.deliver(structuredClone(e)),paints:()=>paints,notices,groups:()=>buildGroups(state.live,e=>e.type==='decision')};

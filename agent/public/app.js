@@ -237,7 +237,22 @@ function groupHTML(g,{log=false}={}){
 const feedIsMain=e=>railTypes.has(e.type);
 function liveHTML(){const gs=buildGroups(state.live.slice().reverse(),feedIsMain).reverse().slice(0,40);return gs.length?gs.map(g=>groupHTML(g)).join(''):'<div class="empty">Every step the agent takes shows up here.</div>';}
 let liveTimer;
-function renderLive(){clearTimeout(liveTimer);const box=$('#livefeed');const top=box.scrollTop;box.innerHTML=liveHTML();box.scrollTop=top;}
+function renderLive(){
+ clearTimeout(liveTimer);const box=$('#livefeed'),top=box.scrollTop;
+ const focused=box.contains(document.activeElement)?document.activeElement:null,focusRow=focused?.closest('.tg-kid');
+ const focusPayload=focusRow?[...focusRow.querySelectorAll('.ap-log-payload')].indexOf(focused.closest('.ap-log-payload')):-1;
+ const saved=new Map([...box.querySelectorAll('.tg-kid')].map(row=>[row.dataset.kid,[...row.querySelectorAll('.ap-log-payload')].map(detail=>({label:detail.querySelector('summary')?.textContent,open:detail.open}))]));
+ box.innerHTML=liveHTML();box.scrollTop=top;
+ for(const row of box.querySelectorAll('.tg-kid')){
+  const before=saved.get(row.dataset.kid);
+  [...row.querySelectorAll('.ap-log-payload')].forEach((detail,i)=>{if(before?.[i]?.label===detail.querySelector('summary')?.textContent)detail.open=before[i].open;});
+ }
+ if(focusRow){
+  const row=[...box.querySelectorAll('.tg-kid')].find(row=>row.dataset.kid===focusRow.dataset.kid);
+  const target=focusPayload>=0?row?.querySelectorAll('.ap-log-payload')[focusPayload]?.querySelector('summary'):null;
+  (target||row?.querySelector('.kd-main')||$('#rtabs [data-rtab="live"]'))?.focus({preventScroll:true});
+ }
+}
 const scheduleLive=()=>{clearTimeout(liveTimer);liveTimer=setTimeout(renderLive,120);};
 // Main row click shows the full line; kid click opens its details in place. Same behavior in the feed and in session logs.
 function toggleMore(li){
@@ -247,6 +262,7 @@ function toggleMore(li){
  if(open)more.innerHTML=`<p>${esc(tidy(ev.title))}</p>${ev.detail?`<p class="faint">${esc(tidy(ev.detail))}</p>`:''}<div class="acts">${ev.lead_id?`<button type="button" class="btn sm" data-open="lead" data-id="${ev.lead_id}">Open brand</button>`:''}${ev.task_id&&li.dataset.log!=='1'?`<button type="button" class="btn sm" data-open="task" data-id="${ev.task_id}">Open mission</button>`:''}</div>`;
 }
 function toggleKid(btn){
+ const focused=btn===document.activeElement;
  const row=btn.closest('.tg-kid'),id=Number(row.dataset.kid),open=!state.openKids.has(id);
  open?state.openKids.add(id):state.openKids.delete(id);
  const all=[...state.sdata.values()].flatMap(d=>d.events).concat(state.live);
@@ -258,7 +274,7 @@ function toggleKid(btn){
  const gs=buildGroups(host.slice().sort((a,b)=>a.id-b.id),group.closest('.tgl')?(()=>true):feedIsMain);
  const g=gs.find(x=>(x.latest||x.main).id===gid);
  const k=g&&pairTools(g.tools).find(x=>kidKey(x)===id);
- if(k)row.outerHTML=kidHTML(k,row.classList.contains('last'));
+ if(k){row.outerHTML=kidHTML(k,row.classList.contains('last'));if(focused)[...group.querySelectorAll('.tg-kid')].find(row=>Number(row.dataset.kid)===id)?.querySelector('.kd-main')?.focus({preventScroll:true});}
 }
 function traceClick(e){
  const go=e.target.closest('.tgl [data-open]');if(go){e.stopPropagation();openGo(go);return true;}

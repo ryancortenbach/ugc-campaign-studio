@@ -1093,3 +1093,17 @@ Verification: 15 delivery-copy, delivery-tooling-view and client-context-retry t
 Independent final review: scoped PASS with all 15 tests independently rerun.
 
 Next area: Live tool log disclosure state across filtered activity updates.
+
+## 2026-10-29: Live tool payloads retain expansion and keyboard focus
+
+Expected: new Live activity retains expanded tool payloads and their focused summaries, including when a pending call receives its result or joins a main event. Opening or closing a tool retains focus on its button; a pruned tool returns focus to Live.
+
+Reproduced: four of seven new permanent regressions failed. Tool toggles replaced their focused buttons, feed repaints collapsed nested Input details and lost focus, and pruning left no keyboard return point.
+
+Changed: capture payload states by child event ID and payload ordinal/label before repainting. Restore matching disclosures and focused summaries/buttons, using the Live tab when a child is pruned. Tool toggles restore their button only when it owned focus. New payloads remain collapsed and outside focus remains untouched. No copy or styling changes.
+
+Verification: 40 Live disclosure/replay, tool-log, sidebar, rail-focus and session-refresh tests passed. Seven new checks cover toggles, new activity, immutable result pairing, explicit collapse, unrelated tools, the 40-group limit and outside focus. The pre-existing replay fixture lacked a session-invalidation mock; its event branch was unchanged from baseline, and the fixture now supplies that dependency. Real invalidation remains covered by the 12 session tests. Root/app/test syntax and diff checks passed. Tests use actual extracted Live handlers, real pairing/log helpers and supplied events without API calls. Main-row expansion, native keyboard/layout and actual stream transport remain unverified. No paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 40 tests independently rerun.
+
+Next area: Settings sender-profile save failures and Undo recovery.
