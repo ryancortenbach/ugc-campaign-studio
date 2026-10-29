@@ -887,18 +887,23 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidde
 const leadFilters=[['all','All'],['drafts','Drafts'],['awaiting_video','Needs video'],['rejected','Not a fit'],['issues','Other']];
 const leadSorts=[['newest','Newest'],['name','Name'],['status','Status']];
 const statusRank=['drafted','awaiting_video','contacted','replied','won','drafting','qualified','grading','visiting','found','skipped','unreachable','error','lost','rejected'];
-async function leads(arg,{isCurrent=()=>true}={}){
+async function leads(arg,{isCurrent=()=>true,filter:requestedFilter,sort:requestedSort}={}){
  if(!isCurrent())return;
  const request=++leadsRequest,isActive=()=>request===leadsRequest&&isCurrent();
- const [{leads:found},dr,packet]=await Promise.all([api('/api/leads'),loadDraftMaps({isCurrent:isActive}),tryGet('/api/client-demo')]);
+ let loaded;
+ try{loaded=await Promise.all([api('/api/leads'),loadDraftMaps({isCurrent:isActive}),tryGet('/api/client-demo')]);}
+ catch(error){if(!isActive())return;throw error;}
  if(!isActive())return;
+ const [{leads:found},dr,packet]=loaded;
  const simulatedBrands=packet?.mode==='demo'?(packet.brands||[]).filter(brand=>['disobedient','vylin'].includes(brand.id)):[];
  const domain=value=>{try{return new URL(value.includes('://')?value:`https://${value}`).hostname.replace(/^www\./,'').toLowerCase();}catch{return '';}};
  const all=found.map(lead=>({...lead,simulatedJourney:simulatedBrands.some(brand=>domain(brand.website)===domain(lead.domain||lead.url||''))}));
  const haveDraft=new Set(dr.map(d=>d.lead_id));
  if(typeof arg==='string'&&leadFilters.some(f=>f[0]===arg)){pref.set('lfilter',arg);history.replaceState(null,'','#/leads');}
- let filter=pref.get('lfilter','all');if(filter==='drafted')filter='drafts';if(['unreachable','skipped'].includes(filter))filter='issues';if(!leadFilters.some(f=>f[0]===filter))filter='all';
- let sort=pref.get('lsort','newest');if(!leadSorts.some(s=>s[0]===sort))sort='newest';
+ let filter=requestedFilter??pref.get('lfilter','all');if(filter==='drafted')filter='drafts';if(['unreachable','skipped'].includes(filter))filter='issues';if(!leadFilters.some(f=>f[0]===filter))filter='all';
+ let sort=requestedSort??pref.get('lsort','newest');if(!leadSorts.some(s=>s[0]===sort))sort='newest';
+ if(requestedFilter!==undefined)pref.set('lfilter',filter);
+ if(requestedSort!==undefined)pref.set('lsort',sort);
  const match={all:l=>l.status!=='rejected'||l.simulatedJourney,drafts:l=>haveDraft.has(l.id)&&l.status!=='rejected',awaiting_video:l=>l.status==='awaiting_video',rejected:l=>l.status==='rejected',issues:l=>['unreachable','skipped','error','lost'].includes(l.status)};
  const counts=Object.fromEntries(Object.entries(match).map(([k,f])=>[k,all.filter(f).length]));
  const cmp={newest:(a,b)=>b.id-a.id,name:(a,b)=>String(a.company||a.domain).localeCompare(String(b.company||b.domain)),status:(a,b)=>statusRank.indexOf(a.status)-statusRank.indexOf(b.status)||b.id-a.id};
@@ -908,11 +913,17 @@ async function leads(arg,{isCurrent=()=>true}={}){
    <div class="cwrap sortwrap"><button type="button" class="ctl" id="sortbtn" aria-expanded="false" aria-haspopup="true">${ic('arrow-up-down')}<span>${leadSorts.find(s=>s[0]===sort)[1]}</span></button><div class="cmenu right" id="sortmenu" hidden>${leadSorts.map(([k,l])=>`<button type="button" data-ls="${k}" class="${k===sort?'on':''}"><span><b>${l}</b></span>${k===sort?ic('check'):''}</button>`).join('')}</div></div>
    <button class="ctl" id="requalify" type="button" data-tip="Drop brands with no Instagram, TikTok or logo, and grade the rest">Re-check brands</button></div></div>
   <div class="ct-leads-table"><div class="trows bare" id="crm"><div class="trow th"><span>Brand</span><span>Where</span><span>Contact</span><span>Status</span><span>Actions</span></div>${rows().map(leadRow).join('')||'<div class="idle">No brands match this filter.</div>'}</div></div>`;
- document.querySelectorAll('[data-lf]').forEach(b=>b.onclick=()=>{pref.set('lfilter',b.dataset.lf);leads(undefined,{isCurrent});});
+ let pendingSelection={},selectionRequest=0;
+ const refresh=async selection=>{
+  const request=++selectionRequest;pendingSelection={...pendingSelection,...selection};
+  try{await leads(undefined,{isCurrent,...pendingSelection});}catch(error){if(isCurrent())toast(error.message,'bad');}
+  finally{if(request===selectionRequest)pendingSelection={};}
+ };
+ document.querySelectorAll('[data-lf]').forEach(b=>b.onclick=()=>refresh({filter:b.dataset.lf}));
  const sb=$('#sortbtn'),sm=$('#sortmenu');
  sb.onclick=e=>{e.stopPropagation();const open=sm.hidden;closeMenus();sm.hidden=!open;sb.setAttribute('aria-expanded',String(open));};
- sm.querySelectorAll('[data-ls]').forEach(b=>b.onclick=()=>{pref.set('lsort',b.dataset.ls);leads(undefined,{isCurrent});});
- $('#requalify').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.lastChild.textContent='Checking brands';try{const r=await api('/api/leads/requalify',{});toast(`Checked ${r.checked} brands`,'ok',`${r.rejected.length} not a fit${r.withdrawnDrafts?.length?`. ${r.withdrawnDrafts.length} Gmail draft${r.withdrawnDrafts.length===1?'':'s'} to delete yourself`:''}`);leads(undefined,{isCurrent});}catch(err){toast(err.message,'bad');b.disabled=false;b.lastChild.textContent='Re-check brands';}};
+ sm.querySelectorAll('[data-ls]').forEach(b=>b.onclick=()=>refresh({sort:b.dataset.ls}));
+ $('#requalify').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.lastChild.textContent='Checking brands';try{const r=await api('/api/leads/requalify',{});toast(`Checked ${r.checked} brands`,'ok',`${r.rejected.length} not a fit${r.withdrawnDrafts?.length?`. ${r.withdrawnDrafts.length} Gmail draft${r.withdrawnDrafts.length===1?'':'s'} to delete yourself`:''}`);await refresh({});}catch(err){toast(err.message,'bad');}finally{if(b.isConnected){b.disabled=false;b.lastChild.textContent='Re-check brands';}}};
 }
 let leadsRequest=0;
 // Drafts live inside Leads now. The old route and any old link land on the Drafts filter.

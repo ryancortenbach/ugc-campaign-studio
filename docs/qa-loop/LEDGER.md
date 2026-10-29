@@ -967,3 +967,17 @@ Verification: 34 voice action-refresh, navigation, design-draft, delayed playbac
 Independent final review: concurrent-result send-back resolved, then scoped PASS with all 34 tests independently rerun.
 
 Next area: Lead filter persistence and status transitions during list refresh failures.
+
+## 2026-10-29: Lead selections commit only after a successful list refresh
+
+Expected: failed filter or sort loads leave the displayed selection and saved preference aligned. Current errors are visible, stale or departed errors are quiet, and a successful recheck followed by a failed read leaves its control retryable.
+
+Reproduced: six initial permanent regressions failed. Preferences changed immediately while old rows and selected chips stayed visible. Click-triggered read failures rejected without handling, including stale or departed requests. A failed reload after a successful recheck left its button disabled. Independent review then found rapid filter/sort choices lost the other pending dimension; both ordering regressions failed against the first fix.
+
+Changed: stage requested filter/sort values and commit them only after the current list read succeeds. Merge independent pending choices into subsequent requests, and let only the latest completion clear pending intent. Suppress stale/departed read errors and route current control errors through an awaited refresh helper. Recheck restores its connected control after completion or failed reload. Existing layout, labels and status/filter rules remain unchanged.
+
+Verification: 28 lead filter-failure, refresh-race, sort-menu and draft-map tests passed. Ten new checks cover preference commit timing, failure and explicit retry, distinct sorting, older failures/successes, departed reads, recheck retry, a newly rejected draft brand, both cross-control orderings and combined-failure recovery. Root/module/test syntax and diff checks passed. Tests use actual extracted filter/sort handlers with mocked GETs and requalification; row markup is stubbed. Native focus/layout, actual classification and server persistence remain unverified. No real requalification or research, provider calls, sends, paid work, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: cross-control selection send-back resolved, then scoped PASS with all 28 tests independently rerun.
+
+Next area: Home composer model menus and link editor recovery during navigation.
