@@ -38,8 +38,13 @@ export async function paintDelivery({el,api,esc,toast,paymentId,isCurrent=()=>tr
   if(isCurrent())await paintDelivery({el,api,esc,toast,paymentId,isCurrent});
  });
  el.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
+  const focused=el.ownerDocument.activeElement;
   const link=b.dataset.copy==='link',text=link?v.link:`Subject: ${v.email?.subject||''}\n\n${v.email?.body||''}`;
   try{await navigator.clipboard.writeText(text);toast('Copied','ok');}
-  catch{el.querySelector(link?'.od-link input':'.od-email')?.select();toast('Press Command-C to copy','info');}
+  catch{
+   if(!isCurrent()||!el.isConnected||!b.isConnected||el.ownerDocument.activeElement!==focused)return;
+   const field=el.querySelector(link?'.od-link input':'.od-email');if(!field)return;
+   field.focus({preventScroll:true});field.select();toast('Press Command-C to copy','info');
+  }
  });
 }

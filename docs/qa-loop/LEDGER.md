@@ -1079,3 +1079,17 @@ Verification: 26 offer-PDF focus, drawer focus/refresh and composer-menu Escape 
 Independent final review: scoped PASS with all 26 tests independently rerun.
 
 Next area: Client delivery copy controls when clipboard permission fails.
+
+## 2026-10-29: Delivery copy failures focus the current manual fallback
+
+Expected: denied or unavailable clipboard access focuses and selects the complete download link or email for manual copying. Delayed failures must not change newer focus, replacement content or a departed page.
+
+Reproduced: six of seven new permanent regressions failed. The fallback selected text while leaving focus on the copy button. Delayed rejections also selected replacement fields or showed manual-copy advice after navigation.
+
+Changed: capture focus when copying starts. On failure, require the current route, connected host/button and unchanged focus before focusing and selecting the correct field. Existing success text/toasts and manual-copy advice remain unchanged. No copy or styling changes.
+
+Verification: 15 delivery-copy, delivery-tooling-view and client-context-retry tests passed. Seven new checks cover link/email denial, absent Clipboard API, successful email content, departure, newer focus and replacement delivery content. Root/module/test syntax and diff checks passed. Tests import actual delivery UI with mocked reads and clipboard methods; no actual clipboard writes or delivery/provider actions. Native Command-C, clipboard permissions and browser focus remain unverified. No paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 15 tests independently rerun.
+
+Next area: Live tool log disclosure state across filtered activity updates.
