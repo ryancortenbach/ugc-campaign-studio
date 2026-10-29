@@ -597,7 +597,11 @@ function syncComposer(){
 function closeMenus(){document.querySelectorAll('.cmenu').forEach(m=>{m.hidden=true;});document.querySelectorAll('#cplus,#cmodel,#sortbtn').forEach(b=>b.setAttribute('aria-expanded','false'));}
 function bindComposer(){
  const f=$('#composer');if(!f)return;const ta=f.message;
- const menu=(btn,m)=>{btn.onclick=e=>{e.stopPropagation();const open=m.hidden;closeMenus();m.hidden=!open;btn.setAttribute('aria-expanded',String(open));};};
+ const menu=(btn,m)=>{
+  btn.onclick=e=>{e.stopPropagation();const open=m.hidden;closeMenus();m.hidden=!open;btn.setAttribute('aria-expanded',String(open));};
+  const dismiss=e=>{if(e.key!=='Escape'||m.hidden)return;e.preventDefault();e.stopPropagation();closeMenus();btn.focus({preventScroll:true});};
+  btn.onkeydown=dismiss;m.onkeydown=dismiss;
+ };
  menu($('#cplus'),$('#cplusmenu'));menu($('#cmodel'),$('#cmodelmenu'));
  document.querySelectorAll('[data-ctool]').forEach(b=>b.onclick=()=>{comp.tool=b.dataset.ctool;rerenderComposer();});
  f.querySelectorAll('[data-cmodel]').forEach(b=>b.onclick=()=>{pref.set('model',b.dataset.cmodel);rerenderComposer();});

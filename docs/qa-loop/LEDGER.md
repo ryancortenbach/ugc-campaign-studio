@@ -1051,3 +1051,17 @@ Verification: 20 chart-focus, metric-focus, range-failure, mount-ownership and c
 Independent final review: scoped PASS with all 20 tests independently rerun.
 
 Next area: Home composer menu keyboard dismissal.
+
+## 2026-10-29: Home composer menus dismiss with Escape
+
+Expected: Escape from an open attachment/model menu or its trigger closes the menu, resets its expanded announcement and returns focus to the trigger without changing the draft.
+
+Reproduced: six of eight new permanent regressions failed. Both menus ignored Escape and let it reach a bubbling document listener instead of handling local dismissal.
+
+Changed: bind Escape handlers locally to each composer menu and trigger. An open menu prevents the default key action and stops bubbling before closing and returning focus. Closed-menu Escape and other keys pass through. No global Escape interception, copy or styling changes.
+
+Verification: 33 menu-Escape, composer model/link, sort-menu and composer route-draft tests passed. Eight new checks cover both menus from options/triggers, bubbling isolation, closed-menu pass-through, draft/editor retention and other keys. Root/app/test syntax and diff checks passed. Tests extract actual composer handlers in JSDOM and make no API calls. The enclosing-layer check uses a bubbling document listener proxy; existing capture-phase PDF handling is unchanged. Native focus, outside-wrapper Escape and actual modal layering remain unverified. No provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 33 tests independently rerun.
+
+Next area: Offer PDF preview close and return focus.
