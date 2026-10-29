@@ -110,6 +110,7 @@ async function renderSpend(){
 let spendRequest=0;
 function paintSpend(){
  const d=state.spendData;if(!d){$('#spendbody').innerHTML='<div class="empty">Loading.</div>';return;}
+ const openProviders=new Set([...document.querySelectorAll('#spendbody [data-sp-provider][open]')].map(detail=>detail.dataset.spProvider));
  const list=d.providers.filter(p=>p.id!=='whop').sort((a,b)=>(Number(b.spent)||0)-(Number(a.spent)||0));
  const chipFor=p=>{
   if(p.accountEstimate!=null)return '<span class="sp-chip">This month</span>';
@@ -118,7 +119,7 @@ function paintSpend(){
   return m?`<span class="sp-chip">${kfmt(m[1])} of ${kfmt(m[2])} chars</span>`:'';
  };
  $('#spendbody').innerHTML=`<div class="sp-tiles">${d.earned?`<div class="sp-tile"><span class="sp-lab"><img src="/logos/whop.png" alt="">Collected</span><b>${usd(d.earned.sum)}</b><i>${d.earned.count} paid order${d.earned.count===1?'':'s'}</i></div>`:''}<div class="sp-tile"><span class="sp-lab" title="${esc(d.basis||'Priced calls recorded by Mint')}">Recorded spend</span><b>${usd(d.all)}</b><i>Today ${usd(d.today)||'$0'}${d.partial?' · Partial':''}</i></div></div>
- <div class="sp-list">${list.map(p=>{const known=p.spent!=null,share=d.all>0&&known?Math.min(100,(Number(p.spent)/d.all)*100):0;return `<details class="sp-provider"><summary class="sp-row" title="${esc(p.detail||'')}">${logoImg(p.id,p.name)}<div class="sp-name"><div class="sp-top"><b>${esc(p.name)}</b>${chipFor(p)}</div><i class="sp-bar"><b style="width:${share>0?Math.max(share,1.5).toFixed(1):0}%"></b></i></div><span class="sp-amt">${p.accountEstimate!=null?usd(p.accountEstimate)+' est.':known?usd(p.spent):p.id==='elevenlabs'?'Usage only':p.balance!=null?'Balance only':'Not synced'}</span></summary><div class="sp-detail"><p>${esc(p.detail||'Account spending has not been synced.')}</p>${p.billingUrl?`<a class="chip" href="${esc(p.billingUrl)}" target="_blank" rel="noopener">Open billing</a>`:''}</div></details>`;}).join('')||'<div class="empty">No spend yet.</div>'}</div>`;
+ <div class="sp-list">${list.map(p=>{const known=p.spent!=null,share=d.all>0&&known?Math.min(100,(Number(p.spent)/d.all)*100):0;return `<details class="sp-provider" data-sp-provider="${esc(p.id)}"${openProviders.has(String(p.id))?' open':''}><summary class="sp-row" title="${esc(p.detail||'')}">${logoImg(p.id,p.name)}<div class="sp-name"><div class="sp-top"><b>${esc(p.name)}</b>${chipFor(p)}</div><i class="sp-bar"><b style="width:${share>0?Math.max(share,1.5).toFixed(1):0}%"></b></i></div><span class="sp-amt">${p.accountEstimate!=null?usd(p.accountEstimate)+' est.':known?usd(p.spent):p.id==='elevenlabs'?'Usage only':p.balance!=null?'Balance only':'Not synced'}</span></summary><div class="sp-detail"><p>${esc(p.detail||'Account spending has not been synced.')}</p>${p.billingUrl?`<a class="chip" href="${esc(p.billingUrl)}" target="_blank" rel="noopener">Open billing</a>`:''}</div></details>`;}).join('')||'<div class="empty">No spend yet.</div>'}</div>`;
 }
 // Connections tab: logo, name, one status word, and when it was last checked.
 async function loadConns(refresh){

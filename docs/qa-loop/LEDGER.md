@@ -939,3 +939,17 @@ Verification: 24 client payload, image/disclosure, review-view, artifact-availab
 Independent final review: nested-disclosure send-back resolved, then scoped PASS with all 24 tests independently rerun.
 
 Next area: Analytics provider disclosure state and failed data reloads.
+
+## 2026-10-29: Spend refreshes retain each provider's expanded details
+
+Expected: provider billing and usage details stay expanded during spending refreshes and row reordering. Explicitly closed disclosures and new providers remain collapsed. Failed reads retain the last known display.
+
+Reproduced: three of six new permanent regressions failed. Repainting Spend rebuilt each provider disclosure as closed, including after updated totals reordered rows and after a legacy endpoint fallback.
+
+Changed: capture expanded provider IDs at repaint time and restore the open attribute only for matching escaped provider keys. Keep closures made while reads are pending and avoid transferring expansion to another provider. Copy, styling and spending semantics remain unchanged.
+
+Verification: 22 provider-disclosure, spend-refresh-race, analytics-range, small-spend and rail-tab tests passed. Six new checks cover repaint, row ordering, a close during a pending read, failed endpoints, legacy fallback and provider replacement. Root/module/test syntax and diff checks passed. Tests use actual extracted spend handlers with mocked modern/legacy GETs and DOM disclosures. Native focus/layout, actual account balances, billing navigation and provider persistence remain unverified. No provider calls, actual billing actions, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 22 tests independently rerun.
+
+Next area: Reference image replacement and preview cleanup after failed uploads.
