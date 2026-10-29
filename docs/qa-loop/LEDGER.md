@@ -855,3 +855,17 @@ Verification: 21 drawer-focus, drawer-refresh, lead-refresh-race and sort-menu t
 Independent final review: scoped PASS with all 21 tests independently rerun.
 
 Next area: Home activity chart inspection and event marker selection.
+
+## 2026-10-29: Home chart refreshes stay with the current request and host
+
+Expected: older metrics reads cannot replace a newer selected range or its brand markers. Replacing an inspected chart must release its observer and inspection state so the new chart can render.
+
+Reproduced: four initial regressions showed older responses replacing current data, disconnecting a newer observer, painting a detached host and marking a newer focused chart stale. Initial SQLite fixture fields were corrected before recording these valid failures. Independent review then found focused-host replacement leaving the shared inspection flag set; two additional regressions failed against the first fix.
+
+Changed: require the latest request and connected current stats host before response side effects. Reset inspection/stale state and disconnect the prior observer when the host changes. Ignore inspection callbacks from detached or superseded hosts. Current chart inspection still defers refresh until focus leaves. Copy, styling and metric semantics remain unchanged.
+
+Verification: 23 Home stats, metrics and conversation-history tests passed. Eight new permanent checks include range/marker ownership, observer ownership, detached responses, stale inspection updates, current inspection deferral, marker navigation, focused-host replacement and detached blur callbacks. Root/module/test syntax and diff checks passed. Actual metrics DTOs came from in-memory SQLite; API reads, observer behavior and chart width were mocked. Native SVG, pointer/keyboard layout and actual brand navigation remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: focused-host send-back resolved, then scoped PASS with all 23 tests independently rerun.
+
+Next area: Task report links and empty activity after failed reads.

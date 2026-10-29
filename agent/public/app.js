@@ -513,15 +513,19 @@ function layoutMarks(box,m){
  });
 }
 let statsHold=false,statsStale=false,statsRO=null;
+let statsRequest=0,statsHost=null;
 async function loadStats(){
  const box=$('#stats');if(!box)return;
+ if(statsHost!==box){statsRO?.disconnect();statsRO=null;statsHost=box;statsHold=false;statsStale=false;}
+ const request=++statsRequest;
  const data=await api(`/api/metrics?range=${pref.get('range','week')}`);
+ if(request!==statsRequest||!box.isConnected||$('#stats')!==box)return;
  if(statsHold){statsStale=true;return;}
  statsRO?.disconnect();statsRO=null;statsStale=false;
  box.innerHTML=statsPanel(data);
  box.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{pref.set('metric',b.dataset.metric);statsHold=false;loadStats().catch(()=>{});});
  box.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{pref.set('range',b.dataset.range);statsHold=false;loadStats().catch(()=>{});});
- bindChart(box,data,metricOf(),on=>{statsHold=on;if(!on&&statsStale)loadStats().catch(()=>{});});
+ bindChart(box,data,metricOf(),on=>{if(statsHost!==box||!box.isConnected||$('#stats')!==box)return;statsHold=on;if(!on&&statsStale)loadStats().catch(()=>{});});
 }
 
 // Chat box: one composer with attachments, tools, a model picker, dictation and voice, like a chat app.
