@@ -242,9 +242,11 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   patchPanel(true);
  }
  function closePanel(){
+  const restore=panel.contains(doc.activeElement),key=memo.key;
   memo.key=null;memo.rid=null;S.ui.confirm=null;
   grid.querySelectorAll('.rv-card.on').forEach(n=>n.classList.remove('on'));
   patchPanel();
+  if(restore)([...grid.children].find(n=>n.dataset.key===key)||tabsEl.querySelector('[aria-selected="true"]'))?.focus({preventScroll:true});
  }
 
  function apply(list){
@@ -303,7 +305,12 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   if(a==='newshot-x'){S.ui.newOpen=false;form.hidden=true;return;}
   if(a==='recon')return;
   const r=cur();if(!r)return;
-  if(a==='ver'){memo.rid=Number(b.dataset.rid);S.ui.confirm=null;patchPanel(true);return;}
+  if(a==='ver'){
+   const restore=b===doc.activeElement;
+   memo.rid=Number(b.dataset.rid);S.ui.confirm=null;patchPanel(true);
+   if(restore)pbody.querySelector('[data-a="ver"].on')?.focus({preventScroll:true});
+   return;
+  }
   if(a==='approve'){if(!S.paused){S.ui.confirm='approve';patchPanel(true);}return;}
   if(a==='approve-no'||a==='rev-x'||a==='never-no'){S.ui.confirm=null;patchPanel(true);return;}
   if(a==='rev-no'){S.ui.confirm='reject';patchPanel(true);pbody.querySelector('[data-note]')?.focus();return;}

@@ -883,3 +883,17 @@ Verification: 23 profile refresh, navigation, retry and value tests passed, incl
 Independent final review: read/save freshness send-back resolved, then scoped PASS with all 23 tests independently rerun.
 
 Next area: Voice storyboard selection with removed or missing source boards.
+
+## 2026-10-29: Render details preserve keyboard focus when switching and closing
+
+Expected: switching versions retains focus on the selected version. Closing details while its controls own focus returns to the gallery card, or the selected tab if that card was filtered out. Escape from elsewhere preserves the external focus.
+
+Reproduced: five of six new permanent regressions failed. Rebuilding version controls removed the focused button. Close and Escape hid the panel while focus remained inside it, including after version changes and filtering.
+
+Changed: restore the selected version button only when the replaced version button owned focus. Before closing, capture panel focus ownership and the selected group key, then return to its current gallery card or selected tab. Copy and styling remain unchanged.
+
+Verification: 23 panel-focus, tab-focus, media-refresh, refresh-race and cancellation-confirmation tests passed. Six new checks cover Close, Escape, version selection, closing after version selection, filtered cards and outside focus. Root/module/test syntax and diff checks passed. Tests use explicitly focused JSDOM controls and mocked reads with polling disabled. Native pointer/Tab behavior, layout and actual media remain unverified. No provider calls, paid actions, approvals, panel launches, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 23 tests independently rerun. Unrelated streamed panel removal remains outside this explicit-close and version-selection scope.
+
+Next area: Draft editor recovery after failed saves and stale refreshes.
