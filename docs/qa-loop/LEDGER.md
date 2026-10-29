@@ -309,3 +309,17 @@ Verification: 22 render-tab, gallery and refresh-race tests passed. Coverage inc
 Independent review: scoped PASS, with all 22 tests independently rerun.
 
 Next area: task activity filtering and disclosure retention.
+
+## 2026-10-29: standalone research tool failures remain visible
+
+Expected: task activity exposes failed tool work even when the producer records an error without a tool-result event. Open failure details and keyboard focus survive later activity updates.
+
+Reproduced: the existing research profile catch records a tool-annotated error with no result, but activity filtered exclusively to requests and hid that failure. Three focused regressions failed before the fix.
+
+Changed: include tool-annotated errors alongside requests in the existing latest-12 activity window. Use the existing compact log renderer and failure status. Results remain paired inside their requests, and errors remain separate so they cannot steal fallback catalog results. Existing copy and styling are unchanged.
+
+Verification: 15 activity, log-rendering and neighboring Tasks/Leads DOM tests passed. Coverage includes standalone failure visibility, accurate failure metadata, retained disclosure/focus, paired results without duplicate rows, compact event order, legacy pairing, redaction and stale-response isolation. Root/module syntax and diff checks passed. All APIs were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 15 tests independently rerun.
+
+Next area: client brand context save failure and retry.

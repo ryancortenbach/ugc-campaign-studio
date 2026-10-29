@@ -5,8 +5,8 @@ let active=null;
 const planningStatus={planning:['Ideation in progress','s-run'],running:['Research in progress','s-run'],researching:['Research in progress','s-run'],queued:['Research queued','s-wait'],research_queued:['Research queued','s-wait'],paused:['Paused','s-you'],stopped:['Stopped','s-idle'],done:['Brief saved','s-ok'],ready:['Ideas ready','s-ok'],needs_brand:['Needs brand','s-you'],not_started:['Not started','s-idle'],needs_research:['Research needs review','s-you'],failed:['Research paused','s-bad']};
 const statusChip=status=>{const [label,cls]=planningStatus[status]||['Not started','s-idle'];return `<span class="schip ${cls}"><svg class="lu" viewBox="0 0 24 24" aria-hidden="true">${icons[cls==='s-run'?'loader':cls==='s-ok'?'circle-check':cls==='s-wait'?'clock':'circle-alert']}</svg>${label}</span>`;};
 function activityHTML(workspace,esc){
- const events=workspace.events||[],calls=events.filter(e=>e.type==='tool_call').slice(-12).reverse();
- return calls.length?calls.map(e=>toolLogRow(e,{events,esc})).join(''):'<p class="faint">Research tool calls will appear here as the brand is qualified.</p>';
+ const events=workspace.events||[],entries=events.filter(e=>e.type==='tool_call'||(e.type==='error'&&e.tool)).slice(-12).reverse();
+ return entries.length?entries.map(e=>toolLogRow(e,{events,esc})).join(''):'<p class="faint">Research tool calls will appear here as the brand is qualified.</p>';
 }
 function paintActivity(context,workspace){
  const container=context.view.querySelector('#task-board-activity'),html=activityHTML(workspace,context.esc);
