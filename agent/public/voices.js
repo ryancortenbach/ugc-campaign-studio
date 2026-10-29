@@ -5,7 +5,7 @@ const when=iso=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric
 const num=n=>Number(n||0).toLocaleString('en-US');
 const mounts=new WeakMap();
 
-export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>true}){
+export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>true,readDraft=()=>null}){
  if(!isCurrent())return;
  const mount={};mounts.set(view,mount);
  const alive=()=>isCurrent()&&mounts.get(view)===mount;
@@ -14,7 +14,7 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  const {voices,enabled,subscription:sub,error}=data;
  const boards=await api('/api/storyboards').then(r=>r.storyboards.filter(s=>s.plan?.voice)).catch(()=>[]);
  if(!alive())return;
- const again=()=>{if(alive())return voicesView({view,api,esc,toast,sbadge,svg,isCurrent});};
+ const again=(readDraft=()=>null)=>{if(alive())return voicesView({view,api,esc,toast,sbadge,svg,isCurrent,readDraft});};
 
  const plan=sub?`<div class="vplan"><b>${esc(String(sub.tier).replace(/^./,c=>c.toUpperCase()))} plan</b><span>${num(sub.left)} of ${num(sub.limit)} characters left${sub.resetAt?`, resets ${esc(new Date(sub.resetAt).toLocaleDateString('en-US',{month:'short',day:'numeric'}))}`:''}</span><span>${num(sub.voiceSlotsUsed)} of ${num(sub.voiceLimit)} voice slots used</span></div>`
   :`<div class="hint">${enabled?esc(error?`Could not reach ElevenLabs: ${error}`:'Plan details unavailable.'):'Add ELEVENLABS_API_KEY or put the key in ~/.elevenlabs/key to design voices.'}</div>`;
@@ -52,6 +52,7 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  const groups=[];
  for(const v of voices){const key=[v.description,v.line,v.storyboard_id,v.created_at.slice(0,16)].join('|'),last=groups[groups.length-1];if(last&&last.key===key)last.items.unshift(v);else groups.push({key,items:[v]});}
 
+ const draft=readDraft();
  view.innerHTML=`<div class="pagebar"><span class="faint">${voices.length} voice${voices.length===1?'':'s'}</span><button class="btn go sm" id="newvoicebtn" type="button">Design a voice</button></div><div class="card newshot" id="newvoicecard" hidden><div class="head"><h2>Design a voice</h2></div><form class="body" id="newvoice">
   ${plan}
   ${boards.length?`<label>Start from a storyboard voice (optional)</label><select name="storyboardId"><option value="">None</option>${boards.map(s=>`<option value="${esc(s.id)}">${esc(s.title)} v${esc(s.version)}</option>`).join('')}</select>`:''}
@@ -64,20 +65,23 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  view.querySelector('#newvoicebtn').onclick=()=>{view.querySelector('#newvoicecard').hidden=false;view.querySelector('#newvoice textarea[name=description]').focus();};
 
  const form=view.querySelector('#newvoice');
+ const values=()=>({description:form.description.value,line:form.line.value,storyboardId:form.storyboardId?.value||null});
+ if(draft){form.description.value=draft.description;form.line.value=draft.line;if(form.storyboardId)form.storyboardId.value=draft.storyboardId||'';view.querySelector('#newvoicecard').hidden=!draft.open;}
  const count=()=>{const n=form.line.value.trim().length;view.querySelector('#linecount').textContent=`${n} of 100 to 1000`;};
  form.line.addEventListener('input',count);count();
- let filledVoice='';
+ let filledVoice=draft?.filledVoice||'';
  form.storyboardId?.addEventListener('change',()=>{const s=boards.find(x=>String(x.id)===form.storyboardId.value);if(s&&(!form.description.value.trim()||form.description.value===filledVoice)){form.description.value=s.plan.voice;filledVoice=form.description.value;}});
  form.onsubmit=async e=>{
   e.preventDefault();
-  const body={description:form.description.value.trim(),line:form.line.value.trim(),storyboardId:form.storyboardId?.value||null};
+  const submitted=values(),body={...submitted,description:submitted.description.trim(),line:submitted.line.trim()};
   if(body.description.length<20||body.description.length>1000){toast('Describe the voice in 20 to 1000 characters: age, gender, accent, tone and pace.','bad');form.description.focus();return;}
   if(body.line.length<100||body.line.length>1000){toast('Write a sample line of 100 to 1000 characters. ElevenLabs needs at least 100 to design a voice.','bad');form.line.focus();return;}
   if(!window.confirm(`Design voices uses about ${body.line.length} ElevenLabs characters. Continue?`))return;
   const b=form.querySelector('button[type=submit]');b.disabled=true;b.textContent='Designing, about 20 seconds';
   try{const r=await api('/api/voices/design',body);toast('Voices designed','ok',`${r.voices.length} previews. Listen, then run checks.`);}
   catch(err){toast(err.message,'bad');b.disabled=false;b.textContent='Design voices';return;}
-  again();
+  if(alive()&&JSON.stringify(values())===JSON.stringify(submitted)){form.reset();view.querySelector('#newvoicecard').hidden=true;filledVoice='';}
+  again(()=>({...values(),open:!form.closest('#newvoicecard').hidden,filledVoice}));
  };
  view.querySelectorAll('[data-vcheck]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='Checking';try{const r=await api(`/api/voices/${b.dataset.vcheck}/check`,{});toast(r.voice.status==='checks_passed'||r.voice.checks?.passed?'Checks passed':'Checks found problems','ok');}catch(err){toast(err.message,'bad');}again();});
  view.querySelectorAll('[data-vsave]').forEach(b=>b.onclick=async()=>{

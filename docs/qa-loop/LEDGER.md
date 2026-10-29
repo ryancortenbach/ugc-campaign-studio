@@ -547,3 +547,17 @@ Verification: 24 model-draft, link-validation, upload, reply-draft and neighbori
 Independent final review: scoped PASS, with all 24 tests independently rerun.
 
 Next area: Voices pending design form recovery.
+
+## 2026-10-29: successful voice designs retain newer unsent form edits
+
+Expected: edits made while a voice design or its subsequent preview-list refresh is pending survive that successful refresh. The unchanged submitted form clears normally. A next design still requires an explicit submission and credit confirmation.
+
+Reproduced: success remounted Voices with an empty hidden form, erasing newer description/sample edits and edits made during the preview read. Both focused regressions failed before the fix.
+
+Changed: successful-design refresh supplies an internal draft reader sampled immediately before replacing the view. Restore raw description, sample, storyboard selection, form visibility and the prior autofill marker. Clear the form only when its raw values still match the submitted snapshot. Check/save remount behavior remains unchanged; draft recovery is scoped to successful design refreshes.
+
+Verification: 27 design-draft, storyboard-selection, form-validation, navigation and mocked voice-service tests passed. Coverage includes newer input during both waits, explicit subsequent confirmation, unchanged-form clearing, failed POST retention, storyboard/autofill continuity and a preview-check completion not replaying a pending submitted design as another valid draft. Root/module syntax and diff checks passed. All generation/check/save calls were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. This is not a general cross-action serialization guarantee. No real voice generation, credit use, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 27 tests independently rerun, including the cross-action regression.
+
+Next area: Client brief refresh and missing research states.
