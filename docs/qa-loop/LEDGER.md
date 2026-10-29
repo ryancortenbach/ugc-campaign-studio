@@ -1037,3 +1037,17 @@ Verification: 35 lead focus, filter-failure, sort-menu, refresh-race and draft-m
 Independent final review: scoped PASS with all 35 tests independently rerun.
 
 Next area: Analytics chart keyboard inspection after refreshed datasets.
+
+## 2026-10-29: Analytics refreshes retain keyboard chart inspection
+
+Expected: a refresh completed while inspecting the chart retains keyboard focus and the same time bucket with current values. If that bucket is absent from the new period, inspection resumes at its latest bucket. Moving elsewhere must retain that newer focus.
+
+Reproduced: four of seven new permanent regressions failed. Success, failure and changed-period refreshes replaced the focused chart, dropping focus to the document body and losing inspection state.
+
+Changed: record the inspected bucket timestamp on the chart. Load repaints capture its current focus and restore the matching bucket after binding the replacement chart, defaulting to the latest bucket when absent. Existing metric switches continue to show their aggregate state. Outside focus, newer metric focus and departed mounts retain ownership. No copy or styling changes.
+
+Verification: 20 chart-focus, metric-focus, range-failure, mount-ownership and chart-transition tests passed. Seven new checks cover refreshed values, failed reads, changed periods, day rollover, outside/metric focus and departure. Root/module/test syntax and diff checks passed. Tests use the actual Analytics module, real summarizer DTOs and mocked GETs in JSDOM. Native keyboard/focus, layout and transport remain unverified. No provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 20 tests independently rerun.
+
+Next area: Home composer menu keyboard dismissal.
