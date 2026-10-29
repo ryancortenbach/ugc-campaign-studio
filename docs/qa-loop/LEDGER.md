@@ -673,3 +673,17 @@ Verification: 23 small-spend, metric-focus, range-failure, navigation and in-mem
 Independent final review: scoped PASS, with all 23 tests independently rerun.
 
 Next area: Settings save and retry controls.
+
+## 2026-10-29: existing final videos respect missing local tooling
+
+Expected: missing ffmpeg disables both first-time final creation and remaking an existing final, with the existing setup warning. Upload eligibility for an already valid final remains independent of video creation tooling.
+
+Reproduced: independent review sent back an existing-final state missed by the first read probes. With ffmpeg absent, Remake final video and Make it again remained enabled even though the backend rejects the operation. Two permanent regressions failed before the fix for stale and fresh existing finals.
+
+Changed: apply the existing warning copy and ffmpeg disabled condition to the existing-final remake path. Existing upload gating, media, copy and styling remain intact.
+
+Verification: 19 tooling, delivery-read, client-context-retry and task-activity tests passed, including eight ignored read probes. Both fresh/stale remakes are disabled without tooling; a fresh valid final can still upload when storage is available, a stale one cannot, and a later tooling read restores remake availability. Root/module/test syntax and diff checks passed. Delivery reads were mocked and no delivery action buttons were invoked. Actual final creation, upload, Gmail, clipboard and native media behavior remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: sent back the missing-tool state, then returned scoped PASS with all 19 tests independently rerun after the fix.
+
+Next area: Reference history restoration and staged request state.

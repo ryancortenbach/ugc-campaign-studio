@@ -26,7 +26,8 @@ export async function paintDelivery({el,api,esc,toast,paymentId,isCurrent=()=>tr
  else body=`<div class="od-body"><video class="od-video" controls preload="metadata" playsinline src="${esc(f.url)}"></video><div class="od-info">
   <p>Made ${esc(when(f.at))} from ${total} shots, ${mb(f.bytes)}, ${f.captions?'with captions':'without captions'}.</p>
   ${f.stale?'<p class="od-warn">A shot changed after this video was made.</p>':''}
-  <div class="od-actions"><button class="btn sm${f.stale?' go':''}" type="button" data-del="final">${ic('refresh-cw')}${f.stale?'Remake final video':'Make it again'}</button>${!v||v.stale?`<button class="btn sm go" type="button" data-del="deliver" ${d.setup.storage&&!f.stale?'':'disabled'}>${ic('send')}Upload and draft email</button>`:''}</div>
+  ${d.setup.ffmpeg?'':'<p class="od-warn">ffmpeg is missing on this Mac. Run npm install in agent/ or brew install ffmpeg.</p>'}
+  <div class="od-actions"><button class="btn sm${f.stale?' go':''}" type="button" data-del="final" ${d.setup.ffmpeg?'':'disabled'}>${ic('refresh-cw')}${f.stale?'Remake final video':'Make it again'}</button>${!v||v.stale?`<button class="btn sm go" type="button" data-del="deliver" ${d.setup.storage&&!f.stale?'':'disabled'}>${ic('send')}Upload and draft email</button>`:''}</div>
   ${d.setup.storage?'':'<p class="faint">To upload, add SUPABASE_SECRET_KEY to .env.local and restart the app.</p>'}
   ${v?deliveryHTML(d,esc):''}</div></div>`;
  el.innerHTML=`<div class="od-head"><h3>Finished video</h3><span class="faint">Nothing is sent automatically</span></div>${body}`;
