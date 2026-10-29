@@ -925,3 +925,17 @@ Verification: 23 connection-control, connection-refresh, malformed-row and rail-
 Independent final review: scoped PASS with all 23 tests independently rerun.
 
 Next area: Client brief image review and disclosure state during refresh failures.
+
+## 2026-10-29: Client review retains expanded tool payloads during feedback
+
+Expected: opening feedback and refreshing a client review preserves the inspected tool input, result or error disclosure, with each expansion belonging to its event and payload label.
+
+Reproduced: seven initial ignored image/disclosure probes passed, but independent review found they covered only outer tool rows. Nested payloads collapsed whenever opening feedback repainted the view. Four of five new permanent regressions failed before the fix.
+
+Changed: capture expanded payload disclosures by event ID and payload label before rendering, then restore them after the outer tool rows. Preserve explicit closed states, independent rows and newly available result payloads. Copy and styling remain unchanged.
+
+Verification: 24 client payload, image/disclosure, review-view, artifact-availability and context-retry tests passed. Five new permanent checks cover feedback opening, failed saves and reads, row reordering, explicit closing and new result payloads. Seven ignored probes cover image fallback isolation, safe URLs, outer disclosures, stale task refreshes, removed artifacts and duplicate refreshes. Root/module/test syntax and diff checks passed. Tests use JSDOM, dispatched image errors and mocked reads/review writes. Actual image loading, native layout/input, provider persistence and real approvals remain unverified. No provider calls, actual approvals or panel launches, sends, paid work, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: nested-disclosure send-back resolved, then scoped PASS with all 24 tests independently rerun.
+
+Next area: Analytics provider disclosure state and failed data reloads.

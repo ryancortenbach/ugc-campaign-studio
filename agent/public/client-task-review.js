@@ -16,6 +16,8 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
   if(!current())return;
   const historyOpen=view.querySelector('.ct-history')?.open,evidenceOpen=view.querySelector('.ct-evidence')?.open;
   const openLogs=new Set([...view.querySelectorAll('[data-ap-log][open]')].map(detail=>detail.dataset.apLog));
+  const payloadKey=detail=>JSON.stringify([detail.closest('[data-ap-log]').dataset.apLog,detail.querySelector('summary')?.textContent]);
+  const openPayloads=new Set([...view.querySelectorAll('[data-ap-log] .ap-log-payload[open]')].map(payloadKey));
   const {brand,versions,reviews,events=[]}=data;
   const needsRevision=brand.sampleVideo?.status==='needs_revision'||brand.sampleVideo?.visualQA?.status==='needs_revision';
   const approval=section=>reviews.find(review=>review.section===section&&review.mode==='local');
@@ -44,6 +46,7 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
   if(historyOpen!==undefined)view.querySelector('.ct-history').open=historyOpen;
   if(evidenceOpen!==undefined)view.querySelector('.ct-evidence').open=evidenceOpen;
   for(const detail of view.querySelectorAll('[data-ap-log]'))detail.open=openLogs.has(detail.dataset.apLog);
+  for(const detail of view.querySelectorAll('[data-ap-log] .ap-log-payload'))detail.open=openPayloads.has(payloadKey(detail));
   view.querySelector('[data-ct-refresh]')?.addEventListener('click',async()=>{if(busy)return;busy=true;error='';render();try{const fresh=await api(`/api/tasks/${taskId}/client-review`);if(current())data=fresh;}catch(caught){if(current())error=caught.message;}finally{busy=false;render();}});
  };
  const save=async(section,decision,mode='local')=>{
