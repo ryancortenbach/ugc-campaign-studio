@@ -589,3 +589,17 @@ Verification: 21 reference-removal, upload-race, local-save, research-refresh an
 Independent final review: scoped PASS, with all 21 tests independently rerun.
 
 Next area: Render group filtering after status changes.
+
+## 2026-10-29: all counted client purchases retain a brief row
+
+Expected: every successful purchase included in Client work has a reachable brief row, ordered by the existing payment sort. Duplicate or failed purchases remain filtered out.
+
+Reproduced: the section count included all successful purchases, but ordersHTML silently truncated the list at twelve rows. Fixtures with thirteen and fifteen distinct purchases lost older brief links. Two focused regressions failed before the fix.
+
+Changed: remove only the twelve-row cutoff from ordersHTML. Existing sorting, payment deduplication, status filtering, copy and styling remain intact.
+
+Verification: 15 order-list, task-list-model, lead-refresh and neighboring Tasks/Leads DOM tests passed. The actual paintOrders function is covered in one document through empty/populated/empty states, and through twenty purchases alongside one retained task row. Counts match rendered rows, failed/refunded records stay excluded and displayed values remain escaped. Root/module/test syntax and diff checks passed. Requests were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No actual purchases, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 15 tests independently rerun.
+
+Next area: Connection status unavailable metadata and retries.

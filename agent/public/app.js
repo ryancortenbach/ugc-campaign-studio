@@ -392,7 +392,7 @@ function orderRow(o){
 }
 function ordersHTML(){
  const orders=paidTaskOrders(state.whop?.orders);
- return `<div class="orders" id="orders">${orders.slice(0,12).map(orderRow).join('')}</div>`;
+ return `<div class="orders" id="orders">${orders.map(orderRow).join('')}</div>`;
 }
 function paintOrders(){const el=$('#orders');if(!el)return;const section=el.closest('[data-task-section="client"]');el.outerHTML=ordersHTML();if(section){const count=section.querySelectorAll('.ord,.sess').length;section.hidden=!count;section.querySelector('.task-section-count').textContent=count;}}
 async function refreshWhop(){state.whop=await tryGet('/api/whop');state.whopConfirm=null;if(tab()==='tasks')paintOrders();}
