@@ -4,7 +4,12 @@ export const needsTaskReview=r=>!r.plan?.supersededByRenderId&&(reviewReady(r)||
 export function taskReviewHTML(renders){
  const pending=renders.filter(needsTaskReview);
  if(!pending.length)return '';
- return `<section class="card"><div class="head"><h2>Video review</h2><span class="badge">${pending.length}</span></div><div class="body">${pending.map(r=>`<div class="ap-chat-review-row"><div><b>${esc(r.title)}</b><p class="hint">${r.plan?.visualQA?.status==='needs_revision'?'Needs revision: inconsistent garment artwork.':'Generated clip ready for review.'}</p></div><div class="ap-cd-actions">${Number.isInteger(r.plan?.taskId)?`<a class="btn sm" href="#/tasks/${r.plan.taskId}">Review</a>`:''}<a class="btn sm" href="#/renders/${esc(r.id)}">View clip</a></div></div>`).join('')}</div></section>`;
+ const reason=r=>{
+  if(r.plan?.visualQA?.status!=='needs_revision')return 'Generated clip ready for review.';
+  const finding=String(r.plan?.visualQA?.findings?.[0]||'').trim();
+  return finding?`Needs revision: ${esc(finding)}`:'Needs revision.';
+ };
+ return `<section class="card"><div class="head"><h2>Video review</h2><span class="badge">${pending.length}</span></div><div class="body">${pending.map(r=>`<div class="ap-chat-review-row"><div><b>${esc(r.title)}</b><p class="hint">${reason(r)}</p></div><div class="ap-cd-actions">${Number.isInteger(r.plan?.taskId)?`<a class="btn sm" href="#/tasks/${r.plan.taskId}">Review</a>`:''}<a class="btn sm" href="#/renders/${esc(r.id)}">View clip</a></div></div>`).join('')}</div></section>`;
 }
 export async function mountTaskReviewQueue(host,{read=async signal=>{const r=await fetch('/api/renders',{signal});if(!r.ok)throw Error('Review queue unavailable');return r.json();}}={}){
  const current=()=>host.isConnected&&host.ownerDocument.querySelector('[data-ap-review-queue]')===host;

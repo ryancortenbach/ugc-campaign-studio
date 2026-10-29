@@ -729,3 +729,17 @@ Verification: 27 availability, design-form, navigation, draft-retention and stor
 Independent final review: scoped PASS against UI and local backend requirements, with all 27 tests independently rerun.
 
 Next area: Client task review notification state and dismissed media.
+
+## 2026-10-29: Task review queue reports the actual revision reason
+
+Expected: a flagged clip shows its saved visual-review finding. When no finding is available, the queue must not invent a specific problem.
+
+Reproduced: independent review sent back a truthfulness defect missed by the first notification probes. Every needs-revision item said inconsistent garment artwork, including a saved finding about a missing final CTA. Three permanent regressions failed before the fix for a different issue, missing findings and escaped actual finding text.
+
+Changed: show the first saved finding as escaped text, with a neutral Needs revision fallback. The normal ready message, task/clip links, queue membership, layout and styling remain intact.
+
+Verification: 25 reason, notification, queue-read, availability and client-review view tests passed, including eight ignored notification probes and four new permanent reason checks. Dismissed duplicate notices stay dismissed, distinct render IDs retain links, ineligible renders do not notify, detached queue reads cannot repaint the current host, and task views expose video links without inline players. Root/module/test syntax and diff checks passed. All responses and neighboring review writes were mocked; new probes invoke no approval handlers. Native layout, media playback, keyboard input and real-time notification expiry remain unverified. No provider calls, actual render approvals, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: initial send-back for the invented artwork reason, then scoped PASS after the fix with all 25 tests independently rerun.
+
+Next area: Settings profile field normalization and empty values.
