@@ -10,18 +10,19 @@ const turn=()=>new Promise(resolve=>setImmediate(resolve));
 async function fixture(t,{delayRefresh=false,includeVoice=false}={}){
  const dom=new JSDOM('<main></main>'),previous=Object.getOwnPropertyDescriptor(globalThis,'window');globalThis.window=dom.window;
  t.after(()=>{dom.window.close();if(previous)Object.defineProperty(globalThis,'window',previous);else delete globalThis.window;});
- let confirmations=0,reads=0;dom.window.confirm=()=>{confirmations++;return true;};
+ let confirmations=0,reads=0,checks=0;dom.window.confirm=()=>{confirmations++;return true;};
  for(const name of ['description','line','storyboardId'])Object.defineProperty(dom.window.HTMLFormElement.prototype,name,{get(){return this.elements.namedItem(name);}});
  const view=dom.window.document.querySelector('main'),requests=[],refreshes=[];
  const api=async(path,body)=>{
   if(path==='/api/storyboards')return {storyboards:boards};
   if(path==='/api/voices'){reads++;if(delayRefresh&&reads>1)return new Promise(resolve=>refreshes.push(resolve));return {voices:includeVoice?[{id:1,name:'Existing fixture',description,line,status:'needs_checks',sample_file:'fixture.wav',created_at:'2026-10-29T06:00:00Z'}]:[],enabled:true};}
-  if(path==='/api/voices/1/check')return {voice:{status:'checks_passed'}};
+  if(path==='/api/voices/1/check'){checks++;return {voice:{status:'checks_passed'}};}
   assert.equal(path,'/api/voices/design');return new Promise((resolve,reject)=>requests.push({body,resolve:()=>resolve({voices:[]}),reject}));
  };
- await voicesView({view,api,esc:String,toast:()=>{},sbadge:()=>'',svg:()=>''});view.querySelector('#newvoicebtn').click();
+ const mount=()=>voicesView({view,api,esc:String,toast:()=>{},sbadge:()=>'',svg:()=>''});
+ await mount();view.querySelector('#newvoicebtn').click();
  const form=()=>view.querySelector('#newvoice');form().description.value=description;form().line.value=line;
- return {view,form,requests,refreshes,confirmations:()=>confirmations,submit:()=>form().onsubmit({preventDefault(){}})};
+ return {view,form,requests,refreshes,mount,checks:()=>checks,confirmations:()=>confirmations,submit:()=>form().onsubmit({preventDefault(){}})};
 }
 
 test('newer voice form edits survive completion and still need an explicit design request',async t=>{
@@ -56,10 +57,17 @@ test('a newer storyboard selection retains its description and autofill behavior
  choose(1);assert.equal(f.form().description.value,boards[0].plan.voice);assert.equal(f.requests.length,1);
 });
 
-test('an unrelated preview check does not replay a pending design as a new valid draft',async t=>{
+test('a pending design blocks preview checks and duplicate design submission until completion',async t=>{
  const f=await fixture(t,{includeVoice:true}),original=f.form(),pending=f.submit();
  await f.view.querySelector('[data-vcheck]').onclick();await turn();
- assert.notEqual(f.form(),original);assert.equal(f.form().description.value,'');assert.equal(f.form().line.value,'');
+ assert.equal(f.form(),original);assert.equal(f.form().description.value,description);assert.equal(f.form().line.value,line);assert.equal(f.checks(),0);
  await f.submit();assert.equal(f.requests.length,1);assert.equal(f.confirmations(),1);
- f.requests[0].resolve();await pending;await turn();assert.equal(f.form().line.value,'');
+ f.requests[0].resolve();await pending;await turn();assert.equal(f.form().line.value,'');assert.equal(f.view.querySelector('[data-vcheck]').disabled,false);
+});
+test('a failed design from an older mount cannot unlock a newer pending design',async t=>{
+ const f=await fixture(t),old=f.submit();await f.mount();
+ f.form().description.value=description;f.form().line.value=line;const current=f.submit();
+ assert.equal(f.requests.length,2);f.requests[0].reject(Error('Old design failed'));await old;
+ assert.equal(f.form().querySelector('[type="submit"]').disabled,true);
+ f.requests[1].resolve();await current;assert.equal(f.form().querySelector('[type="submit"]').disabled,false);
 });

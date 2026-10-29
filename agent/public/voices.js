@@ -5,16 +5,25 @@ const when=iso=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric
 const num=n=>Number(n||0).toLocaleString('en-US');
 const mounts=new WeakMap();
 
-export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>true,readDraft=()=>null}){
+export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>true,readDraft=()=>null,fallback=null}){
  if(!isCurrent())return;
  const mount={};mounts.set(view,mount);
  const alive=()=>isCurrent()&&mounts.get(view)===mount;
- const data=await api('/api/voices');
+ let data;
+ try{data=await api('/api/voices');}catch(error){
+  if(!alive())return;
+  if(!fallback)throw error;
+  data=fallback;toast('Voices could not refresh','bad');
+ }
  if(!alive())return;
  const {voices,enabled,subscription:sub,error}=data;
  const boards=await api('/api/storyboards').then(r=>r.storyboards.filter(s=>s.plan?.voice)).catch(()=>[]);
  if(!alive())return;
- const again=(readDraft=()=>null)=>{if(alive())return voicesView({view,api,esc,toast,sbadge,svg,isCurrent,readDraft});};
+ const again=(readDraft=()=>null,updated=[])=>{
+  if(!alive())return;
+  const ids=new Set(updated.map(v=>v.id)),fallback={...data,voices:[...updated,...voices.filter(v=>!ids.has(v.id))]};
+  return voicesView({view,api,esc,toast,sbadge,svg,isCurrent,readDraft,fallback});
+ };
 
  const plan=sub?`<div class="vplan"><b>${esc(String(sub.tier).replace(/^./,c=>c.toUpperCase()))} plan</b><span>${num(sub.left)} of ${num(sub.limit)} characters left${sub.resetAt?`, resets ${esc(new Date(sub.resetAt).toLocaleDateString('en-US',{month:'short',day:'numeric'}))}`:''}</span><span>${num(sub.voiceSlotsUsed)} of ${num(sub.voiceLimit)} voice slots used</span></div>`
   :`<div class="hint">${enabled?esc(error?`Could not reach ElevenLabs: ${error}`:'Plan details unavailable.'):'Add ELEVENLABS_API_KEY or put the key in ~/.elevenlabs/key to design voices.'}</div>`;
@@ -66,6 +75,15 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  view.querySelector('#newvoicebtn').onclick=()=>{view.querySelector('#newvoicecard').hidden=false;view.querySelector('#newvoice textarea[name=description]').focus();};
 
  const form=view.querySelector('#newvoice');
+ let actionBusy=false;
+ const setActionBusy=busy=>{
+  actionBusy=busy;
+  if(!alive())return;
+  for(const button of view.querySelectorAll('[data-vcheck],[data-vsave],#newvoice button[type=submit]')){
+   if(busy){button.dataset.voiceDisabled=String(button.disabled);button.disabled=true;}
+   else if(button.dataset.voiceDisabled!==undefined){button.disabled=button.dataset.voiceDisabled==='true';delete button.dataset.voiceDisabled;}
+  }
+ };
  const values=()=>({description:form.description.value,line:form.line.value,storyboardId:form.storyboardId?.value||null});
  if(draft){form.description.value=draft.description;form.line.value=draft.line;if(form.storyboardId)form.storyboardId.value=draft.storyboardId||'';view.querySelector('#newvoicecard').hidden=!draft.open;}
  const count=()=>{const n=form.line.value.trim().length;view.querySelector('#linecount').textContent=`${n} of 100 to 1000`;};
@@ -74,21 +92,25 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  form.storyboardId?.addEventListener('change',()=>{const s=boards.find(x=>String(x.id)===form.storyboardId.value);if(s&&(!form.description.value.trim()||form.description.value===filledVoice)){form.description.value=s.plan.voice;filledVoice=form.description.value;}});
  form.onsubmit=async e=>{
   e.preventDefault();
+  if(actionBusy||!alive())return;
   const submitted=values(),body={...submitted,description:submitted.description.trim(),line:submitted.line.trim()};
   if(body.description.length<20||body.description.length>1000){toast('Describe the voice in 20 to 1000 characters: age, gender, accent, tone and pace.','bad');form.description.focus();return;}
   if(body.line.length<100||body.line.length>1000){toast('Write a sample line of 100 to 1000 characters. ElevenLabs needs at least 100 to design a voice.','bad');form.line.focus();return;}
   if(!window.confirm(`Design voices uses about ${body.line.length} ElevenLabs characters. Continue?`))return;
-  const b=form.querySelector('button[type=submit]');b.disabled=true;b.textContent='Designing, about 20 seconds';
-  try{const r=await api('/api/voices/design',body);toast('Voices designed','ok',`${r.voices.length} previews. Listen, then run checks.`);}
-  catch(err){toast(err.message,'bad');b.disabled=false;b.textContent='Design voices';return;}
+  const b=form.querySelector('button[type=submit]');setActionBusy(true);b.textContent='Designing, about 20 seconds';
+  let designed=[];
+  try{const r=await api('/api/voices/design',body);designed=r.voices;toast('Voices designed','ok',`${r.voices.length} previews. Listen, then run checks.`);}
+  catch(err){toast(err.message,'bad');setActionBusy(false);b.textContent='Design voices';return;}
   if(alive()&&JSON.stringify(values())===JSON.stringify(submitted)){form.reset();view.querySelector('#newvoicecard').hidden=true;filledVoice='';}
-  again(()=>({...values(),open:!form.closest('#newvoicecard').hidden,filledVoice}));
+  await again(()=>({...values(),open:!form.closest('#newvoicecard').hidden,filledVoice}),designed);
  };
- view.querySelectorAll('[data-vcheck]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='Checking';try{const r=await api(`/api/voices/${b.dataset.vcheck}/check`,{});toast(r.voice.status==='checks_passed'||r.voice.checks?.passed?'Checks passed':'Checks found problems','ok');}catch(err){toast(err.message,'bad');}again();});
+ view.querySelectorAll('[data-vcheck]').forEach(b=>b.onclick=async()=>{if(actionBusy||!alive())return;setActionBusy(true);b.textContent='Checking';let updated=[];try{const r=await api(`/api/voices/${b.dataset.vcheck}/check`,{});updated=[r.voice];toast(r.voice.status==='checks_passed'||r.voice.checks?.passed?'Checks passed':'Checks found problems','ok');}catch(err){toast(err.message,'bad');}await again(undefined,updated);});
  view.querySelectorAll('[data-vsave]').forEach(b=>b.onclick=async()=>{
+  if(actionBusy||!alive())return;
   if(b.dataset.force&&!window.confirm('The checks did not pass. Save this voice anyway?'))return;
-  b.disabled=true;b.textContent='Saving';
-  try{const r=await api(`/api/voices/${b.dataset.vsave}/save`,b.dataset.force?{force:true}:{});toast('Voice saved','ok',`${r.voice.name} is in your ElevenLabs voices.`);}catch(err){toast(err.message,'bad');}
-  again();
+  setActionBusy(true);b.textContent='Saving';
+  let updated=[];
+  try{const r=await api(`/api/voices/${b.dataset.vsave}/save`,b.dataset.force?{force:true}:{});updated=[r.voice];toast('Voice saved','ok',`${r.voice.name} is in your ElevenLabs voices.`);}catch(err){toast(err.message,'bad');}
+  await again(undefined,updated);
  });
 }

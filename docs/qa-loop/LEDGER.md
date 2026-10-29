@@ -953,3 +953,17 @@ Verification: 22 provider-disclosure, spend-refresh-race, analytics-range, small
 Independent final review: scoped PASS with all 22 tests independently rerun.
 
 Next area: Reference image replacement and preview cleanup after failed uploads.
+
+## 2026-10-29: Voices recover confirmed results after a failed list reload
+
+Expected: a failed voice list reload after an action retains known previews and confirmed check/save/design results. Unconfirmed actions remain retryable. Concurrent actions must not lose a confirmed result during an internal remount.
+
+Reproduced: five initial permanent regressions failed with unhandled reload rejections and controls stuck in Checking or Saving. Successful returned results were absent from the displayed list. Independent review found a second concurrent save could finish after the first fallback remount, losing that confirmed result and restoring its save button.
+
+Changed: internal action refreshes carry a fallback snapshot merged with full confirmed action response rows by ID. Failed reloads display that snapshot and a refresh warning; normal initial reads still propagate failures. Await action refreshes. Serialize voice design/check/save actions within a mount and disable other action controls through the refresh, preventing the concurrent-result loss. Failed designs restore prior disabled states only while their mount owns the view. A later successful read remains authoritative. Existing layout and action copy remain; the failed-reload toast is new.
+
+Verification: 34 voice action-refresh, navigation, design-draft, delayed playback-refresh and save-availability tests passed. Eight new action tests cover failed checks/saves, confirmed results, returned design previews, ordinary read recovery and serialization in either preview order. One new draft test guards an old failed design unlocking a newer mount. The prior concurrent-check draft test now verifies the intended blocked action and duplicate-design prevention. Root/module/test syntax and diff checks passed. All check/save/design requests and list reads were mocked. Native audio playback, actual credits, provider persistence and cross-mount/client operation serialization remain unverified. No provider calls, actual voice saves or designs, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: concurrent-result send-back resolved, then scoped PASS with all 34 tests independently rerun.
+
+Next area: Lead filter persistence and status transitions during list refresh failures.
