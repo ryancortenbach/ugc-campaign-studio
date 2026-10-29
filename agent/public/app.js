@@ -1031,6 +1031,7 @@ stream.onmessage=msg=>{
  if((change.kind==='ideation'&&change.leadId===state.selectedLead)||(change.kind==='event'&&change.event.lead_id===state.selectedLead))refreshLeadIdeation();
  if(change.kind==='event'){
   const e=change.event;
+  if(e.id!=null&&state.live.some(event=>event.id===e.id))return;
   if(tab()==='home'&&thread.thinking&&String(e.tool).startsWith('assistant.'))setTimeout(paintChatActivity,0);
   if(tab()==='tasks'&&document.querySelector('#task-ideas-report'))import('./task-storyboards.js').then(m=>m.refreshTaskStoryboardActivity()).catch(()=>{});state.live.unshift(e);state.live.length=Math.min(state.live.length,300);noteDraft(e);
   noteLead(e);if(e.task_id)state.lastStep.set(e.task_id,e);

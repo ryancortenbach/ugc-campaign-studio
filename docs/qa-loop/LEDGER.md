@@ -617,3 +617,17 @@ Verification: 27 history-race, composer-reply, model-draft, upload and neighbori
 Independent final review: scoped PASS, with all 27 tests independently rerun.
 
 Next area: Live tool trace duplicate results and collapse persistence.
+
+## 2026-10-29: retained Live events ignore duplicate stream delivery
+
+Expected: replaying the same retained event record does not add duplicate trace rows, inflate repeated-step counts or move a task's latest-step marker backward. Distinct event IDs and unkeyed events remain visible.
+
+Reproduced: repeated stream delivery appended the same call/result IDs again, created an extra tool child, inflated a main event count and regressed lastStep to a replayed call. Four focused regressions failed before the fix.
+
+Changed: ignore event IDs already present in the bounded Live buffer before ingesting them or running downstream trace and notification handling. Existing copy and styling remain intact. Deduplication covers only the current 300-event buffer. Selected-lead ideation refresh still runs before this guard.
+
+Verification: 24 replay, sidebar, tool-log, task-activity and neighboring Tasks/Leads DOM tests passed. Coverage includes request/result pairing, distinct event ownership, legitimate repeated steps, unkeyed events and retained expanded-child state without scheduling a Live repaint. Root/module/test syntax and diff checks passed. Stream data and requests were mocked or used temporary local fixtures. Expanded-state assertions do not establish native disclosure rendering. Real reconnection, native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 24 tests independently rerun.
+
+Next area: Voices preview selection during list refresh.
