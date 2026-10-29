@@ -421,3 +421,17 @@ Verification: 26 media-refresh, gallery, read-ordering and tab-focus tests passe
 Independent final review: scoped PASS, with all 26 tests independently rerun.
 
 Next area: Analytics empty-period and date-range recovery.
+
+## 2026-10-29: storyboard selection updates untouched voice descriptions
+
+Expected: selecting a different storyboard replaces its automatically supplied voice description when the user has not customized it. Custom descriptions and sample text remain intact.
+
+Reproduced: choosing storyboard A filled its voice description, then choosing B changed the selected id but kept A's description. The same mismatch occurred after choosing None between A and B. Both focused regressions failed before the fix.
+
+Changed: remember the last automatically filled description. A selection fills a blank description or replaces that exact previous automatic value. None retains the existing text. Existing validation, credit confirmation, copy and layout are unchanged.
+
+Verification: 21 storyboard-selection, voice-form, navigation and mocked voice-service tests passed. Coverage includes direct switching, customized descriptions, cleared text, None, retained sample text, invalid-input rejection, confirmation cancellation and navigation guards. Root/module syntax and diff checks passed. New selection tests performed mocked reads only; neighboring generation/check/save requests used mocks and temporary local data. Native selection and visual acceptance remain unverified. No actual voice generation, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 21 tests independently rerun.
+
+Next area: Task reference upload error recovery.

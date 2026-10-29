@@ -66,7 +66,8 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  const form=view.querySelector('#newvoice');
  const count=()=>{const n=form.line.value.trim().length;view.querySelector('#linecount').textContent=`${n} of 100 to 1000`;};
  form.line.addEventListener('input',count);count();
- form.storyboardId?.addEventListener('change',()=>{const s=boards.find(x=>String(x.id)===form.storyboardId.value);if(s&&!form.description.value.trim())form.description.value=s.plan.voice;});
+ let filledVoice='';
+ form.storyboardId?.addEventListener('change',()=>{const s=boards.find(x=>String(x.id)===form.storyboardId.value);if(s&&(!form.description.value.trim()||form.description.value===filledVoice)){form.description.value=s.plan.voice;filledVoice=form.description.value;}});
  form.onsubmit=async e=>{
   e.preventDefault();
   const body={description:form.description.value.trim(),line:form.line.value.trim(),storyboardId:form.storyboardId?.value||null};
