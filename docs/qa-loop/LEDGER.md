@@ -533,3 +533,17 @@ Verification: 17 metric-focus, range-failure, navigation and in-memory analytics
 Independent final review: scoped PASS, with all 17 tests independently rerun.
 
 Next area: Settings profile field escaping and clear/revert behavior.
+
+## 2026-10-29: composer redraws retain unsaved reference links
+
+Expected: choosing another model or composer mode keeps the open reference editor and its unsaved text. A link is attached only after explicit Add link activation.
+
+Reproduced: rerenderComposer retained only the message textarea. Model changes erased an open link draft or rejected link awaiting correction, and mode changes erased the same draft. Three focused regressions failed before the fix.
+
+Changed: capture and restore the link editor's value and open state alongside existing message text before rebinding the composer. Existing model/mode selection, committed references, copy and styling are unchanged.
+
+Verification: 24 model-draft, link-validation, upload, reply-draft and neighboring Tasks/Leads DOM tests passed. Coverage includes model and mode switching, rejected text retention, explicit attachment after redraw without duplication, retained file/link references and keeping an unused editor hidden. Root/module syntax and diff checks passed. New tests invoked no APIs; neighboring requests were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No actual generation, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 24 tests independently rerun.
+
+Next area: Voices pending design form recovery.

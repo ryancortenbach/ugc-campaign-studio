@@ -598,7 +598,11 @@ function bindComposer(){
 function modesHTML(){return `<div class="cmodes" id="cmodes" role="radiogroup" aria-label="What to make">${Object.entries(composerTools).map(([k,x])=>`<button type="button" role="radio" aria-checked="${k===comp.tool}" class="cmode${k===comp.tool?' on':''}" data-ctool="${k}" aria-label="${esc(x.label)}">${ic(x.icon)}<span>${x.label}</span></button>`).join('')}</div>`;}
 function suggestHTML(){return suggestions.map((x,i)=>[x,i]).filter(([x])=>x[0]===comp.tool).slice(0,3).map(([x,i])=>`<button type="button" data-suggest="${i}">${esc(x[1])}</button>`).join('');}
 function bindSuggest(){document.querySelectorAll('[data-suggest]').forEach(b=>b.onclick=()=>{const text=suggestions[Number(b.dataset.suggest)][1];const ta=$('#composer textarea');ta.value=text;syncComposer();ta.focus();ta.setSelectionRange(text.length,text.length);});}
-function rerenderComposer(){const ta=$('#composer textarea'),text=ta?.value||'';$('#composer').outerHTML=composerHTML();$('#composer textarea').value=text;const m=$('#cmodes');if(m)m.outerHTML=modesHTML();const sg=$('#csuggest');if(sg){sg.innerHTML=suggestHTML();bindSuggest();}bindComposer();syncComposer();$('#composer textarea').focus();}
+function rerenderComposer(){
+ const ta=$('#composer textarea'),text=ta?.value||'',link=$('#clink input')?.value||'',linkOpen=$('#clink')?.hidden===false;
+ $('#composer').outerHTML=composerHTML();$('#composer textarea').value=text;$('#clink input').value=link;$('#clink').hidden=!linkOpen;
+ const m=$('#cmodes');if(m)m.outerHTML=modesHTML();const sg=$('#csuggest');if(sg){sg.innerHTML=suggestHTML();bindSuggest();}bindComposer();syncComposer();$('#composer textarea').focus();
+}
 function bindAttach(){
  document.querySelectorAll('[data-unfile]').forEach(b=>b.onclick=()=>{comp.files=comp.files.filter(x=>x.key!==b.dataset.unfile);$('#cfiles').innerHTML=attachHTML();bindAttach();});
  document.querySelectorAll('[data-unlink]').forEach(b=>b.onclick=()=>{comp.links.splice(Number(b.dataset.unlink),1);$('#cfiles').innerHTML=attachHTML();bindAttach();});
