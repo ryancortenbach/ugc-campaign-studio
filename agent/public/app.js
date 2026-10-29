@@ -568,7 +568,7 @@ function syncComposer(){
  d.classList.toggle('live',listening==='dictate');d.dataset.tip=listening==='dictate'?'Stop dictation':'Dictate';
  f.classList.toggle('listening',Boolean(listening));
 }
-function closeMenus(){document.querySelectorAll('.cmenu').forEach(m=>{m.hidden=true;});document.querySelectorAll('#cplus,#cmodel').forEach(b=>b.setAttribute('aria-expanded','false'));}
+function closeMenus(){document.querySelectorAll('.cmenu').forEach(m=>{m.hidden=true;});document.querySelectorAll('#cplus,#cmodel,#sortbtn').forEach(b=>b.setAttribute('aria-expanded','false'));}
 function bindComposer(){
  const f=$('#composer');if(!f)return;const ta=f.message;
  const menu=(btn,m)=>{btn.onclick=e=>{e.stopPropagation();const open=m.hidden;closeMenus();m.hidden=!open;btn.setAttribute('aria-expanded',String(open));};};

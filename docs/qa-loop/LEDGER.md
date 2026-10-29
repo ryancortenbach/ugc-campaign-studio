@@ -505,3 +505,17 @@ Verification: 20 rail-tab, connection-refresh, sidebar, Spend-refresh and neighb
 Independent final review: scoped PASS, with all 20 tests independently rerun.
 
 Next area: Leads sort-menu state and dismissal.
+
+## 2026-10-29: dismissed sort menus report their closed state
+
+Expected: dismissing the Leads sort menu updates both its visibility and the trigger's expanded state. Existing sort selection and unrelated disclosures remain intact.
+
+Reproduced: outside click hid the menu through closeMenus but left sortbtn aria-expanded=true. The shared dismissal regression reproduced the same mismatch. Both focused checks failed before the fix.
+
+Changed: include the sort trigger in the existing known-menu trigger reset list. Existing menu behavior, copy and styling are unchanged.
+
+Verification: 17 sort-menu, lead-refresh, composer-link and neighboring Tasks/Leads DOM tests passed. Coverage includes outside/shared dismissal, open/close toggling, existing composer triggers, unrelated disclosure state and selected sort preference/label retention. Root/module syntax and diff checks passed. Requests were mocked or used temporary local fixtures. Native screen reader, keyboard and visual acceptance remain unverified. No actual requalification, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 17 tests independently rerun.
+
+Next area: Analytics keyboard metric switching.
