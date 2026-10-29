@@ -612,7 +612,7 @@ async function sendComposer(){
  if(text.length<3)return toast('Write a few words first','info');
  if(comp.files.some(x=>x.uploading))return toast('Files are still uploading','info');
  if(comp.links.length)text+=`\n\nReference links: ${comp.links.join(' ')}`;
- const model=currentModel(),attachments=comp.files.map(x=>x.id),spoken=comp.spoken;comp.spoken=false;
+ const model=currentModel(),attachments=comp.files.map(x=>x.id),spoken=comp.spoken,tool=comp.tool;comp.spoken=false;
  comp.busy=true;syncComposer();
  const done=()=>{comp.files=[];comp.links=[];f.message.value='';};
  try{
@@ -621,7 +621,7 @@ async function sendComposer(){
   else if(!attachments.length&&thread.ok&&tab()==='home'){
    thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
    try{const r=await api('/api/assistant',{message:text,model});thread.messages.push({role:'assistant',text:r.reply,actions:r.actions});if(r.mode==='rehearsal'&&r.url)location.hash=r.url;if(spoken)voice.speak(r.reply);}
-   catch(err){thread.messages.pop();f.message.value=text;toast(err.message,'bad');}
+   catch(err){thread.messages.pop();const input=$('#composer')?.message;if(input&&!input.value&&comp.tool===tool&&!comp.files.length&&!comp.links.length)input.value=text;toast(err.message,'bad');}
    finally{thread.thinking=false;paintThread();}
   }
   else{const {task}=await api('/api/chat',{message:text,model,attachments});if(spoken)comp.speakTask=task.id;done();toast('Mission started','ok',`Task ${task.id} on ${modelInfo[model][0]}`);location.hash=`#/tasks/${task.id}`;}

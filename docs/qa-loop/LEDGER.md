@@ -337,3 +337,17 @@ Verification: seven client-context and neighboring task-view/DOM tests passed. C
 Independent review: scoped PASS, with all seven tests independently rerun.
 
 Next area: Home composer draft state during delayed replies.
+
+## 2026-10-29: failed assistant replies preserve newer composer drafts
+
+Expected: a failed reply keeps newer unsent work intact. An untouched empty composer can recover the failed message for retry, including after its form is rebuilt.
+
+Reproduced: failure overwrote newer input with the old message, or restored into a detached form after composer replacement. Two initial regressions failed. Additional file-only, link-only and changed-mode cases reproduced retry text mixing into a different draft.
+
+Changed: capture the submitted composer mode and restore failed text into the current input only while it remains empty, uses that mode, and has no new files or links. Existing thread cleanup, errors, successful replies and retry wording are unchanged. Copy and layout are unchanged.
+
+Verification: 14 reply-draft, upload and neighboring Tasks/Leads DOM tests passed. Coverage includes newer input, replacement forms, untouched retry, successful replies, pending-submit suppression, navigation, reference-only drafts, mode changes and existing upload behavior. Root/module syntax and diff checks passed. Assistant requests and uploads were mocked; other records were temporary local fixtures. Native keyboard, dictation and visual acceptance remain unverified. No model/provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 14 tests independently rerun.
+
+Next area: spend panel response ordering and partial data.
