@@ -1,7 +1,7 @@
 // Mint Labs operating analytics. Read-only payment and app-ledger data.
 const ranges=[['today','Today'],['week','This week'],['month','This month'],['year','This year']];
 const names={claude:'Claude',exa:'Exa',solari:'Solari',higgsfield:'Higgsfield',elevenlabs:'ElevenLabs',terac:'Terac',whop:'Whop'};
-const currency=v=>v==null?'Unavailable':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(v);
+const currency=v=>v==null?'Unavailable':v>0&&v<.01?'<$0.01':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(v);
 const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 7a7 7 0 0 1 11.6-1L20 9M4 15l2.3 3a7 7 0 0 0 11.6-1"/></svg>';
 export async function analyticsView({view,api,esc,toast}){
  const route=location.hash,mount=Symbol('analytics');view.apAnalyticsMount=mount;const active=()=>view.isConnected&&location.hash===route&&view.apAnalyticsMount===mount;

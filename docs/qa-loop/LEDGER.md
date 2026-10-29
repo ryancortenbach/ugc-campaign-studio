@@ -659,3 +659,17 @@ Verification: 20 social-link, drawer-refresh, lead-badge, lead-refresh and neigh
 Independent final review: scoped PASS, with all 20 tests independently rerun.
 
 Next area: Analytics displayed totals with missing provider values.
+
+## 2026-10-29: positive sub-cent analytics values do not appear as zero
+
+Expected: a positive recorded expense below one cent is distinguishable from zero in Analytics, consistent with the existing shared spend formatter. Unavailable values remain separate.
+
+Reproduced: a known $0.004 recorded expense displayed as $0.00 in the money card and chart despite the correct raw total. Four focused regressions failed before the fix.
+
+Changed: the Analytics currency formatter displays positive values below one cent as <$0.01. Zero, exact cents, unavailable values, accounting calculations, layout and other copy are unchanged.
+
+Verification: 23 small-spend, metric-focus, range-failure, navigation and in-memory accounting tests passed. Coverage includes card/chart/bucket agreement, zero and exact-cent boundaries, unknown revenue alongside known spend, and excluding usage/balance metadata without a priced ledger amount. Root/module/test syntax and diff checks passed. No actual provider balances or payments were retrieved. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 23 tests independently rerun.
+
+Next area: Settings save and retry controls.
