@@ -365,3 +365,17 @@ Verification: 21 Spend-view, mocked cost/usage and neighboring Tasks/Leads DOM t
 Independent review: scoped PASS, with all 21 tests independently rerun.
 
 Next area: client review section refresh and failures.
+
+## 2026-10-29: unavailable review artifacts do not offer unsaveable feedback
+
+Expected: a section without a reviewable artifact version does not offer a Changes editor whose save would silently do nothing. Refreshing to an unavailable artifact removes that dead-end editor while retaining its cached draft.
+
+Reproduced: images with a null artifact version still enabled Changes and Save feedback, but the existing save guard returned without a request or message. Refresh could also leave an enabled editor after the image artifact disappeared. Two focused regressions failed before the fix.
+
+Changed: apply the existing artifact-availability condition to Changes and the feedback editor, consistent with Approve and backend validation. Existing draft storage, error behavior, copy and styling are unchanged.
+
+Verification: 19 availability, review-view, regression and in-memory backend tests passed. Coverage includes initially missing artifacts, failed save followed by refresh to a missing artifact, available-version feedback, prior note retention, retry, version invalidation and simulation boundaries. Root/module syntax and diff checks passed. All requests were mocked or used local in-memory records. Native keyboard and visual acceptance remain unverified. No real approvals, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 19 tests independently rerun.
+
+Next area: Settings keyboard editing and dirty-state recovery.

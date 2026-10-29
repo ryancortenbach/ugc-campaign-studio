@@ -21,9 +21,9 @@ export async function clientTaskReviewView({view,api,taskId,isCurrent=()=>true})
   const approval=section=>reviews.find(review=>review.section===section&&review.mode==='local');
   const controls=section=>{
    const review=approval(section),approved=review?.decision==='approved';
-   return `<div class="ct-actions">${review?`<span class="schip ${approved?'s-ok':'s-you'}">${approved?'Approved':'Changes requested'}</span>`:''}<button class="btn sm${approved?'':' go'}" data-ct-approve="${section}" ${busy||!versions[section]||approved?'disabled':''}>${approved?'Approved':'Approve'}</button><button class="btn sm" data-ct-edit="${section}" ${busy?'disabled':''}>Changes</button></div>`;
+   return `<div class="ct-actions">${review?`<span class="schip ${approved?'s-ok':'s-you'}">${approved?'Approved':'Changes requested'}</span>`:''}<button class="btn sm${approved?'':' go'}" data-ct-approve="${section}" ${busy||!versions[section]||approved?'disabled':''}>${approved?'Approved':'Approve'}</button><button class="btn sm" data-ct-edit="${section}" ${busy||!versions[section]?'disabled':''}>Changes</button></div>`;
   };
-  const noteForm=section=>editing===section?`<form data-ct-note="${section}" class="ct-note"><label for="ct-note-${section}">What should change?</label><textarea id="ct-note-${section}" maxlength="1000" required ${busy?'disabled':''}>${esc(feedbackNote(section))}</textarea><button class="btn sm" ${busy?'disabled':''}>Save feedback</button></form>`:'';
+  const noteForm=section=>editing===section&&versions[section]?`<form data-ct-note="${section}" class="ct-note"><label for="ct-note-${section}">What should change?</label><textarea id="ct-note-${section}" maxlength="1000" required ${busy?'disabled':''}>${esc(feedbackNote(section))}</textarea><button class="btn sm" ${busy?'disabled':''}>Save feedback</button></form>`:'';
   const products=list(brand.assets).filter(asset=>asset.kind==='product');
   const productLabel=asset=>/front/i.test(asset.title)?'Front':/back|rear/i.test(asset.title)?'Back':/model|body|fit/i.test(asset.title)?'On-body':asset.title||'Product';
   const logo=list(brand.assets).find(asset=>asset.kind==='logo');
