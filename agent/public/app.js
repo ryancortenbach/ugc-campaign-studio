@@ -574,7 +574,11 @@ function bindComposer(){
  f.querySelectorAll('[data-cmodel]').forEach(b=>b.onclick=()=>{pref.set('model',b.dataset.cmodel);rerenderComposer();});
  f.querySelector('[data-cact="file"]').onclick=()=>{closeMenus();$('#cfile').click();};
  f.querySelector('[data-cact="link"]').onclick=()=>{closeMenus();$('#clink').hidden=false;$('#clink input').focus();};
- $('#clinkadd').onclick=()=>{const v=$('#clink input').value.trim();if(!/^https?:\/\/\S+\.\S+/.test(v))return toast('Paste a full link starting with https://','bad');comp.links.push(v);$('#clink input').value='';$('#clink').hidden=true;$('#cfiles').innerHTML=attachHTML();bindAttach();};
+ $('#clinkadd').onclick=()=>{
+  const v=$('#clink input').value.trim();let link;try{link=new URL(v);}catch{}
+  if(!link||!/^https?:\/\/\S+$/.test(v)||!link.hostname.includes('.'))return toast('Paste a full link starting with https://','bad');
+  comp.links.push(v);$('#clink input').value='';$('#clink').hidden=true;$('#cfiles').innerHTML=attachHTML();bindAttach();
+ };
  $('#clink input').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#clinkadd').click();}};
  $('#cfile').onchange=e=>{addFiles(e.target.files);e.target.value='';};
  f.addEventListener('paste',e=>{const files=[...(e.clipboardData?.files||[])];if(files.length){e.preventDefault();addFiles(files);}});

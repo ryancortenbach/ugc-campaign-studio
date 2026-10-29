@@ -449,3 +449,17 @@ Verification: 13 upload-race, storyboard-refresh, local-save, task-view and neig
 Independent final review: scoped PASS, with all 13 tests independently rerun.
 
 Next area: Home link attachment validation and cancellation.
+
+## 2026-10-29: composer rejects malformed reference links
+
+Expected: Add link accepts a complete HTTP or HTTPS reference URL. Invalid text stays in the editor with the existing validation message so it can be corrected.
+
+Reproduced: the partial regular-expression match accepted a URL followed by pasted notes and a URL containing an invalid port. Both focused regressions failed before the fix, with an invalid attachment added and the editor cleared.
+
+Changed: parse the URL and require a complete whitespace-free HTTP(S) value with a dotted hostname before attaching it. Accepted URLs retain their exact trimmed text. Existing validation copy, attachment markup and removal behavior are unchanged.
+
+Verification: 19 link, upload, reply-draft and neighboring Tasks/Leads DOM tests passed. Coverage includes pasted notes, invalid ports, unsupported schemes, missing hosts, valid path/query/fragment and HTTP port values, retained invalid input, Enter preventing submission and correctly reindexed removal. Root/module syntax and diff checks passed. New link tests invoked no APIs; neighboring requests were mocked or used temporary local fixtures. URL reachability, native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 19 tests independently rerun.
+
+Next area: Connections partial status and retry controls.
