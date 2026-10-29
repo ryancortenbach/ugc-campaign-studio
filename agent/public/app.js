@@ -1000,17 +1000,24 @@ async function storyboards(arg,{isCurrent=()=>true}={}){
 
 const autosize=ta=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+2+'px';};
 async function settings(arg,{isCurrent=()=>true}={}){
- await loadState();if(!isCurrent())return;const c=state.config,p=c.profile;
+ const previous=$('#profile');let saveVersionBefore=previous?.readProfileSaveVersion?.();
+ await loadState();if(!isCurrent())return;
+ while(previous?.isConnected&&$('#profile')===previous&&previous.readProfileSaveVersion?.()!==saveVersionBefore){saveVersionBefore=previous.readProfileSaveVersion();await loadState();if(!isCurrent())return;}
+ const c=state.config,p=c.profile;
+ const draft=previous?.isConnected&&$('#profile')===previous?previous.readProfileDraft?.():null;
  const fields=[['senderName','Name','text'],['company','Company','text'],['senderFact','A true fact about you','area'],['offer','What you offer','area'],['cta','Call to action','area'],['rules','Writing rules','area']];
  $('#view').innerHTML=`<div class="settings">
   <div class="card"><div class="head"><h2>Connections</h2></div><div class="conns">${connRows().map(i=>`<div class="introw"><img src="/logos/${i.id}.png" alt=""><div><b>${esc(i.name)}</b><span>${esc(i.detail)}</span></div><span class="state ${i.st[1]}">${esc(i.st[0])}</span></div>`).join('')}</div></div>
   <form class="card" id="profile"><div class="head"><h2>Sender profile</h2><span class="faint" style="margin-left:auto">Every email is written from this</span></div><div class="body">${fields.map(([k,l,t])=>`<label for="pf-${k}">${l}</label>${t==='text'?`<input id="pf-${k}" type="text" name="${k}" value="${esc(p[k])}">`:`<textarea id="pf-${k}" name="${k}" rows="2">${esc(p[k])}</textarea>`}`).join('')}</div><div class="foot"><span class="faint" id="pfstate">All changes saved</span><button class="btn go" type="submit" id="pfsave" disabled>Save</button></div></form>
  </div>`;
- const f=$('#profile'),values=()=>Object.fromEntries(new FormData(f));let saved=JSON.stringify(values()),saving=false;
+ const f=$('#profile'),values=()=>Object.fromEntries(new FormData(f));let saved=JSON.stringify(values()),saving=false,saveVersion=0;
+ f.readProfileSaveVersion=()=>saveVersion;
+ f.readProfileDraft=()=>{const baseline=JSON.parse(saved);return Object.fromEntries(Object.entries(values()).filter(([key,value])=>value!==baseline[key]));};
  const mark=()=>{const dirty=JSON.stringify(values())!==saved;f.querySelector('#pfsave').disabled=saving||!dirty;f.querySelector('#pfstate').textContent=dirty?'Unsaved changes':'All changes saved';};
  f.querySelectorAll('textarea').forEach(ta=>{autosize(ta);ta.addEventListener('input',()=>autosize(ta));});
  f.addEventListener('input',mark);
- f.onsubmit=async e=>{e.preventDefault();if(saving)return;const payload=values();if(JSON.stringify(payload)===saved)return;saving=true;mark();try{await api('/api/profile',payload);saved=JSON.stringify(payload);toast('Profile saved','ok');}catch(err){toast(err.message,'bad');}finally{saving=false;mark();}};
+ if(draft){for(const [key,value] of Object.entries(draft)){const input=f.elements.namedItem(key);if(input){input.value=value;if(input.tagName==='TEXTAREA')autosize(input);}}mark();}
+ f.onsubmit=async e=>{e.preventDefault();if(saving)return;const payload=values();if(JSON.stringify(payload)===saved)return;saving=true;mark();try{await api('/api/profile',payload);saved=JSON.stringify(payload);saveVersion++;toast('Profile saved','ok');}catch(err){toast(err.message,'bad');}finally{saving=false;mark();}};
 }
 
 async function voices(arg,{isCurrent=()=>true}={}){await voicesView({view:$('#view'),api,esc,toast,sbadge,svg,isCurrent});}
@@ -1033,7 +1040,7 @@ async function route(){
  const wantRail=new URLSearchParams(query||'').get('rail');if(['live','spend','conn','browser'].includes(wantRail))openRail(wantRail);
  if(name!==lastView){lastView=name;state.hashOpened=null;$('#view').scrollTop=0;$('#drawer').hidden=true;state.selectedLead=null;}
  // Live updates re-render the page, so carry over anything half typed and where the console was scrolled.
- const typed=[...document.querySelectorAll('#view form[id] [name]')].filter(el=>el.value&&['text','textarea'].includes(el.type)).map(el=>[el.form.id,el.name,el.value]);
+ const typed=[...document.querySelectorAll('#view form[id] [name]')].filter(el=>el.form.id!=='profile'&&el.value&&['text','textarea'].includes(el.type)).map(el=>[el.form.id,el.name,el.value]);
  const focus=document.activeElement?.form?.id?[document.activeElement.form.id,document.activeElement.name]:null;
  const scroll=document.querySelector('.console:not([hidden])')?.scrollTop;
  try{await loadState();if(!isCurrent())return;await (views[name]||home)(arg?(/^\d+$/.test(arg)?Number(arg):arg):undefined,{isCurrent});}catch(err){if(isCurrent())$('#view').innerHTML=`<div class="card"><div class="empty">${esc(err.message)}</div></div>`;}

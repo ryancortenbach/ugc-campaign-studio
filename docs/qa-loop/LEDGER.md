@@ -869,3 +869,17 @@ Verification: 23 Home stats, metrics and conversation-history tests passed. Eigh
 Independent final review: focused-host send-back resolved, then scoped PASS with all 23 tests independently rerun.
 
 Next area: Task report links and empty activity after failed reads.
+
+## 2026-10-29: Settings refresh preserves dirty fields and confirmed saves
+
+Expected: refreshing Settings preserves unsaved edits, including deliberate blanks and edits made during the read. Unchanged fields use fresh saved values. A state read captured before a successful save must not restore old values as saved.
+
+Reproduced: four initial regressions showed existing nonempty edits and cleared fields being replaced by server values. Generic route restoration carried only nonempty text and restored it only into empty fields. Independent review found a same-form read/save race in the first fix. A further regression showed that saving away from and back to the original value needs a version counter rather than comparing snapshot strings.
+
+Changed: recover only fields differing from the previous connected form's saved snapshot after the Settings read. Let Settings own profile restoration rather than the generic route text snapshot. If that form completes a save during the read, reread state using a monotonic successful-save version and check route ownership again. Initialize the new saved baseline before applying dirty fields and updating their status. Copy and styling remain unchanged.
+
+Verification: 23 profile refresh, navigation, retry and value tests passed, including eight new permanent checks. Coverage includes newer edits during reads, explicit blanks, fresh unchanged fields, clean refresh, pending save completion, captured old state and save-away/back ordering. Root/module/test syntax and diff checks passed. State reads and profile writes were mocked. Real profile persistence, native input/layout and cross-client write ordering remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: read/save freshness send-back resolved, then scoped PASS with all 23 tests independently rerun.
+
+Next area: Voice storyboard selection with removed or missing source boards.
