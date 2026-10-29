@@ -799,3 +799,17 @@ Verification: 52 submission-ownership, preview-lifecycle, reply-draft, model-dra
 Independent final review: scoped PASS for task/storyboard/shot completion ownership, with all 52 tests independently rerun.
 
 Next area: Voice saved-state display after refresh.
+
+## 2026-10-29: Storyboard autosave failures show the existing warning immediately
+
+Expected: automatic standalone storyboard saves that fail local storage must warn while retaining the current edits. A later successful save clears its own obsolete warning, preserving any unrelated newer notice.
+
+Reproduced: textarea edits and staged image drafts called save but silently left the message blank when local storage threw. Three of four new regressions failed before the fix. The existing manual Save version test covered only the explicit save button.
+
+Changed: show the existing storage failure copy immediately from the standalone save branch. After a successful automatic retry, clear the message only when it still exactly matches the previous storage error. Task-backed server persistence, copy and styling remain intact.
+
+Verification: 17 autosave-warning, explicit local-save, reference-removal-focus and version-history tests passed. Four new permanent checks cover retained multiline text, uncached staged requests, successful retry and unrelated notice ownership. Root/module/test syntax and diff checks passed. Storage failures were mocked before writes, and all research reads used local fixtures. No actual provider calls, uploads, image generation, sends, live mutations, desktop actions, restart, main integration or deployment. Native quota behavior, layout and real persistence durability remain unverified.
+
+Independent final review: scoped PASS for standalone autosave warnings, with all 17 tests independently rerun.
+
+Next area: Analytics provider breakdown with incomplete usage metadata.

@@ -11,10 +11,14 @@ const roles=[['character','Character','Face, hair and body identity'],['apparel'
 let research,state,root,storageError='',referenceRole='character',pickerOpen=false,activeShot=0,uploading=false;
 const save=()=>{
  for(const p of state.plans||[]){p.localReview=reviewLocalPlan(p);p.basePrompt=basePrompt(p);p.swapPrompt=swapPrompt(p);}
- const payload=structuredClone(state),context=workspaceContext,host=root;
+ const payload=structuredClone(state),context=workspaceContext,host=root,previousError=storageError;
  let cached=true;
  try{localStorage.setItem(key,JSON.stringify(context?{lab:payload,baseRevision:context.revision,dirty:true}:payload));if(!context)storageError='';}catch{cached=false;storageError=context?'Could not cache this draft locally. Server saving will still be attempted.':'Could not save this draft locally. Keep this page open and retry.';}
- if(!context)return Promise.resolve(cached);
+ if(!context){
+  if(!cached)say(storageError,true);
+  else if(previousError&&host?.querySelector('[data-ap-message]')?.textContent===previousError)say('');
+  return Promise.resolve(cached);
+ }
  context.pendingSaves=(context.pendingSaves||0)+1;
  context.recoveredDirty=false;
  context.queue=context.queue.then(async()=>{
