@@ -94,17 +94,20 @@ const usd=n=>{if(n==null||!Number.isFinite(Number(n)))return '';n=Number(n);retu
 const kfmt=n=>{n=Number(String(n).replace(/,/g,''));return n>=1000?`${Math.round(n/1000)}k`:String(n);};
 // Spend tab: /api/costs when the backend has it, else /api/spend. Whop revenue comes from /api/whop and is shown as Collected.
 async function renderSpend(){
+ const request=++spendRequest;
  const [costs,whop]=await Promise.all([tryGet('/api/costs'),tryGet('/api/whop')]);
+ if(request!==spendRequest)return;
  if(costs&&Array.isArray(costs.providers)){
   state.spendData={all:Number(costs.allTimeUsd||0),today:Number(costs.todayUsd||0),partial:costs.coverage!=='complete',basis:costs.basis,providers:costs.providers.map(p=>({id:p.id,name:p.name||providerName[p.id]||p.id,spent:p.spentUsd,today:p.todayUsd,balance:p.balanceUsd,usage:p.usage,detail:p.detail,billingUrl:p.billingUrl,coverage:p.coverage,accountEstimate:p.accountEstimateUsd}))};
  }else{
-  const s=await tryGet('/api/spend');if(!s)return;
+  const s=await tryGet('/api/spend');if(request!==spendRequest||!s)return;
   state.spendData={all:Number(s.total||0),today:Number(s.today||0),providers:(s.providers||[]).map(p=>({id:p.provider,name:providerName[p.provider]||p.provider,spent:p.total,today:p.today,balance:null,usage:`${p.count} charge${p.count===1?'':'s'}`,detail:''}))};
  }
  if(whop&&Array.isArray(whop.orders)){const paid=whop.orders.filter(o=>o.status==='paid');state.spendData.earned={sum:paid.reduce((n,o)=>n+(Number(o.amount)||0),0),count:paid.length};}
  else state.spendData.earned=null;
  if(railTab==='spend')paintSpend();
 }
+let spendRequest=0;
 function paintSpend(){
  const d=state.spendData;if(!d){$('#spendbody').innerHTML='<div class="empty">Loading.</div>';return;}
  const list=d.providers.filter(p=>p.id!=='whop').sort((a,b)=>(Number(b.spent)||0)-(Number(a.spent)||0));

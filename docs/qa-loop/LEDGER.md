@@ -351,3 +351,17 @@ Verification: 14 reply-draft, upload and neighboring Tasks/Leads DOM tests passe
 Independent final review: scoped PASS, with all 14 tests independently rerun.
 
 Next area: spend panel response ordering and partial data.
+
+## 2026-10-29: stale spend refreshes preserve newer totals
+
+Expected: overlapping Spend refreshes retain the newest provider snapshot and its associated collected revenue. A delayed legacy fallback must not replace a newer modern cost response.
+
+Reproduced: older modern responses and an older pending legacy fallback each overwrote newer provider totals and collected revenue. Both focused regressions failed before the fix.
+
+Changed: sequence Spend refreshes and ignore superseded results after the initial cost/revenue reads and after the optional legacy read. State commits synchronously after the relevant guard. Existing calculations, coverage labels, copy and layout are unchanged.
+
+Verification: 21 Spend-view, mocked cost/usage and neighboring Tasks/Leads DOM tests passed. Coverage includes modern/fallback response ordering, partial and unknown provider amounts, failed endpoints retaining prior data, legacy ledger values, confirmed zero collected revenue and existing usage reconciliation. Root/module syntax and diff checks passed. All provider responses were mocked and app records were temporary local fixtures. Actual balances, billing and native visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 21 tests independently rerun.
+
+Next area: client review section refresh and failures.
