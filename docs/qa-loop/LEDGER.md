@@ -491,3 +491,17 @@ Verification: 19 pruning, error-activity, task-view, tool-log and neighboring Ta
 Independent final review: scoped PASS, with all 19 tests independently rerun.
 
 Next area: Client review feedback cancellation and stale versions.
+
+## 2026-10-29: side-panel tabs retain keyboard focus when redrawn
+
+Expected: activating or redrawing a focused side-panel tab retains focus on its replacement control. Programmatic panel changes preserve focus outside the tab strip.
+
+Reproduced: setRailTab replaced its entire tab strip, removing the focused button and leaving focus on the document body. Both activation and same-tab redraw regressions failed before the fix.
+
+Changed: capture the focused tab key when focus is inside the strip, then focus its replacement with preventScroll after rebuilding the controls. Existing selection, panel visibility, preferences, copy and styling are unchanged.
+
+Verification: 20 rail-tab, connection-refresh, sidebar, Spend-refresh and neighboring Tasks/Leads DOM tests passed. Coverage includes all four tabs, same-tab redraw, selected/panel/preference consistency, external focus retention and preserving mounted Browser controls. Root/module syntax and diff checks passed. New tests used mocked panel helpers; all neighboring requests were mocked or used temporary local fixtures. Native keyboard and visual acceptance remain unverified. No actual provider checks, Browser panel launches, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 20 tests independently rerun.
+
+Next area: Leads sort-menu state and dismissal.

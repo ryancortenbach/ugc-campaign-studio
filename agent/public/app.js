@@ -141,9 +141,11 @@ function paintConns(){
 const railTabs=[['live','Live','activity'],['spend','Spend','wallet'],['conn','Connections','plug'],['browser','Browser','globe']];
 let railTab=pref.get('railtab','live');if(!railTabs.some(t=>t[0]===railTab))railTab='live';
 function setRailTab(t){
+ const focused=$('#rtabs').contains(document.activeElement)?document.activeElement.closest('[data-rtab]')?.dataset.rtab:null;
  railTab=t;pref.set('railtab',t);
  $('#rtabs').innerHTML=railTabs.map(([k,l,i])=>`<button type="button" role="tab" class="rtab${k===t?' on':''}" data-rtab="${k}" aria-selected="${k===t}" data-tip="${l}" aria-label="${l}">${k==='browser'?'<img src="/logos/solari.png" alt="" width="18" height="18">':ic(i)}</button>`).join('');
  $('#rtabs').querySelectorAll('[data-rtab]').forEach(b=>b.onclick=()=>setRailTab(b.dataset.rtab));
+ if(focused)$('#rtabs').querySelector(`[data-rtab="${focused}"]`)?.focus({preventScroll:true});
  $('#livefeed').hidden=t!=='live';$('#spendbody').hidden=t!=='spend';$('#connbody').hidden=t!=='conn';$('#browserbody').hidden=t!=='browser';
  if(t==='spend'){paintSpend();renderSpend().catch(()=>{});}
  if(t==='conn'){paintConns();loadConns().catch(()=>{});}
