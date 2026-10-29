@@ -407,3 +407,17 @@ Verification: 20 lead drawer, list-refresh, badge, PDF-focus and neighboring Tas
 Independent final review: scoped PASS, with all 20 tests independently rerun.
 
 Next area: Renders media fallback and missing thumbnail metadata.
+
+## 2026-10-29: gallery tiles refresh when media sources change
+
+Expected: a new still or changed product photo updates its render tile even when status and product index remain the same. Fresh media retries from the first candidate after old fallbacks fail. Unrelated metadata preserves the current media element.
+
+Reproduced: the tile signature omitted remote still URLs and hero image URLs. Three focused regressions failed: the old product image remained, a ready remote still was ignored, and an exhausted fallback stayed on the logo after fresh media arrived. The detail panel already used the newer media.
+
+Changed: fingerprint the actual ordered media candidates in the tile signature, including source URLs and poster metadata. Existing media selection, fallback order, copy and styling are unchanged.
+
+Verification: 26 media-refresh, gallery, read-ordering and tab-focus tests passed. Coverage includes same-index product photo changes, newly available remote stills, fallback reset, element retention on unrelated metadata, existing video/still/hero/logo fallbacks, local mock action controls and stream behavior. Root/module syntax and diff checks passed. New tests used mocked reads only; all neighboring action calls were mocked. Native media playback, image loading and visual acceptance remain unverified. No actual approvals, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 26 tests independently rerun.
+
+Next area: Analytics empty-period and date-range recovery.

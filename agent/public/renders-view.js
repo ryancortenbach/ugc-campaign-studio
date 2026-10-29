@@ -110,7 +110,7 @@ function cardInner(t,{paused},mi=0){
   :`<div class="rv-hover">${price?`<span class="rv-price">${price}</span>`:'<span></span>'}<span class="rv-go">${esc(pri.label)}</span></div>`;
  return `<div class="rv-tile${renderActive(r)?' active':''}"><div class="rv-media">${mediaHTML(r,t.name,mi)}</div><i class="rv-shade"></i>${logoBadge(r,t.name)}${low?`<span class="rv-ring" title="Lowest check: ${esc(low.name)}">${ring(low.score,'sm')}</span>`:''}${hover}${pillHTML(st)}${renderActive(r)?'<i class="rv-shimmer"></i>':''}</div><div class="rv-cap"><b>${esc(t.name)}</b>${t.count>1?`<span class="rv-ver">v${t.count}</span>`:''}</div>`;
 }
-const cardSig=(t,paused)=>{const r=t.latest,p=r.plan||{};return JSON.stringify([r.id,r.status,r.review,r.revising,r.stale,r.local_file,r.result_url,r.estimate_usd,p.still?.local_file,p.hero?.index,lowestCheck(r)?.score,t.count,t.name,paused]);};
+const cardSig=(t,paused)=>{const r=t.latest;return JSON.stringify([r.id,r.status,r.review,r.revising,r.stale,r.local_file,r.result_url,r.estimate_usd,mediaCandidates(r),lowestCheck(r)?.score,t.count,t.name,paused]);};
 
 // ---------- view ----------
 
