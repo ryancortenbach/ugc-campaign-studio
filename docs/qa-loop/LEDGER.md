@@ -981,3 +981,17 @@ Verification: 28 lead filter-failure, refresh-race, sort-menu and draft-map test
 Independent final review: cross-control selection send-back resolved, then scoped PASS with all 28 tests independently rerun.
 
 Next area: Home composer model menus and link editor recovery during navigation.
+
+## 2026-10-29: Home refreshes preserve the latest unsent composer fields
+
+Expected: a Home route refresh retains the open reference editor, its unsaved URL and the latest message, including deliberate blanks or edits during the state read. Focus follows the latest active composer field without stealing outside focus.
+
+Reproduced: four initial permanent regressions failed. The generic route snapshot omitted the unnamed URL field and restored only earlier nonempty message text. Refreshing Home erased the unsaved URL, hid the editor and restored stale message text after clearing. Live task changes can trigger this route refresh while authoring. Independent review then found model/mode redraws during the state read detached the original form, bypassing the first fix; both added regressions failed.
+
+Changed: give the URL input a field name for focus identity. Let composer restoration own its message, URL and editor state instead of the generic nonempty text snapshot. For a route that began with a composer, capture the current connected composer after the state read, including model/mode redraws. Restore only when the destination has a composer, with the existing route ownership checks. Copy and styling remain unchanged.
+
+Verification: 32 composer route-draft, model-draft, reply-draft and Settings refresh tests passed. Eleven new checks cover unsaved/rejected URLs, late edits and blanks, stale routes, navigation away, latest field focus, outside focus, a reference accepted during the read and model/mode redraws. Root/module/test syntax and diff checks passed. Tests use actual extracted composer/route functions with mocked state reads and a Home mount wrapper. Native layout, keyboard behavior and actual stream transport remain unverified. No provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: composer redraw send-back resolved, then scoped PASS with all 32 tests independently rerun.
+
+Next area: Render new-shot form recovery after failed list refreshes.

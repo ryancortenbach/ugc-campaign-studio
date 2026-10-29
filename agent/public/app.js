@@ -568,7 +568,7 @@ function composerHTML(){
  return `<form class="composer" id="composer" autocomplete="off">
   <div class="cfiles" id="cfiles">${attachHTML()}</div>
   <textarea name="message" rows="1" placeholder="${esc(t.ph)}" aria-label="Message"></textarea>
-  <div class="clink" id="clink" hidden><input type="url" placeholder="Paste a link, e.g. https://brand.com" aria-label="Link"><button type="button" class="btn sm" id="clinkadd">Add link</button></div>
+  <div class="clink" id="clink" hidden><input type="url" name="referenceUrl" placeholder="Paste a link, e.g. https://brand.com" aria-label="Link"><button type="button" class="btn sm" id="clinkadd">Add link</button></div>
   <div class="cbar">
    <div class="cwrap"><button type="button" class="cbtn" id="cplus" data-tip="Add files and links" aria-label="Add files and links" aria-expanded="false">${ic('plus')}</button>
     <div class="cmenu" id="cplusmenu" hidden>
@@ -1072,11 +1072,21 @@ async function route(){
  const wantRail=new URLSearchParams(query||'').get('rail');if(['live','spend','conn','browser'].includes(wantRail))openRail(wantRail);
  if(name!==lastView){lastView=name;state.hashOpened=null;$('#view').scrollTop=0;$('#drawer').hidden=true;state.selectedLead=null;}
  // Live updates re-render the page, so carry over anything half typed and where the console was scrolled.
- const typed=[...document.querySelectorAll('#view form[id] [name]')].filter(el=>el.form.id!=='profile'&&el.value&&['text','textarea'].includes(el.type)).map(el=>[el.form.id,el.name,el.value]);
- const focus=document.activeElement?.form?.id?[document.activeElement.form.id,document.activeElement.name]:null;
+ const previousComposer=$('#composer');let composerDraft=null;
+ const typed=[...document.querySelectorAll('#view form[id] [name]')].filter(el=>!['profile','composer'].includes(el.form.id)&&el.value&&['text','textarea'].includes(el.type)).map(el=>[el.form.id,el.name,el.value]);
+ let focus=document.activeElement?.form?.id?[document.activeElement.form.id,document.activeElement.name]:null;
  const scroll=document.querySelector('.console:not([hidden])')?.scrollTop;
- try{await loadState();if(!isCurrent())return;await (views[name]||home)(arg?(/^\d+$/.test(arg)?Number(arg):arg):undefined,{isCurrent});}catch(err){if(isCurrent())$('#view').innerHTML=`<div class="card"><div class="empty">${esc(err.message)}</div></div>`;}
+ try{
+  await loadState();if(!isCurrent())return;
+  const composer=$('#composer');
+  if(previousComposer&&composer?.isConnected){
+   composerDraft={message:composer.message.value,link:composer.querySelector('#clink input').value,linkOpen:!composer.querySelector('#clink').hidden};
+   if(document.activeElement?.form===composer)focus=['composer',document.activeElement.name];else if(focus?.[0]==='composer')focus=null;
+  }
+  await (views[name]||home)(arg?(/^\d+$/.test(arg)?Number(arg):arg):undefined,{isCurrent});
+ }catch(err){if(isCurrent())$('#view').innerHTML=`<div class="card"><div class="empty">${esc(err.message)}</div></div>`;}
  if(!isCurrent())return;
+ if(composerDraft&&$('#composer')){$('#composer textarea').value=composerDraft.message;$('#clink input').value=composerDraft.link;$('#clink').hidden=!composerDraft.linkOpen;syncComposer();}
  for(const [form,field,value] of typed){const el=document.querySelector(`#${form} [name="${field}"]`);if(el&&!el.value){el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));}}
  if(focus)document.querySelector(`#${focus[0]} [name="${focus[1]}"]`)?.focus();
  const c=document.querySelector('.console:not([hidden])');if(c&&scroll!==undefined&&scroll<c.scrollHeight-c.clientHeight-30)c.scrollTop=scroll;
