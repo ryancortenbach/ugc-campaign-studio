@@ -519,3 +519,17 @@ Verification: 17 sort-menu, lead-refresh, composer-link and neighboring Tasks/Le
 Independent final review: scoped PASS, with all 17 tests independently rerun.
 
 Next area: Analytics keyboard metric switching.
+
+## 2026-10-29: Analytics metric switches retain keyboard focus
+
+Expected: activating Revenue or Spend retains focus on the selected metric after the chart is redrawn. Updates preserve focus on controls outside Analytics.
+
+Reproduced: metric activation rebuilt the view and removed its focused button, leaving focus on the document body in either direction. Both focused regressions failed before the fix.
+
+Changed: capture the currently focused metric at render time and focus its replacement with preventScroll after binding controls. Existing calculations, selected values, API requests, copy and styling are unchanged.
+
+Verification: 17 metric-focus, range-failure, navigation and in-memory analytics tests passed. Coverage includes both metric directions, selected/value consistency, external focus retention, bounded chart key handling, no additional reads during metric changes and existing period/revenue-coverage behavior. Root/module syntax and diff checks passed. All API reads were mocked and backend records were local fixtures. Native keyboard and visual acceptance remain unverified. No live balances or payments retrieved, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 17 tests independently rerun.
+
+Next area: Settings profile field escaping and clear/revert behavior.
