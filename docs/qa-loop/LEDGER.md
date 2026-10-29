@@ -295,3 +295,17 @@ Verification: 18 navigation, voice-form, mocked voice-backend and neighboring Ta
 Independent review: scoped PASS, with all 18 tests independently rerun.
 
 Next area: render gallery keyboard controls and empty selections.
+
+## 2026-10-29: render tabs retain focus during selection and live updates
+
+Expected: selecting a gallery tab, including an empty one, retains keyboard focus on that tab. Live count updates preserve the focused tab without moving focus from other controls.
+
+Reproduced: patchTabs replaced the focused button during both tab selection and a live render update, leaving focus on the page body. Both new focus regressions failed before the fix.
+
+Changed: capture the focused tab key before updating tab markup and restore the equivalent replacement with scroll preservation. Restore only when focus was inside the tab bar. Copy, layout, counts and existing tile keyboard handlers are unchanged.
+
+Verification: 22 render-tab, gallery and refresh-race tests passed. Coverage includes empty selections, live count changes, no outside focus stealing, tile Enter/Space activation, Escape closing, existing gallery actions and cancellation/stream ordering. Root/module syntax and diff checks passed. All APIs and provider actions were mocked. Native keyboard, media playback and visual acceptance remain unverified. No actual approvals, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 22 tests independently rerun.
+
+Next area: task activity filtering and disclosure retention.

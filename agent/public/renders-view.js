@@ -137,8 +137,10 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
 
  // ----- tabs and grid -----
  function patchTabs(){
+  const focused=tabsEl.contains(doc.activeElement)?doc.activeElement.closest('[data-tab]')?.dataset.tab:null;
   const counts=tabCounts(S.tiles);
   tabsEl.innerHTML=TABS.map(([k,l,i])=>`<button type="button" role="tab" data-a="tab" data-tab="${k}" aria-selected="${k===memo.tab}" class="${k===memo.tab?'on':''}">${ic(i)}${l}${counts[k]?` <span class="n">${counts[k]}</span>`:''}</button>`).join('');
+  if(focused)[...tabsEl.querySelectorAll('[data-tab]')].find(button=>button.dataset.tab===focused)?.focus({preventScroll:true});
   root.querySelector('.rv-paused').hidden=!S.paused;root.querySelector('.rv-offline').hidden=!S.offline;
  }
  function patchGrid(){
