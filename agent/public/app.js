@@ -744,7 +744,9 @@ const skipWhy=l=>l.status==='skipped'&&l.contact_email?(l.risks[0]||'Not a fit f
 async function loadDraftMaps({isCurrent=()=>true}={}){
  if(!isCurrent())return [];
  const request=++draftMapsRequest;
- const r=await tryGet('/api/drafts'),list=(r?.drafts||[]).filter(d=>d.status!=='withdrawn');
+ const r=await tryGet('/api/drafts');
+ if(!r)return [...state.dr.values()];
+ const list=(r.drafts||[]).filter(d=>d.status!=='withdrawn');
  if(request!==draftMapsRequest||!isCurrent())return list;
  state.gmail.clear();state.dm.clear();state.dr.clear();
  for(const d of list){

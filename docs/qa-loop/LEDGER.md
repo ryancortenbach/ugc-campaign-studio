@@ -561,3 +561,17 @@ Verification: 27 design-draft, storyboard-selection, form-validation, navigation
 Independent final review: scoped PASS, with all 27 tests independently rerun, including the cross-action regression.
 
 Next area: Client brief refresh and missing research states.
+
+## 2026-10-29: failed draft reloads retain last-known drafts and links
+
+Expected: a temporary draft-list loading failure preserves known Drafts filter rows, counts and Gmail or Instagram links. A successful empty list still removes drafts that no longer exist.
+
+Reproduced: loadDraftMaps treated a failed read as an empty list and cleared all draft maps. Known brands vanished from the Drafts filter, Gmail links disappeared and DM readiness was lost. Three focused regressions failed before the fix.
+
+Changed: return cached primary drafts on a failed read without changing the draft maps. Successful responses retain existing replacement, withdrawal filtering and stale-response guards. Current copy and styling are unchanged.
+
+Verification: 25 draft-failure, lead-refresh, drawer-refresh, badge, sort-menu and neighboring Tasks/Leads DOM tests passed. Coverage includes successful empty responses, explicit retry replacement, initial failure with no cache, withdrawn draft exclusion and both stale success/failure orderings. Root/module/test syntax and diff checks passed. API requests were mocked or used temporary local fixtures. This retains last-known data and does not establish freshness. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 25 tests independently rerun.
+
+Next area: Reference selector keyboard focus and dismissal.
