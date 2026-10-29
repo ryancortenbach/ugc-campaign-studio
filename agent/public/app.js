@@ -908,6 +908,9 @@ async function leads(arg,{isCurrent=()=>true,filter:requestedFilter,sort:request
  const counts=Object.fromEntries(Object.entries(match).map(([k,f])=>[k,all.filter(f).length]));
  const cmp={newest:(a,b)=>b.id-a.id,name:(a,b)=>String(a.company||a.domain).localeCompare(String(b.company||b.domain)),status:(a,b)=>statusRank.indexOf(a.status)-statusRank.indexOf(b.status)||b.id-a.id};
  const rows=()=>all.filter(match[filter]).sort((a,b)=>Number(b.simulatedJourney)-Number(a.simulatedJourney)||(a.status==='rejected')-(b.status==='rejected')||cmp[sort](a,b));
+ const focused=$('#view .ct-leads-toolbar')?.contains(document.activeElement)?document.activeElement:null;
+ const focusedFilter=focused?.closest('[data-lf]')?.dataset.lf;
+ const focusedSort=focused?.id==='sortbtn'||Boolean(focused?.closest('[data-ls]'));
  $('#view').innerHTML=`<div class="ct-leads-toolbar"><div class="fchips" role="group" aria-label="Filter brands">${leadFilters.map(([k,l])=>`<button type="button" class="fchip${k===filter?' on':''}" data-lf="${k}" aria-pressed="${k===filter}">${l}<span class="n">${counts[k]}</span></button>`).join('')}</div>
   <div class="lbar">
    <div class="cwrap sortwrap"><button type="button" class="ctl" id="sortbtn" aria-expanded="false" aria-haspopup="true">${ic('arrow-up-down')}<span>${leadSorts.find(s=>s[0]===sort)[1]}</span></button><div class="cmenu right" id="sortmenu" hidden>${leadSorts.map(([k,l])=>`<button type="button" data-ls="${k}" class="${k===sort?'on':''}"><span><b>${l}</b></span>${k===sort?ic('check'):''}</button>`).join('')}</div></div>
@@ -924,6 +927,8 @@ async function leads(arg,{isCurrent=()=>true,filter:requestedFilter,sort:request
  sb.onclick=e=>{e.stopPropagation();const open=sm.hidden;closeMenus();sm.hidden=!open;sb.setAttribute('aria-expanded',String(open));};
  sm.querySelectorAll('[data-ls]').forEach(b=>b.onclick=()=>refresh({sort:b.dataset.ls}));
  $('#requalify').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.lastChild.textContent='Checking brands';try{const r=await api('/api/leads/requalify',{});toast(`Checked ${r.checked} brands`,'ok',`${r.rejected.length} not a fit${r.withdrawnDrafts?.length?`. ${r.withdrawnDrafts.length} Gmail draft${r.withdrawnDrafts.length===1?'':'s'} to delete yourself`:''}`);await refresh({});}catch(err){toast(err.message,'bad');}finally{if(b.isConnected){b.disabled=false;b.lastChild.textContent='Re-check brands';}}};
+ if(focusedFilter)[...$('#view').querySelectorAll('[data-lf]')].find(button=>button.dataset.lf===focusedFilter)?.focus({preventScroll:true});
+ else if(focusedSort)sb.focus({preventScroll:true});
 }
 let leadsRequest=0;
 // Drafts live inside Leads now. The old route and any old link land on the Drafts filter.

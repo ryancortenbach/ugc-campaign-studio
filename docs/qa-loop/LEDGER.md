@@ -1023,3 +1023,17 @@ Verification: 23 session-control, task-list-model, session-refresh-race and side
 Independent final review: scoped PASS with all 23 tests independently rerun and actual store/runner producers inspected.
 
 Next area: Settings connection refresh retry and navigation ownership.
+
+## 2026-10-29: Lead filters and sorting retain keyboard focus after refresh
+
+Expected: replacing the lead list retains focus on its current filter or sort trigger. Choosing a sort option returns focus to the closed trigger. Moving elsewhere while a request is pending must retain that newer focus.
+
+Reproduced: four of seven new permanent regressions failed. Successful list refreshes removed the focused filter, sort option or trigger, leaving focus on the document body. They also lost a different toolbar filter focused while the read was pending.
+
+Changed: capture the currently focused filter/sort control immediately before a successful repaint and restore its equivalent filter or the sort trigger after binding the new controls. Existing selection, preference, menu and request ownership rules remain unchanged. No copy or styling changes.
+
+Verification: 35 lead focus, filter-failure, sort-menu, refresh-race and draft-map tests passed. Seven new checks cover empty filtered results, sort option/trigger focus, outside movement, latest toolbar focus, failed reads and departure. Root/app/test syntax and diff checks passed. Tests extract actual lead handlers with mocked reads and stubbed row/draft-map helpers in JSDOM. Native keyboard/menu focus, layout and full async router behavior remain unverified. No requalification, provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 35 tests independently rerun.
+
+Next area: Analytics chart keyboard inspection after refreshed datasets.
