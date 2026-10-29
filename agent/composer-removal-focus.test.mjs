@@ -11,7 +11,7 @@ function fixture(t,{files=2,links=['https://fixture.example'],readFail=false,upl
  const {document}=dom.window,comp={files:Array.from({length:files},(_,i)=>({key:'key'+i,name:'ref'+i+'.png',id:'id'+i})),links:[...links]},notices=[],calls=[];
  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let failRead=readFail,failUpload=uploadFail;
- const context=vm.createContext({document,comp,$:s=>document.querySelector(s),esc,ic:()=>'',URL:{createObjectURL:f=>'blob:'+f.name},
+ const context=vm.createContext({document,comp,$:s=>document.querySelector(s),esc,ic:()=>'',URL:{createObjectURL:f=>'blob:'+f.name,revokeObjectURL:()=>{}},
   FileReader:class{readAsDataURL(){if(failRead){failRead=false;this.onerror();}else{this.result='data:image/png;base64,fixture';this.onload();}}},
   api:async(path,body)=>{assert.equal(path,'/api/uploads');calls.push(body);if(failUpload){failUpload=false;throw Error('Fixture upload failed');}return {upload:{id:'new'+calls.length}};},toast:(...args)=>notices.push(args)});
  vm.runInContext(attachmentSource+uploadSource+'\ndocument.querySelector("#cfiles").innerHTML=attachHTML();bindAttach();',context);

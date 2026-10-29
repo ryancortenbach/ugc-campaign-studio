@@ -13,7 +13,7 @@ function fixture(t,{failFirst=false}={}){
  const {document}=dom.window,comp={files:[],links:[]},calls=[],notices=[];
  let release,enter;const entered=new Promise(resolve=>enter=resolve),gate=new Promise(resolve=>release=resolve);
  const context=vm.createContext({document,comp,$:selector=>document.querySelector(selector),esc:String,ic:()=>'',
-  URL:{createObjectURL:input=>`blob:${input.name}`},
+  URL:{createObjectURL:input=>`blob:${input.name}`,revokeObjectURL:()=>{}},
   FileReader:class{readAsDataURL(input){this.result='data:image/png;base64,fixture';this.onload();}},
   api:async(path,body)=>{assert.equal(path,'/api/uploads');calls.push(body);const id=calls.length;if(id===1){enter();await gate;if(failFirst)throw Error('Upload failed');}return {upload:{id:`upload-${id}`}};},
   toast:(...args)=>notices.push(args)});

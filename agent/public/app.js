@@ -609,7 +609,7 @@ function bindAttach(){
   update();$('#cfiles').innerHTML=attachHTML();bindAttach();
   if(focused){const buttons=$('#cfiles').querySelectorAll('button');(buttons[Math.min(index,buttons.length-1)]||$('#composer textarea'))?.focus({preventScroll:true});}
  };
- document.querySelectorAll('[data-unfile]').forEach(b=>b.onclick=()=>remove(b,()=>{comp.files=comp.files.filter(x=>x.key!==b.dataset.unfile);}));
+ document.querySelectorAll('[data-unfile]').forEach(b=>b.onclick=()=>remove(b,()=>{comp.files=comp.files.filter(x=>{if(x.key!==b.dataset.unfile)return true;if(x.preview){URL.revokeObjectURL(x.preview);x.preview=null;}return false;});}));
  document.querySelectorAll('[data-unlink]').forEach(b=>b.onclick=()=>remove(b,()=>{comp.links.splice(Number(b.dataset.unlink),1);}));
 }
 async function addFiles(list){
@@ -621,7 +621,7 @@ async function addFiles(list){
   try{
    const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=()=>rej(Error(`Could not read ${file.name}`));r.readAsDataURL(file);});
    const {upload}=await api('/api/uploads',{name:file.name,type:file.type,data});item.id=upload.id;item.uploading=false;
-  }catch(err){comp.files=comp.files.filter(x=>x!==item);toast(err.message,'bad');}
+  }catch(err){if(item.preview){URL.revokeObjectURL(item.preview);item.preview=null;}comp.files=comp.files.filter(x=>x!==item);toast(err.message,'bad');}
   if($('#cfiles')){$('#cfiles').innerHTML=attachHTML();bindAttach();}
  }
 }
@@ -633,7 +633,7 @@ async function sendComposer(){
  if(comp.links.length)text+=`\n\nReference links: ${comp.links.join(' ')}`;
  const model=currentModel(),attachments=comp.files.map(x=>x.id),spoken=comp.spoken,tool=comp.tool;comp.spoken=false;
  comp.busy=true;syncComposer();
- const done=()=>{comp.files=[];comp.links=[];f.message.value='';};
+ const done=()=>{for(const item of comp.files)if(item.preview){URL.revokeObjectURL(item.preview);item.preview=null;}comp.files=[];comp.links=[];f.message.value='';};
  try{
   if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');location.hash='#/storyboards';}
   else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});done();toast('Shot added','ok','Run checks on it in Renders.');location.hash='#/renders';}

@@ -757,3 +757,17 @@ Verification: 27 sorting, refresh-race, drawer, lead-badge and draft-availabilit
 Independent final review: scoped PASS against the runner workflow, with all 27 tests independently rerun. Unknown future statuses are outside this fix.
 
 Next area: Render form validation and retained values after failure.
+
+## 2026-10-29: Composer releases discarded image preview URLs
+
+Expected: image preview object URLs remain available for retained drafts and release when an attachment is removed, rejected by file reading/upload, or cleared after a successful submission.
+
+Reproduced: none of those discard paths revoked its object URL. Seven of eight permanent lifecycle regressions failed before the fix. Twelve add/remove cycles left twelve URLs in the instrumented allocation set.
+
+Changed: revoke discarded previews on the existing remove, failure and successful-clear paths. Clear the preview property after release so a late upload failure cannot release an already removed item twice. Existing clearing behavior, copy and styling remain intact. Two older browser API stubs now expose revokeObjectURL; the new lifecycle checks record actual calls.
+
+Verification: 40 lifecycle, upload, removal-focus, reply-draft, model-draft and link tests passed. Eight new permanent checks cover retained previews, read/upload failure, pending removal plus late failure, successful task clearing, failed task retry, redraw retention and repeated add/remove cycles. Root/module/test syntax and diff checks passed. Upload and task creation APIs were mocked. This establishes object-URL ownership calls, not measured native memory reclamation, image playback, keyboard or visual acceptance. No actual provider calls, uploads, tasks, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS for cleanup ownership, with all 40 tests independently rerun. Existing submission clearing semantics are unchanged.
+
+Next area: Home composer submission snapshot ownership during newer edits.
