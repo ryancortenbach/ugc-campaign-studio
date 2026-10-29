@@ -52,9 +52,12 @@ export async function taskStoryboardView({view,api,esc,toast,taskId,isCurrent=()
  paintProgress(context,workspace);
 }
 export async function clientProjectView({view,api,esc,toast,paymentId,taskId,isCurrent=()=>true}){
- const context={view,api,esc,taskId,isCurrent};active=context;
+ const previous=active,context={view,api,esc,taskId,isCurrent};active=context;
  context.apiPath=paymentId?`/api/whop/orders/${encodeURIComponent(paymentId)}/report`:`/api/tasks/${taskId}/client-report`;
- const {workspace}=await api(context.apiPath);if(active!==context||!isCurrent())return;
+ let workspace;
+ try{({workspace}=await api(context.apiPath));}
+ catch(error){if(active===context&&previous?.view===view&&isCurrent()&&previous.isCurrent()&&view.isConnected)active=previous;throw error;}
+ if(active!==context||!isCurrent())return;
  const id=workspace.order.payment_id,url=`/api/whop/orders/${encodeURIComponent(id)}/brief.pdf`;context.reportUrl=url;
  const brand=workspace.order.brand_domain||workspace.order.buyer_name||'Client project';
  view.innerHTML=`<div class="pagebar task-ideas-heading"><div><a class="faint" href="#/tasks">Tasks</a><h2>${esc(brand)}</h2><p class="faint">${esc(workspace.order.product||'Creative brief')}</p></div><span id="task-ideas-status"></span><a class="btn sm" href="${url}" target="_blank" rel="noopener">Open PDF</a></div>

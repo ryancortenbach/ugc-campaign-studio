@@ -323,3 +323,17 @@ Verification: 15 activity, log-rendering and neighboring Tasks/Leads DOM tests p
 Independent review: scoped PASS, with all 15 tests independently rerun.
 
 Next area: client brand context save failure and retry.
+
+## 2026-10-29: client brand save retries recover after report reload failure
+
+Expected: saving brand context remains retryable if the subsequent report reload fails. The visible form keeps its input and can refresh the report on retry without reclaiming a newer task view.
+
+Reproduced: a successful context POST followed by failed report GET replaced the active context before rendering. The old form re-enabled its button, but later retries skipped report reload because that form no longer owned the active context. The new recovery regression failed before the fix.
+
+Changed: retain the previous context during a client report load and restore it on read failure only when the failed mount still owns the same connected view and both route guards remain current. Propagate the original error so the existing form handler preserves input and enables retry. Copy and layout are unchanged.
+
+Verification: seven client-context and neighboring task-view/DOM tests passed. Coverage includes successful-save/failed-report retry, failed POST retry, a newer task taking ownership during failure, retained input and existing activity/disclosure behavior. Root/module syntax and diff checks passed. All client context POSTs were mocked and other app records were temporary local fixtures. Native visual acceptance remains unverified. No actual order changes, research starts, provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all seven tests independently rerun.
+
+Next area: Home composer draft state during delayed replies.
