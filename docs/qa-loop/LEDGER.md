@@ -435,3 +435,17 @@ Verification: 21 storyboard-selection, voice-form, navigation and mocked voice-s
 Independent final review: scoped PASS, with all 21 tests independently rerun.
 
 Next area: Task reference upload error recovery.
+
+## 2026-10-29: unreadable storyboard images show a useful error
+
+Expected: if the browser cannot read a selected still or reference image, the error is visible, accepted assets remain intact and the user can retry without an upload request being sent.
+
+Reproduced: FileReader rejected its raw ProgressEvent, which has no message. Both still import and reference upload displayed a blank error. Two focused regressions failed before the fix, including the case where the browser supplies no error object.
+
+Changed: reject the reader error when present, otherwise provide a short image-read error. Existing upload validation, asset selection, persistence, copy and styling are otherwise unchanged.
+
+Verification: 13 upload-race, storyboard-refresh, local-save, task-view and neighboring Tasks/Leads DOM tests passed. Coverage includes visible read errors, zero upload requests after read failure, successful mocked retry, retained references, released controls, current/stale upload failures and existing revision guards. Root/module syntax and diff checks passed. FileReader events and uploads were mocked; app records were temporary local fixtures. Actual disk faults, native file-picker behavior and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 13 tests independently rerun.
+
+Next area: Home link attachment validation and cancellation.

@@ -77,7 +77,7 @@ function showOutput(title,value,note){const panel=root.querySelector('[data-ap-o
 async function uploadFile(file){
  if(!['image/png','image/jpeg','image/webp'].includes(file.type))throw Error('Choose a PNG, JPG or WebP image.');
  if(file.size>5*1024*1024)throw Error('Each reference can be up to 5 MB.');
- const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=reject;reader.readAsDataURL(file);});
+ const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(reader.error||Error('Could not read this image.'));reader.readAsDataURL(file);});
  const r=await fetch('/api/uploads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:file.name,type:file.type,data})});const d=await r.json();if(!r.ok)throw Error(d.error||'Could not save this reference.');return {id:d.upload.id,name:d.upload.name,url:'/uploads/'+encodeURIComponent(d.upload.file),origin:'local_upload'};
 }
 function upload(file){const pending=uploadFile(file);pendingUploads.add(pending);pending.then(()=>pendingUploads.delete(pending),()=>pendingUploads.delete(pending));return pending;}

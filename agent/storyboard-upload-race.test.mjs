@@ -7,10 +7,10 @@ import {apparelView} from './public/apparel-storyboards.js';
 async function fixture(run){
  const dom=new JSDOM('<main></main>',{url:'http://mint.test'});
  const originals=Object.fromEntries(['window','document','localStorage','fetch','FileReader'].map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));
- const requests=[];
+ const requests=[];let readerFailure;
  try{
   globalThis.window=dom.window;globalThis.document=dom.window.document;globalThis.localStorage=dom.window.localStorage;
-  globalThis.FileReader=class{readAsDataURL(){this.result='data:image/png;base64,aW1hZ2U=';queueMicrotask(()=>this.onload());}};
+  globalThis.FileReader=class{readAsDataURL(){if(readerFailure!==undefined){this.error=readerFailure;readerFailure=undefined;queueMicrotask(()=>this.onerror(new dom.window.ProgressEvent('error')));return;}this.result='data:image/png;base64,aW1hZ2U=';queueMicrotask(()=>this.onload());}};
   globalThis.fetch=async(url,options)=>{
    if(url==='/apparel-storyboard-research-v1.json')return {ok:true,json:async()=>JSON.parse(readFileSync(new URL('./public/apparel-storyboard-research-v1.json',import.meta.url)))};
    assert.equal(url,'/api/uploads');assert.equal(options.method,'POST');
@@ -24,7 +24,7 @@ async function fixture(run){
   };
   const started=async count=>{for(let i=0;i<20&&requests.length<count;i++)await new Promise(resolve=>setImmediate(resolve));assert.equal(requests.length,count);};
   const lab=()=>JSON.parse(localStorage.getItem('mintlabs.apparel-storyboards.v1'));
-  await run({root,select,started,requests,lab});
+  await run({root,select,started,requests,lab,failRead:error=>readerFailure=error});
  }finally{dom.window.close();for(const [key,value] of Object.entries(originals))if(value)Object.defineProperty(globalThis,key,value);else delete globalThis[key];}
 }
 
@@ -68,4 +68,23 @@ test('a current upload failure preserves the accepted still and can be retried',
  const retry=select(0,'retried.png');await started(3);requests[2].resolve();await retry;
  plan=lab().plans[0];assert.equal(plan.stills[plan.shots[0].id].url,'/uploads/retried.png');
  assert.equal(root.querySelector('[data-ap-message]').classList.contains('ap-error'),false);
+}));
+
+test('a file read error is visible without an upload request and the still can be retried',async()=>fixture(async({root,select,started,requests,lab,failRead})=>{
+ failRead(new Error('The image could not be read from disk.'));await select(0,'unreadable.png');
+ assert.equal(requests.length,0);assert.equal(root.querySelector('[data-ap-message]').textContent,'The image could not be read from disk.');
+ assert.equal(root.querySelector('[data-ap-message]').classList.contains('ap-error'),true);
+ const retry=select(0,'readable.png');await started(1);requests[0].resolve();await retry;
+ const plan=lab().plans[0];assert.equal(plan.stills[plan.shots[0].id].url,'/uploads/readable.png');
+ assert.equal(root.querySelector('[data-ap-message]').classList.contains('ap-error'),false);
+}));
+
+test('a reference read error without a browser error object displays a fallback and releases upload controls',async()=>fixture(async({root,requests,lab,failRead})=>{
+ const before=lab().refs.length,input=root.querySelector('[data-ap-file="character"]');
+ Object.defineProperty(input,'files',{value:[{name:'unreadable.png',type:'image/png',size:20}],configurable:true});
+ failRead(null);await input.onchange();
+ assert.equal(requests.length,0);assert.equal(lab().refs.length,before);
+ assert.equal(root.querySelector('[data-ap-message]').textContent,'Could not read this image.');
+ assert.equal(root.querySelector('[data-ap-message]').classList.contains('ap-error'),true);
+ assert.equal(root.querySelector('[data-ap-upload]').disabled,false);
 }));
