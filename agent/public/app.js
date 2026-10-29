@@ -767,7 +767,8 @@ let draftMapsRequest=0;
 const lstat=([label,cls])=>`<span class="lstat ${cls}">${ic(statusIcon[cls]||'circle-alert')}<span>${esc(label)}</span></span>`;
 // One primary update: latest reached milestone, or the next required action.
 function leadStatusCell(l){
- const badge=primaryLeadStatus(l,{draft:state.dr.get(l.id),dmReady:state.dm.get(l.id)?.status==='dm_ready',fallback:ls(l.status)});
+ const draft=state.dr.get(l.id);
+ const badge=primaryLeadStatus(l,{draft,dmReady:draft?.channel==='instagram_dm'&&draft.status==='dm_ready',fallback:ls(l.status)});
  const mark=badge.provider?`<img src="${logoSrc(badge.provider)}" alt="${esc(socialNames[badge.provider]||providerName[badge.provider]||badge.provider)}">`:ic(badge.icon||statusIcon[badge.cls]||'circle-alert');
  return `<span class="schip ct-primary-status ${badge.cls}" data-primary-status>${mark}${esc(badge.label)}</span>`;
 }

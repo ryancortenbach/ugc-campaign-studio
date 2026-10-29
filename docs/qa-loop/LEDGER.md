@@ -687,3 +687,17 @@ Verification: 19 tooling, delivery-read, client-context-retry and task-activity 
 Independent final review: sent back the missing-tool state, then returned scoped PASS with all 19 tests independently rerun after the fix.
 
 Next area: Reference history restoration and staged request state.
+
+## 2026-10-29: Lead status follows the current primary draft
+
+Expected: a freshly opened DM-ready draft shows DM ready, even when the list cache previously saw a waiting draft. An older DM must not give a newer email draft the wrong milestone.
+
+Reproduced: the drawer updated the primary draft cache but the status helper read DM readiness from a separate older map. Fresh ready DMs showed Drafted after waiting or absent cached DM data, and an older ready DM mislabeled a newer primary email. Three focused regressions failed before the fix.
+
+Changed: derive the DM-ready milestone from the same primary draft used for blockers and other draft status. Existing copy, styling and action behavior remain intact.
+
+Verification: 27 draft-availability, drawer-refresh, draft-map-failure, lead-badge and neighboring Leads/Tasks tests passed. Coverage includes withdrawn email cleanup links, newer withdrawn rows, missing Instagram connection, rejected shared inboxes, fresh drawer reads and stale list caches. Root/module/test syntax and diff checks passed. Requests and readiness states were mocked; no send or requalification action was invoked. This does not reconcile all action-link caches or establish native keyboard, visual or real account readiness. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: sent back unrealistic readiness data in one fixture. Corrected fixtures derive readiness from required dependencies, reproduce the same three baseline failures and pass all 27 tests independently rerun by the reviewer. Scoped PASS.
+
+Next area: Home attachment removal and failed upload recovery.
