@@ -995,3 +995,17 @@ Verification: 32 composer route-draft, model-draft, reply-draft and Settings ref
 Independent final review: composer redraw send-back resolved, then scoped PASS with all 32 tests independently rerun.
 
 Next area: Render new-shot form recovery after failed list refreshes.
+
+## 2026-10-29: Confirmed new shots survive a failed gallery reload
+
+Expected: a new shot confirmed by the draft endpoint remains visible when its follow-up list read fails. Newer unsent form edits and newer streamed records retain ownership, while old polls cannot erase the confirmed draft.
+
+Reproduced: three initial permanent regressions failed. The new-shot handler ignored its confirmed render response, cleared unchanged input and relied on the list reload. When that reload failed, the gallery had no saved shot to inspect, including alongside a newer unsent form draft.
+
+Changed: apply a confirmed render response if its ID is not already present, invalidating older reads before updating the gallery. Reveal Needs you so the created draft is visible even from another tab. Keep newer streamed records and the existing unsent-form rules. Later successful list reads remain authoritative. Copy and styling remain unchanged.
+
+Verification: 24 creation-recovery, create-draft, refresh-race, cancellation-confirmation and tab-focus tests passed. Eight new checks cover failed reload visibility, newer edits, stale polls, streamed ownership, rejected creation, departure, empty Done-tab creation and later successful refresh without duplication. Root/module/test syntax and diff checks passed. Draft POSTs, GETs and timers were mocked, with polling callbacks invoked locally. Native media/layout, actual database persistence and provider operations remain unverified. No real draft creation, render approvals or panel launches, provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 24 tests independently rerun.
+
+Next area: Settings profile controls and retry state after interrupted navigation.

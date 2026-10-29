@@ -324,7 +324,14 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   if(e.target===form){
    if(creating)return;
    const f=form,payload=shotInput(),button=f.querySelector('button[type="submit"]');creating=true;button.disabled=true;
-   try{await api('/api/renders',payload);toast('Shot added','ok','Run checks on it next.');if(!alive())return;if(JSON.stringify(shotInput())===JSON.stringify(payload)){f.reset();f.hidden=true;S.ui.newOpen=false;}await refresh();if(!alive())return;memo.tab='you';patchTabs();patchGrid();}
+   try{
+    const out=await api('/api/renders',payload);toast('Shot added','ok','Run checks on it next.');if(!alive())return;
+    if(Number.isInteger(out?.render?.id)&&!S.byId.has(out.render.id)){
+     S.readVersion++;S.lastRaw='';memo.tab='you';apply([...S.list,out.render]);
+    }
+    if(JSON.stringify(shotInput())===JSON.stringify(payload)){f.reset();f.hidden=true;S.ui.newOpen=false;}
+    await refresh();if(!alive())return;memo.tab='you';patchTabs();patchGrid();
+   }
    catch(err){toast(err.message,'bad');}
    finally{creating=false;button.disabled=false;}
    return;
