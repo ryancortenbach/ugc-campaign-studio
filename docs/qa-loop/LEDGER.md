@@ -715,3 +715,17 @@ Verification: 32 removal-focus, upload, model-draft, link and reply-draft tests 
 Independent final review: scoped PASS, with all 32 tests independently rerun.
 
 Next area: Analytics tooltip and metric selection after range changes.
+
+## 2026-10-29: Voice save controls respect unavailable setup and previews
+
+Expected: saving a designed voice requires configured ElevenLabs access and a generated preview ID. A missing local sample alone must not block saving an otherwise valid remote preview.
+
+Reproduced: both passed-check Save and failed-check Save anyway stayed enabled without provider configuration. A passed-check record without a generated preview ID also offered Save although the server explicitly rejects it. Three focused regressions failed before the fix.
+
+Changed: apply the configured-provider and generated-preview condition to both save-button branches. Existing copy, styling, confirmation handlers, check controls and saved voice history remain intact.
+
+Verification: 27 availability, design-form, navigation, draft-retention and storyboard-selection tests passed. Eight new read-only DOM checks include configuration recovery, missing local audio, saved history, checks in progress and retaining valid Save anyway controls. Root/module/test syntax and diff checks passed. Read responses and neighboring provider actions were mocked. New availability checks invoke no action handlers. Real provider credentials, preview persistence, native audio, keyboard and visual behavior remain unverified. No actual provider calls, designs, checks, saves, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS against UI and local backend requirements, with all 27 tests independently rerun.
+
+Next area: Client task review notification state and dismissed media.

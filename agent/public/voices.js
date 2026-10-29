@@ -34,9 +34,10 @@ export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>tr
  const card=v=>{
   const st=status[v.status]||[v.status,'s-idle'];
   const canCheck=enabled&&v.sample_file&&v.status!=='checking';
+  const canSave=enabled&&Boolean(v.generated_voice_id);
   const save=v.status==='saved'?`<span class="mono faint" title="ElevenLabs voice id">${esc(v.voice_id)}</span>`
-   :v.status==='checks_passed'?`<button class="btn sm go" data-vsave="${v.id}">Save to my ElevenLabs voices</button>`
-   :v.status==='checks_failed'?`<button class="btn sm warn" data-vsave="${v.id}" data-force="1">Save anyway</button>`
+   :v.status==='checks_passed'?`<button class="btn sm go" data-vsave="${v.id}" ${canSave?'':'disabled'}>Save to my ElevenLabs voices</button>`
+   :v.status==='checks_failed'?`<button class="btn sm warn" data-vsave="${v.id}" data-force="1" ${canSave?'':'disabled'}>Save anyway</button>`
    :`<button class="btn sm" disabled title="Run the checks first">Save to my ElevenLabs voices</button>`;
   return `<div class="card vcard"><div class="head"><b>${esc(v.name)}</b><div class="right">${sbadge(st)}</div></div><div class="body">
    ${v.sample_file?`<audio controls preload="none" src="/voices/${encodeURIComponent(v.sample_file)}"></audio>`:'<div class="hint">No sample audio.</div>'}
