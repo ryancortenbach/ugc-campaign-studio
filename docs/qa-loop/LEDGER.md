@@ -645,3 +645,17 @@ Verification: 31 playback-refresh, preview-list, navigation, storyboard-selectio
 Independent final review: scoped PASS, with all 31 tests independently rerun.
 
 Next area: Lead website and social link routing.
+
+## 2026-10-29: Leads Instagram links follow the saved profile handle
+
+Expected: the Leads Instagram icon links to the same saved profile as the detail drawer, including brands with a saved handle but no separate social URL.
+
+Reproduced: socialLinks ignored instagram_handle, omitting known profiles or linking to a different older social URL while the drawer preferred the current handle. Compact and large link regressions produced three failures before the fix.
+
+Changed: use the existing instaUrl helper for Instagram within socialLinks. Other provider routing, order, wrappers, labels, copy and styling remain intact.
+
+Verification: 20 social-link, drawer-refresh, lead-badge, lead-refresh and neighboring Tasks/Leads DOM tests passed. Coverage includes handle-only records, handle preference matching the drawer, existing HTTPS fallback, compact and large links, external-link attributes and excluding unsupported social schemes. Root/module/test syntax and diff checks passed. Requests were mocked or used temporary local fixtures; no external navigation occurred. Generated-link assertions do not verify Instagram account validity or native icon alignment. Native keyboard and visual acceptance remain unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 20 tests independently rerun.
+
+Next area: Analytics displayed totals with missing provider values.
