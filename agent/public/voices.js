@@ -3,12 +3,18 @@
 const status={needs_checks:['Needs checks','s-wait'],checking:['Checking','s-run'],checks_failed:['Checks failed','s-bad'],checks_passed:['Passed','s-ok'],saved:['Saved','s-ok']};
 const when=iso=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 const num=n=>Number(n||0).toLocaleString('en-US');
+const mounts=new WeakMap();
 
-export async function voicesView({view,api,esc,toast,sbadge,svg}){
+export async function voicesView({view,api,esc,toast,sbadge,svg,isCurrent=()=>true}){
+ if(!isCurrent())return;
+ const mount={};mounts.set(view,mount);
+ const alive=()=>isCurrent()&&mounts.get(view)===mount;
  const data=await api('/api/voices');
+ if(!alive())return;
  const {voices,enabled,subscription:sub,error}=data;
  const boards=await api('/api/storyboards').then(r=>r.storyboards.filter(s=>s.plan?.voice)).catch(()=>[]);
- const again=()=>voicesView({view,api,esc,toast,sbadge,svg});
+ if(!alive())return;
+ const again=()=>{if(alive())return voicesView({view,api,esc,toast,sbadge,svg,isCurrent});};
 
  const plan=sub?`<div class="vplan"><b>${esc(String(sub.tier).replace(/^./,c=>c.toUpperCase()))} plan</b><span>${num(sub.left)} of ${num(sub.limit)} characters left${sub.resetAt?`, resets ${esc(new Date(sub.resetAt).toLocaleDateString('en-US',{month:'short',day:'numeric'}))}`:''}</span><span>${num(sub.voiceSlotsUsed)} of ${num(sub.voiceLimit)} voice slots used</span></div>`
   :`<div class="hint">${enabled?esc(error?`Could not reach ElevenLabs: ${error}`:'Plan details unavailable.'):'Add ELEVENLABS_API_KEY or put the key in ~/.elevenlabs/key to design voices.'}</div>`;

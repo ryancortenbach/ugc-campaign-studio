@@ -281,3 +281,17 @@ Verification: 10 lead-refresh, lead-badge and neighboring Tasks/Leads DOM tests 
 Independent final review: scoped PASS, with all 10 tests independently rerun after the Tasks callback correction.
 
 Next area: voice page navigation and load failures.
+
+## 2026-10-29: delayed Voices loads preserve current navigation
+
+Expected: leaving Voices during its initial or storyboard read preserves the new route. Older mounts and completed voice actions must not reopen an obsolete view.
+
+Reproduced: five navigation regressions failed in the interrupted October 27 pass. The page painted after either delayed read, older same-view mounts replaced newer ones, a completed check reopened Voices after leaving, and the app wrapper omitted its route guard. This pass resumed that saved reproduction before starting another area.
+
+Changed: pass the route guard through the app wrapper and Voices reload callbacks. Track ownership per view and check it after both initial reads. Action completion reloads only the still-current mount. Existing copy, layout, validation and credit confirmations are unchanged.
+
+Verification: 18 navigation, voice-form, mocked voice-backend and neighboring Tasks/Leads DOM tests passed. Coverage includes both pending reads, overlapping mounts, late check completion, route guard forwarding, initial load failure propagation, input validation, cancellation and failed-request retry. Root/module syntax and diff checks passed. All provider responses were mocked and app records were temporary local fixtures. Native navigation, audio playback and visual acceptance remain unverified. No provider calls, credits spent, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent review: scoped PASS, with all 18 tests independently rerun.
+
+Next area: render gallery keyboard controls and empty selections.

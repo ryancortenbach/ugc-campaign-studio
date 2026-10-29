@@ -961,7 +961,7 @@ async function settings(arg,{isCurrent=()=>true}={}){
  f.onsubmit=async e=>{e.preventDefault();if(saving)return;const payload=values();if(JSON.stringify(payload)===saved)return;saving=true;mark();try{await api('/api/profile',payload);saved=JSON.stringify(payload);toast('Profile saved','ok');}catch(err){toast(err.message,'bad');}finally{saving=false;mark();}};
 }
 
-async function voices(){await voicesView({view:$('#view'),api,esc,toast,sbadge,svg});}
+async function voices(arg,{isCurrent=()=>true}={}){await voicesView({view:$('#view'),api,esc,toast,sbadge,svg,isCurrent});}
 async function production(){const {productionView}=await import('./production-research.js');await productionView({view:$('#view'),api,esc,toast});}
 async function analytics(){
  // Codex owns analytics.js. Without it (or without analyticsView), show the Activity chart: counts only.
