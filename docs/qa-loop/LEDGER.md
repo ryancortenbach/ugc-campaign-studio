@@ -911,3 +911,17 @@ Verification: 33 session-refresh, steering-draft, draft-map-failure and lead-ref
 Independent final review: live-update send-back resolved, then scoped PASS with all 33 tests independently rerun.
 
 Next area: Connection status menus and keyboard dismissal after failed refreshes.
+
+## 2026-10-29: Connection refreshes preserve their existing check control
+
+Expected: background connection refreshes and unrelated shell repaints preserve keyboard focus on Check again. A pending manual check retains its control and cannot be submitted twice; failure leaves an explicit retry.
+
+Reproduced: three of five new permanent regressions failed. Every connection repaint replaced the entire panel contents, removing the focused button during background updates and replacing the pending manual control during shell updates.
+
+Changed: initialize the connection header and list once, then patch their summary and status rows. Retain the existing refresh button while API availability is unchanged, updating its pending state and handler in place. Preserve the existing unchecked fallback, copy and styling.
+
+Verification: 23 connection-control, connection-refresh, malformed-row and rail-tab tests passed. Five new checks cover background focus, repeated shell repaints, pending failure/retry, outside focus and fallback/API control transitions. Root/module/test syntax and diff checks passed. Tests use actual extracted connection helpers with mocked fetches and focused JSDOM controls. Native keyboard behavior when a button becomes disabled, rail layout and actual provider health remain unverified. No real network checks, provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 23 tests independently rerun.
+
+Next area: Client brief image review and disclosure state during refresh failures.
