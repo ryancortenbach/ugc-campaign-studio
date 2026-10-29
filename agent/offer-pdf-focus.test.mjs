@@ -54,3 +54,14 @@ test('closing does not refocus removed or hidden drawer controls',t=>{
  f.document.querySelector('#drawer').hidden=true;other.focus();f.hide();
  assert.equal(f.document.activeElement,other);
 });
+
+test('closing after focus moves outside the PDF preserves the newer focus',t=>{
+ const f=fixture(t),other=f.document.querySelector('#other');f.trigger.focus();f.show(7);other.focus();f.hide();
+ assert.equal(f.document.querySelector('#pdfview'),null);assert.equal(f.document.activeElement,other);
+});
+
+test('Escape from an outside control closes the PDF without taking focus back',t=>{
+ const f=fixture(t),other=f.document.querySelector('#other');f.trigger.focus();f.show(7);other.focus();
+ other.dispatchEvent(new f.dom.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+ assert.equal(f.document.querySelector('#pdfview'),null);assert.equal(f.document.activeElement,other);assert.equal(f.document.querySelector('#drawer').hidden,false);
+});

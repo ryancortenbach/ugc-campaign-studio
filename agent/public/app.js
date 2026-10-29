@@ -834,7 +834,7 @@ function openPdf(id){
  document.querySelector('.center').append(el);$('#pdfclose').onclick=closePdf;$('#pdfclose').focus();
 }
 let pdfReturnFocus;
-const closePdf=()=>{const el=$('#pdfview');if(!el)return;el.remove();const trigger=pdfReturnFocus;pdfReturnFocus=null;if(trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});};
+const closePdf=()=>{const el=$('#pdfview');if(!el)return;const owned=el.contains(document.activeElement);el.remove();const trigger=pdfReturnFocus;pdfReturnFocus=null;if(owned&&trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#pdfview')){closePdf();e.stopPropagation();}},true);
 let leadDrawerRequest=0;
 let leadDrawerReturnFocus;

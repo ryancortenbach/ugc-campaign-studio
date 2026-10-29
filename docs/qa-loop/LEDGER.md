@@ -1065,3 +1065,17 @@ Verification: 33 menu-Escape, composer model/link, sort-menu and composer route-
 Independent final review: scoped PASS with all 33 tests independently rerun.
 
 Next area: Offer PDF preview close and return focus.
+
+## 2026-10-29: Closing an offer PDF preserves newer outside focus
+
+Expected: closing a PDF returns focus to its originating thumbnail when focus remains inside the viewer. If the user has moved to another control, closing retains that newer focus.
+
+Reproduced: both new permanent regressions failed. Direct close and Escape from an outside control always refocused the old thumbnail, even though the viewer no longer owned focus.
+
+Changed: capture whether the viewer contains the active element before removing it. Restore the captured thumbnail only when the viewer owned focus. Existing PDF opening, replacement, Escape isolation and hidden/removed-target handling remain unchanged. No copy or styling changes.
+
+Verification: 26 offer-PDF focus, drawer focus/refresh and composer-menu Escape tests passed. Two new checks cover direct close and Escape after moving outside the viewer. Root/app/test syntax and diff checks passed. Tests extract actual PDF handlers in JSDOM without loading PDFs or making server/provider calls. Native PDF iframe keyboard propagation, layout and focus remain unverified. No paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 26 tests independently rerun.
+
+Next area: Client delivery copy controls when clipboard permission fails.
