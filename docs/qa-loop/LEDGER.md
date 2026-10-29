@@ -463,3 +463,17 @@ Verification: 19 link, upload, reply-draft and neighboring Tasks/Leads DOM tests
 Independent final review: scoped PASS, with all 19 tests independently rerun.
 
 Next area: Connections partial status and retry controls.
+
+## 2026-10-29: connection checks retain pending state through shell updates
+
+Expected: Check again remains disabled and shows its loading indicator while its connection check is pending, including after unrelated shell updates. An older completion cannot clear a newer check's pending state.
+
+Reproduced: a manual check disabled only its existing button. Repainting the shell created a fresh enabled button without the loading indicator while the same request remained pending. The focused regression failed before the fix.
+
+Changed: store pending connection-check state outside the button and render that state on each repaint. Clear it only after the current response passes the existing request-order guard. Ignore manual check activation while a request is pending. Existing checked results, failure messages, copy and styling are unchanged.
+
+Verification: 24 connection-refresh, sidebar, mocked cost/provider and neighboring Tasks/Leads DOM tests passed. Coverage includes repaint during a check, disabled duplicate activation, an older response during a newer check, successful completion, failure retention/retry and legacy fallback. Root/module syntax and diff checks passed. All requests were mocked or used temporary local fixtures. Native loading animation and visual acceptance remain unverified. No actual provider checks, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 24 tests independently rerun.
+
+Next area: Task activity disclosure state after empty or failed updates.

@@ -16,8 +16,29 @@ function fixture(t,{fetch,initial=[row('2026-10-27T12:00:00Z')]}={}){
  let context;context=vm.createContext({document,state,fetch,connectionStatus,$:selector=>document.querySelector(selector),esc:String,ic:()=>'',logoImg:()=>'',ago:String,
   toast:(...args)=>notices.push(args),renderShell:()=>context.paintConns()});
  vm.runInContext(getSource+rowsSource+refreshSource,context);context.paintConns();
- return {document,state,notices,load:context.loadConns};
+ return {document,state,notices,load:context.loadConns,repaint:context.paintConns};
 }
+
+test('shell updates cannot re-enable Check again during its pending request',async t=>{
+ let release,calls=0;const f=fixture(t,{fetch:()=>{calls++;return new Promise(resolve=>release=resolve);}});
+ const pending=f.document.querySelector('#connrefresh').onclick();
+ try{
+  f.repaint();const button=f.document.querySelector('#connrefresh');
+  assert.equal(button.disabled,true,'An unrelated shell repaint must retain the pending check state');
+  assert.equal(button.classList.contains('spin'),true);button.click();assert.equal(calls,1);
+ }finally{release(Response.json([row('2026-10-29T06:00:00Z')]));await pending;}
+ assert.equal(f.document.querySelector('#connrefresh').disabled,false);assert.equal(f.document.querySelector('#connrefresh').classList.contains('spin'),false);
+});
+
+test('an older completion cannot end the pending state of a newer connection check',async t=>{
+ const requests=[],f=fixture(t,{fetch:()=>new Promise(resolve=>requests.push(resolve))});
+ const old=f.load(),current=f.load(true);f.repaint();
+ try{
+  requests[0](Response.json([row('2026-10-29T05:00:00Z')]));await old;f.repaint();
+  assert.equal(f.document.querySelector('#connrefresh').disabled,true);assert.equal(f.document.querySelector('#connrefresh').classList.contains('spin'),true);
+ }finally{requests[1](Response.json([row('2026-10-29T06:00:00Z')]));await current;}
+ assert.equal(f.document.querySelector('#connrefresh').disabled,false);assert.equal(f.state.conns[0].checkedAt,'2026-10-29T06:00:00Z');
+});
 
 test('failed manual refresh retains checked results and an enabled retry control',async t=>{
  const f=fixture(t,{fetch:async()=>new Response('',{status:503})});

@@ -122,19 +122,20 @@ function paintSpend(){
 }
 // Connections tab: logo, name, one status word, and when it was last checked.
 async function loadConns(refresh){
- const request=++connsRequest;
+ const request=++connsRequest;connsLoading=true;
  const r=await tryGet('/api/connections'+(refresh?'?refresh=1':''));
  if(request!==connsRequest)return;
+ connsLoading=false;
  const list=Array.isArray(r)?r:Array.isArray(r?.connections)?r.connections:null;
  if(!list){if(refresh)toast('Could not check connections','bad');if(state.connsApi){renderShell();return;}}
  state.conns=list;state.connsApi=Boolean(list);renderShell();
 }
-let connsRequest=0;
+let connsRequest=0,connsLoading=false;
 function paintConns(){
  const rows=connRows();
- $('#connbody').innerHTML=`<div class="conn-head"><span class="faint">${rows.filter(r=>r.verification==='verified').length} verified · ${rows.filter(r=>['configured','reachable'].includes(r.verification)).length} ready</span>${state.connsApi?`<button type="button" class="iconbtn" id="connrefresh" data-tip="Check again" aria-label="Check again">${ic('refresh-cw')}</button>`:''}</div>
+ $('#connbody').innerHTML=`<div class="conn-head"><span class="faint">${rows.filter(r=>r.verification==='verified').length} verified · ${rows.filter(r=>['configured','reachable'].includes(r.verification)).length} ready</span>${state.connsApi?`<button type="button" class="iconbtn${connsLoading?' spin':''}" id="connrefresh" data-tip="Check again" aria-label="Check again" ${connsLoading?'disabled':''}>${ic('refresh-cw')}</button>`:''}</div>
  <div class="conn-list">${rows.map(r=>`<div class="conn-row">${logoImg(r.id,r.name)}<div class="conn-name" title="${esc(r.detail||'')}"><b>${esc(r.name)}</b><span><small>${r.checkedAt?`Checked ${esc(ago(r.checkedAt))}${r.latencyMs!=null&&r.on?` · ${Math.round(r.latencyMs)} ms`:''}`:''}</small></span></div><span class="schip ${r.st[1]}">${ic(r.st[2])}${r.st[0]}</span></div>`).join('')}</div>`;
- const b=$('#connrefresh');if(b)b.onclick=async()=>{b.disabled=true;b.classList.add('spin');await loadConns(true);};
+ const b=$('#connrefresh');if(b)b.onclick=async()=>{if(connsLoading)return;b.disabled=true;b.classList.add('spin');await loadConns(true);};
 }
 // The right rail has three tabs. Live is the agent's activity, Spend and Connections replace the old top bar dropdowns.
 const railTabs=[['live','Live','activity'],['spend','Spend','wallet'],['conn','Connections','plug'],['browser','Browser','globe']];
