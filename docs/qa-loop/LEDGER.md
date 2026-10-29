@@ -393,3 +393,17 @@ Verification: 23 Settings, composer upload/reply and neighboring Tasks/Leads DOM
 Independent final review: scoped PASS, with all 23 tests independently rerun.
 
 Next area: Leads filtering and selected-row recovery after refresh.
+
+## 2026-10-29: newer lead drawer details survive overlapping reads
+
+Expected: reopening a brand uses its newest requested details and draft link. An older response cannot replace those details, including after selecting another brand and returning.
+
+Reproduced: openLead guarded only the selected id. Two overlapping reads for the same id, or an A to B to A selection sequence, allowed the older A response to replace the newer drawer content and draft-map entry. Both focused regressions failed before the fix.
+
+Changed: sequence drawer reads and require both the current request and selected id before rendering or changing the draft map. Existing closed-drawer checks, actions, copy and layout are unchanged.
+
+Verification: 20 lead drawer, list-refresh, badge, PDF-focus and neighboring Tasks/Leads DOM tests passed. Coverage includes same-id response ordering, returning to a brand, switching brands, closing during a refresh, list/filter ordering, withdrawn drafts and existing report interactions. Root/module syntax and diff checks passed. All lead reads were mocked; neighboring app records were temporary local fixtures. No send or approval handlers were invoked. Native visual acceptance remains unverified. No provider calls, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS, with all 20 tests independently rerun.
+
+Next area: Renders media fallback and missing thumbnail metadata.

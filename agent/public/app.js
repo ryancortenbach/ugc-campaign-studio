@@ -771,10 +771,12 @@ function openPdf(id){
 let pdfReturnFocus;
 const closePdf=()=>{const el=$('#pdfview');if(!el)return;el.remove();const trigger=pdfReturnFocus;pdfReturnFocus=null;if(trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#pdfview')){closePdf();e.stopPropagation();}},true);
+let leadDrawerRequest=0;
 async function openLead(id){
+ const request=++leadDrawerRequest;
  state.selectedLead=id;
  const {lead:l,drafts:all=[],renders=[],events=[],ideation}=await api(`/api/leads/${id}`);
- if(state.selectedLead!==id)return;
+ if(request!==leadDrawerRequest||state.selectedLead!==id)return;
  const d=$('#drawer');d.hidden=false;
  const drafts=all.filter(x=>x.status!=='withdrawn'),old=all.find(x=>x.status==='withdrawn'&&x.gmail_url);
  const mail=drafts[0],isDm=mail?.channel==='instagram_dm',gmail=isDm?'':drafts.find(x=>x.gmail_url&&x.channel!=='instagram_dm')?.gmail_url;
