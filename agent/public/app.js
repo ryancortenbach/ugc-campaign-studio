@@ -316,8 +316,22 @@ function sessionCard(g,{nav=['brand_storyboard','client_demo','client_project'].
 }
 const sdOf=g=>g.runs.map(r=>state.sdata.get(r.id)).filter(Boolean);
 function syncMission(){state.mission={events:[...state.sdata.values()].flatMap(d=>d.events).sort((a,b)=>a.id-b.id)};}
+const sessionReads=new Map();
+const sessionUpdates=new Map();
+const invalidateSession=id=>{if(sessionReads.has(id))sessionUpdates.set(id,(sessionUpdates.get(id)||0)+1);};
 async function loadSession(g){
- await Promise.all(g.runs.map(async r=>{try{const d=await api(`/api/tasks/${r.id}`);d.events.forEach(noteDraft);state.sdata.set(r.id,d);}catch{}}));
+ await Promise.all(g.runs.map(async r=>{
+  const request=(sessionReads.get(r.id)||0)+1;sessionReads.set(r.id,request);
+  for(;;){
+   const updates=sessionUpdates.get(r.id)||0;
+   try{
+    const d=await api(`/api/tasks/${r.id}`);if(sessionReads.get(r.id)!==request)return;
+    if((sessionUpdates.get(r.id)||0)!==updates)continue;
+    d.events.forEach(noteDraft);state.sdata.set(r.id,d);
+   }catch{}
+   return;
+  }
+ }));
  syncMission();
 }
 function leadsHTML(g){
@@ -1066,6 +1080,7 @@ stream.onmessage=msg=>{
  if(change.kind==='event'){
   const e=change.event;
   if(e.id!=null&&state.live.some(event=>event.id===e.id))return;
+  if(e.task_id)invalidateSession(e.task_id);
   if(tab()==='home'&&thread.thinking&&String(e.tool).startsWith('assistant.'))setTimeout(paintChatActivity,0);
   if(tab()==='tasks'&&document.querySelector('#task-ideas-report'))import('./task-storyboards.js').then(m=>m.refreshTaskStoryboardActivity()).catch(()=>{});state.live.unshift(e);state.live.length=Math.min(state.live.length,300);noteDraft(e);
   noteLead(e);if(e.task_id)state.lastStep.set(e.task_id,e);
@@ -1087,6 +1102,7 @@ stream.onmessage=msg=>{
  }
  if(change.kind==='lead'){
   const l=change.lead;
+  invalidateSession(l.task_id);
   if(tab()==='tasks'&&state.sdata.has(l.task_id)){
    const d=state.sdata.get(l.task_id),i=d.leads.findIndex(x=>x.id===l.id);if(i<0)d.leads.unshift(l);else d.leads[i]=l;
    const g=sessionGroups().find(x=>x.runs.some(r=>r.id===l.task_id));

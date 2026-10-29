@@ -897,3 +897,17 @@ Verification: 23 panel-focus, tab-focus, media-refresh, refresh-race and cancell
 Independent final review: scoped PASS with all 23 tests independently rerun. Unrelated streamed panel removal remains outside this explicit-close and version-selection scope.
 
 Next area: Draft editor recovery after failed saves and stale refreshes.
+
+## 2026-10-29: Task history refreshes retain the newest per-task reply
+
+Expected: overlapping task history reads keep the newest response for each run, including its steering replies and Gmail draft links. A failed newest read retains last known data. Reads for other tasks remain independent.
+
+Reproduced: three initial regressions failed. Older successful reads replaced newer steering replies, mission events and Gmail links, including an older response arriving after a newer failed read. Overlapping session groups also let an older shared task overwrite its newer snapshot. Task history loads can overlap between opening a session, steering completion and live steering events. Independent review then found newer live events and lead updates could still be overwritten; three further regressions failed against the first fix.
+
+Changed: assign each task history read a monotonic per-task version and check it before updating draft links or saved session data. Accepted live events and lead updates advance a separate per-task update version. If a live update occurs during the owning read, reread before committing so initial mounts still receive a complete snapshot. Superseding reads end older retries. Preserve existing failed-read recovery, session repaint behavior, copy and styling.
+
+Verification: 33 session-refresh, steering-draft, draft-map-failure and lead-refresh tests passed. Twelve new checks cover response ordering, newer failures, overlapping groups, independent tasks, explicit retry, live-event and lead ordering, initial reads, duplicate events, failed rereads and superseding loads. Root/module/test syntax and diff checks passed. Tests use actual extracted history, thread and stream handlers with mocked task GETs and supplied events; neighboring steering writes are mocked. Native layout/input, real stream transport and provider persistence remain unverified. No provider calls, actual sends, paid work, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: live-update send-back resolved, then scoped PASS with all 33 tests independently rerun.
+
+Next area: Connection status menus and keyboard dismissal after failed refreshes.
