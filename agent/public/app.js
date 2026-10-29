@@ -628,23 +628,32 @@ async function addFiles(list){
 }
 async function sendComposer(){
  const f=$('#composer');if(!f||comp.busy)return;
- let text=f.message.value.trim();
+ const submittedText=f.message.value;
+ let text=submittedText.trim();
  if(text.length<3)return toast('Write a few words first','info');
  if(comp.files.some(x=>x.uploading))return toast('Files are still uploading','info');
  if(comp.links.length)text+=`\n\nReference links: ${comp.links.join(' ')}`;
  const model=currentModel(),attachments=comp.files.map(x=>x.id),spoken=comp.spoken,tool=comp.tool;comp.spoken=false;
+ const submittedFiles=[...comp.files],submittedLinks=JSON.stringify(comp.links),originHash=location.hash,linkWasOpen=$('#clink')?.hidden===false;
  comp.busy=true;syncComposer();
- const done=()=>{for(const item of comp.files)if(item.preview){URL.revokeObjectURL(item.preview);item.preview=null;}comp.files=[];comp.links=[];f.message.value='';};
+ const done=()=>{
+  const current=$('#composer');
+  if((current&&current!==f)||comp.tool!==tool||f.message.value!==submittedText||comp.files.length!==submittedFiles.length||comp.files.some((item,i)=>item!==submittedFiles[i])||JSON.stringify(comp.links)!==submittedLinks)return false;
+  if($('#clink input')?.value||($('#clink')?.hidden===false)!==linkWasOpen)return false;
+  for(const item of comp.files)if(item.preview){URL.revokeObjectURL(item.preview);item.preview=null;}
+  comp.files=[];comp.links=[];f.message.value='';
+  return f.isConnected&&location.hash===originHash;
+ };
  try{
-  if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');location.hash='#/storyboards';}
-  else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});done();toast('Shot added','ok','Run checks on it in Renders.');location.hash='#/renders';}
+  if(comp.tool==='storyboard'){toast('Drafting the storyboard','info','About 30 seconds.');await api('/api/storyboards',{product:text.slice(0,200),idea:text,model,attachments});const navigate=done();toast('Storyboard drafted','ok','Run the checkers next.');if(spoken)voice.speak('Storyboard drafted. Run the checkers next.');if(navigate)location.hash='#/storyboards';}
+  else if(comp.tool==='shot'){if(attachments.length)toast('Shots use the text only','info');await api('/api/renders',{title:text.split('\n')[0].slice(0,60),prompt:text});const navigate=done();toast('Shot added','ok','Run checks on it in Renders.');if(navigate)location.hash='#/renders';}
   else if(!attachments.length&&thread.ok&&tab()==='home'){
    thread.readVersion=(thread.readVersion||0)+1;thread.messages.push({role:'user',text});thread.thinking=true;thread.startedAt=Date.now();done();paintThread();
    try{const r=await api('/api/assistant',{message:text,model});thread.messages.push({role:'assistant',text:r.reply,actions:r.actions});if(r.mode==='rehearsal'&&r.url)location.hash=r.url;if(spoken)voice.speak(r.reply);}
    catch(err){thread.messages.pop();const input=$('#composer')?.message;if(input&&!input.value&&comp.tool===tool&&!comp.files.length&&!comp.links.length)input.value=text;toast(err.message,'bad');}
    finally{thread.thinking=false;paintThread();}
   }
-  else{const {task}=await api('/api/chat',{message:text,model,attachments});if(spoken)comp.speakTask=task.id;done();toast('Mission started','ok',`Task ${task.id} on ${modelInfo[model][0]}`);location.hash=`#/tasks/${task.id}`;}
+  else{const {task}=await api('/api/chat',{message:text,model,attachments});if(spoken)comp.speakTask=task.id;const navigate=done();toast('Mission started','ok',`Task ${task.id} on ${modelInfo[model][0]}`);if(navigate)location.hash=`#/tasks/${task.id}`;}
  }catch(err){toast(err.message,'bad');}
  finally{comp.busy=false;syncComposer();}
 }

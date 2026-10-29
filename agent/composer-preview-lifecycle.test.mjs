@@ -12,7 +12,7 @@ function fixture(t,{readFail=false,uploadFail=false,holdUpload=false}={}){
  const dom=new JSDOM('<main><div id="cfiles"></div><form id="composer"><textarea name="message"></textarea></form></main>',{url:'https://fixture.example/#/home'});t.after(()=>dom.window.close());const {document}=dom.window;
  Object.defineProperty(dom.window.HTMLFormElement.prototype,'message',{get(){return this.elements.namedItem('message');}});
  const active=new Set(),revoked=[],comp={tool:'mission',files:[],links:[],busy:false},requests=[],uploads=[],notices=[];let n=0;
- const context=vm.createContext({document,location:dom.window.location,comp,thread:{ok:true},$:s=>document.querySelector(s),esc:String,ic:()=>'',syncComposer:()=>{},currentModel:()=> 'fixture-model',tab:()=> 'home',paintThread:()=>{},voice:{speak:()=>{}},toast:(...a)=>notices.push(a),
+ const context=vm.createContext({document,location:dom.window.location,comp,thread:{ok:true},$:s=>document.querySelector(s),esc:String,ic:()=>'',syncComposer:()=>{},currentModel:()=> 'fixture-model',modelInfo:{'fixture-model':['Fixture']},tab:()=> 'home',paintThread:()=>{},voice:{speak:()=>{}},toast:(...a)=>notices.push(a),
   URL:{createObjectURL:()=>{const url='blob:fixture-'+(++n);active.add(url);return url;},revokeObjectURL:url=>{revoked.push(url);active.delete(url);}},
   FileReader:class{readAsDataURL(){if(readFail){this.onerror();return;}this.result='data:image/png;base64,fixture';this.onload();}},
   api:(path,body)=>{if(path==='/api/uploads'){uploads.push(body);if(holdUpload)return new Promise((resolve,reject)=>uploads.at(-1).complete={resolve,reject});if(uploadFail)return Promise.reject(Error('Mock upload failed'));return Promise.resolve({upload:{id:'upload-'+uploads.length}});}assert.equal(path,'/api/chat');return new Promise((resolve,reject)=>requests.push({body,resolve,reject}));}});
@@ -33,7 +33,7 @@ test('removed pending preview is released only once if its upload later fails',a
  const f=fixture(t,{holdUpload:true}),pending=f.add();await Promise.resolve();f.remove();f.uploads[0].complete.reject(Error('Mock late upload failure'));await pending;assert.equal(f.active.size,0);assert.equal(f.revoked.length,1);
 });
 test('successful mocked task creation releases cleared attachment previews',async t=>{
- const f=fixture(t);await f.add();const pending=f.send();f.requests[0].resolve({task:{id:1}});await pending;assert.equal(f.comp.files.length,0);assert.equal(f.active.size,0);assert.equal(f.revoked.length,1);
+ const f=fixture(t);await f.add();const pending=f.send();f.requests[0].resolve({task:{id:1}});await pending;assert.equal(f.comp.files.length,0);assert.equal(f.active.size,0);assert.equal(f.revoked.length,1);assert.equal(f.notices.some(n=>n[1]==='bad'),false);
 });
 test('failed mocked task creation retains previews until explicit retry succeeds',async t=>{
  const f=fixture(t);await f.add();const pending=f.send();f.requests[0].reject(Error('Mock task request failed'));await pending;assert.equal(f.comp.files.length,1);assert.equal(f.active.size,1);assert.equal(f.revoked.length,0);const retry=f.send();f.requests[1].resolve({task:{id:1}});await retry;assert.equal(f.active.size,0);

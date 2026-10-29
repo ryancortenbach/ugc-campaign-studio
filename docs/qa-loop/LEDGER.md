@@ -785,3 +785,17 @@ Verification: 24 invalid-row, refresh-race, metadata and sidebar tests passed, i
 Independent final review: scoped PASS for JSON row-shape handling, with all 24 tests independently rerun.
 
 Next area: Composer request completion and newer draft ownership.
+
+## 2026-10-29: Completed composer requests preserve newer drafts
+
+Expected: successful task, storyboard or shot creation clears and navigates only when its submitted composer is still unchanged and current. Newer drafts remain intact, including their reference editor and image previews. Leaving the page must not cause a late completion to navigate back.
+
+Reproduced: late success erased newer message text, file/link edits and reference-editor work, cleared references owned by a replacement composer and forced navigation after departure. Seven of nine initial permanent regressions failed before the fix. Missing modelInfo in the first fixture was corrected before recording the valid baseline failures.
+
+Changed: compare raw text, file identities/order, links, composer ownership, mode and unsaved reference-editor state before clearing. Preserve a changed draft as a whole. Navigation requires the unchanged original form to remain connected on the original hash. Unchanged submitted attachments still release their previews after departure. API payloads, copy and styling are unchanged.
+
+Verification: 52 submission-ownership, preview-lifecycle, reply-draft, model-draft, link, upload and removal-focus tests passed. Twelve new ownership checks include all three creation modes, replacements, departure, new attachments/links, reference-editor work before or during the request, raw spacing, unchanged success and failure retention. The older preview fixture now supplies modelInfo and explicitly rejects hidden error notices on success. Root/module/test syntax and diff checks passed. Requests and object URLs were mocked. Assistant rehearsal-result navigation is a separate existing path outside this fix. Native UX, memory reclamation and real task/provider persistence remain unverified. No actual provider calls, task creation, rendering, sends, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS for task/storyboard/shot completion ownership, with all 52 tests independently rerun.
+
+Next area: Voice saved-state display after refresh.
