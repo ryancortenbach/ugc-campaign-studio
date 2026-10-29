@@ -808,12 +808,19 @@ let pdfReturnFocus;
 const closePdf=()=>{const el=$('#pdfview');if(!el)return;el.remove();const trigger=pdfReturnFocus;pdfReturnFocus=null;if(trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#pdfview')){closePdf();e.stopPropagation();}},true);
 let leadDrawerRequest=0;
+let leadDrawerReturnFocus;
+function closeLeadDrawer(){
+ const d=$('#drawer'),owned=d.contains(document.activeElement),trigger=leadDrawerReturnFocus;
+ d.hidden=true;state.selectedLead=null;leadDrawerReturnFocus=null;
+ if(owned&&trigger?.isConnected&&!trigger.closest('[hidden]'))trigger.focus({preventScroll:true});
+}
 async function openLead(id){
+ const trigger=document.activeElement;
  const request=++leadDrawerRequest;
  state.selectedLead=id;
  const {lead:l,drafts:all=[],renders=[],events=[],ideation}=await api(`/api/leads/${id}`);
  if(request!==leadDrawerRequest||state.selectedLead!==id)return;
- const d=$('#drawer');d.hidden=false;
+ const d=$('#drawer');if(!d.contains(trigger))leadDrawerReturnFocus=trigger;d.hidden=false;
  const drafts=all.filter(x=>x.status!=='withdrawn'),old=all.find(x=>x.status==='withdrawn'&&x.gmail_url);
  const mail=drafts[0],isDm=mail?.channel==='instagram_dm',gmail=isDm?'':drafts.find(x=>x.gmail_url&&x.channel!=='instagram_dm')?.gmail_url;
  if(mail)state.dr.set(l.id,mail);
@@ -840,7 +847,7 @@ async function openLead(id){
   ${vid?`<div class="vcard">${video(vid)}<div class="vmeta">${schip(vstate,statusIcon[vstate[1]])}<a class="chip" href="#/renders">Open in Renders</a></div></div>`:`<div class="dsec" id="lead-ideation">${ideationPanel(ideation,events,{esc,icon:ic})}</div>`}
   ${old?`<a class="oldmail" href="${esc(old.gmail_url)}" target="_blank" rel="noopener"><img src="/logos/gmail.png" alt="">Old email to ${esc(old.to_email)}, delete by hand</a>`:''}
  </div>`;
- $('#close').onclick=()=>{d.hidden=true;state.selectedLead=null;};
+ $('#close').onclick=closeLeadDrawer;
  d.querySelectorAll('[data-offer]').forEach(b=>b.onclick=()=>openPdf(Number(b.dataset.offer)));
  $('#sendbtn')?.addEventListener('click',()=>{
   const slot=$('#sendslot');
@@ -849,7 +856,7 @@ async function openLead(id){
   $('#sendyes').onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await api(`/api/drafts/${mail.id}/${isDm?'send-dm':'send'}`,{confirm:true});toast(isDm?'DM sent':'Email sent','ok',`To ${mail.to_email}`,isDm?null:'gmail',isDm?null:`gmail-sent-draft:${mail.id}`);}catch(err){toast(err.message,'bad');}openLead(id);softRefresh(route);};
  });
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden){$('#drawer').hidden=true;state.selectedLead=null;}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeLeadDrawer();});
 
 // Leads: filter chips with counts, a sort menu, and one list. Drafts is a filter here (the old Drafts page redirects to it).
 const leadFilters=[['all','All'],['drafts','Drafts'],['awaiting_video','Needs video'],['rejected','Not a fit'],['issues','Other']];

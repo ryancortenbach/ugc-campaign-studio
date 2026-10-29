@@ -841,3 +841,17 @@ Verification: 24 cancellation-confirmation, recovery, refresh-race, tab-focus an
 Independent final review: initial send-back for successful cancel with failed refresh, then scoped PASS with all 24 tests independently rerun.
 
 Next area: Lead drawer close and keyboard focus after asynchronous reads.
+
+## 2026-10-29: Closing a lead drawer restores its captured focus target
+
+Expected: when keyboard focus is inside the lead drawer, Close or Escape returns it to the connected visible trigger. Closing while focus is elsewhere must not steal that focus. Stale reads must not replace the return target.
+
+Reproduced: Close and Escape hid the drawer without moving focus away from its controls. Four of six new permanent regressions failed before the fix, including a refreshed drawer and an older response arriving after another brand opened.
+
+Changed: capture the external focus target when starting a drawer read and commit it only after the existing response ownership guard. Keep it through internal drawer refreshes. Both close paths share a helper that restores the target only if the drawer owned focus and the target remains connected outside a hidden subtree. Copy and styling remain unchanged.
+
+Verification: 21 drawer-focus, drawer-refresh, lead-refresh-race and sort-menu tests passed. Six new focus checks cover Close, Escape, internal refresh, outside focus, a removed trigger and stale reads. Root/module/test syntax and diff checks passed. Tests run extracted actual handlers with mocked reads and explicitly focused DOM controls. Native pointer/Tab behavior, layout and complete computed visibility/focusability remain unverified. No provider calls, sends, ideation, PDF actions, live mutations, desktop actions, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 21 tests independently rerun.
+
+Next area: Home activity chart inspection and event marker selection.
