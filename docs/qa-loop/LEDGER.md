@@ -1121,3 +1121,17 @@ Verification: 25 pending-refresh, profile-draft, navigation and interruption tes
 Independent final review: scoped PASS with all 25 tests independently rerun. Actual persistence, cross-client ordering, native UI and indefinite-request timeout behavior remain outside this evidence.
 
 Next area: Render version selection while filtered results refresh.
+
+## 2026-10-30: Render version buttons retain keyboard focus through activity updates
+
+Expected: inspecting an older shot keeps its version selection and keyboard position when another version arrives or a render status changes, including when the latest version leaves the selected gallery filter.
+
+Reproduced: three of six new permanent regressions failed. Panel body updates replaced the focused version button, dropping focus to the document body. This affected both selected and unselected version buttons.
+
+Changed: capture the focused version ID before replacing the panel body and restore its replacement afterward. If absent, use the selected version or Close. Outside focus and unchanged panel elements retain ownership. No selection, copy or styling changes.
+
+Verification: 32 version-focus, panel/tab focus, refresh-race, media-refresh and filter/media tests passed. Six new checks cover filtered historical inspection, changed status, an unselected focused version, outside focus, identical patches and closing a filtered panel. Root/module/test syntax and diff checks passed. Actual render UI runs in JSDOM with mocked reads and immutable supplied stream records. Fallback when a focused version is absent, native keyboard/layout and actual stream transport remain unverified. No provider calls, render approvals, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 32 tests independently rerun. Disappearing-version fallback was source-inspected, not directly exercised.
+
+Next area: Draft list retry and drawer ownership after failed reads.

@@ -229,7 +229,9 @@ export async function rendersView({view,api,toast=()=>{},arg,isCurrent=()=>true,
   const sig=panelSig(t,r),typing=pbody.contains(doc.activeElement)&&/^(INPUT|TEXTAREA)$/.test(doc.activeElement.tagName);
   if(!force&&pbody.dataset.sig===sig)return;
   if(typing&&!force)return;
+  const focusedVersion=pbody.contains(doc.activeElement)&&doc.activeElement.matches('[data-a="ver"]')?doc.activeElement.dataset.rid:null;
   pbody.dataset.sig=sig;pbody.innerHTML=bodyHTML(t,r);
+  if(focusedVersion)([...pbody.querySelectorAll('[data-a="ver"]')].find(button=>button.dataset.rid===focusedVersion)||pbody.querySelector('[data-a="ver"].on')||head.querySelector('[data-a="close"]'))?.focus({preventScroll:true});
   const host=pbody.querySelector('[data-panel-host]');
   if(host)import('./panel-check.js').then(m=>m.panelSection({render:r,api,esc,toast,host})).catch(()=>{});
  }
