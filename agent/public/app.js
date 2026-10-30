@@ -861,11 +861,15 @@ function closeLeadDrawer(){
 }
 async function openLead(id){
  const trigger=document.activeElement;
+ const d=$('#drawer'),retain=!d.hidden&&state.selectedLead===id;
+ if(!retain){d.hidden=true;d.innerHTML='';leadDrawerReturnFocus=null;}
  const request=++leadDrawerRequest;
  state.selectedLead=id;
- const {lead:l,drafts:all=[],renders=[],events=[],ideation}=await api(`/api/leads/${id}`);
+ let data;
+ try{data=await api(`/api/leads/${id}`);}catch(error){if(request===leadDrawerRequest&&state.selectedLead===id){if(!retain)state.selectedLead=null;toast(error.message,'bad');}return;}
  if(request!==leadDrawerRequest||state.selectedLead!==id)return;
- const d=$('#drawer');if(!d.contains(trigger))leadDrawerReturnFocus=trigger;d.hidden=false;
+ const {lead:l,drafts:all=[],renders=[],events=[],ideation}=data;
+ if(!d.contains(trigger))leadDrawerReturnFocus=trigger;d.hidden=false;
  const drafts=all.filter(x=>x.status!=='withdrawn'),old=all.find(x=>x.status==='withdrawn'&&x.gmail_url);
  const mail=drafts[0],isDm=mail?.channel==='instagram_dm',gmail=isDm?'':drafts.find(x=>x.gmail_url&&x.channel!=='instagram_dm')?.gmail_url;
  if(mail)state.dr.set(l.id,mail);
@@ -901,7 +905,7 @@ async function openLead(id){
   $('#sendyes').onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await api(`/api/drafts/${mail.id}/${isDm?'send-dm':'send'}`,{confirm:true});toast(isDm?'DM sent':'Email sent','ok',`To ${mail.to_email}`,isDm?null:'gmail',isDm?null:`gmail-sent-draft:${mail.id}`);}catch(err){toast(err.message,'bad');}openLead(id);softRefresh(route);};
  });
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeLeadDrawer();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(!$('#drawer').hidden||state.selectedLead!=null))closeLeadDrawer();});
 
 // Leads: filter chips with counts, a sort menu, and one list. Drafts is a filter here (the old Drafts page redirects to it).
 const leadFilters=[['all','All'],['drafts','Drafts'],['awaiting_video','Needs video'],['rejected','Not a fit'],['issues','Other']];

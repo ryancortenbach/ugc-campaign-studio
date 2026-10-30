@@ -1135,3 +1135,17 @@ Verification: 32 version-focus, panel/tab focus, refresh-race, media-refresh and
 Independent final review: scoped PASS with all 32 tests independently rerun. Disappearing-version fallback was source-inspected, not directly exercised.
 
 Next area: Draft list retry and drawer ownership after failed reads.
+
+## 2026-10-30: Failed lead switches cannot leave another brand's controls active
+
+Expected: opening a different brand must not leave the previous brand's drawer controls available under the new selection. Failed detail reads report an error, preserve same-brand details when available, and support retry without disturbing newer requests.
+
+Reproduced: all six initial permanent regressions failed. Switching selected the new lead before its read completed while the previous drawer and ideation retry remained visible. Rejected reads propagated to fire-and-forget UI callers and left mismatched ownership. A seventh regression later checks stale errors for matching lead IDs.
+
+Changed: hide and clear the old drawer when switching brands, retaining its contents only for a same-brand visible refresh. Handle read failures locally, report only the current request's error and clear an invisible failed selection. Escape also cancels pending selections while the drawer is hidden. Keep existing successful response, close and navigation ownership guards. No copy or styling changes.
+
+Verification: 48 drawer-failure, refresh/focus, draft-map retention, availability, PDF-focus and recipient-recovery tests passed. Nine new checks cover pending switches, failed switches, failed same-brand refreshes, stale errors across different/matching IDs, close while pending, explicit retry and actual Escape key events before successful/failed switch reads. The prior ignored recipient probe was copied with its rejection expectation updated for the intentionally handled UI error. Root/app/test syntax and diff checks passed. Tests extract actual drawer/map handlers with mocked reads in JSDOM; no sends or ideation actions were invoked. Native layout/focus, full router transport and actual provider behavior remain unverified. No paid work, live mutations, desktop control, restart, main integration or deployment.
+
+Independent review sent back the first fix because hiding the drawer bypassed its visible-only Escape listener. Both actual-key regressions failed before correction; Escape now invalidates pending selections while preserving PDF capture precedence. Final scoped PASS: all 48 tests independently rerun, plus the reviewer's own successful/failed-read Escape reproductions passed. Native keyboard, PDF iframe, layout and real network acceptance remain unverified.
+
+Next area: Reference uploads after asynchronous validation failures.
