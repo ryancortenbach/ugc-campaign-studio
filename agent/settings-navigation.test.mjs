@@ -88,7 +88,7 @@ test('an old profile save cannot change the dirty state of a remounted form',asy
  try{
   await f.mount();const old=f.document.querySelector('#profile'),oldInput=old.querySelector('[name="senderName"]');
   oldInput.value='Old update';oldInput.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));const pending=old.onsubmit({preventDefault(){}});
-  await f.mount();const input=f.document.querySelector('[name="senderName"]');input.value='New unsaved update';input.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));
+  f.view.innerHTML='';await f.mount();const input=f.document.querySelector('[name="senderName"]');input.value='New unsaved update';input.dispatchEvent(new f.dom.window.Event('input',{bubbles:true}));
   resolve({});await pending;
   assert.equal(input.value,'New unsaved update');assert.equal(f.document.querySelector('#pfstate').textContent,'Unsaved changes');assert.equal(f.document.querySelector('#pfsave').disabled,false);
  }finally{f.dom.window.close();}

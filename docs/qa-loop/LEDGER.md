@@ -1107,3 +1107,17 @@ Verification: 40 Live disclosure/replay, tool-log, sidebar, rail-focus and sessi
 Independent final review: scoped PASS with all 40 tests independently rerun.
 
 Next area: Settings sender-profile save failures and Undo recovery.
+
+## 2026-10-30: Settings refreshes retain ownership of pending profile saves
+
+Expected: a same-page refresh keeps Save locked until the current request finishes. Reverting to the old value during that request remains an unsaved change if the submitted value is saved successfully.
+
+Reproduced: two of five new permanent regressions failed. Refresh replaced the pending form with an unlocked form, permitting duplicate submissions. Undo during that refresh could then appear saved even though the submitted value was stored.
+
+Changed: expose the connected form's pending-save completion and wait for it before repainting Settings, then read the saved state again. Keep the existing form editable while waiting and preserve its latest dirty fields. Existing version checks still catch saves completed during reads. The neighboring remount fixture now explicitly removes the old form to represent departure, since a connected same-page refresh correctly waits. No copy or styling changes.
+
+Verification: 25 pending-refresh, profile-draft, navigation and interruption tests passed. Five new checks cover duplicate submission, successful Undo, failed-save blank/multiline retry, failed-save Undo and navigation while waiting. Root/app/test syntax and diff checks passed. Tests extract actual Settings handlers with mocked reads and saves in JSDOM. Native keyboard/layout, actual server transport and cross-client save ordering remain unverified. No provider calls, paid work, sends, live mutations, desktop control, restart, main integration or deployment.
+
+Independent final review: scoped PASS with all 25 tests independently rerun. Actual persistence, cross-client ordering, native UI and indefinite-request timeout behavior remain outside this evidence.
+
+Next area: Render version selection while filtered results refresh.
